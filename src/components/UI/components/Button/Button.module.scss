@@ -7,7 +7,15 @@
 }
 
 .primary {
-  border: 0.75px solid $white-base !important;
+  border: 0.75px solid
+    var(
+      --Gradient-Linear-Button-Specific-Primary,
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.44) 0%,
+        rgba(255, 255, 255, 0) 100%
+      )
+    ) !important;
   background: var(
     --Button-Specific-Primary,
     radial-gradient(
@@ -29,7 +37,15 @@
 }
 
 .primaryDestructive {
-  border: 1px solid $white-base !important;
+  border: 0.75px solid
+    var(
+      --Gradient-Linear-Button-Specific-Primary,
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.44) 0%,
+        rgba(255, 255, 255, 0) 100%
+      )
+    ) !important;
   background: var(
     --Button-Specific-Primary-destructive,
     radial-gradient(
@@ -53,7 +69,14 @@
 .secondary {
   color: $gray-600 !important;
   border: 0.75px solid
-    var(--Gradient-Linear-Button-Specific-Secondary, rgba(13, 18, 28, 0.48)) !important;
+    var(
+      --Gradient-Linear-Button-Specific-Secondary,
+      linear-gradient(
+        180deg,
+        rgba(13, 18, 28, 0.21) 0%,
+        rgba(13, 18, 28, 0) 100%
+      )
+    ) !important;
   background: var(
     --Button-Specific-Secondary,
     linear-gradient(
@@ -68,6 +91,16 @@
   &:hover {
     color: $gray-700 !important;
     background: $gray-50 !important;
+    border: 0.75px solid
+      var(
+        --Button-Specific-Secondary,
+        linear-gradient(
+          180deg,
+          rgba(13, 18, 28, 0.03) 0%,
+          rgba(13, 18, 28, 0) 100%
+        ),
+        #fff
+      ) !important;
   }
   &:disabled {
     color: $gray-400 !important;
@@ -78,7 +111,15 @@
 }
 
 .secondaryBlack {
-  border: 1px solid $white-base !important;
+  border: 0.75px solid
+    var(
+      --Gradient-Linear-Button-Specific-Secondary,
+      linear-gradient(
+        180deg,
+        rgba(13, 18, 28, 0.21) 0%,
+        rgba(13, 18, 28, 0) 100%
+      )
+    ) !important;
   background: var(
     --Button-Specific-Secondary-black,
     linear-gradient(

@@ -9,6 +9,7 @@
 // E
 
 // F
+export { default as FiChevronDown } from './ChevronDown';
 
 // G
 

@@ -1,18 +1,20 @@
+import { Select as SelectField, SelectProps } from '@mantine/core';
+import { FiChevronDown } from '@nabiq-icons';
 import { useGetColors } from '@nabiq-ui';
-import { TextInput as Input, TextInputProps } from '@mantine/core';
 
 import Text from '../Text';
 
-import styles from './Input.module.scss';
+import styles from './Select.module.scss';
 
-const TextInput = ({ label, required = false, ...rest }: TextInputProps) => {
-  const { gray700 } = useGetColors();
+const Select = ({ label, required, ...rest }: SelectProps) => {
+  const { gray700, gray500 } = useGetColors();
 
   return (
-    <Input
+    <SelectField
       classNames={{
         input: styles.input,
       }}
+      checkIconPosition='right'
       label={
         label && (
           <Text
@@ -28,9 +30,16 @@ const TextInput = ({ label, required = false, ...rest }: TextInputProps) => {
           </Text>
         )
       }
+      rightSection={
+        <FiChevronDown
+          size={20}
+          style={{ cursor: 'pointer' }}
+          color={gray500}
+        />
+      }
       {...rest}
     />
   );
 };
 
-export default TextInput;
+export default Select;

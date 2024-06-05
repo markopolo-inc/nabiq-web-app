@@ -1,4 +1,4 @@
-import { Button, Text, TextInput } from '@nabiq-ui';
+import { Button, Select, Text, TextInput } from '@nabiq-ui';
 import { FiMail01 } from '@nabiq-icons';
 
 const Test = () => {
@@ -32,11 +32,17 @@ const Test = () => {
         Button
       </Button>
 
-      <div className='w-72'>
+      <div className='w-72 space-y-6'>
         <TextInput
           label='Email'
           leftSection={<FiMail01 size={16} />}
           placeholder='Enter email'
+        />
+
+        <Select
+          placeholder='Select team member'
+          label='Team member'
+          data={['React', 'Angular', 'Vue', 'Svelte']}
         />
       </div>
     </div>
