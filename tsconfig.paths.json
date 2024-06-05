@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "src/*": ["./*"],
+      "@nabiq-ui": ["./components/UI/index.ts"],
+      "@nabiq-icons": ["./components/Icons/index.ts"]
+    }
+  }
+}
