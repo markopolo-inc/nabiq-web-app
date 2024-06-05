@@ -1,3 +1,4 @@
+import { useGetColors } from '@nabiq-ui';
 import { Loader, Button as MantineButton } from '@mantine/core';
 import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 
@@ -58,6 +59,8 @@ const Button = ({
   id,
   ...rest
 }: ButtonPropType) => {
+  const { whiteBase, gray600, primary600, error600 } = useGetColors();
+
   const getClassName = (type) => {
     const classes = {
       primary: styles.primary,
@@ -74,14 +77,14 @@ const Button = ({
 
   const getLoaderColor = (type) => {
     const colors = {
-      primary: 'bg-white',
-      'primary-destructive': 'bg-white',
-      secondary: 'bg-gray-600',
-      'secondary-black': 'bg-white',
-      tertiary: 'bg-primary-600',
-      'tertiary-gray': 'bg-gray-600',
-      'tertiary-destructive': 'bg-error-600',
-      link: 'bg-primary-600',
+      primary: whiteBase,
+      'primary-destructive': whiteBase,
+      secondary: gray600,
+      'secondary-black': whiteBase,
+      tertiary: primary600,
+      'tertiary-gray': gray600,
+      'tertiary-destructive': error600,
+      link: primary600,
     };
     return colors[type];
   };

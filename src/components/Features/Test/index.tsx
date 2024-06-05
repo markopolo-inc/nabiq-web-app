@@ -1,4 +1,4 @@
-import { Button, Text } from '@nabiq-ui';
+import { Button, Text, TextInput } from '@nabiq-ui';
 import { FiMail01 } from '@nabiq-icons';
 
 const Test = () => {
@@ -31,6 +31,14 @@ const Test = () => {
       <Button type='link' size='sm'>
         Button
       </Button>
+
+      <div className='w-72'>
+        <TextInput
+          label='Email'
+          leftSection={<FiMail01 size={16} />}
+          placeholder='Enter email'
+        />
+      </div>
     </div>
   );
 };
