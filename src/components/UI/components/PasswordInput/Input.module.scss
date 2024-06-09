@@ -23,3 +23,20 @@
     color: $gray-500 !important;
   }
 }
+
+.focused {
+  height: 40px !important;
+  padding: 10px 14px !important;
+  border-radius: 1rem !important;
+  color: $gray-900 !important;
+  background: $white-base !important;
+  border: 1px solid $primary-300 !important;
+  box-shadow: 0px 1px 2px 0px rgba(18, 25, 38, 0.05),
+    0px 0px 0px 4px rgba(56, 122, 246, 0.24) !important;
+}
+
+.innerInput {
+  &::placeholder {
+    color: $gray-500 !important;
+  }
+}

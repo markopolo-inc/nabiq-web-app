@@ -1,3 +1,4 @@
+import { Text as MantineText } from '@mantine/core';
 import React, { MouseEventHandler } from 'react';
 
 const sizeMap = {
@@ -23,14 +24,7 @@ const Text = ({
   className,
   children,
   color,
-  marginBottom = 0,
-  marginTop = 0,
-  maxWidth,
-  minWidth,
-  width,
-  id,
-  noWrap = false,
-  textAlign = 'left',
+  ...rest
 }: PropsType) => {
   const handleClick = (e) => {
     if (onClick) {
@@ -38,29 +32,19 @@ const Text = ({
     }
   };
   return (
-    <p
-      id={id}
+    <MantineText
       style={{
-        whiteSpace: noWrap ? 'nowrap' : 'normal',
-        // display: 'flex',
-        // alignItems: 'center',
-        fontSize: sizeMap[size],
-        fontWeight: weight,
-        color,
-        margin: 0,
-        marginBottom,
-        marginTop,
-        maxWidth,
-        minWidth,
-        width,
-        textAlign,
         ...style,
       }}
+      {...rest}
+      fw={weight}
+      size={sizeMap[size]}
+      c={color}
       className={className}
       onClick={(e) => handleClick(e)}
     >
       {children}
-    </p>
+    </MantineText>
   );
 };
 
@@ -86,12 +70,4 @@ interface PropsType {
   className?: string;
   children?: React.ReactNode;
   color?: string;
-  marginBottom?: string | number;
-  marginTop?: string | number;
-  maxWidth?: string | number;
-  minWidth?: string | number;
-  width?: string | number;
-  id?: string;
-  textAlign?: 'center' | 'left' | 'right' | 'justify';
-  noWrap?: boolean;
 }

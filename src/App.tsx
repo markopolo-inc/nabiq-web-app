@@ -1,19 +1,19 @@
 import { MantineProvider } from '@mantine/core';
-import Test from 'src/components/Features/Test';
+import { BrowserRouter } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 
+import Router from './router';
+
 const App = () => {
   return (
     <MantineProvider>
-      <div className='space-y-4 m-4'>
-        <div className='display-xs text-gray-900 shadow-xl'>
-          NABIQ - Your marketing captain!
-        </div>
-
-        <Test />
-      </div>
+      <Toaster position='top-center' reverseOrder={false} />
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
     </MantineProvider>
   );
 };

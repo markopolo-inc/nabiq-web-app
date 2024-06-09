@@ -21,7 +21,7 @@ const TextInput = ({ label, required = false, ...rest }: TextInputProps) => {
             weight={500}
             style={{
               display: label ? 'inline-block' : 'none',
-              marginBottom: label ? 4 : 0,
+              marginBottom: label ? 8 : 0,
             }}
           >
             {label} {required && <span>&#42;</span>}

@@ -115,11 +115,6 @@ const Button = ({
           leadingIcon
         )
       }
-      styles={{
-        root: {
-          'border-radius': '0.75rem',
-        },
-      }}
       {...rest}
     >
       <Text style={{ whiteSpace: 'nowrap' }} size={getSizes(size).text}>
