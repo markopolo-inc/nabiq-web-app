@@ -22,7 +22,7 @@ const SignUpForm = () => {
       </div>
 
       <Button
-        type='link'
+        variant='link'
         size='sm'
         className='px-0'
         onClick={() => navigate('/reset-pass')}
@@ -31,11 +31,11 @@ const SignUpForm = () => {
       </Button>
 
       <div className='flex flex-col space-y-4'>
-        <Button type='primary' size='md'>
+        <Button variant='primary' size='md'>
           Continue
         </Button>
         <Button
-          type='secondary'
+          variant='secondary'
           size='md'
           leadingIcon={<Image src={googleLogo} alt='' />}
         >

@@ -50,7 +50,7 @@ const Button = ({
   loading = false,
   onClick,
   disabled = false,
-  type = 'primary',
+  variant = 'primary',
   fullWidth = false,
   leadingIcon,
   trailingIcon,
@@ -61,7 +61,7 @@ const Button = ({
 }: ButtonPropType) => {
   const { whiteBase, gray600, primary600, error600 } = useGetColors();
 
-  const getClassName = (type) => {
+  const getClassName = (variant) => {
     const classes = {
       primary: styles.primary,
       'primary-destructive': styles.primaryDestructive,
@@ -72,10 +72,10 @@ const Button = ({
       'tertiary-destructive': styles.tertiaryDestructive,
       link: styles.link,
     };
-    return classes[type];
+    return classes[variant];
   };
 
-  const getLoaderColor = (type) => {
+  const getLoaderColor = (variant) => {
     const colors = {
       primary: whiteBase,
       'primary-destructive': whiteBase,
@@ -86,7 +86,7 @@ const Button = ({
       'tertiary-destructive': error600,
       link: primary600,
     };
-    return colors[type];
+    return colors[variant];
   };
 
   const handleClick = (e) => {
@@ -103,14 +103,17 @@ const Button = ({
         ...style,
       }}
       size={getSizes(size).button}
-      className={`${styles.container} ${getClassName(type)} ${className}`}
+      className={`${styles.container} ${getClassName(variant)} ${className}`}
       disabled={loading || disabled}
       onClick={(e) => handleClick(e)}
       fullWidth={fullWidth}
       rightSection={trailingIcon}
       leftSection={
         loading ? (
-          <Loader color={getLoaderColor(type)} size={getSizes(size).loader} />
+          <Loader
+            color={getLoaderColor(variant)}
+            size={getSizes(size).loader}
+          />
         ) : (
           leadingIcon
         )
@@ -128,7 +131,7 @@ export default Button;
 
 interface ButtonPropType {
   children: ReactNode;
-  type?:
+  variant?:
     | 'primary'
     | 'primary-destructive'
     | 'secondary'

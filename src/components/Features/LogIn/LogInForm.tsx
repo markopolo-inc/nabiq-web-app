@@ -25,7 +25,7 @@ const LogInForm = () => {
       <div className='flex justify-between items-center'>
         <Checkbox label='Remember me' />
         <Button
-          type='link'
+          variant='link'
           size='sm'
           className='px-0'
           onClick={() => navigate('/reset-pass')}
@@ -35,11 +35,11 @@ const LogInForm = () => {
       </div>
 
       <div className='flex flex-col space-y-4'>
-        <Button type='primary' size='md'>
+        <Button variant='primary' size='md'>
           Login
         </Button>
         <Button
-          type='secondary'
+          variant='secondary'
           size='md'
           leadingIcon={<Image src={googleLogo} alt='' />}
         >

@@ -20,7 +20,7 @@ const ResetPasswordForm = () => {
 
       {isResetSuccessful ? (
         <Button
-          type='primary'
+          variant='primary'
           size='md'
           className='w-full'
           onClick={() => navigate('/login')}
@@ -29,7 +29,7 @@ const ResetPasswordForm = () => {
         </Button>
       ) : isResetInitiated && !isResetPassword ? (
         <Button
-          type='primary'
+          variant='primary'
           size='md'
           className='w-full'
           onClick={() => setIsResetPassword(true)}
@@ -49,7 +49,7 @@ const ResetPasswordForm = () => {
           />
 
           <Button
-            type='primary'
+            variant='primary'
             size='md'
             className='w-full'
             onClick={() => setIsResetSuccessful(true)}
@@ -62,14 +62,14 @@ const ResetPasswordForm = () => {
           <TextInput label='Email' placeholder='Enter your email' />
           <div className='flex flex-col space-y-4'>
             <Button
-              type='primary'
+              variant='primary'
               size='md'
               onClick={() => setIsResetInitiated(true)}
             >
               Continue
             </Button>
             <Button
-              type='tertiary'
+              variant='tertiary'
               size='md'
               onClick={() => navigate('/login')}
             >

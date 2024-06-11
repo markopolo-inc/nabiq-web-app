@@ -15,8 +15,8 @@ const OnboardingForm = () => {
         </div>
 
         <div className='flex flex-col gap-4'>
-          <Button type='primary'>Continue</Button>
-          <Button type='tertiary'>Skip</Button>
+          <Button variant='primary'>Continue</Button>
+          <Button variant='tertiary'>Skip</Button>
         </div>
       </div>
     </div>

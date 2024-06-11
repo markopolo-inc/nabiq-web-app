@@ -15,7 +15,7 @@ const VerifyForm = () => {
 
       <div className='space-y-6 flex flex-col justify-center mx-auto sm:max-w-xs'>
         <Button
-          type='primary'
+          variant='primary'
           size='md'
           disabled={confirmationPin?.length === 0}
           onClick={() => navigate('/onboarding')}
@@ -26,7 +26,7 @@ const VerifyForm = () => {
           <Text className='text-md text-gray-600'>
             Having trouble with the code?
           </Text>
-          <Button type='link' size='md' className='px-0'>
+          <Button variant='link' size='md' className='px-0'>
             Resend
           </Button>
         </div>
