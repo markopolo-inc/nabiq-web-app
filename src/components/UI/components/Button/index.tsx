@@ -131,6 +131,7 @@ export default Button;
 
 interface ButtonPropType {
   children: ReactNode;
+  type?: 'submit';
   variant?:
     | 'primary'
     | 'primary-destructive'

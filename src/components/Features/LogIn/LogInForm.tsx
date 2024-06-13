@@ -1,3 +1,4 @@
+import { useForm } from '@mantine/form';
 import {
   Button,
   Checkbox,
@@ -8,18 +9,49 @@ import {
 } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import googleLogo from 'src/assets/onboarding/google.svg';
+import { useLoginMutation } from 'src/store/auth/authApi';
+import { trimAllValuesOfObject } from 'src/utils/stringUtils';
 
 const LogInForm = () => {
   const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
+
+  const form = useForm({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validate: {
+      email: (value) => (value.length === 0 ? 'Email is required' : null),
+      password: (value) => (value.length === 0 ? 'Password is required' : null),
+    },
+  });
+
+  const handleFormSubmit = async (values) => {
+    await login({ ...values }).unwrap();
+  };
 
   return (
-    <form className='space-y-6'>
+    <form
+      className='space-y-6'
+      onSubmit={form.onSubmit((values) => {
+        handleFormSubmit(trimAllValuesOfObject(values));
+      })}
+    >
       <Text className='display-xs font-semibold text-gray-900'>Log In</Text>
 
       <div className='space-y-5'>
-        <TextInput label='Email' placeholder='Enter your email' />
+        <TextInput
+          label='Email'
+          placeholder='Enter your email'
+          {...form.getInputProps('email')}
+        />
 
-        <PasswordInput label='Password' placeholder='Enter your password' />
+        <PasswordInput
+          label='Password'
+          placeholder='Enter your password'
+          {...form.getInputProps('password')}
+        />
       </div>
 
       <div className='flex justify-between items-center'>
@@ -35,7 +67,7 @@ const LogInForm = () => {
       </div>
 
       <div className='flex flex-col space-y-4'>
-        <Button variant='primary' size='md'>
+        <Button variant='primary' size='md' type='submit' loading={isLoading}>
           Login
         </Button>
         <Button
