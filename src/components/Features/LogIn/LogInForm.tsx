@@ -9,12 +9,17 @@ import {
 } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import googleLogo from 'src/assets/onboarding/google.svg';
-import { useLoginMutation } from 'src/store/auth/authApi';
+import {
+  useGoogleSignInMutation,
+  useLoginMutation,
+} from 'src/store/auth/authApi';
 import { trimAllValuesOfObject } from 'src/utils/stringUtils';
 
 const LogInForm = () => {
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
+  const [googleSignIn, { isLoading: isGoogleLoading }] =
+    useGoogleSignInMutation();
 
   const form = useForm({
     initialValues: {
@@ -29,6 +34,10 @@ const LogInForm = () => {
 
   const handleFormSubmit = async (values) => {
     await login({ ...values }).unwrap();
+  };
+
+  const handleGoogleSignIn = async () => {
+    await googleSignIn({}).unwrap();
   };
 
   return (
@@ -74,6 +83,8 @@ const LogInForm = () => {
           variant='secondary'
           size='md'
           leadingIcon={<Image src={googleLogo} alt='' />}
+          loading={isGoogleLoading}
+          onClick={handleGoogleSignIn}
         >
           Login with Google
         </Button>

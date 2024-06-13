@@ -1,8 +1,14 @@
-import { Image } from '@nabiq-ui';
+import { Image, useAppSelector } from '@nabiq-ui';
+import { useNavigate } from 'react-router-dom';
 import NabiqLogo from 'src/assets/logo/nabiq-logo.png';
 import HeaderTitle from 'src/layouts/HeaderTitle';
 
 const Home = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, username } = useAppSelector((state) => state.auth);
+
+  console.log('data', isAuthenticated, username);
+
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
@@ -15,6 +21,24 @@ const Home = () => {
           <p className='mt-6 text-lg leading-8 text-gray-600'>
             Welcome to your marketing co-pilot captain.
           </p>
+        </div>
+
+        <div className='mt-8 flex justify-center'>
+          <div className='relative flex items-center justify-center rounded-full px-4 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
+            {isAuthenticated
+              ? `Hello ${username}!`
+              : 'You are not authenticated!'}{' '}
+            <div
+              onClick={() => {
+                navigate('/login');
+              }}
+              className='font-semibold text-indigo-600 pl-2'
+            >
+              <span className='absolute inset-0' aria-hidden='true' />
+              {isAuthenticated ? 'Logout' : 'Login'}{' '}
+              <span aria-hidden='true'>&rarr;</span>
+            </div>
+          </div>
         </div>
       </div>
     </>
