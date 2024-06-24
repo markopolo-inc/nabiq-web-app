@@ -1,13 +1,18 @@
-import { Image, useAppSelector } from '@nabiq-ui';
+import { Image } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import NabiqLogo from 'src/assets/logo/nabiq-logo.png';
 import HeaderTitle from 'src/layouts/HeaderTitle';
+import { useLogoutMutation } from 'src/store/auth/authApi';
+import { useAppSelector } from 'src/store/hooks';
 
 const Home = () => {
   const navigate = useNavigate();
+  const [logout] = useLogoutMutation();
   const { isAuthenticated, username } = useAppSelector((state) => state.auth);
 
-  console.log('data', isAuthenticated, username);
+  const handleLogout = async () => {
+    await logout({}).unwrap();
+  };
 
   return (
     <>
@@ -30,9 +35,13 @@ const Home = () => {
               : 'You are not authenticated!'}{' '}
             <div
               onClick={() => {
-                navigate('/login');
+                if (isAuthenticated) {
+                  handleLogout();
+                } else {
+                  navigate('/login');
+                }
               }}
-              className='font-semibold text-indigo-600 pl-2'
+              className='font-semibold text-indigo-600 pl-2 cursor-pointer'
             >
               <span className='absolute inset-0' aria-hidden='true' />
               {isAuthenticated ? 'Logout' : 'Login'}{' '}

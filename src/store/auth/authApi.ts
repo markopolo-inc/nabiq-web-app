@@ -27,6 +27,36 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    signup: builder.mutation({
+      queryFn: async (arg, _queryApi, _extraOptions, fetchWithBQ) => {
+        return { data: null }; // Return a no-op response
+      },
+      async onQueryStarted(arg, { dispatch }) {
+        const { name, email, password } = arg;
+        const loading = toast.loading('Signin in...');
+        try {
+          // Add user to cognito
+          await Auth.signUp({
+            username: email,
+            password,
+            attributes: {
+              'custom:fullName': name,
+              // 'custom:companyName': companyName,
+            },
+          });
+
+          dispatch(setIsAuthenticated(true));
+          dispatch(setUsername(email));
+
+          toast.dismiss(loading);
+          toast.success('Successfully sign up.');
+          window.location.href = '/';
+        } catch (error) {
+          toast.dismiss(loading);
+          toast.error('Something went wrong');
+        }
+      },
+    }),
     googleSignIn: builder.mutation({
       queryFn: async (_arg, _queryApi, _extraOptions, fetchWithBQ) => {
         return { data: null }; // Return a no-op response
@@ -76,5 +106,9 @@ export const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useGoogleSignInMutation, useLogoutMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useSignupMutation,
+  useGoogleSignInMutation,
+  useLogoutMutation,
+} = authApi;
