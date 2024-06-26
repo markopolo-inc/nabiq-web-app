@@ -3,13 +3,13 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { HelmetProvider } from "react-helmet-async";
+import { PersistGate } from "redux-persist/integration/react";
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 
 import Router from "./router";
-import { store, persistor } from "./store";
-import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./store";
 
 const App = () => {
   return (
