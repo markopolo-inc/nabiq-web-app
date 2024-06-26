@@ -9,5 +9,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- <script>
+      const isBrowser = () => typeof window !== "undefined";
+      const isGlobal = () => typeof global !== "undefined";
+      if (!isGlobal() && isBrowser()) {
+        var global = window;
+      }
+      window.global = window;
+    </script>
+    <script type="module">
+      // import process from 'process';
+      import EventEmitter from "events";
+      import { Buffer } from "buffer";
+      window.Buffer = Buffer;
+      // window.process = process;
+      window.EventEmitter = EventEmitter;
+    </script> -->
   </body>
 </html>

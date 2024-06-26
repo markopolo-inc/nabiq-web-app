@@ -1,8 +1,8 @@
-import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
-import { Auth } from 'aws-amplify';
-import toast from 'react-hot-toast';
-import { apiSlice } from '../api/apiSlice';
-import { setIsAuthenticated, setUsername, logout } from './authSlice';
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
+import { Auth } from "aws-amplify";
+import toast from "react-hot-toast";
+import { apiSlice } from "../api/apiSlice";
+import { setIsAuthenticated, setUsername, logout } from "./authSlice";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -12,18 +12,17 @@ export const authApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(arg, { dispatch }) {
         const { email, password } = arg;
-        const loading = toast.loading('Logging in...');
+        const loading = toast.loading("Logging in...");
         try {
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
           dispatch(setUsername(email));
-
           toast.dismiss(loading);
-          toast.success('Successfully logged in.');
-          window.location.href = '/';
+          toast.success("Successfully logged in.");
+          window.location.href = "/";
         } catch (error) {
           toast.dismiss(loading);
-          toast.error('Invalid email or password.');
+          toast.error("Invalid email or password.");
         }
       },
     }),
@@ -32,7 +31,7 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(_arg, { dispatch }) {
-        const loading = toast.loading('Signing in with Google...');
+        const loading = toast.loading("Signing in with Google...");
         try {
           await Auth.federatedSignIn({
             provider: CognitoHostedUIIdentityProvider.Google,
@@ -44,12 +43,11 @@ export const authApi = apiSlice.injectEndpoints({
           dispatch(setUsername(email));
 
           toast.dismiss(loading);
-          toast.success('Successfully signed in with Google.');
-          window.location.href = '/';
+          toast.success("Successfully signed in with Google.");
+          window.location.href = "/";
         } catch (error) {
           toast.dismiss(loading);
-          console.log('error', error);
-          toast.error('Error signing in with Google.');
+          toast.error("Error signing in with Google.");
         }
       },
     }),
@@ -58,18 +56,18 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(_arg, { dispatch }) {
-        const loading = toast.loading('Logging out...');
+        const loading = toast.loading("Logging out...");
         try {
           await Auth.signOut();
           dispatch(logout());
 
           window.localStorage.clear();
-          window.location.href = '/login';
+          window.location.href = "/login";
           toast.dismiss(loading);
-          toast.success('Successfully logged out.');
+          toast.success("Successfully logged out.");
         } catch (error) {
           toast.dismiss(loading);
-          toast.error('Error signing out.');
+          toast.error("Error signing out.");
         }
       },
     }),
