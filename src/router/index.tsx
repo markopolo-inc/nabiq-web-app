@@ -5,6 +5,7 @@ import ScrollToTop from "src/layouts/ScrollToTop";
 import LoaderGif from "src/assets/loader/loading.gif";
 import AppLayout from "src/layouts/AppLayout";
 import PrivateLayout from "src/layouts/PrivateLayout";
+import NavigationLayout from "src/layouts/NavigationLayout";
 
 const Home = lazy(() => import("src/pages/Home"));
 const SignUp = lazy(() => import("src/pages/SignUp"));
@@ -32,7 +33,9 @@ const Router = () => {
             <Route path="/verify" element={<VerifyEmail />} />
             <Route path="/test" element={<Test />} />
             <Route path="/" element={<PrivateLayout />}>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<NavigationLayout />}>
+                <Route path="/" element={<Home />} />
+              </Route>
               <Route path="/onboarding" element={<Onboarding />} />
             </Route>
           </Route>

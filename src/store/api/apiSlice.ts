@@ -22,4 +22,7 @@ export const apiSlice = createApi({
   // },
   tagTypes: [],
   endpoints: () => ({}),
+  keepUnusedDataFor: 0,
+  refetchOnFocus: true,
+  refetchOnMountOrArgChange: true,
 });

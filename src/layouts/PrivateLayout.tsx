@@ -1,16 +1,11 @@
-import { Outlet } from "react-router-dom";
-
-import { useGetCompanyQuery } from "store/company/companyApi";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAppSelector } from "src/store/hooks";
 
 const PrivateLayout = () => {
   console.log("--- I am from PrivateLayout ---");
-  const { data } = useGetCompanyQuery();
-  console.log("--- company data ---", data);
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+
+  return <>{!isAuthenticated ? <Navigate to={"/login"} /> : <Outlet />}</>;
 };
 
 export default PrivateLayout;

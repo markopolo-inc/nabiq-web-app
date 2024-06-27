@@ -10,8 +10,6 @@ const Home = () => {
   const [logout] = useLogoutMutation();
   const { isAuthenticated, username } = useAppSelector((state) => state.auth);
 
-  const company = useAppSelector((state) => state.company);
-  console.log(company);
   const handleLogout = async () => {
     await logout({}).unwrap();
   };
