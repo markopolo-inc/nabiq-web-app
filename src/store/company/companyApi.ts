@@ -1,5 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
-import { CompanyInterface, setCompany } from "./comapnySlice";
+import { setCompany } from "./comapnySlice";
 
 export const companyApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

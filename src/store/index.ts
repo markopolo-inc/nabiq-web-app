@@ -29,9 +29,10 @@ export const store = configureStore({
     // @ts-ignore
     getDefaultMiddleware({
       // Redux persist
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
+      // serializableCheck: {
+      //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      // },
     }).concat(apiSlice.middleware),
 });
 

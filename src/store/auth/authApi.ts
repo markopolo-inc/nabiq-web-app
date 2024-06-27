@@ -130,8 +130,8 @@ export const authApi = apiSlice.injectEndpoints({
         dispatch(logout());
         const loading = toast.loading("Logging out...");
         toast.dismiss(loading);
+        dispatch(apiSlice.util.resetApiState());
         window.localStorage.clear();
-        apiSlice.util.resetApiState();
         window.location.href = "/login";
       },
     }),
