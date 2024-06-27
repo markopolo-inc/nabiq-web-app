@@ -4,7 +4,7 @@ import HeaderTitle from 'src/layouts/HeaderTitle';
 const VerifyEmail = () => {
   return (
     <>
-      <HeaderTitle>Nabiq | Signup</HeaderTitle>
+      <HeaderTitle>Nabiq | Verification</HeaderTitle>
 
       <div className='flex min-h-full flex-1 flex-col justify-center py-36 sm:py-28 px-6'>
         <VerifyForm />

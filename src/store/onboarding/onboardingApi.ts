@@ -1,12 +1,12 @@
-import { apiSlice } from '../api/apiSlice';
-import { onboardUser } from './onboardingSlice';
+import { apiSlice } from "../api/apiSlice";
+import { onboardUser } from "./onboardingSlice";
 
-export const authApi = apiSlice.injectEndpoints({
+export const onboardApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     addOnboardUser: builder.mutation({
       query: (data) => ({
-        url: '/onboard-user',
-        method: 'POST',
+        url: "/onboard-user",
+        method: "POST",
         body: data,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
@@ -26,4 +26,4 @@ export const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useAddOnboardUserMutation } = authApi;
+export const { useAddOnboardUserMutation } = onboardApi;

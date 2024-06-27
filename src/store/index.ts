@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import {
   persistReducer,
   persistStore,
@@ -11,14 +11,8 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { apiSlice } from "./api/apiSlice";
-import authReducer from "./auth/authSlice";
-import onboardingReducer from "./onboarding/onboardingSlice";
 
-const rootReducer = combineReducers({
-  [apiSlice.reducerPath]: apiSlice.reducer,
-  auth: authReducer,
-  onboarding: onboardingReducer,
-});
+import rootReducer from "./rootReducer";
 
 const persistConfig = {
   key: "root",
