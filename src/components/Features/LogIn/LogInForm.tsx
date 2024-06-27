@@ -1,12 +1,5 @@
 import { useForm } from "@mantine/form";
-import {
-  Button,
-  Checkbox,
-  Image,
-  PasswordInput,
-  Text,
-  TextInput,
-} from "@nabiq-ui";
+import { Button, Image, PasswordInput, Text, TextInput } from "@nabiq-ui";
 import { useNavigate } from "react-router-dom";
 import googleLogo from "src/assets/onboarding/google.svg";
 import {

@@ -93,10 +93,8 @@ export const authApi = apiSlice.injectEndpoints({
         const loading = toast.loading("Verifying...");
         try {
           await Auth.confirmSignUp(email, confirmationPin);
-          dispatch(setIsAuthenticated(true));
-          dispatch(setUsername(email));
-          toast.success("Verification");
-          window.location.href = "/onboarding";
+          toast.success("Verification successful!");
+          window.location.href = "/login";
         } catch (error) {
           toast.error(error?.message || "Something went wrong!");
         } finally {

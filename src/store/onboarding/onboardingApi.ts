@@ -1,29 +1,30 @@
+import toast from "react-hot-toast";
+
 import { apiSlice } from "../api/apiSlice";
-import { onboardUser } from "./onboardingSlice";
 
 export const onboardApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    addOnboardUser: builder.mutation({
+    onboardUser: builder.mutation({
       query: (data) => ({
-        url: "/onboard-user",
+        url: "/onboard",
         method: "POST",
         body: data,
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        const loading = toast.loading("Onboarding user...");
         try {
-          const result = await queryFulfilled;
-
-          dispatch(
-            onboardUser({
-              user: result.data?.user,
-            })
-          );
+          await queryFulfilled;
+          toast.success("Onboarding successful!");
+          window.location.href = "/";
         } catch (err) {
+          toast.error("Failed to onboard user!");
           throw new Error(err);
+        } finally {
+          toast.dismiss(loading);
         }
       },
     }),
   }),
 });
 
-export const { useAddOnboardUserMutation } = onboardApi;
+export const { useOnboardUserMutation } = onboardApi;

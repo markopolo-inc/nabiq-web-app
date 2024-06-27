@@ -1,11 +1,10 @@
-import { Image } from "@nabiq-ui";
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "src/layouts/ScrollToTop";
-import LoaderGif from "src/assets/loader/loading.gif";
 import AppLayout from "src/layouts/AppLayout";
 import PrivateLayout from "src/layouts/PrivateLayout";
 import NavigationLayout from "src/layouts/NavigationLayout";
+import PageLoader from "src/components/UI/PageLoader";
 
 const Home = lazy(() => import("src/pages/Home"));
 const SignUp = lazy(() => import("src/pages/SignUp"));
@@ -18,13 +17,7 @@ const Test = lazy(() => import("src/pages/Test"));
 const Router = () => {
   return (
     <ScrollToTop>
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center min-h-screen">
-            <Image src={LoaderGif} alt="Loading..." />
-          </div>
-        }
-      >
+      <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route path="/signup" element={<SignUp />} />

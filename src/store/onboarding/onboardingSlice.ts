@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface OnboardingState {
   user: any;
@@ -11,12 +11,7 @@ const initialState: OnboardingState = {
 const onboardingSlice = createSlice({
   name: "onboarding",
   initialState,
-  reducers: {
-    onboardUser: (state, action: PayloadAction<OnboardingState>) => {
-      state.user = action.payload.user;
-    },
-  },
+  reducers: {},
 });
 
-export const { onboardUser } = onboardingSlice.actions;
 export default onboardingSlice.reducer;

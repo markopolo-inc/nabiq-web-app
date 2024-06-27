@@ -15,11 +15,11 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
-  // extractRehydrationInfo(action, { reducerPath }) {
-  //   if (action.type === REHYDRATE) {
-  //     return action.payload[reducerPath];
-  //   }
-  // },
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === REHYDRATE && reducerPath) {
+      return action.payload?.[reducerPath];
+    }
+  },
   tagTypes: [],
   endpoints: () => ({}),
   keepUnusedDataFor: 0,
