@@ -2,7 +2,7 @@ import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 import { Auth } from "aws-amplify";
 import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
-import { setIsAuthenticated, setUsername, logout } from "./authSlice";
+import { setIsAuthenticated, setUserEmail, logout } from "./authSlice";
 const UserNotConfirmedException = "UserNotConfirmedException";
 
 export const authApi = apiSlice.injectEndpoints({
@@ -17,7 +17,7 @@ export const authApi = apiSlice.injectEndpoints({
         try {
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
-          dispatch(setUsername(email));
+          dispatch(setUserEmail(email));
           toast.success("Successfully logged in.");
           window.location.href = "/";
         } catch (error) {
@@ -47,8 +47,7 @@ export const authApi = apiSlice.injectEndpoints({
               "custom:fullName": name,
             },
           });
-          // dispatch(setIsAuthenticated(true));
-          dispatch(setUsername(email));
+          dispatch(setUserEmail(email));
 
           toast.success("Successfully sign up.");
           window.location.href = `/verify`;
@@ -73,7 +72,7 @@ export const authApi = apiSlice.injectEndpoints({
           const email = user.attributes.email;
 
           dispatch(setIsAuthenticated(true));
-          dispatch(setUsername(email));
+          dispatch(setUserEmail(email));
 
           toast.dismiss(loading);
           toast.success("Successfully signed in with Google.");

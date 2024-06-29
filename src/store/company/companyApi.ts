@@ -1,4 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
+import { setUser } from "../user/userSlice";
 import { setCompany } from "./comapnySlice";
 
 export const companyApi = apiSlice.injectEndpoints({
@@ -9,12 +10,13 @@ export const companyApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
       transformResponse: (response: any) => {
-        return response?.company;
+        return response;
       },
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          dispatch(setCompany(result?.data));
+          dispatch(setCompany(result?.data?.company));
+          dispatch(setUser(result?.data?.user));
         } catch (err) {
           throw new Error(err);
         }

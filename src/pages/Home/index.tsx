@@ -2,8 +2,10 @@ import ConnectCampaignPlatforms from "src/components/Features/Home/ConnectCampai
 import ConnectMarktag from "src/components/Features/Home/ConnectMarktag";
 import IntegrateApps from "src/components/Features/Home/IntegrateApps";
 import HeaderTitle from "src/layouts/HeaderTitle";
+import { useAppSelector } from "src/store/hooks";
 
 const Home = () => {
+  const { userName } = useAppSelector((state) => state.user);
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
@@ -11,7 +13,7 @@ const Home = () => {
       <div className="flex flex-col gap-16">
         <div className="flex flex-col">
           <p className="text-gray-900 font-semibold text-4xl">
-            Hello, John Doe
+            Hello, {userName}
           </p>
           <p className="text-gray-600 font-normal text-lg">
             Welcome to your marketing co-pilot captain.

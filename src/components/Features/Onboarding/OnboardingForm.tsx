@@ -29,7 +29,6 @@ const OnboardingForm = () => {
 
     try {
       const user = await Auth.currentUserPoolUser();
-      console.log(user);
       await onboardUser({
         cognitoId: user?.attributes?.sub,
         userName: user?.attributes?.["custom:fullName"] || "Test",

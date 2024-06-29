@@ -12,7 +12,7 @@ const VerifyForm = () => {
 
   const [verify, { isLoading }] = useVerifyMutation();
   const [resend] = useResendVerificationCodeMutation();
-  const { username: email } = useAppSelector((state) => state.auth);
+  const { email } = useAppSelector((state) => state.auth);
 
   return (
     <>
