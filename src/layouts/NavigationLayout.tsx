@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "src/store/hooks";
 import NabiqLogo from "src/assets/logo/nabiq-logo.png";
+import Sidebar from "components/Features/Sidebar";
 
 const NavigationLayout = () => {
   console.log("--- I am from Navigationlayout ---");
@@ -29,9 +30,11 @@ const NavigationLayout = () => {
           <Image src={NabiqLogo} alt="Nabiq" className="w-24" />
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md">Navbar</AppShell.Navbar>
+      <AppShell.Navbar p="md">
+        <Sidebar />
+      </AppShell.Navbar>
       <AppShell.Main>
-        <div>
+        <div className="p-4">
           <Outlet />
         </div>
       </AppShell.Main>
