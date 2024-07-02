@@ -21,14 +21,7 @@ const Home = () => {
         </div>
         <div className="p-12 bg-gray-100 rounded-xl">
           <div className="flex flex-col justify-center items-center">
-            <div
-              className="gap-6"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "456px 456px",
-                width: "fit-content",
-              }}
-            >
+            <div className="gap-6 w-fit grid grid-cols-[456px] 2xl:grid-cols-[456px_456px]">
               <ConnectMarktag />
               <IntegrateApps />
               <ConnectCampaignPlatforms />

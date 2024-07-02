@@ -32,6 +32,7 @@ export { default as FiMinus } from "./Minus";
 
 // P
 export { default as FiPrimitiveDot } from "./PrimitiveDot";
+export { default as FiPuzzlePiece02 } from "./PuzzlePiece02";
 
 // R
 
