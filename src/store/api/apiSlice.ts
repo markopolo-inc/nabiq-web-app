@@ -19,7 +19,7 @@ export const apiSlice = createApi({
       return action.payload?.[reducerPath];
     }
   },
-  tagTypes: [],
+  tagTypes: ["Company"],
   endpoints: () => ({}),
   keepUnusedDataFor: 0,
   refetchOnFocus: true,

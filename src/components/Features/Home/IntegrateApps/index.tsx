@@ -33,8 +33,8 @@ const IntegrateApps = () => {
             </Button>
             <div className="flex gap-4">
               {apps.map((item) => (
-                <div>
-                  <AppLogo app={item as AppNameType} key={item} width={20} />
+                <div key={item}>
+                  <AppLogo app={item as AppNameType} width={20} />
                 </div>
               ))}
             </div>

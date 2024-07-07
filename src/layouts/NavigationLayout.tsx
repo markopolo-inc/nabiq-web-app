@@ -21,12 +21,12 @@ const NavigationLayout = () => {
   return (
     <AppShell
       header={{ height: 72 }}
-      navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
+      navbar={{ width: 300, breakpoint: "md", collapsed: { mobile: !opened } }}
       padding="md"
     >
       <AppShell.Header className="px-8">
         <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+          <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
           <Image src={NabiqLogo} alt="Nabiq" className="w-24" />
         </Group>
       </AppShell.Header>

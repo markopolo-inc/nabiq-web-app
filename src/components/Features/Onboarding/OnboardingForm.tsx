@@ -36,7 +36,6 @@ const OnboardingForm = () => {
         ...values,
       });
     } catch (err) {
-      console.log(err);
       toast.error("Failed to get user data!");
     } finally {
       setIsLoading(false);

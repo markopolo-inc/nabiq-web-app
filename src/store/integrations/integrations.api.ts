@@ -11,6 +11,7 @@ interface SaveApiInterface {
 export const integrationsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     saveAppApiKey: builder.mutation<any, SaveApiInterface>({
+      invalidatesTags: ["Company"],
       query: (args) => {
         const url = `/${args.appName}/oauth`;
         return {

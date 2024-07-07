@@ -30,7 +30,6 @@ const ApiKeyModal = ({ appName }: { appName: AppNameType }) => {
         appName,
         brandId,
       }).unwrap();
-      console.log(res);
       if (res?.success) {
         setOpened(false);
       }
