@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useGetColors } from "@nabiq-ui";
-import { sidebarOptions } from "src/utils/sidebarOptions";
+import { sidebarOptions } from "src/lib/sidebarOptions";
 
 const Sidebar = () => {
   const { gray400, primary500 } = useGetColors();

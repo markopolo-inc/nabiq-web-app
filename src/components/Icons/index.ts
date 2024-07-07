@@ -30,6 +30,10 @@ export { default as FiHomeLine } from "./HomeLine";
 export { default as FiMail01 } from "./Mail01";
 export { default as FiMinus } from "./Minus";
 
+// N
+export { default as FiNotificationMessage } from "./NotificationMessage";
+export { default as FiMessageDotCircle } from "./MessageDotsCircle";
+
 // P
 export { default as FiPrimitiveDot } from "./PrimitiveDot";
 export { default as FiPuzzlePiece02 } from "./PuzzlePiece02";

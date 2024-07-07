@@ -1,8 +1,9 @@
 import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
+import { AppNameType } from "src/components/UI/AppLogo";
 
 interface SaveApiInterface {
-  appName: "klaviyo" | "hubspot" | "postmark";
+  appName: AppNameType;
   brandId: string;
   apiKey: string;
 }

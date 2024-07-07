@@ -1,13 +1,12 @@
-import { Button, Image } from "@nabiq-ui";
+import { Button } from "@nabiq-ui";
 import { FiZap } from "@nabiq-icons";
 import { useNavigate } from "react-router-dom";
 
-import KlavyoLogo from "assets/integraions/klavioLogo.svg";
-import HubspotLogo from "assets/integraions/HubspotLogo.svg";
-import PostMarkLogo from "assets/integraions/PostmarkLogo.png";
+import AppLogo, { AppNameType } from "src/components/UI/AppLogo";
 
 const IntegrateApps = () => {
   const navigate = useNavigate();
+  const apps = ["klaviyo", "hubspot", "postmark"];
   return (
     <div className="bg-white rounded-xl p-8 shadow-lg">
       <div className="flex gap-3 flex-nowrap">
@@ -33,15 +32,11 @@ const IntegrateApps = () => {
               Integrate
             </Button>
             <div className="flex gap-4">
-              <div>
-                <Image src={KlavyoLogo} style={{ width: 20 }} />
-              </div>
-              <div>
-                <Image src={HubspotLogo} style={{ width: 20 }} />
-              </div>
-              <div>
-                <Image src={PostMarkLogo} style={{ width: 20 }} />
-              </div>
+              {apps.map((item) => (
+                <div>
+                  <AppLogo app={item as AppNameType} key={item} width={20} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
