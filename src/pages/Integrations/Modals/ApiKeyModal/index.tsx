@@ -1,10 +1,41 @@
+import { useForm } from "@mantine/form";
+import captilize from "lodash/capitalize";
 import { Button, Modal, TextInput } from "@nabiq-ui";
 import { FiZap } from "@nabiq-icons";
-import AppLogo, { AppNameType } from "src/components/UI/AppLogo";
-import captilize from "lodash/capitalize";
+
+import AppLogo, { AppNameType } from "components/UI/AppLogo";
+import { useSaveAppApiKeyMutation } from "store/integrations/integrations.api";
+import { useAppSelector } from "src/store/hooks";
+import { trimAllValuesOfObject } from "src/utils/stringUtils";
 
 const ApiKeyModal = ({ appName }: { appName: AppNameType }) => {
+  const [saveApikey, { isLoading }] = useSaveAppApiKeyMutation();
+  const { resourceId: brandId, integrations } = useAppSelector(
+    (state) => state.brand
+  );
+
   const ModalBody = ({ setOpened }) => {
+    const form = useForm({
+      initialValues: {
+        apiKey: "",
+      },
+      validate: {
+        apiKey: (value) => (value.length === 0 ? "API key is required" : null),
+      },
+    });
+
+    const handleFormSubmit = async (values) => {
+      const res = await saveApikey({
+        apiKey: values.apiKey,
+        appName,
+        brandId,
+      }).unwrap();
+      console.log(res);
+      if (res?.success) {
+        setOpened(false);
+      }
+    };
+
     return (
       <div className="p-8 flex flex-col gap-8">
         <div className="flex flex-col gap-4">
@@ -18,17 +49,36 @@ const ApiKeyModal = ({ appName }: { appName: AppNameType }) => {
             </p>
           </div>
         </div>
-        <TextInput label="API key" placeholder="Enter API key" />
-        <div className="flex flex-col gap-3">
-          <Button fullWidth>Confirm</Button>
-          <Button
-            fullWidth
-            variant="secondary"
-            onClick={() => setOpened(false)}
-          >
-            Cancel
-          </Button>
-        </div>
+        <form
+          className="flex flex-col gap-8"
+          onSubmit={form.onSubmit((values) => {
+            handleFormSubmit(trimAllValuesOfObject(values));
+          })}
+        >
+          <TextInput
+            label="API key"
+            placeholder="Enter API key"
+            {...form.getInputProps("apiKey")}
+          />
+          <div className="flex flex-col gap-3">
+            <Button
+              type="submit"
+              disabled={!form.values.apiKey}
+              fullWidth
+              loading={isLoading}
+            >
+              Confirm
+            </Button>
+            <Button
+              fullWidth
+              variant="secondary"
+              onClick={() => setOpened(false)}
+              disabled={isLoading}
+            >
+              Cancel
+            </Button>
+          </div>
+        </form>
       </div>
     );
   };
@@ -36,18 +86,23 @@ const ApiKeyModal = ({ appName }: { appName: AppNameType }) => {
   return (
     <Modal
       size="sm"
-      closeOnClickOutside
       withCustomClose
       body={({ setOpened }) => <ModalBody setOpened={setOpened} />}
     >
-      {({ setOpened }) => (
-        <Button
-          leadingIcon={<FiZap fill="white" size={22} />}
-          onClick={() => setOpened(true)}
-        >
-          Integrate
-        </Button>
-      )}
+      {({ setOpened }) =>
+        integrations?.[appName]?.apiKey ? (
+          <Button variant="secondary" onClick={() => setOpened(true)}>
+            Configure
+          </Button>
+        ) : (
+          <Button
+            leadingIcon={<FiZap fill="white" size={22} />}
+            onClick={() => setOpened(true)}
+          >
+            Integrate
+          </Button>
+        )
+      }
     </Modal>
   );
 };

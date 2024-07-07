@@ -29,11 +29,10 @@ export const companyApi = apiSlice.injectEndpoints({
           dispatch(setUser(result?.data?.user));
           dispatch(setBrand(result?.data?.brand));
         } catch (err) {
-          console.log(err);
           return err;
         }
       },
-      onCacheEntryAdded: async () => {},
+      async onCacheEntryAdded() {},
     }),
   }),
 });

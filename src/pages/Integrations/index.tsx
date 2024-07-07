@@ -3,7 +3,7 @@ import { FiZap } from "@nabiq-icons";
 
 import AppLogo from "src/components/UI/AppLogo";
 import HeaderTitle from "layouts/HeaderTitle";
-import {} from "src/store/integrations/integrations.api";
+
 import { buildQueryString } from "src/utils/stringUtils";
 import { getAuthToken } from "src/utils/auth";
 

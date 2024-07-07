@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
+import type { AppNameType } from "src/components/UI/AppLogo";
+
 export interface BrandInterface {
   brandName?: string;
   companyId?: string;
@@ -10,6 +12,7 @@ export interface BrandInterface {
   isTiktokAccountAdded?: boolean;
   resourceId?: string;
   resourceType?: "Brand";
+  integrations?: Record<AppNameType, { apiKey: string }>;
 }
 
 const initialState: BrandInterface = {
