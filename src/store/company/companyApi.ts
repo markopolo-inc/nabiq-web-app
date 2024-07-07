@@ -1,10 +1,17 @@
 import { apiSlice } from "../api/apiSlice";
-import { setUser } from "../user/userSlice";
-import { setCompany } from "./comapnySlice";
+import { BrandInterface, setBrand } from "../brand/brandSlice";
+import { UserInterface, setUser } from "../user/userSlice";
+import { CompanyInterface, setCompany } from "./comapnySlice";
+
+interface ResponseInterface {
+  company: CompanyInterface;
+  user: UserInterface;
+  brand: BrandInterface;
+}
 
 export const companyApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getCompany: builder.query<any, void>({
+    getCompany: builder.query<ResponseInterface, void>({
       query: () => ({
         url: "/company",
         method: "GET",
@@ -12,15 +19,21 @@ export const companyApi = apiSlice.injectEndpoints({
       transformResponse: (response: any) => {
         return response;
       },
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      transformErrorResponse: (response) => {
+        return null;
+      },
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(setCompany(result?.data?.company));
           dispatch(setUser(result?.data?.user));
+          dispatch(setBrand(result?.data?.brand));
         } catch (err) {
-          throw new Error(err);
+          console.log(err);
+          return err;
         }
       },
+      onCacheEntryAdded: async () => {},
     }),
   }),
 });

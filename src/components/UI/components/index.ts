@@ -1,9 +1,11 @@
 // Layout
 export { default as AppShell } from "./AppShell";
 export { default as Group } from "./Group";
+export { default as Modal } from "./Modal";
 
 // Buttons
 export { default as Button } from "./Button";
+export { default as CloseButton } from "./CloseButton";
 
 // Input
 export { default as TextInput } from "./TextInput";

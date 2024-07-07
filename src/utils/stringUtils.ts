@@ -5,3 +5,11 @@ export const trimAllValuesOfObject = (payload) => {
   }
   return obj;
 };
+
+export function buildQueryString(params) {
+  return Object.keys(params)
+    .map(
+      (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+    )
+    .join("&");
+}
