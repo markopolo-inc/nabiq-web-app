@@ -1,19 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { CompanyInterface } from "interfaces/company.interface";
 
-export interface CompanyInterface {
-  id?: string;
-  _id?: string;
-  resourceId?: string;
-  companyName?: string;
-  meta?: {
-    cognitoId: string;
-    userName: string;
-    userEmail: string;
-    businessName: string;
-    industry: string;
-    businessSize: string;
-  };
-}
 const initialState: CompanyInterface = {
   resourceId: "",
   companyName: "",

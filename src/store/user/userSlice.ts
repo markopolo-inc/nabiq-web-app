@@ -1,13 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface UserInterface {
-  _id?: string;
-  resourceId?: string;
-  companyId?: string;
-  cognitoId?: string;
-  userEmail?: string;
-  userName?: string;
-}
+import type { UserInterface } from "interfaces/user.interface";
 
 const initialState: UserInterface = {
   resourceId: "",
