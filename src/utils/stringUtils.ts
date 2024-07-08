@@ -13,3 +13,11 @@ export function buildQueryString(params) {
     )
     .join("&");
 }
+
+export function camelCaseToCapitalized(str) {
+  // Replace each uppercase letter with a space followed by the same letter in lowercase
+  const result = str.replace(/([A-Z])/g, " $1").toLowerCase();
+
+  // Capitalize the first letter of each word
+  return result.replace(/\b\w/g, (char) => char.toUpperCase());
+}

@@ -57,12 +57,15 @@ export const integrationsApi = apiSlice.injectEndpoints({
           },
         };
       },
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           await queryFulfilled;
           toast.success(`Information saved!`);
         } catch (err) {
-          toast.error(err?.message || "Failed to save information!");
+          toast.error(err?.error.message || "Failed to save information!");
           return err;
         }
       },

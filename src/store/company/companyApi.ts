@@ -1,9 +1,11 @@
 import type { BrandInterface } from "interfaces/brand.interface";
+import type { UserInterface } from "interfaces/user.interface";
+import type { CompanyInterface } from "interfaces/company.interface";
 
 import { apiSlice } from "../api/apiSlice";
 import { setBrand } from "../brand/brandSlice";
-import { UserInterface, setUser } from "../user/userSlice";
-import { CompanyInterface, setCompany } from "./comapnySlice";
+import { setUser } from "../user/userSlice";
+import { setCompany } from "./comapnySlice";
 
 interface ResponseInterface {
   company: CompanyInterface;
@@ -19,12 +21,6 @@ export const companyApi = apiSlice.injectEndpoints({
         url: "/company",
         method: "GET",
       }),
-      transformResponse: (response: any) => {
-        return response;
-      },
-      transformErrorResponse: (response) => {
-        return null;
-      },
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;

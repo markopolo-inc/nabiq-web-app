@@ -9,8 +9,22 @@ import {
   useIntegrateSMSMutation,
 } from "store/integrations/integrations.api";
 import { useAppSelector } from "src/store/hooks";
-import { trimAllValuesOfObject } from "src/utils/stringUtils";
-import { AppInterface } from "interfaces/brand.interface";
+import {
+  camelCaseToCapitalized,
+  trimAllValuesOfObject,
+} from "src/utils/stringUtils";
+import { AppInterface, GatewayType } from "interfaces/brand.interface";
+import { hasEmptyField } from "src/utils/object.utils";
+
+const gatewayvalues: Record<GatewayType, string[]> = {
+  klaviyo: ["apiKey"],
+  postmark: [],
+  clicksend: ["apiKey"],
+  flowroute: ["accessKey", "secretKey"],
+  hubspot: [],
+  sinch: ["servicePlanId", "apiToken"],
+  twilio: ["accountSid", "authToken"],
+};
 
 const ModalBody: React.FC<{
   setOpened: React.Dispatch<SetStateAction<boolean>>;
@@ -20,12 +34,18 @@ const ModalBody: React.FC<{
   const [integrateEmail, { isLoading: isLoadingEmail }] =
     useIntegrateEmailMutation();
   const [integrateSMS] = useIntegrateSMSMutation();
+
+  const fields = gatewayvalues?.[app.gateway];
+
+  const initialValues = {};
+
+  fields?.forEach((field) => {
+    initialValues[field] = "";
+  });
+
   const form = useForm({
     initialValues: {
-      apiKey: "",
-    },
-    validate: {
-      apiKey: (value) => (value.length === 0 ? "API key is required" : null),
+      ...initialValues,
     },
   });
 
@@ -39,12 +59,12 @@ const ModalBody: React.FC<{
       if (res?.success) {
         setOpened(false);
       }
-    } else {
+    } else if (app.category === "sms") {
       const res = await integrateSMS({
         brandId,
         gateway: app.gateway,
         [app.gateway]: {
-          apiKey: values.apiKey,
+          ...form.values,
         },
       }).unwrap();
       if (res?.success) {
@@ -72,15 +92,20 @@ const ModalBody: React.FC<{
           handleFormSubmit(trimAllValuesOfObject(values));
         })}
       >
-        <TextInput
-          label="API key"
-          placeholder="Enter API key"
-          {...form.getInputProps("apiKey")}
-        />
+        <div className="flex flex-col gap-3">
+          {fields?.map((field) => (
+            <TextInput
+              key={field}
+              label={camelCaseToCapitalized(field)}
+              placeholder={`Enter ${camelCaseToCapitalized(field)}`}
+              {...form.getInputProps(field)}
+            />
+          ))}
+        </div>
         <div className="flex flex-col gap-3">
           <Button
             type="submit"
-            disabled={!form.values.apiKey}
+            disabled={hasEmptyField(form.values)}
             fullWidth
             loading={isLoadingEmail}
           >

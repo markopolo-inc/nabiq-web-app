@@ -29,6 +29,9 @@ export interface EmailIntegrationInterface {
   klaviyo?: {
     apiKey: string;
   };
+  postmark?: {
+    apiKey: string;
+  };
 }
 
 export interface AppInterface {
@@ -44,7 +47,7 @@ export interface AppInterface {
 export interface BrandInterface {
   brandName?: string;
   companyId?: string;
-  connectedMarktag?: any;
+  connectedMarktag?: unknown;
   isAmazonAccountConnected?: boolean;
   isLinkedInAccountAdded?: boolean;
   isTiktokAccountAdded?: boolean;
