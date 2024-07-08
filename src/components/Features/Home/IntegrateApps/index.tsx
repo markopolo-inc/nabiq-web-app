@@ -2,7 +2,8 @@ import { Button } from "@nabiq-ui";
 import { FiZap } from "@nabiq-icons";
 import { useNavigate } from "react-router-dom";
 
-import AppLogo, { AppNameType } from "src/components/UI/AppLogo";
+import GatewayLogo from "src/components/UI/GatewayLogo";
+import type { GatewayType } from "src/interfaces/brand.interface";
 
 const IntegrateApps = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const IntegrateApps = () => {
             <div className="flex gap-4">
               {apps.map((item) => (
                 <div key={item}>
-                  <AppLogo app={item as AppNameType} width={20} />
+                  <GatewayLogo app={item as GatewayType} width={20} />
                 </div>
               ))}
             </div>

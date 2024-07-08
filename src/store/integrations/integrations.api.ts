@@ -1,19 +1,31 @@
 import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
-import { AppNameType } from "src/components/UI/AppLogo";
+import type {
+  GatewayType,
+  SMSIntegrationInterface,
+} from "src/interfaces/brand.interface";
 
-interface SaveApiInterface {
-  appName: AppNameType;
+interface SaveApiPayload {
+  gateway: GatewayType;
   brandId: string;
   apiKey: string;
 }
+interface IntgrateSMSPayload extends SMSIntegrationInterface {
+  brandId: string;
+  gateway: GatewayType;
+}
+
+type ResponseType = {
+  success: boolean;
+  message: string;
+};
 
 export const integrationsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    saveAppApiKey: builder.mutation<any, SaveApiInterface>({
+    integrateEmail: builder.mutation<ResponseType, SaveApiPayload>({
       invalidatesTags: ["Company"],
       query: (args) => {
-        const url = `/${args.appName}/oauth`;
+        const url = `/${args.gateway}/oauth`;
         return {
           url,
           method: "POST",
@@ -33,7 +45,30 @@ export const integrationsApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    integrateSMS: builder.mutation<ResponseType, IntgrateSMSPayload>({
+      invalidatesTags: ["Company"],
+      query: (args) => {
+        const url = "/sms/auth";
+        return {
+          url,
+          method: "POST",
+          body: {
+            ...args,
+          },
+        };
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          toast.success(`Information saved!`);
+        } catch (err) {
+          toast.error(err?.message || "Failed to save information!");
+          return err;
+        }
+      },
+    }),
   }),
 });
 
-export const { useSaveAppApiKeyMutation } = integrationsApi;
+export const { useIntegrateEmailMutation, useIntegrateSMSMutation } =
+  integrationsApi;

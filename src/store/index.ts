@@ -26,7 +26,8 @@ export const store = configureStore({
   reducer: persistedReducer,
   devTools: import.meta.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     getDefaultMiddleware({
       // Redux persist
       // serializableCheck: false,

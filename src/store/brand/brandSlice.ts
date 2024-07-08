@@ -1,19 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
-import type { AppNameType } from "src/components/UI/AppLogo";
-
-export interface BrandInterface {
-  brandName?: string;
-  companyId?: string;
-  connectedMarktag?: any;
-  isAmazonAccountConnected?: boolean;
-  isLinkedInAccountAdded?: boolean;
-  isTiktokAccountAdded?: boolean;
-  resourceId?: string;
-  resourceType?: "Brand";
-  integrations?: Record<AppNameType, { apiKey: string }>;
-}
+import type { BrandInterface } from "src/interfaces/brand.interface";
 
 const initialState: BrandInterface = {
   resourceType: "Brand",

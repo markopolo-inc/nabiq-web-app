@@ -1,4 +1,8 @@
-import { FiDataFlow02, FiHomeLine, FiPuzzlePiece02 } from "@nabiq-icons";
+import {
+  // FiDataFlow02,
+  FiHomeLine,
+  FiPuzzlePiece02,
+} from "@nabiq-icons";
 
 export const sidebarOptions = [
   {

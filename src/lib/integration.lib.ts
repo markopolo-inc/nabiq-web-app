@@ -3,6 +3,7 @@ import {
   FiMail01,
   FiMessageDotCircle,
 } from "@nabiq-icons";
+import type { AppInterface } from "src/interfaces/brand.interface";
 
 export const appCategories = [
   {
@@ -22,15 +23,15 @@ export const appCategories = [
   },
 ];
 
-export const appOptions = [
+export const appOptions: AppInterface[] = [
   {
     category: "email",
     name: "Klaviyo",
     headline:
       "Enhance your e-commerce marketing with data-driven email automation.",
-    key: "klaviyo",
+    gateway: "klaviyo",
     learnMoreLink: "",
-    isApiKeyIntegration: true,
+    isKeyIntegration: true,
     isOauthIntegration: false,
   },
   {
@@ -38,9 +39,9 @@ export const appOptions = [
     name: "Hubspot",
     headline:
       "Increase sales with personalized email campaigns designed for online retailers.",
-    key: "hubspot",
+    gateway: "hubspot",
     learnMoreLink: "",
-    isApiKeyIntegration: false,
+    isKeyIntegration: false,
     isOauthIntegration: true,
   },
   {
@@ -48,9 +49,9 @@ export const appOptions = [
     name: "Postmark",
     headline:
       "Increase sales with personalized email campaigns designed for online retailers.",
-    key: "postmark",
+    gateway: "postmark",
     learnMoreLink: "",
-    isApiKeyIntegration: true,
+    isKeyIntegration: true,
     isOauthIntegration: false,
   },
   {
@@ -58,9 +59,9 @@ export const appOptions = [
     name: "Twilio",
     headline:
       "Enhance customer engagement with flexible and powerful communication APIs for messaging, voice, and video.",
-    key: "twilio",
+    gateway: "twilio",
     learnMoreLink: "",
-    isApiKeyIntegration: true,
+    isKeyIntegration: true,
     isOauthIntegration: false,
   },
   {
@@ -68,9 +69,29 @@ export const appOptions = [
     name: "Sinch",
     headline:
       "Boost your customer interactions with scalable and reliable messaging, voice, and video communication solutions.",
-    key: "sinch",
+    gateway: "sinch",
     learnMoreLink: "",
-    isApiKeyIntegration: true,
+    isKeyIntegration: true,
+    isOauthIntegration: false,
+  },
+  {
+    category: "sms",
+    name: "Flow Route",
+    headline:
+      "Simplify your communication infrastructure with robust SIP trunking and messaging solutions.",
+    gateway: "flowroute",
+    learnMoreLink: "",
+    isKeyIntegration: true,
+    isOauthIntegration: false,
+  },
+  {
+    category: "sms",
+    name: "Click Send",
+    headline:
+      "Streamline your business communications with versatile platform for SMS, email, and direct mail.",
+    gateway: "clicksend",
+    learnMoreLink: "",
+    isKeyIntegration: true,
     isOauthIntegration: false,
   },
 ];

@@ -1,5 +1,7 @@
+import type { BrandInterface } from "interfaces/brand.interface";
+
 import { apiSlice } from "../api/apiSlice";
-import { BrandInterface, setBrand } from "../brand/brandSlice";
+import { setBrand } from "../brand/brandSlice";
 import { UserInterface, setUser } from "../user/userSlice";
 import { CompanyInterface, setCompany } from "./comapnySlice";
 

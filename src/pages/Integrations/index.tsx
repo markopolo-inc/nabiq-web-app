@@ -2,13 +2,14 @@ import { useState } from "react";
 import { Button } from "@nabiq-ui";
 import { FiZap } from "@nabiq-icons";
 
-import AppLogo, { AppNameType } from "components/UI/AppLogo";
+import GatewayLogo from "components/UI/GatewayLogo";
 import HeaderTitle from "layouts/HeaderTitle";
 import { buildQueryString } from "utils/stringUtils";
 import { getAuthToken } from "utils/auth";
 import { useAppSelector } from "store/hooks";
 import ApiKeyModal from "components/Features/Integrations/Modals/ApiKeyModal";
 import { appCategories, appOptions } from "lib/integration.lib";
+import type { GatewayType } from "interfaces/brand.interface";
 
 const Integrations = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
@@ -68,11 +69,14 @@ const Integrations = () => {
                 return (
                   <div
                     className="rounded-xl border border-gray-200 p-6 shadow-sm min-h-60 flex flex-col justify-between gap-8"
-                    key={app.key}
+                    key={app.gateway}
                   >
                     <div>
                       <div className="flex items-center gap-3">
-                        <AppLogo app={app.key as AppNameType} width={32} />
+                        <GatewayLogo
+                          app={app.gateway as GatewayType}
+                          width={32}
+                        />
                         <p className="text-gray-900 font-semibold text-lg">
                           {app.name}
                         </p>
@@ -86,7 +90,7 @@ const Integrations = () => {
                           onClick={async () => {
                             window.location.href = `${
                               import.meta.env.VITE_BASE_API_URL
-                            }/${app.key}/oauth?${buildQueryString({
+                            }/${app.gateway}/oauth?${buildQueryString({
                               brandId,
                               token: await getAuthToken(),
                               redirectUri:
@@ -98,9 +102,9 @@ const Integrations = () => {
                           Integrate
                         </Button>
                       )}
-                      {app.isApiKeyIntegration && (
-                        <ApiKeyModal appName={app.key as AppNameType} />
-                      )}
+
+                      {app.isKeyIntegration && <ApiKeyModal app={app} />}
+
                       <Button variant="tertiary-gray">Learn more</Button>
                     </div>
                   </div>
