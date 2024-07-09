@@ -9,16 +9,30 @@ import { getAuthToken } from "utils/auth";
 import { useAppSelector } from "store/hooks";
 import ApiKeyModal from "components/Features/Integrations/Modals/ApiKeyModal";
 import { appCategories, appOptions } from "lib/integration.lib";
-import type { GatewayType } from "interfaces/brand.interface";
+import type { GatewayInterface, GatewayType } from "interfaces/brand.interface";
+import OptionTabs from "src/components/UI/components/OptionTabs";
+import { hasEmptyField } from "src/utils/object.utils";
+import { Badge } from "@mantine/core";
 
 const Integrations = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [selectedCategory, setSelectedCategory] = useState<
     "email" | "sms" | "push"
   >("email");
+  const [selectedGateway, setSelectedGateway] =
+    useState<GatewayInterface | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const { integrations, smsIntegrations } = useAppSelector(
+    (state) => state.brand
+  );
 
   return (
     <>
+      <ApiKeyModal
+        gateway={selectedGateway}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
       <HeaderTitle>Nabiq - Integrations</HeaderTitle>
       <div className="flex flex-col gap-16">
         <div className="flex flex-col">
@@ -30,78 +44,85 @@ const Integrations = () => {
         </div>
         <div className="flex flex-col gap-6">
           <div className="border border-gray-200 rounded-xl w-fit p-2 flex gap-3 bg-gray-50">
-            {appCategories.map((item) => {
-              const isSelected = selectedCategory === item.key;
-              const Icon = item.Icon;
-              return (
-                <span
-                  onClick={() =>
-                    setSelectedCategory(item.key as "email" | "sms" | "push")
-                  }
-                  key={item.title}
-                  style={{
-                    display: "flex",
-                    gap: 8,
-                    alignItems: "center",
-                    cursor: "pointer",
-                    padding: "8px 12px",
-                    borderRadius: 6,
-                    border: isSelected
-                      ? "0.75px solid rgba(13, 18, 28, 0.48)"
-                      : "none",
-                    background: isSelected ? "#FFF" : "#F8FAFC",
-                    boxShadow: isSelected
-                      ? "0px 1px 2px 0px rgba(13, 18, 28, 0.48), 0px 0px 1px 0px rgba(13, 18, 28, 0.08)"
-                      : "none",
-                    color: isSelected ? "#364152" : "#697586",
-                    fontWeight: 600,
-                  }}
-                >
-                  <Icon size={20} strokeWidth={2.2} /> {item.title}
-                </span>
-              );
-            })}
+            <OptionTabs
+              setActive={setSelectedCategory}
+              active={selectedCategory}
+              options={appCategories}
+            />
           </div>
           <div className="gap-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
             {appOptions
               ?.filter((item) => item?.category === selectedCategory)
-              .map((app) => {
+              .map((gateway) => {
+                const isGatewayConnected =
+                  !hasEmptyField(integrations?.[gateway.gateway]) ||
+                  !hasEmptyField(smsIntegrations?.[gateway.gateway]);
                 return (
                   <div
                     className="rounded-xl border border-gray-200 p-6 shadow-sm min-h-60 flex flex-col justify-between gap-8"
-                    key={app.gateway}
+                    key={gateway.gateway}
                   >
                     <div>
-                      <div className="flex items-center gap-3">
-                        <GatewayLogo
-                          app={app.gateway as GatewayType}
-                          width={32}
-                        />
-                        <p className="text-gray-900 font-semibold text-lg">
-                          {app.name}
-                        </p>
+                      <div className="flex gap-6 justify-between items-center">
+                        <div className="flex items-center gap-3">
+                          <GatewayLogo
+                            app={gateway.gateway as GatewayType}
+                            width={32}
+                          />
+                          <p className="text-gray-900 font-semibold text-lg">
+                            {gateway.name}
+                          </p>
+                        </div>
+                        <Badge variant="outline" color="green">
+                          Connected
+                        </Badge>
                       </div>
-                      <p className="mt-6">{app.headline}</p>
+
+                      <p className="mt-6">{gateway.headline}</p>
                     </div>
                     <div className="flex gap-3">
-                      {app.isOauthIntegration && (
+                      {gateway.isOauthIntegration && (
                         <Button
                           leadingIcon={<FiZap fill="white" size={22} />}
                           onClick={async () => {
                             window.location.href = `${
                               import.meta.env.VITE_BASE_API_URL
-                            }/${app.gateway}/oauth?${buildQueryString({
+                            }/${gateway.gateway}/oauth?${buildQueryString({
                               brandId,
                               token: await getAuthToken(),
                               redirectUri: window.location.href,
                             })}`;
                           }}
                         >
-                          Integrate
+                          {isGatewayConnected ? "Reconnect" : "Integrate"}
                         </Button>
                       )}
 
-                      {app.isKeyIntegration && <ApiKeyModal app={app} />}
+                      {gateway.isKeyIntegration && (
+                        <>
+                          {isGatewayConnected ? (
+                            <Button
+                              variant="secondary"
+                              onClick={() => {
+                                setShowModal(true);
+                                setSelectedGateway(gateway);
+                              }}
+                            >
+                              Configure
+                            </Button>
+                          ) : (
+                            <Button
+                              leadingIcon={<FiZap fill="white" size={22} />}
+                              onClick={() => {
+                                setShowModal(true);
+                                setSelectedGateway(gateway);
+                              }}
+                            >
+                              Integrate
+                            </Button>
+                          )}
+                        </>
+                      )}
 
                       <Button variant="tertiary-gray">Learn more</Button>
                     </div>

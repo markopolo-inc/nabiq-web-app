@@ -3,27 +3,27 @@ import {
   FiMail01,
   FiMessageDotCircle,
 } from "@nabiq-icons";
-import type { AppInterface } from "src/interfaces/brand.interface";
+import type { GatewayInterface } from "src/interfaces/brand.interface";
 
 export const appCategories = [
   {
-    key: "email",
-    title: "Email apps",
-    Icon: FiMail01,
+    value: "email",
+    label: "Email apps",
+    icon: FiMail01,
   },
   {
-    key: "sms",
-    title: "SMS apps",
-    Icon: FiMessageDotCircle,
+    value: "sms",
+    label: "SMS apps",
+    icon: FiMessageDotCircle,
   },
   {
-    key: "push",
-    title: "Push notification apps",
-    Icon: FiNotificationMessage,
+    value: "push",
+    label: "Push notification apps",
+    icon: FiNotificationMessage,
   },
 ];
 
-export const appOptions: AppInterface[] = [
+export const appOptions: GatewayInterface[] = [
   {
     category: "email",
     name: "Klaviyo",

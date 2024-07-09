@@ -1,38 +1,25 @@
-import { Button, Modal } from "@nabiq-ui";
-import { FiZap } from "@nabiq-icons";
-
-import { useAppSelector } from "store/hooks";
+import { Modal } from "@nabiq-ui";
 
 import ModalBody from "./ModalBody";
-import type { AppInterface } from "interfaces/brand.interface";
-import { hasEmptyField } from "src/utils/object.utils";
+import type { GatewayInterface } from "interfaces/brand.interface";
+import React from "react";
 
-const ApiKeyModal = ({ app }: { app: AppInterface }) => {
-  const { integrations, smsIntegrations } = useAppSelector(
-    (state) => state.brand
-  );
-
+const ApiKeyModal: React.FC<{
+  gateway: GatewayInterface;
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ gateway, showModal, setShowModal }) => {
   return (
     <Modal
       size="sm"
+      toggleFromOutside={showModal}
+      setToggleFromOutside={setShowModal}
       withCustomClose
-      body={({ setOpened }) => <ModalBody setOpened={setOpened} app={app} />}
+      body={({ setOpened }) => (
+        <ModalBody setOpened={setOpened} gateway={gateway} />
+      )}
     >
-      {({ setOpened }) =>
-        !hasEmptyField(integrations?.[app.gateway]) ||
-        !hasEmptyField(smsIntegrations?.[app.gateway]) ? (
-          <Button variant="secondary" onClick={() => setOpened(true)}>
-            Configure
-          </Button>
-        ) : (
-          <Button
-            leadingIcon={<FiZap fill="white" size={22} />}
-            onClick={() => setOpened(true)}
-          >
-            Integrate
-          </Button>
-        )
-      }
+      {() => <></>}
     </Modal>
   );
 };

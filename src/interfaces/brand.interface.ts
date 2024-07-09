@@ -35,7 +35,7 @@ export interface EmailIntegrationInterface {
   };
 }
 
-export interface AppInterface {
+export interface GatewayInterface {
   category: "sms" | "email";
   name: string;
   headline: string;

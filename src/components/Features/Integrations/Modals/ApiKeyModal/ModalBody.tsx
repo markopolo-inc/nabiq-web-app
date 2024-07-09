@@ -13,7 +13,7 @@ import {
   camelCaseToCapitalized,
   trimAllValuesOfObject,
 } from "src/utils/stringUtils";
-import { AppInterface, GatewayType } from "interfaces/brand.interface";
+import type { GatewayInterface, GatewayType } from "interfaces/brand.interface";
 import { hasEmptyField } from "src/utils/object.utils";
 
 const gatewayvalues: Record<GatewayType, string[]> = {
@@ -28,14 +28,14 @@ const gatewayvalues: Record<GatewayType, string[]> = {
 
 const ModalBody: React.FC<{
   setOpened: React.Dispatch<SetStateAction<boolean>>;
-  app: AppInterface;
-}> = ({ setOpened, app }) => {
+  gateway: GatewayInterface;
+}> = ({ setOpened, gateway }) => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [integrateEmail, { isLoading: isLoadingEmail }] =
     useIntegrateEmailMutation();
   const [integrateSMS] = useIntegrateSMSMutation();
 
-  const fields = gatewayvalues?.[app.gateway];
+  const fields = gatewayvalues?.[gateway.gateway];
 
   const initialValues = {};
 
@@ -50,20 +50,20 @@ const ModalBody: React.FC<{
   });
 
   const handleFormSubmit = async (values) => {
-    if (app.category === "email") {
+    if (gateway.category === "email") {
       const res = await integrateEmail({
         apiKey: values.apiKey,
-        gateway: app.gateway,
+        gateway: gateway.gateway,
         brandId,
       }).unwrap();
       if (res?.success) {
         setOpened(false);
       }
-    } else if (app.category === "sms") {
+    } else if (gateway.category === "sms") {
       const res = await integrateSMS({
         brandId,
-        gateway: app.gateway,
-        [app.gateway]: {
+        gateway: gateway.gateway,
+        [gateway.gateway]: {
           ...form.values,
         },
       }).unwrap();
@@ -76,13 +76,13 @@ const ModalBody: React.FC<{
   return (
     <div className="p-8 flex flex-col gap-8">
       <div className="flex flex-col gap-4">
-        <GatewayLogo app={app.gateway} width={32} />
+        <GatewayLogo app={gateway.gateway} width={32} />
         <div className="flex flex-col gap-2">
           <p className="text-gray-900 font-semibold text-[24px]">
-            Integrate {app.name}
+            Integrate {gateway.name}
           </p>
           <p className="text-gray-600 font-normal text-base">
-            Please enter your {app.name} account details.
+            Please enter your {gateway.name} account details.
           </p>
         </div>
       </div>
