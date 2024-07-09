@@ -5,7 +5,7 @@ import { useAppSelector } from "store/hooks";
 
 import ModalBody from "./ModalBody";
 import type { AppInterface } from "interfaces/brand.interface";
-import { isEmpty } from "lodash";
+import { hasEmptyField } from "src/utils/object.utils";
 
 const ApiKeyModal = ({ app }: { app: AppInterface }) => {
   const { integrations, smsIntegrations } = useAppSelector(
@@ -19,8 +19,8 @@ const ApiKeyModal = ({ app }: { app: AppInterface }) => {
       body={({ setOpened }) => <ModalBody setOpened={setOpened} app={app} />}
     >
       {({ setOpened }) =>
-        !isEmpty(integrations?.[app.gateway]) ||
-        !isEmpty(smsIntegrations?.[app.gateway]) ? (
+        !hasEmptyField(integrations?.[app.gateway]) ||
+        !hasEmptyField(smsIntegrations?.[app.gateway]) ? (
           <Button variant="secondary" onClick={() => setOpened(true)}>
             Configure
           </Button>

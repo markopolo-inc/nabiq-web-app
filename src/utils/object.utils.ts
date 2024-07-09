@@ -1,5 +1,7 @@
-import { isEmpty } from "lodash";
+import { isEmpty, isObject } from "lodash";
 
 export function hasEmptyField(obj) {
-  return Object.values(obj).some((value) => isEmpty(value));
+  return isObject(obj)
+    ? Object.values(obj).some((value) => isEmpty(value))
+    : false;
 }

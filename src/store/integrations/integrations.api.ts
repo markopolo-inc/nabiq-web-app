@@ -37,8 +37,8 @@ export const integrationsApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(args, { queryFulfilled }) {
         try {
-          await queryFulfilled;
-          toast.success(`Api key saved!`);
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || "Saved successfully!");
         } catch (err) {
           toast.error(err.message || "Failed to add api key!");
           return err;
@@ -47,23 +47,20 @@ export const integrationsApi = apiSlice.injectEndpoints({
     }),
     integrateSMS: builder.mutation<ResponseType, IntgrateSMSPayload>({
       invalidatesTags: ["Company"],
-      query: (args) => {
-        const url = "/sms/auth";
-        return {
-          url,
-          method: "POST",
-          body: {
-            ...args,
-          },
-        };
-      },
+      query: (args) => ({
+        url: "/sms/auth",
+        method: "POST",
+        body: {
+          ...args,
+        },
+      }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue?.data;
       },
       async onQueryStarted(args, { queryFulfilled }) {
         try {
-          await queryFulfilled;
-          toast.success(`Information saved!`);
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || "Saved successfully!");
         } catch (err) {
           toast.error(err?.error.message || "Failed to save information!");
           return err;

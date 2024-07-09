@@ -18,7 +18,7 @@ import { hasEmptyField } from "src/utils/object.utils";
 
 const gatewayvalues: Record<GatewayType, string[]> = {
   klaviyo: ["apiKey"],
-  postmark: [],
+  postmark: ["apiKey"],
   clicksend: ["apiKey"],
   flowroute: ["accessKey", "secretKey"],
   hubspot: [],

@@ -93,9 +93,7 @@ const Integrations = () => {
                             }/${app.gateway}/oauth?${buildQueryString({
                               brandId,
                               token: await getAuthToken(),
-                              redirectUri:
-                                window.location.hostname +
-                                window.location.pathname,
+                              redirectUri: window.location.href,
                             })}`;
                           }}
                         >

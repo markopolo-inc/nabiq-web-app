@@ -30,7 +30,8 @@ export interface EmailIntegrationInterface {
     apiKey: string;
   };
   postmark?: {
-    apiKey: string;
+    apiKey?: string;
+    accountToken?: string;
   };
 }
 
