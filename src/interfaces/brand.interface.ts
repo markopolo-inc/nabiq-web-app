@@ -6,7 +6,7 @@ export type GatewayType =
   | "sinch"
   | "clicksend"
   | "flowroute"
-  | "oneSignal"
+  | "onesignal"
   | "sendgrid"
   | "resend"
   | "mailgun";
@@ -24,6 +24,27 @@ export interface IntegrationInterface {
     appId: string;
     authToken: string;
   };
+  mailgun?: {
+    domainName: string;
+    password: string;
+  };
+  hubspot?: {
+    domain: string;
+    email: string;
+    hubId: string;
+    refreshToken: string;
+    scope: string;
+    userId: string;
+  };
+  sendgrid?: {
+    apiKey: string;
+  };
+  resend?: {
+    apiKey: string;
+  };
+  onesignal?: {
+    appId: string;
+  };
 
   // sms
   twilio?: {
@@ -32,6 +53,7 @@ export interface IntegrationInterface {
   };
   clicksend?: {
     apiKey: string;
+    userName?: string;
   };
   flowroute?: {
     accessKey: string;
@@ -62,6 +84,6 @@ export interface BrandInterface {
   isTiktokAccountAdded?: boolean;
   resourceId?: string;
   resourceType?: "Brand";
-  integrations?: IntegrationInterface;
+  emailIntegrations?: IntegrationInterface;
   smsIntegrations?: IntegrationInterface;
 }

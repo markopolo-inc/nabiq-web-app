@@ -60,8 +60,9 @@ export const appOptions: GatewayInterface[] = [
   {
     category: "email",
     name: "OneSignal",
-    headline: "Required",
-    gateway: "oneSignal",
+    headline:
+      "Engage your audience effectively with push notifications, emails, SMS, and in-app messages all from one platform.",
+    gateway: "onesignal",
     learnMoreLink: "",
     isKeyIntegration: true,
     isOauthIntegration: false,
@@ -69,7 +70,8 @@ export const appOptions: GatewayInterface[] = [
   {
     category: "email",
     name: "SendGrid",
-    headline: "Required",
+    headline:
+      "Enhance your email deliverability for both transactional and marketing emails with a trusted cloud-based service.",
     gateway: "sendgrid",
     learnMoreLink: "",
     isKeyIntegration: true,
@@ -78,7 +80,8 @@ export const appOptions: GatewayInterface[] = [
   {
     category: "email",
     name: "Resend",
-    headline: "Required",
+    headline:
+      "Simplify your transactional email delivery with reliable and scalable API service.",
     gateway: "resend",
     learnMoreLink: "",
     isKeyIntegration: true,
@@ -87,7 +90,8 @@ export const appOptions: GatewayInterface[] = [
   {
     category: "email",
     name: "MailGun",
-    headline: "Required",
+    headline:
+      "Automate your email workflows effortlessly with robust APIs for sending, receiving, and tracking emails.",
     gateway: "mailgun",
     learnMoreLink: "",
     isKeyIntegration: true,
@@ -153,9 +157,9 @@ export const gatewayFields: Record<
     klaviyo: ["apiKey"],
     postmark: ["apiKey"],
     mailgun: ["domainName", "username", "password"],
-    oneSignal: ["authToken", "appId"],
-    resend: ["apiToken"],
-    sendgrid: ["accessKey"],
+    onesignal: ["authToken", "appId"],
+    resend: ["apiKey"],
+    sendgrid: ["apiKey"],
     hubspot: [],
     clicksend: ["userName", "apiKey"],
   },

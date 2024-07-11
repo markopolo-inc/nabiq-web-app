@@ -28,7 +28,7 @@ const GatewayLogo: React.FC<{
     flowroute: FlowRoute,
     resend: Resend,
     sendgrid: SendGrid,
-    oneSignal: OneSignal,
+    onesignal: OneSignal,
     mailgun: MailGun,
   };
 

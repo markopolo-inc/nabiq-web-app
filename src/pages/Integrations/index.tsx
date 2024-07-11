@@ -22,7 +22,7 @@ const Integrations = () => {
   const [selectedGateway, setSelectedGateway] =
     useState<GatewayInterface | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const { integrations, smsIntegrations } = useAppSelector(
+  const { emailIntegrations, smsIntegrations } = useAppSelector(
     (state) => state.brand
   );
 
@@ -56,7 +56,7 @@ const Integrations = () => {
               .map((gateway) => {
                 const isGatewayConnected =
                   (gateway.category === "email" &&
-                    !hasEmptyField(integrations?.[gateway?.gateway])) ||
+                    !hasEmptyField(emailIntegrations?.[gateway?.gateway])) ||
                   (gateway.category === "sms" &&
                     !hasEmptyField(smsIntegrations?.[gateway?.gateway]));
 
