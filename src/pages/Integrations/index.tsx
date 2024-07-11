@@ -55,8 +55,11 @@ const Integrations = () => {
               ?.filter((item) => item?.category === selectedCategory)
               .map((gateway) => {
                 const isGatewayConnected =
-                  !hasEmptyField(integrations?.[gateway.gateway]) ||
-                  !hasEmptyField(smsIntegrations?.[gateway.gateway]);
+                  (gateway.category === "email" &&
+                    !hasEmptyField(integrations?.[gateway?.gateway])) ||
+                  (gateway.category === "sms" &&
+                    !hasEmptyField(smsIntegrations?.[gateway?.gateway]));
+
                 return (
                   <div
                     className="rounded-xl border border-gray-200 p-6 shadow-sm min-h-60 flex flex-col justify-between gap-8"
@@ -73,9 +76,11 @@ const Integrations = () => {
                             {gateway.name}
                           </p>
                         </div>
-                        <Badge variant="outline" color="green">
-                          Connected
-                        </Badge>
+                        {isGatewayConnected && (
+                          <Badge variant="outline" color="green">
+                            Connected
+                          </Badge>
+                        )}
                       </div>
 
                       <p className="mt-6">{gateway.headline}</p>

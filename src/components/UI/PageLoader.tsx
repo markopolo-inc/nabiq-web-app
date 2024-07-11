@@ -3,7 +3,7 @@ import LoaderGif from "src/assets/loader/loading.gif";
 
 const PageLoader = () => {
   return (
-    <div className="h-screen flex flex-col items-center justify-center">
+    <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center">
       <Image src={LoaderGif} alt="Loading..." className="w-48" />
     </div>
   );

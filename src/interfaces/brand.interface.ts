@@ -5,9 +5,27 @@ export type GatewayType =
   | "twilio"
   | "sinch"
   | "clicksend"
-  | "flowroute";
+  | "flowroute"
+  | "oneSignal"
+  | "sendgrid"
+  | "resend"
+  | "mailgun";
 
-export interface SMSIntegrationInterface {
+export interface IntegrationInterface {
+  // email
+  klaviyo?: {
+    apiKey: string;
+  };
+  postmark?: {
+    apiKey?: string;
+    accountToken?: string;
+  };
+  oneSignal?: {
+    appId: string;
+    authToken: string;
+  };
+
+  // sms
   twilio?: {
     accountSid: string;
     authToken: string;
@@ -22,16 +40,6 @@ export interface SMSIntegrationInterface {
   sinch?: {
     servicePlanId: string;
     apiToken: string;
-  };
-}
-
-export interface EmailIntegrationInterface {
-  klaviyo?: {
-    apiKey: string;
-  };
-  postmark?: {
-    apiKey?: string;
-    accountToken?: string;
   };
 }
 
@@ -54,6 +62,6 @@ export interface BrandInterface {
   isTiktokAccountAdded?: boolean;
   resourceId?: string;
   resourceType?: "Brand";
-  integrations?: EmailIntegrationInterface;
-  smsIntegrations?: SMSIntegrationInterface;
+  integrations?: IntegrationInterface;
+  smsIntegrations?: IntegrationInterface;
 }

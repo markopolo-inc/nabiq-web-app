@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
 import type {
   GatewayType,
-  SMSIntegrationInterface,
+  IntegrationInterface,
 } from "src/interfaces/brand.interface";
 
 interface SaveApiPayload {
@@ -10,9 +10,14 @@ interface SaveApiPayload {
   brandId: string;
   apiKey: string;
 }
-interface IntgrateSMSPayload extends SMSIntegrationInterface {
+interface IntegrationPayload extends IntegrationInterface {
   brandId: string;
   gateway: GatewayType;
+}
+
+interface IntegrationArgType {
+  category: "email" | "sms" | "push";
+  payload: IntegrationPayload;
 }
 
 type ResponseType = {
@@ -45,13 +50,13 @@ export const integrationsApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    integrateSMS: builder.mutation<ResponseType, IntgrateSMSPayload>({
+    integrateGateway: builder.mutation<ResponseType, IntegrationArgType>({
       invalidatesTags: ["Company"],
       query: (args) => ({
-        url: "/sms/auth",
+        url: `/${args.category}/auth`,
         method: "POST",
         body: {
-          ...args,
+          ...args.payload,
         },
       }),
       transformErrorResponse(baseQueryReturnValue) {
@@ -70,5 +75,5 @@ export const integrationsApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useIntegrateEmailMutation, useIntegrateSMSMutation } =
+export const { useIntegrateEmailMutation, useIntegrateGatewayMutation } =
   integrationsApi;

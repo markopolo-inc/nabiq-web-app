@@ -3,7 +3,10 @@ import {
   FiMail01,
   FiMessageDotCircle,
 } from "@nabiq-icons";
-import type { GatewayInterface } from "src/interfaces/brand.interface";
+import type {
+  GatewayInterface,
+  GatewayType,
+} from "src/interfaces/brand.interface";
 
 export const appCategories = [
   {
@@ -55,6 +58,52 @@ export const appOptions: GatewayInterface[] = [
     isOauthIntegration: false,
   },
   {
+    category: "email",
+    name: "OneSignal",
+    headline: "Required",
+    gateway: "oneSignal",
+    learnMoreLink: "",
+    isKeyIntegration: true,
+    isOauthIntegration: false,
+  },
+  {
+    category: "email",
+    name: "SendGrid",
+    headline: "Required",
+    gateway: "sendgrid",
+    learnMoreLink: "",
+    isKeyIntegration: true,
+    isOauthIntegration: false,
+  },
+  {
+    category: "email",
+    name: "Resend",
+    headline: "Required",
+    gateway: "resend",
+    learnMoreLink: "",
+    isKeyIntegration: true,
+    isOauthIntegration: false,
+  },
+  {
+    category: "email",
+    name: "MailGun",
+    headline: "Required",
+    gateway: "mailgun",
+    learnMoreLink: "",
+    isKeyIntegration: true,
+    isOauthIntegration: false,
+  },
+  {
+    category: "email",
+    name: "Click Send",
+    headline:
+      "Streamline your business communications with versatile platform for SMS, email, and direct mail.",
+    gateway: "clicksend",
+    learnMoreLink: "",
+    isKeyIntegration: true,
+    isOauthIntegration: false,
+  },
+  {
     category: "sms",
     name: "Twilio",
     headline:
@@ -95,3 +144,25 @@ export const appOptions: GatewayInterface[] = [
     isOauthIntegration: false,
   },
 ];
+
+export const gatewayFields: Record<
+  "email" | "sms",
+  Partial<Record<GatewayType, string[]>>
+> = {
+  email: {
+    klaviyo: ["apiKey"],
+    postmark: ["apiKey"],
+    mailgun: ["domainName", "username", "password"],
+    oneSignal: ["authToken", "appId"],
+    resend: ["apiToken"],
+    sendgrid: ["accessKey"],
+    hubspot: [],
+    clicksend: ["userName", "apiKey"],
+  },
+  sms: {
+    clicksend: ["apiKey"],
+    flowroute: ["accessKey", "secretKey"],
+    sinch: ["servicePlanId", "apiToken"],
+    twilio: ["accountSid", "authToken"],
+  },
+};

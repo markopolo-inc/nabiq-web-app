@@ -4,38 +4,24 @@ import { useForm } from "@mantine/form";
 import { Button, TextInput } from "@nabiq-ui";
 
 import GatewayLogo from "components/UI/GatewayLogo";
-import {
-  useIntegrateEmailMutation,
-  useIntegrateSMSMutation,
-} from "store/integrations/integrations.api";
+import { useIntegrateGatewayMutation } from "store/integrations/integrations.api";
 import { useAppSelector } from "src/store/hooks";
 import {
   camelCaseToCapitalized,
   trimAllValuesOfObject,
 } from "src/utils/stringUtils";
-import type { GatewayInterface, GatewayType } from "interfaces/brand.interface";
+import type { GatewayInterface } from "interfaces/brand.interface";
 import { hasEmptyField } from "src/utils/object.utils";
-
-const gatewayvalues: Record<GatewayType, string[]> = {
-  klaviyo: ["apiKey"],
-  postmark: ["apiKey"],
-  clicksend: ["apiKey"],
-  flowroute: ["accessKey", "secretKey"],
-  hubspot: [],
-  sinch: ["servicePlanId", "apiToken"],
-  twilio: ["accountSid", "authToken"],
-};
+import { gatewayFields } from "lib/integration.lib";
 
 const ModalBody: React.FC<{
   setOpened: React.Dispatch<SetStateAction<boolean>>;
   gateway: GatewayInterface;
 }> = ({ setOpened, gateway }) => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
-  const [integrateEmail, { isLoading: isLoadingEmail }] =
-    useIntegrateEmailMutation();
-  const [integrateSMS] = useIntegrateSMSMutation();
+  const [integrate, { isLoading }] = useIntegrateGatewayMutation();
 
-  const fields = gatewayvalues?.[gateway.gateway];
+  const fields = gatewayFields?.[gateway.category]?.[gateway.gateway];
 
   const initialValues = {};
 
@@ -50,26 +36,28 @@ const ModalBody: React.FC<{
   });
 
   const handleFormSubmit = async (values) => {
-    if (gateway.category === "email") {
-      const res = await integrateEmail({
-        apiKey: values.apiKey,
-        gateway: gateway.gateway,
-        brandId,
-      }).unwrap();
-      if (res?.success) {
-        setOpened(false);
-      }
-    } else if (gateway.category === "sms") {
-      const res = await integrateSMS({
+    // if (gateway.category === "email") {
+    //   const res = await integrateEmail({
+    //     apiKey: values.apiKey,
+    //     gateway: gateway.gateway,
+    //     brandId,
+    //   }).unwrap();
+    //   if (res?.success) {
+    //     setOpened(false);
+    //   }
+
+    const res = await integrate({
+      category: gateway.category,
+      payload: {
         brandId,
         gateway: gateway.gateway,
         [gateway.gateway]: {
           ...form.values,
         },
-      }).unwrap();
-      if (res?.success) {
-        setOpened(false);
-      }
+      },
+    }).unwrap();
+    if (res?.success) {
+      setOpened(false);
     }
   };
 
@@ -107,7 +95,7 @@ const ModalBody: React.FC<{
             type="submit"
             disabled={hasEmptyField(form.values)}
             fullWidth
-            loading={isLoadingEmail}
+            loading={isLoading}
           >
             Confirm
           </Button>
@@ -115,7 +103,7 @@ const ModalBody: React.FC<{
             fullWidth
             variant="secondary"
             onClick={() => setOpened(false)}
-            disabled={isLoadingEmail}
+            disabled={isLoading}
           >
             Cancel
           </Button>
