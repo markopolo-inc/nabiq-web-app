@@ -1,0 +1,31 @@
+.th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #fcfcfd;
+  text-align: left;
+  color: #525252;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 12px 24px;
+  white-space: nowrap;
+}
+
+.th:after,
+.th:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+.th:before {
+  top: -1px;
+  border-top: 1px solid #dcdcdc;
+}
+
+.th:after {
+  bottom: -1px;
+  border-bottom: 1px solid #dcdcdc;
+}

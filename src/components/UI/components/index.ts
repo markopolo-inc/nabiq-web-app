@@ -14,6 +14,16 @@ export { default as Select } from "./Select";
 export { default as Checkbox } from "./Checkbox";
 export { default as OtpInput } from "./OtpInput";
 
+export { default as Table } from "./Table";
+export { default as TableBody } from "./TableBody";
+export { default as TableFoot } from "./TableFoot";
+export { default as TableHead } from "./TableHead";
+export { default as TableLoader } from "./TableLoader";
+export { default as TableRowLoader } from "./TableRowLoader";
+export { default as TableRow } from "./TableRow";
+export { default as Th } from "./Th";
+export { default as Td } from "./Td";
+
 // Typography
 export { default as Text } from "./Text";
 

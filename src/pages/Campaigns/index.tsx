@@ -2,14 +2,11 @@ import { useState } from "react";
 import { Button, Group, Stack, TextInput } from "@nabiq-ui";
 import { FiPlus } from "@nabiq-icons";
 
-import OptionTabs from "src/components/UI/components/OptionTabs";
 import HeaderTitle from "src/layouts/HeaderTitle";
-import CampaignGoalModal from "src/components/Features/Campaigns/CampaignGoalModal";
+import CampaignGoalModal from "components/Features/Campaigns/CampaignGoalModal";
+import CampaignTable from "components/Features/Campaigns/CampaignTable";
 
 const Campaigns = () => {
-  const [active, setActive] = useState<
-    "all" | "active" | "processing" | "finished"
-  >("all");
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
 
   return (
@@ -56,25 +53,7 @@ const Campaigns = () => {
           </Stack>
         </div>
 
-        <Group justify="space-between">
-          <OptionTabs
-            active={active}
-            setActive={setActive}
-            options={[
-              { value: "all", label: "All" },
-              { value: "active", label: "Active" },
-              { value: "processing", label: "Processing" },
-              { value: "finished", label: "Finished" },
-            ]}
-          />
-          <TextInput
-            // styles={{ input: { paddingLeft: 40 } }}
-            // leftSection={<FiSearchLg size={26} color="#697586" />}
-            // leftSectionPointerEvents="none"
-            className="w-[400px]"
-            placeholder="Search..."
-          />
-        </Group>
+        <CampaignTable />
       </Stack>
     </>
   );
