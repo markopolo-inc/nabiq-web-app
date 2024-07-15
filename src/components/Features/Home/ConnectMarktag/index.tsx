@@ -22,7 +22,7 @@ const ConnectMarktag = () => {
           </div>
           <div className="flex gap-3">
             <Button>Connect</Button>
-            <Button variant="link">Learn more</Button>
+            {/* <Button variant="link">Learn more</Button> */}
           </div>
         </div>
       </div>

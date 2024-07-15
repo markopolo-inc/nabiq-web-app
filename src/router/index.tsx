@@ -13,6 +13,7 @@ const ResetPassword = lazy(() => import("pages/ResetPassword"));
 const VerifyEmail = lazy(() => import("pages/VerifyEmail"));
 const Onboarding = lazy(() => import("pages/Onboarding"));
 const Integrations = lazy(() => import("pages/Integrations"));
+const Campaigns = lazy(() => import("pages/Campaigns"));
 const Test = lazy(() => import("src/pages/Test"));
 
 const Router = () => {
@@ -25,6 +26,7 @@ const Router = () => {
               <Route path="/" element={<NavigationLayout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/integrations" element={<Integrations />} />
+                <Route path="/campaigns" element={<Campaigns />} />
               </Route>
               <Route path="/onboarding" element={<Onboarding />} />
             </Route>

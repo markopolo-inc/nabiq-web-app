@@ -22,3 +22,6 @@ export { default as Image } from "./Image";
 
 // Navigation
 export { default as Burger } from "./Burger";
+
+// Stack
+export { default as Stack } from "./Stack";

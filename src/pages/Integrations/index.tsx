@@ -43,13 +43,11 @@ const Integrations = () => {
           </p>
         </div>
         <div className="flex flex-col gap-6">
-          <div className="border border-gray-200 rounded-xl w-fit p-2 flex gap-3 bg-gray-50">
-            <OptionTabs
-              setActive={setSelectedCategory}
-              active={selectedCategory}
-              options={appCategories}
-            />
-          </div>
+          <OptionTabs
+            setActive={setSelectedCategory}
+            active={selectedCategory}
+            options={appCategories}
+          />
           <div className="gap-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
             {appOptions
               ?.filter((item) => item?.category === selectedCategory)
@@ -128,8 +126,6 @@ const Integrations = () => {
                           )}
                         </>
                       )}
-
-                      <Button variant="tertiary-gray">Learn more</Button>
                     </div>
                   </div>
                 );
