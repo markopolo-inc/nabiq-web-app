@@ -30,7 +30,7 @@ const goals = [
 ];
 
 const ModalBody = ({ setOpened }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <Stack className="p-8" gap={64} align="center">
