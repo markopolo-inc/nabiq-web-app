@@ -26,8 +26,8 @@ const StyledStepper = (props: StepperProps) => {
         stepIcon: {},
 
         separator: {
-          marginLeft: rem(-110),
-          marginRight: rem(-120),
+          marginLeft: rem(-75),
+          marginRight: rem(-110),
           marginTop: rem(20),
           // height: rem(10),
         },

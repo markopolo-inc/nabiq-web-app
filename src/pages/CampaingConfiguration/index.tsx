@@ -21,9 +21,9 @@ const CampaignConfigurations = () => {
           </Stack>
         </div>
 
-        <div>
+        <Stack w={960} className="mx-auto">
           <Stepper />
-        </div>
+        </Stack>
       </Stack>
     </>
   );

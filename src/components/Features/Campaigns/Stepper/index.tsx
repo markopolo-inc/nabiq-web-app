@@ -14,25 +14,26 @@ const MyStepper = () => {
         allowNextStepsSelect={true}
         active={active + 1}
         onStepClick={setActive}
-        completedIcon={<div className="w-3 h-3 rounded-full bg-white"></div>}
+        completedIcon={<div className="w-2 h-2 rounded-full bg-white"></div>}
+        size="xs"
       >
         <StepperField.Step
           allowStepSelect={true}
           label="Campaign details"
           description="Enter the campaign details"
-          icon={<div className="w-3 h-3 rounded-full bg-gray-300"></div>}
+          icon={<div className="w-2 h-2 rounded-full bg-gray-300"></div>}
         />
         <StepperField.Step
           allowStepSelect={true}
           label="Timing"
           description="Specify the content and approval timing"
-          icon={<div className="w-3 h-3 rounded-full bg-gray-300"></div>}
+          icon={<div className="w-2 h-2 rounded-full bg-gray-300"></div>}
         />
         <StepperField.Step
           allowStepSelect={true}
           label="Channels"
           description="Choose the main and additional channels"
-          icon={<div className="w-3 h-3 rounded-full bg-gray-300"></div>}
+          icon={<div className="w-2 h-2 rounded-full bg-gray-300"></div>}
         />
       </StyledStepper>
     </>
