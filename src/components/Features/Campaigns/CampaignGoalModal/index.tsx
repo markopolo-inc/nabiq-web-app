@@ -6,6 +6,7 @@ import {
   FiHelpCircle,
 } from "@nabiq-icons";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const goals = [
   {
@@ -29,6 +30,7 @@ const goals = [
 ];
 
 const ModalBody = ({ setOpened }) => {
+  const navigate = useNavigate();
   return (
     <Stack className="p-8" gap={64} align="center">
       <Stack align="center" gap={8}>
@@ -63,7 +65,14 @@ const ModalBody = ({ setOpened }) => {
                 <p className="text-gray-600 font-normal text-sm text-center">
                   {goal.headline}
                 </p>
-                <Button onClick={() => setOpened(false)}>Create</Button>
+                <Button
+                  onClick={() => {
+                    navigate("/create-campaign");
+                    setOpened(false);
+                  }}
+                >
+                  Create
+                </Button>
               </Stack>
             );
           })}

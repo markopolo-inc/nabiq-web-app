@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useState } from "react";
 import { useForm } from "@mantine/form";
 
 import { Button, TextInput } from "@nabiq-ui";
@@ -13,6 +13,7 @@ import {
 import type { GatewayInterface } from "interfaces/brand.interface";
 import { hasEmptyField } from "src/utils/object.utils";
 import { gatewayFields } from "lib/integration.lib";
+import AccountForm from "./AccountForm";
 
 const ModalBody: React.FC<{
   setOpened: React.Dispatch<SetStateAction<boolean>>;
@@ -20,6 +21,9 @@ const ModalBody: React.FC<{
 }> = ({ setOpened, gateway }) => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [integrate, { isLoading }] = useIntegrateGatewayMutation();
+  const [formStep, setFormStep] = useState<"credential" | "accountSelect">(
+    "credential"
+  );
 
   const fields = gatewayFields?.[gateway.category]?.[gateway.gateway];
 
@@ -57,7 +61,11 @@ const ModalBody: React.FC<{
       },
     }).unwrap();
     if (res?.success) {
-      setOpened(false);
+      if (Object.values(res?.selectableObjects || {})?.length === 0)
+        setOpened(false);
+      else {
+        setFormStep("accountSelect");
+      }
     }
   };
 
@@ -74,41 +82,44 @@ const ModalBody: React.FC<{
           </p>
         </div>
       </div>
-      <form
-        className="flex flex-col gap-8"
-        onSubmit={form.onSubmit((values) => {
-          handleFormSubmit(trimAllValuesOfObject(values));
-        })}
-      >
-        <div className="flex flex-col gap-3">
-          {fields?.map((field) => (
-            <TextInput
-              key={field}
-              label={camelCaseToCapitalized(field)}
-              placeholder={`Enter ${camelCaseToCapitalized(field)}`}
-              {...form.getInputProps(field)}
-            />
-          ))}
-        </div>
-        <div className="flex flex-col gap-3">
-          <Button
-            type="submit"
-            disabled={hasEmptyField(form.values)}
-            fullWidth
-            loading={isLoading}
-          >
-            Confirm
-          </Button>
-          <Button
-            fullWidth
-            variant="secondary"
-            onClick={() => setOpened(false)}
-            disabled={isLoading}
-          >
-            Cancel
-          </Button>
-        </div>
-      </form>
+      {formStep === "credential" && (
+        <form
+          className="flex flex-col gap-8"
+          onSubmit={form.onSubmit((values) => {
+            handleFormSubmit(trimAllValuesOfObject(values));
+          })}
+        >
+          <div className="flex flex-col gap-3">
+            {fields?.map((field) => (
+              <TextInput
+                key={field}
+                label={camelCaseToCapitalized(field)}
+                placeholder={`Enter ${camelCaseToCapitalized(field)}`}
+                {...form.getInputProps(field)}
+              />
+            ))}
+          </div>
+          <div className="flex flex-col gap-3">
+            <Button
+              type="submit"
+              disabled={hasEmptyField(form.values)}
+              fullWidth
+              loading={isLoading}
+            >
+              Confirm
+            </Button>
+            <Button
+              fullWidth
+              variant="secondary"
+              onClick={() => setOpened(false)}
+              disabled={isLoading}
+            >
+              Cancel
+            </Button>
+          </div>
+        </form>
+      )}
+      <AccountForm />
     </div>
   );
 };

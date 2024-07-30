@@ -23,6 +23,7 @@ interface IntegrationArgType {
 type ResponseType = {
   success: boolean;
   message: string;
+  selectableObjects?: Record<string, any[]>;
 };
 
 export const integrationsApi = apiSlice.injectEndpoints({

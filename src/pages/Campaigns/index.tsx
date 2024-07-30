@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Group, Stack, TextInput } from "@nabiq-ui";
+import { Button, Group, Stack } from "@nabiq-ui";
 import { FiPlus } from "@nabiq-icons";
 
 import HeaderTitle from "src/layouts/HeaderTitle";
@@ -8,6 +8,10 @@ import CampaignTable from "components/Features/Campaigns/CampaignTable";
 
 const Campaigns = () => {
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
+
+  const handleCreateCampaign = () => {
+    setShowGoalModal(true);
+  };
 
   return (
     <>
@@ -30,14 +34,14 @@ const Campaigns = () => {
             <Button variant="secondary">How does it work?</Button>
             <Button
               leadingIcon={<FiPlus size={20} color="white" />}
-              onClick={() => setShowGoalModal(true)}
+              onClick={handleCreateCampaign}
             >
               Create campaign
             </Button>
           </Group>
         </div>
 
-        <div className="max-w-[280px]" onClick={() => setShowGoalModal(true)}>
+        <div className="max-w-[280px]" onClick={handleCreateCampaign}>
           <Stack
             className="rounded-xl border border-primary-200 bg-primary-25 p-8 shadow-sm cursor-pointer"
             gap={24}

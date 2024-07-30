@@ -3,6 +3,8 @@ export { default as AppShell } from "./AppShell";
 export { default as Group } from "./Group";
 export { default as Modal } from "./Modal";
 
+export { default as Breadcrumbs } from "./Breadcrumbs";
+
 // Buttons
 export { default as Button } from "./Button";
 export { default as CloseButton } from "./CloseButton";

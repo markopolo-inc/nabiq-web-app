@@ -5,6 +5,7 @@ import AppLayout from "src/layouts/AppLayout";
 import PrivateLayout from "src/layouts/PrivateLayout";
 import NavigationLayout from "src/layouts/NavigationLayout";
 import PageLoader from "src/components/UI/PageLoader";
+import CreateCampaign from "src/pages/CreateCampaign";
 
 const Home = lazy(() => import("pages/Home"));
 const SignUp = lazy(() => import("pages/SignUp"));
@@ -27,6 +28,7 @@ const Router = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/integrations" element={<Integrations />} />
                 <Route path="/campaigns" element={<Campaigns />} />
+                <Route path="/create-campaign" element={<CreateCampaign />} />
               </Route>
               <Route path="/onboarding" element={<Onboarding />} />
             </Route>

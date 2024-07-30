@@ -14,6 +14,10 @@ export function buildQueryString(params) {
     .join("&");
 }
 
+/**
+ * Returns capitalized name from camelcase
+ * @param str String that needs to be converted from camelCase to capitalized string
+ */
 export function camelCaseToCapitalized(str) {
   // Replace each uppercase letter with a space followed by the same letter in lowercase
   const result = str.replace(/([A-Z])/g, " $1").toLowerCase();
