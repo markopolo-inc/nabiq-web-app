@@ -11,8 +11,8 @@ import ApiKeyModal from "components/Features/Integrations/Modals/ApiKeyModal";
 import { appCategories, appOptions } from "lib/integration.lib";
 import type { GatewayInterface, GatewayType } from "interfaces/brand.interface";
 import OptionTabs from "src/components/UI/components/OptionTabs";
-import { hasEmptyField } from "src/utils/object.utils";
 import { Badge } from "@mantine/core";
+import { isEmpty } from "lodash";
 
 const Integrations = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
@@ -54,9 +54,9 @@ const Integrations = () => {
               .map((gateway) => {
                 const isGatewayConnected =
                   (gateway.category === "email" &&
-                    !hasEmptyField(emailIntegrations?.[gateway?.gateway])) ||
+                    !isEmpty(emailIntegrations?.[gateway?.gateway])) ||
                   (gateway.category === "sms" &&
-                    !hasEmptyField(smsIntegrations?.[gateway?.gateway]));
+                    !isEmpty(smsIntegrations?.[gateway?.gateway]));
 
                 return (
                   <div

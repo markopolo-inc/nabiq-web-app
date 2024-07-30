@@ -21,9 +21,13 @@ const ModalBody: React.FC<{
 }> = ({ setOpened, gateway }) => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [integrate, { isLoading }] = useIntegrateGatewayMutation();
+  const [responseMsg, setResponseMsg] = useState("");
   const [formStep, setFormStep] = useState<"credential" | "accountSelect">(
     "credential"
   );
+  const [selectableObjects, setSelectableObjects] = useState<
+    Record<string, any>
+  >({});
 
   const fields = gatewayFields?.[gateway.category]?.[gateway.gateway];
 
@@ -60,10 +64,12 @@ const ModalBody: React.FC<{
         },
       },
     }).unwrap();
+    setResponseMsg(res?.message);
     if (res?.success) {
       if (Object.values(res?.selectableObjects || {})?.length === 0)
         setOpened(false);
       else {
+        setSelectableObjects(res.selectableObjects);
         setFormStep("accountSelect");
       }
     }
@@ -119,7 +125,14 @@ const ModalBody: React.FC<{
           </div>
         </form>
       )}
-      <AccountForm />
+      {formStep === "accountSelect" && (
+        <AccountForm
+          selectableObjects={selectableObjects}
+          message={responseMsg}
+          gateway={gateway}
+          setOpened={setOpened}
+        />
+      )}
     </div>
   );
 };
