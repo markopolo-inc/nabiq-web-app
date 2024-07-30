@@ -156,8 +156,8 @@ export const gatewayFields: Record<
   email: {
     klaviyo: ["apiKey"],
     postmark: ["apiKey"],
-    mailgun: ["domainName", "username", "password"],
-    onesignal: ["authToken", "appId"],
+    mailgun: ["username", "password"],
+    onesignal: ["authKey", "appId"],
     resend: ["apiKey"],
     sendgrid: ["apiKey"],
     hubspot: [],

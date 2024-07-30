@@ -21,8 +21,9 @@ export interface IntegrationInterface {
     accountToken?: string;
   };
   oneSignal?: {
-    appId: string;
-    authToken: string;
+    appId?: string;
+    authToken?: string;
+    authKey?: string;
   };
   mailgun?: {
     domainName: string;

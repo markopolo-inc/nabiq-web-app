@@ -8,6 +8,8 @@ import { useAddAccountsMutation } from "src/store/integrations/integrations.api"
 const accountSelectionIds = {
   servers: { value: "serverId", label: "serverName" },
   signatures: { value: "ID", label: "EmailAddress" },
+  accounts: { value: "id", label: "name" },
+  domains: { value: "name", label: "name" },
 };
 
 const AccountForm: React.FC<{
@@ -49,12 +51,13 @@ const AccountForm: React.FC<{
       >
         <Stack>
           {fields?.map((field, idx) => {
+            const attribute = accountSelectionIds[field].value;
             const data = selectableObjects[field]?.map((item) => {
               return {
-                ...item,
-                value: String(item?.[accountSelectionIds[field].value]),
+                value: String(item?.[attribute]),
                 label: String(item?.[accountSelectionIds[field].label]),
               };
+              // return String(item?.[attribute]);
             });
             return (
               <Select
@@ -62,7 +65,9 @@ const AccountForm: React.FC<{
                 placeholder="Select..."
                 onChange={(value) =>
                   Object.assign(payload, {
-                    [field]: data.find((item) => item?.value === value),
+                    [field]: selectableObjects[field]?.find(
+                      (item) => item?.[attribute] === value
+                    ),
                   })
                 }
                 label={capitalize(field)}
