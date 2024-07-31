@@ -1,7 +1,7 @@
 import { Breadcrumbs, Button, Stack } from "@nabiq-ui";
 import HeaderTitle from "src/layouts/HeaderTitle.tsx";
 import Stepper from "src/components/Features/Campaigns/Stepper";
-import CampaignTiming from "src/components/Features/Campaigns/CampaignTiming";
+import CampaignChannels from "src/components/Features/Campaigns/CampaignChannels";
 
 const CreateCampaign = () => {
   return (
@@ -35,8 +35,8 @@ const CreateCampaign = () => {
           <Stack gap={32}>
             {/*TODO: Will work later*/}
             {/*<CampaignDetailsForm />*/}
-            <CampaignTiming />
-            {/*<Channels />*/}
+            {/*<CampaignTiming />*/}
+            <CampaignChannels />
           </Stack>
         </Stack>
       </Stack>
