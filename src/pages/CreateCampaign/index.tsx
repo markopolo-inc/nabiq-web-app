@@ -1,13 +1,17 @@
-import { Breadcrumbs } from "@nabiq-ui";
+import { Breadcrumbs, Stack } from "@nabiq-ui";
 
 const CreateCampaign = () => {
   return (
-    <div>
-      <Breadcrumbs separator=">">
-        <p>Campaigns</p>
-        <p>Campaign configuration</p>
-      </Breadcrumbs>
-    </div>
+    <Stack gap={64}>
+      <div>
+        <Breadcrumbs separator=">">
+          <p>Campaigns</p>
+          <p>Campaign configuration</p>
+        </Breadcrumbs>
+      </div>
+      {/*TODO: Will work later*/}
+      {/*<Channels />*/}
+    </Stack>
   );
 };
 
