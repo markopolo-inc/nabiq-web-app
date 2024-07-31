@@ -5,20 +5,19 @@ import {
 
 import styles from "./index.module.scss";
 import { Text } from "@nabiq-ui";
-import { rem } from "@mantine/core";
-import ChevronDown from "src/components/Icons/ChevronDown";
+import { Calendar } from "@nabiq-icons";
 
 interface PropTypes extends DatePickerInputProps {
   placeholder?: string;
 }
 
 const DatePickerInput = ({ label, description, error, ...rest }: PropTypes) => {
-  const icon = <ChevronDown style={{ width: rem(18), height: rem(18) }} />;
+  // const icon = <ChevronDown style={{ width: rem(18), height: rem(18) }} />;
 
   return (
     <div>
       <MantineDatePickerInput
-        leftSection={icon}
+        leftSection={<Calendar size={16} color="#697586" />}
         error={error}
         classNames={{
           input: error ? styles.errorInput : styles.input,

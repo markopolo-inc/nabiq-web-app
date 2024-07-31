@@ -1,5 +1,5 @@
 import { Group } from "@nabiq-ui";
-import ChannelItem from "src/components/Features/CreateCampaign/Channels/ChannelItem.tsx";
+import ChannelItem from "src/components/Features/Campaigns/CampaignChannels/ChannelItem.tsx";
 
 const Channels = () => {
   return (
