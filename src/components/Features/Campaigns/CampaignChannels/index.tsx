@@ -1,13 +1,15 @@
-import { Group } from "@nabiq-ui";
-import ChannelItem from "src/components/Features/Campaigns/CampaignChannels/ChannelItem.tsx";
+import { Stack } from "@nabiq-ui";
+import ChannelEmail from "src/components/Features/Campaigns/CampaignChannels/ChannelEmail.tsx";
+import ChannelSMS from "src/components/Features/Campaigns/CampaignChannels/ChannelSMS.tsx";
+import ChannelPushNotification from "src/components/Features/Campaigns/CampaignChannels/ChannelPushNotification.tsx";
 
 const Channels = () => {
   return (
-    <Group className="flex-col items-start">
-      <ChannelItem />
-      <ChannelItem />
-      <ChannelItem />
-    </Group>
+    <Stack w={920} className="mx-auto flex-col items-start flex-grow">
+      <ChannelEmail />
+      <ChannelSMS />
+      <ChannelPushNotification />
+    </Stack>
   );
 };
 
