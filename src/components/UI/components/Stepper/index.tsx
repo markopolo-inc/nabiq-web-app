@@ -1,4 +1,4 @@
-import { Stepper as StepperField, StepperProps, rem } from "@mantine/core";
+import { rem, Stepper as StepperField, StepperProps } from "@mantine/core";
 
 const StyledStepper = (props: StepperProps) => {
   return (
@@ -23,13 +23,23 @@ const StyledStepper = (props: StepperProps) => {
           padding: 0,
         },
 
-        stepIcon: {},
-
         separator: {
-          marginLeft: rem(-75),
+          marginLeft: rem(-92),
           marginRight: rem(-110),
           marginTop: rem(20),
           // height: rem(10),
+        },
+        stepLabel: {
+          fontSize: "14px",
+          fontWeight: "600",
+          color: "#0A52D6",
+          lineHeight: "20px",
+        },
+        stepDescription: {
+          fontSize: "12px",
+          fontWeight: "400",
+          color: "#2972F5",
+          lineHeight: "20px",
         },
       }}
       {...props}
