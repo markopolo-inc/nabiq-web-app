@@ -2,8 +2,16 @@ import { Breadcrumbs, Button, Stack } from "@nabiq-ui";
 import HeaderTitle from "src/layouts/HeaderTitle.tsx";
 import Stepper from "src/components/Features/Campaigns/Stepper";
 import CampaignChannels from "src/components/Features/Campaigns/CampaignChannels";
+import { useState } from "react";
+import CampaignDetailsForm from "src/components/Features/Campaigns/CampaignDetailsForm";
+import CampaignTiming from "src/components/Features/Campaigns/CampaignTiming";
 
 const CreateCampaign = () => {
+  const [active, setActive] = useState<number>(0);
+
+  const nextStep = () =>
+    setActive((current) => (current < 3 ? current + 1 : current));
+
   return (
     <>
       <HeaderTitle>Nabiq | Campaign Configuration</HeaderTitle>
@@ -22,7 +30,11 @@ const CreateCampaign = () => {
               </p>
             </Stack>
             <Stack>
-              <Button variant="secondary" disabled>
+              <Button
+                variant="secondary"
+                disabled={active === 2}
+                onClick={nextStep}
+              >
                 Continue
               </Button>
             </Stack>
@@ -30,13 +42,16 @@ const CreateCampaign = () => {
         </Stack>
 
         <Stack gap={64} w={960} className="mx-auto">
-          <Stepper />
+          <Stepper active={active} setActive={setActive} />
 
           <Stack gap={32}>
-            {/*TODO: Will work later*/}
-            {/*<CampaignDetailsForm />*/}
-            {/*<CampaignTiming />*/}
-            <CampaignChannels />
+            {active === 0 ? (
+              <CampaignDetailsForm />
+            ) : active === 1 ? (
+              <CampaignTiming />
+            ) : (
+              <CampaignChannels />
+            )}
           </Stack>
         </Stack>
       </Stack>
