@@ -1,13 +1,12 @@
-import { useState } from "react";
 import { Stepper as StepperField } from "@mantine/core";
 import { StyledStepper } from "@nabiq-ui";
 
-const MyStepper = () => {
-  const [active, setActive] = useState<number>(0);
+type StepperProps = {
+  active: number;
+  setActive: (value: number) => void;
+};
 
-  // const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
-  // const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
-
+const Stepper = ({ active, setActive }: StepperProps) => {
   return (
     <>
       <StyledStepper
@@ -40,4 +39,4 @@ const MyStepper = () => {
   );
 };
 
-export default MyStepper;
+export default Stepper;

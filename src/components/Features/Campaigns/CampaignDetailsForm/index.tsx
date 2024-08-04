@@ -11,12 +11,14 @@ const CampaignDetailsForm = () => {
           placeholder="Enter campaign details"
           rows={4}
         />
-        <Text size="14px">Microcopy required</Text>
+        <Text size="14px" className="text-gray-600">
+          Microcopy required
+        </Text>
       </Stack>
 
       <Stack gap={6}>
         <TextInput label="Campaign link" placeholder="www.mywebsite/offer2" />
-        <Text size="14px">
+        <Text size="14px" className="text-gray-600">
           Destination link where you want to redirect users to
         </Text>
       </Stack>
@@ -29,7 +31,7 @@ const CampaignDetailsForm = () => {
           data={["Content tone"]}
         />
 
-        <Text size="14px">
+        <Text size="14px" className="text-gray-600">
           The tone of the content we will generate for you
         </Text>
       </Stack>

@@ -1,9 +1,11 @@
 // A
+export { default as ArrowNarrowUpRight } from "./ArrowNarrowUpRight";
 export { default as FiAnnouncement01 } from "./Announcement01";
 
 // B
 
 // C
+export { default as Calendar } from "./Calendar";
 export { default as FiCheck } from "./Check";
 export { default as FiCommand } from "./Command";
 export { default as FiCursorClick01 } from "./CursorClick01";
@@ -12,6 +14,7 @@ export { default as FiCursorClick01 } from "./CursorClick01";
 export { default as FiDataFlow02 } from "./DataFlow02";
 
 // E
+export { default as Envelope } from "./Envelope";
 export { default as FiEye } from "./Eye";
 export { default as FiEyeOff } from "./EyeOff";
 
@@ -32,6 +35,7 @@ export { default as FiInfinity } from "./Infinity";
 
 // M
 export { default as FiMail01 } from "./Mail01";
+export { default as Message } from "./Message";
 export { default as FiMinus } from "./Minus";
 
 // N
