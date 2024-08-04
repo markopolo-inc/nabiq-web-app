@@ -6,6 +6,7 @@ import PrivateLayout from "src/layouts/PrivateLayout";
 import NavigationLayout from "src/layouts/NavigationLayout";
 import PageLoader from "src/components/UI/PageLoader";
 import CreateCampaign from "src/pages/CreateCampaign";
+import ConnectMarktag from "src/pages/ConnetMarktag";
 
 const Home = lazy(() => import("pages/Home"));
 const SignUp = lazy(() => import("pages/SignUp"));
@@ -29,12 +30,9 @@ const Router = () => {
                 <Route path="/integrations" element={<Integrations />} />
                 <Route path="/campaigns" element={<Campaigns />} />
                 <Route path="/create-campaign" element={<CreateCampaign />} />
-                <Route
-                  path="/connect-marktag"
-                  element={<h1>Connect mark tag</h1>}
-                />
               </Route>
               <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/connect-marktag" element={<ConnectMarktag />} />
             </Route>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<LogIn />} />

@@ -1,4 +1,5 @@
 // A
+export { default as ArrowNarrowLeft } from "./ArrowNarrowLeft";
 export { default as ArrowNarrowUpRight } from "./ArrowNarrowUpRight";
 export { default as FiAnnouncement01 } from "./Announcement01";
 
@@ -6,6 +7,7 @@ export { default as FiAnnouncement01 } from "./Announcement01";
 
 // C
 export { default as Calendar } from "./Calendar";
+export { default as Command } from "./Command";
 export { default as FiCheck } from "./Check";
 export { default as FiCommand } from "./Command";
 export { default as FiCursorClick01 } from "./CursorClick01";
