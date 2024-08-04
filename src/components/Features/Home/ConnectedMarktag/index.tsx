@@ -1,5 +1,5 @@
 import { ArrowNarrowUpRight, Command2 } from "@nabiq-icons";
-import { Button, Image, Text, useGetColors } from "@nabiq-ui";
+import { Button, Text, useGetColors } from "@nabiq-ui";
 
 const ConnectedMarktag = () => {
   const { primary500 } = useGetColors();
