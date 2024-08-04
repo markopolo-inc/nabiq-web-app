@@ -29,6 +29,10 @@ const Router = () => {
                 <Route path="/integrations" element={<Integrations />} />
                 <Route path="/campaigns" element={<Campaigns />} />
                 <Route path="/create-campaign" element={<CreateCampaign />} />
+                <Route
+                  path="/connect-marktag"
+                  element={<h1>Connect mark tag</h1>}
+                />
               </Route>
               <Route path="/onboarding" element={<Onboarding />} />
             </Route>
