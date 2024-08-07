@@ -1,4 +1,4 @@
-import { Button, Image, Select, Text } from "@nabiq-ui";
+import { Button, Select, Text } from "@nabiq-ui";
 import { Command } from "@nabiq-icons";
 import { useAppSelector } from "src/store/hooks.ts";
 import {
@@ -13,8 +13,10 @@ import { useNavigate } from "react-router-dom";
 type MarktagsType = MarktagsResponseInterface;
 
 const MarktagDetails = () => {
-  const user = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+
+  const user = useAppSelector((state) => state.user);
+  const company = useAppSelector((state) => state.company);
 
   const [resourceId, setResourceId] = useState<string>("");
   const [marktagsResourceId, setMarktagsResourceId] = useState<string>("");
@@ -53,6 +55,8 @@ const MarktagDetails = () => {
   );
 
   const onClick = () => {
+    if (!resourceId || !marktagsResourceId) return;
+
     connect(selectedMarktag)
       .unwrap()
       .then((response) => {
@@ -81,14 +85,13 @@ const MarktagDetails = () => {
         </Text>
 
         <div className="flex gap-3">
-          <div className="flex items-center gap-1 py-1 pl-1.5 pr-3 border border-primary-200 rounded-2xl">
-            <Image className="h-4 w-4 rounded-full" src="/img.png" alt="John" />
+          <div className="py-1 px-3 border border-primary-200 rounded-2xl">
             <Text
               size="14px"
               weight={500}
               className="text-primary-700 leading-5"
             >
-              {user?.userName}
+              {company?.companyName}
             </Text>
           </div>
 
