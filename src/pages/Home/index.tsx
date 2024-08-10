@@ -3,6 +3,7 @@ import ConnectMarktag from "src/components/Features/Home/ConnectMarktag";
 import IntegrateApps from "src/components/Features/Home/IntegrateApps";
 import HeaderTitle from "src/layouts/HeaderTitle";
 import { useAppSelector } from "src/store/hooks";
+import ConnectedMarktag from "src/components/Features/Home/ConnectedMarktag";
 
 const Home = () => {
   const { userName } = useAppSelector((state) => state.user);
@@ -25,6 +26,7 @@ const Home = () => {
               <ConnectMarktag />
               <IntegrateApps />
               <ConnectCampaignPlatforms />
+              <ConnectedMarktag />
             </div>
           </div>
         </div>
