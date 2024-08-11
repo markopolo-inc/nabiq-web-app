@@ -164,7 +164,7 @@ export const gatewayFields: Record<
     clicksend: ["userName", "apiKey"],
   },
   sms: {
-    clicksend: ["apiKey"],
+    clicksend: ["userName", "apiKey"],
     flowroute: ["accessKey", "secretKey"],
     sinch: ["servicePlanId", "apiToken"],
     twilio: ["accountSid", "authToken"],

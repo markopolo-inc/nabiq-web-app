@@ -1,15 +1,35 @@
 import { Alert } from "@mantine/core";
 import { Button, Stack, Select } from "@nabiq-ui";
 import { capitalize } from "lodash";
+import { useState } from "react";
 import { GatewayInterface } from "src/interfaces/brand.interface";
 import { useAppSelector } from "src/store/hooks";
 import { useAddAccountsMutation } from "src/store/integrations/integrations.api";
 
 const accountSelectionIds = {
-  servers: { value: "serverId", label: "serverName" },
-  signatures: { value: "ID", label: "EmailAddress" },
-  accounts: { value: "id", label: "name" },
-  domains: { value: "name", label: "name" },
+  // email
+  postmark: {
+    servers: { value: "serverId", label: "serverName" },
+    signatures: { value: "ID", label: "EmailAddress" },
+  },
+  onesignal: {
+    accounts: { value: "id", label: "name" },
+  },
+  resend: {
+    domains: { value: "name", label: "name" },
+  },
+  mailgun: { domains: { value: "name", label: "name" } },
+  clicksend: {
+    accounts: { value: "subaccount_id", label: "first_name" },
+  },
+
+  // sms
+  twilio: {
+    servers: {
+      value: "urls",
+      label: "username",
+    },
+  },
 };
 
 const AccountForm: React.FC<{
@@ -21,12 +41,9 @@ const AccountForm: React.FC<{
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [addAccount, { isLoading }] = useAddAccountsMutation();
   const fields = Object.keys(selectableObjects || {});
-  const payload = {};
+  const [payload, setPayload] = useState({});
 
-  fields?.forEach((field) => {
-    payload[field] = undefined;
-  });
-
+  console.log(payload);
   return (
     <Stack>
       <Alert color="green" title={message || "Account verified!"} />
@@ -51,11 +68,15 @@ const AccountForm: React.FC<{
       >
         <Stack>
           {fields?.map((field, idx) => {
-            const attribute = accountSelectionIds[field].value;
+            const attributeValue =
+              accountSelectionIds[gateway.gateway][field]?.value;
+            const attributeLabel =
+              accountSelectionIds[gateway.gateway][field]?.label;
+
             const data = selectableObjects[field]?.map((item) => {
               return {
-                value: String(item?.[attribute]),
-                label: String(item?.[accountSelectionIds[field].label]),
+                value: String(item?.[attributeValue]),
+                label: String(item?.[attributeLabel]),
               };
               // return String(item?.[attribute]);
             });
@@ -64,11 +85,12 @@ const AccountForm: React.FC<{
                 value={payload?.[field]?.value}
                 placeholder="Select..."
                 onChange={(value) =>
-                  Object.assign(payload, {
+                  setPayload((payload) => ({
+                    ...payload,
                     [field]: selectableObjects[field]?.find(
-                      (item) => item?.[attribute] === value
+                      (item) => String(item?.[attributeValue]) === value
                     ),
-                  })
+                  }))
                 }
                 label={capitalize(field)}
                 key={idx}
