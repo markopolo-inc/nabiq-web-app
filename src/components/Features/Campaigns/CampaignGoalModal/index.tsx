@@ -7,6 +7,8 @@ import {
 } from "@nabiq-icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCampaign } from "src/store/campaign/campaignSlice";
 
 const goals = [
   {
@@ -14,23 +16,27 @@ const goals = [
     headline: "To acquire new customers either for paying, trial or freemium.",
     icon: FiZapFast,
     color: "#EE46BC",
+    type: "acquisition",
   },
   {
     title: "Activation",
     headline: "To convert trail/freemium users to paying customers.",
     icon: FiCursorClick01,
     color: "#2E90FA",
+    type: "activation",
   },
   {
     title: "Retention",
     headline: "To push recurring subscription, cross-sell and upsell.",
     icon: FiInfinity,
     color: "#17B26A",
+    type: "retention",
   },
 ];
 
 const ModalBody = ({ setOpened }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <Stack className="p-8" gap={64} align="center">
@@ -68,7 +74,16 @@ const ModalBody = ({ setOpened }) => {
                 </p>
                 <Button
                   onClick={() => {
-                    navigate("/create-campaign");
+                    dispatch(
+                      setCampaign({
+                        goal: goal.type as
+                          | "acquisition"
+                          | "retention"
+                          | "activation",
+                      })
+                    );
+
+                    navigate("/campaigns/campaign-configuration");
                     setOpened(false);
                   }}
                 >

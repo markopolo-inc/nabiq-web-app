@@ -29,7 +29,10 @@ const Router = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/integrations" element={<Integrations />} />
                 <Route path="/campaigns" element={<Campaigns />} />
-                <Route path="/create-campaign" element={<CreateCampaign />} />
+                <Route
+                  path="/campaigns/campaign-configuration"
+                  element={<CreateCampaign />}
+                />
               </Route>
               <Route path="/onboarding" element={<Onboarding />} />
               <Route path="/connect-marktag" element={<ConnectMarktag />} />
