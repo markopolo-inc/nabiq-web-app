@@ -5,12 +5,33 @@ import CampaignChannels from "src/components/Features/Campaigns/CampaignChannels
 import { useState } from "react";
 import CampaignDetailsForm from "src/components/Features/Campaigns/CampaignDetailsForm";
 import CampaignTiming from "src/components/Features/Campaigns/CampaignTiming";
+import { useCreateCampaignConfigMutation } from "src/store/campaign/campaigApi";
+import { useAppSelector } from "src/store/hooks";
+import PageLoader from "src/components/UI/PageLoader";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { resetCampaign } from "src/store/campaign/campaignSlice";
 
 const CreateCampaign = () => {
   const [active, setActive] = useState<number>(0);
+  const [createConfig, { isLoading }] = useCreateCampaignConfigMutation();
+  const campaignConfig = useAppSelector((state) => state.campaign);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const nextStep = () =>
-    setActive((current) => (current < 3 ? current + 1 : current));
+  const isReadyToConfirm = active === 2;
+
+  const nextStep = async () => {
+    if (isReadyToConfirm) {
+      const res = await createConfig(campaignConfig).unwrap();
+      if (res.success) {
+        navigate("/campaigns");
+        dispatch(resetCampaign());
+      }
+    } else {
+      setActive((current) => (current < 3 ? current + 1 : current));
+    }
+  };
 
   return (
     <>
@@ -20,6 +41,8 @@ const CreateCampaign = () => {
         <Stack gap={20}>
           <Breadcrumbs />
 
+          {isLoading && <PageLoader />}
+
           <div className="flex justify-between">
             <Stack>
               <p className="text-gray-900 font-semibold text-3xl">
@@ -28,11 +51,11 @@ const CreateCampaign = () => {
             </Stack>
             <Stack>
               <Button
-                variant="secondary"
-                disabled={active === 2}
+                variant={isReadyToConfirm ? "primary" : "secondary"}
                 onClick={nextStep}
+                loading={isLoading}
               >
-                Continue
+                {isReadyToConfirm ? "Create" : "Continue"}
               </Button>
             </Stack>
           </div>

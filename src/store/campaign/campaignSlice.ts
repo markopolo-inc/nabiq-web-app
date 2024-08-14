@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 import { CampaignInterface } from "src/interfaces/campaign.interface";
 
@@ -9,9 +9,14 @@ const initialState: Partial<CampaignInterface> = {
   channels: [],
 };
 
+export const revertAll = createAction("REVERT_ALL");
+
 const campaignSlice = createSlice({
   name: "campaign",
   initialState,
+  extraReducers(builder) {
+    builder.addCase(revertAll, () => initialState);
+  },
   reducers: {
     setCampaign: (
       state,
@@ -20,8 +25,9 @@ const campaignSlice = createSlice({
       ...state,
       ...action.payload,
     }),
+    resetCampaign: () => initialState,
   },
 });
 
-export const { setCampaign } = campaignSlice.actions;
+export const { setCampaign, resetCampaign } = campaignSlice.actions;
 export default campaignSlice.reducer;

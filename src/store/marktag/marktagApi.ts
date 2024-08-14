@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
 
 interface BrandsListResponseInterface {
@@ -29,8 +30,20 @@ const marktagApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: "/marktag/connect",
         method: "POST",
-        data: data,
+        body: data,
       }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || "Connected marktag successfully!");
+        } catch (err) {
+          toast.error(err?.error.message || "Failed to connect!");
+          return err;
+        }
+      },
     }),
   }),
 });

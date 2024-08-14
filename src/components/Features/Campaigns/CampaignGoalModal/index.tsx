@@ -9,6 +9,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCampaign } from "src/store/campaign/campaignSlice";
+import { useAppSelector } from "src/store/hooks";
 
 const goals = [
   {
@@ -37,6 +38,9 @@ const goals = [
 const ModalBody = ({ setOpened }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { resourceId: brandId, markTag } = useAppSelector(
+    (state) => state.brand
+  );
 
   return (
     <Stack className="p-8" gap={64} align="center">
@@ -76,6 +80,8 @@ const ModalBody = ({ setOpened }) => {
                   onClick={() => {
                     dispatch(
                       setCampaign({
+                        brandId,
+                        tagId: markTag?.resourceId,
                         goal: goal.type as
                           | "acquisition"
                           | "retention"

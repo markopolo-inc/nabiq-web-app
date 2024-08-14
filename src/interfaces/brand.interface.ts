@@ -87,4 +87,7 @@ export interface BrandInterface {
   resourceType?: "Brand";
   emailIntegrations?: IntegrationInterface;
   smsIntegrations?: IntegrationInterface;
+  markTag?: {
+    resourceId?: string;
+  };
 }
