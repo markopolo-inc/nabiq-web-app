@@ -57,14 +57,10 @@ const MarktagDetails = () => {
   const onClick = async () => {
     if (!resourceId || !marktagsResourceId) return;
 
-    await connect(selectedMarktag)
-      .unwrap()
-      .then((response) => {
-        if (response?.success) {
-          navigate("/");
-        }
-      })
-      .catch((ex) => console.log(ex));
+    const res = await connect(selectedMarktag);
+    if (res?.data?.success) {
+      navigate("/");
+    }
   };
 
   useEffect(() => {
