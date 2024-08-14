@@ -18,10 +18,7 @@ const CreateCampaign = () => {
 
       <Stack gap={78}>
         <Stack gap={20}>
-          <Breadcrumbs separator=">">
-            <p>Campaigns</p>
-            <p>Campaign configuration</p>
-          </Breadcrumbs>
+          <Breadcrumbs />
 
           <div className="flex justify-between">
             <Stack>
@@ -41,7 +38,7 @@ const CreateCampaign = () => {
           </div>
         </Stack>
 
-        <Stack gap={64} w={960} className="mx-auto">
+        <Stack gap={64} w={960} className="mx-auto mb-12">
           <Stepper active={active} setActive={setActive} />
 
           <Stack gap={32}>

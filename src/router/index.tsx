@@ -5,7 +5,7 @@ import AppLayout from "src/layouts/AppLayout";
 import PrivateLayout from "src/layouts/PrivateLayout";
 import NavigationLayout from "src/layouts/NavigationLayout";
 import PageLoader from "src/components/UI/PageLoader";
-import CreateCampaign from "src/pages/CreateCampaign";
+import CreateCampaign from "src/pages/CreateCampaignConfiguration";
 import ConnectMarktag from "src/pages/ConnetMarktag";
 
 const Home = lazy(() => import("pages/Home"));

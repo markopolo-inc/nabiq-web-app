@@ -1,7 +1,15 @@
 import { Select, Text } from "@nabiq-ui";
 import { Message } from "@nabiq-icons";
+import { useAppSelector } from "src/store/hooks";
+import { useDispatch } from "react-redux";
+import { GatewayType } from "src/interfaces/brand.interface";
+import { setCampaign } from "src/store/campaign/campaignSlice";
 
 const ChannelSMS = () => {
+  const { smsIntegrations } = useAppSelector((state) => state.brand);
+  const { campaign } = useAppSelector((state) => state);
+  const dispatch = useDispatch();
+
   return (
     <div className="w-full flex justify-between items-center bg-white border border-gray-200 rounded-xl p-4 ">
       <div className="flex gap-4">
@@ -11,9 +19,26 @@ const ChannelSMS = () => {
         </Text>
       </div>
       <Select
+        value={
+          (campaign?.channels || []).find((item) => item.channel === "sms")
+            ?.platform
+        }
         placeholder="No platform selected"
-        defaultValue="No platform selected"
-        data={["No platform selected"]}
+        data={Object.keys(smsIntegrations || {})}
+        onChange={(value) => {
+          const channels =
+            campaign?.channels?.filter((item) => item.channel !== "sms") ||
+            [];
+          channels.push({
+            channel: "sms",
+            platform: value as GatewayType,
+          });
+          dispatch(
+            setCampaign({
+              channels,
+            })
+          );
+        }}
       />
     </div>
   );

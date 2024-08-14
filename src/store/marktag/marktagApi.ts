@@ -25,6 +25,7 @@ const marktagApi = apiSlice.injectEndpoints({
       }),
     }),
     connectMarktag: builder.mutation<any, any>({
+      invalidatesTags: ["Company"],
       query: (data) => ({
         url: "/marktag/connect",
         method: "POST",

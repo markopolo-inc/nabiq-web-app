@@ -6,6 +6,7 @@ const initialState: Partial<CampaignInterface> = {
   tone: "informal",
   startDate: moment().format("YYYY-MM-DD"),
   endDate: moment().add("day", 7).format("YYYY-MM-DD"),
+  channels: [],
 };
 
 const campaignSlice = createSlice({

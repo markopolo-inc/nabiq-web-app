@@ -1,8 +1,8 @@
-import { GatewayInterface } from "./brand.interface";
+import { GatewayType } from "./brand.interface";
 
 export interface ChannelInterface {
   channel: "sms" | "email" | "notification";
-  platform: GatewayInterface | "none";
+  platform: GatewayType | "none";
 }
 
 export interface CampaignInterface {
