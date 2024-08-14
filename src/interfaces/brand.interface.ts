@@ -89,5 +89,7 @@ export interface BrandInterface {
   smsIntegrations?: IntegrationInterface;
   markTag?: {
     resourceId?: string;
+    domain: string;
+    hostname: string;
   };
 }

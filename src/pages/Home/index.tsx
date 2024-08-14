@@ -7,6 +7,8 @@ import ConnectedMarktag from "src/components/Features/Home/ConnectedMarktag";
 
 const Home = () => {
   const { userName } = useAppSelector((state) => state.user);
+  const { markTag } = useAppSelector((state) => state.brand);
+
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
@@ -23,10 +25,9 @@ const Home = () => {
         <div className="p-12 bg-gray-100 rounded-xl">
           <div className="flex flex-col justify-center items-center">
             <div className="gap-6 w-fit grid grid-cols-1 lg:grid-cols-2">
-              <ConnectMarktag />
+              {Boolean(markTag) ? <ConnectedMarktag /> : <ConnectMarktag />}
               <IntegrateApps />
               <ConnectCampaignPlatforms />
-              <ConnectedMarktag />
             </div>
           </div>
         </div>
