@@ -54,10 +54,10 @@ const MarktagDetails = () => {
     [marktagsListOptions, marktagsResourceId],
   );
 
-  const onClick = () => {
+  const onClick = async () => {
     if (!resourceId || !marktagsResourceId) return;
 
-    connect(selectedMarktag)
+    await connect(selectedMarktag)
       .unwrap()
       .then((response) => {
         if (response?.success) {
