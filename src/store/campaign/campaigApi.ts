@@ -1,6 +1,9 @@
 import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
-import { APIResponseType } from "src/interfaces/response.interface";
+import {
+  APIGetConfigsResponseType,
+  APIResponseType,
+} from "src/interfaces/response.interface";
 
 export const campaignApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,7 +28,22 @@ export const campaignApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getConfigs: builder.query<APIGetConfigsResponseType, string>({
+      query: (brandId) => ({
+        url: `/cohort?brandId=${brandId}`,
+        method: "GET",
+      }),
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          return result?.data;
+        } catch (err) {
+          return err;
+        }
+      },
+      async onCacheEntryAdded() {},
+    }),
   }),
 });
 
-export const { useCreateCampaignConfigMutation } = campaignApi;
+export const { useCreateCampaignConfigMutation, useGetConfigsQuery } = campaignApi;
