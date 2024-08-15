@@ -22,8 +22,12 @@ const MarktagDetails = () => {
   const [marktagsResourceId, setMarktagsResourceId] = useState<string>("");
   const [marktags, setMarktags] = useState<MarktagsType[]>([]);
 
-  const { data: brandsList } = useGetBrandsListQuery();
-  const [getMarktag] = useLazyGetMarktagUnderBrandQuery();
+  const { data: brandsList, isLoading: isLoadingBrandList } =
+    useGetBrandsListQuery();
+
+  const [getMarktag, { isLoading: isLoadingMarktag }] =
+    useLazyGetMarktagUnderBrandQuery();
+
   const [connect] = useConnectMarktagMutation();
 
   const brandsListOptions = useMemo(
@@ -107,7 +111,10 @@ const MarktagDetails = () => {
           label="Brand"
           placeholder="Select brand"
           value={resourceId}
-          onChange={setResourceId}
+          onChange={(brandItem) => {
+            setMarktagsResourceId("");
+            setResourceId(brandItem);
+          }}
           data={brandsListOptions}
           leftSection={
             resourceId && (
@@ -116,21 +123,24 @@ const MarktagDetails = () => {
               </div>
             )
           }
+          disabled={isLoadingBrandList}
         />
 
         <Select
           className="mb-0"
           label="Marktag"
           placeholder="Select ‘Marktag’ container"
+          defaultValue="Select ‘Marktag’ container"
           value={marktagsResourceId}
           onChange={setMarktagsResourceId}
           data={marktagsListOptions}
           leftSection={<Command size={20} />}
+          disabled={isLoadingMarktag}
         />
 
         <Button
           className="w-full !mt-12"
-          variant="secondary"
+          variant={!resourceId || !marktagsResourceId ? "secondary" : "primary"}
           disabled={!resourceId || !marktagsResourceId}
           onClick={onClick}
         >
