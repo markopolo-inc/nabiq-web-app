@@ -1,10 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { useGetColors } from "@nabiq-ui";
-import { sidebarOptions } from "src/lib/sidebarOptions";
+import { lowerPartOptions, sidebarOptions } from "src/lib/sidebarOptions";
 
-const Sidebar = () => {
-  const { gray400, primary500 } = useGetColors();
+const MenuItem = ({ item }) => {
   const { pathname } = useLocation();
+  const isSelected = item?.menuRegex?.test(pathname);
+  const { gray400, primary500 } = useGetColors();
   const style = {
     borderRadius: 12,
     border: "1px solid #E3E8EF",
@@ -12,41 +13,48 @@ const Sidebar = () => {
     boxShadow:
       "0px 2px 3px 0px rgba(18, 25, 38, 0.10), 0px 1px 2px 0px rgba(18, 25, 38, 0.06)",
   };
+
+  const Icon = item.Icon;
+  return (
+    <Link
+      to={item.to}
+      className="p-3"
+      style={{
+        ...(isSelected ? style : {}),
+      }}
+    >
+      <div className="flex gap-3 items-center">
+        <Icon size={24} color={isSelected ? primary500 : gray400} />
+        <span
+          className={`${
+            isSelected ? "text-primary-500" : "text-gray-600"
+          } text-sm font-medium`}
+        >
+          {item.title}
+        </span>
+      </div>
+    </Link>
+  );
+};
+
+const Sidebar = () => {
   return (
     <div className="h-screen">
       <div className="h-full flex flex-col justify-between overflow-y-auto">
         <div className="flex-1">
           <ul className="flex flex-col gap-3">
-            {sidebarOptions?.map((item, idx) => {
-              const isSelected = item?.menuRegex?.test(pathname);
-              return (
-                <Link
-                  key={idx}
-                  to={item.to}
-                  className="p-3"
-                  style={{
-                    ...(isSelected ? style : {}),
-                  }}
-                >
-                  <div className="flex gap-3 items-center">
-                    <item.Icon
-                      size={24}
-                      color={isSelected ? primary500 : gray400}
-                    />
-                    <span
-                      className={`${
-                        isSelected ? "text-primary-500" : "text-gray-600"
-                      } text-sm font-medium`}
-                    >
-                      {item.title}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+            {sidebarOptions?.map((item, idx) => (
+              <MenuItem item={item} />
+            ))}
           </ul>
         </div>
-        {/* <div className="bg-gray-800 text-white">Lower part</div> */}
+        <div>
+          <ul className="flex flex-col gap-3">
+            {lowerPartOptions?.map((item, idx) => (
+              <MenuItem item={item} />
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

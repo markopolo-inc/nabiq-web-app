@@ -3,6 +3,8 @@ import {
   FiAnnouncement01,
   FiHomeLine,
   FiPuzzlePiece02,
+  FiSettings01,
+  FiSliders01,
 } from "@nabiq-icons";
 
 export const sidebarOptions = [
@@ -29,5 +31,20 @@ export const sidebarOptions = [
     Icon: FiPuzzlePiece02,
     to: "/integrations",
     menuRegex: new RegExp(/^\/integrations/, "i"),
+  },
+  {
+    title: "Control room",
+    Icon: FiSliders01,
+    to: "/control-room",
+    menuRegex: new RegExp(/^\/control-room/, "i"),
+  },
+];
+
+export const lowerPartOptions = [
+  {
+    title: "Settings",
+    Icon: FiSettings01,
+    to: "/settings",
+    menuRegex: new RegExp(/^\/settings/, "i"),
   },
 ];

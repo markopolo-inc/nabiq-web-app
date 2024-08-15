@@ -54,6 +54,8 @@ export { default as FiPuzzlePiece02 } from "./PuzzlePiece02";
 
 // S
 export { default as FiSearchLg } from "./SearchLg";
+export { default as FiSliders01 } from "./Sliders01";
+export { default as FiSettings01 } from "./Settings01";
 
 // T
 
