@@ -1,5 +1,6 @@
 // A
 export { default as ArrowNarrowLeft } from "./ArrowNarrowLeft";
+export { default as ArrowNarrowDown } from "./ArrowNarrowDown";
 export { default as ArrowNarrowUpRight } from "./ArrowNarrowUpRight";
 export { default as FiAnnouncement01 } from "./Announcement01";
 

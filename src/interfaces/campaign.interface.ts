@@ -10,7 +10,7 @@ export interface CampaignItemInterface {
   resourceType: string;
   brandId: string;
   tagId: string;
-  status: "processing";
+  status: "active" | "processing" | "finished";
   goal: "acquisition";
   name: string;
   details: string;
@@ -31,5 +31,5 @@ export interface CampaignInterface {
   stepCount: number;
   stepDelay: number;
   channels: ChannelInterface[];
-  // list: CampaignItemInterface[];
+  list: CampaignItemInterface[];
 }

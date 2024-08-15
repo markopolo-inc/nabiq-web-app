@@ -9,13 +9,17 @@ import { setCampaign } from "src/store/campaign/campaignSlice.ts";
 export const campaignApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCampaignConfig: builder.mutation<APIResponseType, any>({
-      query: (args) => ({
-        url: `/cohort`,
-        method: "POST",
-        body: {
-          ...args,
-        },
-      }),
+      query: (args) => {
+        const { list, ...rest } = args;
+
+        return {
+          url: `/cohort`,
+          method: "POST",
+          body: {
+            ...rest,
+          },
+        };
+      },
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue?.data;
       },
@@ -37,7 +41,7 @@ export const campaignApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          // dispatch(setCampaign({ list: result?.data?.data || [] }));
+          dispatch(setCampaign({ list: result?.data?.data || [] }));
           return result?.data;
         } catch (err) {
           return err;
