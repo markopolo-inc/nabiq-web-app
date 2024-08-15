@@ -5,6 +5,17 @@ export interface ChannelInterface {
   platform: GatewayType | "none";
 }
 
+export interface CampaignItemInterface {
+  resourceId: string;
+  resourceType: string;
+  brandId: string;
+  tagId: string;
+  status: "processing";
+  goal: "acquisition";
+  name: string;
+  details: string;
+}
+
 export interface CampaignInterface {
   brandId: string;
   tagId: string;
@@ -20,4 +31,5 @@ export interface CampaignInterface {
   stepCount: number;
   stepDelay: number;
   channels: ChannelInterface[];
+  // list: CampaignItemInterface[];
 }

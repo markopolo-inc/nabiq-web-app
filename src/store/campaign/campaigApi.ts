@@ -4,6 +4,7 @@ import {
   APIGetConfigsResponseType,
   APIResponseType,
 } from "src/interfaces/response.interface";
+import { setCampaign } from "src/store/campaign/campaignSlice.ts";
 
 export const campaignApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -36,6 +37,7 @@ export const campaignApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          // dispatch(setCampaign({ list: result?.data?.data || [] }));
           return result?.data;
         } catch (err) {
           return err;
@@ -46,4 +48,5 @@ export const campaignApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateCampaignConfigMutation, useGetConfigsQuery } = campaignApi;
+export const { useCreateCampaignConfigMutation, useGetConfigsQuery } =
+  campaignApi;
