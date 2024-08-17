@@ -14,6 +14,8 @@ export interface CampaignItemInterface {
   goal: "acquisition";
   name: string;
   details: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface CampaignInterface {

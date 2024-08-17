@@ -50,6 +50,7 @@ export { default as FiMessageDotCircle } from "./MessageDotsCircle";
 export { default as FiPlus } from "./Plus";
 export { default as FiPrimitiveDot } from "./PrimitiveDot";
 export { default as FiPuzzlePiece02 } from "./PuzzlePiece02";
+export { default as FiPen } from "./Pen";
 
 // R
 
@@ -59,6 +60,7 @@ export { default as FiSliders01 } from "./Sliders01";
 export { default as FiSettings01 } from "./Settings01";
 
 // T
+export { default as FiTrash } from "./Trash";
 
 // U
 

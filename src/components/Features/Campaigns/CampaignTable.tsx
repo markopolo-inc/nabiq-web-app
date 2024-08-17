@@ -14,7 +14,8 @@ import {
 import OptionTabs from "src/components/UI/components/OptionTabs";
 import { useAppSelector } from "src/store/hooks.ts";
 import { CampaignItemInterface } from "src/interfaces/campaign.interface.ts";
-import { ArrowNarrowDown } from "@nabiq-icons";
+import { ArrowNarrowDown, FiPen, FiTrash } from "@nabiq-icons";
+import moment from "moment";
 
 type ActivatedTabsType = "all" | CampaignItemInterface["status"];
 
@@ -92,6 +93,8 @@ const CampaignTable = () => {
             </div>
           </Th>
         ))}
+
+        <Th></Th>
       </TableHead>
       <TableBody>
         {filteredList.map((item) => {
@@ -120,13 +123,30 @@ const CampaignTable = () => {
 
               <Td className="py-4 px-6">
                 <Stack align="left" gap={4}>
-                  {item.name}
+                  {moment(item.updatedAt).format("MMM DD, YYYY [at] hh:mm a")}
                 </Stack>
               </Td>
 
               <Td className="py-4 px-6">
                 <Stack align="left" gap={4}>
-                  {item.status}
+                  {moment(item.createdAt).format("MMM DD, YYYY [at] hh:mm a")}
+                </Stack>
+              </Td>
+
+              <Td className="py-4 px-6">
+                <Stack
+                  align="center"
+                  gap={4}
+                  className="flex-row justify-center"
+                >
+                  <div className="p-3 hover:cursor-pointer">
+                    <FiTrash size={20} color="#475467" />
+                  </div>
+
+                  <div className="p-3 hover:cursor-pointer">
+                    <FiPen size={20} color="#475467" />
+                  </div>
+                  <div></div>
                 </Stack>
               </Td>
             </TableRow>
