@@ -7,6 +7,7 @@ export { default as Breadcrumbs } from "./Breadcrumbs";
 
 // Buttons
 export { default as Button } from "./Button";
+export { default as Badge } from "./Badge";
 export { default as CloseButton } from "./CloseButton";
 
 // Input
