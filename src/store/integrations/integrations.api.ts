@@ -21,7 +21,7 @@ type ResponseType = {
   selectableObjects?: Record<string, any[]>;
 };
 
-export const integrationsApi = apiSlice.injectEndpoints({
+const integrationsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     integrateGateway: builder.mutation<ResponseType, IntegrationArgType>({
       invalidatesTags: ["Company"],

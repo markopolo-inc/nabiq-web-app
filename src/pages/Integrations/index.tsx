@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@nabiq-ui";
+import { Button, OptionTabs } from "@nabiq-ui";
 import { FiZap } from "@nabiq-icons";
 
 import GatewayLogo from "components/UI/GatewayLogo";
@@ -10,7 +10,6 @@ import { useAppSelector } from "store/hooks";
 import ApiKeyModal from "components/Features/Integrations/Modals/ApiKeyModal";
 import { appCategories, appOptions } from "lib/integration.lib";
 import type { GatewayInterface, GatewayType } from "interfaces/brand.interface";
-import OptionTabs from "src/components/UI/components/OptionTabs";
 import { Badge } from "@mantine/core";
 import { isEmpty } from "lodash";
 

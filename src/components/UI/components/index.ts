@@ -28,6 +28,7 @@ export { default as TableRowLoader } from "./TableRowLoader";
 export { default as TableRow } from "./TableRow";
 export { default as Th } from "./Th";
 export { default as Td } from "./Td";
+export { default as OptionTabs } from "./OptionTabs";
 
 // Typography
 export { default as Text } from "./Text";

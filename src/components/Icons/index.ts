@@ -10,6 +10,7 @@ export { default as FiAnnouncement01 } from "./Announcement01";
 
 // C
 export { default as Calendar } from "./Calendar";
+export { default as FiCheckVerified01 } from "./CheckVerified01";
 export { default as Command } from "./Command";
 export { default as Command2 } from "./Command2";
 export { default as FiCheck } from "./Check";
@@ -33,6 +34,7 @@ export { default as FiChevronDown } from "./ChevronDown";
 export { default as FiHelpCircle } from "./HelpCircle";
 export { default as FiHexagon01 } from "./Hexagon01";
 export { default as FiHomeLine } from "./HomeLine";
+export { default as FiHourglass03 } from "./Hourglass03";
 
 // I
 export { default as FiInfinity } from "./Infinity";
