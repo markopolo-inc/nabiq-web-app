@@ -7,6 +7,7 @@ const initialState: Partial<CampaignInterface> = {
   startDate: moment().format("YYYY-MM-DD"),
   endDate: moment().add("day", 7).format("YYYY-MM-DD"),
   channels: [],
+  list: [],
 };
 
 export const revertAll = createAction("REVERT_ALL");
@@ -20,7 +21,7 @@ const campaignSlice = createSlice({
   reducers: {
     setCampaign: (
       state,
-      action: PayloadAction<Partial<CampaignInterface>>
+      action: PayloadAction<Partial<CampaignInterface>>,
     ) => ({
       ...state,
       ...action.payload,

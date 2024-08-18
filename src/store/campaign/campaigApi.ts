@@ -1,17 +1,25 @@
 import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
-import { APIResponseType } from "src/interfaces/response.interface";
+import {
+  APIGetConfigsResponseType,
+  APIResponseType,
+} from "src/interfaces/response.interface";
+import { setCampaign } from "src/store/campaign/campaignSlice.ts";
 
 export const campaignApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCampaignConfig: builder.mutation<APIResponseType, any>({
-      query: (args) => ({
-        url: `/cohort`,
-        method: "POST",
-        body: {
-          ...args,
-        },
-      }),
+      query: (args) => {
+        const { list, ...rest } = args;
+
+        return {
+          url: `/cohort`,
+          method: "POST",
+          body: {
+            ...rest,
+          },
+        };
+      },
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue?.data;
       },
@@ -25,7 +33,24 @@ export const campaignApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getConfigs: builder.query<APIGetConfigsResponseType, string>({
+      query: (brandId) => ({
+        url: `/cohort?brandId=${brandId}`,
+        method: "GET",
+      }),
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(setCampaign({ list: result?.data?.data || [] }));
+          return result?.data;
+        } catch (err) {
+          return err;
+        }
+      },
+      async onCacheEntryAdded() {},
+    }),
   }),
 });
 
-export const { useCreateCampaignConfigMutation } = campaignApi;
+export const { useCreateCampaignConfigMutation, useGetConfigsQuery } =
+  campaignApi;
