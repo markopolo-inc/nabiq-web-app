@@ -16,11 +16,11 @@ interface ResponseInterface {
 export const companyApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCompany: builder.query<ResponseInterface, void>({
-      providesTags: ["Company"],
       query: () => ({
         url: "/company",
         method: "GET",
       }),
+      providesTags: ["Company"],
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
