@@ -1,6 +1,7 @@
 import { OptionTabs, Stack } from "@nabiq-ui";
 import { FiHourglass03, FiCheckVerified01 } from "@nabiq-icons";
 import { useState } from "react";
+import { useGetConfigsQuery } from "src/store/controlRoom/controlRoom.api";
 
 export const appCategories = [
   {
@@ -17,6 +18,10 @@ export const appCategories = [
 
 const ControlRoom = () => {
   const [category, setCategory] = useState<"queued" | "published">("queued");
+
+  const { data } = useGetConfigsQuery({ type: category, limit: 10, page: 1 });
+
+  console.log(data);
   return (
     <Stack gap={32}>
       <Stack gap={64}>
