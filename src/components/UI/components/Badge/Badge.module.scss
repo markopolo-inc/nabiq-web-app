@@ -1,0 +1,12 @@
+@import '../../../../styles/colors.scss';
+
+.badge_wrapper {
+  color: var(--badge-color);
+  background-color: var(--badge-bg-color);
+  border-color: var(--badge-bd-color);
+}
+
+.badge_label {
+  font-style: normal;
+  font-weight: 500;
+}
