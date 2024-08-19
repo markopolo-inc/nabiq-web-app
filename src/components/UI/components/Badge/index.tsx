@@ -5,7 +5,6 @@ import {
 import styles from "./Badge.module.scss";
 
 type BadgePropsType = BadgeFieldProps & {
-  label: string;
   color:
     | "gray"
     | "primary"
@@ -22,10 +21,10 @@ type BadgePropsType = BadgeFieldProps & {
 
 const Badge = ({
   className,
-  label,
   color,
   size = "sm",
   variant = "outline",
+  children,
   ...rest
 }: BadgePropsType) => {
   const getColor = () => {
@@ -73,6 +72,7 @@ const Badge = ({
           border_color: "#B2DDFF",
         };
       case "purple":
+        children;
         return {
           color: "#5925DC",
           bg_color: "#F4F3FF",
@@ -146,7 +146,7 @@ const Badge = ({
       variant={variant}
       {...rest}
     >
-      {label}
+      {children}
     </BadgeField>
   );
 };
