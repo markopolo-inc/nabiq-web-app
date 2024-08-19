@@ -154,7 +154,7 @@ const CampaignTable = () => {
         })}
         {filteredList.length === 0 ? (
           <TableRow>
-            <Td className="py-4 px-6">
+            <Td className="py-4 px-6" colSpan={7}>
               <Stack align="center" gap={4}>
                 <p className="text-gray-900 font-semibold text-base">
                   No campaigns created yet
