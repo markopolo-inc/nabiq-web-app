@@ -1,0 +1,17 @@
+@import '../../../../styles/colors.scss';
+
+.badge_wrapper {
+  color: var(--badge-color);
+  background-color: var(--badge-bg-color);
+  border-color: var(--badge-bd-color);
+  padding: var(--badge-pd);
+  height: auto !important;
+}
+
+.badge_label {
+  font-size: var(--badge-fz);
+  line-height: var(--badge-lh);
+  font-style: normal;
+  font-weight: 500;
+  text-transform: capitalize;
+}
