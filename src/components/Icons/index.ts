@@ -1,4 +1,6 @@
 // A
+export { default as ArrowRight } from "./ArrowRight";
+export { default as ArrowUp } from "./ArrowUp";
 export { default as ArrowNarrowLeft } from "./ArrowNarrowLeft";
 export { default as ArrowNarrowDown } from "./ArrowNarrowDown";
 export { default as ArrowNarrowUpRight } from "./ArrowNarrowUpRight";
@@ -65,6 +67,7 @@ export { default as FiTrash } from "./Trash";
 // U
 
 // X
+export { default as XClose } from "./XClose";
 
 // Z
 export { default as FiZap } from "./Zap";
