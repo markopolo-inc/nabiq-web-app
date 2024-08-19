@@ -6,7 +6,17 @@ import styles from "./Badge.module.scss";
 
 type BadgePropsType = BadgeFieldProps & {
   label: string;
-  color: "primary" | "secondary" | "danger" | "success" | "warning";
+  color:
+    | "gray"
+    | "primary"
+    | "error"
+    | "warning"
+    | "success"
+    | "bluelight"
+    | "blue"
+    | "purple"
+    | "pink"
+    | "orange";
   size: "sm" | "md" | "lg";
 };
 
@@ -20,41 +30,71 @@ const Badge = ({
 }: BadgePropsType) => {
   const getColor = () => {
     switch (color) {
-      case "primary":
-        return {
-          color: "#0A52D6",
-          bg_color: "#fff",
-          border_color: "#0A52D6",
-        };
-      case "secondary":
+      case "gray":
         return {
           color: "#364152",
           bg_color: "#fff",
           border_color: "#364152",
         };
-      case "danger":
+      case "primary":
+        return {
+          color: "#0A52D6",
+          bg_color: "#F9F5FF",
+          border_color: "#B2CCFB",
+        };
+      case "error":
         return {
           color: "#B42318",
-          bg_color: "#fff",
-          border_color: "#B42318",
+          bg_color: "#FEF3F2",
+          border_color: "#FECDCA",
+        };
+      case "warning":
+        return {
+          color: "#B54708",
+          bg_color: "#FFFAEB",
+          border_color: "#FEDF89",
         };
       case "success":
         return {
           color: "#067647",
-          bg_color: "#fff",
-          border_color: "#067647",
+          bg_color: "#ECFDF3",
+          border_color: "#ABEFC6",
         };
-      case "warning":
+      case "bluelight":
         return {
-          color: "#dc6803",
-          bg_color: "#fff",
-          border_color: "#dc6803",
+          color: "#026AA2",
+          bg_color: "#F0F9FF",
+          border_color: "#B9E6FE",
+        };
+      case "blue":
+        return {
+          color: "#175CD3",
+          bg_color: "#EFF8FF",
+          border_color: "#B2DDFF",
+        };
+      case "purple":
+        return {
+          color: "#5925DC",
+          bg_color: "#F4F3FF",
+          border_color: "#D9D6FE",
+        };
+      case "pink":
+        return {
+          color: "#C11574",
+          bg_color: "#FDF2FA",
+          border_color: "#FCCEEE",
+        };
+      case "orange":
+        return {
+          color: "#B93815",
+          bg_color: "#FEF6EE",
+          border_color: "#F9DBAF",
         };
       default:
         return {
-          color: "text-black",
-          bg_color: "bg-white",
-          border_color: "border-black",
+          color: "#364152",
+          bg_color: "#fff",
+          border_color: "#364152",
         };
     }
   };
