@@ -7,12 +7,14 @@ import styles from "./Badge.module.scss";
 type BadgePropsType = BadgeFieldProps & {
   label: string;
   color: "primary" | "secondary" | "danger" | "success" | "warning";
+  size: "sm" | "md" | "lg";
 };
 
 const Badge = ({
   className,
   label,
   color,
+  size = "sm",
   variant = "outline",
   ...rest
 }: BadgePropsType) => {
@@ -57,6 +59,35 @@ const Badge = ({
     }
   };
 
+  const getSize = () => {
+    switch (size) {
+      case "sm":
+        return {
+          font_size: "12px",
+          line_height: "18px",
+          padding: "1px 8px",
+        };
+      case "md":
+        return {
+          font_size: "14px",
+          line_height: "20px",
+          padding: "2px 10px",
+        };
+      case "lg":
+        return {
+          font_size: "14px",
+          line_height: "20px",
+          padding: "4px 10px",
+        };
+      default:
+        return {
+          font_size: "12px",
+          line_height: "18px",
+          padding: "2px 8px",
+        };
+    }
+  };
+
   return (
     <BadgeField
       className={className}
@@ -68,6 +99,9 @@ const Badge = ({
         "--badge-color": getColor().color,
         "--badge-bg-color": getColor().bg_color,
         "--badge-bd-color": getColor().border_color,
+        "--badge-fz": getSize().font_size,
+        "--badge-lh": getSize().line_height,
+        "--badge-pd": getSize().padding,
       }}
       variant={variant}
       {...rest}
