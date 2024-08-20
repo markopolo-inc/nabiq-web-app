@@ -33,7 +33,7 @@ export const campaignApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    getConfigs: builder.query<APIGetConfigsResponseType, string>({
+    getCampaignConfigs: builder.query<APIGetConfigsResponseType, string>({
       query: (brandId) => ({
         url: `/cohort?brandId=${brandId}`,
         method: "GET",
@@ -52,5 +52,5 @@ export const campaignApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateCampaignConfigMutation, useGetConfigsQuery } =
+export const { useCreateCampaignConfigMutation, useGetCampaignConfigsQuery } =
   campaignApi;

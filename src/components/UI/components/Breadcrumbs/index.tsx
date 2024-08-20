@@ -4,13 +4,17 @@ import { FiChevronRight } from "src/components/Icons";
 
 const CustomBreadCrumbs = () => {
   const { pathname } = useLocation();
+  // const navigate = useNavigate();
   const links = pathname.split("/")?.slice(1);
   return (
     <Breadcrumbs separator={<FiChevronRight size={16} color="#9AA4B2" />}>
       {links?.map((item, idx) => (
         <p
+          // onClick={() => {
+          //   navigate(`/${links.slice(0, idx + 1).join("/")}`);
+          // }}
           key={idx}
-          className={`capitalize text-sm ${
+          className={`capitalize cursor-pointer text-sm ${
             idx === links.length - 1
               ? "text-primary-700 font-semibold"
               : "text-gray-600 font-medium"

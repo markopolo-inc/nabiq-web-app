@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import {
   Stack,
+  Badge,
   Table,
   TableBody,
   TableRow,
@@ -16,6 +17,7 @@ import { useAppSelector } from "src/store/hooks.ts";
 import { CampaignItemInterface } from "src/interfaces/campaign.interface.ts";
 import { ArrowNarrowDown, FiPen, FiTrash } from "@nabiq-icons";
 import moment from "moment";
+import { capitalize } from "lodash";
 
 type ActivatedTabsType = "all" | CampaignItemInterface["status"];
 
@@ -25,6 +27,11 @@ const CAMPAIGN_TABLE_HEADERS: string[] = [
   "Last modified",
   "Date created",
 ];
+
+const colorMap = {
+  processing: "warning",
+  active: "success",
+};
 
 const CampaignTable = () => {
   const { list } = useAppSelector((state) => state.campaign);
@@ -42,7 +49,7 @@ const CampaignTable = () => {
           .includes(searchTerm.toLowerCase());
         return statusMatch && nameMatch;
       }),
-    [active, searchTerm, list],
+    [active, searchTerm, list]
   );
 
   const banner = (
@@ -50,9 +57,12 @@ const CampaignTable = () => {
       <Group className="flex gap-2 items-center px-8 py-5 border-b border-b-gray-200">
         <p className="text-gray-900 font-semibold text-lg">Campaign</p>
 
-        <div className="rounded-2xl border border-primary-200 py-0.5 px-2 text-xs font-medium text-primary-700">
+        <Badge color="blue" size="sm">
           {list.length ?? 0} campaigns
-        </div>
+        </Badge>
+        {/* <div className="rounded-2xl border border-primary-200 py-0.5 px-2 text-xs font-medium text-primary-700">
+          {list.length ?? 0} campaigns
+        </div> */}
       </Group>
       <Stack className="py-3 px-4">
         <Group justify="space-between">
@@ -113,11 +123,9 @@ const CampaignTable = () => {
 
               <Td className="py-4 px-6">
                 <Stack align="left" gap={4}>
-                  <div
-                    className={`w-fit rounded-2xl border py-0.5 px-2 text-xs font-medium ${item.status === "active" ? "text-primary-700 border-primary-200" : "text-warning-700 border-warning-200"} `}
-                  >
-                    {item.status}
-                  </div>
+                  <Badge color={(colorMap?.[item.status] as "gray") || "gray"}>
+                    {capitalize(item.status)}
+                  </Badge>
                 </Stack>
               </Td>
 

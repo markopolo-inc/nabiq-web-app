@@ -5,7 +5,7 @@ import CampaignChannels from "src/components/Features/Campaigns/CampaignChannels
 import { useState } from "react";
 import CampaignDetailsForm from "src/components/Features/Campaigns/CampaignDetailsForm";
 import CampaignTiming from "src/components/Features/Campaigns/CampaignTiming";
-import { useCreateCampaignConfigMutation } from "src/store/campaign/campaigApi";
+import { useCreateCampaignConfigMutation } from "src/store/campaign/campaignApi";
 import { useAppSelector } from "src/store/hooks";
 import PageLoader from "src/components/UI/PageLoader";
 import { useNavigate } from "react-router-dom";
