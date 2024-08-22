@@ -1,62 +1,63 @@
 
-import { Badge, Button, Group, Select, Text, TextInput } from "@nabiq-ui";
+import { Badge, Button, Group, HorizontalFlow, Select, Text, TextInput } from "@nabiq-ui";
 import { XClose, FiMail01, ArrowRight, ArrowUp } from "@nabiq-icons";
+import { Edge, Position, Node } from "@xyflow/react";
 
-// const initialNodes: Node[] = [
-//   {
-//     id: 'horizontal-1',
-//     sourcePosition: Position.Right,
-//     type: 'input',
-//     dragHandle: '.custom-drag-handle',
-//     data: { label: 'Input' },
-//     position: { x: 0, y: 80 },
-//     style: {
-//       border: '1px solid #ddd',
-//     },
-//   },
-//   {
-//     id: 'horizontal-2',
-//     dragHandle: '.custom-drag-handle',
-//     targetPosition: Position.Left,
-//     data: { label: 'A Node' },
-//     position: { x: 250, y: 0 },
-//     style: {
-//       border: '1px solid #ddd',
-//     },
-//   },
-//   {
-//     id: 'horizontal-3',
-//     dragHandle: '.custom-drag-handle',
-//     targetPosition: Position.Left,
-//     data: { label: 'Node 3' },
-//     position: { x: 250, y: 160 },
-//     style: {
-//       border: '1px solid #ddd',
-//     },
-//   }
-// ];
+const initialNodes: Node[] = [
+  {
+    id: 'horizontal-1',
+    sourcePosition: Position.Right,
+    type: 'input',
+    dragHandle: '.custom-drag-handle',
+    data: { label: 'Input' },
+    position: { x: 0, y: 80 },
+    style: {
+      border: '1px solid #ddd',
+    },
+  },
+  {
+    id: 'horizontal-2',
+    dragHandle: '.custom-drag-handle',
+    targetPosition: Position.Left,
+    data: { label: 'A Node' },
+    position: { x: 250, y: 0 },
+    style: {
+      border: '1px solid #ddd',
+    },
+  },
+  {
+    id: 'horizontal-3',
+    dragHandle: '.custom-drag-handle',
+    targetPosition: Position.Left,
+    data: { label: 'Node 3' },
+    position: { x: 250, y: 160 },
+    style: {
+      border: '1px solid #ddd',
+    },
+  }
+];
 
-// const initialEdges: Edge[] = [
-//   {
-//     id: 'horizontal-e1-2',
-//     source: 'horizontal-1',
-//     type: 'smoothstep',
-//     target: 'horizontal-2',
-//   },
-//   {
-//     id: 'horizontal-e1-3',
-//     source: 'horizontal-1',
-//     type: 'smoothstep',
-//     target: 'horizontal-3',
-//   },
-// ];
+const initialEdges: Edge[] = [
+  {
+    id: 'horizontal-e1-2',
+    source: 'horizontal-1',
+    type: 'smoothstep',
+    target: 'horizontal-2',
+  },
+  {
+    id: 'horizontal-e1-3',
+    source: 'horizontal-1',
+    type: 'smoothstep',
+    target: 'horizontal-3',
+  },
+];
 
 const Test = () => {
   return (
     <div className="space-y-4 space-x-4">
-      {/* <div className="h-[800px]">
+      <div className="h-[800px]">
         <HorizontalFlow initialEdges={initialEdges} initialNodes={initialNodes} />
-      </div> */}
+      </div>
       <Text className="display-lg text-primary-500 font-semibold">Nabiq</Text>
       <Button>Button CTA</Button>
       <Button variant="primary-destructive" size="sm">

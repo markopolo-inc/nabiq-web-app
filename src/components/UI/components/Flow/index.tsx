@@ -1,17 +1,20 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, ComponentType } from 'react';
 import {
+    ReactFlowProvider,
     ReactFlow,
     useNodesState,
     useEdgesState,
     addEdge,
     Node,
     Edge,
+    NodeProps,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 type HorizontalFlowPropsType = {
     initialNodes: Node[],
-    initialEdges: Edge[]
+    initialEdges: Edge[],
+    nodeTypes?: Record<string, ComponentType<NodeProps>>
 }
 
 const styles = {
@@ -27,19 +30,20 @@ const HorizontalFlow = ({ initialEdges, initialNodes }: HorizontalFlowPropsType)
     );
 
     return (
-        <ReactFlow
-            style={styles}
-            panOnDrag={false}
-            zoomOnScroll={false}
-            draggable={false}
-            zoomOnDoubleClick={false}
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            fitView
-        />
+        <ReactFlowProvider>
+            <ReactFlow
+                style={styles}
+                panOnDrag={false}
+                zoomOnScroll={false}
+                draggable={false}
+                zoomOnDoubleClick={false}
+                nodes={nodes}
+                edges={edges}
+                onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
+                onConnect={onConnect}
+            />
+        </ReactFlowProvider>
 
     );
 };
