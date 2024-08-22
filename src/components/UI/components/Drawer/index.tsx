@@ -1,10 +1,12 @@
-import { Drawer as DrawerFiled, DrawerProps as DrawerFiledProps } from '@mantine/core';
+import { Drawer as DrawerFiled, DrawerProps as DrawerFiledProps, DrawerHeaderProps as DrawerHeaderFieldProps, DrawerBodyProps as DrawerBodyFiledProps } from '@mantine/core';
 import { FiCrossX } from '@nabiq-icons';
 
 import styles from "./Style.module.scss";
 
 
-export const DrawerHeader = ({ children }: { children: React.ReactNode }) => {
+type DrawerHeaderPropsType = DrawerHeaderFieldProps
+
+export const DrawerHeader = ({ children }: DrawerHeaderPropsType) => {
     return (
         <DrawerFiled.Header>
             <DrawerFiled.Title>{children}</DrawerFiled.Title>
@@ -13,7 +15,7 @@ export const DrawerHeader = ({ children }: { children: React.ReactNode }) => {
     );
 }
 
-export const DrawerBody = ({ children }: { children: React.ReactNode }) => {
+export const DrawerBody = ({ children }: DrawerBodyFiledProps) => {
     return <DrawerFiled.Body>{children}</DrawerFiled.Body>;
 }
 
@@ -26,6 +28,7 @@ export const Drawer = ({ opened, onClose, children, ...rest }: DrawerFiledProps)
             classNames={{
                 content: styles.drawer_content,
                 header: styles.drawer_header,
+                body: styles.drawer_body
             }}
             {...rest} >
             <DrawerFiled.Overlay />
