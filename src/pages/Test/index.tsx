@@ -1,63 +1,110 @@
 
 import { Badge, Button, Group, HorizontalFlow, Select, Text, TextInput } from "@nabiq-ui";
 import { XClose, FiMail01, ArrowRight, ArrowUp } from "@nabiq-icons";
-import { Edge, Position, Node } from "@xyflow/react";
+import { useMemo } from "react";
 
-const initialNodes: Node[] = [
-  {
-    id: 'horizontal-1',
-    sourcePosition: Position.Right,
-    type: 'input',
-    dragHandle: '.custom-drag-handle',
-    data: { label: 'Input' },
-    position: { x: 0, y: 80 },
-    style: {
-      border: '1px solid #ddd',
-    },
-  },
-  {
-    id: 'horizontal-2',
-    dragHandle: '.custom-drag-handle',
-    targetPosition: Position.Left,
-    data: { label: 'A Node' },
-    position: { x: 250, y: 0 },
-    style: {
-      border: '1px solid #ddd',
-    },
-  },
-  {
-    id: 'horizontal-3',
-    dragHandle: '.custom-drag-handle',
-    targetPosition: Position.Left,
-    data: { label: 'Node 3' },
-    position: { x: 250, y: 160 },
-    style: {
-      border: '1px solid #ddd',
-    },
-  }
-];
-
-const initialEdges: Edge[] = [
-  {
-    id: 'horizontal-e1-2',
-    source: 'horizontal-1',
-    type: 'smoothstep',
-    target: 'horizontal-2',
-  },
-  {
-    id: 'horizontal-e1-3',
-    source: 'horizontal-1',
-    type: 'smoothstep',
-    target: 'horizontal-3',
-  },
-];
+import DiscoverBali from "../../components/Features/Monitoring/DiscoverBali"
+import Cohort from "../../components/Features/Monitoring/Cohort"
+import Platform from "../../components/Features/Monitoring/Platform"
 
 const Test = () => {
+
+  const nodeTypes = useMemo(() => ({
+    DiscoverBali: DiscoverBali,
+    Cohort1: Cohort,
+    Cohort2: Cohort,
+    Cohort3: Cohort,
+    Cohort4: Cohort,
+    Platform: Platform,
+  }), []);
+
+  const initialNodes = [
+    {
+      id: 'discover_bali',
+      type: 'DiscoverBali',
+      position: { x: 0, y: 100 },
+      data: { value: 123 },
+      dragHandle: '.custom-drag-handle',
+    },
+    {
+      id: 'cohort_1',
+      type: 'Cohort1',
+      position: { x: 390, y: 0 },
+      data: { value: 123 },
+      dragHandle: '.custom-drag-handle',
+    },
+    {
+      id: 'cohort_2',
+      type: 'Cohort2',
+      position: { x: 390, y: 100 },
+      data: { value: 123 },
+      dragHandle: '.custom-drag-handle',
+    },
+    {
+      id: 'cohort_3',
+      type: 'Cohort3',
+      position: { x: 390, y: 200 },
+      data: { value: 123 },
+      dragHandle: '.custom-drag-handle',
+    },
+    {
+      id: 'cohort_4',
+      type: 'Cohort4',
+      position: { x: 390, y: 300 },
+      data: { value: 123 },
+      dragHandle: '.custom-drag-handle',
+    },
+    {
+      id: 'platform',
+      type: 'Platform',
+      position: { x: 860, y: 150 },
+      data: { value: 123 },
+      dragHandle: '.custom-drag-handle',
+    },
+  ];
+
+  const initialEdges = [
+    {
+      id: 'edge_1',
+      source: 'discover_bali',
+      target: 'cohort_1',
+      sourceHandle: 'a',
+      style: { stroke: '#9AA4B2' },
+    },
+    {
+      id: 'edge_2',
+      source: 'discover_bali',
+      target: 'cohort_2',
+      targetPosition: 'right',
+      sourceHandle: 'a',
+      style: { stroke: '#9AA4B2' },
+    },
+    {
+      id: 'edge_3',
+      source: 'discover_bali',
+      target: 'cohort_3',
+      sourceHandle: 'a',
+      style: { stroke: '#9AA4B2' },
+    },
+    {
+      id: 'edge_4',
+      source: 'discover_bali',
+      target: 'cohort_4',
+      sourceHandle: 'a',
+      style: { stroke: '#9AA4B2' },
+    },
+    {
+      id: 'edge_5',
+      source: 'cohort_2',
+      target: 'platform',
+      sourceHandle: '',
+      style: { stroke: '#9AA4B2' },
+    },
+  ];
+
+
   return (
     <div className="space-y-4 space-x-4">
-      <div className="h-[800px]">
-        <HorizontalFlow initialEdges={initialEdges} initialNodes={initialNodes} />
-      </div>
       <Text className="display-lg text-primary-500 font-semibold">Nabiq</Text>
       <Button>Button CTA</Button>
       <Button variant="primary-destructive" size="sm">
@@ -83,7 +130,9 @@ const Test = () => {
         Button
       </Button>
       <Button variant="link" size="sm">
-        Button
+        Button<div className="h-[800px] p-20">
+          <HorizontalFlow nodeTypes={nodeTypes} initialNodes={initialNodes} initialEdges={initialEdges} />
+        </div>
       </Button>
 
       <div className="w-72 space-y-6">
@@ -197,6 +246,10 @@ const Test = () => {
           </Group>
         ))}
       </Group>
+
+      <div className="h-[800px] p-4">
+        <HorizontalFlow nodeTypes={nodeTypes} initialNodes={initialNodes} initialEdges={initialEdges} />
+      </div>
     </div>
   );
 };

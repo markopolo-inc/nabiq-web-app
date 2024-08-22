@@ -12,8 +12,8 @@ import {
 import '@xyflow/react/dist/style.css';
 
 type HorizontalFlowPropsType = {
-    initialNodes: Node[],
-    initialEdges: Edge[],
+    initialNodes?: Node[],
+    initialEdges?: Edge[],
     nodeTypes?: Record<string, ComponentType<NodeProps>>
 }
 
@@ -21,7 +21,7 @@ const styles = {
     width: '100%',
 };
 
-const HorizontalFlow = ({ initialEdges, initialNodes }: HorizontalFlowPropsType) => {
+const HorizontalFlow = ({ initialEdges, initialNodes, nodeTypes }: HorizontalFlowPropsType) => {
     const [nodes, _, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const onConnect = useCallback(
@@ -39,6 +39,7 @@ const HorizontalFlow = ({ initialEdges, initialNodes }: HorizontalFlowPropsType)
                 zoomOnDoubleClick={false}
                 nodes={nodes}
                 edges={edges}
+                nodeTypes={nodeTypes}
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
