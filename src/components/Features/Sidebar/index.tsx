@@ -51,7 +51,7 @@ const Sidebar = () => {
         <div>
           <ul className="flex flex-col gap-3">
             {lowerPartOptions?.map((item, idx) => (
-              <MenuItem item={item} />
+              <MenuItem key={idx} item={item} />
             ))}
           </ul>
         </div>
