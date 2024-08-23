@@ -16,6 +16,7 @@ export { default as Command2 } from "./Command2";
 export { default as FiCheck } from "./Check";
 export { default as FiChevronRight } from "./ChevronRight";
 export { default as FiCommand } from "./Command";
+export { default as FiCrossX } from "./CrossX";
 export { default as FiCursorClick01 } from "./CursorClick01";
 
 // D
