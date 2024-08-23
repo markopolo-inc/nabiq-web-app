@@ -21,6 +21,7 @@ export { default as FiCursorClick01 } from "./CursorClick01";
 
 // D
 export { default as FiDataFlow02 } from "./DataFlow02";
+export { default as FiDot } from "./Dot";
 
 // E
 export { default as Envelope } from "./Envelope";

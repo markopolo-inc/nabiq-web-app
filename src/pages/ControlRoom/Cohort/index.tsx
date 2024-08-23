@@ -1,6 +1,12 @@
 import { Breadcrumbs, Button, Group, Stack } from "@nabiq-ui";
+import { useParams } from "react-router-dom";
+import { useGetConfigCohortQuery } from "src/store/controlRoom/controlRoom.api";
 
 const Cohort = () => {
+  const { configId } = useParams();
+
+  const { data } = useGetConfigCohortQuery(configId);
+  console.log(data);
   return (
     <Stack gap={64}>
       <Stack gap={20}>

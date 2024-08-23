@@ -35,8 +35,11 @@ export const campaignApi = apiSlice.injectEndpoints({
     }),
     getCampaignConfigs: builder.query<APIGetConfigsResponseType, string>({
       query: (brandId) => ({
-        url: `/cohort?brandId=${brandId}`,
+        url: `/cohort`,
         method: "GET",
+        params: {
+          brandId,
+        },
       }),
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
