@@ -1,7 +1,7 @@
 import { Badge, Button, Group, Stack } from "@nabiq-ui";
 import { FiChevronRight, FiDot } from "@nabiq-icons";
 import { formatTimeAgo } from "src/utils/date.uitils";
-import moment from "moment";
+import moment from "moment-timezone";
 import { useNavigate } from "react-router-dom";
 
 const Queued = ({ configs }) => {

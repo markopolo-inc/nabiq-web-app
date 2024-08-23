@@ -16,7 +16,7 @@ import OptionTabs from "src/components/UI/components/OptionTabs";
 import { useAppSelector } from "src/store/hooks.ts";
 import { CampaignItemInterface } from "src/interfaces/campaign.interface.ts";
 import { ArrowNarrowDown, FiPen, FiTrash } from "@nabiq-icons";
-import moment from "moment";
+import moment from "moment-timezone";
 import { capitalize } from "lodash";
 
 type ActivatedTabsType = "all" | CampaignItemInterface["status"];
