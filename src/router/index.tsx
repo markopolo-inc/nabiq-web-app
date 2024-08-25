@@ -38,11 +38,11 @@ const Router = () => {
                 <Route path="/campaigns" element={<Campaigns />} />
                 <Route path="/control-room" element={<ControlRoom />} />
                 <Route
-                  path="/control-room/cohort"
+                  path="/control-room/cohort/:configId"
                   element={<ControlRoomCohort />}
                 />
                 <Route
-                  path="/control-room/cohort/content"
+                  path="/control-room/cohort/content/:configId"
                   element={<ControlRoomContent />}
                 />
                 <Route

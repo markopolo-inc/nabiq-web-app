@@ -10,6 +10,9 @@ export { default as Button } from "./Button";
 export { default as Badge } from "./Badge";
 export { default as CloseButton } from "./CloseButton";
 
+// Drawer
+export { Drawer, DrawerHeader, DrawerBody } from "./Drawer";
+
 // Input
 export { default as TextInput } from "./TextInput";
 export { default as TextArea } from "./TextArea";

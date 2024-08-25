@@ -6,7 +6,7 @@ import {
   Stack,
   Text,
 } from "@nabiq-ui";
-import moment from "moment";
+import moment from "moment-timezone";
 import { useDispatch } from "react-redux";
 import { CampaignInterface } from "src/interfaces/campaign.interface";
 import { setCampaign } from "src/store/campaign/campaignSlice";

@@ -32,8 +32,8 @@ const Badge = ({
       case "gray":
         return {
           color: "#364152",
-          bg_color: "#fff",
-          border_color: "#364152",
+          bg_color: "#F9FAFB",
+          border_color: "#EAECF0",
         };
       case "primary":
         return {
@@ -146,7 +146,16 @@ const Badge = ({
       variant={variant}
       {...rest}
     >
-      {children}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 4,
+        }}
+      >
+        {" "}
+        {children}
+      </div>
     </BadgeField>
   );
 };
