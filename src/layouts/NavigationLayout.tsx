@@ -1,4 +1,11 @@
-import { AppShell, Burger, Group, Image, useDisclosure } from "@nabiq-ui";
+import {
+  AppShell,
+  Avatar,
+  Burger,
+  Group,
+  Image,
+  useDisclosure,
+} from "@nabiq-ui";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -25,9 +32,19 @@ const NavigationLayout = () => {
       padding="md"
     >
       <AppShell.Header className="px-8">
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
-          <Image src={NabiqLogo} alt="Nabiq" className="w-24" />
+        <Group h="100%" px="md" className="justify-between">
+          <Group>
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="md"
+              size="sm"
+            />
+            <Image src={NabiqLogo} alt="Nabiq" className="w-24" />
+          </Group>
+          <Group>
+            <Avatar src="img.png" alt="It's me" />
+          </Group>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
