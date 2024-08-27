@@ -1,17 +1,11 @@
-import {
-  AppShell,
-  Avatar,
-  Burger,
-  Group,
-  Image,
-  useDisclosure,
-} from "@nabiq-ui";
+import { AppShell, Burger, Group, Image, useDisclosure } from "@nabiq-ui";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "src/store/hooks";
 import NabiqLogo from "src/assets/logo/nabiq-logo.png";
 import Sidebar from "components/Features/Sidebar";
+import AvatarMenu from "src/components/Features/Sidebar/AvatarMenu";
 
 const NavigationLayout = () => {
   console.log("--- I am from Navigationlayout ---");
@@ -42,9 +36,8 @@ const NavigationLayout = () => {
             />
             <Image src={NabiqLogo} alt="Nabiq" className="w-24" />
           </Group>
-          <Group>
-            <Avatar src="img.png" alt="It's me" />
-          </Group>
+
+          <AvatarMenu />
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
