@@ -23,6 +23,8 @@ export { default as Checkbox } from "./Checkbox";
 export { default as OtpInput } from "./OtpInput";
 
 export { default as Table } from "./Table";
+export { default as Avatar } from "./Avatar";
+export { default as Dialog } from "./Dialog";
 export { default as TableBody } from "./TableBody";
 export { default as TableFoot } from "./TableFoot";
 export { default as TableHead } from "./TableHead";

@@ -104,6 +104,8 @@ export default {
         30: ".3",
       },
       boxShadow: {
+        'custom-sm': '0px 4px 6px -2px rgba(18, 25, 38, 0.03)',
+        'custom-md': '0px 12px 16px -4px rgba(18, 25, 38, 0.08)',
         sm: "0px 1px 3px 0px rgba(18, 25, 38, 0.10), 0px 1px 2px 0px rgba(18, 25, 38, 0.06)",
         md: "0px 4px 8px -2px rgba(18, 25, 38, 0.10), 0px 2px 4px -2px rgba(18, 25, 38, 0.06)",
         lg: "0px 12px 16px -4px rgba(18, 25, 38, 0.08), 0px 4px 6px -2px rgba(18, 25, 38, 0.03)",

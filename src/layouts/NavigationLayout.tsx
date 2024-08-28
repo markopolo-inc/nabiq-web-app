@@ -5,6 +5,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useAppSelector } from "src/store/hooks";
 import NabiqLogo from "src/assets/logo/nabiq-logo.png";
 import Sidebar from "components/Features/Sidebar";
+import AvatarMenu from "src/components/Features/Sidebar/AvatarMenu";
 
 const NavigationLayout = () => {
   console.log("--- I am from Navigationlayout ---");
@@ -25,9 +26,18 @@ const NavigationLayout = () => {
       padding="md"
     >
       <AppShell.Header className="px-8">
-        <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
-          <Image src={NabiqLogo} alt="Nabiq" className="w-24" />
+        <Group h="100%" px="md" className="justify-between">
+          <Group>
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="md"
+              size="sm"
+            />
+            <Image src={NabiqLogo} alt="Nabiq" className="w-24" />
+          </Group>
+
+          <AvatarMenu />
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">

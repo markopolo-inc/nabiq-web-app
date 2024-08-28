@@ -43,6 +43,7 @@ export { default as FiHourglass03 } from "./Hourglass03";
 export { default as FiInfinity } from "./Infinity";
 
 // L
+export { default as Logout01 } from "./Logout01";
 
 // M
 export { default as FiMail01 } from "./Mail01";
