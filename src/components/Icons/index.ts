@@ -71,6 +71,7 @@ export { default as FiSettings01 } from "./Settings01";
 export { default as FiTrash } from "./Trash";
 
 // U
+export { default as FiFileUpload } from "./UploadCloud02";
 
 // X
 export { default as XClose } from "./XClose";
