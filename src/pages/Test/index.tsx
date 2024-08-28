@@ -4,6 +4,7 @@ import {
   Drawer,
   DrawerBody,
   DrawerHeader,
+  FileInput,
   Group,
   HorizontalFlow,
   Select,
@@ -12,113 +13,126 @@ import {
   useDisclosure,
 } from "@nabiq-ui";
 import { XClose, FiMail01, ArrowRight, ArrowUp } from "@nabiq-icons";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
-import DiscoverBali from "../../components/Features/Monitoring/DiscoverBali"
-import Cohort from "../../components/Features/Monitoring/Cohort"
-import Platform from "../../components/Features/Monitoring/Platform"
+import DiscoverBali from "../../components/Features/Monitoring/DiscoverBali";
+import Cohort from "../../components/Features/Monitoring/Cohort";
+import Platform from "../../components/Features/Monitoring/Platform";
 
 const index = () => {
+  const [file, setFile] = useState(null);
+  console.log(file);
   const [opened, { close }] = useDisclosure(true);
 
-  const nodeTypes = useMemo(() => ({
-    DiscoverBali: DiscoverBali,
-    Cohort1: Cohort,
-    Cohort2: Cohort,
-    Cohort3: Cohort,
-    Cohort4: Cohort,
-    Platform: Platform,
-  }), []);
+  const nodeTypes = useMemo(
+    () => ({
+      DiscoverBali: DiscoverBali,
+      Cohort1: Cohort,
+      Cohort2: Cohort,
+      Cohort3: Cohort,
+      Cohort4: Cohort,
+      Platform: Platform,
+    }),
+    [],
+  );
 
   const initialNodes = [
     {
-      id: 'discover_bali',
-      type: 'DiscoverBali',
+      id: "discover_bali",
+      type: "DiscoverBali",
       position: { x: 0, y: 100 },
       data: { value: 123 },
-      dragHandle: '.custom-drag-handle',
+      dragHandle: ".custom-drag-handle",
     },
     {
-      id: 'cohort_1',
-      type: 'Cohort1',
+      id: "cohort_1",
+      type: "Cohort1",
       position: { x: 390, y: 0 },
       data: { value: 123 },
-      dragHandle: '.custom-drag-handle',
+      dragHandle: ".custom-drag-handle",
     },
     {
-      id: 'cohort_2',
-      type: 'Cohort2',
+      id: "cohort_2",
+      type: "Cohort2",
       position: { x: 390, y: 100 },
       data: { value: 123 },
-      dragHandle: '.custom-drag-handle',
+      dragHandle: ".custom-drag-handle",
     },
     {
-      id: 'cohort_3',
-      type: 'Cohort3',
+      id: "cohort_3",
+      type: "Cohort3",
       position: { x: 390, y: 200 },
       data: { value: 123 },
-      dragHandle: '.custom-drag-handle',
+      dragHandle: ".custom-drag-handle",
     },
     {
-      id: 'cohort_4',
-      type: 'Cohort4',
+      id: "cohort_4",
+      type: "Cohort4",
       position: { x: 390, y: 300 },
       data: { value: 123 },
-      dragHandle: '.custom-drag-handle',
+      dragHandle: ".custom-drag-handle",
     },
     {
-      id: 'platform',
-      type: 'Platform',
+      id: "platform",
+      type: "Platform",
       position: { x: 860, y: 150 },
       data: { value: 123 },
-      dragHandle: '.custom-drag-handle',
+      dragHandle: ".custom-drag-handle",
     },
   ];
 
   const initialEdges = [
     {
-      id: 'edge_1',
-      source: 'discover_bali',
-      target: 'cohort_1',
-      sourceHandle: 'a',
-      style: { stroke: '#9AA4B2' },
+      id: "edge_1",
+      source: "discover_bali",
+      target: "cohort_1",
+      sourceHandle: "a",
+      style: { stroke: "#9AA4B2" },
     },
     {
-      id: 'edge_2',
-      source: 'discover_bali',
-      target: 'cohort_2',
-      targetPosition: 'right',
-      sourceHandle: 'a',
-      style: { stroke: '#9AA4B2' },
+      id: "edge_2",
+      source: "discover_bali",
+      target: "cohort_2",
+      targetPosition: "right",
+      sourceHandle: "a",
+      style: { stroke: "#9AA4B2" },
     },
     {
-      id: 'edge_3',
-      source: 'discover_bali',
-      target: 'cohort_3',
-      sourceHandle: 'a',
-      style: { stroke: '#9AA4B2' },
+      id: "edge_3",
+      source: "discover_bali",
+      target: "cohort_3",
+      sourceHandle: "a",
+      style: { stroke: "#9AA4B2" },
     },
     {
-      id: 'edge_4',
-      source: 'discover_bali',
-      target: 'cohort_4',
-      sourceHandle: 'a',
-      style: { stroke: '#9AA4B2' },
+      id: "edge_4",
+      source: "discover_bali",
+      target: "cohort_4",
+      sourceHandle: "a",
+      style: { stroke: "#9AA4B2" },
     },
     {
-      id: 'edge_5',
-      source: 'cohort_2',
-      target: 'platform',
-      sourceHandle: '',
-      style: { stroke: '#9AA4B2' },
+      id: "edge_5",
+      source: "cohort_2",
+      target: "platform",
+      sourceHandle: "",
+      style: { stroke: "#9AA4B2" },
     },
   ];
 
-
   return (
     <>
+      <div className="p-32">
+        <div className="w-[564px] h-[126px]">
+          <FileInput onChange={setFile} />
+        </div>
+      </div>
       <div className="h-[800px] p-4">
-        <HorizontalFlow nodeTypes={nodeTypes} initialNodes={initialNodes} initialEdges={initialEdges} />
+        <HorizontalFlow
+          nodeTypes={nodeTypes}
+          initialNodes={initialNodes}
+          initialEdges={initialEdges}
+        />
       </div>
 
       <div className="space-y-4 space-x-4">
@@ -325,17 +339,18 @@ const index = () => {
               </div>
 
               <div className="font-open text-xs font-medium leading-7 text-gray-600">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-                quod nobis magni qui tenetur non eum voluptatibus, maxime quos,
-                ducimus ullam voluptatum nam ipsam soluta numquam asperiores
-                pariatur corporis facere necessitatibus? Dolorum vero deserunt,
-                provident aperiam possimus modi esse quaerat, facilis qui
-                accusamus animi aspernatur, maiores tenetur non hic inventore?
-                Neque aliquid quos, fugiat a dicta eos nulla veniam sapiente
-                explicabo necessitatibus officiis odit, molestias molestiae non
-                debitis, ipsa iure quisquam. Facere iusto accusantium debitis cum
-                unde voluptatibus autem magnam? Voluptatum odit nisi reiciendis
-                quibusdam, ex beatae ipsam expedita nam veritatis.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Deserunt quod nobis magni qui tenetur non eum voluptatibus,
+                maxime quos, ducimus ullam voluptatum nam ipsam soluta numquam
+                asperiores pariatur corporis facere necessitatibus? Dolorum vero
+                deserunt, provident aperiam possimus modi esse quaerat, facilis
+                qui accusamus animi aspernatur, maiores tenetur non hic
+                inventore? Neque aliquid quos, fugiat a dicta eos nulla veniam
+                sapiente explicabo necessitatibus officiis odit, molestias
+                molestiae non debitis, ipsa iure quisquam. Facere iusto
+                accusantium debitis cum unde voluptatibus autem magnam?
+                Voluptatum odit nisi reiciendis quibusdam, ex beatae ipsam
+                expedita nam veritatis.
               </div>
 
               <div className="flex flex-col items-start p-6 gap-4 self-stretch rounded-lg bg-gray-50 font-open text-xs font-semibold leading-4 text-gray-600">
