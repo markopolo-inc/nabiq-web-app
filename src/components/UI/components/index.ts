@@ -14,6 +14,7 @@ export { default as CloseButton } from "./CloseButton";
 export { Drawer, DrawerHeader, DrawerBody } from "./Drawer";
 
 // Input
+export { default as FileInput } from "./FileInput";
 export { default as TextInput } from "./TextInput";
 export { default as TextArea } from "./TextArea";
 export { default as PasswordInput } from "./PasswordInput";
