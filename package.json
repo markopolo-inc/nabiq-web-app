@@ -15,6 +15,7 @@
     "@mantine/form": "^7.10.1",
     "@mantine/hooks": "^7.10.1",
     "@reduxjs/toolkit": "^2.2.5",
+    "@xyflow/react": "^12.1.1",
     "aws-amplify": "^5",
     "dayjs": "^1.11.11",
     "lodash": "^4.17.21",

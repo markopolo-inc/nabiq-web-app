@@ -48,3 +48,6 @@ export { default as Burger } from "./Burger";
 export { default as Stack } from "./Stack";
 
 export { default as DatePickerInput } from "./DatePickerInput";
+
+// Flow component
+export { default as HorizontalFlow } from "./Flow"
