@@ -45,10 +45,13 @@ export { default as Image } from "./Image";
 // Navigation
 export { default as Burger } from "./Burger";
 
+// Grid
+export { default as Grid } from "./Grid";
+
 // Stack
 export { default as Stack } from "./Stack";
 
 export { default as DatePickerInput } from "./DatePickerInput";
 
 // Flow component
-export { default as HorizontalFlow } from "./Flow"
+export { default as HorizontalFlow } from "./Flow";
