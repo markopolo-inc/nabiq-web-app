@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useAppSelector } from "src/store/hooks";
 import NabiqLogo from "src/assets/logo/nabiq-logo.png";
 import Sidebar from "components/Features/Sidebar";
-import AvatarMenu from "src/components/Features/Sidebar/AvatarMenu";
+import TopMenu from "src/components/Features/Sidebar/TopMenu";
 
 const NavigationLayout = () => {
   console.log("--- I am from Navigationlayout ---");
@@ -37,7 +37,7 @@ const NavigationLayout = () => {
             <Image src={NabiqLogo} alt="Nabiq" className="w-24" />
           </Group>
 
-          <AvatarMenu />
+          <TopMenu />
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
