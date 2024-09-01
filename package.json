@@ -12,9 +12,11 @@
   "dependencies": {
     "@mantine/core": "^7.10.1",
     "@mantine/dates": "^7.10.1",
+    "@mantine/dropzone": "^7.12.2",
     "@mantine/form": "^7.10.1",
     "@mantine/hooks": "^7.10.1",
     "@reduxjs/toolkit": "^2.2.5",
+    "@tabler/icons-react": "^3.14.0",
     "@xyflow/react": "^12.1.1",
     "aws-amplify": "^5",
     "dayjs": "^1.11.11",
