@@ -4,6 +4,7 @@ import {
   Drawer,
   DrawerBody,
   DrawerHeader,
+  Dropzone,
   FileInput,
   Group,
   HorizontalFlow,
@@ -124,9 +125,17 @@ const index = () => {
     <>
       <div className="p-32">
         <div className="w-[564px] h-[126px]">
-          <FileInput onChange={setFile} />
+          <Dropzone
+            onDrop={(files) => console.log('accepted files', files)}
+            onReject={(files) => console.log('rejected files', files)}
+          />
         </div>
       </div>
+      {/* <div className="p-32">
+        <div className="w-[564px] h-[126px]">
+          <FileInput onChange={setFile} />
+        </div>
+      </div> */}
       <div className="h-[800px] p-4">
         <HorizontalFlow
           nodeTypes={nodeTypes}
