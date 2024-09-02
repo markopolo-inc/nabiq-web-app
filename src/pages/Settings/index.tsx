@@ -6,17 +6,18 @@ import {
   TextInput,
   PasswordInput,
   Image,
-  FileInput,
   Select,
+  Dropzone,
 } from "@nabiq-ui";
 
 import HeaderTitle from "src/layouts/HeaderTitle";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
+import { FileWithPath } from "@mantine/dropzone";
 
 const Settings = () => {
-  const [file, setFile] = useState(null);
-  console.log({ file });
+  const [files, setFiles] = useState<FileWithPath[]>([]);
+
   const form = useForm({
     initialValues: {
       name: "",
@@ -32,6 +33,12 @@ const Settings = () => {
       password: (value) => (value.length === 0 ? "Password is required" : null),
     },
   });
+
+  const previews = files.map((file, index) => {
+    const imageUrl = URL.createObjectURL(file);
+    return <Image className="w-16 h-16 rounded-full" key={index} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />;
+  });
+
 
   return (
     <Stack gap={64}>
@@ -89,12 +96,16 @@ const Settings = () => {
                 </p>
 
                 <div className="flex gap-5">
-                  <Image
-                    className="w-16 h-16 rounded-full"
-                    src={file ? URL.createObjectURL(file) : "./img.png"}
-                  />
+                  {!files.length ?
+                    <Image className="w-16 h-16 rounded-full" src="./img.png" alt="no preview img" /> :
+                    previews
+                  }
 
-                  <FileInput onChange={setFile} value={file} />
+                  <Dropzone
+                    className="w-full"
+                    onDrop={setFiles}
+                    onReject={(files) => console.log('rejected files', files)}
+                  />
                 </div>
               </div>
             </div>
