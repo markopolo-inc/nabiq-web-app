@@ -30,7 +30,8 @@ const FileInput: React.FC<FileInputProps> = ({ onChange, ...props }) => {
                 onChange(file);
               } else {
                 alert("Image dimensions should not exceed 800x400 pixels.");
-                onChange(null);
+                // @TODO- will null
+                onChange(file);
               }
             };
           } else {
