@@ -23,10 +23,7 @@ export const authSlice = createSlice({
     setUserEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
     },
-    logout: (state) => {
-      state.isAuthenticated = false;
-      state.email = "";
-    },
+    logout: () => initialState,
   },
 });
 
