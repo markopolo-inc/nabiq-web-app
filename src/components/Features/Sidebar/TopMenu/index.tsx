@@ -1,9 +1,15 @@
 import { Menu, UnstyledButton, Image, Avatar, Divider, useGetColors } from "@nabiq-ui"
 import { FiHelpCircle, FiSettings01, Logout01 } from "@nabiq-icons"
 import { rem } from "@mantine/core";
+import { useLogoutMutation } from "src/store/auth/authApi";
 
 const TopMenu = () => {
     const { gray500 } = useGetColors();
+    const [logout] = useLogoutMutation()
+
+    const handleLogout = async () => {
+        await logout({}).unwrap();
+    }
 
     return (
         <Menu width={240} position="bottom-end">
@@ -52,6 +58,7 @@ const TopMenu = () => {
                 <Menu.Divider />
 
                 <Menu.Item
+                    onClick={handleLogout}
                     className="text-sm font-medium leading-5 text-gray-700"
                     leftSection={<Logout01 style={{ width: rem(18), height: rem(18) }} color={gray500} />}
                 >
