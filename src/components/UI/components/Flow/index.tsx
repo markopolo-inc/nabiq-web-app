@@ -43,6 +43,8 @@ const HorizontalFlow = ({ initialEdges, initialNodes, nodeTypes }: HorizontalFlo
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
+                elementsSelectable={false}
+                nodesConnectable={false}
             />
         </ReactFlowProvider>
 

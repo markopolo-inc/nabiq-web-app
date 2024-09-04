@@ -44,11 +44,11 @@ const Index = () => {
                         <OperationItem />
                     </div>) : <></>}
             </div>
-            <Handle
-                type="source"
-                position={Position.Right}
-                id="c"
-            />
+            {/*<Handle*/}
+            {/*    type="source"*/}
+            {/*    position={Position.Right}*/}
+            {/*    id="c"*/}
+            {/*/>*/}
         </>
     )
 }

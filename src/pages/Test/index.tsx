@@ -74,13 +74,13 @@ const index = () => {
       data: { value: 123 },
       dragHandle: ".custom-drag-handle",
     },
-    {
-      id: "platform",
-      type: "Platform",
-      position: { x: 860, y: 150 },
-      data: { value: 123 },
-      dragHandle: ".custom-drag-handle",
-    },
+    // {
+    //   id: "platform",
+    //   type: "Platform",
+    //   position: { x: 860, y: 150 },
+    //   data: { value: 123 },
+    //   dragHandle: ".custom-drag-handle",
+    // },
   ];
 
   const initialEdges = [
