@@ -1,4 +1,4 @@
-import { Badge, Button, Group, Stack } from "@nabiq-ui";
+import { Badge, Button, Group, Stack, Progress } from "@nabiq-ui";
 import { FiChevronRight, FiDot } from "@nabiq-icons";
 import { formatTimeAgo } from "src/utils/date.uitils";
 import moment from "moment-timezone";
@@ -30,32 +30,54 @@ const Queued = ({ configs }) => {
 
               <Stack gap={4}>
                 <p className="text-gray-900 font-semibold text-lg">
-                  {item?.name}
+                  '{item?.name}'{" "}
+                  <span className="font-normal">
+                    {item?.status === "processing"
+                      ? "funnel is processing..."
+                      : "funnel is ready to view!"}
+                  </span>
                 </p>
+
                 <p className="text-gray-600 font-normal text-sm">
-                  View cohorts and give feedback on sample funnel contents.
+                  {item?.status === "processing"
+                    ? "Our AI is building you the perfect cohorts and contents within."
+                    : "View cohorts and give feedback on sample funnel contents."}
                 </p>
               </Stack>
-              <Badge color="gray">
-                Scheduled for {moment(item?.startDate).format("MMM D, YYYY")}
-              </Badge>
+              {item?.status === "processing" ? (
+                <div className="flex flex-nowrap items-center justify-between">
+                  <div className="w-[75%]">
+                    <Progress value={20} color="#2972F5" />
+                  </div>
+
+                  <span className="text-gray-700 font-sm font-medium">
+                    {item?.timeLeft} left
+                  </span>
+                </div>
+              ) : (
+                <Badge color="gray">
+                  Scheduled for {moment(item?.startDate).format("MMM D, YYYY")}
+                </Badge>
+              )}
             </Stack>
-            <Group>
-              <Button
-                trailingIcon={<FiChevronRight />}
-                onClick={() =>
-                  navigate(`/control-room/cohort/content/${item?.id}`)
-                }
-              >
-                View content sample
-              </Button>
-              <Button
-                variant="secondary-black"
-                onClick={() => navigate(`/control-room/cohort/${item?.id}`)}
-              >
-                View cohort
-              </Button>
-            </Group>
+            {item?.status === "processing" && (
+              <Group>
+                <Button
+                  trailingIcon={<FiChevronRight />}
+                  onClick={() =>
+                    navigate(`/control-room/cohort/content/${item?.id}`)
+                  }
+                >
+                  View content sample
+                </Button>
+                <Button
+                  variant="secondary-black"
+                  onClick={() => navigate(`/control-room/cohort/${item?.id}`)}
+                >
+                  View cohort
+                </Button>
+              </Group>
+            )}
           </Stack>
         </Stack>
       ))}

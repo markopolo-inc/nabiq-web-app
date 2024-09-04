@@ -1,9 +1,10 @@
 import { Breadcrumbs, Button, Group, Stack } from "@nabiq-ui";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetConfigCohortQuery } from "src/store/controlRoom/controlRoom.api";
 
 const Cohort = () => {
   const { configId } = useParams();
+  const navigate = useNavigate();
 
   const { data } = useGetConfigCohortQuery(configId);
   console.log(data);
@@ -17,7 +18,9 @@ const Cohort = () => {
             <p>Title</p>
             <p>Cohorts for the campaign which will be updated in each step.</p>
           </Stack>
-          <Button>Back to control room</Button>
+          <Button onClick={() => navigate("/control-room")}>
+            Back to control room
+          </Button>
         </Group>
       </Stack>
     </Stack>

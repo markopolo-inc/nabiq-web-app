@@ -1,3 +1,5 @@
+import { Progress } from "@mantine/core";
+
 // Layout
 export { default as AppShell } from "./AppShell";
 export { default as Group } from "./Group";
@@ -10,7 +12,6 @@ export { default as Button } from "./Button";
 export { default as Badge } from "./Badge";
 export { default as CloseButton } from "./CloseButton";
 export { default as UnstyledButton } from "./UnstyledButton";
-
 
 // Drawer
 export { Drawer, DrawerHeader, DrawerBody } from "./Drawer";
@@ -38,7 +39,7 @@ export { default as TableRow } from "./TableRow";
 export { default as Th } from "./Th";
 export { default as Td } from "./Td";
 export { default as OptionTabs } from "./OptionTabs";
-export { default as Dropzone } from "./Dropzone"
+export { default as Dropzone } from "./Dropzone";
 
 // Typography
 export { default as Text } from "./Text";
@@ -61,6 +62,7 @@ export { default as DatePickerInput } from "./DatePickerInput";
 export { default as HorizontalFlow } from "./Flow";
 
 // Menu
+export { default as Menu } from "./Menu";
 
-export { default as Menu } from "./Menu"
-
+// Progress
+export { default as Progress } from "./Progress";
