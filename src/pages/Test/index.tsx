@@ -14,16 +14,15 @@ import {
   useDisclosure,
 } from "@nabiq-ui";
 import { XClose, FiMail01, ArrowRight, ArrowUp } from "@nabiq-icons";
-import { useMemo, useState } from "react";
-
+import {useMemo, useState} from "react";
 import DiscoverBali from "../../components/Features/Monitoring/DiscoverBali";
 import Cohort from "../../components/Features/Monitoring/Cohort";
 import Platform from "../../components/Features/Monitoring/Platform";
 import { FileWithPath } from "@mantine/dropzone";
+import {initialEdges, initialNodes} from "src/pages/Test/nodes-edges.ts";
 
 const index = () => {
   const [files, setFiles] = useState<FileWithPath[]>([]);
-
   const [opened, { close }] = useDisclosure(true);
 
   const nodeTypes = useMemo(
@@ -37,90 +36,6 @@ const index = () => {
     }),
     [],
   );
-
-  const initialNodes = [
-    {
-      id: "discover_bali",
-      type: "DiscoverBali",
-      position: { x: 0, y: 100 },
-      data: { value: 123 },
-      dragHandle: ".custom-drag-handle",
-    },
-    {
-      id: "cohort_1",
-      type: "Cohort1",
-      position: { x: 390, y: 0 },
-      data: { value: 123 },
-      dragHandle: ".custom-drag-handle",
-    },
-    {
-      id: "cohort_2",
-      type: "Cohort2",
-      position: { x: 390, y: 100 },
-      data: { value: 123 },
-      dragHandle: ".custom-drag-handle",
-    },
-    {
-      id: "cohort_3",
-      type: "Cohort3",
-      position: { x: 390, y: 200 },
-      data: { value: 123 },
-      dragHandle: ".custom-drag-handle",
-    },
-    {
-      id: "cohort_4",
-      type: "Cohort4",
-      position: { x: 390, y: 300 },
-      data: { value: 123 },
-      dragHandle: ".custom-drag-handle",
-    },
-    // {
-    //   id: "platform",
-    //   type: "Platform",
-    //   position: { x: 860, y: 150 },
-    //   data: { value: 123 },
-    //   dragHandle: ".custom-drag-handle",
-    // },
-  ];
-
-  const initialEdges = [
-    {
-      id: "edge_1",
-      source: "discover_bali",
-      target: "cohort_1",
-      sourceHandle: "a",
-      style: { stroke: "#9AA4B2" },
-    },
-    {
-      id: "edge_2",
-      source: "discover_bali",
-      target: "cohort_2",
-      targetPosition: "right",
-      sourceHandle: "a",
-      style: { stroke: "#9AA4B2" },
-    },
-    {
-      id: "edge_3",
-      source: "discover_bali",
-      target: "cohort_3",
-      sourceHandle: "a",
-      style: { stroke: "#9AA4B2" },
-    },
-    {
-      id: "edge_4",
-      source: "discover_bali",
-      target: "cohort_4",
-      sourceHandle: "a",
-      style: { stroke: "#9AA4B2" },
-    },
-    {
-      id: "edge_5",
-      source: "cohort_2",
-      target: "platform",
-      sourceHandle: "",
-      style: { stroke: "#9AA4B2" },
-    },
-  ];
 
   const previews = files.map((file, index) => {
     const imageUrl = URL.createObjectURL(file);
