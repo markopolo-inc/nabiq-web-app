@@ -5,9 +5,9 @@ import {
   DrawerBody,
   DrawerHeader,
   Dropzone,
-  FileInput,
   Group,
   HorizontalFlow,
+  Image,
   Select,
   Text,
   TextInput,
@@ -19,10 +19,11 @@ import { useMemo, useState } from "react";
 import DiscoverBali from "../../components/Features/Monitoring/DiscoverBali";
 import Cohort from "../../components/Features/Monitoring/Cohort";
 import Platform from "../../components/Features/Monitoring/Platform";
+import { FileWithPath } from "@mantine/dropzone";
 
 const index = () => {
-  const [file, setFile] = useState(null);
-  console.log(file);
+  const [files, setFiles] = useState<FileWithPath[]>([]);
+
   const [opened, { close }] = useDisclosure(true);
 
   const nodeTypes = useMemo(
@@ -121,12 +122,23 @@ const index = () => {
     },
   ];
 
+  const previews = files.map((file, index) => {
+    const imageUrl = URL.createObjectURL(file);
+    return <Image className="w-16 h-16 rounded-full" key={index} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />;
+  });
+
   return (
     <>
       <div className="p-32">
-        <div className="w-[564px] h-[126px]">
+        <div className="w-[564px] h-[126px] flex gap-5">
+          {!files.length ?
+            <Image className="w-16 h-16 rounded-full" src="./img.png" alt="no preview img" /> :
+            previews
+          }
+
           <Dropzone
-            onDrop={(files) => console.log('accepted files', files)}
+            className="w-full"
+            onDrop={setFiles}
             onReject={(files) => console.log('rejected files', files)}
           />
         </div>

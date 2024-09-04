@@ -1,4 +1,4 @@
-import { Menu, UnstyledButton, Image, Avatar, Divider, useGetColors } from "@nabiq-ui"
+import { Menu, UnstyledButton, Image, Avatar, useGetColors } from "@nabiq-ui"
 import { FiHelpCircle, FiSettings01, Logout01 } from "@nabiq-icons"
 import { rem } from "@mantine/core";
 import { useLogoutMutation } from "src/store/auth/authApi";
