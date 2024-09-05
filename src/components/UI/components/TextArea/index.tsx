@@ -1,6 +1,6 @@
-import { Textarea, TextareaProps } from "@mantine/core";
+import { Textarea, TextareaProps } from '@mantine/core';
 
-import styles from "./TextArea.module.scss";
+import styles from './TextArea.module.scss';
 
 const TextArea = ({ ...rest }: TextareaProps) => {
   return (

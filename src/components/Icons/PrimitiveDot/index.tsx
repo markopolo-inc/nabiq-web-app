@@ -1,11 +1,6 @@
 import { CSSProperties, MouseEventHandler } from 'react';
 
-const PrimitiveDot = ({
-  color = 'currentColor',
-  size = 6,
-  onClick,
-  style,
-}: PropTypes) => (
+const PrimitiveDot = ({ color = 'currentColor', size = 6, onClick, style }: PropTypes) => (
   <svg
     width={size}
     height={size}

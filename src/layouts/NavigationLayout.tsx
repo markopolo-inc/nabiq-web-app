@@ -1,11 +1,10 @@
-import { AppShell, Burger, Group, Image, useDisclosure } from "@nabiq-ui";
-import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-
-import { useAppSelector } from "src/store/hooks";
-import NabiqLogo from "src/assets/logo/nabiq-logo.png";
-import Sidebar from "components/Features/Sidebar";
-import TopMenu from "src/components/Features/Sidebar/TopMenu";
+import { AppShell, Burger, Group, Image, useDisclosure } from '@nabiq-ui';
+import Sidebar from 'components/Features/Sidebar';
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import NabiqLogo from 'src/assets/logo/nabiq-logo.png';
+import TopMenu from 'src/components/Features/Sidebar/TopMenu';
+import { useAppSelector } from 'src/store/hooks';
 
 const NavigationLayout = () => {
   // console.log("--- I am from Navigationlayout ---");
@@ -15,36 +14,31 @@ const NavigationLayout = () => {
 
   useEffect(() => {
     if (!companyId) {
-      navigate("/onboarding");
+      navigate('/onboarding');
     }
   }, [companyId]);
 
   return (
     <AppShell
       header={{ height: 72 }}
-      navbar={{ width: 300, breakpoint: "md", collapsed: { mobile: !opened } }}
-      padding="md"
+      navbar={{ width: 300, breakpoint: 'md', collapsed: { mobile: !opened } }}
+      padding='md'
     >
-      <AppShell.Header className="px-8">
-        <Group h="100%" px="md" className="justify-between">
+      <AppShell.Header className='px-8'>
+        <Group h='100%' px='md' className='justify-between'>
           <Group>
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="md"
-              size="sm"
-            />
-            <Image src={NabiqLogo} alt="Nabiq" className="w-24" />
+            <Burger opened={opened} onClick={toggle} hiddenFrom='md' size='sm' />
+            <Image src={NabiqLogo} alt='Nabiq' className='w-24' />
           </Group>
 
           <TopMenu />
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md">
+      <AppShell.Navbar p='md'>
         <Sidebar />
       </AppShell.Navbar>
       <AppShell.Main>
-        <div className="p-4">
+        <div className='p-4'>
           <Outlet />
         </div>
       </AppShell.Main>

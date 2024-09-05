@@ -1,6 +1,6 @@
-import LogoComponent from 'src/components/Features/Onboarding/LogoComponent';
 import LogInFooter from 'src/components/Features/LogIn/LogInFooter';
 import LogInForm from 'src/components/Features/LogIn/LogInForm';
+import LogoComponent from 'src/components/Features/Onboarding/LogoComponent';
 import HeaderTitle from 'src/layouts/HeaderTitle';
 
 const LogIn = () => {

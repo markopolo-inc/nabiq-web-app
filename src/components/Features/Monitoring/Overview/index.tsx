@@ -1,7 +1,11 @@
 // import { useGetMetricsQuery } from "src/store/monitoring/monitoring.api";
-import MetricsCard from "./MetricsCard";
+import { FC } from 'react';
 
-const Overview = () => {
+import MetricsCard from './MetricsCard';
+
+const Overview: FC<{
+  timeRange: 'today' | 'last_week' | 'last_month';
+}> = () => {
   // const { data, isLoading } = useGetMetricsQuery({
   //   timeRange,
   //   campaignId: null,
@@ -9,7 +13,7 @@ const Overview = () => {
 
   return (
     <>
-      <MetricsCard value={1260} name="Revenue" type="amount" field="-10" />
+      <MetricsCard value={1260} name='Revenue' type='amount' field='-10' />
     </>
   );
 };

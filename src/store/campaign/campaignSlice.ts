@@ -1,28 +1,25 @@
-import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import moment from "moment-timezone";
-import { CampaignInterface } from "src/interfaces/campaign.interface";
+import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit';
+import moment from 'moment-timezone';
+import { CampaignInterface } from 'src/interfaces/campaign.interface';
 
 const initialState: Partial<CampaignInterface> = {
-  tone: "informal",
-  startDate: moment().format("YYYY-MM-DD"),
-  endDate: moment().add(7, "day").format("YYYY-MM-DD"),
+  tone: 'informal',
+  startDate: moment().format('YYYY-MM-DD'),
+  endDate: moment().add(7, 'day').format('YYYY-MM-DD'),
   channels: [],
   list: [],
 };
 
-export const revertAll = createAction("REVERT_ALL");
+export const revertAll = createAction('REVERT_ALL');
 
 const campaignSlice = createSlice({
-  name: "campaign",
+  name: 'campaign',
   initialState,
   extraReducers(builder) {
     builder.addCase(revertAll, () => initialState);
   },
   reducers: {
-    setCampaign: (
-      state,
-      action: PayloadAction<Partial<CampaignInterface>>
-    ) => ({
+    setCampaign: (state, action: PayloadAction<Partial<CampaignInterface>>) => ({
       ...state,
       ...action.payload,
     }),

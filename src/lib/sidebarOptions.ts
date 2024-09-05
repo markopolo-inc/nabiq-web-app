@@ -3,19 +3,18 @@ import {
   FiAnnouncement01,
   FiHomeLine,
   FiPuzzlePiece02,
-  FiSettings01,
-  // FiSliders01,
+  FiSettings01, // FiSliders01,
   // FiLineChartUp05,
-} from "@nabiq-icons";
+} from '@nabiq-icons';
 
 // console.log("hlleo");
 
 export const sidebarOptions = [
   {
-    title: "Home",
+    title: 'Home',
     Icon: FiHomeLine,
-    to: "/",
-    menuRegex: new RegExp(/^\/$/, "i"),
+    to: '/',
+    menuRegex: new RegExp(/^\/$/, 'i'),
   },
   // {
   //   title: "Co-Pilot",
@@ -24,10 +23,10 @@ export const sidebarOptions = [
   //   menuRegex: new RegExp(/^\/co-pilot/, "i"),
   // },
   {
-    title: "Campaigns",
+    title: 'Campaigns',
     Icon: FiAnnouncement01,
-    to: "/campaigns",
-    menuRegex: new RegExp(/^\/campaigns/, "i"),
+    to: '/campaigns',
+    menuRegex: new RegExp(/^\/campaigns/, 'i'),
   },
   // {
   //   title: "Monitoring",
@@ -36,10 +35,10 @@ export const sidebarOptions = [
   //   menuRegex: new RegExp(/^\/monitoring/, "i"),
   // },
   {
-    title: "Integrations",
+    title: 'Integrations',
     Icon: FiPuzzlePiece02,
-    to: "/integrations",
-    menuRegex: new RegExp(/^\/integrations/, "i"),
+    to: '/integrations',
+    menuRegex: new RegExp(/^\/integrations/, 'i'),
   },
   // {
   //   title: "Control room",
@@ -51,9 +50,9 @@ export const sidebarOptions = [
 
 export const lowerPartOptions = [
   {
-    title: "Settings",
+    title: 'Settings',
     Icon: FiSettings01,
-    to: "/settings",
-    menuRegex: new RegExp(/^\/settings/, "i"),
+    to: '/settings',
+    menuRegex: new RegExp(/^\/settings/, 'i'),
   },
 ];

@@ -1,8 +1,8 @@
-import { GatewayType } from "./brand.interface";
+import { GatewayType } from './brand.interface';
 
 export interface ChannelInterface {
-  channel: "sms" | "email" | "notification";
-  platform: GatewayType | "none";
+  channel: 'sms' | 'email' | 'notification';
+  platform: GatewayType | 'none';
 }
 
 export interface CampaignItemInterface {
@@ -10,8 +10,8 @@ export interface CampaignItemInterface {
   resourceType: string;
   brandId: string;
   tagId: string;
-  status: "active" | "processing" | "finished";
-  goal: "acquisition";
+  status: 'active' | 'processing' | 'finished';
+  goal: 'acquisition';
   name: string;
   details: string;
   createdAt: string;
@@ -21,11 +21,11 @@ export interface CampaignItemInterface {
 export interface CampaignInterface {
   brandId: string;
   tagId: string;
-  goal: "acquisition" | "retention" | "activation";
+  goal: 'acquisition' | 'retention' | 'activation';
   name: string;
   details: string;
   link: string;
-  tone: "formal" | "informal";
+  tone: 'formal' | 'informal';
   content: [];
   startDate: string;
   endDate: string;

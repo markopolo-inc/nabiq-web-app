@@ -1,39 +1,38 @@
-import { useGetColors } from "@nabiq-ui";
-import { Loader, Button as MantineButton } from "@mantine/core";
-import { CSSProperties, MouseEventHandler, ReactNode } from "react";
+import { Loader, Button as MantineButton } from '@mantine/core';
+import { useGetColors } from '@nabiq-ui';
+import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 
-import Text from "../Text";
-
-import styles from "./Button.module.scss";
+import Text from '../Text';
+import styles from './Button.module.scss';
 
 const getSizes = (size) => {
   const buttonSize = {
-    sm: "xs",
-    md: "sm",
-    lg: "md",
-    xl: "lg",
-    "2xl": "xl",
+    sm: 'xs',
+    md: 'sm',
+    lg: 'md',
+    xl: 'lg',
+    '2xl': 'xl',
   };
   const textSize = {
-    sm: "14px",
-    md: "14px",
-    lg: "16px",
-    xl: "16px",
-    "2xl": "18px",
+    sm: '14px',
+    md: '14px',
+    lg: '16px',
+    xl: '16px',
+    '2xl': '18px',
   };
   const loaderSize = {
     sm: 13,
     md: 15,
     lg: 17,
     xl: 19,
-    "2xl": 21,
+    '2xl': 21,
   };
   const buttonHeight = {
     sm: 36,
     md: 40,
     lg: 44,
     xl: 48,
-    "2xl": 60,
+    '2xl': 60,
   };
 
   return {
@@ -46,11 +45,11 @@ const getSizes = (size) => {
 
 const Button = ({
   children,
-  size = "md",
+  size = 'md',
   loading = false,
   onClick,
   disabled = false,
-  variant = "primary",
+  variant = 'primary',
   fullWidth = false,
   leadingIcon,
   trailingIcon,
@@ -64,12 +63,12 @@ const Button = ({
   const getClassName = (btnVariant) => {
     const classes = {
       primary: styles.primary,
-      "primary-destructive": styles.primaryDestructive,
+      'primary-destructive': styles.primaryDestructive,
       secondary: styles.secondary,
-      "secondary-black": styles.secondaryBlack,
+      'secondary-black': styles.secondaryBlack,
       tertiary: styles.tertiary,
-      "tertiary-gray": styles.tertiaryGray,
-      "tertiary-destructive": styles.tertiaryDestructive,
+      'tertiary-gray': styles.tertiaryGray,
+      'tertiary-destructive': styles.tertiaryDestructive,
       link: styles.link,
     };
     return classes[btnVariant];
@@ -78,12 +77,12 @@ const Button = ({
   const getLoaderColor = (btnVariant) => {
     const colors = {
       primary: whiteBase,
-      "primary-destructive": whiteBase,
+      'primary-destructive': whiteBase,
       secondary: gray600,
-      "secondary-black": whiteBase,
+      'secondary-black': whiteBase,
       tertiary: primary600,
-      "tertiary-gray": gray600,
-      "tertiary-destructive": error600,
+      'tertiary-gray': gray600,
+      'tertiary-destructive': error600,
       link: primary600,
     };
     return colors[btnVariant];
@@ -110,17 +109,14 @@ const Button = ({
       rightSection={trailingIcon}
       leftSection={
         loading ? (
-          <Loader
-            color={getLoaderColor(variant)}
-            size={getSizes(size).loader}
-          />
+          <Loader color={getLoaderColor(variant)} size={getSizes(size).loader} />
         ) : (
           leadingIcon
         )
       }
       {...rest}
     >
-      <Text style={{ whiteSpace: "nowrap" }} size={getSizes(size).text}>
+      <Text style={{ whiteSpace: 'nowrap' }} size={getSizes(size).text}>
         {children}
       </Text>
     </MantineButton>
@@ -131,17 +127,17 @@ export default Button;
 
 interface ButtonPropType {
   children: ReactNode;
-  type?: "submit";
+  type?: 'submit';
   variant?:
-    | "primary"
-    | "primary-destructive"
-    | "secondary"
-    | "secondary-black"
-    | "tertiary"
-    | "tertiary-gray"
-    | "tertiary-destructive"
-    | "link";
-  size?: "sm" | "md" | "lg" | "xl" | "2xl";
+    | 'primary'
+    | 'primary-destructive'
+    | 'secondary'
+    | 'secondary-black'
+    | 'tertiary'
+    | 'tertiary-gray'
+    | 'tertiary-destructive'
+    | 'link';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   loading?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;

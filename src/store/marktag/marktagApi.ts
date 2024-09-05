@@ -1,5 +1,6 @@
-import toast from "react-hot-toast";
-import { apiSlice } from "../api/apiSlice";
+import toast from 'react-hot-toast';
+
+import { apiSlice } from '../api/apiSlice';
 
 interface BrandsListResponseInterface {
   resourceId: string;
@@ -15,20 +16,20 @@ const marktagApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getBrandsList: builder.query<BrandsListResponseInterface[], void>({
       query: () => ({
-        url: "/marktag/brands",
-        method: "GET",
+        url: '/marktag/brands',
+        method: 'GET',
       }),
     }),
     getMarktagUnderBrand: builder.query<MarktagsResponseInterface[], string>({
       query: (brandId) => ({
         url: `/marktag/${brandId} `,
-        method: "GET",
+        method: 'GET',
       }),
     }),
     connectMarktag: builder.mutation<any, any>({
       query: (data) => ({
-        url: "/marktag/connect",
-        method: "POST",
+        url: '/marktag/connect',
+        method: 'POST',
         body: data,
       }),
       transformErrorResponse(baseQueryReturnValue) {
@@ -37,13 +38,13 @@ const marktagApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || "Connected marktag successfully!");
+          toast.success(res.data?.message || 'Connected marktag successfully!');
         } catch (err) {
-          toast.error(err?.error.message || "Failed to connect!");
+          toast.error(err?.error.message || 'Failed to connect!');
           return err;
         }
       },
-      invalidatesTags: ["Company"],
+      invalidatesTags: ['Company'],
     }),
   }),
 });

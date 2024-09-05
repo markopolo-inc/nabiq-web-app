@@ -3,10 +3,7 @@ import React, { ReactNode } from 'react';
 import styles from './index.module.scss';
 
 interface TableProps
-  extends React.DetailedHTMLProps<
-    React.TableHTMLAttributes<HTMLTableElement>,
-    HTMLTableElement
-  > {
+  extends React.DetailedHTMLProps<React.TableHTMLAttributes<HTMLTableElement>, HTMLTableElement> {
   maxHeight?: string | number;
   striped?: boolean;
   borderTopRightRadius?: string | number;
@@ -55,9 +52,7 @@ const Table = ({
         }}
       >
         <table
-          className={`${styles.table} ${
-            striped ? styles.striped : undefined
-          } ${className}`}
+          className={`${styles.table} ${striped ? styles.striped : undefined} ${className}`}
           {...rest}
         />
       </div>

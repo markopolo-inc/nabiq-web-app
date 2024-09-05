@@ -1,13 +1,13 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { BrandInterface } from "src/interfaces/brand.interface";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import type { BrandInterface } from 'src/interfaces/brand.interface';
 
 const initialState: BrandInterface = {
-  resourceType: "Brand",
-  resourceId: "",
+  resourceType: 'Brand',
+  resourceId: '',
 };
 
 const brandSlice = createSlice({
-  name: "brand",
+  name: 'brand',
   initialState,
   reducers: {
     setBrand: (state, action: PayloadAction<BrandInterface>) => action.payload,

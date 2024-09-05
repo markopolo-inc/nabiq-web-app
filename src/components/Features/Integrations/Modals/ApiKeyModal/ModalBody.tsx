@@ -1,19 +1,15 @@
-import React, { SetStateAction, useState } from "react";
-import { useForm } from "@mantine/form";
+import { useForm } from '@mantine/form';
+import { Button, TextInput } from '@nabiq-ui';
+import GatewayLogo from 'components/UI/GatewayLogo';
+import type { GatewayInterface } from 'interfaces/brand.interface';
+import { gatewayFields } from 'lib/integration.lib';
+import React, { SetStateAction, useState } from 'react';
+import { useAppSelector } from 'src/store/hooks';
+import { hasEmptyField } from 'src/utils/object.utils';
+import { camelCaseToCapitalized, trimAllValuesOfObject } from 'src/utils/stringUtils';
+import { useIntegrateGatewayMutation } from 'store/integrations/integrations.api';
 
-import { Button, TextInput } from "@nabiq-ui";
-
-import GatewayLogo from "components/UI/GatewayLogo";
-import { useIntegrateGatewayMutation } from "store/integrations/integrations.api";
-import { useAppSelector } from "src/store/hooks";
-import {
-  camelCaseToCapitalized,
-  trimAllValuesOfObject,
-} from "src/utils/stringUtils";
-import type { GatewayInterface } from "interfaces/brand.interface";
-import { hasEmptyField } from "src/utils/object.utils";
-import { gatewayFields } from "lib/integration.lib";
-import AccountForm from "./AccountForm";
+import AccountForm from './AccountForm';
 
 const ModalBody: React.FC<{
   setOpened: React.Dispatch<SetStateAction<boolean>>;
@@ -21,20 +17,16 @@ const ModalBody: React.FC<{
 }> = ({ setOpened, gateway }) => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [integrate, { isLoading }] = useIntegrateGatewayMutation();
-  const [responseMsg, setResponseMsg] = useState("");
-  const [formStep, setFormStep] = useState<"credential" | "accountSelect">(
-    "credential"
-  );
-  const [selectableObjects, setSelectableObjects] = useState<
-    Record<string, any>
-  >({});
+  const [responseMsg, setResponseMsg] = useState('');
+  const [formStep, setFormStep] = useState<'credential' | 'accountSelect'>('credential');
+  const [selectableObjects, setSelectableObjects] = useState<Record<string, any>>({});
 
   const fields = gatewayFields?.[gateway.category]?.[gateway.gateway];
 
   const initialValues = {};
 
   fields?.forEach((field) => {
-    initialValues[field] = "";
+    initialValues[field] = '';
   });
 
   const form = useForm({
@@ -66,36 +58,33 @@ const ModalBody: React.FC<{
     }).unwrap();
     setResponseMsg(res?.message);
     if (res?.success) {
-      if (Object.values(res?.selectableObjects || {})?.length === 0)
-        setOpened(false);
+      if (Object.values(res?.selectableObjects || {})?.length === 0) setOpened(false);
       else {
         setSelectableObjects(res.selectableObjects);
-        setFormStep("accountSelect");
+        setFormStep('accountSelect');
       }
     }
   };
 
   return (
-    <div className="p-8 flex flex-col gap-8">
-      <div className="flex flex-col gap-4">
+    <div className='p-8 flex flex-col gap-8'>
+      <div className='flex flex-col gap-4'>
         <GatewayLogo app={gateway.gateway} width={32} />
-        <div className="flex flex-col gap-2">
-          <p className="text-gray-900 font-semibold text-[24px]">
-            Integrate {gateway.name}
-          </p>
-          <p className="text-gray-600 font-normal text-base">
+        <div className='flex flex-col gap-2'>
+          <p className='text-gray-900 font-semibold text-[24px]'>Integrate {gateway.name}</p>
+          <p className='text-gray-600 font-normal text-base'>
             Please enter your {gateway.name} account details.
           </p>
         </div>
       </div>
-      {formStep === "credential" && (
+      {formStep === 'credential' && (
         <form
-          className="flex flex-col gap-8"
+          className='flex flex-col gap-8'
           onSubmit={form.onSubmit(() => {
             handleFormSubmit();
           })}
         >
-          <div className="flex flex-col gap-3">
+          <div className='flex flex-col gap-3'>
             {fields?.map((field) => (
               <TextInput
                 key={field}
@@ -105,9 +94,9 @@ const ModalBody: React.FC<{
               />
             ))}
           </div>
-          <div className="flex flex-col gap-3">
+          <div className='flex flex-col gap-3'>
             <Button
-              type="submit"
+              type='submit'
               disabled={hasEmptyField(form.values)}
               fullWidth
               loading={isLoading}
@@ -116,7 +105,7 @@ const ModalBody: React.FC<{
             </Button>
             <Button
               fullWidth
-              variant="secondary"
+              variant='secondary'
               onClick={() => setOpened(false)}
               disabled={isLoading}
             >
@@ -125,7 +114,7 @@ const ModalBody: React.FC<{
           </div>
         </form>
       )}
-      {formStep === "accountSelect" && (
+      {formStep === 'accountSelect' && (
         <AccountForm
           selectableObjects={selectableObjects}
           message={responseMsg}

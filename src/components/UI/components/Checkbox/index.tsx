@@ -1,9 +1,8 @@
-import { ChangeEventHandler, useRef } from 'react';
 import { FiCheck, FiMinus, FiPrimitiveDot } from '@nabiq-icons';
+import { ChangeEventHandler, useRef } from 'react';
 
 import { useGetColors } from '../../hooks';
 import Text from '../Text';
-
 import styles from './Checkbox.module.scss';
 
 const Checkbox = ({
@@ -19,16 +18,8 @@ const Checkbox = ({
   label = '',
 }: PropTypes) => {
   const ref = useRef(null);
-  const {
-    gray300,
-    primary50,
-    gray700,
-    primary100,
-    primary600,
-    whiteBase,
-    primary700,
-    gray100,
-  } = useGetColors();
+  const { gray300, primary50, gray700, primary100, primary600, whiteBase, primary700, gray100 } =
+    useGetColors();
 
   const sizeMap = {
     md: 20,
@@ -162,15 +153,15 @@ const Checkbox = ({
               disabled && checked
                 ? disabledBackGroundColor[variant]
                 : disabled
-                ? gray100
-                : checked || (indeterminate && variant === 'checkbox')
-                ? checkedBackgroundColorMap[variant]
-                : whiteBase,
+                  ? gray100
+                  : checked || (indeterminate && variant === 'checkbox')
+                    ? checkedBackgroundColorMap[variant]
+                    : whiteBase,
             borderColor: disabled
               ? gray300
               : checked || (indeterminate && variant === 'checkbox')
-              ? primary600
-              : gray300,
+                ? primary600
+                : gray300,
             height: sizeMap[size],
             width: sizeMap[size],
           }}
@@ -183,24 +174,19 @@ const Checkbox = ({
         <div
           className={styles.icon}
           style={{
-            opacity:
-              checked || (indeterminate && variant === 'checkbox') ? 1 : 0,
+            opacity: checked || (indeterminate && variant === 'checkbox') ? 1 : 0,
             width: sizeMap[size],
           }}
         >
           {indeterminate && variant === 'checkbox' ? (
             <FiMinus
               size={indeterminateIconSize[size]}
-              color={
-                disabled ? disabledIconColorMap[variant] : iconColorMap[variant]
-              }
+              color={disabled ? disabledIconColorMap[variant] : iconColorMap[variant]}
             />
           ) : (
             <Icon
               size={iconSizeMap[variant][size]}
-              color={
-                disabled ? disabledIconColorMap[variant] : iconColorMap[variant]
-              }
+              color={disabled ? disabledIconColorMap[variant] : iconColorMap[variant]}
             />
           )}
         </div>

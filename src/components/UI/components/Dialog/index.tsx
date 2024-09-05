@@ -1,4 +1,4 @@
-import { Dialog as DialogField, DialogProps } from "@mantine/core";
+import { Dialog as DialogField, DialogProps } from '@mantine/core';
 
 type DialogFieldProps = DialogProps;
 

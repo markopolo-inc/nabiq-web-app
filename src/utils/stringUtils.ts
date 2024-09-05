@@ -14,10 +14,8 @@ export const trimAllValuesOfObject = (payload) => {
 
 export function buildQueryString(params) {
   return Object.keys(params)
-    .map(
-      (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
-    )
-    .join("&");
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    .join('&');
 }
 
 /**
@@ -26,7 +24,7 @@ export function buildQueryString(params) {
  */
 export function camelCaseToCapitalized(str) {
   // Replace each uppercase letter with a space followed by the same letter in lowercase
-  const result = str.replace(/([A-Z])/g, " $1").toLowerCase();
+  const result = str.replace(/([A-Z])/g, ' $1').toLowerCase();
 
   // Capitalize the first letter of each word
   return result.replace(/\b\w/g, (char) => char.toUpperCase());

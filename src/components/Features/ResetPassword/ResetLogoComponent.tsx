@@ -27,15 +27,15 @@ const ResetLogoComponent = ({
           {isResetSuccessful
             ? 'Password changed!'
             : isResetInitiated && !isResetPassword
-            ? 'Please check your email'
-            : 'Reset password'}
+              ? 'Please check your email'
+              : 'Reset password'}
         </Text>
         <Text className='text-center text-xl text-gray-500'>
           {isResetSuccessful
             ? 'Your password has been changed successfully.'
             : isResetInitiated && !isResetPassword
-            ? `We have sent you instructions to reset your password on ${email}`
-            : 'Enter your email address and we will send you instructions to reset your password.'}
+              ? `We have sent you instructions to reset your password on ${email}`
+              : 'Enter your email address and we will send you instructions to reset your password.'}
         </Text>
       </div>
     </div>

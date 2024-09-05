@@ -1,1 +1,1 @@
-export { Grid as default } from "@mantine/core";
+export { Grid as default } from '@mantine/core';

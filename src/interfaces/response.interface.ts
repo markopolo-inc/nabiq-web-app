@@ -1,4 +1,4 @@
-import { CampaignItemInterface } from "src/interfaces/campaign.interface.ts";
+import { CampaignItemInterface } from 'src/interfaces/campaign.interface.ts';
 
 export type APIResponseType = {
   success: boolean;

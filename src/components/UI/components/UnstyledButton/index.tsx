@@ -1,1 +1,1 @@
-export { UnstyledButton as default } from "@mantine/core";
+export { UnstyledButton as default } from '@mantine/core';
