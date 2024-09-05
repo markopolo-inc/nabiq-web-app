@@ -37,13 +37,13 @@ export const initialNodes = [
         data: { value: 123 },
         dragHandle: ".custom-drag-handle",
     },
-    {
-      id: "platform",
-      type: "Platform",
-      position,
-      data: { value: 123 },
-      dragHandle: ".custom-drag-handle",
-    },
+    // {
+    //   id: "platform",
+    //   type: "Platform",
+    //   position,
+    //   data: { value: 123 },
+    //   dragHandle: ".custom-drag-handle",
+    // },
 ];
 
 export const initialEdges = [
