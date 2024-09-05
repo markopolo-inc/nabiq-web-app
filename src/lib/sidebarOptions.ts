@@ -4,8 +4,8 @@ import {
   FiHomeLine,
   FiPuzzlePiece02,
   FiSettings01,
-  FiSliders01,
-  FiLineChartUp05,
+  // FiSliders01,
+  // FiLineChartUp05,
 } from "@nabiq-icons";
 
 export const sidebarOptions = [
@@ -27,24 +27,24 @@ export const sidebarOptions = [
     to: "/campaigns",
     menuRegex: new RegExp(/^\/campaigns/, "i"),
   },
-  {
-    title: "Monitoring",
-    Icon: FiLineChartUp05,
-    to: "/monitoring",
-    menuRegex: new RegExp(/^\/monitoring/, "i"),
-  },
+  // {
+  //   title: "Monitoring",
+  //   Icon: FiLineChartUp05,
+  //   to: "/monitoring",
+  //   menuRegex: new RegExp(/^\/monitoring/, "i"),
+  // },
   {
     title: "Integrations",
     Icon: FiPuzzlePiece02,
     to: "/integrations",
     menuRegex: new RegExp(/^\/integrations/, "i"),
   },
-  {
-    title: "Control room",
-    Icon: FiSliders01,
-    to: "/control-room",
-    menuRegex: new RegExp(/^\/control-room/, "i"),
-  },
+  // {
+  //   title: "Control room",
+  //   Icon: FiSliders01,
+  //   to: "/control-room",
+  //   menuRegex: new RegExp(/^\/control-room/, "i"),
+  // },
 ];
 
 export const lowerPartOptions = [
