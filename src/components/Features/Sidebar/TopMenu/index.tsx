@@ -2,8 +2,10 @@ import { Menu, UnstyledButton, Image, Avatar, useGetColors } from "@nabiq-ui"
 import { FiHelpCircle, FiSettings01, Logout01 } from "@nabiq-icons"
 import { rem } from "@mantine/core";
 import { useLogoutMutation } from "src/store/auth/authApi";
+import {useAppSelector} from "src/store/hooks.ts";
 
 const TopMenu = () => {
+    const { userEmail, userName  } = useAppSelector((state) => state.user);
     const { gray500 } = useGetColors();
     const [logout] = useLogoutMutation()
 
@@ -29,8 +31,8 @@ const TopMenu = () => {
                     />
 
                     <div className="flex flex-col items-start font-sans text-sm font-semibold leading-5 text-gray-700">
-                        <div>John Doe</div>
-                        <div className="font-normal text-gray-600">johndoe@gmail.com</div>
+                        <div>{userName}</div>
+                        <div className="font-normal text-gray-600">{userEmail}</div>
                     </div>
 
                 </Menu.Label>
