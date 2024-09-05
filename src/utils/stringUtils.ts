@@ -1,3 +1,9 @@
+/**
+ * Trims all values of a given object and returns the resulting object.
+ *
+ * @param {Object} payload - The object to trim values from.
+ * @return {Object} A new object with all values trimmed.
+ */
 export const trimAllValuesOfObject = (payload) => {
   const obj = {};
   for (const key in payload) {

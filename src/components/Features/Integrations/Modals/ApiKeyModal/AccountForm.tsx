@@ -43,7 +43,7 @@ const AccountForm: React.FC<{
   const fields = Object.keys(selectableObjects || {});
   const [payload, setPayload] = useState({});
 
-  console.log(payload);
+  // console.log(payload);
   return (
     <Stack>
       <Alert color="green" title={message || "Account verified!"} />
@@ -85,8 +85,8 @@ const AccountForm: React.FC<{
                 value={payload?.[field]?.value}
                 placeholder="Select..."
                 onChange={(value) =>
-                  setPayload((payload) => ({
-                    ...payload,
+                  setPayload((state) => ({
+                    ...state,
                     [field]: selectableObjects[field]?.find(
                       (item) => String(item?.[attributeValue]) === value
                     ),

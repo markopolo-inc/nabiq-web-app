@@ -9,6 +9,7 @@ const ArrowRight = ({
 }: PropTypes) => {
   return (
     <svg
+      strokeWidth={strokeWidth}
       style={{ ...style }}
       onClick={(e) => onClick && onClick(e)}
       width={size}

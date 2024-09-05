@@ -8,6 +8,8 @@ import {
   // FiLineChartUp05,
 } from "@nabiq-icons";
 
+// console.log("hlleo");
+
 export const sidebarOptions = [
   {
     title: "Home",

@@ -20,6 +20,7 @@ const ArrowNarrowDown = ({
       <path
         d="M7.99967 3.33331V12.6666M7.99967 12.6666L12.6663 7.99998M7.99967 12.6666L3.33301 7.99998"
         stroke={color}
+        strokeWidth={strokeWidth}
       />
     </svg>
   );

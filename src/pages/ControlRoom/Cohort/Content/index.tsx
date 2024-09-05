@@ -6,7 +6,7 @@ const Content = () => {
   const { configId } = useParams();
 
   const { data } = useGetConfigContentQuery(configId);
-  console.log(data);
+  // console.log(data);
 
   const contents = data?.data?.contents || [];
 

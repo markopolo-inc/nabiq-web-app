@@ -31,7 +31,6 @@ export const companyApi = apiSlice.injectEndpoints({
           return err;
         }
       },
-      async onCacheEntryAdded() {},
     }),
   }),
 });

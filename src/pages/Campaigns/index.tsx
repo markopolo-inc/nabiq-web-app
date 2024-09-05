@@ -5,13 +5,13 @@ import { FiPlus } from "@nabiq-icons";
 import HeaderTitle from "src/layouts/HeaderTitle";
 import CampaignGoalModal from "components/Features/Campaigns/CampaignGoalModal";
 import CampaignTable from "components/Features/Campaigns/CampaignTable";
-import { useGetCampaignConfigsQuery } from "src/store/campaign/campaignApi.ts";
-import { useAppSelector } from "src/store/hooks.ts";
+// import { useGetCampaignConfigsQuery } from "src/store/campaign/campaignApi.ts";
+// import { useAppSelector } from "src/store/hooks.ts";
 
 const Campaigns = () => {
-  const { resourceId: brandId } = useAppSelector((state) => state.brand);
-  const { isLoading } = useGetCampaignConfigsQuery(brandId);
-  console.log(isLoading);
+  // const { resourceId: brandId } = useAppSelector((state) => state.brand);
+  // const { isLoading } = useGetCampaignConfigsQuery(brandId);
+  // console.log(isLoading);
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
 
   const handleCreateCampaign = () => {

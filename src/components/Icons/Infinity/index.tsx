@@ -1,6 +1,6 @@
 import { PropTypes } from "../types";
 
-const Infinity = ({
+const InfinityIcon = ({
   color = "#12B76A",
   size = 10,
   strokeWidth = 1.5,
@@ -28,4 +28,4 @@ const Infinity = ({
   );
 };
 
-export default Infinity;
+export default InfinityIcon;

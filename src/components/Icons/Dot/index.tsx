@@ -16,7 +16,7 @@ const Dot = ({
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="4" cy="4" r="3" fill={color} />
+    <circle cx="4" cy="4" r="3" fill={color} strokeWidth={strokeWidth} />
   </svg>
 );
 

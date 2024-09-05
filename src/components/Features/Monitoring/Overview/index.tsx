@@ -1,7 +1,7 @@
 // import { useGetMetricsQuery } from "src/store/monitoring/monitoring.api";
 import MetricsCard from "./MetricsCard";
 
-const Overview = ({ timeRange }) => {
+const Overview = () => {
   // const { data, isLoading } = useGetMetricsQuery({
   //   timeRange,
   //   campaignId: null,

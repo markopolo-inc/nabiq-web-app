@@ -21,7 +21,7 @@ import Cohort from "../../components/Features/Monitoring/Cohort";
 import Platform from "../../components/Features/Monitoring/Platform";
 import { FileWithPath } from "@mantine/dropzone";
 
-const index = () => {
+const Test = () => {
   const [files, setFiles] = useState<FileWithPath[]>([]);
 
   const [opened, { close }] = useDisclosure(true);
@@ -35,7 +35,7 @@ const index = () => {
       Cohort4: Cohort,
       Platform: Platform,
     }),
-    [],
+    []
   );
 
   const initialNodes = [
@@ -124,22 +124,34 @@ const index = () => {
 
   const previews = files.map((file, index) => {
     const imageUrl = URL.createObjectURL(file);
-    return <Image className="w-16 h-16 rounded-full" key={index} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />;
+    return (
+      <Image
+        className="w-16 h-16 rounded-full"
+        key={index}
+        src={imageUrl}
+        onLoad={() => URL.revokeObjectURL(imageUrl)}
+      />
+    );
   });
 
   return (
     <>
       <div className="p-32">
         <div className="w-[564px] h-[126px] flex gap-5">
-          {!files.length ?
-            <Image className="w-16 h-16 rounded-full" src="./img.png" alt="no preview img" /> :
+          {!files.length ? (
+            <Image
+              className="w-16 h-16 rounded-full"
+              src="./img.png"
+              alt="no preview img"
+            />
+          ) : (
             previews
-          }
+          )}
 
           <Dropzone
             className="w-full"
             onDrop={setFiles}
-            onReject={(files) => console.log('rejected files', files)}
+            // onReject={(files) => console.log("rejected files", files)}
           />
         </div>
       </div>
@@ -403,4 +415,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Test;

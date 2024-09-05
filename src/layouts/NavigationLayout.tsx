@@ -8,7 +8,7 @@ import Sidebar from "components/Features/Sidebar";
 import TopMenu from "src/components/Features/Sidebar/TopMenu";
 
 const NavigationLayout = () => {
-  console.log("--- I am from Navigationlayout ---");
+  // console.log("--- I am from Navigationlayout ---");
   const navigate = useNavigate();
   const { resourceId: companyId } = useAppSelector((state) => state.company);
   const [opened, { toggle }] = useDisclosure();

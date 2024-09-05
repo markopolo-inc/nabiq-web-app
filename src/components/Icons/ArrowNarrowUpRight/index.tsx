@@ -17,7 +17,11 @@ const ArrowNarrowUpRight = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M5 15L15 5M15 5H8.33333M15 5V11.6667" stroke={color} />
+      <path
+        d="M5 15L15 5M15 5H8.33333M15 5V11.6667"
+        stroke={color}
+        strokeWidth={strokeWidth}
+      />
     </svg>
   );
 };

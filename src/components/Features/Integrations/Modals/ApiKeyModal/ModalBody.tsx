@@ -43,7 +43,7 @@ const ModalBody: React.FC<{
     },
   });
 
-  const handleFormSubmit = async (values) => {
+  const handleFormSubmit = async () => {
     // if (gateway.category === "email") {
     //   const res = await integrateEmail({
     //     apiKey: values.apiKey,
@@ -60,7 +60,7 @@ const ModalBody: React.FC<{
         brandId,
         gateway: gateway.gateway,
         [gateway.gateway]: {
-          ...form.values,
+          ...trimAllValuesOfObject(form.values),
         },
       },
     }).unwrap();
@@ -91,8 +91,8 @@ const ModalBody: React.FC<{
       {formStep === "credential" && (
         <form
           className="flex flex-col gap-8"
-          onSubmit={form.onSubmit((values) => {
-            handleFormSubmit(trimAllValuesOfObject(values));
+          onSubmit={form.onSubmit(() => {
+            handleFormSubmit();
           })}
         >
           <div className="flex flex-col gap-3">

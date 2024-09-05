@@ -9,7 +9,7 @@ const UserNotConfirmedException = "UserNotConfirmedException";
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
-      queryFn: async (arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
@@ -33,7 +33,7 @@ export const authApi = apiSlice.injectEndpoints({
       },
     }),
     signup: builder.mutation({
-      queryFn: async (arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
@@ -60,10 +60,10 @@ export const authApi = apiSlice.injectEndpoints({
       },
     }),
     googleSignIn: builder.mutation({
-      queryFn: async (_arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
-      async onQueryStarted(_arg, { dispatch, getState }) {
+      async onQueryStarted(_arg, { dispatch }) {
         const loading = toast.loading("Signing in with Google...");
         try {
           await Auth.federatedSignIn({
@@ -85,10 +85,10 @@ export const authApi = apiSlice.injectEndpoints({
       },
     }),
     verify: builder.mutation({
-      queryFn: async (_arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
-      async onQueryStarted(_arg, { dispatch, getState }) {
+      async onQueryStarted(_arg) {
         const { email, confirmationPin } = _arg;
         const loading = toast.loading("Verifying...");
         try {
@@ -103,7 +103,7 @@ export const authApi = apiSlice.injectEndpoints({
       },
     }),
     resendVerificationCode: builder.mutation({
-      queryFn: async (_arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(_arg) {
@@ -120,7 +120,7 @@ export const authApi = apiSlice.injectEndpoints({
       },
     }),
     logout: builder.mutation({
-      queryFn: async (_arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(_arg, { dispatch }) {

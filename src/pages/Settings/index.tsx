@@ -36,9 +36,15 @@ const Settings = () => {
 
   const previews = files.map((file, index) => {
     const imageUrl = URL.createObjectURL(file);
-    return <Image className="w-16 h-16 rounded-full" key={index} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />;
+    return (
+      <Image
+        className="w-16 h-16 rounded-full"
+        key={index}
+        src={imageUrl}
+        onLoad={() => URL.revokeObjectURL(imageUrl)}
+      />
+    );
   });
-
 
   return (
     <Stack gap={64}>
@@ -96,15 +102,20 @@ const Settings = () => {
                 </p>
 
                 <div className="flex gap-5">
-                  {!files.length ?
-                    <Image className="w-16 h-16 rounded-full" src="./img.png" alt="no preview img" /> :
+                  {!files.length ? (
+                    <Image
+                      className="w-16 h-16 rounded-full"
+                      src="./img.png"
+                      alt="no preview img"
+                    />
+                  ) : (
                     previews
-                  }
+                  )}
 
                   <Dropzone
                     className="w-full"
                     onDrop={setFiles}
-                    onReject={(files) => console.log('rejected files', files)}
+                    // onReject={(file) => console.log('rejected files', file)}
                   />
                 </div>
               </div>

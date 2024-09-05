@@ -10,7 +10,7 @@ export const campaignApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCampaignConfig: builder.mutation<APIResponseType, any>({
       query: (args) => {
-        const { list, ...rest } = args;
+        const { list: _list, ...rest } = args;
 
         return {
           url: `/cohort`,
@@ -50,7 +50,6 @@ export const campaignApi = apiSlice.injectEndpoints({
           return err;
         }
       },
-      async onCacheEntryAdded() {},
     }),
   }),
 });
