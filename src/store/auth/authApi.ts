@@ -2,7 +2,8 @@ import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 import { Auth } from "aws-amplify";
 import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
-import { setIsAuthenticated, setUserEmail, logout } from "./authSlice";
+import {logout, setIsAuthenticated, setUserEmail} from "./authSlice";
+import {persistor} from "src/store";
 const UserNotConfirmedException = "UserNotConfirmedException";
 
 export const authApi = apiSlice.injectEndpoints({
@@ -127,7 +128,11 @@ export const authApi = apiSlice.injectEndpoints({
         dispatch(logout());
         const loading = toast.loading("Logging out...");
         toast.dismiss(loading);
+        dispatch({ type: 'store/reset' });
         dispatch(apiSlice.util.resetApiState());
+        persistor.purge().then(() => {
+          console.log('Persisted state has been cleared.');
+        });
         window.localStorage.clear();
         window.location.href = "/login";
       },
