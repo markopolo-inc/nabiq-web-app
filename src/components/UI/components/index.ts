@@ -1,5 +1,3 @@
-import { Progress } from "@mantine/core";
-
 // Layout
 export { default as AppShell } from "./AppShell";
 export { default as Group } from "./Group";
