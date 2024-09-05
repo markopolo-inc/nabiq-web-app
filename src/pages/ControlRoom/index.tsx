@@ -41,7 +41,8 @@ const ControlRoom = () => {
         />
       </Stack>
       <Stack align="center">
-        <Queued configs={configs} />
+        {category === "queued" && <Queued configs={configs} />}
+        {category === "published" && <div>Published</div>}
       </Stack>
     </Stack>
   );

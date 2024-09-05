@@ -33,7 +33,7 @@ const CampaignDetailsForm = () => {
           onChange={(e) => handleChange("details", e.currentTarget.value)}
         />
         <Text size="14px" className="text-gray-600">
-          Microcopy required
+          Provide the text of your campaign
         </Text>
       </Stack>
 
@@ -45,7 +45,8 @@ const CampaignDetailsForm = () => {
           onChange={(e) => handleChange("link", e.currentTarget.value)}
         />
         <Text size="14px" className="text-gray-600">
-          Destination link where you want to redirect users to
+          Destination link where you want to redirect users after clicking your
+          campaign
         </Text>
       </Stack>
 
@@ -63,7 +64,8 @@ const CampaignDetailsForm = () => {
         />
 
         <Text size="14px" className="text-gray-600">
-          The tone of the content we will generate for you
+          The tone of the content that will be utilized for generating different
+          variations of your campaign
         </Text>
       </Stack>
     </Stack>

@@ -14,21 +14,24 @@ import { useAppSelector } from "src/store/hooks";
 const goals = [
   {
     title: "Acquisition",
-    headline: "To acquire new customers either for paying, trial or freemium.",
+    headline:
+      "Select this goal to attract new customers. Focus on acquiring paying users, trial users, or freemium users, depending on your business model.",
     icon: FiZapFast,
     color: "#EE46BC",
     type: "acquisition",
   },
   {
     title: "Activation",
-    headline: "To convert trail/freemium users to paying customers.",
+    headline:
+      "Choose this goal to convert trial or freemium users into paying customers. It’s all about getting existing users to take the next step.",
     icon: FiCursorClick01,
     color: "#2E90FA",
     type: "activation",
   },
   {
     title: "Retention",
-    headline: "To push recurring subscription, cross-sell and upsell.",
+    headline:
+      "Use this goal to increase customer loyalty. Boost recurring subscriptions, encourage cross-sells, or promote upsells to maintain and grow your customer base.",
     icon: FiInfinity,
     color: "#17B26A",
     type: "retention",
@@ -47,7 +50,7 @@ const ModalBody = ({ setOpened }) => {
       <Stack align="center" gap={8}>
         <p className="text-gray-900 text-[24px] font-semibold">New campaign</p>
         <p className="text-gray-600 text-base font-normal">
-          Select your campaign goal
+          Select the campaign goal that matches your objective.
         </p>
       </Stack>
       <Stack align="center">

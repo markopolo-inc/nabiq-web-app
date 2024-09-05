@@ -3,7 +3,7 @@ import React, { SetStateAction } from "react";
 interface Option {
   label: string;
   value: string | number;
-  icon?: React.FC<{ size: number; strokeWidth: number }>;
+  icon?: React.FC<{ size: number; strokeWidth: number; color: string }>;
 }
 
 const OptionTabs: React.FC<{
@@ -38,7 +38,8 @@ const OptionTabs: React.FC<{
               fontWeight: 600,
             }}
           >
-            {Icon && <Icon size={20} strokeWidth={2.2} />} {item.label}
+            {Icon && <Icon size={20} strokeWidth={2.2} color="#9AA4B2" />}{" "}
+            {item.label}
           </span>
         );
       })}

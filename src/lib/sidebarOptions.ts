@@ -5,6 +5,7 @@ import {
   FiPuzzlePiece02,
   FiSettings01,
   FiSliders01,
+  FiLineChartUp05,
 } from "@nabiq-icons";
 
 export const sidebarOptions = [
@@ -25,6 +26,12 @@ export const sidebarOptions = [
     Icon: FiAnnouncement01,
     to: "/campaigns",
     menuRegex: new RegExp(/^\/campaigns/, "i"),
+  },
+  {
+    title: "Monitoring",
+    Icon: FiLineChartUp05,
+    to: "/monitoring",
+    menuRegex: new RegExp(/^\/monitoring/, "i"),
   },
   {
     title: "Integrations",

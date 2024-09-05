@@ -44,6 +44,7 @@ export { default as FiInfinity } from "./Infinity";
 
 // L
 export { default as Logout01 } from "./Logout01";
+export { default as FiLineChartUp05 } from "./LineChartUp05";
 
 // M
 export { default as FiMail01 } from "./Mail01";

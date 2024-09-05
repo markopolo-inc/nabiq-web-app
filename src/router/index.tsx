@@ -16,7 +16,8 @@ const VerifyEmail = lazy(() => import("pages/VerifyEmail"));
 const Onboarding = lazy(() => import("pages/Onboarding"));
 const Integrations = lazy(() => import("pages/Integrations"));
 const Campaigns = lazy(() => import("pages/Campaigns"));
-const Settings = lazy(() => import("pages/Settings"));
+const Settings = lazy(() => import("pages/Campaigns"));
+const Monitoring = lazy(() => import("pages/Monitoring"));
 const ControlRoom = lazy(() => import("pages/ControlRoom"));
 const ControlRoomCohort = lazy(() => import("pages/ControlRoom/Cohort"));
 const ControlRoomContent = lazy(
@@ -49,6 +50,7 @@ const Router = () => {
                   path="/control-room/published"
                   element={<ControlRoomPublished />}
                 />
+                <Route path="/monitoring" element={<Monitoring />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route
                   path="/campaigns/campaign-configuration"

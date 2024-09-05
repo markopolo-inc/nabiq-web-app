@@ -44,9 +44,12 @@ const CreateCampaign = () => {
           {isLoading && <PageLoader />}
 
           <div className="flex justify-between">
-            <Stack>
+            <Stack gap={4}>
               <p className="text-gray-900 font-semibold text-3xl">
                 Configure your campaign
+              </p>
+              <p className="text-gray-600 font-normal text-sm">
+                Provide all the details for configuring your campaign
               </p>
             </Stack>
             <Stack>
