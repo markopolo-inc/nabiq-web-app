@@ -1,11 +1,8 @@
-import {
-  DatePickerInput as MantineDatePickerInput,
-  DatePickerInputProps,
-} from "@mantine/dates";
+import { DatePickerInputProps, DatePickerInput as MantineDatePickerInput } from '@mantine/dates';
+import { Calendar } from '@nabiq-icons';
+import { Text } from '@nabiq-ui';
 
-import styles from "./index.module.scss";
-import { Text } from "@nabiq-ui";
-import { Calendar } from "@nabiq-icons";
+import styles from './index.module.scss';
 
 interface PropTypes extends DatePickerInputProps {
   placeholder?: string;
@@ -17,7 +14,7 @@ const DatePickerInput = ({ label, description, error, ...rest }: PropTypes) => {
   return (
     <div>
       <MantineDatePickerInput
-        leftSection={<Calendar size={16} color="#697586" />}
+        leftSection={<Calendar size={16} color='#697586' />}
         error={error}
         classNames={{
           input: error ? styles.errorInput : styles.input,
@@ -30,7 +27,7 @@ const DatePickerInput = ({ label, description, error, ...rest }: PropTypes) => {
         {...rest}
       />
       {description && (
-        <Text color="#525252" size="14px" weight={400} className="mt-2">
+        <Text color='#525252' size='14px' weight={400} className='mt-2'>
           {description}
         </Text>
       )}

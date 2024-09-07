@@ -1,7 +1,7 @@
-import { CSSProperties, MouseEventHandler } from "react";
+import { CSSProperties, MouseEventHandler } from 'react';
 
 const ArrowNarrowDown = ({
-  color = "#12B76A",
+  color = '#12B76A',
   size = 10,
   strokeWidth = 1.5,
   onClick,
@@ -13,13 +13,14 @@ const ArrowNarrowDown = ({
       onClick={(e) => onClick && onClick(e)}
       width={size}
       height={size}
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      viewBox='0 0 16 16'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
     >
       <path
-        d="M7.99967 3.33331V12.6666M7.99967 12.6666L12.6663 7.99998M7.99967 12.6666L3.33301 7.99998"
+        d='M7.99967 3.33331V12.6666M7.99967 12.6666L12.6663 7.99998M7.99967 12.6666L3.33301 7.99998'
         stroke={color}
+        strokeWidth={strokeWidth}
       />
     </svg>
   );

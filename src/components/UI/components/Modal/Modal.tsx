@@ -1,13 +1,13 @@
-import { Modal as MantineModal } from "@mantine/core";
-import { CSSProperties, ReactNode, useEffect, useState } from "react";
+import { Modal as MantineModal } from '@mantine/core';
+import { CSSProperties, ReactNode, useEffect, useState } from 'react';
 
-import CloseButton from "../CloseButton";
+import CloseButton from '../CloseButton';
 
 const Modal = ({
   title = () => <></>,
   body,
   children,
-  size = "lg",
+  size = 'lg',
   centered = true,
   style = {},
   onClose,
@@ -61,23 +61,21 @@ const Modal = ({
           //   borderRadius: '8px !important',
           // },
           body: {
-            borderRadius: "8px !important",
+            borderRadius: '8px !important',
           },
           header: {
-            display: withNoHeader || withCustomClose ? "none" : "false",
+            display: withNoHeader || withCustomClose ? 'none' : 'false',
             padding: 20,
             paddingBottom: 0,
-            alignItems: "flex-start",
+            alignItems: 'flex-start',
           },
         }}
       >
         <>
           {withCustomClose && (
-            <div
-              style={{ position: "absolute", right: 20, top: 20, zIndex: 1 }}
-            >
+            <div style={{ position: 'absolute', right: 20, top: 20, zIndex: 1 }}>
               <CloseButton
-                size="lg"
+                size='lg'
                 onClick={() => {
                   setOpened(false);
                 }}
@@ -96,13 +94,9 @@ export default Modal;
 interface PropTypes {
   title?: ({ setOpened }: { setOpened: (state: boolean) => void }) => ReactNode;
   body: ({ setOpened }: { setOpened: (state: boolean) => void }) => ReactNode;
-  children: ({
-    setOpened,
-  }: {
-    setOpened: (state: boolean) => void;
-  }) => ReactNode;
+  children: ({ setOpened }: { setOpened: (state: boolean) => void }) => ReactNode;
   style?: CSSProperties;
-  size?: "xs" | "sm" | "md" | "lg" | "xl" | string | number;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | string | number;
   onClose?: any;
   zIndex?: number;
   closeOnClickOutside?: boolean;

@@ -1,25 +1,25 @@
-import { rem, Stepper as StepperField, StepperProps } from "@mantine/core";
+import { Stepper as StepperField, StepperProps, rem } from '@mantine/core';
 
 const StyledStepper = (props: StepperProps) => {
   return (
     <StepperField
       styles={{
         steps: {
-          alignItems: "flex-start",
+          alignItems: 'flex-start',
         },
         stepCompletedIcon: {
-          borderRadius: "50%",
-          boxShadow: "0px 0px 0px 6px rgba(56, 122, 246, 0.24)",
+          borderRadius: '50%',
+          boxShadow: '0px 0px 0px 6px rgba(56, 122, 246, 0.24)',
         },
         stepBody: {
           // display: 'none',
           marginLeft: 0,
           marginTop: rem(12),
-          textAlign: "center",
+          textAlign: 'center',
         },
 
         step: {
-          flexDirection: "column",
+          flexDirection: 'column',
           padding: 0,
         },
 
@@ -30,16 +30,16 @@ const StyledStepper = (props: StepperProps) => {
           // height: rem(10),
         },
         stepLabel: {
-          fontSize: "14px",
-          fontWeight: "600",
-          color: "#0A52D6",
-          lineHeight: "20px",
+          fontSize: '14px',
+          fontWeight: '600',
+          color: '#0A52D6',
+          lineHeight: '20px',
         },
         stepDescription: {
-          fontSize: "12px",
-          fontWeight: "400",
-          color: "#2972F5",
-          lineHeight: "20px",
+          fontSize: '12px',
+          fontWeight: '400',
+          color: '#2972F5',
+          lineHeight: '20px',
         },
       }}
       {...props}

@@ -1,1 +1,1 @@
-export { Progress as default } from "@mantine/core";
+export { Progress as default } from '@mantine/core';

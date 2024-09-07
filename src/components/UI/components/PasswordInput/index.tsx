@@ -1,18 +1,12 @@
+import { PasswordInput as Input, PasswordInputProps } from '@mantine/core';
 import { FiEye, FiEyeOff } from '@nabiq-icons';
 import { useGetColors } from '@nabiq-ui';
-import { PasswordInput as Input, PasswordInputProps } from '@mantine/core';
-
-import Text from '../Text';
-
-import styles from './Input.module.scss';
 import { useState } from 'react';
 
-const PasswordInput = ({
-  label,
-  required,
-  description,
-  ...rest
-}: PasswordInputProps) => {
+import Text from '../Text';
+import styles from './Input.module.scss';
+
+const PasswordInput = ({ label, required, description, ...rest }: PasswordInputProps) => {
   const { gray400, gray600, gray700 } = useGetColors();
   const [focused, setFocused] = useState(false);
 

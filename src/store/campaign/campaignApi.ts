@@ -1,20 +1,18 @@
-import toast from "react-hot-toast";
-import { apiSlice } from "../api/apiSlice";
-import {
-  APIGetConfigsResponseType,
-  APIResponseType,
-} from "src/interfaces/response.interface";
-import { setCampaign } from "src/store/campaign/campaignSlice.ts";
+import toast from 'react-hot-toast';
+import { APIGetConfigsResponseType, APIResponseType } from 'src/interfaces/response.interface';
+import { setCampaign } from 'src/store/campaign/campaignSlice.ts';
+
+import { apiSlice } from '../api/apiSlice';
 
 export const campaignApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCampaignConfig: builder.mutation<APIResponseType, any>({
       query: (args) => {
-        const { list, ...rest } = args;
+        const { list: _list, ...rest } = args;
 
         return {
           url: `/cohort`,
-          method: "POST",
+          method: 'POST',
           body: {
             ...rest,
           },
@@ -26,9 +24,9 @@ export const campaignApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || "Created campaign successfully!");
+          toast.success(res.data?.message || 'Created campaign successfully!');
         } catch (err) {
-          toast.error(err?.error.message || "Failed to create!");
+          toast.error(err?.error.message || 'Failed to create!');
           return err;
         }
       },
@@ -36,7 +34,7 @@ export const campaignApi = apiSlice.injectEndpoints({
     getCampaignConfigs: builder.query<APIGetConfigsResponseType, string>({
       query: (brandId) => ({
         url: `/cohort`,
-        method: "GET",
+        method: 'GET',
         params: {
           brandId,
         },
@@ -50,10 +48,8 @@ export const campaignApi = apiSlice.injectEndpoints({
           return err;
         }
       },
-      async onCacheEntryAdded() {},
     }),
   }),
 });
 
-export const { useCreateCampaignConfigMutation, useGetCampaignConfigsQuery } =
-  campaignApi;
+export const { useCreateCampaignConfigMutation, useGetCampaignConfigsQuery } = campaignApi;

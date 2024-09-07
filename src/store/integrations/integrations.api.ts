@@ -1,9 +1,7 @@
-import toast from "react-hot-toast";
-import { apiSlice } from "../api/apiSlice";
-import type {
-  GatewayType,
-  IntegrationInterface,
-} from "src/interfaces/brand.interface";
+import toast from 'react-hot-toast';
+import type { GatewayType, IntegrationInterface } from 'src/interfaces/brand.interface';
+
+import { apiSlice } from '../api/apiSlice';
 
 interface IntegrationPayload extends IntegrationInterface {
   brandId: string;
@@ -11,7 +9,7 @@ interface IntegrationPayload extends IntegrationInterface {
 }
 
 interface IntegrationArgType {
-  category: "email" | "sms" | "push";
+  category: 'email' | 'sms' | 'push';
   payload: IntegrationPayload;
 }
 
@@ -24,10 +22,10 @@ type ResponseType = {
 const integrationsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     integrateGateway: builder.mutation<ResponseType, IntegrationArgType>({
-      invalidatesTags: ["Company"],
+      invalidatesTags: ['Company'],
       query: (args) => ({
         url: `/${args.category}/auth`,
-        method: "POST",
+        method: 'POST',
         body: {
           ...args.payload,
         },
@@ -38,18 +36,18 @@ const integrationsApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || "Saved successfully!");
+          toast.success(res.data?.message || 'Saved successfully!');
         } catch (err) {
-          toast.error(err?.error.message || "Failed to save information!");
+          toast.error(err?.error.message || 'Failed to save information!');
           return err;
         }
       },
     }),
     addAccounts: builder.mutation<ResponseType, any>({
-      invalidatesTags: ["Company"],
+      invalidatesTags: ['Company'],
       query: (args) => ({
         url: `/${args.category}/integrate-account`,
-        method: "POST",
+        method: 'POST',
         body: {
           ...args.payload,
         },
@@ -60,9 +58,9 @@ const integrationsApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || "Saved successfully!");
+          toast.success(res.data?.message || 'Saved successfully!');
         } catch (err) {
-          toast.error(err?.error.message || "Failed to save information!");
+          toast.error(err?.error.message || 'Failed to save information!');
           return err;
         }
       },
@@ -70,5 +68,4 @@ const integrationsApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useIntegrateGatewayMutation, useAddAccountsMutation } =
-  integrationsApi;
+export const { useIntegrateGatewayMutation, useAddAccountsMutation } = integrationsApi;

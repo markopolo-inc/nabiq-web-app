@@ -1,4 +1,4 @@
-import { CSSProperties, MouseEventHandler } from "react";
+import { CSSProperties, MouseEventHandler } from 'react';
 
 export interface PropTypes {
   color?: string;

@@ -1,7 +1,7 @@
-import { apiSlice } from "../api/apiSlice";
+import { apiSlice } from '../api/apiSlice';
 
 interface RequestQueryParams {
-  type: "queued" | "published";
+  type: 'queued' | 'published';
   limit: number;
   page: number;
 }
@@ -17,7 +17,7 @@ interface MarkContentRequestType {
   configId: string;
   payload: {
     id: string; // content id
-    status: "relevant" | "irrelevant";
+    status: 'relevant' | 'irrelevant';
   };
 }
 
@@ -26,26 +26,26 @@ const controlRoomApi = apiSlice.injectEndpoints({
     getConfigs: builder.query<ConfigResponseType, RequestQueryParams>({
       query: (args) => ({
         url: `/control-room/config`,
-        method: "GET",
+        method: 'GET',
         params: { ...args },
       }),
     }),
     getConfigContent: builder.query<any, string>({
       query: (configId) => ({
         url: `/control-room/config/${configId}/content`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
     getConfigCohort: builder.query<any, string>({
       query: (configId) => ({
         url: `/control-room/config/${configId}/cohort`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
     markConfig: builder.mutation<any, MarkContentRequestType>({
       query: (args) => ({
         url: `/control-room/config/${args.configId}/content`,
-        method: "POST",
+        method: 'POST',
         body: {
           ...args.payload,
         },

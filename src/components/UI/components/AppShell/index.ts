@@ -1,1 +1,1 @@
-export { AppShell as default } from "@mantine/core";
+export { AppShell as default } from '@mantine/core';
