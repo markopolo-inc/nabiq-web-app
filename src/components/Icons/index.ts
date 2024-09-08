@@ -72,6 +72,8 @@ export { default as FiStar04 } from './Star04';
 
 // T
 export { default as FiTrash } from './Trash';
+export { default as FiThumbsUp } from './ThumbsUp';
+export { default as FiThumbsDown } from './ThumbsDown';
 
 // U
 export { default as FiUser03 } from './User03';

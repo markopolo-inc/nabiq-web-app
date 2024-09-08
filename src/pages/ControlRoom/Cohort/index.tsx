@@ -40,7 +40,7 @@ const Cohort = () => {
                 </Badge>
                 <Badge size='sm' color='gray'>
                   <FiUser03 size={14} />
-                  Size {item?.size}
+                  Size {item?.size?.toLocaleString('en-US')}
                 </Badge>
               </Group>
             </Stack>
