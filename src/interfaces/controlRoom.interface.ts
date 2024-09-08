@@ -1,3 +1,5 @@
+import { GatewayType } from './brand.interface';
+
 export interface IControlRoomConfig {
   id: string;
   step: number;
@@ -23,6 +25,14 @@ export interface ICohortContent {
   subject: string;
   content: string;
   status: 'relevant' | 'irrelevant' | 'not_marked';
+
+  // for published contents
+  sentOn: string; // date and time field
+  step: number;
+
+  reaction: 'liked' | 'disliked';
+  channel: 'email' | 'sms';
+  gateway: GatewayType;
 }
 
 export interface IControlRoomConfigCohortContent {

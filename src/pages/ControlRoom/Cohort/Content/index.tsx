@@ -4,16 +4,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { IControlRoomConfigCohortContent } from 'src/interfaces/controlRoom.interface';
 import {
   useGetConfigContentQuery,
-  useMarkConfigMutation,
+  useMarkConfigContentMutation,
 } from 'src/store/controlRoom/controlRoom.api';
 
 const Content = () => {
   const { configId } = useParams();
   const navigate = useNavigate();
-  const [markConfig, { isLoading }] = useMarkConfigMutation();
+  const [markConfig, { isLoading }] = useMarkConfigContentMutation();
 
   const { data } = useGetConfigContentQuery(configId);
-  // console.log(data);
   const configData: IControlRoomConfigCohortContent = data?.data || {};
   const contents = configData?.contents || [];
 

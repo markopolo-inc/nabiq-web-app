@@ -1,5 +1,4 @@
 import toast from 'react-hot-toast';
-import { APIResponseType } from 'src/interfaces/response.interface';
 
 import { apiSlice } from '../api/apiSlice';
 
@@ -20,7 +19,8 @@ interface MarkContentRequestType {
   configId: string;
   payload: {
     id: string; // content id
-    status: 'relevant' | 'irrelevant';
+    status?: 'relevant' | 'irrelevant';
+    reaction?: 'liked' | 'disliked';
   };
 }
 
@@ -48,12 +48,46 @@ const controlRoomApi = apiSlice.injectEndpoints({
         { type: 'ControlRoomConfigContent', id: configId },
       ],
     }),
-    markConfig: builder.mutation<APIResponseType, MarkContentRequestType>({
+    markConfigContent: builder.mutation<any, MarkContentRequestType>({
       invalidatesTags: (_result, _error, args) => [
         { type: 'ControlRoomConfigContent', id: args.configId },
       ],
       query: (args) => ({
         url: `/control-room/config/${args.configId}/content`,
+        method: 'POST',
+        body: {
+          operations: [{ ...args.payload }],
+        },
+      }),
+
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || 'Successfully updated feedback!');
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to give feedback!');
+          return err;
+        }
+      },
+    }),
+    getConfigContentPublished: builder.query<any, string>({
+      query: (configId) => ({
+        url: `/control-room/config/${configId}/content/published`,
+        method: 'GET',
+      }),
+      providesTags: (_result, _error, configId) => [
+        { type: 'ControlRoomConfigContentPublished', id: configId },
+      ],
+    }),
+    reactConfigContent: builder.mutation<any, MarkContentRequestType>({
+      invalidatesTags: (_result, _error, args) => [
+        { type: 'ControlRoomConfigContentPublished', id: args.configId },
+      ],
+      query: (args) => ({
+        url: `/control-room/config/${args.configId}/content/reaction`,
         method: 'POST',
         body: {
           operations: [{ ...args.payload }],
@@ -80,5 +114,7 @@ export const {
   useGetConfigsQuery,
   useGetConfigCohortQuery,
   useGetConfigContentQuery,
-  useMarkConfigMutation,
+  useMarkConfigContentMutation,
+  useReactConfigContentMutation,
+  useGetConfigContentPublishedQuery,
 } = controlRoomApi;
