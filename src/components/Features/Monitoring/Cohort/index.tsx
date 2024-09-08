@@ -1,4 +1,6 @@
-import { Handle, Position } from '@xyflow/react';
+import { Handle, NodeProps, Position } from '@xyflow/react';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks.ts';
+import { onSelectNode } from 'src/store/monitoring/monitoringSlice.ts';
 
 const OperationItem = () => {
   return (
@@ -10,11 +12,23 @@ const OperationItem = () => {
   );
 };
 
-const Index = () => {
+const Index = (props: NodeProps) => {
+  const dispatch = useAppDispatch();
+  const { selectedNode } = useAppSelector((state) => state.monitoring);
   return (
     <>
-      <Handle type='target' position={Position.Left} id='b' />
-      <div className='w-[262px] flex flex-col flex-start gap-8 p-[16px_24px_16px_16px] rounded-xl border border-gray-200 bg-white shadow-sm hover:cursor-pointer'>
+      <Handle
+        type='target'
+        position={Position.Left}
+        id='left'
+        isConnectable={props.isConnectable}
+      />
+      <div
+        onClick={() => {
+          dispatch(onSelectNode(props));
+        }}
+        className='w-[262px] flex flex-col flex-start gap-8 p-[16px_24px_16px_16px] rounded-xl border border-gray-200 bg-white shadow-sm hover:cursor-pointer'
+      >
         <div className='flex justify-between items-center w-full'>
           <div className='text-gray-900 text-[16px] font-semibold leading-6'>Cohort 1</div>
           <div className='flex items-center py-0.5 px-2 rounded-2xl border border-gray-200 bg-gray-50 text-gray-700 text-center text-xs font-medium leading-[18px]'>
@@ -32,11 +46,17 @@ const Index = () => {
           {/*<OperationItem/>*/}
         </div>
       </div>
-      {/*<Handle*/}
-      {/*    type="source"*/}
-      {/*    position={Position.Right}*/}
-      {/*    id="c"*/}
-      {/*/>*/}
+
+      {props.id === selectedNode?.id && selectedNode?.data?.platformId ? (
+        <Handle
+          type='source'
+          position={Position.Right}
+          id={`handle-${props.id}`}
+          isConnectable={props.isConnectable}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 };

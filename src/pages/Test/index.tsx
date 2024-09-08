@@ -34,6 +34,7 @@ const Test = () => {
       Cohort3: Cohort,
       Cohort4: Cohort,
       Platform: Platform,
+      Platform2: Platform,
     }),
     [],
   );

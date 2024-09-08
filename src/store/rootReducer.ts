@@ -5,6 +5,7 @@ import authReducer from './auth/authSlice';
 import brandReducer from './brand/brandSlice';
 import campaignReducer from './campaign/campaignSlice';
 import companyReducer from './company/comapnySlice';
+import monitoringReucer from './monitoring/monitoringSlice';
 import onboardingReducer from './onboarding/onboardingSlice';
 import userReducer from './user/userSlice';
 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   brand: brandReducer,
   campaign: campaignReducer,
+  monitoring: monitoringReucer,
 });
 
 export default rootReducer;

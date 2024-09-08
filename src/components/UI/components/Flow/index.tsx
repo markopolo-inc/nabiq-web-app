@@ -11,7 +11,8 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import dagre from 'dagre';
-import { ComponentType, useCallback } from 'react';
+import { ComponentType, useCallback, useEffect } from 'react';
+import { useAppSelector } from 'src/store/hooks.ts';
 
 type HorizontalFlowPropsType = {
   initialNodes?: Node[];
@@ -63,12 +64,14 @@ const getLayoutedElements = (nodes, edges, direction = 'LR') => {
 };
 
 const HorizontalFlow = ({ initialEdges, initialNodes, nodeTypes }: HorizontalFlowPropsType) => {
+  const { selectedNode, hidden } = useAppSelector((state) => state.monitoring);
+
   const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
     initialNodes,
     initialEdges,
   );
 
-  const [nodes, _, onNodesChange] = useNodesState(layoutedNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
 
   const onConnect = useCallback(
@@ -78,6 +81,33 @@ const HorizontalFlow = ({ initialEdges, initialNodes, nodeTypes }: HorizontalFlo
       ),
     [],
   );
+
+  useEffect(() => {
+    setNodes((nds) =>
+      nds.map((node) => {
+        if (node.id === selectedNode?.data?.platformId) {
+          return {
+            ...node,
+            hidden: node.hidden === false ? true : hidden,
+          };
+        }
+        return node;
+      }),
+    );
+
+    setEdges((eds) =>
+      eds.map((edge) => {
+        if (edge.id === selectedNode?.data?.platformId) {
+          return {
+            ...edge,
+            hidden: hidden,
+          };
+        }
+
+        return edge;
+      }),
+    );
+  }, [selectedNode, hidden, setNodes, setEdges]);
 
   return (
     <ReactFlowProvider>
