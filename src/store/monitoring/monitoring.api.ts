@@ -9,7 +9,14 @@ const monitoringApi = apiSlice.injectEndpoints({
         params: { ...params },
       }),
     }),
+    getTopPerformingCampaigns: builder.query<void, any>({
+      query: () => ({
+        url: '/monitoring/campaign/top',
+        method: 'GET',
+        // params: { ...params },
+      }),
+    }),
   }),
 });
 
-export const { useGetMetricsQuery } = monitoringApi;
+export const { useGetMetricsQuery, useGetTopPerformingCampaignsQuery } = monitoringApi;

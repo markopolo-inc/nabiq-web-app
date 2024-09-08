@@ -21,7 +21,7 @@ function MetricsCard({ name, type, value, change }: MetricsCardProps) {
     <Stack className='w-[264px] border border-gray-200 rounded-xl p-6 gap-4'>
       <p className='text-grey-600 font-medium text-sm'>{name}</p>
       <Group justify='space-between'>
-        <p className='text-grey-900 font-semibold text-[30px]'>
+        <p className='text-grey-900 font-semibold text-[24px]'>
           {type !== 'percentage' && TypeMap[type]}
           {formatNumber(value)}
           {type === 'percentage' && TypeMap[type]}

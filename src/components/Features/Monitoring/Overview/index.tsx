@@ -4,6 +4,7 @@ import { IMetrics } from 'src/interfaces/monitoring.interface';
 import { useGetMetricsQuery } from 'src/store/monitoring/monitoring.api';
 
 import MetricsCard from './MetricsCard';
+import TopPerformingCampaign from './TopPerformingCampaigns';
 
 const Overview: FC<{
   timeRange: 'today' | 'last_week' | 'last_month';
@@ -15,7 +16,7 @@ const Overview: FC<{
 
   const metrics: IMetrics[] = data?.data?.metrics || [];
   return (
-    <Stack align='center' justify='center'>
+    <Stack gap={32}>
       <Group>
         {!isLoading &&
           metrics.map((item) => (
@@ -28,6 +29,8 @@ const Overview: FC<{
             />
           ))}
       </Group>
+
+      <TopPerformingCampaign />
     </Stack>
   );
 };
