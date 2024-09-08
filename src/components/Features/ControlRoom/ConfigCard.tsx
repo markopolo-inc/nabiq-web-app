@@ -2,14 +2,14 @@ import { FiChevronRight, FiDot } from '@nabiq-icons';
 import { Badge, Button, Group, Progress, Stack } from '@nabiq-ui';
 import moment from 'moment-timezone';
 import { useNavigate } from 'react-router-dom';
-import { ControlRoomConfigInterface } from 'src/interfaces/controlRoom.interface';
+import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
 import { formatTimeAgo } from 'src/utils/date.uitils';
 
 const ConfigCard = ({
   config,
   isPublished = false,
 }: {
-  config: ControlRoomConfigInterface;
+  config: IControlRoomConfig;
   isPublished?: boolean;
 }) => {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ const ConfigCard = ({
           {!isPublished && (
             <>
               {config?.status === 'processing' ? (
-                <div className='flex flex-nowrap configs-center justify-between'>
+                <div className='flex flex-nowrap items-center justify-between'>
                   <div className='w-[75%]'>
                     <Progress value={config?.progress} color='#2972F5' />
                   </div>
@@ -71,7 +71,7 @@ const ConfigCard = ({
                 </div>
               ) : (
                 <Badge color='gray'>
-                  Scheduled for {moment(config?.startDate).format('MMM D, YYYY')}
+                  Scheduled for {moment(config?.scheduledFor).format('MMM D, YYYY')}
                 </Badge>
               )}{' '}
             </>
@@ -81,6 +81,7 @@ const ConfigCard = ({
         {isPublished && (
           <Group>
             <Button
+              size='sm'
               trailingIcon={<FiChevronRight />}
               onClick={() => navigate(`/control-room/published/${config?.id}`)}
             >
@@ -91,15 +92,17 @@ const ConfigCard = ({
 
         {!isPublished && (
           <>
-            {config?.status == 'processing' ? (
+            {config?.status !== 'processing' ? (
               <Group>
                 <Button
+                  size='sm'
                   trailingIcon={<FiChevronRight />}
                   onClick={() => navigate(`/control-room/cohort/content/${config?.id}`)}
                 >
                   View content sample
                 </Button>
                 <Button
+                  size='sm'
                   variant='secondary-black'
                   onClick={() => navigate(`/control-room/cohort/${config?.id}`)}
                 >

@@ -1,6 +1,7 @@
 import { FiCheck, FiCrossX, FiHelpCircle } from '@nabiq-icons';
 import { Badge, Breadcrumbs, Button, Group, Stack } from '@nabiq-ui';
 import { useNavigate, useParams } from 'react-router-dom';
+import { IControlRoomConfigCohortContent } from 'src/interfaces/controlRoom.interface';
 import {
   useGetConfigContentQuery,
   useMarkConfigMutation,
@@ -13,7 +14,7 @@ const Content = () => {
 
   const { data } = useGetConfigContentQuery(configId);
   // console.log(data);
-  const configData = data?.data || {};
+  const configData: IControlRoomConfigCohortContent = data?.data || {};
   const contents = configData?.contents || [];
 
   const handleMarkConfig = async (contentId: string, status: 'irrelevant' | 'relevant') => {

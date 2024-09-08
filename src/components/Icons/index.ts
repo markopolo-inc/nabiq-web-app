@@ -15,6 +15,7 @@ export { default as Command } from './Command';
 export { default as Command2 } from './Command2';
 export { default as FiCheck } from './Check';
 export { default as FiChevronRight } from './ChevronRight';
+export { default as FiChevronDown } from './ChevronDown';
 export { default as FiCommand } from './Command';
 export { default as FiCrossX } from './CrossX';
 export { default as FiCursorClick01 } from './CursorClick01';
@@ -29,7 +30,7 @@ export { default as FiEye } from './Eye';
 export { default as FiEyeOff } from './EyeOff';
 
 // F
-export { default as FiChevronDown } from './ChevronDown';
+export { default as FiFileUpload } from './UploadCloud02';
 
 // G
 
@@ -67,12 +68,13 @@ export { default as FiPen } from './Pen';
 export { default as FiSearchLg } from './SearchLg';
 export { default as FiSliders01 } from './Sliders01';
 export { default as FiSettings01 } from './Settings01';
+export { default as FiStar04 } from './Star04';
 
 // T
 export { default as FiTrash } from './Trash';
 
 // U
-export { default as FiFileUpload } from './UploadCloud02';
+export { default as FiUser03 } from './User03';
 
 // X
 export { default as XClose } from './XClose';

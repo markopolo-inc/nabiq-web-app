@@ -1,10 +1,10 @@
 import { Stack } from '@nabiq-ui';
-import { ControlRoomConfigInterface } from 'src/interfaces/controlRoom.interface';
+import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
 
 import ConfigCard from './ConfigCard';
 
 const Published: React.FC<{
-  configs: ControlRoomConfigInterface[];
+  configs: IControlRoomConfig[];
 }> = ({ configs }) => {
   return (
     <Stack gap={32}>
