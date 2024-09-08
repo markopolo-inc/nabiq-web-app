@@ -1,12 +1,10 @@
 import { useForm } from '@mantine/form';
 import { Button, Image, PasswordInput, Text, TextInput } from '@nabiq-ui';
-import { useNavigate } from 'react-router-dom';
 import googleLogo from 'src/assets/onboarding/google.svg';
 import { useGoogleSignInMutation, useSignupMutation } from 'src/store/auth/authApi';
 import { trimAllValuesOfObject } from 'src/utils/stringUtils';
 
 const SignUpForm = () => {
-  const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
   const [googleSignIn, { isLoading: isGoogleLoading }] = useGoogleSignInMutation();
 
@@ -53,7 +51,12 @@ const SignUpForm = () => {
         />
       </div>
 
-      <Button variant='link' size='sm' className='px-0' onClick={() => navigate('/reset-pass')}>
+      <Button
+        variant='link'
+        size='sm'
+        className='px-0'
+        onClick={() => window.open('https://app.markopolo.ai/reset-pass', '_blank')}
+      >
         Forgot password?
       </Button>
 

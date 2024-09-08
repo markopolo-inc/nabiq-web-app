@@ -1,12 +1,10 @@
 import { useForm } from '@mantine/form';
 import { Button, Image, PasswordInput, Text, TextInput } from '@nabiq-ui';
-import { useNavigate } from 'react-router-dom';
 import googleLogo from 'src/assets/onboarding/google.svg';
 import { useGoogleSignInMutation, useLoginMutation } from 'src/store/auth/authApi';
 import { trimAllValuesOfObject } from 'src/utils/stringUtils';
 
 const LogInForm = () => {
-  const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
   const [googleSignIn, { isLoading: isGoogleLoading }] = useGoogleSignInMutation();
 
@@ -50,7 +48,12 @@ const LogInForm = () => {
 
       <div className='flex justify-end items-center'>
         {/* <Checkbox label='Remember me' /> */}
-        <Button variant='link' size='sm' className='px-0' onClick={() => navigate('/reset-pass')}>
+        <Button
+          variant='link'
+          size='sm'
+          className='px-0'
+          onClick={() => window.open('https://app.markopolo.ai/reset-pass', '_blank')}
+        >
           Forgot password?
         </Button>
       </div>
