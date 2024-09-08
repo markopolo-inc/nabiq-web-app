@@ -1,5 +1,10 @@
 import { apiSlice } from '../api/apiSlice';
 
+interface IPerformanceTrendParams {
+  metric: string; // Impressions | Conversion Rate | Revenue
+  timeRange: '12_months' | '30_days' | '7_days' | '24_hours';
+}
+
 const monitoringApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMetrics: builder.query<any, any>({
@@ -9,14 +14,24 @@ const monitoringApi = apiSlice.injectEndpoints({
         params: { ...params },
       }),
     }),
-    getTopPerformingCampaigns: builder.query<void, any>({
+    getTopPerformingCampaigns: builder.query<any, void>({
       query: () => ({
         url: '/monitoring/campaign/top',
         method: 'GET',
-        // params: { ...params },
+      }),
+    }),
+    getPerformanceTrend: builder.query<any, IPerformanceTrendParams>({
+      query: (args) => ({
+        url: '/monitoring/performance/trend',
+        method: 'GET',
+        params: { ...args },
       }),
     }),
   }),
 });
 
-export const { useGetMetricsQuery, useGetTopPerformingCampaignsQuery } = monitoringApi;
+export const {
+  useGetMetricsQuery,
+  useGetTopPerformingCampaignsQuery,
+  useGetPerformanceTrendQuery,
+} = monitoringApi;

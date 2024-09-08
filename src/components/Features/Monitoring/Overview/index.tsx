@@ -4,6 +4,7 @@ import { IMetrics } from 'src/interfaces/monitoring.interface';
 import { useGetMetricsQuery } from 'src/store/monitoring/monitoring.api';
 
 import MetricsCard from './MetricsCard';
+import PerformanceTrend from './PerformanceTrend';
 import TopPerformingCampaign from './TopPerformingCampaigns';
 
 const Overview: FC<{
@@ -30,7 +31,12 @@ const Overview: FC<{
           ))}
       </Group>
 
-      <TopPerformingCampaign />
+      <div>
+        <Stack gap={32}>
+          <TopPerformingCampaign />
+          <PerformanceTrend />
+        </Stack>
+      </div>
     </Stack>
   );
 };
