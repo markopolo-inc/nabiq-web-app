@@ -1,9 +1,8 @@
-import { useGetColors } from '@nabiq-ui';
 import { Loader, Button as MantineButton } from '@mantine/core';
+import { useGetColors } from '@nabiq-ui';
 import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 
 import Text from '../Text';
-
 import styles from './Button.module.scss';
 
 const getSizes = (size) => {
@@ -61,7 +60,7 @@ const Button = ({
 }: ButtonPropType) => {
   const { whiteBase, gray600, primary600, error600 } = useGetColors();
 
-  const getClassName = (variant) => {
+  const getClassName = (btnVariant) => {
     const classes = {
       primary: styles.primary,
       'primary-destructive': styles.primaryDestructive,
@@ -72,10 +71,10 @@ const Button = ({
       'tertiary-destructive': styles.tertiaryDestructive,
       link: styles.link,
     };
-    return classes[variant];
+    return classes[btnVariant];
   };
 
-  const getLoaderColor = (variant) => {
+  const getLoaderColor = (btnVariant) => {
     const colors = {
       primary: whiteBase,
       'primary-destructive': whiteBase,
@@ -86,7 +85,7 @@ const Button = ({
       'tertiary-destructive': error600,
       link: primary600,
     };
-    return colors[variant];
+    return colors[btnVariant];
   };
 
   const handleClick = (e) => {
@@ -110,10 +109,7 @@ const Button = ({
       rightSection={trailingIcon}
       leftSection={
         loading ? (
-          <Loader
-            color={getLoaderColor(variant)}
-            size={getSizes(size).loader}
-          />
+          <Loader color={getLoaderColor(variant)} size={getSizes(size).loader} />
         ) : (
           leadingIcon
         )

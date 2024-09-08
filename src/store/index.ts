@@ -1,33 +1,39 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { UnknownAction, configureStore } from '@reduxjs/toolkit';
 import {
-  persistReducer,
-  persistStore,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
   REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { apiSlice } from "./api/apiSlice";
+  REHYDRATE,
+  persistReducer,
+  persistStore,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import rootReducer from "./rootReducer";
+import { apiSlice } from './api/apiSlice';
+import rootReducer from './rootReducer';
+
+const resettableRootReducer = (state: ReturnType<typeof rootReducer>, action: UnknownAction) => {
+  if (action.type === 'store/reset') {
+    return rootReducer(undefined, action);
+  }
+
+  return rootReducer(state, action);
+};
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   version: 1,
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, resettableRootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  devTools: import.meta.env.NODE_ENV !== "production",
+  devTools: import.meta.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     getDefaultMiddleware({
       // Redux persist
       // serializableCheck: false,

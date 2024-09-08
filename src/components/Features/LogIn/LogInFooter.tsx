@@ -7,12 +7,7 @@ const LogInFooter = () => {
   return (
     <div className='flex justify-center items-center gap-1'>
       <Text className='text-md text-gray-600'>Don’t have an account?</Text>
-      <Button
-        variant='link'
-        size='md'
-        className='px-0'
-        onClick={() => navigate(`/signup`)}
-      >
+      <Button variant='link' size='md' className='px-0' onClick={() => navigate(`/signup`)}>
         Sign Up
       </Button>
     </div>

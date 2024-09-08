@@ -1,1 +1,1 @@
-export { Menu as default } from "@mantine/core";
+export { Menu as default } from '@mantine/core';

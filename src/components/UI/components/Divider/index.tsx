@@ -1,1 +1,1 @@
-export { Divider as default } from "@mantine/core";
+export { Divider as default } from '@mantine/core';

@@ -1,15 +1,15 @@
 export type GatewayType =
-  | "hubspot"
-  | "klaviyo"
-  | "postmark"
-  | "twilio"
-  | "sinch"
-  | "clicksend"
-  | "flowroute"
-  | "onesignal"
-  | "sendgrid"
-  | "resend"
-  | "mailgun";
+  | 'hubspot'
+  | 'klaviyo'
+  | 'postmark'
+  | 'twilio'
+  | 'sinch'
+  | 'clicksend'
+  | 'flowroute'
+  | 'onesignal'
+  | 'sendgrid'
+  | 'resend'
+  | 'mailgun';
 
 export interface IntegrationInterface {
   // email
@@ -67,7 +67,7 @@ export interface IntegrationInterface {
 }
 
 export interface GatewayInterface {
-  category: "sms" | "email";
+  category: 'sms' | 'email';
   name: string;
   headline: string;
   gateway: GatewayType;
@@ -84,7 +84,7 @@ export interface BrandInterface {
   isLinkedInAccountAdded?: boolean;
   isTiktokAccountAdded?: boolean;
   resourceId?: string;
-  resourceType?: "Brand";
+  resourceType?: 'Brand';
   emailIntegrations?: IntegrationInterface;
   smsIntegrations?: IntegrationInterface;
   markTag?: {

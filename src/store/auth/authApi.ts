@@ -1,30 +1,33 @@
-import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
-import { Auth } from "aws-amplify";
-import toast from "react-hot-toast";
-import { apiSlice } from "../api/apiSlice";
-import { setIsAuthenticated, setUserEmail, logout } from "./authSlice";
-const UserNotConfirmedException = "UserNotConfirmedException";
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
+import { Auth } from 'aws-amplify';
+import toast from 'react-hot-toast';
+import { persistor } from 'src/store';
+
+import { apiSlice } from '../api/apiSlice';
+import { logout, setIsAuthenticated, setUserEmail } from './authSlice';
+
+const UserNotConfirmedException = 'UserNotConfirmedException';
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
-      queryFn: async (arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
         const { email, password } = arg;
-        const loading = toast.loading("Logging in...");
+        const loading = toast.loading('Logging in...');
         try {
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
-          toast.success("Successfully logged in.");
-          window.location.href = "/";
+          toast.success('Successfully logged in.');
+          window.location.href = '/';
         } catch (error) {
           if (error?.code === UserNotConfirmedException) {
-            window.location.href = "/verify";
+            window.location.href = '/verify';
           } else {
-            toast.error(error?.message || "Something went wrong!");
+            toast.error(error?.message || 'Something went wrong!');
           }
         } finally {
           toast.dismiss(loading);
@@ -32,38 +35,38 @@ export const authApi = apiSlice.injectEndpoints({
       },
     }),
     signup: builder.mutation({
-      queryFn: async (arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
         const { name, email, password } = arg;
-        const loading = toast.loading("Signin in...");
+        const loading = toast.loading('Signin in...');
         try {
           // Add user to cognito
           await Auth.signUp({
             username: email,
             password,
             attributes: {
-              "custom:fullName": name,
+              'custom:fullName': name,
             },
           });
           dispatch(setUserEmail(email));
 
-          toast.success("Successfully sign up.");
+          toast.success('Successfully sign up.');
           window.location.href = `/verify`;
         } catch (error) {
-          toast.error(error?.message || "Something went wrong");
+          toast.error(error?.message || 'Something went wrong');
         } finally {
           toast.dismiss(loading);
         }
       },
     }),
     googleSignIn: builder.mutation({
-      queryFn: async (_arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
-      async onQueryStarted(_arg, { dispatch, getState }) {
-        const loading = toast.loading("Signing in with Google...");
+      async onQueryStarted(_arg, { dispatch }) {
+        const loading = toast.loading('Signing in with Google...');
         try {
           await Auth.federatedSignIn({
             provider: CognitoHostedUIIdentityProvider.Google,
@@ -75,61 +78,65 @@ export const authApi = apiSlice.injectEndpoints({
           dispatch(setUserEmail(email));
 
           toast.dismiss(loading);
-          toast.success("Successfully signed in with Google.");
-          window.location.href = "/";
+          toast.success('Successfully signed in with Google.');
+          window.location.href = '/';
         } catch (error) {
           toast.dismiss(loading);
-          toast.error("Error signing in with Google.");
+          toast.error('Error signing in with Google.');
         }
       },
     }),
     verify: builder.mutation({
-      queryFn: async (_arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
-      async onQueryStarted(_arg, { dispatch, getState }) {
+      async onQueryStarted(_arg) {
         const { email, confirmationPin } = _arg;
-        const loading = toast.loading("Verifying...");
+        const loading = toast.loading('Verifying...');
         try {
           await Auth.confirmSignUp(email, confirmationPin);
-          toast.success("Verification successful!");
-          window.location.href = "/login";
+          toast.success('Verification successful!');
+          window.location.href = '/login';
         } catch (error) {
-          toast.error(error?.message || "Something went wrong!");
+          toast.error(error?.message || 'Something went wrong!');
         } finally {
           toast.dismiss(loading);
         }
       },
     }),
     resendVerificationCode: builder.mutation({
-      queryFn: async (_arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(_arg) {
         const { email } = _arg;
-        const loading = toast.loading("Resending code...");
+        const loading = toast.loading('Resending code...');
         try {
           await Auth.resendSignUp(email);
-          toast.success("Code has been sent to your email!");
+          toast.success('Code has been sent to your email!');
         } catch (error) {
-          toast.error(error?.message || "Something went wrong!");
+          toast.error(error?.message || 'Something went wrong!');
         } finally {
           toast.dismiss(loading);
         }
       },
     }),
     logout: builder.mutation({
-      queryFn: async (_arg, _queryApi, _extraOptions, fetchWithBQ) => {
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(_arg, { dispatch }) {
         Auth.signOut();
         dispatch(logout());
-        const loading = toast.loading("Logging out...");
+        const loading = toast.loading('Logging out...');
         toast.dismiss(loading);
+        dispatch({ type: 'store/reset' });
         dispatch(apiSlice.util.resetApiState());
+        persistor.purge().then((_) => {
+          // resolved
+        });
         window.localStorage.clear();
-        window.location.href = "/login";
+        window.location.href = '/login';
       },
     }),
   }),

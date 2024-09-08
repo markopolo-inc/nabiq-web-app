@@ -11,8 +11,7 @@ const VerifyLogoComponent = ({ email }) => {
           Check your email to continue
         </Text>
         <Text className='text-center text-xl text-gray-500'>
-          We have sent an email to{' '}
-          <span className='text-gray-700'>{email}</span>
+          We have sent an email to <span className='text-gray-700'>{email}</span>
         </Text>
       </div>
     </>

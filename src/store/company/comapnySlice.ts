@@ -1,17 +1,16 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { CompanyInterface } from "interfaces/company.interface";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import type { CompanyInterface } from 'interfaces/company.interface';
 
 const initialState: CompanyInterface = {
-  resourceId: "",
-  companyName: "",
+  resourceId: '',
+  companyName: '',
 };
 
 const companySlice = createSlice({
-  name: "company",
+  name: 'company',
   initialState,
   reducers: {
-    setCompany: (state, action: PayloadAction<CompanyInterface>) =>
-      action.payload,
+    setCompany: (state, action: PayloadAction<CompanyInterface>) => action.payload,
   },
 });
 

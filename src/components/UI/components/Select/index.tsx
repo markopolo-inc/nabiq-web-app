@@ -1,10 +1,9 @@
-import { Select as SelectField, SelectProps } from "@mantine/core";
-import { FiChevronDown } from "@nabiq-icons";
-import { useGetColors } from "@nabiq-ui";
+import { Select as SelectField, SelectProps } from '@mantine/core';
+import { FiChevronDown } from '@nabiq-icons';
+import { useGetColors } from '@nabiq-ui';
 
-import Text from "../Text";
-
-import styles from "./Select.module.scss";
+import Text from '../Text';
+import styles from './Select.module.scss';
 
 const Select = ({ label, required, ...rest }: SelectProps) => {
   const { gray700, gray500 } = useGetColors();
@@ -19,15 +18,15 @@ const Select = ({ label, required, ...rest }: SelectProps) => {
           zIndex: 9999,
         },
       }}
-      checkIconPosition="right"
+      checkIconPosition='right'
       label={
         label && (
           <Text
-            size="14px"
+            size='14px'
             color={gray700}
             weight={500}
             style={{
-              display: label ? "inline-block" : "none",
+              display: label ? 'inline-block' : 'none',
               marginBottom: label ? 4 : 0,
             }}
           >
@@ -35,13 +34,7 @@ const Select = ({ label, required, ...rest }: SelectProps) => {
           </Text>
         )
       }
-      rightSection={
-        <FiChevronDown
-          size={20}
-          style={{ cursor: "pointer" }}
-          color={gray500}
-        />
-      }
+      rightSection={<FiChevronDown size={20} style={{ cursor: 'pointer' }} color={gray500} />}
       {...rest}
     />
   );

@@ -1,8 +1,7 @@
-import { useGetColors } from '@nabiq-ui';
 import { TextInput as Input, TextInputProps } from '@mantine/core';
+import { useGetColors } from '@nabiq-ui';
 
 import Text from '../Text';
-
 import styles from './Input.module.scss';
 
 const TextInput = ({ label, required = false, ...rest }: TextInputProps) => {

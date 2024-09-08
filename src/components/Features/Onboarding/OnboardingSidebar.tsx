@@ -15,12 +15,9 @@ const OnboardingSidebar = () => {
         <Image className='w-36' src={logo} alt='' />
 
         <div className='mt-16 flex flex-col gap-3'>
-          <Text className='display-xl font-medium text-white'>
-            Before we start...
-          </Text>
+          <Text className='display-xl font-medium text-white'>Before we start...</Text>
           <Text className='text-xl text-gray-300'>
-            Providing your business information will help us optimize your
-            experience.
+            Providing your business information will help us optimize your experience.
           </Text>
         </div>
       </div>

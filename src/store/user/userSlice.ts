@@ -1,14 +1,14 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { UserInterface } from "interfaces/user.interface";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import type { UserInterface } from 'interfaces/user.interface';
 
 const initialState: UserInterface = {
-  resourceId: "",
-  userEmail: "",
-  userName: "",
+  resourceId: '',
+  userEmail: '',
+  userName: '',
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<UserInterface>) => action.payload,

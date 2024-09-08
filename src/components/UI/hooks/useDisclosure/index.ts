@@ -1,1 +1,1 @@
-export { useDisclosure as default } from "@mantine/hooks";
+export { useDisclosure as default } from '@mantine/hooks';

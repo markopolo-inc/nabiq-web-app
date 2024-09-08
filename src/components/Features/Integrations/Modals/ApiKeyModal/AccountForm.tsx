@@ -1,33 +1,33 @@
-import { Alert } from "@mantine/core";
-import { Button, Stack, Select } from "@nabiq-ui";
-import { capitalize } from "lodash";
-import { useState } from "react";
-import { GatewayInterface } from "src/interfaces/brand.interface";
-import { useAppSelector } from "src/store/hooks";
-import { useAddAccountsMutation } from "src/store/integrations/integrations.api";
+import { Alert } from '@mantine/core';
+import { Button, Select, Stack } from '@nabiq-ui';
+import { capitalize } from 'lodash';
+import { useState } from 'react';
+import { GatewayInterface } from 'src/interfaces/brand.interface';
+import { useAppSelector } from 'src/store/hooks';
+import { useAddAccountsMutation } from 'src/store/integrations/integrations.api';
 
 const accountSelectionIds = {
   // email
   postmark: {
-    servers: { value: "serverId", label: "serverName" },
-    signatures: { value: "ID", label: "EmailAddress" },
+    servers: { value: 'serverId', label: 'serverName' },
+    signatures: { value: 'ID', label: 'EmailAddress' },
   },
   onesignal: {
-    accounts: { value: "id", label: "name" },
+    accounts: { value: 'id', label: 'name' },
   },
   resend: {
-    domains: { value: "name", label: "name" },
+    domains: { value: 'name', label: 'name' },
   },
-  mailgun: { domains: { value: "name", label: "name" } },
+  mailgun: { domains: { value: 'name', label: 'name' } },
   clicksend: {
-    accounts: { value: "subaccount_id", label: "first_name" },
+    accounts: { value: 'subaccount_id', label: 'first_name' },
   },
 
   // sms
   twilio: {
     servers: {
-      value: "urls",
-      label: "username",
+      value: 'urls',
+      label: 'username',
     },
   },
 };
@@ -43,10 +43,10 @@ const AccountForm: React.FC<{
   const fields = Object.keys(selectableObjects || {});
   const [payload, setPayload] = useState({});
 
-  console.log(payload);
+  // console.log(payload);
   return (
     <Stack>
-      <Alert color="green" title={message || "Account verified!"} />
+      <Alert color='green' title={message || 'Account verified!'} />
 
       <form
         onSubmit={async (e) => {
@@ -68,10 +68,8 @@ const AccountForm: React.FC<{
       >
         <Stack>
           {fields?.map((field, idx) => {
-            const attributeValue =
-              accountSelectionIds[gateway.gateway][field]?.value;
-            const attributeLabel =
-              accountSelectionIds[gateway.gateway][field]?.label;
+            const attributeValue = accountSelectionIds[gateway.gateway][field]?.value;
+            const attributeLabel = accountSelectionIds[gateway.gateway][field]?.label;
 
             const data = selectableObjects[field]?.map((item) => {
               return {
@@ -83,12 +81,12 @@ const AccountForm: React.FC<{
             return (
               <Select
                 value={payload?.[field]?.value}
-                placeholder="Select..."
+                placeholder='Select...'
                 onChange={(value) =>
-                  setPayload((payload) => ({
-                    ...payload,
+                  setPayload((state) => ({
+                    ...state,
                     [field]: selectableObjects[field]?.find(
-                      (item) => String(item?.[attributeValue]) === value
+                      (item) => String(item?.[attributeValue]) === value,
                     ),
                   }))
                 }
@@ -99,7 +97,7 @@ const AccountForm: React.FC<{
             );
           })}
           <Button
-            type="submit"
+            type='submit'
             fullWidth
             loading={isLoading}
             //   disabled={hasEmptyField(form.values)}

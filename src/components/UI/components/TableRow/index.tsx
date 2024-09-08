@@ -5,10 +5,7 @@ import styles from './index.module.css';
 const TableRow = ({
   className,
   ...rest
-}: React.DetailedHTMLProps<
-  React.HTMLAttributes<HTMLTableRowElement>,
-  HTMLTableRowElement
->) => {
+}: React.DetailedHTMLProps<React.HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>) => {
   return <tr className={`${styles.tr} ${className}`} {...rest} />;
 };
 

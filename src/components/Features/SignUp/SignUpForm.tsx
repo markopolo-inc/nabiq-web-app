@@ -2,17 +2,13 @@ import { useForm } from '@mantine/form';
 import { Button, Image, PasswordInput, Text, TextInput } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import googleLogo from 'src/assets/onboarding/google.svg';
-import {
-  useGoogleSignInMutation,
-  useSignupMutation,
-} from 'src/store/auth/authApi';
+import { useGoogleSignInMutation, useSignupMutation } from 'src/store/auth/authApi';
 import { trimAllValuesOfObject } from 'src/utils/stringUtils';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
-  const [googleSignIn, { isLoading: isGoogleLoading }] =
-    useGoogleSignInMutation();
+  const [googleSignIn, { isLoading: isGoogleLoading }] = useGoogleSignInMutation();
 
   const form = useForm({
     initialValues: {
@@ -45,17 +41,9 @@ const SignUpForm = () => {
       <Text className='display-xs font-semibold text-gray-900'>Sign up</Text>
 
       <div className='space-y-5'>
-        <TextInput
-          label='Name'
-          placeholder='Enter your name'
-          {...form.getInputProps('name')}
-        />
+        <TextInput label='Name' placeholder='Enter your name' {...form.getInputProps('name')} />
 
-        <TextInput
-          label='Email'
-          placeholder='Enter your email'
-          {...form.getInputProps('email')}
-        />
+        <TextInput label='Email' placeholder='Enter your email' {...form.getInputProps('email')} />
 
         <PasswordInput
           label='Password'
@@ -65,12 +53,7 @@ const SignUpForm = () => {
         />
       </div>
 
-      <Button
-        variant='link'
-        size='sm'
-        className='px-0'
-        onClick={() => navigate('/reset-pass')}
-      >
+      <Button variant='link' size='sm' className='px-0' onClick={() => navigate('/reset-pass')}>
         Forgot password?
       </Button>
 
