@@ -1,5 +1,5 @@
 import { FiCursorClick01, FiHelpCircle, FiInfinity, FiZapFast } from '@nabiq-icons';
-import { Button, Group, Modal, Stack } from '@nabiq-ui';
+import { Button, Group, Modal, Stack, Tooltip } from '@nabiq-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,8 @@ import { useAppSelector } from 'src/store/hooks';
 const goals = [
   {
     title: 'Acquisition',
-    headline:
+    headline: 'To acquire new customers either for paying, trial or freemium.',
+    tooltip:
       'Select this goal to attract new customers. Focus on acquiring paying users, trial users, or freemium users, depending on your business model.',
     icon: FiZapFast,
     color: '#EE46BC',
@@ -17,7 +18,8 @@ const goals = [
   },
   {
     title: 'Activation',
-    headline:
+    headline: 'To convert trail/freemium users to paying customers.',
+    tooltip:
       'Choose this goal to convert trial or freemium users into paying customers. It’s all about getting existing users to take the next step.',
     icon: FiCursorClick01,
     color: '#2E90FA',
@@ -25,7 +27,8 @@ const goals = [
   },
   {
     title: 'Retention',
-    headline:
+    headline: 'To push recurring subscription, cross-sell and upsell.',
+    tooltip:
       'Use this goal to increase customer loyalty. Boost recurring subscriptions, encourage cross-sells, or promote upsells to maintain and grow your customer base.',
     icon: FiInfinity,
     color: '#17B26A',
@@ -57,7 +60,9 @@ const ModalBody = ({ setOpened }) => {
                 className='w-[310px] p-8 border shadow-sm border-gray-200 rounded-xl'
               >
                 <Group justify='end'>
-                  <FiHelpCircle color='#9AA4B2' size={20} style={{ cursor: 'pointer' }} />
+                  <Tooltip text={goal.tooltip}>
+                    <FiHelpCircle color='#9AA4B2' size={20} style={{ cursor: 'pointer' }} />
+                  </Tooltip>
                 </Group>
                 <Stack align='center'>
                   <Icon size={32} color={goal.color} />
@@ -95,6 +100,7 @@ const CampaignGoalModal: React.FC<{
 }> = ({ showModal, setShowModal }) => {
   return (
     <Modal
+      zIndex={999}
       size='fit-content'
       withCustomClose
       toggleFromOutside={showModal}

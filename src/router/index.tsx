@@ -16,7 +16,7 @@ const VerifyEmail = lazy(() => import('pages/VerifyEmail'));
 const Onboarding = lazy(() => import('pages/Onboarding'));
 const Integrations = lazy(() => import('pages/Integrations'));
 const Campaigns = lazy(() => import('pages/Campaigns'));
-const Settings = lazy(() => import('pages/Campaigns'));
+const Settings = lazy(() => import('pages/Settings'));
 const Monitoring = lazy(() => import('pages/Monitoring'));
 const ControlRoom = lazy(() => import('pages/ControlRoom'));
 const ControlRoomCohort = lazy(() => import('pages/ControlRoom/Cohort'));

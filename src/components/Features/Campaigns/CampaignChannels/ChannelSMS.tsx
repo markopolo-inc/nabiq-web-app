@@ -1,6 +1,8 @@
 import { Message } from '@nabiq-icons';
-import { Select, Text } from '@nabiq-ui';
+import { Group, Select, Text } from '@nabiq-ui';
+import { capitalize } from 'lodash';
 import { useDispatch } from 'react-redux';
+import GatewayLogo from 'src/components/UI/GatewayLogo';
 import { GatewayType } from 'src/interfaces/brand.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
@@ -21,7 +23,25 @@ const ChannelSMS = () => {
       <Select
         value={(campaign?.channels || []).find((item) => item.channel === 'sms')?.platform}
         placeholder='No platform selected'
-        data={Object.keys(smsIntegrations || {})}
+        data={Object.keys(smsIntegrations || {})?.map((item) => ({
+          label: capitalize(item),
+          value: item,
+        }))}
+        leftSection={
+          <GatewayLogo
+            width={18}
+            app={
+              (campaign?.channels || []).find((item) => item.channel === 'sms')
+                ?.platform as GatewayType
+            }
+          />
+        }
+        renderOption={(option) => (
+          <Group>
+            <GatewayLogo width={18} app={option.option.value as GatewayType} />
+            <p className='text-grey-900 font-medium'>{option.option.label}</p>
+          </Group>
+        )}
         onChange={(value) => {
           const channels = campaign?.channels?.filter((item) => item.channel !== 'sms') || [];
           channels.push({
