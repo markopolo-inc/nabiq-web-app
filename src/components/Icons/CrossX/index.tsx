@@ -1,6 +1,12 @@
 import { PropTypes } from '../types';
 
-const CrossX = ({ color = '#12B76A', size = 10, strokeWidth = 1.5, onClick, style }: PropTypes) => {
+const CrossX = ({
+  color = 'currentColor',
+  size = 10,
+  strokeWidth = 1.5,
+  onClick,
+  style,
+}: PropTypes) => {
   return (
     <svg
       width={size}

@@ -1,7 +1,9 @@
 import { FiCheckVerified01, FiHourglass03 } from '@nabiq-icons';
 import { OptionTabs, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import Published from 'src/components/Features/ControlRoom/Published';
 import Queued from 'src/components/Features/ControlRoom/Queued';
+import { ControlRoomConfigInterface } from 'src/interfaces/controlRoom.interface';
 import { useGetConfigsQuery } from 'src/store/controlRoom/controlRoom.api';
 
 export const appCategories = [
@@ -22,7 +24,7 @@ const ControlRoom = () => {
 
   const { data } = useGetConfigsQuery({ type: category, limit: 10, page: 1 });
 
-  const configs = data?.data?.configs || [];
+  const configs: ControlRoomConfigInterface[] = data?.data?.configs || [];
   return (
     <Stack gap={32}>
       <Stack gap={64}>
@@ -38,7 +40,7 @@ const ControlRoom = () => {
       </Stack>
       <Stack align='center'>
         {category === 'queued' && <Queued configs={configs} />}
-        {category === 'published' && <div>Published</div>}
+        {category === 'published' && <Published configs={configs} />}
       </Stack>
     </Stack>
   );

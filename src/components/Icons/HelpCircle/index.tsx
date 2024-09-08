@@ -1,7 +1,7 @@
 import { PropTypes } from '../types';
 
 const HelpCircle = ({
-  color = '#12B76A',
+  color = 'currentColor',
   size = 10,
   strokeWidth = 1.5,
   onClick,

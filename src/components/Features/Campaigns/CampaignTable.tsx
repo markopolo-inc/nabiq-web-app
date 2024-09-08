@@ -92,14 +92,16 @@ const CampaignTable = () => {
   return (
     <Table banner={banner} withBanner>
       <TableHead>
-        {CAMPAIGN_TABLE_HEADERS.map((item) => (
-          <Th key={item}>
-            <div className='flex items-center gap-1'>
-              <div className='text-xs font-medium text-gray-600'>{item}</div>
-              <ArrowNarrowDown size={16} color='#475467' />
-            </div>
-          </Th>
-        ))}
+        <TableRow>
+          {CAMPAIGN_TABLE_HEADERS.map((item) => (
+            <Th key={item}>
+              <div className='flex items-center gap-1'>
+                <div className='text-xs font-medium text-gray-600'>{item}</div>
+                <ArrowNarrowDown size={16} color='#475467' />
+              </div>
+            </Th>
+          ))}
+        </TableRow>
 
         <Th></Th>
       </TableHead>

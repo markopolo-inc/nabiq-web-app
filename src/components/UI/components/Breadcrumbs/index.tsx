@@ -5,7 +5,10 @@ import { FiChevronRight } from 'src/components/Icons';
 const CustomBreadCrumbs = () => {
   const { pathname } = useLocation();
   // const navigate = useNavigate();
-  const links = pathname.split('/')?.slice(1);
+  const links = pathname
+    .split('/')
+    ?.slice(1)
+    .filter((item) => !/[0-9]+/.test(item));
   return (
     <Breadcrumbs separator={<FiChevronRight size={16} color='#9AA4B2' />}>
       {links?.map((item, idx) => (
