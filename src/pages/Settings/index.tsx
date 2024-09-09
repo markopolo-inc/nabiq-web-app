@@ -1,35 +1,27 @@
 import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
-import {
-  Button,
-  Dropzone,
-  Grid,
-  Group,
-  Image,
-  PasswordInput,
-  Select,
-  Stack,
-  TextInput,
-} from '@nabiq-ui';
+import { Button, Dropzone, Grid, Group, Image, Select, Stack, TextInput } from '@nabiq-ui';
 import { useState } from 'react';
 import HeaderTitle from 'src/layouts/HeaderTitle';
+import { useAppSelector } from 'src/store/hooks.ts';
 
 const Settings = () => {
   const [files, setFiles] = useState<FileWithPath[]>([]);
+  const user = useAppSelector((state) => state.user);
+  const company = useAppSelector((state) => state.company);
 
   const form = useForm({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      businessName: '',
+      userName: user.userName,
+      userEmail: user.userEmail,
+      profilePhoto: '',
+      businessName: company.companyName,
       industry: '',
       businessSize: '',
     },
     validate: {
-      name: (value) => (value.length === 0 ? 'Name is required' : null),
-      email: (value) => (value.length === 0 ? 'Email is required' : null),
-      password: (value) => (value.length === 0 ? 'Password is required' : null),
+      userName: (value) => (value.length === 0 ? 'Name is required' : null),
+      userEmail: (value) => (value.length === 0 ? 'Email is required' : null),
       businessName: (value) => (value?.length === 0 ? 'Business name is required' : null),
       industry: (value) => (value?.length === 0 ? 'Industry is required' : null),
     },
@@ -77,20 +69,14 @@ const Settings = () => {
               <TextInput
                 label='Name'
                 placeholder='Enter your name'
-                {...form.getInputProps('name')}
+                {...form.getInputProps('userName')}
               />
 
               <TextInput
                 label='Email'
                 placeholder='Enter your email'
-                {...form.getInputProps('email')}
-              />
-
-              <PasswordInput
-                label='Password'
-                placeholder='Enter your password'
-                description='Password must contain at least 8 characters.'
-                {...form.getInputProps('password')}
+                {...form.getInputProps('userEmail')}
+                disabled
               />
 
               <div className='flex flex-col gap-1.5'>
