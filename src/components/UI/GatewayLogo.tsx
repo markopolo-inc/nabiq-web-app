@@ -4,7 +4,7 @@ import FlowRoute from 'assets/integraions/FlowRoute.svg';
 import Hubspot from 'assets/integraions/HubspotLogo.svg';
 import MailGun from 'assets/integraions/MailGunLogo.svg';
 import OneSignal from 'assets/integraions/OneSignalLogo.svg';
-import Postmark from 'assets/integraions/PostmarkLogo.png';
+import Postmark from 'assets/integraions/PostmarkLogo.svg';
 import Resend from 'assets/integraions/Resend.svg';
 import SendGrid from 'assets/integraions/SendGridLogo.svg';
 import Sinch from 'assets/integraions/SinchLogo.svg';

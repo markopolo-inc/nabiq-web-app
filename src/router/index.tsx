@@ -21,7 +21,7 @@ const Monitoring = lazy(() => import('pages/Monitoring'));
 const ControlRoom = lazy(() => import('pages/ControlRoom'));
 const ControlRoomCohort = lazy(() => import('pages/ControlRoom/Cohort'));
 const ControlRoomContent = lazy(() => import('pages/ControlRoom/Cohort/Content'));
-const ControlRoomPublished = lazy(() => import('pages/ControlRoom/Published'));
+const ControlRoomPublished = lazy(() => import('src/pages/ControlRoom/PublishedContent'));
 const Test = lazy(() => import('src/pages/Test'));
 
 const Router = () => {
@@ -41,7 +41,10 @@ const Router = () => {
                   path='/control-room/cohort/content/:configId'
                   element={<ControlRoomContent />}
                 />
-                <Route path='/control-room/published' element={<ControlRoomPublished />} />
+                <Route
+                  path='/control-room/published/:configId'
+                  element={<ControlRoomPublished />}
+                />
                 <Route path='/monitoring' element={<Monitoring />} />
                 <Route path='/settings' element={<Settings />} />
                 <Route path='/campaigns/campaign-configuration' element={<CreateCampaign />} />

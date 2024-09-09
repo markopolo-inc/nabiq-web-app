@@ -1,7 +1,10 @@
 import { FiCheckVerified01, FiHourglass03 } from '@nabiq-icons';
 import { OptionTabs, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import Published from 'src/components/Features/ControlRoom/Published';
 import Queued from 'src/components/Features/ControlRoom/Queued';
+import ContentLoader from 'src/components/UI/ContentLoader';
+import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
 import { useGetConfigsQuery } from 'src/store/controlRoom/controlRoom.api';
 
 export const appCategories = [
@@ -20,9 +23,10 @@ export const appCategories = [
 const ControlRoom = () => {
   const [category, setCategory] = useState<'queued' | 'published'>('queued');
 
-  const { data } = useGetConfigsQuery({ type: category, limit: 10, page: 1 });
+  const { data, isLoading } = useGetConfigsQuery({ type: category, limit: 10, page: 1 });
 
-  const configs = data?.data?.configs || [];
+  const configs: IControlRoomConfig[] = data?.data?.configs || [];
+
   return (
     <Stack gap={32}>
       <Stack gap={64}>
@@ -36,10 +40,14 @@ const ControlRoom = () => {
         </Stack>
         <OptionTabs setActive={setCategory} active={category} options={appCategories} />
       </Stack>
-      <Stack align='center'>
-        {category === 'queued' && <Queued configs={configs} />}
-        {category === 'published' && <div>Published</div>}
-      </Stack>
+      {isLoading ? (
+        <ContentLoader />
+      ) : (
+        <Stack align='center'>
+          {category === 'queued' && <Queued configs={configs} />}
+          {category === 'published' && <Published configs={configs} />}
+        </Stack>
+      )}
     </Stack>
   );
 };

@@ -5,11 +5,12 @@ import { useGetColors } from '@nabiq-ui';
 import Text from '../Text';
 import styles from './Select.module.scss';
 
-const Select = ({ label, required, ...rest }: SelectProps) => {
+const Select = ({ label, required, allowDeselect = false, ...rest }: SelectProps) => {
   const { gray700, gray500 } = useGetColors();
 
   return (
     <SelectField
+      allowDeselect={allowDeselect}
       classNames={{
         input: styles.input,
       }}

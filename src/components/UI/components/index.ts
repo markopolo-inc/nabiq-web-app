@@ -64,3 +64,6 @@ export { default as Menu } from './Menu';
 
 // Progress
 export { default as Progress } from './Progress';
+
+// Tooltop
+export { default as Tooltip } from './Tooltip';

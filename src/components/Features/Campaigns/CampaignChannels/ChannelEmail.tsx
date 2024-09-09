@@ -1,14 +1,37 @@
 import { Envelope } from '@nabiq-icons';
-import { Select, Text } from '@nabiq-ui';
+import { Group, Select, Text } from '@nabiq-ui';
+import { capitalize } from 'lodash';
+// import { HTMLAttributes, ReactNode, forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
+import GatewayLogo from 'src/components/UI/GatewayLogo';
 import { GatewayType } from 'src/interfaces/brand.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
+
+// interface SelectItemProps extends HTMLAttributes<HTMLDivElement> {
+//   label: string;
+//   value: any;
+//   icon?: ReactNode;
+//   type?: string;
+// }
 
 const ChannelEmail = () => {
   const { emailIntegrations } = useAppSelector((state) => state.brand);
   const { campaign } = useAppSelector((state) => state);
   const dispatch = useDispatch();
+
+  // const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
+  //   ({ label, icon, ...others }, ref) => (
+  //     <div ref={ref} {...others}>
+  //       <Group wrap='nowrap'>
+  //         <Text style={{ margin: 0 }}>
+  //           {icon && icon}&nbsp; &nbsp;{label}
+  //         </Text>
+  //       </Group>
+  //     </div>
+  //   ),
+  // );
+
   return (
     <div className='w-full flex justify-between items-center bg-white border border-gray-200 rounded-xl p-4 '>
       <div className='flex gap-3'>
@@ -20,7 +43,25 @@ const ChannelEmail = () => {
       <Select
         value={(campaign?.channels || []).find((item) => item.channel === 'email')?.platform}
         placeholder='No platform selected'
-        data={Object.keys(emailIntegrations || {})}
+        data={Object.keys(emailIntegrations || {})?.map((item) => ({
+          label: capitalize(item),
+          value: item,
+        }))}
+        leftSection={
+          <GatewayLogo
+            width={18}
+            app={
+              (campaign?.channels || []).find((item) => item.channel === 'email')
+                ?.platform as GatewayType
+            }
+          />
+        }
+        renderOption={(option) => (
+          <Group>
+            <GatewayLogo width={18} app={option.option.value as GatewayType} />
+            <p className='text-grey-900 font-medium'>{option.option.label}</p>
+          </Group>
+        )}
         onChange={(value) => {
           const channels = campaign?.channels?.filter((item) => item.channel !== 'email') || [];
           channels.push({

@@ -1,6 +1,6 @@
 import { PropTypes } from '../types';
 
-const HelpCircle = ({
+const ThumbsDown = ({
   color = 'currentColor',
   size = 10,
   strokeWidth = 1.5,
@@ -9,16 +9,16 @@ const HelpCircle = ({
 }: PropTypes) => {
   return (
     <svg
-      width={size}
-      height={size}
       style={{ ...style }}
       onClick={(e) => onClick && onClick(e)}
+      width={size}
+      height={size}
       viewBox='0 0 24 24'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
-        d='M9.09 9C9.3251 8.33167 9.78915 7.76811 10.4 7.40913C11.0108 7.05016 11.7289 6.91894 12.4272 7.03871C13.1255 7.15849 13.7588 7.52152 14.2151 8.06353C14.6713 8.60553 14.9211 9.29152 14.92 10C14.92 12 11.92 13 11.92 13M12 17H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z'
+        d='M7 22V11M2 13V20C2 21.1046 2.89543 22 4 22H17.4262C18.907 22 20.1662 20.9197 20.3914 19.4562L21.4683 12.4562C21.7479 10.6389 20.3418 9 18.5032 9H15C14.4477 9 14 8.55228 14 8V4.46584C14 3.10399 12.896 2 11.5342 2C11.2093 2 10.915 2.1913 10.7831 2.48812L7.26394 10.4061C7.10344 10.7673 6.74532 11 6.35013 11H4C2.89543 11 2 11.8954 2 13Z'
         stroke={color}
         strokeWidth={strokeWidth}
         strokeLinecap='round'
@@ -28,4 +28,4 @@ const HelpCircle = ({
   );
 };
 
-export default HelpCircle;
+export default ThumbsDown;

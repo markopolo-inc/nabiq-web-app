@@ -151,7 +151,6 @@ const Badge = ({
           gap: 4,
         }}
       >
-        {' '}
         {children}
       </div>
     </BadgeField>
