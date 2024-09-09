@@ -1,14 +1,6 @@
 import { Group, OptionTabs, Select, Stack } from '@nabiq-ui';
 import { useState } from 'react';
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  Label,
-  ResponsiveContainer, //   Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { Area, AreaChart, CartesianGrid, Label, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { useGetPerformanceTrendQuery } from 'src/store/monitoring/monitoring.api';
 
 const PerformanceTrend = () => {
@@ -82,6 +74,7 @@ const PerformanceTrend = () => {
             opacity={0.4}
             stroke='#181819'
           />
+          {/* <Tooltip /> */}
           <Area
             type='monotone'
             dataKey='value'

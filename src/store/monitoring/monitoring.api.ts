@@ -5,6 +5,12 @@ interface IPerformanceTrendParams {
   timeRange: '12_months' | '30_days' | '7_days' | '24_hours';
 }
 
+interface IPerformanceComparisonParams {
+  metric: string; // Impression ...
+  campaign1: string;
+  campaign2: string;
+}
+
 const monitoringApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMetrics: builder.query<any, any>({
@@ -27,6 +33,19 @@ const monitoringApi = apiSlice.injectEndpoints({
         params: { ...args },
       }),
     }),
+    getCampaigns: builder.query<any, void>({
+      query: () => ({
+        url: '/monitoring/campaign',
+        method: 'GET',
+      }),
+    }),
+    getPerformanceComparison: builder.query<any, IPerformanceComparisonParams>({
+      query: (args) => ({
+        url: '/monitoring/performance/comparison',
+        method: 'GET',
+        params: { ...args },
+      }),
+    }),
   }),
 });
 
@@ -34,4 +53,6 @@ export const {
   useGetMetricsQuery,
   useGetTopPerformingCampaignsQuery,
   useGetPerformanceTrendQuery,
+  useGetCampaignsQuery,
+  useGetPerformanceComparisonQuery,
 } = monitoringApi;
