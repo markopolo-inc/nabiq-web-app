@@ -4,6 +4,7 @@ import { IMetrics } from 'src/interfaces/monitoring.interface';
 import { useGetMetricsQuery } from 'src/store/monitoring/monitoring.api';
 
 import MetricsCard from './MetricsCard';
+import PerformanceComparison from './PerformanceComparison';
 import PerformanceTrend from './PerformanceTrend';
 import TopPerformingCampaign from './TopPerformingCampaigns';
 
@@ -37,6 +38,7 @@ const Overview: FC<{
           <PerformanceTrend />
         </Stack>
       </div>
+      <PerformanceComparison />
     </Stack>
   );
 };
