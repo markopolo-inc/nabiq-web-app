@@ -1,4 +1,7 @@
-import { Calendar, FiDataFlow02, FiHourglass03 } from '@nabiq-icons';
+import {
+  Calendar, //  FiDataFlow02,
+  FiHourglass03,
+} from '@nabiq-icons';
 import { Group, OptionTabs, Select, Stack } from '@nabiq-ui';
 import { useState } from 'react';
 import Overview from 'src/components/Features/Monitoring/Overview';
@@ -9,11 +12,11 @@ export const appCategories = [
     label: 'Overview',
     icon: FiHourglass03,
   },
-  {
-    value: 'breakdown',
-    label: 'Breakdown',
-    icon: FiDataFlow02,
-  },
+  // {
+  //   value: 'breakdown',
+  //   label: 'Breakdown',
+  //   icon: FiDataFlow02,
+  // },
 ];
 
 const Monitoring = () => {
