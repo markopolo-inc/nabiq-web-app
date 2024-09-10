@@ -17,7 +17,7 @@ const ArrowUp = ({
     xmlns='http://www.w3.org/2000/svg'
   >
     <path
-      d='M12 19V5M12 5L5 12M12 5L19 12'
+      d='M12 5V19M12 19L19 12M12 19L5 12'
       stroke={color}
       strokeWidth={strokeWidth}
       strokeLinecap='round'

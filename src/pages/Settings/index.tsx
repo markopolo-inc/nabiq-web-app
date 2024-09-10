@@ -30,6 +30,8 @@ const Settings = () => {
       name: (value) => (value.length === 0 ? 'Name is required' : null),
       email: (value) => (value.length === 0 ? 'Email is required' : null),
       password: (value) => (value.length === 0 ? 'Password is required' : null),
+      businessName: (value) => (value?.length === 0 ? 'Business name is required' : null),
+      industry: (value) => (value?.length === 0 ? 'Industry is required' : null),
     },
   });
 
@@ -110,7 +112,7 @@ const Settings = () => {
                   <Dropzone
                     className='w-full'
                     onDrop={setFiles}
-                    // onReject={(file) => console.log('rejected files', file)}
+                    // onReject={(_files) => console.log('rejected files', _files)}
                   />
                 </div>
               </div>

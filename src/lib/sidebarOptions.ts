@@ -2,9 +2,10 @@ import {
   // FiDataFlow02,
   FiAnnouncement01,
   FiHomeLine,
+  FiLineChartUp05,
   FiPuzzlePiece02,
   FiSettings01,
-  FiSliders01, // FiLineChartUp05,
+  FiSliders01,
 } from '@nabiq-icons';
 
 // console.log("hlleo");
@@ -28,12 +29,12 @@ export const sidebarOptions = [
     to: '/campaigns',
     menuRegex: new RegExp(/^\/campaigns/, 'i'),
   },
-  // {
-  //   title: "Monitoring",
-  //   Icon: FiLineChartUp05,
-  //   to: "/monitoring",
-  //   menuRegex: new RegExp(/^\/monitoring/, "i"),
-  // },
+  {
+    title: 'Monitoring',
+    Icon: FiLineChartUp05,
+    to: '/monitoring',
+    menuRegex: new RegExp(/^\/monitoring/, 'i'),
+  },
   {
     title: 'Integrations',
     Icon: FiPuzzlePiece02,

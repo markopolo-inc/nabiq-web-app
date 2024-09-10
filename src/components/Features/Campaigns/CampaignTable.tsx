@@ -102,8 +102,6 @@ const CampaignTable = () => {
             </Th>
           ))}
         </TableRow>
-
-        <Th></Th>
       </TableHead>
       <TableBody>
         {filteredList.map((item) => {

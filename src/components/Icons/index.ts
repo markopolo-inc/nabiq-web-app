@@ -1,6 +1,7 @@
 // A
 export { default as ArrowRight } from './ArrowRight';
 export { default as ArrowUp } from './ArrowUp';
+export { default as ArrowDown } from './ArrowDown';
 export { default as ArrowNarrowLeft } from './ArrowNarrowLeft';
 export { default as ArrowNarrowDown } from './ArrowNarrowDown';
 export { default as ArrowNarrowUpRight } from './ArrowNarrowUpRight';
