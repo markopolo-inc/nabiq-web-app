@@ -1,7 +1,12 @@
-import { Calendar, FiDataFlow02, FiHourglass03 } from '@nabiq-icons';
+import {
+  Calendar, // FiDataFlow02,
+  FiHourglass03,
+} from '@nabiq-icons';
 import { Group, OptionTabs, Select, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import Breakdown from 'src/components/Features/Monitoring/Breakdown';
 import Overview from 'src/components/Features/Monitoring/Overview';
+import { useGetCampaignsQuery } from 'src/store/monitoring/monitoring.api';
 
 export const appCategories = [
   {
@@ -9,11 +14,11 @@ export const appCategories = [
     label: 'Overview',
     icon: FiHourglass03,
   },
-  {
-    value: 'breakdown',
-    label: 'Breakdown',
-    icon: FiDataFlow02,
-  },
+  // {
+  //   value: 'breakdown',
+  //   label: 'Breakdown',
+  //   icon: FiDataFlow02,
+  // },
 ];
 
 const Monitoring = () => {
@@ -21,6 +26,10 @@ const Monitoring = () => {
 
   const [timeRange, setTimeRange] = useState<'today' | 'last_week' | 'last_month'>('last_week');
 
+  const [campaignId, setCampaignId] = useState<string>('');
+
+  const { data: campaignData } = useGetCampaignsQuery();
+  const campaigns = campaignData?.data || [];
   return (
     <Stack gap={32}>
       <Stack gap={64}>
@@ -36,27 +45,41 @@ const Monitoring = () => {
           <Group justify='space-between'>
             <OptionTabs setActive={setCategory} active={category} options={appCategories} />
             <Group>
-              <Select
-                leftSection={<Calendar size={18} color='#697586' />}
-                value={timeRange}
-                onChange={(value) => setTimeRange(value as 'today' | 'last_week' | 'last_month')}
-                data={[
-                  { label: 'Today', value: 'today' },
-                  {
-                    label: 'Last week',
-                    value: 'last_week',
-                  },
-                  {
-                    label: 'Last month',
-                    value: 'last_month',
-                  },
-                ]}
-              />
+              {['overview', 'breakdown'].includes(category) && (
+                <Select
+                  leftSection={<Calendar size={18} color='#697586' />}
+                  value={timeRange}
+                  onChange={(value) => setTimeRange(value as 'today' | 'last_week' | 'last_month')}
+                  data={[
+                    { label: 'Today', value: 'today' },
+                    {
+                      label: 'Last week',
+                      value: 'last_week',
+                    },
+                    {
+                      label: 'Last month',
+                      value: 'last_month',
+                    },
+                  ]}
+                />
+              )}
+
+              {category === 'breakdown' && (
+                <Select
+                  placeholder='Select'
+                  value={campaignId}
+                  data={campaigns?.map((item) => ({ label: item.name, value: item.resourceId }))}
+                  onChange={setCampaignId}
+                />
+              )}
             </Group>
           </Group>
         </Stack>
       </Stack>
-      <Stack>{category === 'overview' && <Overview timeRange={timeRange} />}</Stack>
+      <Stack>
+        {category === 'overview' && <Overview timeRange={timeRange} />}
+        {category === 'breakdown' && <Breakdown timeRange={timeRange} campaignId={campaignId} />}
+      </Stack>
     </Stack>
   );
 };

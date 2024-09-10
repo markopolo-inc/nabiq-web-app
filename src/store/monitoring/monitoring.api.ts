@@ -46,6 +46,12 @@ const monitoringApi = apiSlice.injectEndpoints({
         params: { ...args },
       }),
     }),
+    getCohortForCampaigns: builder.query<any, string>({
+      query: (campaignId) => ({
+        url: `/monitoring/campaign/${campaignId}/cohort`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -55,4 +61,5 @@ export const {
   useGetPerformanceTrendQuery,
   useGetCampaignsQuery,
   useGetPerformanceComparisonQuery,
+  useGetCohortForCampaignsQuery,
 } = monitoringApi;

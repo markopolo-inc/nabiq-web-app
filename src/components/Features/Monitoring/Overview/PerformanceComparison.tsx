@@ -52,13 +52,13 @@ const PerformanceComparison = () => {
         </Stack>
         <Group>
           <Select
-            placeholder='Campaign 1'
+            placeholder='Select Campaign 1'
             value={campaign1}
             data={campaigns?.map((item) => ({ label: item.name, value: item.resourceId }))}
             onChange={setCampaign1}
           />
           <Select
-            placeholder='Campaign 2'
+            placeholder='SelectCampaign 2'
             value={campaign2}
             data={campaigns?.map((item) => ({ label: item.name, value: item.resourceId }))}
             onChange={setCampaign2}
@@ -100,8 +100,8 @@ const PerformanceComparison = () => {
             opacity={0.4}
             stroke='#181819'
           />
-          <Line type='monotone' dataKey='campaign1' stroke='#2972F5' />
-          <Line type='monotone' dataKey='campaign2' stroke='#DD2590' />
+          <Line type='monotone' dataKey='campaign1' stroke='#2972F5' strokeWidth={2} dot={null} />
+          <Line type='monotone' dataKey='campaign2' stroke='#DD2590' strokeWidth={2} dot={null} />
         </LineChart>
       </ResponsiveContainer>
     </Stack>
