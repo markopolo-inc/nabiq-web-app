@@ -1,14 +1,23 @@
-import { Group, Table, TableBody, TableHead, TableRow, Td, Th } from '@nabiq-ui';
+import { Button, Group, Table, TableBody, TableHead, TableRow, Td, Th } from '@nabiq-ui';
+import { useNavigate } from 'react-router-dom';
 import { useGetTopPerformingCampaignsQuery } from 'src/store/monitoring/monitoring.api';
 
 const TopPerformingCampaign = () => {
   const { data } = useGetTopPerformingCampaignsQuery();
+  const navigate = useNavigate();
 
   const campaigns = data?.data?.campaigns || [];
 
   const banner = (
-    <Group className='py-[20px] px-6'>
+    <Group className='py-[20px] px-6' justify='space-between'>
       <p className='text-gray-900 text-lg font-semibold'>Top performing campaigns</p>
+      <Button
+        variant='link'
+        size='lg'
+        onClick={() => navigate('/monitoring/top-performing-campaigns')}
+      >
+        View all
+      </Button>
     </Group>
   );
 

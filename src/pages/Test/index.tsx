@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ReactFlow, addEdge, useEdgesState, useNodesState } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 const initialNodes = [
   {
@@ -114,6 +115,7 @@ const initialEdges = [
 ];
 
 const HorizontalFlow = () => {
+  // @ts-expect-error
   const [nodes, _, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback((params) => setEdges((els) => addEdge(params, els)), []);
