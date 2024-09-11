@@ -1,5 +1,6 @@
 import {
   Breadcrumbs,
+  Button,
   Group,
   Stack,
   Table,
@@ -10,7 +11,7 @@ import {
   Th,
 } from '@nabiq-ui';
 import moment from 'moment-timezone';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MetricsCard from 'src/components/UI/MetricsCard';
 import { useGetCampaignDetailsQuery } from 'src/store/monitoring/monitoring.api';
 import { formatNumber } from 'src/utils/number';
@@ -18,6 +19,7 @@ import { formatNumber } from 'src/utils/number';
 const TopPerformingCampaignDetails = () => {
   const { campaignId } = useParams();
   const { data, isLoading } = useGetCampaignDetailsQuery(campaignId);
+  const navigate = useNavigate();
 
   const campaignDetails = data?.data || {};
 
@@ -43,6 +45,7 @@ const TopPerformingCampaignDetails = () => {
               Created on {moment(campaignDetails.createdAt).format('MMM DD, YYYY at hh:mm a')}
             </p>
           </Stack>
+          <Button onClick={() => navigate(-1)}>Go back</Button>
         </Group>
       </Stack>
 
