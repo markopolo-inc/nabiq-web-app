@@ -39,6 +39,12 @@ const monitoringApi = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getCampaignDetails: builder.query<any, string>({
+      query: (campaignId) => ({
+        url: `/monitoring/campaign/${campaignId}/detail`,
+        method: 'GET',
+      }),
+    }),
     getPerformanceComparison: builder.query<any, IPerformanceComparisonParams>({
       query: (args) => ({
         url: '/monitoring/performance/comparison',
@@ -60,6 +66,7 @@ export const {
   useGetTopPerformingCampaignsQuery,
   useGetPerformanceTrendQuery,
   useGetCampaignsQuery,
+  useGetCampaignDetailsQuery,
   useGetPerformanceComparisonQuery,
   useGetCohortForCampaignsQuery,
 } = monitoringApi;

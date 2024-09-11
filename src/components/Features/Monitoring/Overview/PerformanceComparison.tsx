@@ -1,5 +1,5 @@
 import { Group, OptionTabs, Select, Stack } from '@nabiq-ui';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CartesianGrid,
   Label,
@@ -41,6 +41,17 @@ const PerformanceComparison = () => {
     }
   });
 
+  useEffect(() => {
+    if (campaigns.length > 0) {
+      setCampaign1(campaigns[0].resourceId);
+      setCampaign2(campaigns[1].resourceId);
+    }
+    return () => {
+      setCampaign1('');
+      setCampaign2('');
+    };
+  }, [campaigns]);
+
   return (
     <Stack gap={20} className='border border-gray-200 shadow-sm rounded-xl p-6'>
       <Group justify='space-between'>
@@ -58,7 +69,7 @@ const PerformanceComparison = () => {
             onChange={setCampaign1}
           />
           <Select
-            placeholder='SelectCampaign 2'
+            placeholder='Select Campaign 2'
             value={campaign2}
             data={campaigns?.map((item) => ({ label: item.name, value: item.resourceId }))}
             onChange={setCampaign2}

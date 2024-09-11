@@ -4,7 +4,7 @@ import { Auth } from 'aws-amplify';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useOnboardUserMutation } from 'store/onboarding/onboardingApi';
-import { trimAllValuesOfObject } from 'utils/stringUtils';
+import { trimAllValuesOfObject } from 'utils/string.utils';
 
 const OnboardingForm = () => {
   const [isLoadingUser, setIsLoading] = useState(false);

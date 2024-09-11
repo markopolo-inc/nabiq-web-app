@@ -1,9 +1,9 @@
 import { Group, Stack } from '@nabiq-ui';
 import { FC } from 'react';
+import MetricsCard from 'src/components/UI/MetricsCard';
 import { IMetrics } from 'src/interfaces/monitoring.interface';
 import { useGetMetricsQuery } from 'src/store/monitoring/monitoring.api';
 
-import MetricsCard from './MetricsCard';
 import PerformanceComparison from './PerformanceComparison';
 import PerformanceTrend from './PerformanceTrend';
 import TopPerformingCampaign from './TopPerformingCampaigns';

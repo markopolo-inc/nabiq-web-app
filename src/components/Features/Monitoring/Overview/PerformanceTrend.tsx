@@ -1,4 +1,5 @@
 import { Group, OptionTabs, Select, Stack } from '@nabiq-ui';
+import moment from 'moment-timezone';
 import { useState } from 'react';
 import { Area, AreaChart, CartesianGrid, Label, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { useGetPerformanceTrendQuery } from 'src/store/monitoring/monitoring.api';
@@ -15,6 +16,21 @@ const PerformanceTrend = () => {
     '30_days': 'Day',
     '7_days': 'Day',
     '24_hours': 'Hour',
+  };
+
+  const getFormattedTime = (value: string) => {
+    switch (timeRange) {
+      case '12_months':
+        return value;
+      case '30_days':
+        return moment(value, 'DD').format('DD MMM');
+      case '7_days':
+        return value;
+      case '24_hours':
+        return moment(value, 'HH').format('HH:mm');
+      default:
+        return '';
+    }
   };
 
   return (
@@ -60,7 +76,7 @@ const PerformanceTrend = () => {
             strokeDasharray='3 3'
             opacity={0.4}
             stroke='#181819'
-            tickFormatter={(value) => value}
+            tickFormatter={(value) => getFormattedTime(value)}
             interval='equidistantPreserveStart'
           >
             <Label value={XLabelMap[timeRange]} offset={-10} position='insideBottom' />

@@ -1,6 +1,7 @@
 import { Button, Group, Table, TableBody, TableHead, TableRow, Td, Th } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import { useGetTopPerformingCampaignsQuery } from 'src/store/monitoring/monitoring.api';
+import { formatMetricUnit } from 'src/utils/string.utils';
 
 const TopPerformingCampaign = () => {
   const { data } = useGetTopPerformingCampaignsQuery();
@@ -37,17 +38,22 @@ const TopPerformingCampaign = () => {
           <TableRow key={idx}>
             <Td>{item?.name}</Td>
             <Td>
-              {item?.metrics
-                ?.find((metric) => metric?.name === 'Conversion Rate')
-                .value?.toLocaleString()}
+              {formatMetricUnit(
+                item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').value,
+                item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').type,
+              )}
             </Td>
             <Td>
-              {item?.metrics
-                ?.find((metric) => metric?.name === 'Engagement')
-                .value?.toLocaleString()}
+              {formatMetricUnit(
+                item?.metrics?.find((metric) => metric?.name === 'Engagement').value,
+                item?.metrics?.find((metric) => metric?.name === 'Engagement').type,
+              )}
             </Td>
             <Td>
-              {item?.metrics?.find((metric) => metric?.name === 'Revenue').value?.toLocaleString()}
+              {formatMetricUnit(
+                item?.metrics?.find((metric) => metric?.name === 'Revenue').value,
+                item?.metrics?.find((metric) => metric?.name === 'Revenue').type,
+              )}
             </Td>
           </TableRow>
         ))}
