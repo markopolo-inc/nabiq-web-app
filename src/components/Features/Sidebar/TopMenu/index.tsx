@@ -6,6 +6,8 @@ import { useAppSelector } from 'src/store/hooks.ts';
 
 const TopMenu = () => {
   const { userEmail, userName } = useAppSelector((state) => state.user);
+  const company = useAppSelector((state) => state.company);
+
   const { gray500 } = useGetColors();
   const [logout] = useLogoutMutation();
 
@@ -17,13 +19,22 @@ const TopMenu = () => {
     <Menu width={240} position='bottom-end'>
       <Menu.Target>
         <UnstyledButton className='w-10 h-10 rounded-full focus:ring-4 ring-[#E0E0E0]'>
-          <Image src='img.png' className='w-10 h-10 rounded-full' />
+          <Image
+            src={company?.meta?.profilePhoto}
+            className='w-10 h-10 rounded-full'
+            alt={company?.meta?.userName}
+          />
         </UnstyledButton>
       </Menu.Target>
 
       <Menu.Dropdown className='!p-0 border border-gray-200 shadow-custom-md rounded-lg'>
         <Menu.Label className='flex gap-3 py-3 px-4'>
-          <Avatar src='img.png' alt="It's me" active size='md' />
+          <Avatar
+            src={company?.meta?.profilePhoto}
+            alt={company?.meta?.userName}
+            active
+            size='md'
+          />
 
           <div className='flex flex-col items-start font-sans text-sm font-semibold leading-5 text-gray-700'>
             <div>{userName}</div>

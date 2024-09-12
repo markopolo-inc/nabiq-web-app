@@ -10,5 +10,6 @@ export interface CompanyInterface {
     businessName: string;
     industry: string;
     businessSize: string;
+    profilePhoto: string;
   };
 }
