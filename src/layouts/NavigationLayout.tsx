@@ -38,7 +38,7 @@ const NavigationLayout = () => {
         <Sidebar />
       </AppShell.Navbar>
       <AppShell.Main>
-        <div className='p-4'>
+        <div className='p-4 max-w-[1328px] mx-auto'>
           <Outlet />
         </div>
       </AppShell.Main>

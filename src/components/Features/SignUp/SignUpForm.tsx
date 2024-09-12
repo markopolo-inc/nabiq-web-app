@@ -2,7 +2,7 @@ import { useForm } from '@mantine/form';
 import { Button, Image, PasswordInput, Text, TextInput } from '@nabiq-ui';
 import googleLogo from 'src/assets/onboarding/google.svg';
 import { useGoogleSignInMutation, useSignupMutation } from 'src/store/auth/authApi';
-import { trimAllValuesOfObject } from 'src/utils/stringUtils';
+import { trimAllValuesOfObject } from 'src/utils/string.utils';
 
 const SignUpForm = () => {
   const [signup, { isLoading }] = useSignupMutation();

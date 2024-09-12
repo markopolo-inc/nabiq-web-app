@@ -10,7 +10,7 @@ import { isEmpty } from 'lodash';
 import { useState } from 'react';
 import { useAppSelector } from 'store/hooks';
 import { getAuthToken } from 'utils/auth';
-import { buildQueryString } from 'utils/stringUtils';
+import { buildQueryString } from 'utils/string.utils';
 
 const Integrations = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);

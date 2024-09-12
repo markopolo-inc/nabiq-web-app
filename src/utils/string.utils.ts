@@ -1,3 +1,5 @@
+import { formatNumber } from './number';
+
 /**
  * Trims all values of a given object and returns the resulting object.
  *
@@ -29,3 +31,23 @@ export function camelCaseToCapitalized(str) {
   // Capitalize the first letter of each word
   return result.replace(/\b\w/g, (char) => char.toUpperCase());
 }
+
+/**
+ * Formats a metric value with a unit based on the provided type.
+ *
+ * @param {string | number} value - The value to be formatted.
+ * @param {'count' | 'percentage' | 'amount'} type - The type of unit to be applied.
+ * @return {string} The formatted metric value with the unit.
+ */
+export const formatMetricUnit = (
+  value: string | number,
+  type: 'count' | 'percentage' | 'amount',
+) => {
+  const TypeMap = {
+    count: '',
+    percentage: '%',
+    amount: '$',
+  };
+
+  return `${type !== 'percentage' ? TypeMap[type] : ''} ${formatNumber(value)}${type === 'percentage' ? TypeMap[type] : ''}`;
+};

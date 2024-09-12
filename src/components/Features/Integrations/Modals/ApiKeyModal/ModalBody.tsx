@@ -6,7 +6,7 @@ import { gatewayFields } from 'lib/integration.lib';
 import React, { SetStateAction, useState } from 'react';
 import { useAppSelector } from 'src/store/hooks';
 import { hasEmptyField } from 'src/utils/object.utils';
-import { camelCaseToCapitalized, trimAllValuesOfObject } from 'src/utils/stringUtils';
+import { camelCaseToCapitalized, trimAllValuesOfObject } from 'src/utils/string.utils';
 import { useIntegrateGatewayMutation } from 'store/integrations/integrations.api';
 
 import AccountForm from './AccountForm';
