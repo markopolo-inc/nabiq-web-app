@@ -1,6 +1,7 @@
 import type { BrandInterface } from 'interfaces/brand.interface';
 import type { CompanyInterface } from 'interfaces/company.interface';
 import type { UserInterface } from 'interfaces/user.interface';
+import toast from 'react-hot-toast';
 
 import { apiSlice } from '../api/apiSlice';
 import { setBrand } from '../brand/brandSlice';
@@ -32,7 +33,32 @@ export const companyApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    updateSetting: builder.mutation<any, any>({
+      query: (args) => {
+        const { ...rest } = args;
+        return {
+          url: `/company/settings`,
+          method: 'POST',
+          body: {
+            ...rest,
+          },
+        };
+      },
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || 'Settings successfully updated!');
+          window.location.href = '/';
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to updated!');
+          return err;
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetCompanyQuery } = companyApi;
+export const { useGetCompanyQuery, useUpdateSettingMutation } = companyApi;
