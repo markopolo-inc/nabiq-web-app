@@ -3,6 +3,7 @@ import ConnectCampaignPlatforms from 'src/components/Features/Home/ConnectCampai
 import ConnectMarktag from 'src/components/Features/Home/ConnectMarktag';
 import ConnectMarktagModal from 'src/components/Features/Home/ConnectMarktagModal';
 import ConnectedMarktag from 'src/components/Features/Home/ConnectedMarktag';
+import CreateNewMarktagModal from 'src/components/Features/Home/CreateNewMarktagModal';
 import IntegrateApps from 'src/components/Features/Home/IntegrateApps';
 import HeaderTitle from 'src/layouts/HeaderTitle';
 import { useAppSelector } from 'src/store/hooks';
@@ -12,12 +13,17 @@ const Home = () => {
   const { markTag } = useAppSelector((state) => state.brand);
 
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
+  const [showNewMarktagModal, setShowNewMarktagModal] = useState<boolean>(false);
 
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
 
       <ConnectMarktagModal showModal={showMarktagModal} setShowModal={setShowMarktagModal} />
+      <CreateNewMarktagModal
+        showModal={showNewMarktagModal}
+        setShowModal={setShowNewMarktagModal}
+      />
 
       <div className='flex flex-col gap-16'>
         <div className='flex flex-col'>

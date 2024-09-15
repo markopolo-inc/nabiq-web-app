@@ -1,4 +1,5 @@
 // A
+
 export { default as ArrowRight } from './ArrowRight';
 export { default as ArrowUp } from './ArrowUp';
 export { default as ArrowDown } from './ArrowDown';
@@ -20,6 +21,7 @@ export { default as FiChevronDown } from './ChevronDown';
 export { default as FiCommand } from './Command';
 export { default as FiCrossX } from './CrossX';
 export { default as FiCursorClick01 } from './CursorClick01';
+export { default as FiCode } from './Code';
 
 // D
 export { default as FiDataFlow02 } from './DataFlow02';
@@ -34,6 +36,7 @@ export { default as FiEyeOff } from './EyeOff';
 export { default as FiFileUpload } from './UploadCloud02';
 
 // G
+export { default as FiGlobe01 } from './Globe01';
 
 // H
 export { default as FiHelpCircle } from './HelpCircle';
@@ -47,6 +50,7 @@ export { default as FiInfinity } from './Infinity';
 // L
 export { default as Logout01 } from './Logout01';
 export { default as FiLineChartUp05 } from './LineChartUp05';
+export { default as FiLifeBuoy01 } from './LifeBuoy01';
 
 // M
 export { default as FiMail01 } from './Mail01';
@@ -70,6 +74,7 @@ export { default as FiSearchLg } from './SearchLg';
 export { default as FiSliders01 } from './Sliders01';
 export { default as FiSettings01 } from './Settings01';
 export { default as FiStar04 } from './Star04';
+export { default as FiShopify } from './Shopify';
 
 // T
 export { default as FiTrash } from './Trash';
