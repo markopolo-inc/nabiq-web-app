@@ -11,7 +11,7 @@ const Home = () => {
   const { userName } = useAppSelector((state) => state.user);
   const { markTag } = useAppSelector((state) => state.brand);
 
-  const [showMarktagModal, setShowMarktagModal] = useState<boolean>(true);
+  const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
 
   return (
     <>
@@ -29,7 +29,11 @@ const Home = () => {
         <div className='p-12 bg-gray-100 rounded-xl'>
           <div className='flex flex-col justify-center items-center'>
             <div className='gap-6 w-fit grid grid-cols-1 lg:grid-cols-2'>
-              {Boolean(markTag) ? <ConnectedMarktag /> : <ConnectMarktag />}
+              {Boolean(markTag) ? (
+                <ConnectedMarktag onShowMarktag={() => setShowMarktagModal(true)} />
+              ) : (
+                <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
+              )}
               <IntegrateApps />
               <ConnectCampaignPlatforms />
             </div>
