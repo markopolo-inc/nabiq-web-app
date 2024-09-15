@@ -34,6 +34,7 @@ export { default as FiEyeOff } from './EyeOff';
 
 // F
 export { default as FiFileUpload } from './UploadCloud02';
+export { default as FileQuestion02 } from './FileQuestion02';
 
 // G
 export { default as FiGlobe01 } from './Globe01';

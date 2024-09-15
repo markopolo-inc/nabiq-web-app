@@ -23,6 +23,7 @@
     ]
   },
   "dependencies": {
+    "@mantine/code-highlight": "^7.12.2",
     "@mantine/core": "^7.10.1",
     "@mantine/dates": "^7.10.1",
     "@mantine/dropzone": "^7.12.2",
