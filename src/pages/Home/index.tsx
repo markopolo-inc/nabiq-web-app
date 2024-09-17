@@ -4,6 +4,7 @@ import ConnectMarktag from 'src/components/Features/Home/ConnectMarktag';
 import ConnectMarktagModal from 'src/components/Features/Home/ConnectMarktagModal';
 import ConnectedMarktag from 'src/components/Features/Home/ConnectedMarktag';
 import CreateNewMarktagModal from 'src/components/Features/Home/CreateNewMarktagModal';
+import GuidedMarktagModal from 'src/components/Features/Home/GuidedMarktagModal';
 import InstallCodeManuallyModal from 'src/components/Features/Home/InstallCodeManuallyModal';
 import IntegrateApps from 'src/components/Features/Home/IntegrateApps';
 import HeaderTitle from 'src/layouts/HeaderTitle';
@@ -15,7 +16,8 @@ const Home = () => {
 
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
   const [showNewMarktagModal, setShowNewMarktagModal] = useState<boolean>(false);
-  const [showCodeMarktagModal, setShowCodearktagModal] = useState<boolean>(true);
+  const [showCodeMarktagModal, setShowCodearktagModal] = useState<boolean>(false);
+  const [showGuidedMarktagModal, setShowGuidedMarktagModal] = useState<boolean>(false);
 
   return (
     <>
@@ -29,6 +31,11 @@ const Home = () => {
       <InstallCodeManuallyModal
         showModal={showCodeMarktagModal}
         setShowModal={setShowCodearktagModal}
+      />
+
+      <GuidedMarktagModal
+        showModal={showGuidedMarktagModal}
+        setShowModal={setShowGuidedMarktagModal}
       />
 
       <div className='flex flex-col gap-16'>
