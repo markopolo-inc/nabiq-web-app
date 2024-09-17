@@ -23,7 +23,11 @@ const Home = () => {
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
 
-      <ConnectMarktagModal showModal={showMarktagModal} setShowModal={setShowMarktagModal} />
+      <ConnectMarktagModal
+        showModal={showMarktagModal}
+        setShowModal={setShowMarktagModal}
+        setShowCreateNewModal={setShowNewMarktagModal}
+      />
       <CreateNewMarktagModal
         showModal={showNewMarktagModal}
         setShowModal={setShowNewMarktagModal}

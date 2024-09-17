@@ -3,7 +3,7 @@ import { Button, Group, Modal, Stack, useGetColors } from '@nabiq-ui';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ModalBody = ({ setOpened }) => {
+const ModalBody = ({ setOpened, setOpenedCreateNew }) => {
   const { primary500, success500 } = useGetColors();
   const navigate = useNavigate();
 
@@ -48,7 +48,15 @@ const ModalBody = ({ setOpened }) => {
               New to this? No worries, create a new marktag from scatch
             </p>
 
-            <Button variant='primary'>Create</Button>
+            <Button
+              onClick={() => {
+                setOpened(false);
+                setOpenedCreateNew(true);
+              }}
+              variant='primary'
+            >
+              Create
+            </Button>
           </div>
         </Group>
       </Stack>
@@ -59,7 +67,8 @@ const ModalBody = ({ setOpened }) => {
 const ConnectMarktagModal: React.FC<{
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ showModal, setShowModal }) => {
+  setShowCreateNewModal: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ showModal, setShowModal, setShowCreateNewModal }) => {
   return (
     <Modal
       zIndex={999}
@@ -67,7 +76,9 @@ const ConnectMarktagModal: React.FC<{
       withCustomClose
       toggleFromOutside={showModal}
       setToggleFromOutside={setShowModal}
-      body={({ setOpened }) => <ModalBody setOpened={setOpened} />}
+      body={({ setOpened }) => (
+        <ModalBody setOpened={setOpened} setOpenedCreateNew={setShowCreateNewModal} />
+      )}
     >
       {() => <></>}
     </Modal>
