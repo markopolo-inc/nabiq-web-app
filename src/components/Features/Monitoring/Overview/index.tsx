@@ -4,7 +4,10 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MetricsCard from 'src/components/UI/MetricsCard';
 import { IMetrics } from 'src/interfaces/monitoring.interface';
-import { useGetMetricsQuery } from 'src/store/monitoring/monitoring.api';
+import {
+  useGetLowMonitoringCampaignQuery,
+  useGetMetricsQuery,
+} from 'src/store/monitoring/monitoring.api';
 
 import PerformanceComparison from './PerformanceComparison';
 import PerformanceTrend from './PerformanceTrend';
@@ -22,6 +25,11 @@ const Overview: FC<{
   });
 
   const metrics: IMetrics[] = data?.data?.metrics || [];
+
+  const { data: campaignsData } = useGetLowMonitoringCampaignQuery();
+
+  const campaigns = campaignsData?.data?.campaigns.slice(0, 3) || [];
+
   return (
     <Stack gap={32}>
       <Group>
@@ -52,68 +60,36 @@ const Overview: FC<{
                 <div className='text-sm font-semibold text-gray-600'>Non-performing campaigns</div>
               </div>
 
-              <div className='flex flex-col gap-6 border border-gray-200 rounded-xl bg-white p-6'>
-                <div className='flex flex-col gap-4'>
-                  <div className='flex flex-col gap-1 text-sm font-normal text-gray-600'>
-                    <p className='text-gray-900 font-semibold'>test campaign</p>
-                    <p>Retention</p>
-                  </div>
-
-                  <div className='w-max bg-error-50 border border-error-200 text-error-700 text-xs font-medium py-0.5 px-2 rounded-2xl'>
-                    Low impression
-                  </div>
-                </div>
-
-                <Button
-                  className='self-start !p-0'
-                  variant='link'
-                  trailingIcon={<FiChevronRight size={16} />}
+              {campaigns.map((item, idx) => (
+                <div
+                  key={idx}
+                  className='flex flex-col gap-6 border border-gray-200 rounded-xl bg-white p-6'
                 >
-                  View all
-                </Button>
-              </div>
+                  <div className='flex flex-col gap-4'>
+                    <div className='flex flex-col gap-1 text-sm font-normal text-gray-600'>
+                      <p className='text-gray-900 font-semibold'>{item.name}</p>
+                      <p>{item.type}</p>
+                    </div>
 
-              <div className='flex flex-col gap-6 border border-gray-200 rounded-xl bg-white p-6'>
-                <div className='flex flex-col gap-4'>
-                  <div className='flex flex-col gap-1 text-sm font-normal text-gray-600'>
-                    <p className='text-gray-900 font-semibold'>test campaign</p>
-                    <p>Retention</p>
+                    <div className='w-max bg-error-50 border border-error-200 text-error-700 text-xs font-medium py-0.5 px-2 rounded-2xl'>
+                      {item.reason}
+                    </div>
                   </div>
 
-                  <div className='w-max bg-error-50 border border-error-200 text-error-700 text-xs font-medium py-0.5 px-2 rounded-2xl'>
-                    Low impression
-                  </div>
+                  <Button
+                    className='self-start !p-0'
+                    variant='link'
+                    trailingIcon={<FiChevronRight size={16} />}
+                    onClick={() =>
+                      navigate(
+                        `/monitoring/top-performing-campaigns/${item.name?.split(' ').join('-')}/${item.id}`,
+                      )
+                    }
+                  >
+                    View all
+                  </Button>
                 </div>
-
-                <Button
-                  className='self-start !p-0'
-                  variant='link'
-                  trailingIcon={<FiChevronRight size={16} />}
-                >
-                  View all
-                </Button>
-              </div>
-
-              <div className='flex flex-col gap-6 border border-gray-200 rounded-xl bg-white p-6'>
-                <div className='flex flex-col gap-4'>
-                  <div className='flex flex-col gap-1 text-sm font-normal text-gray-600'>
-                    <p className='text-gray-900 font-semibold'>test campaign</p>
-                    <p>Retention</p>
-                  </div>
-
-                  <div className='w-max bg-error-50 border border-error-200 text-error-700 text-xs font-medium py-0.5 px-2 rounded-2xl'>
-                    Low impression
-                  </div>
-                </div>
-
-                <Button
-                  className='self-start !p-0'
-                  variant='link'
-                  trailingIcon={<FiChevronRight size={16} />}
-                >
-                  View all
-                </Button>
-              </div>
+              ))}
             </Stack>
 
             <Button onClick={() => navigate('non-performing-campaigns')} variant='secondary'>
