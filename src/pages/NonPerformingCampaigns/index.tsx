@@ -104,11 +104,11 @@ const NonPerformingCampaigns = () => {
                   variant='link'
                   size='xl'
                   trailingIcon={<FiChevronRight size={16} />}
-                  onClick={() =>
-                    navigate(
-                      `/monitoring/top-performing-campaigns/${item.name?.split(' ').join('-')}/${item.id}`,
-                    )
-                  }
+                  // onClick={() =>
+                  //   navigate(
+                  //     `/monitoring/top-performing-campaigns/${item.name?.split(' ').join('-')}/${item.id}`,
+                  //   )
+                  // }
                 >
                   View
                 </Button>
