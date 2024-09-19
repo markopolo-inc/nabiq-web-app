@@ -82,7 +82,7 @@ const Overview: FC<{
                     trailingIcon={<FiChevronRight size={16} />}
                     onClick={() => navigate('non-performing-campaigns')}
                   >
-                    View all
+                    View
                   </Button>
                 </div>
               ))}
