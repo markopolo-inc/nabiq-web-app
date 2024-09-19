@@ -49,5 +49,5 @@ export const formatMetricUnit = (
     amount: '$',
   };
 
-  return `${type !== 'percentage' ? TypeMap[type] : ''} ${formatNumber(value)}${type === 'percentage' ? TypeMap[type] : ''}`;
+  return `${type !== 'percentage' ? TypeMap[type] : ''}${formatNumber(value)}${type === 'percentage' ? TypeMap[type] : ''}`;
 };
