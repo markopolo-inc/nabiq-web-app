@@ -58,6 +58,12 @@ const monitoringApi = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getLowMonitoringCampaign: builder.query<any, void>({
+      query: () => ({
+        url: `/monitoring/campaign/low`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -69,4 +75,5 @@ export const {
   useGetCampaignDetailsQuery,
   useGetPerformanceComparisonQuery,
   useGetCohortForCampaignsQuery,
+  useGetLowMonitoringCampaignQuery,
 } = monitoringApi;

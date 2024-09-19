@@ -20,6 +20,7 @@ const Settings = lazy(() => import('pages/Settings'));
 const Monitoring = lazy(() => import('pages/Monitoring'));
 const TopPerformingCampaigns = lazy(() => import('pages/TopPerformingCampaigns'));
 const TopPerformingCampaignDetails = lazy(() => import('src/pages/TopPerformingCampaignDetails'));
+const NonPerformingCampaigns = lazy(() => import('src/pages/NonPerformingCampaigns'));
 const ControlRoom = lazy(() => import('pages/ControlRoom'));
 const ControlRoomCohort = lazy(() => import('pages/ControlRoom/Cohort'));
 const ControlRoomContent = lazy(() => import('pages/ControlRoom/Cohort/Content'));
@@ -55,6 +56,10 @@ const Router = () => {
                 <Route
                   path='/monitoring/top-performing-campaigns/:name/:campaignId'
                   element={<TopPerformingCampaignDetails />}
+                />
+                <Route
+                  path='/monitoring/non-performing-campaigns'
+                  element={<NonPerformingCampaigns />}
                 />
                 <Route path='/settings' element={<Settings />} />
                 <Route path='/campaigns/campaign-configuration' element={<CreateCampaign />} />
