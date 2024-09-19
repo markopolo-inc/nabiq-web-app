@@ -1,7 +1,4 @@
-import {
-  // ArrowDown,
-  FiChevronRight,
-} from '@nabiq-icons';
+import { ArrowDown } from '@nabiq-icons';
 import {
   Breadcrumbs,
   Button,
@@ -12,14 +9,15 @@ import {
   TableHead,
   TableRow,
   Td,
-  Th, // useGetColors,
+  Th,
+  useGetColors,
 } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import { useGetLowMonitoringCampaignQuery } from 'src/store/monitoring/monitoring.api.ts';
 import { formatMetricUnit } from 'src/utils/string.utils.ts';
 
 const NonPerformingCampaigns = () => {
-  // const { error500 } = useGetColors();
+  const { error500 } = useGetColors();
   const navigate = useNavigate();
 
   const { data } = useGetLowMonitoringCampaignQuery();
@@ -55,7 +53,6 @@ const NonPerformingCampaigns = () => {
             <Th>Conversion rate</Th>
             <Th>Engagement</Th>
             <Th>Revenue</Th>
-            <Th />
           </TableRow>
         </TableHead>
         <TableBody>
@@ -66,9 +63,21 @@ const NonPerformingCampaigns = () => {
                 <p>{item.type}</p>
               </Td>
               <Td>
-                {formatMetricUnit(
-                  item?.metrics?.find((metric) => metric?.name === 'Impressions').value,
-                  item?.metrics?.find((metric) => metric?.name === 'Impressions').type,
+                {item?.metrics?.find((metric) => metric?.name === 'Impressions').value > 0 ? (
+                  formatMetricUnit(
+                    item?.metrics?.find((metric) => metric?.name === 'Impressions').value,
+                    item?.metrics?.find((metric) => metric?.name === 'Impressions').type,
+                  )
+                ) : (
+                  <div className='w-max flex gap-1 items-center justify-center px-1.5 py-0.5 border border-error-200 rounded-2xl bg-error-50'>
+                    <ArrowDown size={12} color={error500} />
+                    <div className='text-xs font-medium text-error-700'>
+                      {formatMetricUnit(
+                        item?.metrics?.find((metric) => metric?.name === 'Impressions').value,
+                        item?.metrics?.find((metric) => metric?.name === 'Impressions').type,
+                      )}
+                    </div>
+                  </div>
                 )}
               </Td>
               <Td>
@@ -78,14 +87,22 @@ const NonPerformingCampaigns = () => {
                 )}
               </Td>
               <Td>
-                {formatMetricUnit(
-                  item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').value,
-                  item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').type,
+                {item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').value > 0 ? (
+                  formatMetricUnit(
+                    item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').value,
+                    item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').type,
+                  )
+                ) : (
+                  <div className='w-max flex gap-1 items-center justify-center px-1.5 py-0.5 border border-error-200 rounded-2xl bg-error-50'>
+                    <ArrowDown size={12} color={error500} />
+                    <div className='text-xs font-medium text-error-700'>
+                      {formatMetricUnit(
+                        item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').value,
+                        item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').type,
+                      )}
+                    </div>
+                  </div>
                 )}
-                {/*<div className='w-max flex gap-3 items-center justify-center px-1.5 py-0.5 border border-error-200 rounded-2xl bg-error-50'>*/}
-                {/*  <ArrowDown size={12} color={error500} />*/}
-                {/*  <div className='text-xs font-medium text-error-700'>0.47%</div>*/}
-                {/*</div>*/}
               </Td>
               <Td>
                 {formatMetricUnit(
@@ -98,20 +115,6 @@ const NonPerformingCampaigns = () => {
                   item?.metrics?.find((metric) => metric?.name === 'Revenue').value,
                   item?.metrics?.find((metric) => metric?.name === 'Revenue').type,
                 )}
-              </Td>
-              <Td>
-                <Button
-                  variant='link'
-                  size='xl'
-                  trailingIcon={<FiChevronRight size={16} />}
-                  // onClick={() =>
-                  //   navigate(
-                  //     `/monitoring/top-performing-campaigns/${item.name?.split(' ').join('-')}/${item.id}`,
-                  //   )
-                  // }
-                >
-                  View
-                </Button>
               </Td>
             </TableRow>
           ))}

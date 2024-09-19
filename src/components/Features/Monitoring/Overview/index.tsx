@@ -80,13 +80,9 @@ const Overview: FC<{
                     className='self-start !p-0'
                     variant='link'
                     trailingIcon={<FiChevronRight size={16} />}
-                    // onClick={() =>
-                    //   navigate(
-                    //     `/monitoring/top-performing-campaigns/${item.name?.split(' ').join('-')}/${item.id}`,
-                    //   )
-                    // }
+                    onClick={() => navigate('non-performing-campaigns')}
                   >
-                    View all
+                    View
                   </Button>
                 </div>
               ))}
