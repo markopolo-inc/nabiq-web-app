@@ -1,8 +1,4 @@
 import {
-  // ArrowDown,
-  FiChevronRight,
-} from '@nabiq-icons';
-import {
   Breadcrumbs,
   Button,
   Group,
@@ -55,7 +51,6 @@ const NonPerformingCampaigns = () => {
             <Th>Conversion rate</Th>
             <Th>Engagement</Th>
             <Th>Revenue</Th>
-            <Th />
           </TableRow>
         </TableHead>
         <TableBody>
@@ -98,20 +93,6 @@ const NonPerformingCampaigns = () => {
                   item?.metrics?.find((metric) => metric?.name === 'Revenue').value,
                   item?.metrics?.find((metric) => metric?.name === 'Revenue').type,
                 )}
-              </Td>
-              <Td>
-                <Button
-                  variant='link'
-                  size='xl'
-                  trailingIcon={<FiChevronRight size={16} />}
-                  // onClick={() =>
-                  //   navigate(
-                  //     `/monitoring/top-performing-campaigns/${item.name?.split(' ').join('-')}/${item.id}`,
-                  //   )
-                  // }
-                >
-                  View
-                </Button>
               </Td>
             </TableRow>
           ))}
