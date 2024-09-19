@@ -1,9 +1,11 @@
 import { FiCommand } from '@nabiq-icons';
 import { Button, useGetColors } from '@nabiq-ui';
-import { useNavigate } from 'react-router-dom';
 
-const ConnectMarktag = () => {
-  const navigate = useNavigate();
+type ConnectMarktagPropsTypes = {
+  onShowMarktag: () => void;
+};
+
+const ConnectMarktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
   const { primary500 } = useGetColors();
   return (
     <div className='bg-white rounded-xl p-8 shadow-lg'>
@@ -21,7 +23,7 @@ const ConnectMarktag = () => {
             </p>
           </div>
           <div className='flex gap-3'>
-            <Button onClick={() => navigate('/connect-marktag')}>Connect</Button>
+            <Button onClick={onShowMarktag}>Connect</Button>
             {/* <Button variant="link">Learn more</Button> */}
           </div>
         </div>

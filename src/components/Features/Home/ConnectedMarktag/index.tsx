@@ -1,10 +1,12 @@
 import { ArrowNarrowUpRight, FiCommand } from '@nabiq-icons';
 import { Button, useGetColors } from '@nabiq-ui';
-import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks.ts';
 
-const ConnectedMarktag = () => {
-  const navigate = useNavigate();
+type ConnectedMarktagPropsTypes = {
+  onShowMarktag: () => void;
+};
+
+const ConnectedMarktag = ({ onShowMarktag }: ConnectedMarktagPropsTypes) => {
   const { primary500 } = useGetColors();
   const { markTag } = useAppSelector((state) => state.brand);
 
@@ -35,7 +37,7 @@ const ConnectedMarktag = () => {
             <Button
               variant='secondary'
               trailingIcon={<ArrowNarrowUpRight size={20} color='#4B5565' />}
-              onClick={() => navigate('/connect-marktag')}
+              onClick={onShowMarktag}
             >
               Reconfigure
             </Button>
