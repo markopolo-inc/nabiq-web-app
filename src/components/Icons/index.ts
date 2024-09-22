@@ -20,6 +20,7 @@ export { default as FiChevronRight } from './ChevronRight';
 export { default as FiChevronDown } from './ChevronDown';
 export { default as FiCommand } from './Command';
 export { default as FiCrossX } from './CrossX';
+export { default as FiCircle } from './Circle';
 export { default as FiCursorClick01 } from './CursorClick01';
 export { default as FiCode } from './Code';
 
