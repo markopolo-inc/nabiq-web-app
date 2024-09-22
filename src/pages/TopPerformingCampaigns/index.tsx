@@ -37,7 +37,9 @@ const TopPerformingCampaigns = () => {
               List of top performing campaigns and their metrics.
             </p>
           </Stack>
-          <Button onClick={() => navigate(-1)}>Go back</Button>
+          <Button size='md' onClick={() => navigate(-1)}>
+            Go back
+          </Button>
         </Group>
       </Stack>
       <Table banner={banner} withBanner striped>
@@ -78,7 +80,7 @@ const TopPerformingCampaigns = () => {
               <Td>
                 <Button
                   variant='link'
-                  size='xl'
+                  size='sm'
                   onClick={() =>
                     navigate(
                       `/monitoring/top-performing-campaigns/${item.name?.split(' ').join('-')}/${item.id}`,
