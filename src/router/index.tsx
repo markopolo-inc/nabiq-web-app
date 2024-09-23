@@ -26,6 +26,7 @@ const ControlRoomCohort = lazy(() => import('pages/ControlRoom/Cohort'));
 const ControlRoomContent = lazy(() => import('pages/ControlRoom/Cohort/Content'));
 const ControlRoomPublished = lazy(() => import('src/pages/ControlRoom/PublishedContent'));
 const Test = lazy(() => import('src/pages/Test'));
+const TestButton = lazy(() => import('src/pages/TestButton'));
 
 const Router = () => {
   return (
@@ -72,6 +73,7 @@ const Router = () => {
             <Route path='/reset-pass' element={<ResetPassword />} />
             <Route path='/verify' element={<VerifyEmail />} />
             <Route path='/test' element={<Test />} />
+            <Route path='/test/btn' element={<TestButton />} />
           </Route>
         </Routes>
       </Suspense>

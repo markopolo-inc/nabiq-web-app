@@ -40,7 +40,9 @@ const NonPerformingCampaigns = () => {
               List of non performing campaigns and their metrics.
             </p>
           </Stack>
-          <Button onClick={() => navigate(-1)}>Go back</Button>
+          <Button size='md' onClick={() => navigate(-1)}>
+            Go back
+          </Button>
         </Group>
       </Stack>
 

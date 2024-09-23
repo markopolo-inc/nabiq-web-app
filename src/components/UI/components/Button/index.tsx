@@ -5,21 +5,25 @@ import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 import Text from '../Text';
 import styles from './Button.module.scss';
 
+const SIZES = {
+  SM: 'sm',
+  MD: 'md',
+  LG: 'lg',
+} as const;
+
 const getSizes = (size) => {
-  const buttonSize = {
-    sm: 'xs',
-    md: 'sm',
-    lg: 'md',
-    xl: 'lg',
-    '2xl': 'xl',
+  const btnSize = {
+    SM: SIZES.SM,
+    MD: SIZES.MD,
+    LG: SIZES.LG,
   };
-  const textSize = {
+
+  const fontSize = {
     sm: '14px',
-    md: '14px',
-    lg: '16px',
-    xl: '16px',
-    '2xl': '18px',
+    md: '16px',
+    lg: '18px',
   };
+
   const loaderSize = {
     sm: 13,
     md: 15,
@@ -27,25 +31,24 @@ const getSizes = (size) => {
     xl: 19,
     '2xl': 21,
   };
-  const buttonHeight = {
+
+  const btnHeight = {
     sm: 36,
-    md: 40,
-    lg: 44,
-    xl: 48,
-    '2xl': 60,
+    md: 44,
+    lg: 60,
   };
 
   return {
-    button: buttonSize[size],
-    text: textSize[size],
+    button: btnSize[size],
+    text: fontSize[size],
     loader: loaderSize[size],
-    buttonHeight: buttonHeight[size],
+    btnHeight: btnHeight[size],
   };
 };
 
 const Button = ({
   children,
-  size = 'md',
+  size = SIZES.SM,
   loading = false,
   onClick,
   disabled = false,
@@ -59,6 +62,14 @@ const Button = ({
   ...rest
 }: ButtonPropType) => {
   const { whiteBase, gray600, primary600, error600 } = useGetColors();
+
+  const isText = typeof children === 'string';
+
+  const paddingClasses = {
+    sm: isText ? 'py-2 px-4' : 'p-2',
+    md: isText ? 'py-2.5 px-4' : 'p-3',
+    lg: isText ? 'py-4 px-5.5' : 'p-4',
+  };
 
   const getClassName = (btnVariant) => {
     const classes = {
@@ -98,11 +109,11 @@ const Button = ({
     <MantineButton
       id={id}
       style={{
-        height: getSizes(size).buttonHeight,
+        height: getSizes(size).btnHeight,
         ...style,
       }}
       size={getSizes(size).button}
-      className={`${styles.container} ${getClassName(variant)} ${className}`}
+      className={`${styles.container} ${getClassName(variant)} ${paddingClasses[size]} ${className}`}
       disabled={loading || disabled}
       onClick={(e) => handleClick(e)}
       fullWidth={fullWidth}
@@ -137,7 +148,7 @@ interface ButtonPropType {
     | 'tertiary-gray'
     | 'tertiary-destructive'
     | 'link';
-  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
