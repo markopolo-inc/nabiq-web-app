@@ -79,6 +79,13 @@
   --Success-800: #{$success-800};
   --Success-900: #{$success-900};
   --Success-950: #{$success-950};
+
+  --Gradient-Linear-Button-Specific-Secondary-black: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 44%
+  );
+  --Button-Specific-Secondary-black: linear-gradient(90deg, #303534 0%, #ffffff 0%, #ffffff 8%);
 }
 
 * {
