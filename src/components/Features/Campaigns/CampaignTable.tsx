@@ -1,6 +1,7 @@
-import { ArrowNarrowDown, FiPen, FiTrash } from '@nabiq-icons';
+import { ArrowNarrowDown, FiSearchLg, FiTrash } from '@nabiq-icons';
 import {
   Badge,
+  Button,
   Group,
   Stack,
   Table,
@@ -8,6 +9,7 @@ import {
   TableHead,
   TableRow,
   Td,
+  Text,
   TextInput,
   Th,
 } from '@nabiq-ui';
@@ -25,6 +27,7 @@ const CAMPAIGN_TABLE_HEADERS: string[] = [
   'Status',
   'Last modified',
   'Date created',
+  '',
 ];
 
 const colorMap = {
@@ -52,14 +55,11 @@ const CampaignTable = () => {
   const banner = (
     <Stack gap={0}>
       <Group className='flex gap-2 items-center px-8 py-5 border-b border-b-gray-200'>
-        <p className='text-gray-900 font-semibold text-lg'>Campaign</p>
+        <Text className='text-gray-900 font-semibold text-lg'>Campaign</Text>
 
         <Badge color='blue' size='sm'>
           {list.length ?? 0} campaigns
         </Badge>
-        {/* <div className="rounded-2xl border border-primary-200 py-0.5 px-2 text-xs font-medium text-primary-700">
-          {list.length ?? 0} campaigns
-        </div> */}
       </Group>
       <Stack className='py-3 px-4'>
         <Group justify='space-between'>
@@ -79,9 +79,10 @@ const CampaignTable = () => {
           <TextInput
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
-            // styles={{ input: { paddingLeft: 40 } }}
-            // leftSection={<FiSearchLg size={26} color="#697586" />}
-            // leftSectionPointerEvents="none"
+            styles={{ input: { paddingLeft: 40 } }}
+            leftSection={<FiSearchLg size={26} color='#697586' />}
+            leftSectionWidth={40}
+            leftSectionPointerEvents='none'
             className='w-[400px]'
             placeholder='Search...'
           />
@@ -91,21 +92,37 @@ const CampaignTable = () => {
   );
   return (
     <Table banner={banner} withBanner>
-      <TableHead>
-        <TableRow>
-          {CAMPAIGN_TABLE_HEADERS.map((item) => (
-            <Th key={item}>
-              <div className='flex items-center gap-1'>
-                <div className='text-xs font-medium text-gray-600'>{item}</div>
-                <ArrowNarrowDown size={16} color='#475467' />
-              </div>
-            </Th>
-          ))}
-        </TableRow>
-      </TableHead>
+      {filteredList.length > 0 && (
+        <TableHead>
+          <TableRow>
+            {CAMPAIGN_TABLE_HEADERS.map((item) => (
+              <Th key={item}>
+                <div className='flex items-center gap-1'>
+                  <div className='text-xs font-medium text-gray-600'>{item}</div>
+                  {item?.length ? <ArrowNarrowDown size={16} color='#475467' /> : null}
+                </div>
+              </Th>
+            ))}
+          </TableRow>
+        </TableHead>
+      )}
+
       <TableBody>
-        {filteredList.map((item) => {
-          return (
+        {filteredList.length === 0 ? (
+          <TableRow>
+            <Td className='py-10 px-8' colSpan={7}>
+              <Stack align='center' gap={4}>
+                <p className='text-gray-900 font-semibold text-base'>
+                  No campaigns {list.length === 0 ? 'created yet' : 'found!'}
+                </p>
+                <p className='text-gray-600 text-sm'>
+                  Your {list.length === 0 ? 'created' : 'filtered'} campaigns will show up here.
+                </p>
+              </Stack>
+            </Td>
+          </TableRow>
+        ) : (
+          filteredList.map((item) => (
             <TableRow>
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
@@ -140,26 +157,13 @@ const CampaignTable = () => {
                     <FiTrash size={20} color='#475467' />
                   </div>
 
-                  <div className='p-3 hover:cursor-pointer'>
-                    <FiPen size={20} color='#475467' />
-                  </div>
-                  <div></div>
+                  <Button variant='tertiary' size='md'>
+                    View
+                  </Button>
                 </Stack>
               </Td>
             </TableRow>
-          );
-        })}
-        {filteredList.length === 0 ? (
-          <TableRow>
-            <Td className='py-4 px-6' colSpan={7}>
-              <Stack align='center' gap={4}>
-                <p className='text-gray-900 font-semibold text-base'>No campaigns created yet</p>
-                <p className='text-gray-600 text-sm'>Your created campaigns will show up here.</p>
-              </Stack>
-            </Td>
-          </TableRow>
-        ) : (
-          <></>
+          ))
         )}
       </TableBody>
     </Table>
