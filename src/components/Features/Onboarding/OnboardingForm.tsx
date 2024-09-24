@@ -58,14 +58,35 @@ const OnboardingForm = () => {
           />
           <Select
             required
-            data={['Travel']}
+            data={[
+              { value: 'apparel', label: 'Apparel' },
+              { value: 'auto', label: 'Auto' },
+              { value: 'b2b', label: 'B2B' },
+              { value: 'beauty', label: 'Beauty' },
+              { value: 'consumer_service', label: 'Consumer Service' },
+              { value: 'finance_insurance', label: 'Finance Insurance' },
+              { value: 'fitness', label: 'Fitness' },
+              { value: 'home_improvement', label: 'Home Improvement' },
+              { value: 'healthcare', label: 'Healthcare' },
+              { value: 'industrial_services', label: 'Industrial Services' },
+              { value: 'legal', label: 'Legal' },
+              { value: 'retail', label: 'Retail' },
+              { value: 'technology', label: 'Technology' },
+              { value: 'travel_hospitality', label: 'Travel & Hospitality' },
+            ]}
             label='Industry'
             placeholder='Select industry'
             {...form.getInputProps('industry')}
           />
           <Select
             required
-            data={['10-50']}
+            data={[
+              { value: '1-10', label: '1-10 employees' },
+              { value: '11-50', label: '11-50 employees' },
+              { value: '51-200', label: '51-200 employees' },
+              { value: '201-500', label: '201-500 employees' },
+              { value: '500+', label: '500+ employees' },
+            ]}
             label='Business size'
             placeholder='Select business size'
             {...form.getInputProps('businessSize')}

@@ -45,7 +45,9 @@ const TopPerformingCampaignDetails = () => {
               Created on {moment(campaignDetails.createdAt).format('MMM DD, YYYY at hh:mm a')}
             </p>
           </Stack>
-          <Button onClick={() => navigate(-1)}>Go back</Button>
+          <Button size='md' onClick={() => navigate(-1)}>
+            Go back
+          </Button>
         </Group>
       </Stack>
 

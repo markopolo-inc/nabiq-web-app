@@ -10,22 +10,16 @@
   border: 0.75px solid
     var(
       --Gradient-Linear-Button-Specific-Primary,
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.44) 0%,
-        rgba(255, 255, 255, 0) 100%
-      )
+      linear-gradient(180deg, rgba(255, 255, 255, 0.44) 0%, rgba(255, 255, 255, 0) 100%)
     ) !important;
   background: var(
     --Button-Specific-Primary,
-    radial-gradient(
-      100% 100% at 50% 0%,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ),
+    radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
     #2972f5
   ) !important;
-  box-shadow: 0px 1px 2px 0px rgba(13, 18, 28, 0.64), 0px 0px 0px 1px #0a52d6 !important;
+  box-shadow:
+    0px 1px 2px 0px rgba(13, 18, 28, 0.64),
+    0px 0px 0px 1px #0a52d6 !important;
   &:hover {
     background: $primary-700 !important;
   }
@@ -40,22 +34,16 @@
   border: 0.75px solid
     var(
       --Gradient-Linear-Button-Specific-Primary,
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.44) 0%,
-        rgba(255, 255, 255, 0) 100%
-      )
+      linear-gradient(180deg, rgba(255, 255, 255, 0.44) 0%, rgba(255, 255, 255, 0) 100%)
     ) !important;
   background: var(
     --Button-Specific-Primary-destructive,
-    radial-gradient(
-      100% 100% at 50% 0%,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ),
+    radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
     #d92d20
   ) !important;
-  box-shadow: 0px 1px 2px 0px rgba(13, 18, 28, 0.64), 0px 0px 0px 1px #d92d20 !important;
+  box-shadow:
+    0px 1px 2px 0px rgba(13, 18, 28, 0.64),
+    0px 0px 0px 1px #d92d20 !important;
   &:hover {
     background: $error-700 !important;
   }
@@ -68,74 +56,47 @@
 
 .secondary {
   color: $gray-600 !important;
-  border: 0.75px solid
-    var(
-      --Gradient-Linear-Button-Specific-Secondary,
-      linear-gradient(
-        180deg,
-        rgba(13, 18, 28, 0.21) 0%,
-        rgba(13, 18, 28, 0) 100%
-      )
-    ) !important;
+  border: 0.75px solid var(--Gradient-Linear-Button-Specific-Secondary, rgba(13, 18, 28, 0.48)) !important;
   background: var(
     --Button-Specific-Secondary,
-    linear-gradient(
-      180deg,
-      rgba(13, 18, 28, 0.03) 0%,
-      rgba(13, 18, 28, 0) 100%
-    ),
+    linear-gradient(180deg, rgba(13, 18, 28, 0.03) 0%, rgba(13, 18, 28, 0) 100%),
     #fff
   ) !important;
-  box-shadow: 0px 1px 2px 0px rgba(13, 18, 28, 0.48),
+  box-shadow:
+    0px 1px 2px 0px rgba(13, 18, 28, 0.48),
     0px 0px 1px 0px rgba(13, 18, 28, 0.08) !important;
   &:hover {
     color: $gray-700 !important;
-    background: $gray-50 !important;
-    border: 0.75px solid
-      var(
-        --Button-Specific-Secondary,
-        linear-gradient(
-          180deg,
-          rgba(13, 18, 28, 0.03) 0%,
-          rgba(13, 18, 28, 0) 100%
-        ),
-        #fff
-      ) !important;
+    background: var(--Gray-50, #f8fafc) !important;
+    border: 1px solid var(--Button-Specific-Secondary, #fff) !important;
   }
   &:disabled {
     color: $gray-400 !important;
-    border: 1px solid $gray-200 !important;
+    border: 1px solid var(--Gray-200, #e3e8ef) !important;
     background: $white-base !important;
     box-shadow: 0px 1px 2px 0px rgba(18, 25, 38, 0.05) !important;
   }
 }
 
 .secondaryBlack {
-  border: 0.75px solid
-    var(
-      --Gradient-Linear-Button-Specific-Secondary,
-      linear-gradient(
-        180deg,
-        rgba(13, 18, 28, 0.21) 0%,
-        rgba(13, 18, 28, 0) 100%
-      )
-    ) !important;
-  background: var(
-    --Button-Specific-Secondary-black,
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    #303534
-  ) !important;
-  box-shadow: 0px 1px 2px 0px rgba(13, 18, 28, 0.64), 0px 0px 0px 1px #303534 !important;
+  border: 1px solid var(--Gradient-Linear-Button-Specific-Secondary-black, #fff) !important;
+  background: linear-gradient(0deg, #303534, #303534),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%) !important;
+
+  box-shadow:
+    0px 1px 2px 0px rgba(13, 18, 28, 0.64),
+    0px 0px 0px 1px #303534 !important;
+
   &:hover {
-    background: $gray-950 !important;
+    border: 1px solid var(--Gradient-Linear-Button-Specific-Secondary-black, #fff) !important;
+    background: var(--Gray-950, #303534) !important;
+    box-shadow:
+      0px 1px 2px 0px rgba(13, 18, 28, 0.64),
+      0px 0px 0px 1px #303534 !important;
   }
   &:disabled {
-    border: 1px solid $gray-200 !important;
-    background: $white-base !important;
+    border: 1px solid var(--Gray-200, #e3e8ef) !important;
+    background: var(--White-base, #fff) !important;
     box-shadow: 0px 1px 2px 0px rgba(18, 25, 38, 0.05) !important;
   }
 }
