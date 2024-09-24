@@ -83,12 +83,12 @@ const TopPerformingCampaigns = () => {
                   size='sm'
                   onClick={() =>
                     navigate(
-                      `/monitoring/top-performing-campaigns/${item.name?.split(' ').join('-')}/${item.id}`,
+                      `/monitoring/${item.name?.split(' ').join('-')?.toLowerCase()}/breakdown`,
                     )
                   }
                   trailingIcon={<FiChevronRight size={16} />}
                 >
-                  View
+                  Breakdown
                 </Button>
               </Td>
             </TableRow>
