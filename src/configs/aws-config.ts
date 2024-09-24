@@ -1,11 +1,4 @@
-// const isLocalhost = true;
-const isLocalhost = Boolean(
-  window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.1/8 is considered localhost for IPv4.
-    window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/),
-);
+const liveRedirectUrl = 'https://nabiq.markopolo.ai/login';
 
 const config = {
   Auth: {
@@ -17,10 +10,8 @@ const config = {
     oauth: {
       domain: 'markopoloai.auth.ap-southeast-1.amazoncognito.com',
       scope: ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-      redirectSignIn: isLocalhost
-        ? 'http://localhost:5173/login'
-        : 'https://nabiq.markopolo.ai/login',
-      redirectSignOut: isLocalhost ? 'http://localhost:5173' : 'https://nabiq.markopolo.ai',
+      redirectSignIn: liveRedirectUrl,
+      redirectSignOut: liveRedirectUrl,
       responseType: 'token',
     },
   },
