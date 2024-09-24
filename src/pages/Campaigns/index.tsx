@@ -1,17 +1,15 @@
 import { FiPlus } from '@nabiq-icons';
-import { Button, Group, Stack } from '@nabiq-ui';
+import { Button, Group, Stack, TableLoader } from '@nabiq-ui';
 import CampaignGoalModal from 'components/Features/Campaigns/CampaignGoalModal';
 import CampaignTable from 'components/Features/Campaigns/CampaignTable';
 import { useState } from 'react';
 import HeaderTitle from 'src/layouts/HeaderTitle';
-
-// import { useGetCampaignConfigsQuery } from "src/store/campaign/campaignApi.ts";
-// import { useAppSelector } from "src/store/hooks.ts";
+import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
+import { useAppSelector } from 'src/store/hooks.ts';
 
 const Campaigns = () => {
-  // const { resourceId: brandId } = useAppSelector((state) => state.brand);
-  // const { isLoading } = useGetCampaignConfigsQuery(brandId);
-  // console.log(isLoading);
+  const { resourceId: brandId } = useAppSelector((state) => state.brand);
+  const { isLoading, data: campaignList } = useGetCampaignConfigsQuery(brandId);
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
 
   const handleCreateCampaign = () => {
@@ -40,21 +38,23 @@ const Campaigns = () => {
           </Group>
         </div>
 
-        <div className='max-w-[280px]' onClick={handleCreateCampaign}>
-          <Stack
-            className='rounded-xl border border-primary-200 bg-primary-25 p-8 shadow-sm cursor-pointer'
-            gap={24}
-          >
-            <div>
-              <Button fullWidth={false}>
-                <FiPlus size={20} color='white' />
-              </Button>
-            </div>
-            <p className='text-gray-900 font-semibold'>Create your first campaign</p>
-          </Stack>
-        </div>
+        {!isLoading && campaignList?.data?.length === 0 && (
+          <div className='max-w-[280px]' onClick={handleCreateCampaign}>
+            <Stack
+              className='rounded-xl border border-primary-200 bg-primary-25 p-8 shadow-sm cursor-pointer'
+              gap={24}
+            >
+              <div>
+                <Button fullWidth={false}>
+                  <FiPlus size={20} color='white' />
+                </Button>
+              </div>
+              <p className='text-gray-900 font-semibold'>Create your first campaign</p>
+            </Stack>
+          </div>
+        )}
 
-        <CampaignTable />
+        {isLoading ? <TableLoader /> : <CampaignTable />}
       </Stack>
     </>
   );
