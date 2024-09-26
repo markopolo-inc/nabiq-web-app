@@ -3,6 +3,7 @@ import {
   Badge,
   Button,
   Group,
+  OptionTabs,
   Stack,
   Table,
   TableBody,
@@ -16,7 +17,6 @@ import {
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { useMemo, useState } from 'react';
-import OptionTabs from 'src/components/UI/components/OptionTabs';
 import { CampaignItemInterface } from 'src/interfaces/campaign.interface.ts';
 import { useAppSelector } from 'src/store/hooks.ts';
 
@@ -90,6 +90,7 @@ const CampaignTable = () => {
       </Stack>
     </Stack>
   );
+
   return (
     <Table banner={banner} withBanner>
       {filteredList.length > 0 && (
