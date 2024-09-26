@@ -24,3 +24,4 @@ creds.md
 *.njsproj
 *.sln
 *.sw?
+*.pem

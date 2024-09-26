@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "HTTPS=true vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings=100",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" --config ./.prettierrc",
@@ -51,6 +51,7 @@
   "devDependencies": {
     "@types/lodash": "^4.17.6",
     "@types/moment-timezone": "^0.5.30",
+    "@types/node": "^22.7.2",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/recharts": "^1.8.29",
