@@ -20,7 +20,7 @@ const ConnectCampaignPlatforms = () => {
             </p>
           </div>
           <div className='flex gap-3'>
-            <Button variant='secondary' onClick={() => navigate('/campaigns')}>
+            <Button variant='secondary' onClick={() => navigate('/connect-platforms')}>
               Connect
             </Button>
           </div>

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CampaignChannels from 'src/components/Features/Campaigns/CampaignChannels';
 import CampaignDetailsForm from 'src/components/Features/Campaigns/CampaignDetailsForm';
+import CampaignFirstCreationModal from 'src/components/Features/Campaigns/CampaignFirstCreationModal';
 import CampaignTiming from 'src/components/Features/Campaigns/CampaignTiming';
 import Stepper from 'src/components/Features/Campaigns/Stepper';
 import PageLoader from 'src/components/UI/PageLoader';
@@ -13,11 +14,13 @@ import { resetCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
 const CreateCampaign = () => {
-  const [active, setActive] = useState<number>(0);
-  const [createConfig, { isLoading }] = useCreateCampaignConfigMutation();
-  const campaignConfig = useAppSelector((state) => state.campaign);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [createConfig, { isLoading }] = useCreateCampaignConfigMutation();
+  const campaignConfig = useAppSelector((state) => state.campaign);
+  const { list } = useAppSelector((state) => state.campaign);
+  const [active, setActive] = useState<number>(0);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const isReadyToConfirm = active === 2;
 
@@ -27,6 +30,10 @@ const CreateCampaign = () => {
       if (res.success) {
         navigate('/campaigns');
         dispatch(resetCampaign());
+
+        if (list?.length === 1) {
+          setShowModal(true);
+        }
       }
     } else {
       setActive((current) => (current < 3 ? current + 1 : current));
@@ -36,6 +43,7 @@ const CreateCampaign = () => {
   return (
     <>
       <HeaderTitle>Nabiq | Campaign Configuration</HeaderTitle>
+      <CampaignFirstCreationModal showModal={showModal} setShowModal={setShowModal} />
 
       <Stack gap={78}>
         <Stack gap={20}>

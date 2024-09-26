@@ -10,6 +10,7 @@ import { useAppSelector } from 'src/store/hooks.ts';
 const Campaigns = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const { isLoading, data: campaignList } = useGetCampaignConfigsQuery(brandId);
+
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
 
   const handleCreateCampaign = () => {
