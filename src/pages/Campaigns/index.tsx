@@ -33,7 +33,7 @@ const Campaigns = () => {
             </p>
           </Stack>
           <Group>
-            <Button variant='secondary'>How does it work?</Button>
+            {/*<Button variant='secondary'>How does it work?</Button>*/}
             <Button leadingIcon={<FiPlus size={20} color='white' />} onClick={handleCreateCampaign}>
               Create campaign
             </Button>
