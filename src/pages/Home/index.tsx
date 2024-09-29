@@ -11,8 +11,8 @@ import HeaderTitle from 'src/layouts/HeaderTitle';
 import { useAppSelector } from 'src/store/hooks';
 
 const Home = () => {
-  const { userName } = useAppSelector((state) => state.user);
   const { markTag } = useAppSelector((state) => state.brand);
+  const company = useAppSelector((state) => state.company);
 
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
   const [showNewMarktagModal, setShowNewMarktagModal] = useState<boolean>(false);
@@ -44,7 +44,7 @@ const Home = () => {
 
       <div className='flex flex-col gap-16'>
         <div className='flex flex-col'>
-          <p className='text-gray-900 font-semibold text-4xl'>Hello, {userName}</p>
+          <p className='text-gray-900 font-semibold text-4xl'>Hello, {company?.meta?.userName}</p>
           <p className='text-gray-600 font-normal text-lg'>
             Welcome to your marketing co-pilot captain.
           </p>

@@ -68,6 +68,7 @@ export { default as FiPlus } from './Plus';
 export { default as FiPrimitiveDot } from './PrimitiveDot';
 export { default as FiPuzzlePiece02 } from './PuzzlePiece02';
 export { default as FiPen } from './Pen';
+export { default as FiPlatformIcon } from './PlatformIcon';
 
 // R
 

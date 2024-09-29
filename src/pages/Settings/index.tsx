@@ -103,11 +103,13 @@ const Settings = () => {
                     </p>
 
                     <div className='flex gap-5'>
-                      <Image
-                        className='w-16 h-16 rounded-full'
-                        src={form.getValues().profilePhoto}
-                        alt='Avatar image'
-                      />
+                      <div className='flex-none  w-16 h-16 rounded-full overflow-hidden'>
+                        <Image
+                          className='object-cover w-full h-full'
+                          src={form.getValues().profilePhoto}
+                          alt='Avatar image'
+                        />
+                      </div>
                       <Dropzone className='w-full' onDrop={setFiles} />
                     </div>
                   </div>
