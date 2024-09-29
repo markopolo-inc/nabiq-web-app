@@ -5,7 +5,6 @@ import { useLogoutMutation } from 'src/store/auth/authApi';
 import { useAppSelector } from 'src/store/hooks.ts';
 
 const TopMenu = () => {
-  const { userEmail, userName } = useAppSelector((state) => state.user);
   const company = useAppSelector((state) => state.company);
 
   const { gray500 } = useGetColors();
@@ -37,8 +36,8 @@ const TopMenu = () => {
           />
 
           <div className='flex flex-col items-start font-sans text-sm font-semibold leading-5 text-gray-700'>
-            <div>{userName}</div>
-            <div className='font-normal text-gray-600'>{userEmail}</div>
+            <div>{company?.meta?.userName}</div>
+            <div className='font-normal text-gray-600'>{company?.meta?.userEmail}</div>
           </div>
         </Menu.Label>
 
