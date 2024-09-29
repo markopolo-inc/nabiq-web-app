@@ -196,7 +196,7 @@ export const TopPerformingCampaignBreakdown = () => {
               ref={div2Ref}
             >
               <Group justify='space-between'>
-                <GatewayLogo app='postmark' />
+                <GatewayLogo app='twilio' />
                 <Badge color='gray'>Step 3</Badge>
               </Group>
               <Stack gap={0} className='mt-4'>
