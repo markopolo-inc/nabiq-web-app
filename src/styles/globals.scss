@@ -35,6 +35,7 @@
 
 @layer base {
   body {
-    @apply font-geist bg-white text-gray-900 text-base;
+    font-family: var(--font-geist), sans-serif !important;
+    @apply bg-white text-gray-900 text-base;
   }
 }
