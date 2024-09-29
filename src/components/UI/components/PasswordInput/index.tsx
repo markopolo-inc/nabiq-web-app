@@ -1,24 +1,20 @@
 import { PasswordInput as Input, PasswordInputProps } from '@mantine/core';
 import { FiEye, FiEyeOff } from '@nabiq-icons';
 import { useGetColors } from '@nabiq-ui';
-import { useState } from 'react';
 
 import Text from '../Text';
 import styles from './Input.module.scss';
 
 const PasswordInput = ({ label, required, description, ...rest }: PasswordInputProps) => {
   const { gray400, gray600, gray700 } = useGetColors();
-  const [focused, setFocused] = useState(false);
 
   return (
     <div className='space-y-2'>
       <Input
         classNames={{
-          input: `${focused ? styles.focused : styles.input}`,
+          input: styles.input,
           innerInput: styles.innerInput,
         }}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
         label={
           label && (
             <Text
