@@ -50,8 +50,7 @@ export const companyApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Settings successfully updated!');
-          window.location.href = '/';
+          toast.success(res.data?.message || 'Update successfully!');
         } catch (err) {
           toast.error(err?.error.message || 'Failed to updated!');
           return err;
