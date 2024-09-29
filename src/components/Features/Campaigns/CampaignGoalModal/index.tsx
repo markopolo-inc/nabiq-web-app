@@ -1,5 +1,5 @@
 import { FiCursorClick01, FiHelpCircle, FiInfinity, FiZapFast } from '@nabiq-icons';
-import { Button, Group, Modal, Stack, Tooltip } from '@nabiq-ui';
+import { Badge, Button, Group, Modal, Stack, Tooltip } from '@nabiq-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +15,8 @@ const goals = [
     icon: FiZapFast,
     color: '#EE46BC',
     type: 'acquisition',
+    isDisabled: true,
+    badgeLabel: 'Coming soon',
   },
   {
     title: 'Activation',
@@ -24,6 +26,8 @@ const goals = [
     icon: FiCursorClick01,
     color: '#2E90FA',
     type: 'activation',
+    isDisabled: false,
+    badgeLabel: '',
   },
   {
     title: 'Retention',
@@ -33,6 +37,8 @@ const goals = [
     icon: FiInfinity,
     color: '#17B26A',
     type: 'retention',
+    isDisabled: false,
+    badgeLabel: '',
   },
 ];
 
@@ -59,7 +65,8 @@ const ModalBody = ({ setOpened }) => {
                 key={idx}
                 className='w-[310px] p-8 border shadow-sm border-gray-200 rounded-xl'
               >
-                <Group justify='end'>
+                <Group justify={goal.badgeLabel ? 'space-between' : 'end'}>
+                  {goal.badgeLabel ? <Badge color='warning'>{goal.badgeLabel}</Badge> : <></>}
                   <Tooltip text={goal.tooltip}>
                     <FiHelpCircle color='#9AA4B2' size={20} style={{ cursor: 'pointer' }} />
                   </Tooltip>
@@ -71,6 +78,8 @@ const ModalBody = ({ setOpened }) => {
                 <p className='text-gray-600 font-normal text-sm text-center'>{goal.headline}</p>
                 <Button
                   onClick={() => {
+                    if (goal.isDisabled) return;
+
                     dispatch(
                       setCampaign({
                         brandId,
@@ -82,6 +91,7 @@ const ModalBody = ({ setOpened }) => {
                     navigate('/campaigns/campaign-configuration');
                     setOpened(false);
                   }}
+                  disabled={goal.isDisabled}
                 >
                   Create
                 </Button>
