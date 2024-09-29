@@ -16,6 +16,7 @@ import moment from 'moment-timezone';
 import { useMemo, useState } from 'react';
 import OptionTabs from 'src/components/UI/components/OptionTabs';
 import { CampaignItemInterface } from 'src/interfaces/campaign.interface.ts';
+import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi';
 import { useAppSelector } from 'src/store/hooks.ts';
 
 type ActivatedTabsType = 'all' | CampaignItemInterface['status'];
@@ -33,7 +34,10 @@ const colorMap = {
 };
 
 const CampaignTable = () => {
-  const { list } = useAppSelector((state) => state.campaign);
+  const { resourceId: brandId } = useAppSelector((state) => state.brand);
+  const { data } = useGetCampaignConfigsQuery(brandId);
+
+  const list = data?.data || [];
 
   const [active, setActive] = useState<ActivatedTabsType>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -55,7 +59,7 @@ const CampaignTable = () => {
         <p className='text-gray-900 font-semibold text-lg'>Campaign</p>
 
         <Badge color='blue' size='sm'>
-          {list.length ?? 0} campaigns
+          {/* {list.length ?? 0} campaigns */}
         </Badge>
         {/* <div className="rounded-2xl border border-primary-200 py-0.5 px-2 text-xs font-medium text-primary-700">
           {list.length ?? 0} campaigns

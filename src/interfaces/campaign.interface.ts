@@ -33,5 +33,4 @@ export interface CampaignInterface {
   stepCount: number;
   stepDelay: number;
   channels: ChannelInterface[];
-  list: CampaignItemInterface[];
 }
