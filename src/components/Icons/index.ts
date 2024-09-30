@@ -42,6 +42,7 @@ export { default as FiGlobe01 } from './Globe01';
 
 // H
 export { default as FiHelpCircle } from './HelpCircle';
+export { default as HelpCircle02 } from './HelpCircle02';
 export { default as FiHexagon01 } from './Hexagon01';
 export { default as FiHomeLine } from './HomeLine';
 export { default as FiHourglass03 } from './Hourglass03';
@@ -76,6 +77,7 @@ export { default as FiPlatformIcon } from './PlatformIcon';
 export { default as FiSearchLg } from './SearchLg';
 export { default as FiSliders01 } from './Sliders01';
 export { default as FiSettings01 } from './Settings01';
+export { default as FiSettings02 } from './Settings02';
 export { default as FiStar04 } from './Star04';
 export { default as FiShopify } from './Shopify';
 

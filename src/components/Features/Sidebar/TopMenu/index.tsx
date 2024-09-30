@@ -1,5 +1,5 @@
 import { rem } from '@mantine/core';
-import { FiHelpCircle, FiSettings01, Logout01 } from '@nabiq-icons';
+import { FiSettings02, HelpCircle02, Logout01 } from '@nabiq-icons';
 import { Avatar, Image, Menu, UnstyledButton, useGetColors } from '@nabiq-ui';
 import { useLogoutMutation } from 'src/store/auth/authApi';
 import { useAppSelector } from 'src/store/hooks.ts';
@@ -41,24 +41,22 @@ const TopMenu = () => {
           </div>
         </Menu.Label>
 
-        <Menu.Divider />
+        <Menu.Divider style={{ marginTop: '0' }} />
 
         <Menu.Item
           className='text-sm font-medium leading-5 text-gray-700'
           component='a'
           href='/settings'
-          leftSection={<FiSettings01 style={{ width: rem(18), height: rem(18) }} color={gray500} />}
+          leftSection={<FiSettings02 style={{ width: rem(16), height: rem(16) }} color={gray500} />}
         >
           Settings
         </Menu.Item>
-
-        <Menu.Divider />
 
         <Menu.Item
           className='text-sm font-medium leading-5 text-gray-700'
           component='a'
           href='/support'
-          leftSection={<FiHelpCircle style={{ width: rem(18), height: rem(18) }} color={gray500} />}
+          leftSection={<HelpCircle02 style={{ width: rem(16), height: rem(16) }} color={gray500} />}
         >
           Support
         </Menu.Item>
@@ -68,7 +66,7 @@ const TopMenu = () => {
         <Menu.Item
           onClick={handleLogout}
           className='text-sm font-medium leading-5 text-gray-700'
-          leftSection={<Logout01 style={{ width: rem(18), height: rem(18) }} color={gray500} />}
+          leftSection={<Logout01 style={{ width: rem(16), height: rem(16) }} color={gray500} />}
         >
           Log out
         </Menu.Item>
