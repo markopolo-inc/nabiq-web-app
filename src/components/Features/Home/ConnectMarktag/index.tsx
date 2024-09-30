@@ -24,7 +24,14 @@ const ConnectMarktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
           </div>
           <div className='flex gap-3'>
             <Button onClick={onShowMarktag}>Connect</Button>
-            {/* <Button variant="link">Learn more</Button> */}
+            <Button
+              onClick={() =>
+                window.open('https://www.markopolo.ai/products/marktag/marktag', '_blank')
+              }
+              variant='link'
+            >
+              Learn more
+            </Button>
           </div>
         </div>
       </div>
