@@ -1,5 +1,9 @@
 import toast from 'react-hot-toast';
-import { APIGetConfigsResponseType, APIResponseType } from 'src/interfaces/response.interface';
+import {
+  APIGetAdsResponseType,
+  APIGetConfigsResponseType,
+  APIResponseType,
+} from 'src/interfaces/response.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice.ts';
 
 import { apiSlice } from '../api/apiSlice';
@@ -49,7 +53,7 @@ export const campaignApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    getCampaignAds: builder.mutation<APIResponseType, any>({
+    getCampaignAds: builder.mutation<APIGetAdsResponseType, any>({
       query: (args) => {
         return {
           url: `/brand/integration/content`,
@@ -65,7 +69,7 @@ export const campaignApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          return res;
+          return res?.data?.list || [];
         } catch (err) {
           return err;
         }

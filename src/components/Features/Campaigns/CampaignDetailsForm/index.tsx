@@ -111,7 +111,7 @@ const CampaignDetailsForm = () => {
           </Stack>
         </Stack>
 
-        {campaign?.content?.length && (
+        {campaign?.content?.length ? (
           <Stack gap={12}>
             {campaign?.content?.map((item) => (
               <Group
@@ -141,7 +141,7 @@ const CampaignDetailsForm = () => {
               </Group>
             ))}
           </Stack>
-        )}
+        ) : null}
       </Stack>
     </>
   );

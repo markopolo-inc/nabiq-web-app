@@ -22,71 +22,29 @@ import {
 import { capitalize } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { CampaignAdsItemInterface } from 'src/interfaces/campaign.interface';
 import { useGetCampaignAdsMutation } from 'src/store/campaign/campaignApi';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
+import { useAppSelector } from 'src/store/hooks';
 
 type PlatformType = 'facebook' | 'google';
 
-const ADS_TABLE_HEADERS: string[] = [
-  'Ad name',
-  'Status',
-  'CTR',
-  'Link clicks',
-  'CPC',
-  'Reach',
-  'Engagement',
-];
+const ADS_TABLE_HEADERS: string[] = ['Ad name', 'Status', 'CPC', 'CTR', 'Clicks', 'Impression'];
 
 const colorMap = {
   processing: 'warning',
   active: 'success',
 };
 
-const list = [
-  {
-    id: '123',
-    name: 'holiday campaign ad',
-    type: 'Image',
-    platform: 'facebook',
-    status: 'active',
-    CTR: 35,
-    Clicks: 12.6,
-    CPC: 1.14,
-    Reach: 248,
-    Engagement: 123,
-  },
-  {
-    id: '125553',
-    name: 'christmas exp',
-    type: 'Video',
-    platform: 'facebook',
-    status: 'active',
-    CTR: 25.24,
-    Clicks: 2,
-    CPC: 6.7,
-    Reach: 232,
-    Engagement: 1233,
-  },
-  {
-    id: '123423',
-    name: 'new year 23',
-    type: 'Stories',
-    platform: 'facebook',
-    status: 'active',
-    CTR: 34,
-    Clicks: 23,
-    CPC: 3.2,
-    Reach: 234,
-    Engagement: 343,
-  },
-];
-
 const ModalBody = ({ setOpened }) => {
   const dispatch = useDispatch();
+  const { campaign } = useAppSelector((state) => state);
   const [createConfig, { isLoading }] = useGetCampaignAdsMutation();
   const [platform, setPlatform] = useState<string>('facebook');
-  // const [list, setList] = useState<any[]>([]);
-  const [selectedAds, setSelectedAds] = useState<any[]>([]);
+  const [list, setList] = useState<CampaignAdsItemInterface[]>([]);
+  const [selectedAds, setSelectedAds] = useState<string[]>(
+    campaign?.content?.map((item) => item?.id) || [],
+  );
 
   const getPlatformAds = async () => {
     const payload = {
@@ -95,9 +53,8 @@ const ModalBody = ({ setOpened }) => {
       limit: 10,
     };
 
-    const res = await createConfig(payload).unwrap();
-    // setList(res.data || []);
-    console.log('res', res);
+    const res: any = await createConfig(payload).unwrap();
+    setList(res || []);
   };
 
   useEffect(() => {
@@ -245,7 +202,7 @@ const ModalBody = ({ setOpened }) => {
                     onChange={() => onSelectAd({ value: item?.id })}
                   />
                   <Stack align='left' gap={4}>
-                    <div className='text-sm font-medium text-gray-900'>{item?.name}</div>
+                    <div className='text-sm font-medium text-gray-900'>{item?.title}</div>
                     <div className='text-xs font-medium text-gray-600'>{item?.type}</div>
                   </Stack>
                 </Group>
@@ -261,31 +218,25 @@ const ModalBody = ({ setOpened }) => {
 
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
-                  {item?.CTR || '-'}
+                  {item?.metrics?.cpc || '-'}
                 </Stack>
               </Td>
 
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
-                  {item?.Clicks || '-'}
+                  {item?.metrics?.ctr || '-'}
                 </Stack>
               </Td>
 
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
-                  {item?.CPC || '-'}
+                  {item?.metrics?.clicks || '-'}
                 </Stack>
               </Td>
 
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
-                  {item?.Reach || '-'}
-                </Stack>
-              </Td>
-
-              <Td className='py-4 px-6'>
-                <Stack align='left' gap={4}>
-                  {item?.Engagement || '-'}
+                  {item?.metrics?.impressions || '-'}
                 </Stack>
               </Td>
             </TableRow>

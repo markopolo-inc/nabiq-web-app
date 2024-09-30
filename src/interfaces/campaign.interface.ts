@@ -36,3 +36,20 @@ export interface CampaignInterface {
   list: CampaignItemInterface[];
   showFirstCreationModal: boolean;
 }
+
+interface Metrics {
+  cpc: number | undefined;
+  ctr: number | undefined;
+  impressions: number | undefined;
+  clicks: number | undefined;
+}
+
+export interface CampaignAdsItemInterface {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  status: string;
+  type: string;
+  metrics: Metrics;
+}
