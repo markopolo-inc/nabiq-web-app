@@ -14,7 +14,7 @@ const ModalBody = ({ setOpened }) => {
         </p>
       </Stack>
       <Stack align='center'>
-        <Group>
+        <Group justify='center'>
           <div className='w-[280px] flex flex-col gap-6 border border-gray-200 rounded-xl bg-white shadow-sm p-6'>
             <div className='flex flex-col gap-3 items-center'>
               <FiGlobe01 size={32} color={gray500} />

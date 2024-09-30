@@ -14,11 +14,14 @@ export interface CampaignItemInterface {
   goal: 'acquisition';
   name: string;
   details: string;
+  funnels: any[];
+  job: any;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface CampaignInterface {
+  resourceId?: string;
   brandId: string;
   tagId: string;
   goal: 'acquisition' | 'retention' | 'activation';
@@ -26,12 +29,28 @@ export interface CampaignInterface {
   details: string;
   link: string;
   tone: 'formal' | 'informal';
-  content: [];
   startDate: string;
   endDate: string;
   time: string; // MUST USE 24 HOUR FORMAT
   stepCount: number;
   stepDelay: number;
+  content: any[];
   channels: ChannelInterface[];
-  list: CampaignItemInterface[];
+}
+
+interface Metrics {
+  cpc: number | undefined;
+  ctr: number | undefined;
+  impressions: number | undefined;
+  clicks: number | undefined;
+}
+
+export interface CampaignAdsItemInterface {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  status: string;
+  type: string;
+  metrics: Metrics;
 }
