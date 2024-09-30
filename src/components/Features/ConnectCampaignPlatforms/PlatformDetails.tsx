@@ -1,11 +1,13 @@
 import { Button, Select, Text } from '@nabiq-ui';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUpdateSettingMutation } from 'src/store/company/companyApi';
 import { useAppSelector } from 'src/store/hooks.ts';
 import { useGetBrandsListQuery } from 'src/store/marktag/marktagApi.ts';
 
 const PlatformDetails = () => {
   const navigate = useNavigate();
+  const [updateSetting] = useUpdateSettingMutation();
   const user = useAppSelector((state) => state.user);
   const company = useAppSelector((state) => state.company);
   const [resourceId, setResourceId] = useState<string>('');
@@ -29,6 +31,16 @@ const PlatformDetails = () => {
   const handleConnect = async () => {
     if (!resourceId) return;
 
+    const connectedBrand = {
+      resourceId: selectedBrand.resourceId,
+      companyId: selectedBrand.companyId,
+      brandName: selectedBrand.brandName,
+      brandWebsite: selectedBrand.brandWebsite,
+      brandLogo: selectedBrand.brandInfo.brandLogo,
+      connectedAccounts: selectedBrand.connectedAccounts,
+    };
+
+    updateSetting({ connectedBrand }).unwrap();
     navigate('/');
   };
 
