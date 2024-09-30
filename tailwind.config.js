@@ -79,6 +79,7 @@ export default {
         },
       },
       fontFamily: {
+        geist: ['var(--font-geist)', ...fontFamily.sans],
         sans: ['var(--font-inter)', ...fontFamily.sans],
         open: 'var(--font-open)',
       },

@@ -11,7 +11,7 @@ const ConnectedMarktag = ({ onShowMarktag }: ConnectedMarktagPropsTypes) => {
   const { markTag } = useAppSelector((state) => state.brand);
 
   return (
-    <div className='bg-white rounded-xl p-8 shadow-lg'>
+    <div className='bg-white rounded-xl p-8 shadow-lg w-[273px]'>
       <div className='flex gap-3 flex-nowrap'>
         <div>
           <FiCommand size={32} color={primary500} fill={primary500} />
@@ -22,15 +22,13 @@ const ConnectedMarktag = ({ onShowMarktag }: ConnectedMarktagPropsTypes) => {
             <p className='text-gray-900 text-lg font-semibold'>{markTag?.domain}</p>
             <p className='text-gray-600 text-sm font-normal'>{markTag?.hostname}</p>
 
-            {/*<div className="flex items-center gap-1 px-1.5 py-1 border border-success-500 rounded-2xl mt-4">*/}
-            {/*  <div className="w-2 h-2 rounded-full bg-success-500"></div>*/}
-            {/*  <Text*/}
-            {/*    size="14px"*/}
-            {/*    weight={500}*/}
-            {/*    className="text-success-700 leading-5"*/}
-            {/*  >*/}
-            {/*    Pixel: 621000359117182*/}
-            {/*  </Text>*/}
+            {/*<div className='mt-4'>*/}
+            {/*  <div className='flex items-center gap-1 px-1.5 py-[1px] border border-success-500 rounded-2xl'>*/}
+            {/*    <div className='w-2 h-2 rounded-full bg-success-500'></div>*/}
+            {/*    <p className='text-xs font-medium text-success-700 leading-[18px] tracking-[0.32px]'>*/}
+            {/*      Pixel: 621000359117182*/}
+            {/*    </p>*/}
+            {/*  </div>*/}
             {/*</div>*/}
           </div>
           <div className='flex gap-3'>
