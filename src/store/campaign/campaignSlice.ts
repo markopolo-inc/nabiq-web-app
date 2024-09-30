@@ -7,6 +7,7 @@ const initialState: Partial<CampaignInterface> = {
   startDate: moment().format('YYYY-MM-DD'),
   endDate: moment().add(7, 'day').format('YYYY-MM-DD'),
   channels: [],
+  content: [],
 };
 
 export const revertAll = createAction('REVERT_ALL');
