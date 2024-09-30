@@ -4,7 +4,6 @@ import {
   APIGetConfigsResponseType,
   APIResponseType,
 } from 'src/interfaces/response.interface';
-import { setCampaign } from 'src/store/campaign/campaignSlice.ts';
 
 import { apiSlice } from '../api/apiSlice';
 
@@ -12,13 +11,11 @@ export const campaignApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCampaignConfig: builder.mutation<APIResponseType, any>({
       query: (args) => {
-        const { list: _list, ...rest } = args;
-
         return {
           url: `/cohort`,
           method: 'POST',
           body: {
-            ...rest,
+            ...args,
           },
         };
       },
@@ -35,29 +32,11 @@ export const campaignApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    getCampaignConfigs: builder.query<APIGetConfigsResponseType, string>({
-      query: (brandId) => ({
-        url: `/cohort`,
-        method: 'GET',
-        params: {
-          brandId,
-        },
-      }),
-      async onQueryStarted(args, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-          dispatch(setCampaign({ list: result?.data?.data || [] }));
-          return result?.data;
-        } catch (err) {
-          return err;
-        }
-      },
-    }),
-    getCampaignAds: builder.mutation<APIGetAdsResponseType, any>({
+    editCampaignConfig: builder.mutation<APIResponseType, any>({
       query: (args) => {
         return {
-          url: `/brand/integration/content`,
-          method: 'POST',
+          url: `/cohort`,
+          method: 'PATCH',
           body: {
             ...args,
           },
@@ -69,7 +48,65 @@ export const campaignApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          return res?.data?.list || [];
+          toast.success(res.data?.message || 'Campaign update campaign successfully!');
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to update!');
+          return err;
+        }
+      },
+    }),
+    deleteCampaignConfig: builder.mutation<APIResponseType, any>({
+      query: (configId) => {
+        return {
+          url: `/cohort`,
+          method: 'DELETE',
+          params: {
+            configId,
+          },
+        };
+      },
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || 'Campaign update campaign successfully!');
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to update!');
+          return err;
+        }
+      },
+    }),
+    getCampaignConfigs: builder.query<APIGetConfigsResponseType, string>({
+      query: (brandId) => ({
+        url: `/cohort`,
+        method: 'GET',
+        params: {
+          brandId,
+        },
+      }),
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          return result?.data;
+        } catch (err) {
+          return err;
+        }
+      },
+    }),
+    getCampaignAdsResult: builder.query<APIGetAdsResponseType, any>({
+      query: (args) => ({
+        url: `/brand/integration/content`,
+        method: 'POST',
+        body: {
+          ...args,
+        },
+      }),
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          return result?.data?.list || [];
         } catch (err) {
           return err;
         }
@@ -80,6 +117,8 @@ export const campaignApi = apiSlice.injectEndpoints({
 
 export const {
   useCreateCampaignConfigMutation,
+  useEditCampaignConfigMutation,
+  useDeleteCampaignConfigMutation,
   useGetCampaignConfigsQuery,
-  useGetCampaignAdsMutation,
+  useGetCampaignAdsResultQuery,
 } = campaignApi;

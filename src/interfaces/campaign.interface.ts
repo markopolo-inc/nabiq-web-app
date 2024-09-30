@@ -14,11 +14,14 @@ export interface CampaignItemInterface {
   goal: 'acquisition';
   name: string;
   details: string;
+  funnels: any[];
+  job: any;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface CampaignInterface {
+  resourceId?: string;
   brandId: string;
   tagId: string;
   goal: 'acquisition' | 'retention' | 'activation';
@@ -33,8 +36,6 @@ export interface CampaignInterface {
   stepDelay: number;
   content: any[];
   channels: ChannelInterface[];
-  list: CampaignItemInterface[];
-  showFirstCreationModal: boolean;
 }
 
 interface Metrics {

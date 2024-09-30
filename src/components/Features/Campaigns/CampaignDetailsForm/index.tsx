@@ -1,5 +1,5 @@
-import { FiCrossX, FiFileUpload } from '@nabiq-icons';
-import { Group, PlatformIcon, Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
+import { FiCrossX, FiFileUpload, FiPlatformIcon } from '@nabiq-icons';
+import { Group, Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
 import CampaignAdsModal from 'components/Features/Campaigns/CampaignAdsModal';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -121,10 +121,10 @@ const CampaignDetailsForm = () => {
                 className='p-4 rounded-lg border border-[#EAECF0]'
               >
                 <Group gap={8} align='start'>
-                  <PlatformIcon platform={item?.platform} size={20} />
+                  <FiPlatformIcon platform={item?.platform} size={20} />
                   <Stack gap={2}>
                     <Text size='14px' className='text-gray-700' weight={500}>
-                      {item?.name}
+                      {item?.title}
                     </Text>
                     <Text size='14px' className='text-gray-600'>
                       {item?.type}

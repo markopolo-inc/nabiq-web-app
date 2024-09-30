@@ -3,17 +3,21 @@ import { Button, Group, Stack, TableLoader } from '@nabiq-ui';
 import CampaignGoalModal from 'components/Features/Campaigns/CampaignGoalModal';
 import CampaignTable from 'components/Features/Campaigns/CampaignTable';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import HeaderTitle from 'src/layouts/HeaderTitle';
 import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
+import { resetCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks.ts';
 
 const Campaigns = () => {
+  const dispatch = useDispatch();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
-  const { isLoading, data: campaignList } = useGetCampaignConfigsQuery(brandId);
+  const { isLoading, data: campaignList, refetch } = useGetCampaignConfigsQuery(brandId);
 
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
 
   const handleCreateCampaign = () => {
+    dispatch(resetCampaign());
     setShowGoalModal(true);
   };
 
@@ -55,7 +59,11 @@ const Campaigns = () => {
           </div>
         )}
 
-        {isLoading ? <TableLoader /> : <CampaignTable />}
+        {isLoading ? (
+          <TableLoader />
+        ) : (
+          <CampaignTable list={campaignList?.data} refetch={refetch} />
+        )}
       </Stack>
     </>
   );

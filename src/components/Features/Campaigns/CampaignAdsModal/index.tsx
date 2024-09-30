@@ -1,4 +1,4 @@
-import { ArrowNarrowDown } from '@nabiq-icons';
+import { ArrowNarrowDown, FiPlatformIcon } from '@nabiq-icons';
 import {
   Badge,
   Button,
@@ -7,7 +7,6 @@ import {
   Modal,
   OptionTabs,
   Pagination,
-  PlatformIcon,
   Stack,
   Table,
   TableBody,
@@ -20,10 +19,9 @@ import {
   Th,
 } from '@nabiq-ui';
 import { capitalize } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { CampaignAdsItemInterface } from 'src/interfaces/campaign.interface';
-import { useGetCampaignAdsMutation } from 'src/store/campaign/campaignApi';
+import { useGetCampaignAdsResultQuery } from 'src/store/campaign/campaignApi';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -32,34 +30,24 @@ type PlatformType = 'facebook' | 'google';
 const ADS_TABLE_HEADERS: string[] = ['Ad name', 'Status', 'CPC', 'CTR', 'Clicks', 'Impression'];
 
 const colorMap = {
-  processing: 'warning',
-  active: 'success',
+  INACTIVE: 'warning',
+  ACTIVE: 'success',
 };
 
 const ModalBody = ({ setOpened }) => {
   const dispatch = useDispatch();
   const { campaign } = useAppSelector((state) => state);
-  const [createConfig, { isLoading }] = useGetCampaignAdsMutation();
   const [platform, setPlatform] = useState<string>('facebook');
-  const [list, setList] = useState<CampaignAdsItemInterface[]>([]);
   const [selectedAds, setSelectedAds] = useState<string[]>(
     campaign?.content?.map((item) => item?.id) || [],
   );
 
-  const getPlatformAds = async () => {
-    const payload = {
-      platform,
-      page: 1,
-      limit: 10,
-    };
-
-    const res: any = await createConfig(payload).unwrap();
-    setList(res || []);
-  };
-
-  useEffect(() => {
-    getPlatformAds();
-  }, []);
+  const { isLoading, data } = useGetCampaignAdsResultQuery({
+    platform,
+    page: 1,
+    limit: 10,
+  });
+  const list = data?.list || [];
 
   const onSelectAd = ({ value }) => {
     if (selectedAds?.includes(value)) {
@@ -84,7 +72,10 @@ const ModalBody = ({ setOpened }) => {
     const selectedAdsList = list?.filter((item) => selectedAds?.includes(item?.id));
     dispatch(
       setCampaign({
-        content: selectedAdsList,
+        content: selectedAdsList?.map((item) => ({
+          ...item,
+          platform,
+        })),
       }),
     );
     setOpened(false);
@@ -125,13 +116,13 @@ const ModalBody = ({ setOpened }) => {
             {
               value: 'facebook',
               label: 'Facebook',
-              logo: <PlatformIcon platform='facebook' size={20} />,
+              logo: <FiPlatformIcon platform='facebook' size={20} />,
             },
-            {
-              value: 'google',
-              label: 'Google',
-              logo: <PlatformIcon platform='google' size={20} />,
-            },
+            // {
+            //   value: 'google',
+            //   label: 'Google',
+            //   logo: <FiPlatformIcon platform='google' size={20} />,
+            // },
           ]}
         />
       </Stack>

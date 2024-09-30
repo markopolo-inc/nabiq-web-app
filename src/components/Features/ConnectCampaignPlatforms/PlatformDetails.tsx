@@ -10,7 +10,8 @@ const PlatformDetails = () => {
   const [updateSetting] = useUpdateSettingMutation();
   const user = useAppSelector((state) => state.user);
   const company = useAppSelector((state) => state.company);
-  const [resourceId, setResourceId] = useState<string>('');
+  const { connectedBrand } = useAppSelector((state) => state.brand);
+  const [resourceId, setResourceId] = useState<string>(connectedBrand?.resourceId || '');
 
   const { data: brandsList, isLoading: isLoadingBrandList } = useGetBrandsListQuery();
 
@@ -31,7 +32,7 @@ const PlatformDetails = () => {
   const handleConnect = async () => {
     if (!resourceId) return;
 
-    const connectedBrand = {
+    const brandPayload = {
       resourceId: selectedBrand.resourceId,
       companyId: selectedBrand.companyId,
       brandName: selectedBrand.brandName,
@@ -40,7 +41,7 @@ const PlatformDetails = () => {
       connectedAccounts: selectedBrand.connectedAccounts,
     };
 
-    updateSetting({ connectedBrand }).unwrap();
+    updateSetting({ connectedBrand: brandPayload }).unwrap();
     navigate('/');
   };
 

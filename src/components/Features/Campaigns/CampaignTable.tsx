@@ -17,8 +17,11 @@ import {
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { CampaignItemInterface } from 'src/interfaces/campaign.interface.ts';
-import { useAppSelector } from 'src/store/hooks.ts';
+import { useDeleteCampaignConfigMutation } from 'src/store/campaign/campaignApi';
+import { setCampaign } from 'src/store/campaign/campaignSlice';
 
 type ActivatedTabsType = 'all' | CampaignItemInterface['status'];
 
@@ -35,8 +38,10 @@ const colorMap = {
   active: 'success',
 };
 
-const CampaignTable = () => {
-  const { list } = useAppSelector((state) => state.campaign);
+const CampaignTable = ({ list, refetch }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [deleteConfig, { isLoading }] = useDeleteCampaignConfigMutation();
 
   const [active, setActive] = useState<ActivatedTabsType>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -51,6 +56,35 @@ const CampaignTable = () => {
       }),
     [active, searchTerm, list],
   );
+
+  const handleEditCampaign = ({ campaignId }) => {
+    const selectedCampaign = list?.find((item) => item.resourceId === campaignId);
+    const {
+      createdAt: _createdAt,
+      funnels: _funnels,
+      job: _job,
+      resourceType: _resourceType,
+      status: _status,
+      updatedAt: _updatedAt,
+      ...payload
+    } = selectedCampaign;
+
+    dispatch(
+      setCampaign({
+        ...payload,
+      }),
+    );
+    navigate('/campaigns/campaign-configuration');
+  };
+
+  const handleDeleteCampaign = async ({ campaignId }) => {
+    if (!window.confirm('Are you want to delete this campaign?')) return;
+
+    const res = await deleteConfig(campaignId).unwrap();
+    if (res.success) {
+      refetch();
+    }
+  };
 
   const banner = (
     <Stack gap={0}>
@@ -154,11 +188,18 @@ const CampaignTable = () => {
 
               <Td className='py-4 px-6'>
                 <Stack align='center' gap={4} className='flex-row justify-center'>
-                  <div className='p-3 hover:cursor-pointer'>
+                  <div
+                    className={`p-3 ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                    onClick={() => handleDeleteCampaign({ campaignId: item.resourceId })}
+                  >
                     <FiTrash size={20} color='#475467' />
                   </div>
 
-                  <Button variant='tertiary' size='md'>
+                  <Button
+                    variant='tertiary'
+                    size='md'
+                    onClick={() => handleEditCampaign({ campaignId: item.resourceId })}
+                  >
                     View
                   </Button>
                 </Stack>
