@@ -34,10 +34,9 @@ const TopMenu = () => {
             active
             size='md'
           />
-
-          <div className='flex flex-col items-start font-sans text-sm font-semibold leading-5 text-gray-700'>
-            <div>{company?.meta?.userName}</div>
-            <div className='font-normal text-gray-600'>{company?.meta?.userEmail}</div>
+          <div className='grid font-sans text-sm font-semibold leading-5 text-gray-700'>
+            <p className='truncate'>{company?.meta?.userName}</p>
+            <p className='font-normal text-gray-600 truncate'>{company?.meta?.userEmail}</p>
           </div>
         </Menu.Label>
 
