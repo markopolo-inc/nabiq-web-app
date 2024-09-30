@@ -1,12 +1,23 @@
 import { FiZap } from '@nabiq-icons';
 import { Button } from '@nabiq-ui';
+import { isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import GatewayLogo from 'src/components/UI/GatewayLogo';
 import type { GatewayType } from 'src/interfaces/brand.interface';
+import { appOptions } from 'src/lib/integration.lib';
+import { useAppSelector } from 'src/store/hooks';
 
 const IntegrateApps = () => {
   const navigate = useNavigate();
-  const apps = ['klaviyo', 'hubspot', 'postmark'];
+  const { emailIntegrations, smsIntegrations } = useAppSelector((state) => state.brand);
+
+  const connectedGateways = appOptions.filter((gateway) => {
+    return (
+      (gateway.category === 'email' && !isEmpty(emailIntegrations?.[gateway?.gateway])) ||
+      (gateway.category === 'sms' && !isEmpty(smsIntegrations?.[gateway?.gateway]))
+    );
+  });
+
   return (
     <div className='bg-white rounded-xl p-8 shadow-lg'>
       <div className='flex gap-3 flex-nowrap'>
@@ -25,10 +36,10 @@ const IntegrateApps = () => {
             <Button variant='secondary-black' onClick={() => navigate('/integrations')}>
               Integrate
             </Button>
-            <div className='flex gap-4'>
-              {apps.map((item) => (
-                <div key={item}>
-                  <GatewayLogo app={item as GatewayType} width={20} />
+            <div className='flex flex-wrap justify-end gap-4 w-4/6'>
+              {connectedGateways.map((gateway) => (
+                <div key={gateway.gateway} className='flex-shrink-0'>
+                  <GatewayLogo app={gateway.gateway as GatewayType} width={20} />
                 </div>
               ))}
             </div>

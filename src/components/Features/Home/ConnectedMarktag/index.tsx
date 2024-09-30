@@ -11,7 +11,7 @@ const ConnectedMarktag = ({ onShowMarktag }: ConnectedMarktagPropsTypes) => {
   const { markTag } = useAppSelector((state) => state.brand);
 
   return (
-    <div className='bg-white rounded-xl p-8 shadow-lg w-[273px]'>
+    <div className='bg-white rounded-xl p-8 shadow-lg max-w-xs'>
       <div className='flex gap-3 flex-nowrap'>
         <div>
           <FiCommand size={32} color={primary500} fill={primary500} />
