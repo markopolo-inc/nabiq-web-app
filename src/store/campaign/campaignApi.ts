@@ -49,7 +49,33 @@ export const campaignApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getCampaignAds: builder.mutation<APIResponseType, any>({
+      query: (args) => {
+        return {
+          url: `/brand/integration/content`,
+          method: 'POST',
+          body: {
+            ...args,
+          },
+        };
+      },
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          return res;
+        } catch (err) {
+          return err;
+        }
+      },
+    }),
   }),
 });
 
-export const { useCreateCampaignConfigMutation, useGetCampaignConfigsQuery } = campaignApi;
+export const {
+  useCreateCampaignConfigMutation,
+  useGetCampaignConfigsQuery,
+  useGetCampaignAdsMutation,
+} = campaignApi;

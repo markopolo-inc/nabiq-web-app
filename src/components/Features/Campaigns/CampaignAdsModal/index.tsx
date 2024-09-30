@@ -2,44 +2,136 @@ import { ArrowNarrowDown } from '@nabiq-icons';
 import {
   Badge,
   Button,
+  Checkbox,
   Group,
   Modal,
   OptionTabs,
+  Pagination,
+  PlatformIcon,
   Stack,
   Table,
   TableBody,
+  TableFoot,
   TableHead,
   TableRow,
+  TableRowLoader,
   Td,
   Text,
   Th,
 } from '@nabiq-ui';
 import { capitalize } from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useGetCampaignAdsMutation } from 'src/store/campaign/campaignApi';
+import { setCampaign } from 'src/store/campaign/campaignSlice';
 
 type PlatformType = 'facebook' | 'google';
 
-const ADS_TABLE_HEADERS: string[] = ['Ads name', 'Status', 'CTR', 'CVR', 'CPC', 'ROAS'];
+const ADS_TABLE_HEADERS: string[] = [
+  'Ad name',
+  'Status',
+  'CTR',
+  'Link clicks',
+  'CPC',
+  'Reach',
+  'Engagement',
+];
 
 const colorMap = {
   processing: 'warning',
   active: 'success',
 };
 
-const ModalBody = ({ setOpened }) => {
-  const list = [
-    {
-      name: 'holiday campaign ad',
-      type: 'image',
-      status: 'active',
-      CTR: 34,
-      CVR: 23,
-      CPC: 67,
-      ROAS: 24,
-    },
-  ];
+const list = [
+  {
+    id: '123',
+    name: 'holiday campaign ad',
+    type: 'Image',
+    platform: 'facebook',
+    status: 'active',
+    CTR: 35,
+    Clicks: 12.6,
+    CPC: 1.14,
+    Reach: 248,
+    Engagement: 123,
+  },
+  {
+    id: '125553',
+    name: 'christmas exp',
+    type: 'Video',
+    platform: 'facebook',
+    status: 'active',
+    CTR: 25.24,
+    Clicks: 2,
+    CPC: 6.7,
+    Reach: 232,
+    Engagement: 1233,
+  },
+  {
+    id: '123423',
+    name: 'new year 23',
+    type: 'Stories',
+    platform: 'facebook',
+    status: 'active',
+    CTR: 34,
+    Clicks: 23,
+    CPC: 3.2,
+    Reach: 234,
+    Engagement: 343,
+  },
+];
 
+const ModalBody = ({ setOpened }) => {
+  const dispatch = useDispatch();
+  const [createConfig, { isLoading }] = useGetCampaignAdsMutation();
   const [platform, setPlatform] = useState<string>('facebook');
+  // const [list, setList] = useState<any[]>([]);
+  const [selectedAds, setSelectedAds] = useState<any[]>([]);
+
+  const getPlatformAds = async () => {
+    const payload = {
+      platform,
+      page: 1,
+      limit: 10,
+    };
+
+    const res = await createConfig(payload).unwrap();
+    // setList(res.data || []);
+    console.log('res', res);
+  };
+
+  useEffect(() => {
+    getPlatformAds();
+  }, []);
+
+  const onSelectAd = ({ value }) => {
+    if (selectedAds?.includes(value)) {
+      setSelectedAds(selectedAds?.filter((item) => item !== value));
+    } else {
+      setSelectedAds([...selectedAds, value]);
+    }
+  };
+
+  const onSelectAllAds = ({ value }) => {
+    const allSelected = value?.every((item) => selectedAds?.includes(item));
+
+    if (allSelected) {
+      setSelectedAds([]);
+    } else {
+      const newAds = Array.from(new Set([...selectedAds, ...value]));
+      setSelectedAds(newAds);
+    }
+  };
+
+  const handleConfirm = () => {
+    const selectedAdsList = list?.filter((item) => selectedAds?.includes(item?.id));
+    dispatch(
+      setCampaign({
+        content: selectedAdsList,
+      }),
+    );
+    setOpened(false);
+  };
 
   const banner = (
     <Stack gap={0}>
@@ -47,16 +139,24 @@ const ModalBody = ({ setOpened }) => {
         <Group justify='space-between'>
           <Group gap={8}>
             <Text className='text-gray-900 font-semibold text-lg'>Ads</Text>
-            <Badge color='blue' size='sm'>
-              {list.length ?? 0} ads
-            </Badge>
+            {!isLoading && (
+              <Badge color='blue' size='sm'>
+                {list?.length ?? 0} ads
+              </Badge>
+            )}
           </Group>
 
           <Group gap={12}>
             <Button variant='secondary' size='md' onClick={() => setOpened(false)}>
-              Cancle
+              Cancel
             </Button>
-            <Button size='md'>Confirm</Button>
+            <Button
+              size='md'
+              disabled={isLoading || selectedAds?.length === 0}
+              onClick={handleConfirm}
+            >
+              Confirm
+            </Button>
           </Group>
         </Group>
       </Stack>
@@ -65,8 +165,16 @@ const ModalBody = ({ setOpened }) => {
           active={platform}
           setActive={(value: PlatformType) => setPlatform(value)}
           options={[
-            { value: 'facebook', label: 'Facebook' },
-            { value: 'google', label: 'Google' },
+            {
+              value: 'facebook',
+              label: 'Facebook',
+              logo: <PlatformIcon platform='facebook' size={20} />,
+            },
+            {
+              value: 'google',
+              label: 'Google',
+              logo: <PlatformIcon platform='google' size={20} />,
+            },
           ]}
         />
       </Stack>
@@ -75,13 +183,33 @@ const ModalBody = ({ setOpened }) => {
 
   return (
     <Table banner={banner} withBanner>
-      {list.length > 0 && (
+      {list?.length > 0 && (
         <TableHead>
           <TableRow>
             {ADS_TABLE_HEADERS.map((item) => (
               <Th key={item}>
                 <div className='flex items-center gap-1'>
-                  <div className='text-xs font-medium text-gray-600'>{item}</div>
+                  {item === 'Ad name' && (
+                    <Checkbox
+                      size='md'
+                      checked={list?.every((adItem) => selectedAds?.includes(adItem?.id))}
+                      indeterminate={
+                        list?.some((adItem) => selectedAds?.includes(adItem?.id)) &&
+                        !list?.every((adItem) => selectedAds?.includes(adItem?.id))
+                      }
+                      onChange={() =>
+                        onSelectAllAds({
+                          value: list?.map((adItem) => adItem?.id),
+                        })
+                      }
+                    />
+                  )}
+                  <div
+                    className={`text-xs font-medium text-gray-600 ${item === 'Ad name' ? 'ml-2' : ''}`}
+                  >
+                    {item}
+                  </div>
+
                   {item?.length ? <ArrowNarrowDown size={16} color='#475467' /> : null}
                 </div>
               </Th>
@@ -91,7 +219,13 @@ const ModalBody = ({ setOpened }) => {
       )}
 
       <TableBody>
-        {list.length === 0 ? (
+        {isLoading ? (
+          <TableRow>
+            <Td colSpan={7}>
+              <TableRowLoader />
+            </Td>
+          </TableRow>
+        ) : list?.length === 0 ? (
           <TableRow>
             <Td className='py-10 px-8' colSpan={7}>
               <Stack align='center' gap={4}>
@@ -101,50 +235,75 @@ const ModalBody = ({ setOpened }) => {
             </Td>
           </TableRow>
         ) : (
-          list.map((item) => (
-            <TableRow>
+          list?.map((item) => (
+            <TableRow key={item?.id}>
               <Td className='py-4 px-6'>
-                <Stack align='left' gap={4}>
-                  <div className='text-sm font-medium text-gray-900'>{item.name}</div>
-                  <div className='text-xs font-medium text-gray-600'>{item.type}</div>
-                </Stack>
+                <Group gap={12}>
+                  <Checkbox
+                    size='md'
+                    checked={selectedAds?.includes(item?.id)}
+                    onChange={() => onSelectAd({ value: item?.id })}
+                  />
+                  <Stack align='left' gap={4}>
+                    <div className='text-sm font-medium text-gray-900'>{item?.name}</div>
+                    <div className='text-xs font-medium text-gray-600'>{item?.type}</div>
+                  </Stack>
+                </Group>
               </Td>
 
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
-                  <Badge color={(colorMap?.[item.status] as 'gray') || 'gray'}>
-                    {capitalize(item.status)}
+                  <Badge color={(colorMap?.[item?.status] as 'gray') || 'gray'}>
+                    {capitalize(item?.status)}
                   </Badge>
                 </Stack>
               </Td>
 
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
-                  {item.CTR}
+                  {item?.CTR || '-'}
                 </Stack>
               </Td>
 
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
-                  {item.CVR}
+                  {item?.Clicks || '-'}
                 </Stack>
               </Td>
 
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
-                  {item.CPC}
+                  {item?.CPC || '-'}
                 </Stack>
               </Td>
 
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
-                  {item.ROAS}
+                  {item?.Reach || '-'}
+                </Stack>
+              </Td>
+
+              <Td className='py-4 px-6'>
+                <Stack align='left' gap={4}>
+                  {item?.Engagement || '-'}
                 </Stack>
               </Td>
             </TableRow>
           ))
         )}
       </TableBody>
+
+      {!isLoading && list?.length ? (
+        <TableFoot className='border-t border-gray-300'>
+          <TableRow>
+            <Td className='py-3 px-6' colSpan={7}>
+              <Stack align='flex-end'>
+                <Pagination total={1} />
+              </Stack>
+            </Td>
+          </TableRow>
+        </TableFoot>
+      ) : null}
     </Table>
   );
 };

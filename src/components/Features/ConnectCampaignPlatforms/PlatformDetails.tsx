@@ -22,8 +22,8 @@ const PlatformDetails = () => {
   );
 
   const selectedBrand = useMemo(
-    () => brandsListOptions?.find((item) => item.value === resourceId),
-    [brandsListOptions, resourceId],
+    () => brandsList?.find((item) => item.resourceId === resourceId),
+    [brandsList, resourceId],
   );
 
   const handleConnect = async () => {
@@ -61,7 +61,7 @@ const PlatformDetails = () => {
           leftSection={
             resourceId && (
               <div className='flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-center text-xs font-semibold leading-4'>
-                {selectedBrand?.label?.charAt(0)?.toUpperCase()}
+                {selectedBrand?.brandName?.charAt(0)?.toUpperCase()}
               </div>
             )
           }

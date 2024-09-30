@@ -1,5 +1,5 @@
-import { FiFileUpload } from '@nabiq-icons';
-import { Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
+import { FiCrossX, FiFileUpload } from '@nabiq-icons';
+import { Group, PlatformIcon, Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
 import CampaignAdsModal from 'components/Features/Campaigns/CampaignAdsModal';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -16,6 +16,15 @@ const CampaignDetailsForm = () => {
     dispatch(
       setCampaign({
         [field]: value,
+      }),
+    );
+  };
+
+  const handleRemoveAd = ({ value }) => {
+    const selectedAdsList = campaign?.content?.filter((item) => item?.id !== value);
+    dispatch(
+      setCampaign({
+        content: selectedAdsList,
       }),
     );
   };
@@ -101,6 +110,38 @@ const CampaignDetailsForm = () => {
             </Stack>
           </Stack>
         </Stack>
+
+        {campaign?.content?.length && (
+          <Stack gap={12}>
+            {campaign?.content?.map((item) => (
+              <Group
+                key={item?.id}
+                align='start'
+                justify='space-between'
+                className='p-4 rounded-lg border border-[#EAECF0]'
+              >
+                <Group gap={8} align='start'>
+                  <PlatformIcon platform={item?.platform} size={20} />
+                  <Stack gap={2}>
+                    <Text size='14px' className='text-gray-700' weight={500}>
+                      {item?.name}
+                    </Text>
+                    <Text size='14px' className='text-gray-600'>
+                      {item?.type}
+                    </Text>
+                  </Stack>
+                </Group>
+
+                <FiCrossX
+                  size={10}
+                  color='#9AA4B2'
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleRemoveAd({ value: item?.id })}
+                />
+              </Group>
+            ))}
+          </Stack>
+        )}
       </Stack>
     </>
   );
