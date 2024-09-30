@@ -1,6 +1,5 @@
-import { Badge } from '@mantine/core';
 import { FiZap } from '@nabiq-icons';
-import { Button, OptionTabs } from '@nabiq-ui';
+import { Badge, Button, OptionTabs } from '@nabiq-ui';
 import ApiKeyModal from 'components/Features/Integrations/Modals/ApiKeyModal';
 import GatewayLogo from 'components/UI/GatewayLogo';
 import type { GatewayInterface, GatewayType } from 'interfaces/brand.interface';
@@ -57,7 +56,7 @@ const Integrations = () => {
                           <p className='text-gray-900 font-semibold text-lg'>{gateway.name}</p>
                         </div>
                         {isGatewayConnected && (
-                          <Badge variant='outline' color='green'>
+                          <Badge variant='outline' color='success'>
                             Connected
                           </Badge>
                         )}
