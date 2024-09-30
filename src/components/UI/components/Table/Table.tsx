@@ -30,7 +30,7 @@ const Table = ({
       {withBanner && Boolean(banner) && (
         <div
           style={{
-            border: '1px solid #dcdcdc',
+            border: '1px solid #E3E8EF',
             borderBottom: 'none',
             borderRadius: '12px 12px 0 0',
             background: 'white',

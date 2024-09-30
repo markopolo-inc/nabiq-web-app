@@ -76,6 +76,25 @@ export interface GatewayInterface {
   isOauthIntegration: boolean;
 }
 
+interface connectedAccounts {
+  facebookAd: {
+    id: string;
+    name: string;
+  };
+  googleAd: {
+    id: string;
+    name: string;
+  };
+}
+interface ConnectedBrand {
+  resourceId: string;
+  companyId: string;
+  brandName: string;
+  brandWebsite: string;
+  brandLogo: string;
+  connectedAccounts: connectedAccounts;
+}
+
 export interface BrandInterface {
   brandName?: string;
   companyId?: string;
@@ -92,4 +111,5 @@ export interface BrandInterface {
     domain: string;
     hostname: string;
   };
+  connectedBrand?: ConnectedBrand;
 }

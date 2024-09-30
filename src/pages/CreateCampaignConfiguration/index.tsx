@@ -4,44 +4,96 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CampaignChannels from 'src/components/Features/Campaigns/CampaignChannels';
 import CampaignDetailsForm from 'src/components/Features/Campaigns/CampaignDetailsForm';
+import CampaignFirstCreationModal from 'src/components/Features/Campaigns/CampaignFirstCreationModal';
 import CampaignTiming from 'src/components/Features/Campaigns/CampaignTiming';
 import Stepper from 'src/components/Features/Campaigns/Stepper';
 import PageLoader from 'src/components/UI/PageLoader';
+import { APIResponseType } from 'src/interfaces/response.interface';
 import HeaderTitle from 'src/layouts/HeaderTitle.tsx';
-import { useCreateCampaignConfigMutation } from 'src/store/campaign/campaignApi';
+import {
+  useCreateCampaignConfigMutation,
+  useEditCampaignConfigMutation,
+  useGetCampaignConfigsQuery,
+} from 'src/store/campaign/campaignApi';
 import { resetCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
+import { setFirstCreationModal } from 'src/store/onboarding/onboardingSlice';
 
 const CreateCampaign = () => {
-  const [active, setActive] = useState<number>(0);
-  const [createConfig, { isLoading }] = useCreateCampaignConfigMutation();
-  const campaignConfig = useAppSelector((state) => state.campaign);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { resourceId: brandId } = useAppSelector((state) => state.brand);
+  const { data: campaignList } = useGetCampaignConfigsQuery(brandId);
+  const [createConfig, { isLoading: isCreateConfigLoading }] = useCreateCampaignConfigMutation();
+  const [editConfig, { isLoading: isEditConfigLoading }] = useEditCampaignConfigMutation();
+  const campaignConfig = useAppSelector((state) => state.campaign);
+  const { isFirstCreationModal } = useAppSelector((state) => state.onboarding);
+  const [active, setActive] = useState<number>(0);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const isReadyToConfirm = active === 2;
+  const isStepOneValid = !!(
+    campaignConfig.name &&
+    campaignConfig.details &&
+    campaignConfig.link &&
+    campaignConfig.tone
+  );
+  const isStepTwoValid = !!(
+    campaignConfig.startDate &&
+    campaignConfig.endDate &&
+    campaignConfig.time &&
+    campaignConfig.stepCount &&
+    campaignConfig.stepDelay
+  );
+  const isStepThreeValid = campaignConfig.channels.length;
 
   const nextStep = async () => {
     if (isReadyToConfirm) {
-      const res = await createConfig(campaignConfig).unwrap();
+      let res: APIResponseType;
+      if (campaignConfig?.resourceId?.length) {
+        res = await editConfig(campaignConfig).unwrap();
+      } else {
+        res = await createConfig(campaignConfig).unwrap();
+      }
+
       if (res.success) {
         navigate('/campaigns');
         dispatch(resetCampaign());
+
+        if (!isFirstCreationModal && campaignList?.data?.length === 1) {
+          setShowModal(true);
+          dispatch(setFirstCreationModal(true));
+        }
       }
     } else {
       setActive((current) => (current < 3 ? current + 1 : current));
     }
   };
 
+  const handleStepChange = (newStep: number) => {
+    if (newStep < active) {
+      setActive(newStep);
+    } else {
+      if (
+        (active === 0 && isStepOneValid) ||
+        (active === 1 && isStepTwoValid) ||
+        (active === 2 && isStepThreeValid)
+      ) {
+        setActive(newStep);
+      }
+    }
+  };
+
   return (
     <>
       <HeaderTitle>Nabiq | Campaign Configuration</HeaderTitle>
+      <CampaignFirstCreationModal showModal={showModal} setShowModal={setShowModal} />
 
       <Stack gap={78}>
         <Stack gap={20}>
           <Breadcrumbs />
 
-          {isLoading && <PageLoader />}
+          {(isCreateConfigLoading || isEditConfigLoading) && <PageLoader />}
 
           <div className='flex justify-between'>
             <Stack gap={4}>
@@ -52,18 +104,31 @@ const CreateCampaign = () => {
             </Stack>
             <Stack>
               <Button
-                variant={isReadyToConfirm ? 'primary' : 'secondary'}
+                variant='primary'
                 onClick={nextStep}
-                loading={isLoading}
+                disabled={
+                  active === 0
+                    ? !isStepOneValid
+                    : active === 1
+                      ? !isStepTwoValid
+                      : isReadyToConfirm
+                        ? !isStepThreeValid
+                        : false
+                }
+                loading={isCreateConfigLoading || isEditConfigLoading}
               >
-                {isReadyToConfirm ? 'Create' : 'Continue'}
+                {isReadyToConfirm
+                  ? campaignConfig?.resourceId?.length
+                    ? 'Update'
+                    : 'Create'
+                  : 'Continue'}
               </Button>
             </Stack>
           </div>
         </Stack>
 
         <Stack gap={64} w={960} className='mx-auto mb-12'>
-          <Stepper active={active} setActive={setActive} />
+          <Stepper active={active} setActive={handleStepChange} />
 
           <Stack gap={32}>
             {active === 0 ? (

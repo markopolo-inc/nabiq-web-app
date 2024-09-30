@@ -1,23 +1,27 @@
-import { ArrowNarrowDown, FiPen, FiTrash } from '@nabiq-icons';
+import { ArrowNarrowDown, FiSearchLg, FiTrash } from '@nabiq-icons';
 import {
   Badge,
+  Button,
   Group,
+  OptionTabs,
   Stack,
   Table,
   TableBody,
   TableHead,
   TableRow,
   Td,
+  Text,
   TextInput,
   Th,
 } from '@nabiq-ui';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { useMemo, useState } from 'react';
-import OptionTabs from 'src/components/UI/components/OptionTabs';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { CampaignItemInterface } from 'src/interfaces/campaign.interface.ts';
-import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi';
-import { useAppSelector } from 'src/store/hooks.ts';
+import { useDeleteCampaignConfigMutation } from 'src/store/campaign/campaignApi';
+import { setCampaign } from 'src/store/campaign/campaignSlice';
 
 type ActivatedTabsType = 'all' | CampaignItemInterface['status'];
 
@@ -26,6 +30,7 @@ const CAMPAIGN_TABLE_HEADERS: string[] = [
   'Status',
   'Last modified',
   'Date created',
+  '',
 ];
 
 const colorMap = {
@@ -33,11 +38,10 @@ const colorMap = {
   active: 'success',
 };
 
-const CampaignTable = () => {
-  const { resourceId: brandId } = useAppSelector((state) => state.brand);
-  const { data } = useGetCampaignConfigsQuery(brandId);
-
-  const list = data?.data || [];
+const CampaignTable = ({ list, refetch }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [deleteConfig, { isLoading }] = useDeleteCampaignConfigMutation();
 
   const [active, setActive] = useState<ActivatedTabsType>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -53,17 +57,43 @@ const CampaignTable = () => {
     [active, searchTerm, list],
   );
 
+  const handleEditCampaign = ({ campaignId }) => {
+    const selectedCampaign = list?.find((item) => item.resourceId === campaignId);
+    const {
+      createdAt: _createdAt,
+      funnels: _funnels,
+      job: _job,
+      resourceType: _resourceType,
+      status: _status,
+      updatedAt: _updatedAt,
+      ...payload
+    } = selectedCampaign;
+
+    dispatch(
+      setCampaign({
+        ...payload,
+      }),
+    );
+    navigate('/campaigns/campaign-configuration');
+  };
+
+  const handleDeleteCampaign = async ({ campaignId }) => {
+    if (!window.confirm('Are you want to delete this campaign?')) return;
+
+    const res = await deleteConfig(campaignId).unwrap();
+    if (res.success) {
+      refetch();
+    }
+  };
+
   const banner = (
     <Stack gap={0}>
       <Group className='flex gap-2 items-center px-8 py-5 border-b border-b-gray-200'>
-        <p className='text-gray-900 font-semibold text-lg'>Campaign</p>
+        <Text className='text-gray-900 font-semibold text-lg'>Campaign</Text>
 
         <Badge color='blue' size='sm'>
           {filteredList.length || 0} campaigns
         </Badge>
-        {/* <div className="rounded-2xl border border-primary-200 py-0.5 px-2 text-xs font-medium text-primary-700">
-          {list.length ?? 0} campaigns
-        </div> */}
       </Group>
       <Stack className='py-3 px-4'>
         <Group justify='space-between'>
@@ -83,9 +113,10 @@ const CampaignTable = () => {
           <TextInput
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
-            // styles={{ input: { paddingLeft: 40 } }}
-            // leftSection={<FiSearchLg size={26} color="#697586" />}
-            // leftSectionPointerEvents="none"
+            styles={{ input: { paddingLeft: 40 } }}
+            leftSection={<FiSearchLg size={26} color='#697586' />}
+            leftSectionWidth={40}
+            leftSectionPointerEvents='none'
             className='w-[400px]'
             placeholder='Search...'
           />
@@ -93,23 +124,40 @@ const CampaignTable = () => {
       </Stack>
     </Stack>
   );
+
   return (
     <Table banner={banner} withBanner>
-      <TableHead>
-        <TableRow>
-          {CAMPAIGN_TABLE_HEADERS.map((item) => (
-            <Th key={item}>
-              <div className='flex items-center gap-1'>
-                <div className='text-xs font-medium text-gray-600'>{item}</div>
-                <ArrowNarrowDown size={16} color='#475467' />
-              </div>
-            </Th>
-          ))}
-        </TableRow>
-      </TableHead>
+      {filteredList.length > 0 && (
+        <TableHead>
+          <TableRow>
+            {CAMPAIGN_TABLE_HEADERS.map((item) => (
+              <Th key={item}>
+                <div className='flex items-center gap-1'>
+                  <div className='text-xs font-medium text-gray-600'>{item}</div>
+                  {item?.length ? <ArrowNarrowDown size={16} color='#475467' /> : null}
+                </div>
+              </Th>
+            ))}
+          </TableRow>
+        </TableHead>
+      )}
+
       <TableBody>
-        {filteredList.map((item) => {
-          return (
+        {filteredList.length === 0 ? (
+          <TableRow>
+            <Td className='py-10 px-8' colSpan={7}>
+              <Stack align='center' gap={4}>
+                <p className='text-gray-900 font-semibold text-base'>
+                  No campaigns {list.length === 0 ? 'created yet' : 'found!'}
+                </p>
+                <p className='text-gray-600 text-sm'>
+                  Your {list.length === 0 ? 'created' : 'filtered'} campaigns will show up here.
+                </p>
+              </Stack>
+            </Td>
+          </TableRow>
+        ) : (
+          filteredList.map((item) => (
             <TableRow>
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
@@ -140,30 +188,24 @@ const CampaignTable = () => {
 
               <Td className='py-4 px-6'>
                 <Stack align='center' gap={4} className='flex-row justify-center'>
-                  <div className='p-3 hover:cursor-pointer'>
+                  <div
+                    className={`p-3 ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                    onClick={() => handleDeleteCampaign({ campaignId: item.resourceId })}
+                  >
                     <FiTrash size={20} color='#475467' />
                   </div>
 
-                  <div className='p-3 hover:cursor-pointer'>
-                    <FiPen size={20} color='#475467' />
-                  </div>
-                  <div></div>
+                  <Button
+                    variant='tertiary'
+                    size='md'
+                    onClick={() => handleEditCampaign({ campaignId: item.resourceId })}
+                  >
+                    View
+                  </Button>
                 </Stack>
               </Td>
             </TableRow>
-          );
-        })}
-        {filteredList.length === 0 ? (
-          <TableRow>
-            <Td className='py-4 px-6' colSpan={7}>
-              <Stack align='center' gap={4}>
-                <p className='text-gray-900 font-semibold text-base'>No campaigns created yet</p>
-                <p className='text-gray-600 text-sm'>Your created campaigns will show up here.</p>
-              </Stack>
-            </Td>
-          </TableRow>
-        ) : (
-          <></>
+          ))
         )}
       </TableBody>
     </Table>

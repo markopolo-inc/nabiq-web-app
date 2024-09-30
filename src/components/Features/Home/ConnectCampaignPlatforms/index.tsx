@@ -1,8 +1,24 @@
 import { FiHexagon01, FiPlatformIcon } from '@nabiq-icons';
 import { Button } from '@nabiq-ui';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from 'src/store/hooks';
 
 const ConnectCampaignPlatforms = () => {
-  const apps = ['facebook', 'google'];
+  const navigate = useNavigate();
+  const { connectedBrand } = useAppSelector((state) => state.brand);
+
+  const platforms = [
+    {
+      id: 1,
+      name: 'facebook',
+      isConnected: connectedBrand?.connectedAccounts?.facebookAd?.id?.length,
+    },
+    {
+      id: 2,
+      name: 'google',
+      isConnected: connectedBrand?.connectedAccounts?.googleAd?.id?.length,
+    },
+  ];
 
   return (
     <div className='bg-white rounded-xl p-8 shadow-lg'>
@@ -20,19 +36,19 @@ const ConnectCampaignPlatforms = () => {
               ads.
             </p>
           </div>
-          <div className='flex gap-3 justify-between items-center'>
-            <Button
-              variant='secondary'
-              onClick={() => window.open('https://app.markopolo.ai/brand/dashboard', '_blank')}
-            >
-              Connect
+          <div className='flex justify-between items-center'>
+            <Button variant='secondary' onClick={() => navigate('/connect-platforms')}>
+              {platforms.filter((item) => item.isConnected)?.length ? 'Reconfigure' : 'Connect'}
             </Button>
+
             <div className='flex gap-4'>
-              {apps.map((item) => (
-                <div key={item}>
-                  <FiPlatformIcon platform={item} size={20} />
-                </div>
-              ))}
+              {platforms
+                .filter((item) => item.isConnected)
+                .map((item) => (
+                  <div key={item.id}>
+                    <FiPlatformIcon platform={item.name} size={20} />
+                  </div>
+                ))}
             </div>
           </div>
         </div>

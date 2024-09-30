@@ -5,6 +5,10 @@ import { apiSlice } from '../api/apiSlice';
 interface BrandsListResponseInterface {
   resourceId: string;
   brandName: string;
+  companyId?: string;
+  brandWebsite?: string;
+  brandInfo?: any;
+  connectedAccounts?: any;
 }
 
 export interface MarktagsResponseInterface {

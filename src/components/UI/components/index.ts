@@ -67,3 +67,6 @@ export { default as Progress } from './Progress';
 
 // Tooltop
 export { default as Tooltip } from './Tooltip';
+
+// Pagination
+export { default as Pagination } from './Pagination';

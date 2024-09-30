@@ -4,6 +4,7 @@ interface Option {
   label: string;
   value: string | number;
   icon?: React.FC<{ size: number; strokeWidth: number; color: string }>;
+  logo?: React.ReactNode;
 }
 
 const OptionTabs: React.FC<{
@@ -16,6 +17,7 @@ const OptionTabs: React.FC<{
       {options.map((item, idx) => {
         const isSelected = active === item.value;
         const Icon = item?.icon;
+        const Logo = item?.logo;
         return (
           <span
             onClick={() => setActive(item.value)}
@@ -36,7 +38,8 @@ const OptionTabs: React.FC<{
               fontWeight: 600,
             }}
           >
-            {Icon && <Icon size={20} strokeWidth={2.2} color='#9AA4B2' />} {item.label}
+            {Icon ? <Icon size={20} strokeWidth={2.2} color='#9AA4B2' /> : Logo ? Logo : null}
+            {item.label}
           </span>
         );
       })}
