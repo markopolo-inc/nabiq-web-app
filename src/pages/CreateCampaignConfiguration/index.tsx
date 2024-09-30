@@ -12,6 +12,7 @@ import HeaderTitle from 'src/layouts/HeaderTitle.tsx';
 import { useCreateCampaignConfigMutation } from 'src/store/campaign/campaignApi';
 import { resetCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
+import { setFirstCreationModal } from 'src/store/onboarding/onboardingSlice';
 
 const CreateCampaign = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const CreateCampaign = () => {
   const [createConfig, { isLoading }] = useCreateCampaignConfigMutation();
   const campaignConfig = useAppSelector((state) => state.campaign);
   const { list } = useAppSelector((state) => state.campaign);
+  const { isFirstCreationModal } = useAppSelector((state) => state.onboarding);
   const [active, setActive] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -31,8 +33,9 @@ const CreateCampaign = () => {
         navigate('/campaigns');
         dispatch(resetCampaign());
 
-        if (list?.length === 1) {
+        if (!isFirstCreationModal && list?.length === 1) {
           setShowModal(true);
+          dispatch(setFirstCreationModal(true));
         }
       }
     } else {

@@ -26,12 +26,13 @@ export interface CampaignInterface {
   details: string;
   link: string;
   tone: 'formal' | 'informal';
-  content: [];
   startDate: string;
   endDate: string;
   time: string; // MUST USE 24 HOUR FORMAT
   stepCount: number;
   stepDelay: number;
+  content: any[];
   channels: ChannelInterface[];
   list: CampaignItemInterface[];
+  showFirstCreationModal: boolean;
 }
