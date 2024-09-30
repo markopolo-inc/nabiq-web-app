@@ -32,6 +32,20 @@ const CreateCampaign = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const isReadyToConfirm = active === 2;
+  const isStepOneValid = !!(
+    campaignConfig.name &&
+    campaignConfig.details &&
+    campaignConfig.link &&
+    campaignConfig.tone
+  );
+  const isStepTwoValid = !!(
+    campaignConfig.startDate &&
+    campaignConfig.endDate &&
+    campaignConfig.time &&
+    campaignConfig.stepCount &&
+    campaignConfig.stepDelay
+  );
+  const isStepThreeValid = campaignConfig.channels.length;
 
   const nextStep = async () => {
     if (isReadyToConfirm) {
@@ -56,6 +70,20 @@ const CreateCampaign = () => {
     }
   };
 
+  const handleStepChange = (newStep: number) => {
+    if (newStep < active) {
+      setActive(newStep);
+    } else {
+      if (
+        (active === 0 && isStepOneValid) ||
+        (active === 1 && isStepTwoValid) ||
+        (active === 2 && isStepThreeValid)
+      ) {
+        setActive(newStep);
+      }
+    }
+  };
+
   return (
     <>
       <HeaderTitle>Nabiq | Campaign Configuration</HeaderTitle>
@@ -76,8 +104,17 @@ const CreateCampaign = () => {
             </Stack>
             <Stack>
               <Button
-                variant={isReadyToConfirm ? 'primary' : 'secondary'}
+                variant='primary'
                 onClick={nextStep}
+                disabled={
+                  active === 0
+                    ? !isStepOneValid
+                    : active === 1
+                      ? !isStepTwoValid
+                      : isReadyToConfirm
+                        ? !isStepThreeValid
+                        : false
+                }
                 loading={isCreateConfigLoading || isEditConfigLoading}
               >
                 {isReadyToConfirm
@@ -91,7 +128,7 @@ const CreateCampaign = () => {
         </Stack>
 
         <Stack gap={64} w={960} className='mx-auto mb-12'>
-          <Stepper active={active} setActive={setActive} />
+          <Stepper active={active} setActive={handleStepChange} />
 
           <Stack gap={32}>
             {active === 0 ? (

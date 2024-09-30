@@ -11,11 +11,21 @@ export const campaignApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCampaignConfig: builder.mutation<APIResponseType, any>({
       query: (args) => {
+        const filteredContent = args.content.length
+          ? args.content.map((item) => ({
+              title: item.title,
+              description: item.description,
+              image: item.image,
+            }))
+          : [];
+        const { list: _list, ...restArgs } = args;
+        const newArgs = { ...restArgs, content: filteredContent };
+
         return {
           url: `/cohort`,
           method: 'POST',
           body: {
-            ...args,
+            ...newArgs,
           },
         };
       },
@@ -34,11 +44,21 @@ export const campaignApi = apiSlice.injectEndpoints({
     }),
     editCampaignConfig: builder.mutation<APIResponseType, any>({
       query: (args) => {
+        const filteredContent = args.content.length
+          ? args.content.map((item) => ({
+              title: item.title,
+              description: item.description,
+              image: item.image,
+            }))
+          : [];
+        const { list: _list, ...restArgs } = args;
+        const newArgs = { ...restArgs, content: filteredContent };
+
         return {
           url: `/cohort`,
           method: 'PATCH',
           body: {
-            ...args,
+            ...newArgs,
           },
         };
       },
