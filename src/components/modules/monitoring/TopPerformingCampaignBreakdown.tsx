@@ -4,6 +4,7 @@ import { capitalize } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import GatewayLogo from 'src/components/UI/GatewayLogo';
+import { useGetAudienceForCampaignQuery } from 'src/store/monitoring/monitoring.api';
 
 const users = [
   {
@@ -69,8 +70,11 @@ export const TopPerformingCampaignBreakdown = () => {
   const div1Ref = useRef(null);
   const div2Ref = useRef(null);
   const [_pathData, setPathData] = useState('');
-  const { name } = useParams();
+  const { name, campaignId } = useParams();
   const [timeRange, setTimeRange] = useState<'today' | 'last_week' | 'last_month'>('last_week');
+  const { data } = useGetAudienceForCampaignQuery(campaignId);
+
+  console.log(data);
 
   useEffect(() => {
     const updatePathData = () => {

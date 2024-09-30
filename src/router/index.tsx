@@ -17,7 +17,7 @@ const Onboarding = lazy(() => import('pages/Onboarding'));
 const Integrations = lazy(() => import('pages/Integrations'));
 const Campaigns = lazy(() => import('pages/Campaigns'));
 const Settings = lazy(() => import('pages/Settings'));
-const Monitoring = lazy(() => import('pages/Monitoring'));
+// const Monitoring = lazy(() => import('pages/Monitoring'));
 const TopPerformingCampaigns = lazy(() => import('pages/TopPerformingCampaigns'));
 const TopPerformingCampaignDetails = lazy(() => import('src/pages/TopPerformingCampaignDetails'));
 const TopPerformingCampaingBreakDown = lazy(
@@ -52,17 +52,14 @@ const Router = () => {
                   path='/control-room/published/:configId'
                   element={<ControlRoomPublished />}
                 />
-                <Route path='/monitoring' element={<Monitoring />} />
-                <Route
-                  path='/monitoring/top-performing-campaigns'
-                  element={<TopPerformingCampaigns />}
-                />
+                {/* <Route path='/monitoring' element={<Monitoring />} /> */}
+                <Route path='/monitoring' element={<TopPerformingCampaigns />} />
                 <Route
                   path='/monitoring/top-performing-campaigns/:name/:campaignId'
                   element={<TopPerformingCampaignDetails />}
                 />
                 <Route
-                  path='/monitoring/:name/breakdown'
+                  path='/monitoring/:name/breakdown/:campaignId'
                   element={<TopPerformingCampaingBreakDown />}
                 />
                 <Route
