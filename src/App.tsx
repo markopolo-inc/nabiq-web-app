@@ -15,7 +15,11 @@ const App = () => {
     <HelmetProvider>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <MantineProvider>
+          <MantineProvider
+            theme={{
+              fontFamily: 'Geist, sans-serif',
+            }}
+          >
             <Toaster position='top-center' reverseOrder={false} />
             <BrowserRouter>
               <Router />
