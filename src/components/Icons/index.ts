@@ -23,6 +23,7 @@ export { default as FiCrossX } from './CrossX';
 export { default as FiCircle } from './Circle';
 export { default as FiCursorClick01 } from './CursorClick01';
 export { default as FiCode } from './Code';
+export { default as FiCheckCircle } from './CheckCircle';
 
 // D
 export { default as FiDataFlow02 } from './DataFlow02';

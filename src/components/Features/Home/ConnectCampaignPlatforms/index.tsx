@@ -1,7 +1,9 @@
 import { FiHexagon01, FiPlatformIcon } from '@nabiq-icons';
 import { Button } from '@nabiq-ui';
+import { useNavigate } from 'react-router-dom';
 
 const ConnectCampaignPlatforms = () => {
+  const navigate = useNavigate();
   const apps = ['facebook', 'google'];
 
   return (
@@ -20,11 +22,8 @@ const ConnectCampaignPlatforms = () => {
               ads.
             </p>
           </div>
-          <div className='flex gap-3 justify-between items-center'>
-            <Button
-              variant='secondary'
-              onClick={() => window.open('https://app.markopolo.ai/brand/dashboard', '_blank')}
-            >
+          <div className='flex gap-3'>
+            <Button variant='secondary' onClick={() => navigate('/connect-platforms')}>
               Connect
             </Button>
             <div className='flex gap-4'>

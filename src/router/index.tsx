@@ -5,8 +5,6 @@ import AppLayout from 'src/layouts/AppLayout';
 import NavigationLayout from 'src/layouts/NavigationLayout';
 import PrivateLayout from 'src/layouts/PrivateLayout';
 import ScrollToTop from 'src/layouts/ScrollToTop';
-import ConnectMarktag from 'src/pages/ConnetMarktag';
-import CreateCampaign from 'src/pages/CreateCampaignConfiguration';
 
 const Home = lazy(() => import('pages/Home'));
 const SignUp = lazy(() => import('pages/SignUp'));
@@ -16,6 +14,7 @@ const VerifyEmail = lazy(() => import('pages/VerifyEmail'));
 const Onboarding = lazy(() => import('pages/Onboarding'));
 const Integrations = lazy(() => import('pages/Integrations'));
 const Campaigns = lazy(() => import('pages/Campaigns'));
+const CreateCampaign = lazy(() => import('src/pages/CreateCampaignConfiguration'));
 const Settings = lazy(() => import('pages/Settings'));
 const Monitoring = lazy(() => import('pages/Monitoring'));
 const TopPerformingCampaigns = lazy(() => import('pages/TopPerformingCampaigns'));
@@ -25,6 +24,8 @@ const ControlRoom = lazy(() => import('pages/ControlRoom'));
 const ControlRoomCohort = lazy(() => import('pages/ControlRoom/Cohort'));
 const ControlRoomContent = lazy(() => import('pages/ControlRoom/Cohort/Content'));
 const ControlRoomPublished = lazy(() => import('src/pages/ControlRoom/PublishedContent'));
+const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
+const ConnectCampaignPlatforms = lazy(() => import('src/pages/ConnectCampaignPlatforms'));
 const Test = lazy(() => import('src/pages/Test'));
 const TestButton = lazy(() => import('src/pages/TestButton'));
 
@@ -67,6 +68,7 @@ const Router = () => {
               </Route>
               <Route path='/onboarding' element={<Onboarding />} />
               <Route path='/connect-marktag' element={<ConnectMarktag />} />
+              <Route path='/connect-platforms' element={<ConnectCampaignPlatforms />} />
             </Route>
             <Route path='/signup' element={<SignUp />} />
             <Route path='/login' element={<LogIn />} />

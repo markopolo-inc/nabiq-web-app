@@ -93,10 +93,10 @@ const CampaignDetailsForm = () => {
 
             <Stack gap={4} align='center'>
               <Text size='14px' className='text-primary-600' weight={600}>
-                Import content from your connected platforms
+                Import ads from your connected platforms
               </Text>
               <Text size='12px' className='text-gray-600'>
-                Ad accounts need to be connected
+                Ad accounts/Apps need to be connected
               </Text>
             </Stack>
           </Stack>
