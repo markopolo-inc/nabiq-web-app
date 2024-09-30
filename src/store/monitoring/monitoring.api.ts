@@ -71,6 +71,13 @@ const monitoringApi = apiSlice.injectEndpoints({
         params: { campaignId, page: 1, limit: 100 },
       }),
     }),
+    getAudienceBreakdown: builder.query<any, string>({
+      query: (userId) => ({
+        url: `monitoring/campaign/audience/breakdown`,
+        method: 'GET',
+        params: { userId },
+      }),
+    }),
   }),
 });
 
@@ -84,4 +91,5 @@ export const {
   useGetCohortForCampaignsQuery,
   useGetLowMonitoringCampaignQuery,
   useGetAudienceForCampaignQuery,
+  useGetAudienceBreakdownQuery,
 } = monitoringApi;
