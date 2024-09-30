@@ -20,6 +20,8 @@ const TopPerformingCampaigns = () => {
   const navigate = useNavigate();
   const campaigns = data?.data?.campaigns || [];
 
+  const metrics = data?.data?.campaigns?.[0]?.metrics?.map((item) => item?.name) || [];
+
   const banner = (
     <Group className='py-[20px] px-6' justify='space-between'>
       <p className='text-gray-900 text-lg font-semibold'>Top performing campaigns</p>
@@ -46,37 +48,24 @@ const TopPerformingCampaigns = () => {
         <TableHead>
           <TableRow>
             <Th>Campaign name</Th>
-            <Th>Conversion rate</Th>
-            <Th>Engagement</Th>
-            <Th>Revenue</Th>
+            {metrics.map((metric, _idx) => (
+              <Th key={_idx}>{metric}</Th>
+            ))}
             <Th />
           </TableRow>
         </TableHead>
         <TableBody>
           {campaigns.map((item, idx) => (
             <TableRow key={idx}>
-              <Td>
-                <p>{item?.name}</p>
-                <p>{item?.detail}</p>
-              </Td>
-              <Td>
-                {formatMetricUnit(
-                  item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').value,
-                  item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').type,
-                )}
-              </Td>
-              <Td>
-                {formatMetricUnit(
-                  item?.metrics?.find((metric) => metric?.name === 'Engagement').value,
-                  item?.metrics?.find((metric) => metric?.name === 'Engagement').type,
-                )}
-              </Td>
-              <Td>
-                {formatMetricUnit(
-                  item?.metrics?.find((metric) => metric?.name === 'Revenue').value,
-                  item?.metrics?.find((metric) => metric?.name === 'Revenue').type,
-                )}
-              </Td>
+              <Td>{item?.name}</Td>
+              {metrics.map((metric, _idx) => (
+                <Td key={_idx}>
+                  {formatMetricUnit(
+                    item?.metrics?.find((_metric) => _metric?.name === metric)?.value,
+                    item?.metrics?.find((_metric) => _metric?.name === metric)?.type,
+                  )}
+                </Td>
+              ))}
               <Td>
                 <Button
                   variant='link'

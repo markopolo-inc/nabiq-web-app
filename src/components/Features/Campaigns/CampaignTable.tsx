@@ -59,7 +59,7 @@ const CampaignTable = () => {
         <p className='text-gray-900 font-semibold text-lg'>Campaign</p>
 
         <Badge color='blue' size='sm'>
-          {/* {list.length ?? 0} campaigns */}
+          {filteredList.length || 0} campaigns
         </Badge>
         {/* <div className="rounded-2xl border border-primary-200 py-0.5 px-2 text-xs font-medium text-primary-700">
           {list.length ?? 0} campaigns

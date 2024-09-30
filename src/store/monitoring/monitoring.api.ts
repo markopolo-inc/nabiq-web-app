@@ -68,7 +68,7 @@ const monitoringApi = apiSlice.injectEndpoints({
       query: (campaignId) => ({
         url: `monitoring/campaign/audience`,
         method: 'GET',
-        params: { campaignId },
+        params: { campaignId, page: 1, limit: 100 },
       }),
     }),
   }),

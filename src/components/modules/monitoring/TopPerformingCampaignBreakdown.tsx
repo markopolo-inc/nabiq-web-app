@@ -6,66 +6,6 @@ import { useParams } from 'react-router-dom';
 import GatewayLogo from 'src/components/UI/GatewayLogo';
 import { useGetAudienceForCampaignQuery } from 'src/store/monitoring/monitoring.api';
 
-const users = [
-  {
-    id: 39635,
-    email: 'john12@gmail.com',
-    phone: '(406) 555-0120',
-  },
-  {
-    id: 43178,
-    email: 'ryan@gmail.com',
-    phone: '(316) 555-0116',
-    note: "This user hasn't engaged recently but has a high conversion probability. Target with re-engagement campaigns and incentives.",
-  },
-  {
-    id: 43756,
-    email: 'chris.h@gmail.com',
-    phone: '(209) 555-0104',
-  },
-  {
-    id: 70668,
-    email: 'john12@gmail.com',
-    phone: '(406) 555-0120',
-  },
-  {
-    id: 97174,
-    email: 'john12@gmail.com',
-    phone: '(406) 555-0120',
-  },
-  {
-    id: 22739,
-    email: 'john12@gmail.com',
-    phone: '(406) 555-0120',
-  },
-  {
-    id: 43178,
-    email: 'ryan@gmail.com',
-    phone: '(316) 555-0116',
-    note: "This user hasn't engaged recently but has a high conversion probability. Target with re-engagement campaigns and incentives.",
-  },
-  {
-    id: 43756,
-    email: 'chris.h@gmail.com',
-    phone: '(209) 555-0104',
-  },
-  {
-    id: 70668,
-    email: 'john12@gmail.com',
-    phone: '(406) 555-0120',
-  },
-  {
-    id: 97174,
-    email: 'john12@gmail.com',
-    phone: '(406) 555-0120',
-  },
-  {
-    id: 22739,
-    email: 'john12@gmail.com',
-    phone: '(406) 555-0120',
-  },
-];
-
 export const TopPerformingCampaignBreakdown = () => {
   const div1Ref = useRef(null);
   const div2Ref = useRef(null);
@@ -74,7 +14,7 @@ export const TopPerformingCampaignBreakdown = () => {
   const [timeRange, setTimeRange] = useState<'today' | 'last_week' | 'last_month'>('last_week');
   const { data } = useGetAudienceForCampaignQuery(campaignId);
 
-  console.log(data);
+  const audience = data?.data?.audience || [];
 
   useEffect(() => {
     const updatePathData = () => {
@@ -141,7 +81,7 @@ export const TopPerformingCampaignBreakdown = () => {
             className='rounded-md border border-gray-20 p-1 max-h-[724px] overflow-y-auto max-w-[428px]'
             gap={8}
           >
-            {users.map((user, idx) => (
+            {audience.map((user, idx) => (
               <Stack
                 className='rounded-md border border-gray-200 bg-white shadow-sm p-4 max-w-[418px]'
                 ref={div1Ref}

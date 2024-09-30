@@ -39,20 +39,20 @@ const TopPerformingCampaign = () => {
             <Td>{item?.name}</Td>
             <Td>
               {formatMetricUnit(
-                item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').value,
-                item?.metrics?.find((metric) => metric?.name === 'Conversion Rate').type,
+                item?.metrics?.find((metric) => metric?.name === 'Conversion Rate')?.value,
+                item?.metrics?.find((metric) => metric?.name === 'Conversion Rate')?.type,
               )}
             </Td>
             <Td>
               {formatMetricUnit(
-                item?.metrics?.find((metric) => metric?.name === 'Engagement').value,
-                item?.metrics?.find((metric) => metric?.name === 'Engagement').type,
+                item?.metrics?.find((metric) => metric?.name === 'Engagement')?.value,
+                item?.metrics?.find((metric) => metric?.name === 'Engagement')?.type,
               )}
             </Td>
             <Td>
               {formatMetricUnit(
-                item?.metrics?.find((metric) => metric?.name === 'Revenue').value,
-                item?.metrics?.find((metric) => metric?.name === 'Revenue').type,
+                item?.metrics?.find((metric) => metric?.name === 'Revenue')?.value,
+                item?.metrics?.find((metric) => metric?.name === 'Revenue')?.type,
               )}
             </Td>
           </TableRow>
