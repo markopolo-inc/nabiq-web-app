@@ -3,7 +3,7 @@ import { Badge, Breadcrumbs, Button, Group, Stack } from '@nabiq-ui';
 import cn from 'classnames';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import GatewayLogo from 'src/components/UI/GatewayLogo';
 import {
@@ -16,7 +16,6 @@ import ContentDrawer from './components/ContentDrawer';
 export const TopPerformingCampaignBreakdown = () => {
   const div1Ref = useRef(null);
   const div2Ref = useRef(null);
-  const [_pathData, setPathData] = useState('');
   const { name, campaignId } = useParams();
   const [showDrawer, setShowDrawer] = useState(false);
   // const [timeRange, setTimeRange] = useState<'today' | 'last_week' | 'last_month'>('last_week');
@@ -30,32 +29,6 @@ export const TopPerformingCampaignBreakdown = () => {
   const audience = audienceData?.data?.audience || [];
 
   const breakdown = audienceBreakdownData?.data || [];
-
-  useEffect(() => {
-    const updatePathData = () => {
-      if (div1Ref.current && div2Ref.current) {
-        const div1Rect = div1Ref.current.getBoundingClientRect();
-        const div2Rect = div2Ref.current.getBoundingClientRect();
-
-        const x1 = div1Rect.right;
-        const y1 = div1Rect.top + div1Rect.height / 2;
-        const x2 = div2Rect.left;
-        const y2 = div2Rect.top + div2Rect.height / 2;
-
-        const midX = (x1 + x2) / 2;
-        const controlY = y1;
-
-        setPathData(`M ${x1} ${y1} Q ${midX} ${controlY}, ${x2} ${y2}`);
-      }
-    };
-
-    updatePathData();
-    window.addEventListener('resize', updatePathData);
-
-    return () => {
-      window.removeEventListener('resize', updatePathData);
-    };
-  }, []);
 
   return (
     <Stack>
