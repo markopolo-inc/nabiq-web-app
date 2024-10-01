@@ -1,5 +1,5 @@
 import { FiChevronRight } from '@nabiq-icons';
-import { Badge, Breadcrumbs, Button, Group, Stack } from '@nabiq-ui';
+import { Badge, Breadcrumbs, Button, Group, Pagination, Stack } from '@nabiq-ui';
 import cn from 'classnames';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
@@ -10,8 +10,11 @@ import {
   useGetAudienceBreakdownQuery,
   useGetAudienceForCampaignQuery,
 } from 'src/store/monitoring/monitoring.api';
+import { formatMetricUnit } from 'src/utils/string.utils';
 
 import ContentDrawer from './components/ContentDrawer';
+
+const PAGE_SIZE = 50;
 
 export const TopPerformingCampaignBreakdown = () => {
   const div1Ref = useRef(null);
@@ -22,13 +25,24 @@ export const TopPerformingCampaignBreakdown = () => {
   const [userId, setUserId] = useState<string>(null);
   const [selectedEmail, setSelectedEmail] = useState<string>(null);
   const [selectedContent, setSelectedContent] = useState<any>(null);
+  const [page, setPage] = useState<number>(1);
   const [selectedAudienceIdx, setSelectedAudienceIdx] = useState<number>(null);
-  const { data: audienceData } = useGetAudienceForCampaignQuery(campaignId);
-  const { data: audienceBreakdownData } = useGetAudienceBreakdownQuery(userId);
+  const { data: audienceData } = useGetAudienceForCampaignQuery({
+    campaignId,
+    page,
+    limit: PAGE_SIZE,
+  });
+  const { data: audienceBreakdownData } = useGetAudienceBreakdownQuery({
+    userId,
+    campaignId,
+  });
 
   const audience = audienceData?.data?.audience || [];
+  const totalAudience = audienceData?.data?.total ?? 0;
+  const totalPages = Math.ceil(totalAudience / PAGE_SIZE);
 
   const breakdown = audienceBreakdownData?.data || [];
+  const isNoData = !!breakdown?.[0]?.noData;
 
   return (
     <Stack>
@@ -48,8 +62,8 @@ export const TopPerformingCampaignBreakdown = () => {
           List of audience and individual campaign funnel details.
         </p>
       </Stack>
-      <Group justify='space-between' className='mt-[64px]'>
-        {/* <Group>
+      {/* <Group justify='space-between' className='mt-[64px]'>
+        <Group>
           <Select
             leftSection={<Calendar size={18} color='#697586' />}
             value={timeRange}
@@ -66,9 +80,9 @@ export const TopPerformingCampaignBreakdown = () => {
               },
             ]}
           />
-        </Group> */}
-        {/* <TextInput placeholder='Search audience' className='w-[264px]' /> */}
-      </Group>
+        </Group>
+        <TextInput placeholder='Search audience' className='w-[264px]' />
+      </Group> */}
       <div className='grid grid-cols-12 gap-20 relative mt-8'>
         <Stack className='col-span-6'>
           <p className='text-sm font-normal text-gray-600'>Audience</p>
@@ -99,56 +113,71 @@ export const TopPerformingCampaignBreakdown = () => {
               </Stack>
             ))}
           </Stack>
+          <Pagination
+            total={totalPages}
+            onChange={(value) => {
+              setSelectedAudienceIdx(null);
+              setPage(value);
+              setUserId(null);
+            }}
+            value={page}
+          />
         </Stack>
 
         <Stack className='col-span-6'>
           <p className='text-sm font-normal text-gray-600'>Breakdown</p>
-          <Stack gap={36}>
-            {breakdown?.map((item, idx) => (
-              <div
-                className={cn(
-                  'rounded-md border border-gray-200 bg-white shadow-sm p-6 max-w-[360px]',
-                  idx === 0 ? 'border-primary-600 border-[2px]' : '',
-                )}
-                ref={div2Ref}
-                key={idx}
-              >
-                <Group justify='space-between'>
-                  <GatewayLogo app={item?.platform} width={24} />
-                  <Badge color='gray'>Step {item?.step}</Badge>
-                </Group>
-                <Stack gap={0} className='mt-4'>
-                  <p className='text-gray-900 font-semibold'>{capitalize(item?.channel)}</p>
-                  <p className='text-gray-600 font-normal text-sm'>
-                    Sent on {moment(item?.sentOn).format('MMM D, YYYY')} at{' '}
-                    {moment(item?.sentOn).format('h:mm a')}
-                  </p>
-                </Stack>
-                <Group className='mt-9 tex-sm text-gray-600' justify='space-between'>
+          {!isNoData ? (
+            <Stack gap={36}>
+              {breakdown?.map((item, idx) => (
+                <div
+                  className={cn(
+                    'rounded-md border border-gray-200 bg-white shadow-sm p-6 max-w-[360px]',
+                    idx === 0 ? 'border-primary-600 border-[2px]' : '',
+                  )}
+                  ref={div2Ref}
+                  key={idx}
+                >
+                  <Group justify='space-between'>
+                    <GatewayLogo app={item?.platform} width={24} />
+                    <Badge color='gray'>Step {item?.step}</Badge>
+                  </Group>
+                  <Stack gap={0} className='mt-4'>
+                    <p className='text-gray-900 font-semibold'>{capitalize(item?.channel)}</p>
+                    <p className='text-gray-600 font-normal text-sm'>
+                      Sent on {moment(item?.sentOn).format('MMM D, YYYY')} at{' '}
+                      {moment(item?.sentOn).format('h:mm a')}
+                    </p>
+                  </Stack>
+                  {/* <Group className='mt-9 tex-sm text-gray-600' justify='space-between'>
                   <p>Link click?</p>
                   <p>Yes</p>
-                </Group>
-                <div className='mt-4'>
-                  {Object.keys(item?.metrics || {}).map((key, index) => (
-                    <Group className='tex-sm text-gray-600' justify='space-between' key={index}>
-                      <p>{key}:</p>
-                      <p>{item?.metrics[key]}</p>
-                    </Group>
-                  ))}
+                </Group> */}
+                  <div className='mt-4'>
+                    {Object.keys(item?.metrics || {}).map((key, index) => (
+                      <Group className='tex-sm text-gray-600' justify='space-between' key={index}>
+                        <p>{key}:</p>
+                        <p>
+                          {formatMetricUnit(item?.metrics[key]?.value, item?.metrics[key]?.type)}
+                        </p>
+                      </Group>
+                    ))}
+                  </div>
+                  <Button
+                    className='mt-9'
+                    trailingIcon={<FiChevronRight size={18} />}
+                    onClick={() => {
+                      setShowDrawer(true);
+                      setSelectedContent({ ...item, email: selectedEmail });
+                    }}
+                  >
+                    View
+                  </Button>
                 </div>
-                <Button
-                  className='mt-9'
-                  trailingIcon={<FiChevronRight size={18} />}
-                  onClick={() => {
-                    setShowDrawer(true);
-                    setSelectedContent({ ...item, email: selectedEmail });
-                  }}
-                >
-                  View
-                </Button>
-              </div>
-            ))}
-          </Stack>
+              ))}
+            </Stack>
+          ) : (
+            <p className='text-gray-600 font-normal text-sm'>No data available!</p>
+          )}
         </Stack>
       </div>
       {/* <svg className='absolute top-0 left-0 w-full h-full pointer-events-none'>

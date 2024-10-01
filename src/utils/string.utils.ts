@@ -41,13 +41,16 @@ export function camelCaseToCapitalized(str) {
  */
 export const formatMetricUnit = (
   value: string | number,
-  type: 'count' | 'percentage' | 'amount',
+  type: 'count' | 'percentage' | 'amount' | 'boolean',
 ) => {
   const TypeMap = {
     count: '',
     percentage: '%',
     amount: '$',
+    boolean: '',
   };
-
+  if (type === 'boolean') {
+    return Boolean(value) ? 'Yes' : 'No';
+  }
   return `${type !== 'percentage' ? TypeMap[type] : ''}${formatNumber(value)}${type === 'percentage' ? TypeMap[type] : ''}`;
 };
