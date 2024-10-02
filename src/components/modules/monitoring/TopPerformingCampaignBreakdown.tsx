@@ -56,7 +56,7 @@ export const TopPerformingCampaignBreakdown = () => {
   const isNoData = !!breakdown?.[0]?.noData;
 
   useEffect(() => {
-    if (div2Ref.current !== null) {
+    if (div2Ref.current !== null && selectedAudienceIdx !== null) {
       addArrow(`listElem${selectedAudienceIdx}`, 'breakdownElem0');
     }
   }, [audience, breakdown, selectedAudienceIdx]);
@@ -152,6 +152,7 @@ export const TopPerformingCampaignBreakdown = () => {
             <Pagination
               total={totalPages}
               onChange={(value) => {
+                addArrow('', '');
                 setSelectedAudienceIdx(null);
                 setPage(value);
                 setUserId(null);
