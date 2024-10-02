@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import GatewayLogo from 'src/components/UI/GatewayLogo';
 import {
   useGetAudienceBreakdownQuery,
@@ -17,6 +17,7 @@ import ContentDrawer from './components/ContentDrawer';
 const PAGE_SIZE = 50;
 
 export const TopPerformingCampaignBreakdown = () => {
+  const navigate = useNavigate();
   const div1Ref = useRef(null);
   const div2Ref = useRef(null);
   const { name, campaignId } = useParams();
@@ -54,14 +55,20 @@ export const TopPerformingCampaignBreakdown = () => {
         selectedContent={selectedContent}
       />
       <Breadcrumbs />
-      <Stack gap={4}>
-        <p className='text-gray-900 text-[20px] font-semibold'>
-          {capitalize(name?.split('-').join(' '))} breakdown
-        </p>
-        <p className='text-gray-600 text-base font-normal'>
-          List of audience and individual campaign funnel details.
-        </p>
-      </Stack>
+
+      <Group justify='space-between'>
+        <Stack gap={4}>
+          <p className='text-gray-900 text-[20px] font-semibold'>
+            {capitalize(name?.split('-').join(' '))} breakdown
+          </p>
+          <p className='text-gray-600 text-base font-normal'>
+            List of audience and individual campaign funnel details.
+          </p>
+        </Stack>
+        <Button size='md' variant='secondary' onClick={() => navigate(-1)}>
+          Go back
+        </Button>
+      </Group>
       {/* <Group justify='space-between' className='mt-[64px]'>
         <Group>
           <Select
