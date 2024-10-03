@@ -1,4 +1,5 @@
-import { Button, Select, Text } from '@nabiq-ui';
+import { FiPlatformIcon } from '@nabiq-icons';
+import { Button, Select, Stack, Text } from '@nabiq-ui';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUpdateSettingMutation } from 'src/store/company/companyApi';
@@ -29,20 +30,37 @@ const PlatformDetails = () => {
     [brandsList, resourceId],
   );
 
+  const platforms = [
+    {
+      id: 1,
+      name: 'facebook',
+      isConnected: selectedBrand?.connectedAccounts?.facebookAd?.id?.length,
+    },
+    {
+      id: 2,
+      name: 'google',
+      isConnected: selectedBrand?.connectedAccounts?.googleAd?.id?.length,
+    },
+  ];
+
   const handleConnect = async () => {
     if (!resourceId) return;
 
-    const brandPayload = {
-      resourceId: selectedBrand.resourceId,
-      companyId: selectedBrand.companyId,
-      brandName: selectedBrand.brandName,
-      brandWebsite: selectedBrand.brandWebsite,
-      brandLogo: selectedBrand.brandInfo.brandLogo,
-      connectedAccounts: selectedBrand.connectedAccounts,
-    };
+    if (platforms.filter((item) => item.isConnected).length > 0) {
+      const brandPayload = {
+        resourceId: selectedBrand.resourceId,
+        companyId: selectedBrand.companyId,
+        brandName: selectedBrand.brandName,
+        brandWebsite: selectedBrand.brandWebsite,
+        brandLogo: selectedBrand.brandInfo.brandLogo,
+        connectedAccounts: selectedBrand.connectedAccounts,
+      };
 
-    updateSetting({ connectedBrand: brandPayload }).unwrap();
-    navigate('/');
+      updateSetting({ connectedBrand: brandPayload }).unwrap();
+      navigate('/');
+    } else {
+      window.open('https://app.markopolo.ai/brand/dashboard', '_blank');
+    }
   };
 
   return (
@@ -80,6 +98,28 @@ const PlatformDetails = () => {
           }
           disabled={isLoadingBrandList}
         />
+
+        {resourceId &&
+          (platforms.filter((item) => item.isConnected).length > 0 ? (
+            <Stack gap={12}>
+              <Text size='14px' weight={500} className='text-gray-700 leading-5'>
+                Connected platforms
+              </Text>
+              <div className='flex gap-4'>
+                {platforms
+                  .filter((item) => item.isConnected)
+                  .map((item) => (
+                    <div key={item.id}>
+                      <FiPlatformIcon platform={item.name} size={20} />
+                    </div>
+                  ))}
+              </div>
+            </Stack>
+          ) : (
+            <Text size='14px' weight={500} className='text-red-500 leading-5'>
+              No connected platform found!
+            </Text>
+          ))}
 
         <Button
           className='w-full !mt-12'
