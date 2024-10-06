@@ -68,8 +68,8 @@ const TopMenu = () => {
 
         <Menu.Item
           onClick={handleLogout}
-          className='text-sm font-medium leading-5 text-gray-700'
-          leftSection={<Logout01 style={{ width: rem(16), height: rem(16) }} color={gray500} />}
+          className='text-sm font-medium leading-5 text-gray-700 mb-1'
+          leftSection={<Logout01 style={{ width: rem(12), height: rem(12) }} color={gray500} />}
         >
           Log out
         </Menu.Item>

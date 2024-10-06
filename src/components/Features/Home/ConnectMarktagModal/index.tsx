@@ -33,7 +33,7 @@ const ModalBody = ({ setOpened, setOpenedCreateNew }) => {
                 navigate('/connect-marktag');
               }}
             >
-              Create
+              Connect
             </Button>
           </div>
 
