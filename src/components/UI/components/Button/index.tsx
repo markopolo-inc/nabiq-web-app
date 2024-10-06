@@ -1,5 +1,6 @@
-import { Loader, Button as MantineButton } from '@mantine/core';
+import { ButtonProps, Loader, Button as MantineButton } from '@mantine/core';
 import { useGetColors } from '@nabiq-ui';
+import cn from 'classnames';
 import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 
 import Text from '../Text';
@@ -18,31 +19,15 @@ const getSizes = (size) => {
     LG: SIZES.LG,
   };
 
-  const fontSize = {
-    sm: '14px',
-    md: '16px',
-    lg: '18px',
-  };
-
   const loaderSize = {
     sm: 13,
     md: 15,
     lg: 17,
-    xl: 19,
-    '2xl': 21,
-  };
-
-  const btnHeight = {
-    sm: 36,
-    md: 44,
-    lg: 60,
   };
 
   return {
     button: btnSize[size],
-    text: fontSize[size],
     loader: loaderSize[size],
-    btnHeight: btnHeight[size],
   };
 };
 
@@ -60,43 +45,80 @@ const Button = ({
   className,
   id,
   ...rest
-}: ButtonPropType) => {
+}: IButtonProp) => {
   const { whiteBase, gray600, primary600, error600 } = useGetColors();
 
   const isText = typeof children === 'string';
 
-  const paddingClasses = {
-    sm: isText ? 'py-2 px-4' : 'p-2',
-    md: isText ? 'py-2.5 px-4' : 'p-3',
-    lg: isText ? 'py-4 px-5.5' : 'p-4',
+  const getButtonClassesBySize = (btnSize: TButtonSize) => {
+    switch (btnSize) {
+      case 'sm':
+        return '!text-[32px]';
+      case 'md':
+        return isText ? 'py-2.5 px-4' : 'p-3';
+      case 'lg':
+        return isText ? 'py-4 px-5.5' : 'p-4';
+      default:
+        return '';
+    }
+  };
+  const getPaddingClassesBySize = (btnSize: TButtonSize) => {
+    switch (btnSize) {
+      case 'sm':
+        return isText ? 'py-2 px-3 rounded-[12px]' : 'p-2';
+      case 'md':
+        return isText ? 'py-2.5 px-4' : 'p-3';
+      case 'lg':
+        return isText ? 'py-4 px-5.5' : 'p-4';
+      default:
+        return '';
+    }
   };
 
-  const getClassName = (btnVariant) => {
-    const classes = {
-      primary: styles.primary,
-      'primary-destructive': styles.primaryDestructive,
-      secondary: styles.secondary,
-      'secondary-black': styles.secondaryBlack,
-      tertiary: styles.tertiary,
-      'tertiary-gray': styles.tertiaryGray,
-      'tertiary-destructive': styles.tertiaryDestructive,
-      link: styles.link,
-    };
-    return classes[btnVariant];
+  const getClassName = (btnVariant: TButtonVariant) => {
+    switch (btnVariant) {
+      case 'primary':
+        return styles.primary;
+      case 'primary-destructive':
+        return styles.primaryDestructive;
+      case 'secondary':
+        return styles.secondary;
+      case 'secondary-black':
+        return styles.secondaryBlack;
+      case 'tertiary':
+        return styles.tertiary;
+      case 'tertiary-gray':
+        return styles.tertiaryGray;
+      case 'tertiary-destructive':
+        return styles.tertiaryDestructive;
+      case 'link':
+        return styles.link;
+      default:
+        return '';
+    }
   };
 
-  const getLoaderColor = (btnVariant) => {
-    const colors = {
-      primary: whiteBase,
-      'primary-destructive': whiteBase,
-      secondary: gray600,
-      'secondary-black': whiteBase,
-      tertiary: primary600,
-      'tertiary-gray': gray600,
-      'tertiary-destructive': error600,
-      link: primary600,
-    };
-    return colors[btnVariant];
+  const getLoaderColor = (btnVariant: TButtonVariant) => {
+    switch (btnVariant) {
+      case 'primary':
+        return whiteBase;
+      case 'primary-destructive':
+        return whiteBase;
+      case 'secondary':
+        return gray600;
+      case 'secondary-black':
+        return whiteBase;
+      case 'tertiary':
+        return primary600;
+      case 'tertiary-gray':
+        return gray600;
+      case 'tertiary-destructive':
+        return error600;
+      case 'link':
+        return primary600;
+      default:
+        return '';
+    }
   };
 
   const handleClick = (e) => {
@@ -109,11 +131,17 @@ const Button = ({
     <MantineButton
       id={id}
       style={{
-        height: getSizes(size).btnHeight,
+        minWidth: 'fit-content',
         ...style,
       }}
       size={getSizes(size).button}
-      className={`${styles.container} ${getClassName(variant)} ${paddingClasses[size]} ${className}`}
+      className={cn(
+        styles.container,
+        getClassName(variant),
+        getButtonClassesBySize(size),
+        getPaddingClassesBySize(size),
+        className,
+      )}
       disabled={loading || disabled}
       onClick={(e) => handleClick(e)}
       fullWidth={fullWidth}
@@ -127,28 +155,30 @@ const Button = ({
       }
       {...rest}
     >
-      <Text style={{ whiteSpace: 'nowrap' }} size={getSizes(size).text}>
-        {children}
-      </Text>
+      <Text style={{ whiteSpace: 'nowrap' }}>{children}</Text>
     </MantineButton>
   );
 };
 
 export default Button;
 
-interface ButtonPropType {
+type TButtonVariant =
+  | 'primary'
+  | 'primary-destructive'
+  | 'secondary'
+  | 'secondary-black'
+  | 'tertiary'
+  | 'tertiary-gray'
+  | 'tertiary-destructive'
+  | 'link';
+
+type TButtonSize = 'sm' | 'md' | 'lg';
+
+interface IButtonProp extends ButtonProps {
   children: ReactNode;
   type?: 'submit';
-  variant?:
-    | 'primary'
-    | 'primary-destructive'
-    | 'secondary'
-    | 'secondary-black'
-    | 'tertiary'
-    | 'tertiary-gray'
-    | 'tertiary-destructive'
-    | 'link';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: TButtonVariant;
+  size?: TButtonSize;
   loading?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;

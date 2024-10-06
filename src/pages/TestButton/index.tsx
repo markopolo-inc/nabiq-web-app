@@ -732,6 +732,129 @@ const TestButton = () => {
             </Group>
           </Stack>
         </Stack>
+        <Stack gap={16}>
+          <Stack gap={180} className='flex flex-row'>
+            <Group gap={32}>
+              <Button
+                variant='tertiary-destructive'
+                trailingIcon={<FiCircle size={20} />}
+                leadingIcon={<FiCircle size={20} />}
+              >
+                Button CTA
+              </Button>
+              <Button
+                variant='tertiary-destructive'
+                size='md'
+                trailingIcon={<FiCircle size={20} />}
+                leadingIcon={<FiCircle size={20} />}
+              >
+                Button CTA
+              </Button>
+              <Button
+                variant='tertiary-destructive'
+                size='lg'
+                trailingIcon={<FiCircle size={24} />}
+                leadingIcon={<FiCircle size={24} />}
+              >
+                Button CTA
+              </Button>
+            </Group>
+
+            <Group gap={32}>
+              <Button variant='tertiary-destructive'>
+                <FiCircle size={20} />
+              </Button>
+              <Button size='md' variant='tertiary-destructive'>
+                <FiCircle size={20} />
+              </Button>
+              <Button size='lg' variant='tertiary-destructive'>
+                <FiCircle size={24} />
+              </Button>
+            </Group>
+          </Stack>
+          <Stack gap={180} className='flex flex-row'>
+            <Group gap={32}>
+              <Button
+                trailingIcon={<FiCircle size={20} />}
+                leadingIcon={<FiCircle size={20} />}
+                variant='tertiary-destructive'
+              >
+                Button CTA
+              </Button>
+              <Button
+                variant='tertiary-destructive'
+                trailingIcon={<FiCircle size={20} />}
+                leadingIcon={<FiCircle size={20} />}
+                size='md'
+              >
+                Button CTA
+              </Button>
+              <Button
+                size='lg'
+                trailingIcon={<FiCircle size={24} />}
+                leadingIcon={<FiCircle size={24} />}
+                variant='tertiary-destructive'
+              >
+                Button CTA
+              </Button>
+            </Group>
+
+            <Group gap={32}>
+              <Button variant='tertiary-destructive'>
+                <FiCircle size={20} />
+              </Button>
+              <Button size='md' variant='tertiary-destructive'>
+                <FiCircle size={20} />
+              </Button>
+              <Button size='lg' variant='tertiary-destructive'>
+                <FiCircle size={24} />
+              </Button>
+            </Group>
+          </Stack>
+
+          <Stack gap={180} className='flex flex-row'>
+            <Group gap={32}>
+              <Button
+                variant='tertiary-destructive'
+                trailingIcon={<FiCircle size={20} />}
+                leadingIcon={<FiCircle size={20} />}
+                disabled
+              >
+                Button CTA
+              </Button>
+              <Button
+                variant='tertiary-destructive'
+                trailingIcon={<FiCircle size={20} />}
+                leadingIcon={<FiCircle size={20} />}
+                size='md'
+                disabled
+              >
+                Button CTA
+              </Button>
+              <Button
+                variant='tertiary-destructive'
+                size='lg'
+                trailingIcon={<FiCircle size={24} />}
+                leadingIcon={<FiCircle size={24} />}
+                disabled
+              >
+                Button CTA
+              </Button>
+            </Group>
+
+            <Group gap={32}>
+              <Button disabled variant='tertiary-destructive'>
+                <FiCircle size={20} />
+              </Button>
+              <Button size='md' disabled variant='tertiary-destructive'>
+                <FiCircle size={20} />
+              </Button>
+              <Button size='lg' disabled variant='tertiary-destructive'>
+                <FiCircle size={24} />
+              </Button>
+            </Group>
+          </Stack>
+        </Stack>
       </Stack>
     </div>
   );
