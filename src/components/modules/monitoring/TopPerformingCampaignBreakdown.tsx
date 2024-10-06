@@ -1,10 +1,11 @@
 import { FiChevronRight } from '@nabiq-icons';
-import { Badge, Breadcrumbs, Button, Group, Pagination, Stack } from '@nabiq-ui';
+import { Badge, Breadcrumbs, Button, Group, Pagination, Stack, useGetColors } from '@nabiq-ui';
 import cn from 'classnames';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Xarrow, { Xwrapper, useXarrow } from 'react-xarrows';
 import GatewayLogo from 'src/components/UI/GatewayLogo';
 import {
   useGetAudienceBreakdownQuery,
@@ -18,6 +19,15 @@ const PAGE_SIZE = 50;
 
 export const TopPerformingCampaignBreakdown = () => {
   const navigate = useNavigate();
+  const { primary600, gray400 } = useGetColors();
+  const updateXarrow = useXarrow();
+  const [arrows, setArrows] = useState([]);
+  const [subArrows, setSubArrows] = useState([{ start: 'breakdownElem0', end: 'breakdownElem1' }]);
+
+  const addArrow = (start, end) => {
+    setArrows([{ start, end }]);
+  };
+
   const div1Ref = useRef(null);
   const div2Ref = useRef(null);
   const { name, campaignId } = useParams();
@@ -44,6 +54,21 @@ export const TopPerformingCampaignBreakdown = () => {
 
   const breakdown = audienceBreakdownData?.data || [];
   const isNoData = !!breakdown?.[0]?.noData;
+
+  useEffect(() => {
+    if (div2Ref.current !== null && selectedAudienceIdx !== null) {
+      addArrow(`listElem${selectedAudienceIdx}`, 'breakdownElem0');
+    }
+  }, [audience, breakdown, selectedAudienceIdx]);
+
+  useEffect(() => {
+    const newSubArrows = breakdown.slice(0, -1).map((_item, idx) => ({
+      start: `breakdownElem${idx}`,
+      end: `breakdownElem${idx + 1}`,
+    }));
+
+    setSubArrows(newSubArrows);
+  }, [breakdown]);
 
   return (
     <Stack>
@@ -90,103 +115,145 @@ export const TopPerformingCampaignBreakdown = () => {
         </Group>
         <TextInput placeholder='Search audience' className='w-[264px]' />
       </Group> */}
-      <div className='grid grid-cols-12 gap-20 relative mt-8'>
-        <Stack className='col-span-6'>
-          <p className='text-sm font-normal text-gray-600'>Audience</p>
-          <Stack
-            className='rounded-md border border-gray-20 p-1 max-h-[724px] overflow-y-auto max-w-[428px]'
-            gap={8}
-          >
-            {audience.map((user, idx) => (
-              <Stack
-                className={cn(
-                  'rounded-md border border-gray-200 bg-white shadow-sm p-4 max-w-[418px] cursor-pointer',
-                  idx === selectedAudienceIdx ? 'border-primary-600 border-[2px]' : '',
-                )}
-                ref={div1Ref}
-                gap={16}
-                key={idx}
-                onClick={() => {
-                  setUserId(user.id);
-                  setSelectedAudienceIdx(idx);
-                  setSelectedEmail(user.email);
-                }}
-              >
-                <p className='text-gray-900 font-semibold'>ID: {user.id}</p>
-                <Group>
-                  <Badge color='gray'>{user.email}</Badge>
-                  <Badge color='gray'>{user.phone}</Badge>
-                </Group>
-              </Stack>
-            ))}
-          </Stack>
-          <Pagination
-            total={totalPages}
-            onChange={(value) => {
-              setSelectedAudienceIdx(null);
-              setPage(value);
-              setUserId(null);
-            }}
-            value={page}
-          />
-        </Stack>
-
-        <Stack className='col-span-6'>
-          <p className='text-sm font-normal text-gray-600'>Breakdown</p>
-          {!isNoData ? (
-            <Stack gap={36}>
-              {breakdown?.map((item, idx) => (
-                <div
+      <Xwrapper>
+        <div className='grid grid-cols-12 gap-20 relative mt-8'>
+          <Stack className='col-span-6'>
+            <p className='text-sm font-normal text-gray-600'>Audience</p>
+            <Stack
+              className='rounded-md border border-gray-20 p-1 max-h-[724px] overflow-y-auto max-w-[428px]'
+              gap={8}
+              onScroll={updateXarrow}
+            >
+              {audience.map((user, idx) => (
+                <Stack
                   className={cn(
-                    'rounded-md border border-gray-200 bg-white shadow-sm p-6 max-w-[360px]',
-                    idx === 0 ? 'border-primary-600 border-[2px]' : '',
+                    'rounded-md border-[2px] border-gray-200 bg-white shadow-sm p-4 max-w-[418px] cursor-pointer',
+                    idx === selectedAudienceIdx ? 'border-primary-600' : '',
                   )}
-                  ref={div2Ref}
-                  key={idx}
+                  ref={div1Ref}
+                  gap={16}
+                  key={`listElem${idx}`}
+                  onClick={() => {
+                    setUserId(user.id);
+                    setSelectedAudienceIdx(idx);
+                    setSelectedEmail(user.email);
+                    // addArrow(`elem${idx}`, 'breakdownElem');
+                  }}
+                  id={`listElem${idx}`}
                 >
-                  <Group justify='space-between'>
-                    <GatewayLogo app={item?.platform} width={24} />
-                    <Badge color='gray'>Step {item?.step}</Badge>
+                  <p className='text-gray-900 font-semibold'>ID: {user.id}</p>
+                  <Group>
+                    <Badge color='gray'>{user.email}</Badge>
+                    <Badge color='gray'>{user.phone}</Badge>
                   </Group>
-                  <Stack gap={0} className='mt-4'>
-                    <p className='text-gray-900 font-semibold'>{capitalize(item?.channel)}</p>
-                    <p className='text-gray-600 font-normal text-sm'>
-                      Sent on {moment(item?.sentOn).format('MMM D, YYYY')} at{' '}
-                      {moment(item?.sentOn).format('h:mm a')}
-                    </p>
-                  </Stack>
-                  {/* <Group className='mt-9 tex-sm text-gray-600' justify='space-between'>
+                </Stack>
+              ))}
+            </Stack>
+            <Pagination
+              total={totalPages}
+              onChange={(value) => {
+                addArrow('', '');
+                setSelectedAudienceIdx(null);
+                setPage(value);
+                setUserId(null);
+              }}
+              value={page}
+            />
+          </Stack>
+
+          <Stack className='col-span-6'>
+            <p className='text-sm font-normal text-gray-600'>Breakdown</p>
+            {!isNoData ? (
+              <Stack gap={36}>
+                {breakdown?.map((item, idx) => (
+                  <div
+                    className={cn(
+                      'rounded-md border border-gray-200 bg-white shadow-sm p-6 max-w-[360px]',
+                      idx === 0 ? 'border-primary-600 border-[2px]' : '',
+                    )}
+                    ref={div2Ref}
+                    key={`breakdownElem${idx}`}
+                    id={`breakdownElem${idx}`}
+                  >
+                    <Group justify='space-between'>
+                      <GatewayLogo app={item?.platform} width={24} />
+                      <Badge color='gray'>Step {item?.step}</Badge>
+                    </Group>
+                    <Stack gap={0} className='mt-4'>
+                      <p className='text-gray-900 font-semibold'>{capitalize(item?.channel)}</p>
+                      <p className='text-gray-600 font-normal text-sm'>
+                        Sent on {moment(item?.sentOn).format('MMM D, YYYY')} at{' '}
+                        {moment(item?.sentOn).format('h:mm a')}
+                      </p>
+                    </Stack>
+                    {/* <Group className='mt-9 tex-sm text-gray-600' justify='space-between'>
                   <p>Link click?</p>
                   <p>Yes</p>
                 </Group> */}
-                  <div className='mt-4'>
-                    {Object.keys(item?.metrics || {}).map((key, index) => (
-                      <Group className='tex-sm text-gray-600' justify='space-between' key={index}>
-                        <p>{key}:</p>
-                        <p>
-                          {formatMetricUnit(item?.metrics[key]?.value, item?.metrics[key]?.type)}
-                        </p>
-                      </Group>
-                    ))}
+                    <div className='mt-4'>
+                      {Object.keys(item?.metrics || {}).map((key, index) => (
+                        <Group className='tex-sm text-gray-600' justify='space-between' key={index}>
+                          <p>{key}:</p>
+                          <p>
+                            {formatMetricUnit(item?.metrics[key]?.value, item?.metrics[key]?.type)}
+                          </p>
+                        </Group>
+                      ))}
+                    </div>
+                    <Button
+                      className='mt-9'
+                      trailingIcon={<FiChevronRight size={18} />}
+                      onClick={() => {
+                        setShowDrawer(true);
+                        setSelectedContent({ ...item, email: selectedEmail });
+                      }}
+                    >
+                      View
+                    </Button>
                   </div>
-                  <Button
-                    className='mt-9'
-                    trailingIcon={<FiChevronRight size={18} />}
-                    onClick={() => {
-                      setShowDrawer(true);
-                      setSelectedContent({ ...item, email: selectedEmail });
-                    }}
-                  >
-                    View
-                  </Button>
-                </div>
-              ))}
-            </Stack>
-          ) : (
-            <p className='text-gray-600 font-normal text-sm'>No data available!</p>
-          )}
-        </Stack>
-      </div>
+                ))}
+                {subArrows.map((arrow, index) => (
+                  <Xarrow
+                    key={index}
+                    start={arrow.start}
+                    end={arrow.end}
+                    strokeWidth={2}
+                    path='grid'
+                    startAnchor='bottom'
+                    endAnchor='top'
+                    showTail={true}
+                    tailShape='circle'
+                    tailColor={gray400}
+                    tailSize={3}
+                    showHead={false}
+                    lineColor={gray400}
+                  />
+                ))}
+              </Stack>
+            ) : (
+              <p className='text-gray-600 font-normal text-sm'>No data available!</p>
+            )}
+          </Stack>
+        </div>
+
+        {arrows.map((arrow, index) => (
+          <Xarrow
+            key={index}
+            start={arrow.start}
+            end={arrow.end}
+            strokeWidth={2}
+            path='smooth'
+            startAnchor='right'
+            endAnchor='left'
+            showTail={true}
+            tailShape='circle'
+            tailColor={primary600}
+            tailSize={3}
+            showHead={false}
+            lineColor={primary600}
+          />
+        ))}
+      </Xwrapper>
       {/* <svg className='absolute top-0 left-0 w-full h-full pointer-events-none'>
         <path d={pathData} fill='none' stroke='#3B82F6' strokeWidth='2' />
       </svg> */}
