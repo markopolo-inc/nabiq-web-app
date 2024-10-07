@@ -9,6 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import Router from './router';
 import { persistor, store } from './store';
+import './styles/fonts.css';
 
 const App = () => {
   return (
@@ -17,7 +18,7 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <MantineProvider
             theme={{
-              fontFamily: 'Geist, sans-serif',
+              fontFamily: 'Geist',
             }}
           >
             <Toaster position='top-center' reverseOrder={false} />
