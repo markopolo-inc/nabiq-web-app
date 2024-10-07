@@ -15,7 +15,7 @@ import { formatMetricUnit } from 'src/utils/string.utils';
 
 import ContentDrawer from './components/ContentDrawer';
 
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 10;
 
 export const TopPerformingCampaignBreakdown = () => {
   const navigate = useNavigate();
@@ -120,7 +120,7 @@ export const TopPerformingCampaignBreakdown = () => {
           <Stack className='col-span-6'>
             <p className='text-sm font-normal text-gray-600'>Audience</p>
             <Stack
-              className='rounded-md border border-gray-20 p-1 max-h-[724px] overflow-y-auto max-w-[428px]'
+              className='rounded-md border border-gray-20 p-1 max-h-fit max-w-[428px]'
               gap={8}
               onScroll={updateXarrow}
             >
