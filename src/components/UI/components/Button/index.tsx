@@ -23,7 +23,7 @@ const getLoaderSizes = (size) => {
 
 const Button = ({
   children,
-  size = 'sm',
+  size = 'md',
   loading = false,
   onClick,
   disabled = false,

@@ -1,4 +1,4 @@
-import { FiHexagon01, FiPlatformIcon } from '@nabiq-icons';
+import { ArrowNarrowUpRight, FiHexagon01, FiPlatformIcon } from '@nabiq-icons';
 import { Button } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
@@ -21,12 +21,11 @@ const ConnectCampaignPlatforms = () => {
   ];
 
   return (
-    <div className='bg-white rounded-xl p-8 shadow-lg'>
-      <div className='flex gap-3 flex-nowrap'>
-        <div>
-          <FiHexagon01 size={32} color='#15B79E' fill='#15B79E' />
-        </div>
-
+    <div className='bg-white rounded-xl p-8 shadow-lg flex flex-row gap-4 items-start min-h-[250px]'>
+      <div>
+        <FiHexagon01 size={32} color='#15B79E' fill='#15B79E' />
+      </div>
+      <div className='flex gap-3 flex-col justify-between h-full'>
         <div className='flex flex-col gap-16'>
           <div className='flex flex-col gap-1'>
             <p className='text-gray-900 text-lg font-semibold'>Connect campaign platforms</p>
@@ -36,20 +35,28 @@ const ConnectCampaignPlatforms = () => {
               ads.
             </p>
           </div>
-          <div className='flex justify-between items-center'>
-            <Button variant='secondary' onClick={() => navigate('/connect-platforms')}>
-              {platforms.filter((item) => item.isConnected)?.length ? 'Reconfigure' : 'Connect'}
-            </Button>
+        </div>
+        <div className='flex justify-between items-center'>
+          <Button
+            variant='secondary'
+            onClick={() => navigate('/connect-platforms')}
+            trailingIcon={
+              platforms.filter((item) => item.isConnected)?.length ? (
+                <ArrowNarrowUpRight size={24} color='#4B5565' style={{ marginTop: 6 }} />
+              ) : null
+            }
+          >
+            {platforms.filter((item) => item.isConnected)?.length ? 'Reconfigure' : 'Connect'}
+          </Button>
 
-            <div className='flex gap-4'>
-              {platforms
-                .filter((item) => item.isConnected)
-                .map((item) => (
-                  <div key={item.id}>
-                    <FiPlatformIcon platform={item.name} size={20} />
-                  </div>
-                ))}
-            </div>
+          <div className='flex gap-4'>
+            {platforms
+              .filter((item) => item.isConnected)
+              .map((item) => (
+                <div key={item.id}>
+                  <FiPlatformIcon platform={item.name} size={20} />
+                </div>
+              ))}
           </div>
         </div>
       </div>

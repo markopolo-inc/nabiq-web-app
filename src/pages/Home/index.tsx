@@ -51,19 +51,14 @@ const Home = () => {
         </div>
         <div className='p-12 bg-gray-100 rounded-xl'>
           <div className='flex flex-col justify-center items-center'>
-            <div className='gap-6 w-fit grid grid-cols-1 lg:grid-cols-2'>
-              {!Boolean(markTag) ? (
-                <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
-              ) : (
-                <IntegrateApps />
-              )}
-
+            <div className='gap-6 w-fit grid grid-cols-1 xl:grid-cols-2 justify-center'>
+              <ConnectCampaignPlatforms />
+              <IntegrateApps />
               {Boolean(markTag) ? (
                 <ConnectedMarktag onShowMarktag={() => setShowMarktagModal(true)} />
               ) : (
-                <IntegrateApps />
+                <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
               )}
-              <ConnectCampaignPlatforms />
             </div>
           </div>
         </div>

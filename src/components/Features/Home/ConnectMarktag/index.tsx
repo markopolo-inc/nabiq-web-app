@@ -8,12 +8,11 @@ type ConnectMarktagPropsTypes = {
 const ConnectMarktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
   const { primary500 } = useGetColors();
   return (
-    <div className='bg-white rounded-xl p-8 shadow-lg'>
-      <div className='flex gap-3 flex-nowrap'>
-        <div>
-          <FiCommand size={32} color={primary500} fill={primary500} />
-        </div>
-
+    <div className='bg-white rounded-xl p-8 shadow-lg flex flex-row gap-4 items-start min-h-[250px]'>
+      <div>
+        <FiCommand size={32} color={primary500} fill={primary500} />
+      </div>
+      <div className='flex gap-3 flex-col justify-between h-full'>
         <div className='flex flex-col gap-16'>
           <div className='flex flex-col gap-1'>
             <p className='text-gray-900 text-lg font-semibold'>Connect 'Marktag'</p>
@@ -22,13 +21,13 @@ const ConnectMarktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
               your marketing data.
             </p>
           </div>
-          <div className='flex gap-3'>
+          <div className='flex gap-4'>
             <Button onClick={onShowMarktag}>Connect</Button>
             <Button
               onClick={() =>
                 window.open('https://www.markopolo.ai/products/marktag/marktag', '_blank')
               }
-              variant='link'
+              variant='tertiary-gray'
             >
               Learn more
             </Button>
