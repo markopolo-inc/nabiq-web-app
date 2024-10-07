@@ -8,7 +8,11 @@ const TestButton = () => {
         <Stack gap={16}>
           <Stack gap={180} className='flex flex-row'>
             <Group gap={32}>
-              <Button trailingIcon={<FiCircle size={20} />} leadingIcon={<FiCircle size={20} />}>
+              <Button
+                size='sm'
+                trailingIcon={<FiCircle size={20} />}
+                leadingIcon={<FiCircle size={20} />}
+              >
                 Button CTA
               </Button>
               <Button
@@ -28,40 +32,7 @@ const TestButton = () => {
             </Group>
 
             <Group gap={32}>
-              <Button>
-                <FiCircle size={20} />
-              </Button>
-              <Button size='md'>
-                <FiCircle size={20} />
-              </Button>
-              <Button size='lg'>
-                <FiCircle size={24} />
-              </Button>
-            </Group>
-          </Stack>
-          <Stack gap={180} className='flex flex-row'>
-            <Group gap={32}>
-              <Button trailingIcon={<FiCircle size={20} />} leadingIcon={<FiCircle size={20} />}>
-                Button CTA
-              </Button>
-              <Button
-                trailingIcon={<FiCircle size={20} />}
-                leadingIcon={<FiCircle size={20} />}
-                size='md'
-              >
-                Button CTA
-              </Button>
-              <Button
-                size='lg'
-                trailingIcon={<FiCircle size={24} />}
-                leadingIcon={<FiCircle size={24} />}
-              >
-                Button CTA
-              </Button>
-            </Group>
-
-            <Group gap={32}>
-              <Button>
+              <Button size='sm'>
                 <FiCircle size={20} />
               </Button>
               <Button size='md'>
@@ -108,6 +79,46 @@ const TestButton = () => {
                 <FiCircle size={20} />
               </Button>
               <Button size='lg' disabled>
+                <FiCircle size={24} />
+              </Button>
+            </Group>
+          </Stack>
+
+          <Stack gap={180} className='flex flex-row'>
+            <Group gap={32}>
+              <Button
+                trailingIcon={<FiCircle size={20} />}
+                leadingIcon={<FiCircle size={20} />}
+                loading
+              >
+                Button CTA
+              </Button>
+              <Button
+                trailingIcon={<FiCircle size={20} />}
+                leadingIcon={<FiCircle size={20} />}
+                size='md'
+                loading
+              >
+                Button CTA
+              </Button>
+              <Button
+                size='lg'
+                trailingIcon={<FiCircle size={24} />}
+                leadingIcon={<FiCircle size={24} />}
+                loading
+              >
+                Button CTA
+              </Button>
+            </Group>
+
+            <Group gap={32}>
+              <Button loading>
+                <FiCircle size={20} />
+              </Button>
+              <Button size='md' loading>
+                <FiCircle size={20} />
+              </Button>
+              <Button size='lg' loading>
                 <FiCircle size={24} />
               </Button>
             </Group>

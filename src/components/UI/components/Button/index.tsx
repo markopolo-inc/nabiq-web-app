@@ -1,24 +1,18 @@
-import { ButtonProps, Loader, Button as MantineButton } from '@mantine/core';
-import { useGetColors } from '@nabiq-ui';
+import { Loader, Button as MantineButton } from '@mantine/core';
 import cn from 'classnames';
-import { CSSProperties, MouseEventHandler, ReactNode } from 'react';
 
-import Text from '../Text';
-import styles from './Button.module.scss';
-
-const SIZES = {
-  SM: 'sm',
-  MD: 'md',
-  LG: 'lg',
-} as const;
+import { useGetColors } from '../../hooks';
+import {
+  IButtonProp,
+  TButtonVariant,
+  getDisabledClasses,
+  getInnerClassesBySize,
+  getInnerClassesByVariant,
+  getRootClassesBySize,
+  getRootClassesByVariant,
+} from './utils';
 
 const getSizes = (size) => {
-  const btnSize = {
-    SM: SIZES.SM,
-    MD: SIZES.MD,
-    LG: SIZES.LG,
-  };
-
   const loaderSize = {
     sm: 13,
     md: 15,
@@ -26,14 +20,13 @@ const getSizes = (size) => {
   };
 
   return {
-    button: btnSize[size],
     loader: loaderSize[size],
   };
 };
 
 const Button = ({
   children,
-  size = SIZES.SM,
+  size = 'sm',
   loading = false,
   onClick,
   disabled = false,
@@ -41,62 +34,11 @@ const Button = ({
   fullWidth = false,
   leadingIcon,
   trailingIcon,
-  style,
-  className,
   id,
-  ...rest
 }: IButtonProp) => {
   const { whiteBase, gray600, primary600, error600 } = useGetColors();
-
   const isText = typeof children === 'string';
-
-  const getButtonClassesBySize = (btnSize: TButtonSize) => {
-    switch (btnSize) {
-      case 'sm':
-        return '!text-[32px]';
-      case 'md':
-        return isText ? 'py-2.5 px-4' : 'p-3';
-      case 'lg':
-        return isText ? 'py-4 px-5.5' : 'p-4';
-      default:
-        return '';
-    }
-  };
-  const getPaddingClassesBySize = (btnSize: TButtonSize) => {
-    switch (btnSize) {
-      case 'sm':
-        return isText ? 'py-2 px-3 rounded-[12px]' : 'p-2';
-      case 'md':
-        return isText ? 'py-2.5 px-4' : 'p-3';
-      case 'lg':
-        return isText ? 'py-4 px-5.5' : 'p-4';
-      default:
-        return '';
-    }
-  };
-
-  const getClassName = (btnVariant: TButtonVariant) => {
-    switch (btnVariant) {
-      case 'primary':
-        return styles.primary;
-      case 'primary-destructive':
-        return styles.primaryDestructive;
-      case 'secondary':
-        return styles.secondary;
-      case 'secondary-black':
-        return styles.secondaryBlack;
-      case 'tertiary':
-        return styles.tertiary;
-      case 'tertiary-gray':
-        return styles.tertiaryGray;
-      case 'tertiary-destructive':
-        return styles.tertiaryDestructive;
-      case 'link':
-        return styles.link;
-      default:
-        return '';
-    }
-  };
+  const isDisabled = disabled || loading;
 
   const getLoaderColor = (btnVariant: TButtonVariant) => {
     switch (btnVariant) {
@@ -130,19 +72,20 @@ const Button = ({
   return (
     <MantineButton
       id={id}
-      style={{
-        minWidth: 'fit-content',
-        ...style,
+      classNames={{
+        root: cn(
+          'rounded-xl p-[0.75px] !min-w-fit',
+          getRootClassesBySize(size),
+          getRootClassesByVariant(variant),
+        ),
+        inner: cn(
+          '!font-semibold !rounded-[11px] !min-w-fit',
+          getInnerClassesBySize(size, isText),
+          getInnerClassesByVariant(variant),
+          isDisabled ? getDisabledClasses(variant) : '',
+        ),
       }}
-      size={getSizes(size).button}
-      className={cn(
-        styles.container,
-        getClassName(variant),
-        getButtonClassesBySize(size),
-        getPaddingClassesBySize(size),
-        className,
-      )}
-      disabled={loading || disabled}
+      disabled={isDisabled}
       onClick={(e) => handleClick(e)}
       fullWidth={fullWidth}
       rightSection={trailingIcon}
@@ -153,39 +96,10 @@ const Button = ({
           leadingIcon
         )
       }
-      {...rest}
     >
-      <Text style={{ whiteSpace: 'nowrap' }}>{children}</Text>
+      {children}
     </MantineButton>
   );
 };
 
 export default Button;
-
-type TButtonVariant =
-  | 'primary'
-  | 'primary-destructive'
-  | 'secondary'
-  | 'secondary-black'
-  | 'tertiary'
-  | 'tertiary-gray'
-  | 'tertiary-destructive'
-  | 'link';
-
-type TButtonSize = 'sm' | 'md' | 'lg';
-
-interface IButtonProp extends ButtonProps {
-  children: ReactNode;
-  type?: 'submit';
-  variant?: TButtonVariant;
-  size?: TButtonSize;
-  loading?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
-  fullWidth?: boolean;
-  leadingIcon?: ReactNode;
-  trailingIcon?: ReactNode;
-  style?: CSSProperties;
-  className?: string;
-  id?: string;
-}
