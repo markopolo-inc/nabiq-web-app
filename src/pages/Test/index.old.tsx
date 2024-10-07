@@ -167,9 +167,7 @@ const Test = () => {
       <div className='space-y-4 space-x-4'>
         <Text className='display-lg text-primary-500 font-semibold'>Nabiq</Text>
         <Button>Button CTA</Button>
-        <Button variant='primary-destructive' size='sm'>
-          Button
-        </Button>
+
         <Button variant='secondary' size='lg'>
           Button
         </Button>

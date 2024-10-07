@@ -1,27 +1,24 @@
-import { Loader, Button as MantineButton } from '@mantine/core';
+import { Loader, UnstyledButton as MantineButton } from '@mantine/core';
 import cn from 'classnames';
 
 import { useGetColors } from '../../hooks';
 import {
   IButtonProp,
-  TButtonVariant,
   getDisabledClasses,
   getInnerClassesBySize,
   getInnerClassesByVariant,
-  getRootClassesBySize,
   getRootClassesByVariant,
 } from './utils';
 
-const getSizes = (size) => {
-  const loaderSize = {
-    sm: 13,
-    md: 15,
-    lg: 17,
-  };
-
-  return {
-    loader: loaderSize[size],
-  };
+const getLoaderSizes = (size) => {
+  switch (size) {
+    case 'sm':
+      return 18;
+    case 'md':
+      return 18;
+    case 'lg':
+      return 20;
+  }
 };
 
 const Button = ({
@@ -36,32 +33,9 @@ const Button = ({
   trailingIcon,
   id,
 }: IButtonProp) => {
-  const { whiteBase, gray600, primary600, error600 } = useGetColors();
+  const { gray400 } = useGetColors();
   const isText = typeof children === 'string';
   const isDisabled = disabled || loading;
-
-  const getLoaderColor = (btnVariant: TButtonVariant) => {
-    switch (btnVariant) {
-      case 'primary':
-        return whiteBase;
-      case 'primary-destructive':
-        return whiteBase;
-      case 'secondary':
-        return gray600;
-      case 'secondary-black':
-        return whiteBase;
-      case 'tertiary':
-        return primary600;
-      case 'tertiary-gray':
-        return gray600;
-      case 'tertiary-destructive':
-        return error600;
-      case 'link':
-        return primary600;
-      default:
-        return '';
-    }
-  };
 
   const handleClick = (e) => {
     if (onClick) {
@@ -74,30 +48,34 @@ const Button = ({
       id={id}
       classNames={{
         root: cn(
-          'rounded-xl p-[0.75px] !min-w-fit',
-          getRootClassesBySize(size),
+          'rounded-xl p-[0.75px]',
+          fullWidth ? 'w-full' : 'min-w-fit',
+          !isDisabled ? 'transition-transform duration-75 active:scale-[0.98]' : '',
           getRootClassesByVariant(variant),
-        ),
-        inner: cn(
-          '!font-semibold !rounded-[11px] !min-w-fit',
-          getInnerClassesBySize(size, isText),
-          getInnerClassesByVariant(variant),
-          isDisabled ? getDisabledClasses(variant) : '',
         ),
       }}
       disabled={isDisabled}
       onClick={(e) => handleClick(e)}
-      fullWidth={fullWidth}
-      rightSection={trailingIcon}
-      leftSection={
-        loading ? (
-          <Loader color={getLoaderColor(variant)} size={getSizes(size).loader} />
-        ) : (
-          leadingIcon
-        )
-      }
     >
-      {children}
+      <div
+        className={cn(
+          '!font-semibold !rounded-[11.2px] !w-full flex',
+          'items-center justify-center !flex-nowrap gap-2',
+          getInnerClassesBySize(size, isText),
+          getInnerClassesByVariant(variant),
+          isDisabled ? getDisabledClasses(variant) : '',
+        )}
+      >
+        {loading && isText ? (
+          <Loader color={gray400} size={getLoaderSizes(size)} />
+        ) : (
+          leadingIcon && leadingIcon
+        )}
+        <span className='whitespace-nowrap flex items-center justify-center'>
+          {!isText && loading ? <Loader color={gray400} size={getLoaderSizes(size)} /> : children}
+        </span>
+        {trailingIcon && trailingIcon}
+      </div>
     </MantineButton>
   );
 };

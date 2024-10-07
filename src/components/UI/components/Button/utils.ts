@@ -6,13 +6,12 @@ import styles from './Button.module.scss';
 
 export type TButtonVariant =
   | 'primary'
-  | 'primary-destructive'
   | 'secondary'
   | 'secondary-black'
-  | 'tertiary'
   | 'tertiary-gray'
-  | 'tertiary-destructive'
-  | 'link';
+  | 'tertiary'
+  | 'link'
+  | 'tertiary-destructive';
 
 export type TButtonSize = 'sm' | 'md' | 'lg';
 
@@ -32,74 +31,81 @@ export interface IButtonProp extends ButtonProps {
   id?: string;
 }
 
-export const getRootClassesByVariant = (btnVariant: TButtonVariant) => {
+const getRootClassesByVariant = (btnVariant: TButtonVariant) => {
   switch (btnVariant) {
     case 'primary':
-      return cn(styles.primaryRoot, 'border-none shadow-btn-primary !disabled:bg-gray-100');
-    default:
-      return '';
-  }
-};
-
-export const getInnerClassesByVariant = (btnVariant: TButtonVariant) => {
-  switch (btnVariant) {
-    case 'primary':
-      return cn(styles.primaryInner);
-    case 'primary-destructive':
-      return styles.primaryDestructive;
+      return cn(styles.primaryRoot, 'border-none shadow-btn-primary');
     case 'secondary':
-      return styles.secondary;
+      return cn(styles.secondaryRoot, 'border-none');
     case 'secondary-black':
-      return styles.secondaryBlack;
-    case 'tertiary':
-      return styles.tertiary;
+      return styles.secondaryBlackRoot;
     case 'tertiary-gray':
-      return styles.tertiaryGray;
-    case 'tertiary-destructive':
-      return styles.tertiaryDestructive;
+      return cn(styles.tertiaryGrayRoot);
+    case 'tertiary':
+      return styles.tertiaryRoot;
     case 'link':
-      return styles.link;
-  }
-};
-
-export const getDisabledClasses = (btnVariant: TButtonVariant) => {
-  switch (btnVariant) {
-    case 'primary':
-      return styles.primaryDisabled;
+      return styles.linkRoot;
+    case 'tertiary-destructive':
+      return styles.tertiaryDestructiveRoot;
     default:
       return '';
   }
 };
 
-export const getRootClassesBySize = (btnSize: TButtonSize) => {
-  switch (btnSize) {
-    case 'sm':
-      return ['!h-[36px]'];
-    case 'md':
-      return ['!h-[44px]'];
-    case 'lg':
-      return ['!h-[60px]'];
+const getInnerClassesByVariant = (btnVariant: TButtonVariant) => {
+  switch (btnVariant) {
+    case 'primary':
+      return cn(styles.primaryInner, 'text-white');
+    case 'secondary':
+      return cn(styles.secondaryInner, 'text-gray-600 hover:text-gray-700');
+    case 'secondary-black':
+      return cn(styles.secondaryBlackInner, 'text-white');
+    case 'tertiary-gray':
+      return cn(styles.tertiaryGrayInner, 'text-gray-600 hover:text-gray-700');
+    case 'tertiary':
+      return styles.tertiaryInner;
+    case 'link':
+      return cn('!px-0');
+    case 'tertiary-destructive':
+      return cn(styles.tertiaryDestructiveInner);
   }
 };
 
-export const getInnerClassesBySize = (btnSize: TButtonSize, isText: boolean) => {
-  switch (btnSize) {
-    case 'sm':
-      return ['!text-sm', isText ? 'py-2 px-3' : 'p-3'];
-    case 'md':
-      return ['!text-base', isText ? 'py-[10px] px-4' : 'p-3'];
-    case 'lg':
-      return ['!text-lg', isText ? 'py-4 px-[22px]' : 'p-4'];
+const getDisabledClasses = (btnVariant: TButtonVariant) => {
+  switch (btnVariant) {
+    case 'primary':
+      return cn(styles.primaryDisabled, '!text-gray-400');
+    case 'secondary':
+      return cn(styles.secondaryDisabled, '!text-gray-400');
+    case 'secondary-black':
+      return cn(styles.secondaryBlackDisabled, '!text-gray-400');
+    case 'tertiary-gray':
+      return cn('cursor-not-allowed !text-gray-400');
+    case 'tertiary':
+      return cn('cursor-not-allowed !text-gray-400');
+    case 'link':
+      return cn('cursor-not-allowed !text-gray-400');
+    case 'tertiary-destructive':
+      return cn('cursor-not-allowed !text-gray-400');
+    default:
+      return '';
   }
 };
 
-export const getButtonStylesBySize = (btnSize: TButtonSize) => {
+const getInnerClassesBySize = (btnSize: TButtonSize, isText: boolean) => {
   switch (btnSize) {
     case 'sm':
-      return {};
+      return ['!h-[36px] !text-sm', isText ? 'py-2 px-3' : 'p-2'];
     case 'md':
-      return {};
+      return ['!h-[44px] !text-base', isText ? 'py-[10px] px-4' : 'p-3'];
     case 'lg':
-      return {};
+      return ['!h-[60px] !text-lg', isText ? 'py-4 px-[22px]' : 'p-4 px-5'];
   }
+};
+
+export {
+  getRootClassesByVariant,
+  getInnerClassesByVariant,
+  getDisabledClasses,
+  getInnerClassesBySize,
 };
