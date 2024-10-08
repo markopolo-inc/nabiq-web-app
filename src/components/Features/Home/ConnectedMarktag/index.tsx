@@ -27,13 +27,16 @@ const ConnectedMarktag = ({ onShowMarktag }: ConnectedMarktagPropsTypes) => {
             </Badge> */}
           </div>
         </div>
-        <Button
-          variant='secondary'
-          trailingIcon={<ArrowNarrowUpRight size={24} color='#4B5565' style={{ marginTop: 6 }} />}
-          onClick={onShowMarktag}
-        >
-          Reconfigure
-        </Button>
+        <div className='flex justify-between items-center'>
+          <Button
+            variant='secondary'
+            trailingIcon={<ArrowNarrowUpRight size={24} color='#4B5565' style={{ marginTop: 6 }} />}
+            onClick={onShowMarktag}
+            className='!w-36'
+          >
+            Reconfigure
+          </Button>
+        </div>
       </div>
     </div>
   );

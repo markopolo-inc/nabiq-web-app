@@ -29,6 +29,7 @@ export interface IButtonProp extends ButtonProps {
   style?: CSSProperties;
   className?: string;
   id?: string;
+  width?: number;
 }
 
 const getRootClassesByVariant = (btnVariant: TButtonVariant) => {

@@ -38,6 +38,7 @@ const ConnectCampaignPlatforms = () => {
         </div>
         <div className='flex justify-between items-center'>
           <Button
+            className='!w-36'
             variant='secondary'
             onClick={() => navigate('/connect-platforms')}
             trailingIcon={

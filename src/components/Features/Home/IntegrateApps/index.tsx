@@ -22,7 +22,11 @@ const IntegrateApps = () => {
           </div>
         </div>
         <div className='flex gap-3 justify-between items-center'>
-          <Button variant='secondary-black' onClick={() => navigate('/integrations')}>
+          <Button
+            variant='secondary-black'
+            onClick={() => navigate('/integrations')}
+            className='!w-36'
+          >
             Integrate
           </Button>
           <div className='flex flex-wrap justify-end gap-4 w-4/6'>

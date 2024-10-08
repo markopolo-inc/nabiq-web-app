@@ -22,6 +22,7 @@ const getLoaderSizes = (size) => {
 };
 
 const Button = ({
+  className,
   children,
   size = 'sm',
   loading = false,
@@ -32,7 +33,7 @@ const Button = ({
   leadingIcon,
   trailingIcon,
   id,
-  type,
+  type = 'button',
 }: IButtonProp) => {
   const { gray400 } = useGetColors();
   const isText = typeof children === 'string';
@@ -50,10 +51,11 @@ const Button = ({
       id={id}
       classNames={{
         root: cn(
-          'rounded-xl p-[0.75px]',
-          fullWidth ? 'w-full' : 'min-w-fit',
+          'rounded-xl p-[0.75px] min-w-fit',
+          fullWidth ? '!w-full' : 'w-fit',
           !isDisabled ? 'transition-transform duration-75 active:scale-[0.98]' : '',
           getRootClassesByVariant(variant),
+          className,
         ),
       }}
       disabled={isDisabled}
@@ -70,13 +72,13 @@ const Button = ({
       >
         {loading && isText ? (
           <Loader color={gray400} size={getLoaderSizes(size)} />
-        ) : (
-          leadingIcon && leadingIcon
-        )}
+        ) : leadingIcon ? (
+          leadingIcon
+        ) : null}
         <span className='whitespace-nowrap flex items-center justify-center'>
           {!isText && loading ? <Loader color={gray400} size={getLoaderSizes(size)} /> : children}
         </span>
-        {trailingIcon && trailingIcon}
+        {trailingIcon ? trailingIcon : null}
       </div>
     </MantineButton>
   );
