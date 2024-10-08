@@ -61,10 +61,11 @@ const SignUpForm = () => {
       </Button>
 
       <div className='flex flex-col space-y-4'>
-        <Button variant='primary' size='md' type='submit' loading={isLoading}>
+        <Button variant='primary' size='md' type='submit' loading={isLoading} fullWidth>
           Continue
         </Button>
         <Button
+          fullWidth
           variant='secondary'
           size='md'
           leadingIcon={<Image src={googleLogo} alt='' />}

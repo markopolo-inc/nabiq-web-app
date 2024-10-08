@@ -59,7 +59,7 @@ const LogInForm = () => {
       </div>
 
       <div className='flex flex-col space-y-4'>
-        <Button variant='primary' size='md' type='submit' loading={isLoading}>
+        <Button variant='primary' size='md' type='submit' loading={isLoading} fullWidth>
           Login
         </Button>
         <Button
@@ -68,6 +68,7 @@ const LogInForm = () => {
           leadingIcon={<Image src={googleLogo} alt='' />}
           loading={isGoogleLoading}
           onClick={handleGoogleSignIn}
+          fullWidth
         >
           Login with Google
         </Button>
