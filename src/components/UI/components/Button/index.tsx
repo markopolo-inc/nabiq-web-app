@@ -32,6 +32,7 @@ const Button = ({
   leadingIcon,
   trailingIcon,
   id,
+  type,
 }: IButtonProp) => {
   const { gray400 } = useGetColors();
   const isText = typeof children === 'string';
@@ -45,6 +46,7 @@ const Button = ({
 
   return (
     <MantineButton
+      type={type}
       id={id}
       classNames={{
         root: cn(

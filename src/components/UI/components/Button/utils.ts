@@ -17,7 +17,7 @@ export type TButtonSize = 'sm' | 'md' | 'lg';
 
 export interface IButtonProp extends ButtonProps {
   children: ReactNode;
-  type?: 'submit';
+  type?: 'submit' | 'button';
   variant?: TButtonVariant;
   size?: TButtonSize;
   loading?: boolean;
