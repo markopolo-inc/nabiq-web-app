@@ -9,13 +9,21 @@ import Overview from 'src/components/Features/Monitoring/Overview';
 export const appCategories = [
   {
     value: 'overview',
-    label: 'Overview',
-    icon: FiHourglass03,
+    label: () => (
+      <div className='flex gap-2 items-center'>
+        <FiHourglass03 size={18} />
+        Overview
+      </div>
+    ),
   },
   {
     value: 'breakdown',
-    label: 'Breakdown',
-    icon: FiDataFlow02,
+    label: () => (
+      <div className='flex gap-2 items-center'>
+        <FiDataFlow02 size={18} />
+        Breakdown
+      </div>
+    ),
   },
 ];
 

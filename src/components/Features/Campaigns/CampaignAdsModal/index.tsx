@@ -115,14 +115,22 @@ const ModalBody = ({ setOpened }) => {
           options={[
             {
               value: 'facebook',
-              label: 'Facebook',
-              logo: <FiPlatformIcon platform='facebook' size={20} />,
+              label: (
+                <div className='flex gap-2 items-center'>
+                  <FiPlatformIcon platform='facebook' size={18} />
+                  Facebook
+                </div>
+              ),
             },
-            // {
-            //   value: 'google',
-            //   label: 'Google',
-            //   logo: <FiPlatformIcon platform='google' size={20} />,
-            // },
+            {
+              value: 'google',
+              label: (
+                <div className='flex gap-2 items-center'>
+                  <FiPlatformIcon platform='google' size={18} />
+                  Google
+                </div>
+              ),
+            },
           ]}
         />
       </Stack>

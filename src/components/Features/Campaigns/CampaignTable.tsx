@@ -197,7 +197,7 @@ const CampaignTable = ({ list, refetch }) => {
 
                   <Button
                     variant='tertiary'
-                    size='md'
+                    size='sm'
                     onClick={() => handleEditCampaign({ campaignId: item.resourceId })}
                   >
                     View
