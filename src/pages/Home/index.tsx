@@ -59,7 +59,6 @@ const Home = () => {
               ) : (
                 <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
               )}
-              <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
             </div>
           </div>
         </div>

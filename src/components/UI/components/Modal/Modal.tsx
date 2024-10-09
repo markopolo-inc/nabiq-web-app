@@ -2,6 +2,7 @@ import { Modal as MantineModal } from '@mantine/core';
 import { CSSProperties, ReactNode, useEffect, useState } from 'react';
 
 import CloseButton from '../CloseButton';
+import classes from './Modal.module.scss';
 
 const Modal = ({
   title = () => <></>,
@@ -55,19 +56,14 @@ const Modal = ({
         onClose={() => {
           setOpened(false);
         }}
+        classNames={{
+          content: classes.content,
+          header: classes.header,
+        }}
         style={{ ...style }}
         styles={{
-          // modal: {
-          //   borderRadius: '8px !important',
-          // },
-          body: {
-            borderRadius: '8px !important',
-          },
           header: {
             display: withNoHeader || withCustomClose ? 'none' : 'false',
-            padding: 20,
-            paddingBottom: 0,
-            alignItems: 'flex-start',
           },
         }}
       >

@@ -32,6 +32,7 @@ const ModalBody = ({ setOpened, setOpenedCreateNew }) => {
                 setOpened(false);
                 navigate('/connect-marktag');
               }}
+              fullWidth
             >
               Connect
             </Button>
@@ -54,6 +55,7 @@ const ModalBody = ({ setOpened, setOpenedCreateNew }) => {
                 setOpenedCreateNew(true);
               }}
               variant='primary'
+              fullWidth
             >
               Create
             </Button>

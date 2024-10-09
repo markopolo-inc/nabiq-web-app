@@ -92,6 +92,7 @@ const ModalBody = ({ setOpened }) => {
                     setOpened(false);
                   }}
                   disabled={goal.isDisabled}
+                  fullWidth
                 >
                   Create
                 </Button>
