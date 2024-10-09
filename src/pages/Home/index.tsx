@@ -16,7 +16,7 @@ const Home = () => {
 
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
   const [showNewMarktagModal, setShowNewMarktagModal] = useState<boolean>(false);
-  const [showCodeMarktagModal, setShowCodearktagModal] = useState<boolean>(false);
+  const [showCodeMarktagModal, setShowCodeMarktagModal] = useState<boolean>(false);
   const [showGuidedMarktagModal, setShowGuidedMarktagModal] = useState<boolean>(false);
 
   return (
@@ -31,12 +31,13 @@ const Home = () => {
       <CreateNewMarktagModal
         showModal={showNewMarktagModal}
         setShowModal={setShowNewMarktagModal}
+        setShowCodeMarktagModal={setShowCodeMarktagModal}
+        setShowGuidedMarktagModal={setShowGuidedMarktagModal}
       />
       <InstallCodeManuallyModal
         showModal={showCodeMarktagModal}
-        setShowModal={setShowCodearktagModal}
+        setShowModal={setShowCodeMarktagModal}
       />
-
       <GuidedMarktagModal
         showModal={showGuidedMarktagModal}
         setShowModal={setShowGuidedMarktagModal}
