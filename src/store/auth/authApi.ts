@@ -63,29 +63,47 @@ export const authApi = apiSlice.injectEndpoints({
     }),
     googleSignIn: builder.mutation({
       queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
-        return { data: null }; // Return a no-op response
+        return { data: null }; // No-op response
       },
       async onQueryStarted(_arg, { dispatch }) {
         const loading = toast.loading('Signing in with Google...');
-        try {
-          await Auth.federatedSignIn({
-            provider: CognitoHostedUIIdentityProvider.Google,
-          });
-          const user = await Auth.currentAuthenticatedUser();
-          const email = user.attributes.email;
 
+        try {
+          let user: any = null;
+          try {
+            user = await Auth.currentAuthenticatedUser();
+          } catch (error) {
+            if (error !== 'The user is not authenticated') {
+              throw error;
+            }
+          }
+
+          if (!user) {
+            await Auth.federatedSignIn({
+              provider: CognitoHostedUIIdentityProvider.Google,
+            });
+            user = await Auth.currentAuthenticatedUser();
+          }
+
+          const email = user.attributes.email;
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
 
           toast.dismiss(loading);
           toast.success('Successfully signed in with Google.');
-          window.location.href = '/';
+
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 100);
         } catch (error) {
           toast.dismiss(loading);
-          toast.error('Error signing in with Google.');
+          if (error !== 'The user is not authenticated') {
+            toast.error('Error signing in with Google!');
+          }
         }
       },
     }),
+
     verify: builder.mutation({
       queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
