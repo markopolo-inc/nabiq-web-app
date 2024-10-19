@@ -4,7 +4,7 @@ import React from 'react';
 
 import ModalBody from './ModalBody';
 
-const ApiKeyModal: React.FC<{
+export const ApiKeyModal: React.FC<{
   gateway: GatewayInterface;
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,5 +21,3 @@ const ApiKeyModal: React.FC<{
     </Modal>
   );
 };
-
-export default ApiKeyModal;

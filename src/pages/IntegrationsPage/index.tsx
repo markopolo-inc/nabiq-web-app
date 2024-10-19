@@ -1,9 +1,9 @@
 import { FiZap } from '@nabiq-icons';
 import { Badge, Button, OptionTabs } from '@nabiq-ui';
-import ApiKeyModal from 'components/Features/Integrations/Modals/ApiKeyModal';
 import GatewayLogo from 'components/UI/GatewayLogo';
+import { ApiKeyModal } from 'components/modules/integrations';
 import type { GatewayInterface, GatewayType } from 'interfaces/brand.interface';
-import HeaderTitle from 'layouts/HeaderTitle';
+import { HeaderTitle } from 'layouts';
 import { appCategories, appOptions } from 'lib/integration.lib';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
@@ -11,7 +11,7 @@ import { useAppSelector } from 'store/hooks';
 import { getAuthToken } from 'utils/auth';
 import { buildQueryString } from 'utils/string.utils';
 
-const Integrations = () => {
+const IntegrationsPage = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [selectedCategory, setSelectedCategory] = useState<'email' | 'sms' | 'push'>('email');
   const [selectedGateway, setSelectedGateway] = useState<GatewayInterface | null>(null);
@@ -67,6 +67,7 @@ const Integrations = () => {
                     <div className='flex gap-3'>
                       {gateway.isOauthIntegration && (
                         <Button
+                          className='!w-40'
                           leadingIcon={<FiZap fill='white' size={22} />}
                           onClick={async () => {
                             window.location.href = `${
@@ -86,6 +87,7 @@ const Integrations = () => {
                         <>
                           {isGatewayConnected ? (
                             <Button
+                              className='!w-40'
                               variant='secondary'
                               onClick={() => {
                                 setShowModal(true);
@@ -96,6 +98,7 @@ const Integrations = () => {
                             </Button>
                           ) : (
                             <Button
+                              className='!w-40'
                               leadingIcon={<FiZap fill='white' size={22} />}
                               onClick={() => {
                                 setShowModal(true);
@@ -118,4 +121,4 @@ const Integrations = () => {
   );
 };
 
-export default Integrations;
+export default IntegrationsPage;
