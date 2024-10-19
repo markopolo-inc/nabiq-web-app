@@ -1,6 +1,6 @@
+import { PageLoader } from '@nabiq-ui';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PageLoader from 'src/components/UI/PageLoader';
 import AppLayout from 'src/layouts/AppLayout';
 import NavigationLayout from 'src/layouts/NavigationLayout';
 import PrivateLayout from 'src/layouts/PrivateLayout';

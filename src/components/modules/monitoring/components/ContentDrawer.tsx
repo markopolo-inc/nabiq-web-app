@@ -1,8 +1,7 @@
 import { FiDot } from '@nabiq-icons';
-import { Badge, Drawer, DrawerBody, DrawerHeader, Group } from '@nabiq-ui';
+import { Badge, Drawer, DrawerBody, DrawerHeader, GatewayLogo, Group } from '@nabiq-ui';
 import { capitalize } from 'lodash';
 import moment from 'moment';
-import GatewayLogo from 'src/components/UI/GatewayLogo';
 
 const ContentDrawer = ({
   opened,

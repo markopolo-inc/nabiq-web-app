@@ -1,4 +1,7 @@
-import { FiMail01, FiMessageDotCircle, FiNotificationMessage } from '@nabiq-icons';
+import {
+  FiMail01,
+  FiMessageDotCircle, // FiNotificationMessage
+} from '@nabiq-icons';
 import type { GatewayInterface, GatewayType } from 'src/interfaces/brand.interface';
 
 export const appCategories = [
@@ -12,11 +15,11 @@ export const appCategories = [
     label: 'SMS apps',
     icon: FiMessageDotCircle,
   },
-  {
-    value: 'push',
-    label: 'Push notification apps',
-    icon: FiNotificationMessage,
-  },
+  // {
+  //   value: 'push',
+  //   label: 'Push notification apps',
+  //   icon: FiNotificationMessage,
+  // },
 ];
 
 export const appOptions: GatewayInterface[] = [

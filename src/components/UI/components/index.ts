@@ -2,6 +2,8 @@
 export { default as AppShell } from './AppShell';
 export { default as Group } from './Group';
 export { default as Modal } from './Modal';
+export { default as PageLoader } from './PageLoader/PageLoader';
+export { ContentLoader } from './ContentLoader/ContentLoader';
 
 export { default as Breadcrumbs } from './Breadcrumbs';
 
@@ -44,6 +46,7 @@ export { default as Text } from './Text';
 
 // Image
 export { default as Image } from './Image';
+export { default as GatewayLogo } from './GatewayLogo/GatewayLogo';
 
 // Navigation
 export { default as Burger } from './Burger';

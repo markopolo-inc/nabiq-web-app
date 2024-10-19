@@ -1,6 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Button, TextInput } from '@nabiq-ui';
-import GatewayLogo from 'components/UI/GatewayLogo';
+import { Button, GatewayLogo, TextInput } from '@nabiq-ui';
 import type { GatewayInterface } from 'interfaces/brand.interface';
 import { gatewayFields } from 'lib/integration.lib';
 import React, { SetStateAction, useState } from 'react';

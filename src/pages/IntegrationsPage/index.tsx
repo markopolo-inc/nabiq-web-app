@@ -1,6 +1,5 @@
 import { FiZap } from '@nabiq-icons';
-import { Badge, Button, OptionTabs } from '@nabiq-ui';
-import GatewayLogo from 'components/UI/GatewayLogo';
+import { Badge, Button, GatewayLogo, OptionTabs } from '@nabiq-ui';
 import { ApiKeyModal } from 'components/modules/integrations';
 import type { GatewayInterface, GatewayType } from 'interfaces/brand.interface';
 import { HeaderTitle } from 'layouts';
@@ -33,7 +32,15 @@ const IntegrationsPage = () => {
           <OptionTabs
             setActive={setSelectedCategory}
             active={selectedCategory}
-            options={appCategories}
+            options={appCategories?.map((item) => ({
+              ...item,
+              label: (
+                <div className='flex gap-2 items-center'>
+                  <item.icon size={18} />
+                  {item.label}
+                </div>
+              ),
+            }))}
           />
           <div className='gap-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
             {appOptions
