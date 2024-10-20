@@ -1,11 +1,11 @@
 import { Modal } from '@nabiq-ui';
-import type { GatewayInterface } from 'interfaces/brand.interface';
+import type { IGateway } from 'interfaces/brand.interface';
 import React from 'react';
 
 import ModalBody from './ModalBody';
 
 export const ApiKeyModal: React.FC<{
-  gateway: GatewayInterface;
+  gateway: IGateway;
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ gateway, showModal, setShowModal }) => {

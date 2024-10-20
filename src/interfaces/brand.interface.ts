@@ -9,7 +9,8 @@ export type GatewayType =
   | 'onesignal'
   | 'sendgrid'
   | 'resend'
-  | 'mailgun';
+  | 'mailgun'
+  | 'whatsapp';
 
 export interface IntegrationInterface {
   // email
@@ -66,8 +67,8 @@ export interface IntegrationInterface {
   };
 }
 
-export interface GatewayInterface {
-  category: 'sms' | 'email';
+export interface IGateway {
+  category: 'sms' | 'email' | 'push';
   name: string;
   headline: string;
   gateway: GatewayType;

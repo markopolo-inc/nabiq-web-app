@@ -1,7 +1,7 @@
 import { FiZap } from '@nabiq-icons';
 import { Badge, Button, GatewayLogo, OptionTabs } from '@nabiq-ui';
-import { ApiKeyModal } from 'components/modules/integrations';
-import type { GatewayInterface, GatewayType } from 'interfaces/brand.interface';
+import { ApiKeyModal, GatewayDisconnectModal } from 'components/modules/integrations';
+import type { GatewayType, IGateway } from 'interfaces/brand.interface';
 import { HeaderTitle } from 'layouts';
 import { appCategories, appOptions } from 'lib/integration.lib';
 import { isEmpty } from 'lodash';
@@ -13,7 +13,7 @@ import { buildQueryString } from 'utils/string.utils';
 const IntegrationsPage = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [selectedCategory, setSelectedCategory] = useState<'email' | 'sms' | 'push'>('email');
-  const [selectedGateway, setSelectedGateway] = useState<GatewayInterface | null>(null);
+  const [selectedGateway, setSelectedGateway] = useState<IGateway | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const { emailIntegrations, smsIntegrations } = useAppSelector((state) => state.brand);
 
@@ -69,7 +69,7 @@ const IntegrationsPage = () => {
                         )}
                       </div>
 
-                      <p className='mt-6'>{gateway.headline}</p>
+                      <p className='mt-6 text-gray-600 font-normal text-sm'>{gateway.headline}</p>
                     </div>
                     <div className='flex gap-3'>
                       {gateway.isOauthIntegration && (
@@ -106,7 +106,7 @@ const IntegrationsPage = () => {
                           ) : (
                             <Button
                               className='!w-40'
-                              leadingIcon={<FiZap fill='white' size={22} />}
+                              leadingIcon={<FiZap fill='white' size={18} />}
                               onClick={() => {
                                 setShowModal(true);
                                 setSelectedGateway(gateway);
@@ -117,6 +117,8 @@ const IntegrationsPage = () => {
                           )}
                         </>
                       )}
+
+                      {isGatewayConnected && <GatewayDisconnectModal gateway={gateway} />}
                     </div>
                   </div>
                 );
