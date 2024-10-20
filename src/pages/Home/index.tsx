@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ConnectCampaignPlatforms from 'src/components/Features/Home/ConnectCampaignPlatforms';
 import ConnectMarktag from 'src/components/Features/Home/ConnectMarktag';
 import ConnectMarktagModal from 'src/components/Features/Home/ConnectMarktagModal';
+// import ConnectNewMarktagModal from 'src/components/Features/Home/ConnectNewMarktagModal';
 import ConnectedMarktag from 'src/components/Features/Home/ConnectedMarktag';
 import CreateNewMarktagModal from 'src/components/Features/Home/CreateNewMarktagModal';
 import GuidedMarktagModal from 'src/components/Features/Home/GuidedMarktagModal';
@@ -34,6 +35,12 @@ const Home = () => {
         setShowCodeMarktagModal={setShowCodeMarktagModal}
         setShowGuidedMarktagModal={setShowGuidedMarktagModal}
       />
+      {/* <ConnectNewMarktagModal
+        showModal={showNewMarktagModal}
+        setShowModal={setShowNewMarktagModal}
+        setShowCodeMarktagModal={setShowCodeMarktagModal}
+        setShowGuidedMarktagModal={setShowGuidedMarktagModal}
+      /> */}
       <InstallCodeManuallyModal
         showModal={showCodeMarktagModal}
         setShowModal={setShowCodeMarktagModal}
