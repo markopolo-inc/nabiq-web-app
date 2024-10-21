@@ -1,7 +1,12 @@
-import { FiCheckVerified01, FiHourglass03 } from '@nabiq-icons';
-import { ContentLoader, OptionTabs, Stack } from '@nabiq-ui';
+import { FiCheckVerified01, FiHelpCircle, FiHourglass03 } from '@nabiq-icons';
+import { Button, ContentLoader, Group, OptionTabs, Stack } from '@nabiq-ui';
 import { useState } from 'react';
-import { LearnMoreControlRoomModal, Published, Queued } from 'src/components/modules/control-room';
+import {
+  HowDoesFeedbackWorkModal,
+  LearnMoreControlRoomModal,
+  Published,
+  Queued,
+} from 'src/components/modules/control-room';
 import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
 import { useGetConfigsQuery } from 'src/store/controlRoom/controlRoom.api';
 
@@ -20,7 +25,8 @@ export const appCategories = [
 
 const ControlRoom = () => {
   const [category, setCategory] = useState<'queued' | 'published'>('queued');
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showHowDoesFeedbackModal, setShowHowDoesFeedbackModal] = useState<boolean>(false);
+  const [showLearnMoreControlRoomModal, setLearnMoreControlRoomModal] = useState<boolean>(false);
 
   const { data, isLoading } = useGetConfigsQuery({ type: category, limit: 10, page: 1 });
 
@@ -28,17 +34,32 @@ const ControlRoom = () => {
 
   return (
     <>
-      <LearnMoreControlRoomModal showModal={showModal} setShowModal={setShowModal} />
+      <LearnMoreControlRoomModal
+        showModal={showLearnMoreControlRoomModal}
+        setShowModal={setLearnMoreControlRoomModal}
+      />
+      <HowDoesFeedbackWorkModal
+        showModal={showHowDoesFeedbackModal}
+        setShowModal={setShowHowDoesFeedbackModal}
+      />
       <Stack gap={32}>
         <Stack gap={64}>
-          <Stack>
+          <Group justify='space-between'>
             <Stack gap={4}>
               <p className='text-gray-900 text-3xl font-semibold'>Control room</p>
               <p className='text-gray-600 text-base font-normal'>
                 View cohorts and approve content generated for campaigns.
               </p>
             </Stack>
-          </Stack>
+
+            <Button
+              onClick={() => setShowHowDoesFeedbackModal(true)}
+              variant='link'
+              leadingIcon={<FiHelpCircle size={20} />}
+            >
+              What is control room?
+            </Button>
+          </Group>
           <OptionTabs setActive={setCategory} active={category} options={appCategories} />
         </Stack>
         {isLoading ? (

@@ -1,6 +1,6 @@
 import { FiChevronRight } from '@nabiq-icons';
 import { Button, Image, useGetColors } from '@nabiq-ui';
-import ControlRoomAvatar from 'assets/control-room/control-room-modal-avatar.svg';
+import ControlRoomAvatar from 'assets/control-room/network-email-marketing-campaign-and-newsletter.svg';
 import React, { SetStateAction } from 'react';
 
 const ModalBody: React.FC<{
@@ -14,11 +14,11 @@ const ModalBody: React.FC<{
       </div>
 
       <div className='flex flex-col gap-1'>
-        <p className='text-2xl font-semibold text-gray-900'>What is control room?</p>
+        <p className='text-2xl font-semibold text-gray-900'>How does feedback work?</p>
         <p className='text-base font-normal leading-6 text-gray-600'>
-          Keep track of all your campaigns and their status in one place. Provide feedback to
-          content samples and get even better personalized content. You can also view the final
-          published content for each campaign’s respective steps.
+          Give thumbs up to the content samples you find relevant to your campaign or thumbs down to
+          samples that don’t align with your goals. Your feedback helps in creating even more
+          personalized content to send to the users.
         </p>
       </div>
 

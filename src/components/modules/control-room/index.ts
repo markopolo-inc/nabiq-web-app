@@ -4,3 +4,4 @@ export { ConfigCard } from 'components/modules/control-room/components/ConfigCar
 
 // Modals
 export { LearnMoreControlRoomModal } from 'components/modules/control-room/components/modals/LearnMoreControlRoomModal/LearnMoreControlRoomModal';
+export { HowDoesFeedbackWorkModal } from 'components/modules/control-room/components/modals/HowDoesFeedbackWorkModal/HowDoesFeedbackWorkModal';
