@@ -4,7 +4,8 @@ import {
   FiHomeLine,
   FiLineChartUp05,
   FiPuzzlePiece02,
-  FiSettings01, // FiSliders01,
+  FiSettings01,
+  FiSliders01,
 } from '@nabiq-icons';
 
 // console.log("hlleo");
@@ -40,12 +41,12 @@ export const sidebarOptions = [
     to: '/integrations',
     menuRegex: new RegExp(/^\/integrations/, 'i'),
   },
-  // {
-  //   title: 'Control room',
-  //   Icon: FiSliders01,
-  //   to: '/control-room',
-  //   menuRegex: new RegExp(/^\/control-room/, 'i'),
-  // },
+  {
+    title: 'Control room',
+    Icon: FiSliders01,
+    to: '/control-room',
+    menuRegex: new RegExp(/^\/control-room/, 'i'),
+  },
 ];
 
 export const lowerPartOptions = [

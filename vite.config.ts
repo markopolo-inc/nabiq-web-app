@@ -20,5 +20,6 @@ export default defineConfig({
     // },
     // Make sure the server is accessible over the local network
     host: '0.0.0.0',
+    port: 3000,
   },
 });
