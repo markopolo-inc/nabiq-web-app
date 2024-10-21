@@ -1,14 +1,41 @@
-import { Button, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
-import { useContext } from 'react';
+import { Button, Select, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
+import { useContext, useEffect, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
+import { useAppSelector } from 'src/store/hooks';
+import {
+  useLazyGetMarkTagByIdQuery,
+  useRegisterTagMutation,
+} from 'src/store/marktag/markopoloMarktagApi';
+import { useGetBrandsListQuery } from 'src/store/marktag/marktagApi';
 
 import HowItWorksModal from '../HowItworksModal';
 
 const RegisterDomain = () => {
-  //  const { domain, setDomain, setStep, loading, setLoading, setDomainData } =
-  const { marktagType, domain, setDomain, loading } =
-    useContext<MarktagContextType>(MarkTagContext);
   const { gray500 } = useGetColors();
+  const { marktagType, domain, setDomain, setStep } =
+    useContext<MarktagContextType>(MarkTagContext);
+
+  const { connectedBrand } = useAppSelector((state) => state.brand);
+  const [resourceId, setResourceId] = useState<string>(connectedBrand?.resourceId || '');
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  const { data: brandsList, isLoading: isLoadingBrandList } = useGetBrandsListQuery();
+  const [getMarkTagById, { data: domainData }] = useLazyGetMarkTagByIdQuery();
+  const [registerTag, { isLoading }] = useRegisterTagMutation();
+
+  const brandsListOptions = useMemo(
+    () =>
+      brandsList?.map(({ brandName: label, resourceId: value }) => ({
+        label,
+        value,
+      })),
+    [brandsList],
+  );
+
+  const selectedBrand = useMemo(
+    () => brandsList?.find((item) => item.resourceId === resourceId),
+    [brandsList, resourceId],
+  );
 
   // useEffect(() => {
   //   if (marktagType === 'shopify') {
@@ -31,44 +58,65 @@ const RegisterDomain = () => {
   //   }
   // }, [marktagType]);
 
-  // const handleContinueMarkTag = async () => {
-  //   if (!domain) {
-  //     toast.error('Enter a domain!');
-  //     return;
-  //   }
-  //   if (
-  //     domain?.toLowerCase()?.includes('https://') ||
-  //     domain?.toLowerCase()?.includes('www.')
-  //   ) {
-  //     toast.error('Domain can not contain https:// or www.');
-  //     setLoading(false);
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   const id = toast.loading('Registering tag!');
-  //   const res = await markTagApi.registerTag({
-  //     brandId,
-  //     domain,
-  //     isMobile: marktagType === 'mobile',
-  //     isShopify: marktagType === 'shopify',
-  //     isWoocommerce: marktagType === 'woocommerce',
-  //   });
-  //   if (res) {
-  //     toast.success('Tag Registered!');
-  //     const domainData = await markTagApi.getMarkTagById({
-  //       markTagId: res?.markTagId,
-  //     });
-  //     setDomainData(domainData);
-  //     if (domainData?.records?.length > 0) {
-  //       setStep('verify');
-  //     }
-  //   }
-  //   toast.dismiss(id);
-  //   setLoading(false);
-  // };
+  const handleContinueMarkTag = async () => {
+    if (!resourceId) {
+      toast.error('Select a brand!');
+      return;
+    }
+
+    if (!domain) {
+      toast.error('Enter a domain!');
+      return;
+    }
+
+    if (domain?.toLowerCase()?.includes('https://') || domain?.toLowerCase()?.includes('www.')) {
+      toast.error('Domain cannot contain https:// or www.');
+      return;
+    }
+
+    const res = await registerTag({
+      brandId: resourceId,
+      domain,
+      isMobile: marktagType === 'mobile',
+      isShopify: marktagType === 'shopify',
+      isWoocommerce: marktagType === 'woocommerce',
+    }).unwrap();
+
+    if (res?.markTagId) {
+      setIsRegistered(true);
+      getMarkTagById(res.markTagId);
+    }
+  };
+
+  useEffect(() => {
+    if (isRegistered && domainData) {
+      const records = domainData.data?.records;
+      console.log({ domainData });
+      if (records && records.length > 0) {
+        // setDomainData(domainData);
+        setStep('verify');
+      }
+    }
+  }, [isRegistered, domainData]);
 
   return (
     <Stack gap={8}>
+      <Select
+        className='mb-0'
+        label='Brand'
+        placeholder='Select brand'
+        value={resourceId}
+        onChange={(brandItem) => setResourceId(brandItem)}
+        data={brandsListOptions}
+        leftSection={
+          resourceId && (
+            <div className='flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-center text-xs font-semibold leading-4'>
+              {selectedBrand?.brandName?.charAt(0)?.toUpperCase()}
+            </div>
+          )
+        }
+        disabled={isLoadingBrandList}
+      />
       <TextInput
         label='Domain name'
         placeholder='Website URL'
@@ -82,9 +130,9 @@ const RegisterDomain = () => {
       <Stack gap={12}>
         <Button
           style={{ marginTop: '20px', width: '100%' }}
-          loading={loading}
+          loading={isLoading}
           disabled={domain?.length === 0}
-          // onClick={handleContinueMarkTag}
+          onClick={handleContinueMarkTag}
         >
           Continue
         </Button>

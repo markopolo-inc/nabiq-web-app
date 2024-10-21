@@ -70,8 +70,33 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         }
       },
     }),
+    verifyTagSetup: builder.mutation<any, { markTagId: string }>({
+      query: ({ markTagId }) => ({
+        url: '/verify-setup',
+        method: 'POST',
+        body: {
+          markTagId,
+        },
+      }),
+      async onQueryStarted(_arg, { queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          if (result?.data?.serverCreated) {
+            toast.success('Setup verified successfully!');
+          } else {
+            toast.error('Setup verification failed!');
+          }
+        } catch (error) {
+          toast.error('Could not verify setup!');
+        }
+      },
+    }),
   }),
 });
 
-export const { useLazyGetMarkopoloMarkTagsQuery, useGetMarkTagByIdQuery, useRegisterTagMutation } =
-  markopoloMarktagApi;
+export const {
+  useLazyGetMarkopoloMarkTagsQuery,
+  useLazyGetMarkTagByIdQuery,
+  useRegisterTagMutation,
+  useVerifyTagSetupMutation,
+} = markopoloMarktagApi;

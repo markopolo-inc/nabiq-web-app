@@ -3,33 +3,27 @@ import { Alert, Button, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
+import { useVerifyTagSetupMutation } from 'src/store/marktag/markopoloMarktagApi';
 
 import HowItWorksModal from '../HowItworksModal';
 
 const DNSRecord = () => {
-  // const { setLoading, domainData, setStep, loading } =
-  const { domainData, loading } = useContext<MarktagContextType>(MarkTagContext);
   const { gray500, gray900 } = useGetColors();
+  const { domainData, setStep } = useContext<MarktagContextType>(MarkTagContext);
+  const [verifyTagSetup, { isLoading }] = useVerifyTagSetupMutation();
 
   const handleCopy = (value) => {
     navigator.clipboard.writeText(value);
     toast.success('Copy to clipboard');
   };
 
-  // const handleVerifyRecords = async () => {
-  //   setLoading(true);
-  //   const id = toast.loading('Verifying Records..');
-  //   const res = await markTagApi.verifyTagSetup({
-  //     markTagId: domainData?.markTagId,
-  //   });
+  const handleVerifyRecords = async () => {
+    const res = await verifyTagSetup({ markTagId: domainData?.markTagId }).unwrap();
 
-  //   if (res) {
-  //     toast.success('Tag verified and setup complete!');
-  //     setStep('code');
-  //   }
-  //   toast.dismiss(id);
-  //   setLoading(false);
-  // };
+    if (res) {
+      setStep('code');
+    }
+  };
 
   return (
     <div>
@@ -76,7 +70,7 @@ const DNSRecord = () => {
       </Stack>
 
       <Stack gap={12} pt={20}>
-        <Button variant='primary' loading={loading}>
+        <Button variant='primary' loading={isLoading} onClick={handleVerifyRecords}>
           Verify records
         </Button>
         <HowItWorksModal />

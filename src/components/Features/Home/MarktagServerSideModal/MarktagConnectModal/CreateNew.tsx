@@ -1,5 +1,6 @@
 import { FiGlobe01, FiPhone01, FiServer01, FiShopify, FiWooCommerce } from '@nabiq-icons';
 import { Button, Group, Text } from '@nabiq-ui';
+import { toLower } from 'lodash';
 import { useContext } from 'react';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
@@ -55,7 +56,7 @@ const CreateNew = () => {
             variant='primary'
             fullWidth
             onClick={() => {
-              setMarktagType(card.title);
+              setMarktagType(toLower(card.title));
               setStep('register');
             }}
           >
