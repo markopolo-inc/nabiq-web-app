@@ -6,10 +6,12 @@ import brandReducer from './brand/brandSlice';
 import campaignReducer from './campaign/campaignSlice';
 import companyReducer from './company/comapnySlice';
 import onboardingReducer from './onboarding/onboardingSlice';
+import { tagApiSlice } from './tagApi/tagApiSlice';
 import userReducer from './user/userSlice';
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
+  [tagApiSlice.reducerPath]: tagApiSlice.reducer,
   auth: authReducer,
   onboarding: onboardingReducer,
   company: companyReducer,

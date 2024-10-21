@@ -1,4 +1,4 @@
-import { Button, Stack, Text, TextInput, useGetColors, useQuery } from '@nabiq-ui';
+import { Button, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
 import { useContext } from 'react';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
@@ -6,9 +6,9 @@ import HowItWorksModal from '../HowItworksModal';
 
 const RegisterDomain = () => {
   //  const { domain, setDomain, setStep, loading, setLoading, setDomainData } =
-  const { domain, setDomain, loading } = useContext<MarktagContextType>(MarkTagContext);
+  const { marktagType, domain, setDomain, loading } =
+    useContext<MarktagContextType>(MarkTagContext);
   const { gray500 } = useGetColors();
-  const marktagType = useQuery().get('marktagType');
 
   // useEffect(() => {
   //   if (marktagType === 'shopify') {

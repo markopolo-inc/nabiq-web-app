@@ -1,11 +1,26 @@
 import { FiCommand, FiPlus } from '@nabiq-icons';
 import { Button, Group, Modal, Stack, Text, useGetColors } from '@nabiq-ui';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from 'src/store/hooks';
+import { useLazyGetMarkopoloMarkTagsQuery } from 'src/store/marktag/markopoloMarktagApi';
 
 const ModalBody = ({ setOpened, setOpenedCreateNew }) => {
   const navigate = useNavigate();
   const { gray600, gray900, primary500, success500 } = useGetColors();
+  const { connectedBrand } = useAppSelector((state) => state.brand);
+  const [getMarkTags] = useLazyGetMarkopoloMarkTagsQuery();
+  const [_marktagList, setMarktagList] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (connectedBrand?.resourceId) {
+      getMarkTags(connectedBrand?.resourceId)
+        .unwrap()
+        .then((response) => {
+          setMarktagList(response);
+        });
+    }
+  }, [connectedBrand?.resourceId]);
 
   const cardData = [
     {

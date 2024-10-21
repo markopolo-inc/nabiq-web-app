@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
 import Code from './Code';
+import CreateNew from './CreateNew';
 import DNSRecord from './DNSRecord';
 import RegisterDomain from './RegisterDomain';
 
@@ -31,6 +32,7 @@ const ModalBody = ({ setOpened, selectedMarktagId = null }) => {
 
   return (
     <div style={{ padding: '4px 24px 24px' }}>
+      {step === 'create' && <CreateNew />}
       {step === 'register' && <RegisterDomain />}
       {step === 'verify' && <DNSRecord />}
       {step === 'code' && <Code setOpened={setOpened} />}

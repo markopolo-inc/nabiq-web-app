@@ -4,10 +4,10 @@ import ConnectMarktag from 'src/components/Features/Home/ConnectMarktag';
 import ConnectMarktagModal from 'src/components/Features/Home/ConnectMarktagModal';
 // import ConnectNewMarktagModal from 'src/components/Features/Home/ConnectNewMarktagModal';
 import ConnectedMarktag from 'src/components/Features/Home/ConnectedMarktag';
-import CreateNewMarktagModal from 'src/components/Features/Home/CreateNewMarktagModal';
 import GuidedMarktagModal from 'src/components/Features/Home/GuidedMarktagModal';
 import InstallCodeManuallyModal from 'src/components/Features/Home/InstallCodeManuallyModal';
 import IntegrateApps from 'src/components/Features/Home/IntegrateApps';
+import CreateMarktagModal from 'src/components/Features/Home/MarktagServerSideModal/MarktagConnectModal';
 import HeaderTitle from 'src/layouts/HeaderTitle';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -19,6 +19,7 @@ const Home = () => {
   const [showNewMarktagModal, setShowNewMarktagModal] = useState<boolean>(false);
   const [showCodeMarktagModal, setShowCodeMarktagModal] = useState<boolean>(false);
   const [showGuidedMarktagModal, setShowGuidedMarktagModal] = useState<boolean>(false);
+  const [selectedMarktagId, setSelectedMarktagId] = useState(null);
 
   return (
     <>
@@ -29,11 +30,12 @@ const Home = () => {
         setShowModal={setShowMarktagModal}
         setShowCreateNewModal={setShowNewMarktagModal}
       />
-      <CreateNewMarktagModal
-        showModal={showNewMarktagModal}
-        setShowModal={setShowNewMarktagModal}
-        setShowCodeMarktagModal={setShowCodeMarktagModal}
-        setShowGuidedMarktagModal={setShowGuidedMarktagModal}
+      <CreateMarktagModal
+        openedModal={showNewMarktagModal}
+        setOpenedModal={setShowNewMarktagModal}
+        selectedMarktagId={selectedMarktagId}
+        setSelectedMarktagId={setSelectedMarktagId}
+        onCloseModal={() => console.log('Todo: get tags')}
       />
       {/* <ConnectNewMarktagModal
         showModal={showNewMarktagModal}

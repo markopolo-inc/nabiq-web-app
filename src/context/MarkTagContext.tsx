@@ -10,6 +10,7 @@ export type DomainDataRecordType = {
 export type DomainDataType = {
   markTagId: string;
   records: DomainDataRecordType[];
+  isClient?: boolean;
   isShopify?: boolean;
   isWoocommerce?: boolean;
   hostname?: string;
@@ -27,6 +28,8 @@ export type DomainDataType = {
 };
 
 export interface MarktagContextType {
+  marktagType: string;
+  setMarktagType: Dispatch<SetStateAction<string>>;
   domain: string;
   setDomain: Dispatch<SetStateAction<string>>;
   domainData: DomainDataType;
@@ -35,8 +38,8 @@ export interface MarktagContextType {
   setLoading: Dispatch<SetStateAction<boolean>>;
   toggle?: boolean;
   setToggle?: Dispatch<SetStateAction<boolean>>;
-  step?: 'register' | 'verify' | 'code';
-  setStep?: Dispatch<SetStateAction<'register' | 'verify' | 'code'>>;
+  step?: 'create' | 'register' | 'verify' | 'code';
+  setStep?: Dispatch<SetStateAction<'create' | 'register' | 'verify' | 'code'>>;
 }
 
 export const MarkTagContext = createContext<any>({});
