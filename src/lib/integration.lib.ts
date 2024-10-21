@@ -139,16 +139,16 @@ export const appOptions: IGateway[] = [
     isKeyIntegration: true,
     isOauthIntegration: false,
   },
-  // {
-  //   category: 'sms',
-  //   name: 'WhatsApp',
-  //   headline:
-  //     'Connect with customers instantly and securely using WhatsApp’s widely adopted messaging platform for seamless communication.',
-  //   gateway: 'whatsapp',
-  //   learnMoreLink: '',
-  //   isKeyIntegration: true,
-  //   isOauthIntegration: false,
-  // },
+  {
+    category: 'sms',
+    name: 'WhatsApp',
+    headline:
+      'Connect with customers instantly and securely using WhatsApp’s widely adopted messaging platform for seamless communication.',
+    gateway: 'whatsapp',
+    learnMoreLink: '',
+    isKeyIntegration: true,
+    isOauthIntegration: false,
+  },
 ];
 
 export const gatewayFields: Record<'email' | 'sms', Partial<Record<GatewayType, string[]>>> = {
@@ -167,5 +167,6 @@ export const gatewayFields: Record<'email' | 'sms', Partial<Record<GatewayType, 
     flowroute: ['accessKey', 'secretKey'],
     sinch: ['servicePlanId', 'apiToken'],
     twilio: ['accountSid', 'authToken'],
+    whatsapp: ['businessId', 'phoneNumberId', 'accessToken'],
   },
 };
