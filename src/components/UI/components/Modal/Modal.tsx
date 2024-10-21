@@ -69,9 +69,9 @@ const Modal = ({
       >
         <>
           {withCustomClose && (
-            <div style={{ position: 'absolute', right: 20, top: 20, zIndex: 1 }}>
+            <div style={{ position: 'absolute', right: 20, top: 30, zIndex: 1 }}>
               <CloseButton
-                size='lg'
+                size='md'
                 onClick={() => {
                   setOpened(false);
                 }}

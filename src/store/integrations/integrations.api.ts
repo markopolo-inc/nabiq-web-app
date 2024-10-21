@@ -43,6 +43,28 @@ const integrationsApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    disconnectGateway: builder.mutation<ResponseType, any>({
+      invalidatesTags: ['Company'],
+      query: (args) => ({
+        url: `/${args.category}/auth-disconnect`,
+        method: 'POST',
+        body: {
+          ...args.payload,
+        },
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || `Disconnected gateway!`);
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to disconnect!');
+          return err;
+        }
+      },
+    }),
     addAccounts: builder.mutation<ResponseType, any>({
       invalidatesTags: ['Company'],
       query: (args) => ({
@@ -68,4 +90,5 @@ const integrationsApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useIntegrateGatewayMutation, useAddAccountsMutation } = integrationsApi;
+export const { useIntegrateGatewayMutation, useAddAccountsMutation, useDisconnectGatewayMutation } =
+  integrationsApi;

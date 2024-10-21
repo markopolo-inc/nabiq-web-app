@@ -1,7 +1,6 @@
 import { useForm } from '@mantine/form';
-import { Button, TextInput } from '@nabiq-ui';
-import GatewayLogo from 'components/UI/GatewayLogo';
-import type { GatewayInterface } from 'interfaces/brand.interface';
+import { Button, GatewayLogo, TextInput } from '@nabiq-ui';
+import type { IGateway } from 'interfaces/brand.interface';
 import { gatewayFields } from 'lib/integration.lib';
 import React, { SetStateAction, useState } from 'react';
 import { useAppSelector } from 'src/store/hooks';
@@ -13,7 +12,7 @@ import AccountForm from './AccountForm';
 
 const ModalBody: React.FC<{
   setOpened: React.Dispatch<SetStateAction<boolean>>;
-  gateway: GatewayInterface;
+  gateway: IGateway;
 }> = ({ setOpened, gateway }) => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [integrate, { isLoading }] = useIntegrateGatewayMutation();

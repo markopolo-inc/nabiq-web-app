@@ -1,4 +1,4 @@
-import PageLoader from 'components/UI/PageLoader';
+import { PageLoader } from '@nabiq-ui';
 import { Outlet } from 'react-router-dom';
 import { useGetCompanyQuery } from 'src/store/company/companyApi';
 

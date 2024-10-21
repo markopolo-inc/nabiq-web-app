@@ -1,4 +1,5 @@
-import { Breadcrumbs, Button, Stack } from '@nabiq-ui';
+import { Breadcrumbs, Button, PageLoader, Stack } from '@nabiq-ui';
+import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -7,9 +8,7 @@ import CampaignDetailsForm from 'src/components/Features/Campaigns/CampaignDetai
 import CampaignFirstCreationModal from 'src/components/Features/Campaigns/CampaignFirstCreationModal';
 import CampaignTiming from 'src/components/Features/Campaigns/CampaignTiming';
 import Stepper from 'src/components/Features/Campaigns/Stepper';
-import PageLoader from 'src/components/UI/PageLoader';
 import { APIResponseType } from 'src/interfaces/response.interface';
-import HeaderTitle from 'src/layouts/HeaderTitle.tsx';
 import {
   useCreateCampaignConfigMutation,
   useEditCampaignConfigMutation,

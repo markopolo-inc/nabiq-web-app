@@ -1,6 +1,6 @@
+import { PageLoader } from '@nabiq-ui';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PageLoader from 'src/components/UI/PageLoader';
 import AppLayout from 'src/layouts/AppLayout';
 import NavigationLayout from 'src/layouts/NavigationLayout';
 import PrivateLayout from 'src/layouts/PrivateLayout';
@@ -12,7 +12,7 @@ const LogIn = lazy(() => import('pages/LogIn'));
 const ResetPassword = lazy(() => import('pages/ResetPassword'));
 const VerifyEmail = lazy(() => import('pages/VerifyEmail'));
 const Onboarding = lazy(() => import('pages/Onboarding'));
-const Integrations = lazy(() => import('pages/Integrations'));
+const IntegrationsPage = lazy(() => import('pages/IntegrationsPage'));
 const Campaigns = lazy(() => import('pages/Campaigns'));
 const CreateCampaign = lazy(() => import('src/pages/CreateCampaignConfiguration'));
 const Settings = lazy(() => import('pages/Settings'));
@@ -41,7 +41,7 @@ const Router = () => {
             <Route path='/' element={<PrivateLayout />}>
               <Route path='/' element={<NavigationLayout />}>
                 <Route path='/' element={<Home />} />
-                <Route path='/integrations' element={<Integrations />} />
+                <Route path='/integrations' element={<IntegrationsPage />} />
                 <Route path='/campaigns' element={<Campaigns />} />
                 <Route path='/control-room' element={<ControlRoom />} />
                 <Route path='/control-room/cohort/:configId' element={<ControlRoomCohort />} />

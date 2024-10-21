@@ -1,14 +1,14 @@
+import ConnectCampaignPlatforms from 'components/Features/Home/ConnectCampaignPlatforms';
+import ConnectMarktag from 'components/Features/Home/ConnectMarktag';
+import ConnectMarktagModal from 'components/Features/Home/ConnectMarktagModal';
+import CreateNewMarktagModal from 'components/Features/Home/CreateNewMarktagModal';
+import GuidedMarktagModal from 'components/Features/Home/GuidedMarktagModal';
+import InstallCodeManuallyModal from 'components/Features/Home/InstallCodeManuallyModal';
+import IntegrateApps from 'components/Features/Home/IntegrateApps';
+import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
-import ConnectCampaignPlatforms from 'src/components/Features/Home/ConnectCampaignPlatforms';
-import ConnectMarktag from 'src/components/Features/Home/ConnectMarktag';
-import ConnectMarktagModal from 'src/components/Features/Home/ConnectMarktagModal';
 import ConnectedMarktag from 'src/components/Features/Home/ConnectedMarktag';
-import CreateNewMarktagModal from 'src/components/Features/Home/CreateNewMarktagModal';
-import GuidedMarktagModal from 'src/components/Features/Home/GuidedMarktagModal';
-import InstallCodeManuallyModal from 'src/components/Features/Home/InstallCodeManuallyModal';
-import IntegrateApps from 'src/components/Features/Home/IntegrateApps';
-import HeaderTitle from 'src/layouts/HeaderTitle';
-import { useAppSelector } from 'src/store/hooks';
+import { useAppSelector } from 'store/hooks';
 
 const Home = () => {
   const { markTag } = useAppSelector((state) => state.brand);

@@ -1,9 +1,8 @@
 import { FiCheckVerified01, FiHourglass03 } from '@nabiq-icons';
-import { OptionTabs, Stack } from '@nabiq-ui';
+import { ContentLoader, OptionTabs, Stack } from '@nabiq-ui';
 import { useState } from 'react';
 import Published from 'src/components/Features/ControlRoom/Published';
 import Queued from 'src/components/Features/ControlRoom/Queued';
-import ContentLoader from 'src/components/UI/ContentLoader';
 import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
 import { useGetConfigsQuery } from 'src/store/controlRoom/controlRoom.api';
 

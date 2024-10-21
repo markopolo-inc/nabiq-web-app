@@ -1,6 +1,6 @@
-import PlatformDetails from 'src/components/Features/ConnectCampaignPlatforms/PlatformDetails';
-import PlatformSidebar from 'src/components/Features/ConnectCampaignPlatforms/PlatformSidebar';
-import HeaderTitle from 'src/layouts/HeaderTitle';
+import PlatformDetails from 'components/Features/ConnectCampaignPlatforms/PlatformDetails';
+import PlatformSidebar from 'components/Features/ConnectCampaignPlatforms/PlatformSidebar';
+import { HeaderTitle } from 'layouts';
 
 const ConnectCampaignPlatforms = () => {
   return (
