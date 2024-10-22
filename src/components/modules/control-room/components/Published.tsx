@@ -1,7 +1,6 @@
 import { Stack } from '@nabiq-ui';
+import { ConfigCard } from 'components/modules/control-room/components/ConfigCard.tsx';
 import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
-
-import { ConfigCard } from './ConfigCard';
 
 export const Published: React.FC<{
   configs: IControlRoomConfig[];

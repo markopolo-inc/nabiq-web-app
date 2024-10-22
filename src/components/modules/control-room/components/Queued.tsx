@@ -1,7 +1,6 @@
 import { Stack } from '@nabiq-ui';
+import { ConfigCard } from 'components/modules/control-room/components/ConfigCard';
 import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
-
-import { ConfigCard } from './ConfigCard';
 
 export const Queued: React.FC<{
   configs: IControlRoomConfig[];
