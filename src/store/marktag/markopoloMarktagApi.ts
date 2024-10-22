@@ -1,10 +1,11 @@
 import toast from 'react-hot-toast';
+import { DomainDataType } from 'src/context/MarkTagContext';
 
 import { tagApiSlice } from '../tagApi/tagApiSlice';
 
 interface MarkTagResponse {
   status: number;
-  data: any;
+  data: DomainDataType;
 }
 
 const markopoloMarktagApi = tagApiSlice.injectEndpoints({
@@ -45,17 +46,26 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
       {
         brandId: string;
         domain: string;
+        isClient?: boolean;
         isMobile?: boolean;
         isShopify?: boolean;
         isWoocommerce?: boolean;
       }
     >({
-      query: ({ brandId, domain, isMobile = false, isShopify = false, isWoocommerce = false }) => ({
+      query: ({
+        brandId,
+        domain,
+        isClient = false,
+        isMobile = false,
+        isShopify = false,
+        isWoocommerce = false,
+      }) => ({
         url: '/register',
         method: 'POST',
         body: {
           brandId,
           domain,
+          isClient,
           isMobile,
           isShopify,
           isWoocommerce,

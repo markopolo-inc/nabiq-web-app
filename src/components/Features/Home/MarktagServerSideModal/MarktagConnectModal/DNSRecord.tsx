@@ -70,7 +70,7 @@ const DNSRecord = () => {
       </Stack>
 
       <Stack gap={12} pt={20}>
-        <Button variant='primary' loading={isLoading} onClick={handleVerifyRecords}>
+        <Button fullWidth variant='primary' loading={isLoading} onClick={handleVerifyRecords}>
           Verify records
         </Button>
         <HowItWorksModal />

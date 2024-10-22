@@ -1,26 +1,21 @@
 import { Button, Select, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
-import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
+import { DomainDataType, MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 import { useAppSelector } from 'src/store/hooks';
-import {
-  useLazyGetMarkTagByIdQuery,
-  useRegisterTagMutation,
-} from 'src/store/marktag/markopoloMarktagApi';
+import { useRegisterTagMutation } from 'src/store/marktag/markopoloMarktagApi';
 import { useGetBrandsListQuery } from 'src/store/marktag/marktagApi';
 
 import HowItWorksModal from '../HowItworksModal';
 
 const RegisterDomain = () => {
-  const { gray500 } = useGetColors();
-  const { marktagType, domain, setDomain, setStep } =
+  const { gray500, gray600, gray900 } = useGetColors();
+  const { marktagType, domain, setDomain, setDomainData, setStep } =
     useContext<MarktagContextType>(MarkTagContext);
 
   const { connectedBrand } = useAppSelector((state) => state.brand);
   const [resourceId, setResourceId] = useState<string>(connectedBrand?.resourceId || '');
-  const [isRegistered, setIsRegistered] = useState<boolean>(false);
   const { data: brandsList, isLoading: isLoadingBrandList } = useGetBrandsListQuery();
-  const [getMarkTagById, { data: domainData }] = useLazyGetMarkTagByIdQuery();
   const [registerTag, { isLoading }] = useRegisterTagMutation();
 
   const brandsListOptions = useMemo(
@@ -77,30 +72,32 @@ const RegisterDomain = () => {
     const res = await registerTag({
       brandId: resourceId,
       domain,
+      isClient: marktagType === 'client-side',
       isMobile: marktagType === 'mobile',
       isShopify: marktagType === 'shopify',
       isWoocommerce: marktagType === 'woocommerce',
     }).unwrap();
 
     if (res?.markTagId) {
-      setIsRegistered(true);
-      getMarkTagById(res.markTagId);
+      const shapedData: DomainDataType = {
+        markTagId: res.markTagId,
+        records: [res.record],
+      };
+      setDomainData(shapedData);
+      setStep('verify');
     }
   };
 
-  useEffect(() => {
-    if (isRegistered && domainData) {
-      const records = domainData.data?.records;
-      console.log({ domainData });
-      if (records && records.length > 0) {
-        // setDomainData(domainData);
-        setStep('verify');
-      }
-    }
-  }, [isRegistered, domainData]);
-
   return (
-    <Stack gap={8}>
+    <Stack gap={20}>
+      <Stack gap={8} mt={16}>
+        <Text color={gray900} size='24px' weight={600}>
+          Domain setup
+        </Text>
+        <Text color={gray600} size='16px'>
+          Enter domain details.
+        </Text>
+      </Stack>
       <Select
         className='mb-0'
         label='Brand'
@@ -117,19 +114,21 @@ const RegisterDomain = () => {
         }
         disabled={isLoadingBrandList}
       />
-      <TextInput
-        label='Domain name'
-        placeholder='Website URL'
-        disabled={['shopify', 'woocommerce']?.includes(marktagType)}
-        value={domain}
-        onChange={(e) => setDomain(e.currentTarget.value)}
-      />
-      <Text color={gray500} size='14px'>
-        Enter your domain without https: // or www.
-      </Text>
-      <Stack gap={12}>
+      <Stack gap={4}>
+        <TextInput
+          label='Domain name'
+          placeholder='Website URL'
+          disabled={['shopify', 'woocommerce']?.includes(marktagType)}
+          value={domain}
+          onChange={(e) => setDomain(e.currentTarget.value)}
+        />
+        <Text color={gray500} size='14px'>
+          Enter your domain without https: // or www.
+        </Text>
+      </Stack>
+      <Stack gap={12} mt={12}>
         <Button
-          style={{ marginTop: '20px', width: '100%' }}
+          fullWidth
           loading={isLoading}
           disabled={domain?.length === 0}
           onClick={handleContinueMarkTag}

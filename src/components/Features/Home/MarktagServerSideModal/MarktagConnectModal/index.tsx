@@ -1,5 +1,5 @@
 import { FiCommand } from '@nabiq-icons';
-import { Group, Modal, Stack, Text, useGetColors } from '@nabiq-ui';
+import { Group, Modal, useGetColors } from '@nabiq-ui';
 import { useState } from 'react';
 import { DomainDataType, MarkTagContext } from 'src/context/MarkTagContext';
 
@@ -12,7 +12,7 @@ const CreateMarktagModal = ({
   setSelectedMarktagId = undefined,
   onCloseModal = undefined,
 }) => {
-  const { gray600, gray900, primary500 } = useGetColors();
+  const { primary500 } = useGetColors();
   const [marktagType, setMarktagType] = useState<string>('');
   const [domain, setDomain] = useState<string>('');
   const [domainData, setDomainData] = useState<DomainDataType>({
@@ -39,7 +39,7 @@ const CreateMarktagModal = ({
     >
       <Modal
         centered
-        size={step === 'create' ? 1090 : step === 'code' ? 782 : 400}
+        size={step === 'create' ? 1000 : step === 'code' ? 782 : 400}
         toggleFromOutside={openedModal}
         setToggleFromOutside={setOpenedModal}
         onClose={() => {
@@ -54,30 +54,11 @@ const CreateMarktagModal = ({
           }
         }}
         title={() =>
-          step === 'create' ? (
-            <Group className='p-8' justify='between'>
-              <Stack align='center' gap={8}>
-                <Text color={gray900} size='24px' weight={600}>
-                  Create new ‘Marktag’
-                </Text>
-                <Text color={gray600} size='16px'>
-                  Select what platform you want to connect to
-                </Text>
-              </Stack>
-            </Group>
-          ) : (
-            <Group
-              style={{
-                padding: 8,
-                borderRadius: 10,
-                border: '1px solid #eaecf0',
-                background: 'white',
-                boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
-              }}
-            >
+          step !== 'create' ? (
+            <Group className='p-2 rounded-lg border border-[#eaecf0] bg-white shadow-sm'>
               <FiCommand color={primary500} />
             </Group>
-          )
+          ) : null
         }
         body={({ setOpened }) => (
           <ModalBody setOpened={setOpened} selectedMarktagId={selectedMarktagId} />
