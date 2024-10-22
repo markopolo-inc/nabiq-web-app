@@ -1,6 +1,6 @@
 import { FiCheckVerified01, FiHelpCircle, FiHourglass03 } from '@nabiq-icons';
 import { Button, ContentLoader, Group, OptionTabs, Stack } from '@nabiq-ui';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   HowDoesFeedbackWorkModal,
   LearnMoreControlRoomModal,
@@ -31,6 +31,19 @@ const ControlRoom = () => {
   const { data, isLoading } = useGetConfigsQuery({ type: category, limit: 10, page: 1 });
 
   const configs: IControlRoomConfig[] = data?.data?.configs || [];
+
+  useEffect(() => {
+    const hasVisited = localStorage.getItem('hasVisitedControlRoom');
+
+    if (!hasVisited) {
+      const timer = setTimeout(() => {
+        setLearnMoreControlRoomModal(true);
+        localStorage.setItem('hasVisitedControlRoom', 'true');
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   return (
     <>
