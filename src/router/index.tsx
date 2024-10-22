@@ -23,10 +23,10 @@ const TopPerformingCampaingBreakDown = lazy(
   () => import('src/pages/TopPerformingCampaingBreakDown'),
 );
 const NonPerformingCampaigns = lazy(() => import('src/pages/NonPerformingCampaigns'));
-const ControlRoom = lazy(() => import('pages/ControlRoom'));
-const ControlRoomCohort = lazy(() => import('pages/ControlRoom/Cohort'));
-const ControlRoomContent = lazy(() => import('pages/ControlRoom/Cohort/Content'));
-const ControlRoomPublished = lazy(() => import('src/pages/ControlRoom/PublishedContent'));
+const ControlRoom = lazy(() => import('pages/ControlRoomPage'));
+const ControlRoomCohort = lazy(() => import('src/pages/ControlRoomPage/Cohort'));
+const ControlRoomContent = lazy(() => import('src/pages/ControlRoomPage/Cohort/Content'));
+const ControlRoomPublished = lazy(() => import('src/pages/ControlRoomPage/PublishedContent'));
 const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
 const ConnectCampaignPlatforms = lazy(() => import('src/pages/ConnectCampaignPlatforms'));
 const Test = lazy(() => import('src/pages/Test'));
