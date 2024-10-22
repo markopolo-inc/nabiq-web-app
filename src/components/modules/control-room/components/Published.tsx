@@ -1,9 +1,8 @@
 import { Stack } from '@nabiq-ui';
+import { ConfigCard } from 'components/modules/control-room/components/ConfigCard.tsx';
 import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
 
-import ConfigCard from './ConfigCard';
-
-const Published: React.FC<{
+export const Published: React.FC<{
   configs: IControlRoomConfig[];
 }> = ({ configs }) => {
   return (
@@ -14,5 +13,3 @@ const Published: React.FC<{
     </Stack>
   );
 };
-
-export default Published;

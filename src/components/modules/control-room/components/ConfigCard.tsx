@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
 import { formatTimeAgo } from 'src/utils/date.uitils';
 
-const ConfigCard = ({
+export const ConfigCard = ({
   config,
   isPublished = false,
 }: {
@@ -118,5 +118,3 @@ const ConfigCard = ({
     </Stack>
   );
 };
-
-export default ConfigCard;
