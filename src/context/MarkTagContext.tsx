@@ -1,5 +1,15 @@
 import { Dispatch, SetStateAction, createContext } from 'react';
 
+export type StepType =
+  | 'connect'
+  | 'create'
+  | 'register'
+  | 'verify'
+  | 'choose'
+  | 'code'
+  | 'email'
+  | 'support';
+
 export type DomainDataRecordType = {
   name: string;
   ttl: number;
@@ -38,8 +48,8 @@ export interface MarktagContextType {
   setLoading: Dispatch<SetStateAction<boolean>>;
   toggle?: boolean;
   setToggle?: Dispatch<SetStateAction<boolean>>;
-  step?: 'create' | 'register' | 'verify' | 'code';
-  setStep?: Dispatch<SetStateAction<'create' | 'register' | 'verify' | 'code'>>;
+  step?: StepType;
+  setStep?: Dispatch<SetStateAction<StepType>>;
 }
 
 export const MarkTagContext = createContext<any>({});

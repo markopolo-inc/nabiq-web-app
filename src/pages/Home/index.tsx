@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import ConnectCampaignPlatforms from 'src/components/Features/Home/ConnectCampaignPlatforms';
 import ConnectMarktag from 'src/components/Features/Home/ConnectMarktag';
-import ConnectMarktagModal from 'src/components/Features/Home/ConnectMarktagModal';
-// import ConnectNewMarktagModal from 'src/components/Features/Home/ConnectNewMarktagModal';
 import ConnectedMarktag from 'src/components/Features/Home/ConnectedMarktag';
-import GuidedMarktagModal from 'src/components/Features/Home/GuidedMarktagModal';
-import InstallCodeManuallyModal from 'src/components/Features/Home/InstallCodeManuallyModal';
 import IntegrateApps from 'src/components/Features/Home/IntegrateApps';
-import CreateMarktagModal from 'src/components/Features/Home/MarktagServerSideModal/MarktagConnectModal';
+import MarktagCreationsModals from 'src/components/Features/Home/MarktagCreationsModals/MarktagConnectModal';
 import HeaderTitle from 'src/layouts/HeaderTitle';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -16,41 +12,12 @@ const Home = () => {
   const company = useAppSelector((state) => state.company);
 
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
-  const [showNewMarktagModal, setShowNewMarktagModal] = useState<boolean>(false);
-  const [showCodeMarktagModal, setShowCodeMarktagModal] = useState<boolean>(false);
-  const [showGuidedMarktagModal, setShowGuidedMarktagModal] = useState<boolean>(false);
-  const [selectedMarktagId, setSelectedMarktagId] = useState(null);
 
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
 
-      <ConnectMarktagModal
-        showModal={showMarktagModal}
-        setShowModal={setShowMarktagModal}
-        setShowCreateNewModal={setShowNewMarktagModal}
-      />
-      <CreateMarktagModal
-        openedModal={showNewMarktagModal}
-        setOpenedModal={setShowNewMarktagModal}
-        selectedMarktagId={selectedMarktagId}
-        setSelectedMarktagId={setSelectedMarktagId}
-        onCloseModal={() => console.log('Todo: get tags')}
-      />
-      {/* <ConnectNewMarktagModal
-        showModal={showNewMarktagModal}
-        setShowModal={setShowNewMarktagModal}
-        setShowCodeMarktagModal={setShowCodeMarktagModal}
-        setShowGuidedMarktagModal={setShowGuidedMarktagModal}
-      /> */}
-      <InstallCodeManuallyModal
-        showModal={showCodeMarktagModal}
-        setShowModal={setShowCodeMarktagModal}
-      />
-      <GuidedMarktagModal
-        showModal={showGuidedMarktagModal}
-        setShowModal={setShowGuidedMarktagModal}
-      />
+      <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
       <div className='flex flex-col gap-16'>
         <div className='flex flex-col'>

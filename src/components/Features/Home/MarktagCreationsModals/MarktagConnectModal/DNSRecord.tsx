@@ -1,5 +1,5 @@
 import { FiCopy01 } from '@nabiq-icons';
-import { Alert, Button, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
+import { Button, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
@@ -8,7 +8,7 @@ import { useVerifyTagSetupMutation } from 'src/store/marktag/markopoloMarktagApi
 import HowItWorksModal from '../HowItworksModal';
 
 const DNSRecord = () => {
-  const { gray500, gray900 } = useGetColors();
+  const { gray500, gray600, gray900 } = useGetColors();
   const { domainData, setStep } = useContext<MarktagContextType>(MarkTagContext);
   const [verifyTagSetup, { isLoading }] = useVerifyTagSetupMutation();
 
@@ -21,19 +21,23 @@ const DNSRecord = () => {
     const res = await verifyTagSetup({ markTagId: domainData?.markTagId }).unwrap();
 
     if (res) {
-      setStep('code');
+      setStep('choose');
     }
   };
 
   return (
-    <div>
-      <Stack gap={2}>
-        <Text color={gray900} size='18px' weight={600}>
+    <Stack gap={0}>
+      <Stack gap={8} mt={16}>
+        <Text color={gray900} size='24px' weight={600}>
           DNS Records
+        </Text>
+        <Text color={gray600} size='16px' className='leading-6'>
+          Please add record to your domain to complete setup. It may take up to 72 hours for DNS
+          record to propagate.
         </Text>
       </Stack>
 
-      <Stack gap={12} py={12}>
+      <Stack gap={16} py={12}>
         <TextInput label='Type' value={domainData?.records?.[0]?.type} />
 
         <TextInput
@@ -41,6 +45,7 @@ const DNSRecord = () => {
           value={domainData?.records?.[0]?.name}
           rightSection={
             <FiCopy01
+              size={16}
               style={{ cursor: 'pointer' }}
               color={gray500}
               onClick={() => handleCopy(domainData?.records?.[0]?.name)}
@@ -53,6 +58,7 @@ const DNSRecord = () => {
           value={domainData?.records?.[0]?.value}
           rightSection={
             <FiCopy01
+              size={16}
               style={{ cursor: 'pointer' }}
               color={gray500}
               onClick={() => handleCopy(domainData?.records?.[0]?.value)}
@@ -61,12 +67,6 @@ const DNSRecord = () => {
         />
 
         <TextInput label='TTL' value={domainData?.records?.[0]?.ttl} />
-        <Alert color='orange'>
-          <Text size='14px'>
-            Please add record to your domain to complete setup. It may take upto 72 hours for dns
-            record to propagate.
-          </Text>
-        </Alert>
       </Stack>
 
       <Stack gap={12} pt={20}>
@@ -75,7 +75,7 @@ const DNSRecord = () => {
         </Button>
         <HowItWorksModal />
       </Stack>
-    </div>
+    </Stack>
   );
 };
 

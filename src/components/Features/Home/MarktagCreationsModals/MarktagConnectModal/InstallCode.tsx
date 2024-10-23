@@ -1,10 +1,9 @@
 import { CodeHighlight } from '@mantine/code-highlight';
 import '@mantine/code-highlight/styles.css';
 import { FiCheck, FiShopify, FileQuestion02 } from '@nabiq-icons';
-import { Group, Modal, Stack } from '@nabiq-ui';
-import React from 'react';
+import { Group, Stack } from '@nabiq-ui';
 
-const ModalBody = ({ setOpened }) => {
+const InstallCode = () => {
   return (
     <Stack className='p-8' gap={64} align='center' style={{ maxWidth: '784px' }}>
       <Stack align='flex-start' className='mr-auto' gap={8}>
@@ -17,19 +16,19 @@ const ModalBody = ({ setOpened }) => {
             className='w-full'
             language='tsx'
             code={`
-         // Imports
-import mongoose, { Schema } from 'untitled'
-
-// Collection name
-export const collection = 'Design'|
-
-// Schema
-const schema = new Schema({
-  name: {
-    type: String,
-    required: true
-  }
-        `}
+           // Imports
+  import mongoose, { Schema } from 'untitled'
+  
+  // Collection name
+  export const collection = 'Design'|
+  
+  // Schema
+  const schema = new Schema({
+    name: {
+      type: String,
+      required: true
+    }
+          `}
           />
 
           <Stack className='mr-auto'>
@@ -59,16 +58,16 @@ const schema = new Schema({
           </Stack>
 
           <CodeHighlight
-            onClick={() => setOpened(false)}
+            //   onClick={() => setOpened(false)}
             className='w-full'
             language='tsx'
             code={`
-         // Imports
-import mongoose, { Schema } from 'untitled'
-
-// Collection name
-export const collection = 'Design'|
-        `}
+           // Imports
+  import mongoose, { Schema } from 'untitled'
+  
+  // Collection name
+  export const collection = 'Design'|
+          `}
           />
         </Group>
       </Stack>
@@ -76,22 +75,4 @@ export const collection = 'Design'|
   );
 };
 
-const InstallCodeManuallyModal: React.FC<{
-  showModal: boolean;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ showModal, setShowModal }) => {
-  return (
-    <Modal
-      zIndex={999}
-      size='fit-content'
-      withCustomClose
-      toggleFromOutside={showModal}
-      setToggleFromOutside={setShowModal}
-      body={({ setOpened }) => <ModalBody setOpened={setOpened} />}
-    >
-      {() => <></>}
-    </Modal>
-  );
-};
-
-export default InstallCodeManuallyModal;
+export default InstallCode;

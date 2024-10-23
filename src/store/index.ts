@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import { apiSlice } from './api/apiSlice';
+import { markopoloApiSlice } from './markopoloApi/markopoloApiSlice';
 import rootReducer from './rootReducer';
 import { tagApiSlice } from './tagApi/tagApiSlice';
 
@@ -41,7 +42,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(apiSlice.middleware, tagApiSlice.middleware),
+    }).concat(apiSlice.middleware, markopoloApiSlice.middleware, tagApiSlice.middleware),
 });
 
 export const persistor = persistStore(store);

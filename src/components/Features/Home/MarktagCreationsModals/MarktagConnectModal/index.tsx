@@ -1,17 +1,23 @@
 import { FiCommand } from '@nabiq-icons';
 import { Group, Modal, useGetColors } from '@nabiq-ui';
 import { useState } from 'react';
-import { DomainDataType, MarkTagContext } from 'src/context/MarkTagContext';
+import { DomainDataType, MarkTagContext, StepType } from 'src/context/MarkTagContext';
 
 import ModalBody from './ModalBody';
 
-const CreateMarktagModal = ({
-  setOpenedModal,
-  openedModal,
-  selectedMarktagId = null,
-  setSelectedMarktagId = undefined,
-  onCloseModal = undefined,
-}) => {
+const stepSizeMap: { [key: string]: number } = {
+  connect: 660,
+  create: 1000,
+  choose: 940,
+  code: 782,
+  email: 672,
+  support: 552,
+};
+
+const MarktagCreationsModals: React.FC<{
+  openedModal: boolean;
+  setOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ openedModal, setOpenedModal }) => {
   const { primary500 } = useGetColors();
   const [marktagType, setMarktagType] = useState<string>('');
   const [domain, setDomain] = useState<string>('');
@@ -20,7 +26,7 @@ const CreateMarktagModal = ({
     records: [],
   });
   const [loading, setLoading] = useState<boolean>(false);
-  const [step, setStep] = useState<'create' | 'register' | 'verify' | 'code'>('create');
+  const [step, setStep] = useState<StepType>('connect');
 
   return (
     <MarkTagContext.Provider
@@ -39,30 +45,22 @@ const CreateMarktagModal = ({
     >
       <Modal
         centered
-        size={step === 'create' ? 1000 : step === 'code' ? 782 : 400}
+        size={stepSizeMap[step] || 400}
         toggleFromOutside={openedModal}
         setToggleFromOutside={setOpenedModal}
         onClose={() => {
-          if (setSelectedMarktagId) {
-            setSelectedMarktagId(null);
-          }
           setDomainData(null);
-          setStep('create');
+          setStep('connect');
           setDomain('');
-          if (onCloseModal) {
-            onCloseModal();
-          }
         }}
         title={() =>
-          step !== 'create' ? (
+          ['register', 'verify']?.includes(step) ? (
             <Group className='p-2 rounded-lg border border-[#eaecf0] bg-white shadow-sm'>
               <FiCommand color={primary500} />
             </Group>
           ) : null
         }
-        body={({ setOpened }) => (
-          <ModalBody setOpened={setOpened} selectedMarktagId={selectedMarktagId} />
-        )}
+        body={({ setOpened }) => <ModalBody setOpened={setOpened} />}
       >
         {() => <></>}
       </Modal>
@@ -70,4 +68,4 @@ const CreateMarktagModal = ({
   );
 };
 
-export default CreateMarktagModal;
+export default MarktagCreationsModals;

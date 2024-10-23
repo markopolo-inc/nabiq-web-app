@@ -1,13 +1,14 @@
-import '@mantine/code-highlight/styles.css';
 import { Command } from '@nabiq-icons';
-import { Button, Group, Modal, Stack, useGetColors } from '@nabiq-ui';
-import React from 'react';
+import { Button, Group, Stack, useGetColors } from '@nabiq-ui';
+import { useContext } from 'react';
+import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
-const ModalBody = ({ setOpened }) => {
+const GuidedSupport = () => {
   const { primary500 } = useGetColors();
+  const { setStep } = useContext<MarktagContextType>(MarkTagContext);
 
   return (
-    <Stack className='p-8' gap={64} align='' style={{ maxWidth: '552px' }}>
+    <Stack gap={64} align=''>
       <Stack align='flex-start' className='mr-auto' gap={8}>
         <div className='flex gap-4'>
           <div className='flex items-center justify-center w-8 h-8 border border-success-50 rounded-full bg-gray-100'>
@@ -26,32 +27,14 @@ const ModalBody = ({ setOpened }) => {
       </Stack>
       <Stack align='end'>
         <Group gap={12}>
-          <Button variant='secondary' onClick={() => setOpened(false)}>
+          <Button variant='secondary' onClick={() => setStep('choose')}>
             Go back
           </Button>
-          <Button variant='primary'>Get for $50.00</Button>
+          <Button variant='primary'>Book a call</Button>
         </Group>
       </Stack>
     </Stack>
   );
 };
 
-const GuidedMarktagModal: React.FC<{
-  showModal: boolean;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ showModal, setShowModal }) => {
-  return (
-    <Modal
-      zIndex={999}
-      size='fit-content'
-      withCustomClose
-      toggleFromOutside={showModal}
-      setToggleFromOutside={setShowModal}
-      body={({ setOpened }) => <ModalBody setOpened={setOpened} />}
-    >
-      {() => <></>}
-    </Modal>
-  );
-};
-
-export default GuidedMarktagModal;
+export default GuidedSupport;
