@@ -36,8 +36,8 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-        } catch (error) {
-          toast.error(error?.response?.data?.message || 'Failed to get mark tag details!');
+        } catch (err) {
+          toast.error(err?.error?.data?.message || 'Failed to get mark tag details!');
         }
       },
     }),
@@ -94,10 +94,10 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
           if (result?.data?.serverCreated) {
             toast.success('Setup verified successfully!');
           } else {
-            toast.error('Setup verification failed!');
+            toast.error(result?.data?.message || 'Setup verification failed!');
           }
-        } catch (error) {
-          toast.error('Could not verify setup!');
+        } catch (err) {
+          toast.error(err?.error?.data?.message || 'Could not verify setup!');
         }
       },
     }),

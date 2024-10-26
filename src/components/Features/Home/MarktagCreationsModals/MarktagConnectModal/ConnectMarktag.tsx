@@ -9,10 +9,10 @@ import { useLazyGetMarkopoloMarkTagsQuery } from 'src/store/marktag/markopoloMar
 const ConnectMarktag = () => {
   const navigate = useNavigate();
   const { gray600, gray900, primary500, success500 } = useGetColors();
-  const { setStep } = useContext<MarktagContextType>(MarkTagContext);
+  const { setStep, setDomain, setDomainData } = useContext<MarktagContextType>(MarkTagContext);
   const { connectedBrand } = useAppSelector((state) => state.brand);
-  const [getMarkTags] = useLazyGetMarkopoloMarkTagsQuery();
-  const [_marktagList, setMarktagList] = useState<any[]>([]);
+  const [getMarkTags, { isLoading }] = useLazyGetMarkopoloMarkTagsQuery();
+  const [marktagList, setMarktagList] = useState<any[]>([]);
 
   useEffect(() => {
     if (connectedBrand?.resourceId) {
@@ -40,7 +40,19 @@ const ConnectMarktag = () => {
       description: 'New to this? No worries, create a new marktag from scratch',
       buttonLabel: 'Create',
       buttonAction: () => {
-        setStep('create');
+        if (marktagList?.length === 0) {
+          setStep('create');
+        } else {
+          const lastItem = marktagList[marktagList?.length - 1];
+          if (lastItem?.setupStatus !== 'pending') {
+            setStep('create');
+          } else {
+            setStep('verify');
+            setDomain(lastItem?.domain);
+            const domainData = { ...lastItem, markTagId: lastItem.resourceId };
+            setDomainData(domainData);
+          }
+        }
       },
     },
   ];
@@ -72,7 +84,12 @@ const ConnectMarktag = () => {
             <Text color={gray600} className='text-sm font-normal text-center'>
               {card.description}
             </Text>
-            <Button variant='primary' onClick={card.buttonAction} fullWidth>
+            <Button
+              variant='primary'
+              onClick={card.buttonAction}
+              fullWidth
+              loading={index === 0 ? false : isLoading}
+            >
               {card.buttonLabel}
             </Button>
           </div>

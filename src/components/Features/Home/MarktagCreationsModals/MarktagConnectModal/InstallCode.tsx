@@ -1,74 +1,81 @@
 import { CodeHighlight } from '@mantine/code-highlight';
 import '@mantine/code-highlight/styles.css';
-import { FiCheck, FiShopify, FileQuestion02 } from '@nabiq-icons';
-import { Group, Stack } from '@nabiq-ui';
+import { Button, Group, Stack } from '@nabiq-ui';
+import { useContext } from 'react';
+import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
+import { getCodes } from 'src/lib/marktag/getCodes';
 
-const InstallCode = () => {
+import CodeInstructionModal from '../CodeInstructionModal';
+
+const InstallCode = ({ setOpened }) => {
+  const { domainData, setStep } = useContext<MarktagContextType>(MarkTagContext);
+
   return (
-    <Stack className='p-8' gap={64} align='center' style={{ maxWidth: '784px' }}>
-      <Stack align='flex-start' className='mr-auto' gap={8}>
-        <p className='text-gray-900 text-[24px] font-semibold'>Install code manually</p>
-        <p className='text-gray-600 text-base font-normal'>Setup everything by yourself.</p>
-      </Stack>
-      <Stack align='center'>
+    <Stack gap={32}>
+      <Group justify='space-between'>
+        <Stack className='-mt-1' gap={8}>
+          <p className='text-gray-900 text-[24px] font-semibold'>Install code manually</p>
+          <p className='text-gray-600 text-base font-normal'>Setup everything by yourself.</p>
+        </Stack>
+        <CodeInstructionModal />
+      </Group>
+      <Stack>
         <Group className='flex-col' gap={32}>
           <CodeHighlight
             className='w-full'
-            language='tsx'
-            code={`
-           // Imports
-  import mongoose, { Schema } from 'untitled'
-  
-  // Collection name
-  export const collection = 'Design'|
-  
-  // Schema
-  const schema = new Schema({
-    name: {
-      type: String,
-      required: true
-    }
-          `}
+            language='js'
+            code={getCodes({
+              platform: 'facebook',
+              link: domainData?.records?.[0]?.name, // TODO: set a default code for client-side
+              isShopify: domainData?.isShopify,
+            })}
           />
 
-          <Stack className='mr-auto'>
-            <div className='flex gap-4'>
-              <div className='flex gap-1 py-2 px-3 text-sm font-semibold text-gray-600 rounded-lg border-[0.75px] border-[rgba(13,18,28,0.48)] bg-gradient-to-b from-[rgba(13,18,28,0.03)] to-[rgba(13,18,28,0)] shadow-custom-secondary'>
-                <FiShopify size={20} />
-                Install on Shopify
-              </div>
-
-              <div className='flex gap-1 py-2 px-3 text-sm font-semibold text-white rounded-lg border border-white bg-gradient-to-b from-[rgba(255,255,255,0.08)] to-[rgba(255,255,255,0)] bg-[#303534] shadow-custom-secondary-black'>
-                <FileQuestion02 size={20} color='currentColor' />
-                View documentation
-              </div>
-
-              <div className='flex gap-1 py-2 px-3 text-sm font-semibold text-white rounded-lg border-[0.75px] border-primary-600 bg-primary-600 shadow-custom-primary'>
-                <FiCheck size={20} color='currentColor' />I have set up events manually
-              </div>
-            </div>
+          <Stack
+            className={
+              !(domainData?.isWoocommerce || domainData?.isShopify) ? 'ml-auto' : 'mr-auto'
+            }
+          >
+            <Group gap={16}>
+              {(domainData?.isShopify || domainData.isWoocommerce) && (
+                <>
+                  {/* {domainData?.isShopify && (
+                    <ShopifyMarktagInstallButton
+                      fullWidth
+                      setLoading={setLoading}
+                      markTagId={domainData.markTagId}
+                      domainData={domainData}
+                      setDomainData={setDomainData}
+                      loading={loading}
+                    />
+                  )}
+                  {domainData?.isWoocommerce && (
+                    <WoocommerceMarktagInstallButton
+                      fullWidth
+                      setLoading={setLoading}
+                      markTagId={domainData.markTagId}
+                      domainData={domainData}
+                      setDomainData={setDomainData}
+                      loading={loading}
+                    />
+                  )} */}
+                  <Button size='sm' fullWidth variant='primary' onClick={() => setOpened(false)}>
+                    Skip for now
+                  </Button>
+                </>
+              )}
+              {!(domainData?.isWoocommerce || domainData?.isShopify) && (
+                <>
+                  <Button variant='secondary' onClick={() => setStep('choose')}>
+                    Go back
+                  </Button>
+                  <Button variant='primary' onClick={() => setOpened(false)}>
+                    Finish setup
+                  </Button>
+                </>
+              )}
+            </Group>
           </Stack>
-
-          <Stack className='mr-auto'>
-            <p className='text-gray-900 text-[24px] font-semibold'>Event code snippets</p>
-            <p className='text-gray-600 text-base font-normal'>
-              Add this event code to each page of your site to track when a customer visits it.
-              MarkTag automatically collects the page URL and page information.
-            </p>
-          </Stack>
-
-          <CodeHighlight
-            //   onClick={() => setOpened(false)}
-            className='w-full'
-            language='tsx'
-            code={`
-           // Imports
-  import mongoose, { Schema } from 'untitled'
-  
-  // Collection name
-  export const collection = 'Design'|
-          `}
-          />
         </Group>
       </Stack>
     </Stack>

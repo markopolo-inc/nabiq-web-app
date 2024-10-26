@@ -3,7 +3,7 @@ import { Button, Group, Stack, useGetColors } from '@nabiq-ui';
 import { useContext } from 'react';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
-const GuidedSupport = () => {
+const GuidedSupport = ({ setOpened }) => {
   const { primary500 } = useGetColors();
   const { setStep } = useContext<MarktagContextType>(MarkTagContext);
 
@@ -15,14 +15,14 @@ const GuidedSupport = () => {
             <Command size={12} color={primary500} fill={primary500} />
           </div>
 
-          <div className='pr-3'>
+          <Stack gap={8} className='pr-3'>
             <p className='text-gray-900 text-[24px] font-semibold'>
               Guided Implementation for MarkTag
             </p>
             <p className='text-gray-600 text-base font-normal'>
               Let us help you setup ‘Marktag’ easily.
             </p>
-          </div>
+          </Stack>
         </div>
       </Stack>
       <Stack align='end'>
@@ -30,7 +30,9 @@ const GuidedSupport = () => {
           <Button variant='secondary' onClick={() => setStep('choose')}>
             Go back
           </Button>
-          <Button variant='primary'>Book a call</Button>
+          <Button variant='primary' onClick={() => setOpened(false)}>
+            Book a call
+          </Button>
         </Group>
       </Stack>
     </Stack>

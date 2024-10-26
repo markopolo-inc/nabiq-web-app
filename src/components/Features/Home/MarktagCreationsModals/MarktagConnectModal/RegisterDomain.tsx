@@ -59,19 +59,21 @@ const RegisterDomain = () => {
       return;
     }
 
-    if (!domain) {
-      toast.error('Enter a domain!');
-      return;
-    }
+    if (marktagType !== 'client-side') {
+      if (!domain) {
+        toast.error('Enter a domain!');
+        return;
+      }
 
-    if (domain?.toLowerCase()?.includes('https://') || domain?.toLowerCase()?.includes('www.')) {
-      toast.error('Domain cannot contain https:// or www.');
-      return;
+      if (domain?.toLowerCase()?.includes('https://') || domain?.toLowerCase()?.includes('www.')) {
+        toast.error('Domain cannot contain https:// or www.');
+        return;
+      }
     }
 
     const res = await registerTag({
       brandId: resourceId,
-      domain,
+      domain: marktagType === 'client-side' ? 'example.com' : domain, // TODO: set a default domain for client-side
       isClient: marktagType === 'client-side',
       isMobile: marktagType === 'mobile',
       isShopify: marktagType === 'shopify',
@@ -84,7 +86,8 @@ const RegisterDomain = () => {
         records: [res.record],
       };
       setDomainData(shapedData);
-      setStep('verify');
+      setStep(marktagType === 'client-side' ? 'choose' : 'verify');
+      // TODO: fetch domain data for client-side
     }
   };
 
@@ -114,23 +117,27 @@ const RegisterDomain = () => {
         }
         disabled={isLoadingBrandList}
       />
-      <Stack gap={4}>
-        <TextInput
-          label='Domain name'
-          placeholder='Website URL'
-          disabled={['shopify', 'woocommerce']?.includes(marktagType)}
-          value={domain}
-          onChange={(e) => setDomain(e.currentTarget.value)}
-        />
-        <Text color={gray500} size='14px'>
-          Enter your domain without https: // or www.
-        </Text>
-      </Stack>
+
+      {marktagType !== 'client-side' && (
+        <Stack gap={4}>
+          <TextInput
+            label='Domain name'
+            placeholder='Website URL'
+            disabled={['shopify', 'woocommerce']?.includes(marktagType)}
+            value={domain}
+            onChange={(e) => setDomain(e.currentTarget.value)}
+          />
+          <Text color={gray500} size='14px'>
+            Enter your domain without https: // or www.
+          </Text>
+        </Stack>
+      )}
+
       <Stack gap={12} mt={12}>
         <Button
           fullWidth
           loading={isLoading}
-          disabled={domain?.length === 0}
+          disabled={marktagType !== 'client-side' && domain?.length === 0}
           onClick={handleContinueMarkTag}
         >
           Continue
