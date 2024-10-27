@@ -9,6 +9,7 @@ import Resend from 'assets/integraions/Resend.svg';
 import SendGrid from 'assets/integraions/SendGridLogo.svg';
 import Sinch from 'assets/integraions/SinchLogo.svg';
 import Twillio from 'assets/integraions/TwillioLogo.svg';
+import WhatsApp from 'assets/integraions/WhatsappLogo.svg';
 import Klaviyo from 'assets/integraions/klavioLogo.svg';
 import React from 'react';
 import type { GatewayType } from 'src/interfaces/brand.interface';
@@ -29,6 +30,7 @@ const GatewayLogo: React.FC<{
     sendgrid: SendGrid,
     onesignal: OneSignal,
     mailgun: MailGun,
+    whatsapp: WhatsApp,
   };
 
   return <Image src={logo?.[app]} style={{ width }} />;

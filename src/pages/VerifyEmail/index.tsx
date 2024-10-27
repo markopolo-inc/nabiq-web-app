@@ -1,5 +1,5 @@
-import VerifyForm from 'src/components/Features/VerifyEmail/VerifyForm';
-import HeaderTitle from 'src/layouts/HeaderTitle';
+import VerifyForm from 'components/Features/VerifyEmail/VerifyForm';
+import { HeaderTitle } from 'layouts';
 
 const VerifyEmail = () => {
   return (

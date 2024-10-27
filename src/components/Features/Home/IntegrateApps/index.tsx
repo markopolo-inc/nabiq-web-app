@@ -1,7 +1,6 @@
 import { FiZap } from '@nabiq-icons';
-import { Button } from '@nabiq-ui';
+import { Button, GatewayLogo } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
-import GatewayLogo from 'src/components/UI/GatewayLogo';
 import type { GatewayType } from 'src/interfaces/brand.interface';
 
 const IntegrateApps = () => {

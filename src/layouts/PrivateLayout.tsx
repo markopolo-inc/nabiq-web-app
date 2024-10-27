@@ -4,7 +4,7 @@ import { useLogoutMutation } from 'src/store/auth/authApi';
 import { useAppSelector } from 'src/store/hooks';
 import { getAuthToken } from 'src/utils/auth';
 
-const PrivateLayout = () => {
+export const PrivateLayout = () => {
   const [logout] = useLogoutMutation();
   useEffect(() => {
     const handleWindowFocus = async () => {
@@ -27,5 +27,3 @@ const PrivateLayout = () => {
 
   return <>{!isAuthenticated ? <Navigate to={'/login'} /> : <Outlet />}</>;
 };
-
-export default PrivateLayout;

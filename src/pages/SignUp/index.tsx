@@ -1,7 +1,7 @@
+import SignUpForm from 'components/Features/SignUp/SignUpForm';
+import { HeaderTitle } from 'layouts';
 import LogoComponent from 'src/components/Features/Onboarding/LogoComponent';
 import SignUpFooter from 'src/components/Features/SignUp/SignUpFooter';
-import SignUpForm from 'src/components/Features/SignUp/SignUpForm';
-import HeaderTitle from 'src/layouts/HeaderTitle';
 
 const SignUp = () => {
   return (

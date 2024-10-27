@@ -1,13 +1,13 @@
 import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
 import { Button, Dropzone, Grid, Group, Image, Select, Stack, TextInput } from '@nabiq-ui';
+import { HeaderTitle } from 'layouts';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HeaderTitle from 'src/layouts/HeaderTitle';
-import { useUpdateSettingMutation } from 'src/store/company/companyApi.ts';
-import { useAppSelector } from 'src/store/hooks.ts';
-import { uploadFile } from 'src/utils/fileUpload.ts';
-import { trimAllValuesOfObject } from 'src/utils/string.utils.ts';
+import { useUpdateSettingMutation } from 'store/company/companyApi';
+import { useAppSelector } from 'store/hooks';
+import { uploadFile } from 'utils/fileUpload';
+import { trimAllValuesOfObject } from 'utils/string.utils';
 
 const Settings = () => {
   const navigate = useNavigate();

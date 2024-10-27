@@ -1,5 +1,8 @@
-import { FiMail01, FiMessageDotCircle, FiNotificationMessage } from '@nabiq-icons';
-import type { GatewayInterface, GatewayType } from 'src/interfaces/brand.interface';
+import {
+  FiMail01,
+  FiMessageDotCircle, // FiNotificationMessage
+} from '@nabiq-icons';
+import type { GatewayType, IGateway } from 'src/interfaces/brand.interface';
 
 export const appCategories = [
   {
@@ -12,14 +15,14 @@ export const appCategories = [
     label: 'SMS apps',
     icon: FiMessageDotCircle,
   },
-  {
-    value: 'push',
-    label: 'Push notification apps',
-    icon: FiNotificationMessage,
-  },
+  // {
+  //   value: 'push',
+  //   label: 'Push notification apps',
+  //   icon: FiNotificationMessage,
+  // },
 ];
 
-export const appOptions: GatewayInterface[] = [
+export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'Klaviyo',
@@ -136,6 +139,16 @@ export const appOptions: GatewayInterface[] = [
     isKeyIntegration: true,
     isOauthIntegration: false,
   },
+  {
+    category: 'sms',
+    name: 'WhatsApp',
+    headline:
+      'Connect with customers instantly and securely using WhatsApp’s widely adopted messaging platform for seamless communication.',
+    gateway: 'whatsapp',
+    learnMoreLink: '',
+    isKeyIntegration: true,
+    isOauthIntegration: false,
+  },
 ];
 
 export const gatewayFields: Record<'email' | 'sms', Partial<Record<GatewayType, string[]>>> = {
@@ -154,5 +167,6 @@ export const gatewayFields: Record<'email' | 'sms', Partial<Record<GatewayType, 
     flowroute: ['accessKey', 'secretKey'],
     sinch: ['servicePlanId', 'apiToken'],
     twilio: ['accountSid', 'authToken'],
+    whatsapp: ['businessId', 'phoneNumberId', 'accessToken'],
   },
 };

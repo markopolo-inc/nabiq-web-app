@@ -1,12 +1,20 @@
 import { FiChevronRight } from '@nabiq-icons';
-import { Badge, Breadcrumbs, Button, Group, Pagination, Stack, useGetColors } from '@nabiq-ui';
+import {
+  Badge,
+  Breadcrumbs,
+  Button,
+  GatewayLogo,
+  Group,
+  Pagination,
+  Stack,
+  useGetColors,
+} from '@nabiq-ui';
 import cn from 'classnames';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Xarrow, { Xwrapper, useXarrow } from 'react-xarrows';
-import GatewayLogo from 'src/components/UI/GatewayLogo';
 import {
   useGetAudienceBreakdownQuery,
   useGetAudienceForCampaignQuery,

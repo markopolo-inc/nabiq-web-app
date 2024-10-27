@@ -106,6 +106,8 @@ export default {
       },
       boxShadow: {
         'btn-primary': '0px 1px 2px 0px rgba(13, 18, 28, 0.64), 0px 0px 0px 1px #0A52D6',
+        'btn-destructive-primary':
+          '0px 1px 2px 0px rgba(13, 18, 28, 0.64), 0px 0px 0px 1px #D92D20',
         'custom-xs': '0px 1px 2px 0px #1219260D',
         'custom-sm': '0px 4px 6px -2px rgba(18, 25, 38, 0.03)',
         'custom-md': '0px 12px 16px -4px rgba(18, 25, 38, 0.08)',

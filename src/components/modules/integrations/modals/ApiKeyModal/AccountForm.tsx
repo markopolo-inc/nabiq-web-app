@@ -2,7 +2,7 @@ import { Alert } from '@mantine/core';
 import { Button, Select, Stack } from '@nabiq-ui';
 import { capitalize } from 'lodash';
 import { useState } from 'react';
-import { GatewayInterface } from 'src/interfaces/brand.interface';
+import { IGateway } from 'src/interfaces/brand.interface';
 import { useAppSelector } from 'src/store/hooks';
 import { useAddAccountsMutation } from 'src/store/integrations/integrations.api';
 
@@ -35,7 +35,7 @@ const accountSelectionIds = {
 const AccountForm: React.FC<{
   selectableObjects: Record<string, any>;
   message: string;
-  gateway: GatewayInterface;
+  gateway: IGateway;
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ selectableObjects, message, gateway, setOpened }) => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);

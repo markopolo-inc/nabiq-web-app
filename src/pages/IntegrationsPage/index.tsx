@@ -1,9 +1,8 @@
 import { FiZap } from '@nabiq-icons';
-import { Badge, Button, OptionTabs } from '@nabiq-ui';
-import ApiKeyModal from 'components/Features/Integrations/Modals/ApiKeyModal';
-import GatewayLogo from 'components/UI/GatewayLogo';
-import type { GatewayInterface, GatewayType } from 'interfaces/brand.interface';
-import HeaderTitle from 'layouts/HeaderTitle';
+import { Badge, Button, GatewayLogo, OptionTabs } from '@nabiq-ui';
+import { ApiKeyModal, GatewayDisconnectModal } from 'components/modules/integrations';
+import type { GatewayType, IGateway } from 'interfaces/brand.interface';
+import { HeaderTitle } from 'layouts';
 import { appCategories, appOptions } from 'lib/integration.lib';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
@@ -11,10 +10,10 @@ import { useAppSelector } from 'store/hooks';
 import { getAuthToken } from 'utils/auth';
 import { buildQueryString } from 'utils/string.utils';
 
-const Integrations = () => {
+const IntegrationsPage = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [selectedCategory, setSelectedCategory] = useState<'email' | 'sms' | 'push'>('email');
-  const [selectedGateway, setSelectedGateway] = useState<GatewayInterface | null>(null);
+  const [selectedGateway, setSelectedGateway] = useState<IGateway | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const { emailIntegrations, smsIntegrations } = useAppSelector((state) => state.brand);
 
@@ -33,7 +32,15 @@ const Integrations = () => {
           <OptionTabs
             setActive={setSelectedCategory}
             active={selectedCategory}
-            options={appCategories}
+            options={appCategories?.map((item) => ({
+              ...item,
+              label: (
+                <div className='flex gap-2 items-center'>
+                  <item.icon size={18} />
+                  {item.label}
+                </div>
+              ),
+            }))}
           />
           <div className='gap-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
             {appOptions
@@ -62,11 +69,12 @@ const Integrations = () => {
                         )}
                       </div>
 
-                      <p className='mt-6'>{gateway.headline}</p>
+                      <p className='mt-6 text-gray-600 font-normal text-sm'>{gateway.headline}</p>
                     </div>
                     <div className='flex gap-3'>
                       {gateway.isOauthIntegration && (
                         <Button
+                          className='!w-40'
                           leadingIcon={<FiZap fill='white' size={22} />}
                           onClick={async () => {
                             window.location.href = `${
@@ -86,6 +94,7 @@ const Integrations = () => {
                         <>
                           {isGatewayConnected ? (
                             <Button
+                              className='!w-40'
                               variant='secondary'
                               onClick={() => {
                                 setShowModal(true);
@@ -96,7 +105,8 @@ const Integrations = () => {
                             </Button>
                           ) : (
                             <Button
-                              leadingIcon={<FiZap fill='white' size={22} />}
+                              className='!w-40'
+                              leadingIcon={<FiZap fill='white' size={18} />}
                               onClick={() => {
                                 setShowModal(true);
                                 setSelectedGateway(gateway);
@@ -107,6 +117,8 @@ const Integrations = () => {
                           )}
                         </>
                       )}
+
+                      {isGatewayConnected && <GatewayDisconnectModal gateway={gateway} />}
                     </div>
                   </div>
                 );
@@ -118,4 +130,4 @@ const Integrations = () => {
   );
 };
 
-export default Integrations;
+export default IntegrationsPage;

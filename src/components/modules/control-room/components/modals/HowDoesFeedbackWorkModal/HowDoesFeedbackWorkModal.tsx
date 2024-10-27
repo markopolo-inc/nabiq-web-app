@@ -1,25 +1,21 @@
 import { Modal } from '@nabiq-ui';
-import type { GatewayInterface } from 'interfaces/brand.interface';
 import React from 'react';
 
 import ModalBody from './ModalBody';
 
-const ApiKeyModal: React.FC<{
-  gateway: GatewayInterface;
+export const HowDoesFeedbackWorkModal: React.FC<{
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ gateway, showModal, setShowModal }) => {
+}> = ({ showModal, setShowModal }) => {
   return (
     <Modal
-      size='sm'
+      size='lg'
       toggleFromOutside={showModal}
       setToggleFromOutside={setShowModal}
       withCustomClose
-      body={({ setOpened }) => <ModalBody setOpened={setOpened} gateway={gateway} />}
+      body={({ setOpened }) => <ModalBody setOpened={setOpened} />}
     >
       {() => <></>}
     </Modal>
   );
 };
-
-export default ApiKeyModal;

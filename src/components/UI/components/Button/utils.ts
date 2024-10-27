@@ -11,7 +11,8 @@ export type TButtonVariant =
   | 'tertiary-gray'
   | 'tertiary'
   | 'link'
-  | 'tertiary-destructive';
+  | 'tertiary-destructive'
+  | 'primary-destructive';
 
 export type TButtonSize = 'sm' | 'md' | 'lg';
 
@@ -48,6 +49,8 @@ const getRootClassesByVariant = (btnVariant: TButtonVariant) => {
       return styles.linkRoot;
     case 'tertiary-destructive':
       return styles.tertiaryDestructiveRoot;
+    case 'primary-destructive':
+      return cn(styles.primaryDestructiveRoot, 'border-none shadow-btn-destructive-primary');
     default:
       return '';
   }
@@ -69,6 +72,8 @@ const getInnerClassesByVariant = (btnVariant: TButtonVariant) => {
       return cn('!px-0');
     case 'tertiary-destructive':
       return cn(styles.tertiaryDestructiveInner);
+    case 'primary-destructive':
+      return cn(styles.primaryDestructiveInner);
   }
 };
 
@@ -88,6 +93,8 @@ const getDisabledClasses = (btnVariant: TButtonVariant) => {
       return cn('cursor-not-allowed !text-gray-400');
     case 'tertiary-destructive':
       return cn('cursor-not-allowed !text-gray-400');
+    case 'primary-destructive':
+      return cn(styles.primaryDestructiveDisabled, '!text-gray-400');
     default:
       return '';
   }

@@ -145,3 +145,45 @@
     color: $gray-400 !important;
   }
 }
+
+.primaryDestructiveRoot {
+  background: linear-gradient(
+    to top,
+    rgba(217, 45, 32, 1) 0%,
+    rgba(255, 255, 255, 1) 185%
+  ) !important;
+
+  color: $white-base !important;
+  &:hover {
+    background: linear-gradient(
+      to top,
+      rgba(180, 35, 24, 1) 0%,
+      rgba(255, 255, 255, 1) 185%
+    ) !important;
+  }
+  &:disabled {
+    background: #eef2f6 !important;
+    border: 1px solid #e3e8ef !important;
+    box-shadow: 0px 1px 2px 0px rgba(18, 25, 38, 0.05);
+  }
+}
+
+.primaryDestructiveInner {
+  background: var(
+    --Button-Specific-Primary-destructive,
+    radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    #d92d20
+  );
+
+  &:hover {
+    background: $error-700 !important;
+  }
+}
+
+.primaryDestructiveDisabled {
+  cursor: not-allowed;
+  background: $gray-100 !important;
+  &:hover {
+    background: $gray-100 !important;
+  }
+}

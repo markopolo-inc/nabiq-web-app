@@ -1,9 +1,9 @@
+import OnboardingForm from 'components/Features/Onboarding/OnboardingForm';
+import OnboardingSidebar from 'components/Features/Onboarding/OnboardingSidebar';
+import { HeaderTitle } from 'layouts';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import OnboardingForm from 'src/components/Features/Onboarding/OnboardingForm';
-import OnboardingSidebar from 'src/components/Features/Onboarding/OnboardingSidebar';
-import HeaderTitle from 'src/layouts/HeaderTitle';
-import { useAppSelector } from 'src/store/hooks';
+import { useAppSelector } from 'store/hooks';
 
 const Onboarding = () => {
   const navigate = useNavigate();

@@ -57,6 +57,7 @@ export { default as FiInfinity } from './Infinity';
 export { default as Logout01 } from './Logout01';
 export { default as FiLineChartUp05 } from './LineChartUp05';
 export { default as FiLifeBuoy01 } from './LifeBuoy01';
+export { LinkBroken01 as FiLinkBroken01 } from './LinkBroken01';
 
 // M
 export { default as FiMail01 } from './Mail01';

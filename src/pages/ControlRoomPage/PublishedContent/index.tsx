@@ -1,9 +1,8 @@
 import { FiDot, FiThumbsDown, FiThumbsUp } from '@nabiq-icons';
-import { Badge, Breadcrumbs, Button, Group, Stack } from '@nabiq-ui';
+import { Badge, Breadcrumbs, Button, GatewayLogo, Group, Stack } from '@nabiq-ui';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { useNavigate, useParams } from 'react-router-dom';
-import GatewayLogo from 'src/components/UI/GatewayLogo';
 import { IControlRoomConfigCohortContent } from 'src/interfaces/controlRoom.interface';
 import {
   useGetConfigContentPublishedQuery,

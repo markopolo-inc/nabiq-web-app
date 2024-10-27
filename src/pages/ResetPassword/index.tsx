@@ -1,5 +1,5 @@
-import ResetPasswordForm from 'src/components/Features/ResetPassword/ResetPasswordForm';
-import HeaderTitle from 'src/layouts/HeaderTitle';
+import ResetPasswordForm from 'components/Features/ResetPassword/ResetPasswordForm';
+import { HeaderTitle } from 'layouts';
 
 const ResetPassword = () => {
   return (

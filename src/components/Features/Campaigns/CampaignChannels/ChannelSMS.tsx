@@ -1,8 +1,7 @@
 import { Message } from '@nabiq-icons';
-import { Group, Select, Text } from '@nabiq-ui';
+import { GatewayLogo, Group, Select, Text } from '@nabiq-ui';
 import { capitalize } from 'lodash';
 import { useDispatch } from 'react-redux';
-import GatewayLogo from 'src/components/UI/GatewayLogo';
 import { GatewayType } from 'src/interfaces/brand.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
