@@ -24,6 +24,7 @@ export type DomainDataType = {
   isShopify?: boolean;
   isWoocommerce?: boolean;
   hostname?: string;
+  clientId?: string;
   resourceId?: string;
   brandId?: string;
   companyId?: string;

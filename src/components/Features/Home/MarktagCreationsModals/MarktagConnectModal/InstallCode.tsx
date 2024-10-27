@@ -1,14 +1,30 @@
 import { CodeHighlight } from '@mantine/code-highlight';
 import '@mantine/code-highlight/styles.css';
+import { FileQuestion02 } from '@nabiq-icons';
 import { Button, Group, Stack } from '@nabiq-ui';
 import { useContext } from 'react';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 import { getCodes } from 'src/lib/marktag/getCodes';
 
 import CodeInstructionModal from '../CodeInstructionModal';
+import ShopifyMarktagInstallButton from './utils/ShopifyInstallButton';
+import WoocommerceMarktagInstallButton from './utils/WoocommerceInstallButton';
 
 const InstallCode = ({ setOpened }) => {
-  const { domainData, setStep } = useContext<MarktagContextType>(MarkTagContext);
+  const { marktagType, domainData, setDomainData, setStep } =
+    useContext<MarktagContextType>(MarkTagContext);
+
+  const ViewDocumentationButton = () => (
+    <Button
+      variant='secondary-black'
+      leadingIcon={<FileQuestion02 size={18} />}
+      onClick={() =>
+        window.open('https://markopolo-inc.github.io/marktag-docs/web-sdk/installation', '_blank')
+      }
+    >
+      View documentation
+    </Button>
+  );
 
   return (
     <Stack gap={32}>
@@ -26,8 +42,12 @@ const InstallCode = ({ setOpened }) => {
             language='js'
             code={getCodes({
               platform: 'facebook',
-              link: domainData?.records?.[0]?.name, // TODO: set a default code for client-side
+              link:
+                marktagType === 'client-side'
+                  ? domainData?.hostname
+                  : domainData?.records?.[0]?.name,
               isShopify: domainData?.isShopify,
+              clientId: marktagType === 'client-side' ? domainData?.clientId : undefined,
             })}
           />
 
@@ -37,29 +57,24 @@ const InstallCode = ({ setOpened }) => {
             }
           >
             <Group gap={16}>
-              {(domainData?.isShopify || domainData.isWoocommerce) && (
+              {(domainData?.isShopify || domainData?.isWoocommerce) && (
                 <>
-                  {/* {domainData?.isShopify && (
+                  {domainData?.isShopify && (
                     <ShopifyMarktagInstallButton
-                      fullWidth
-                      setLoading={setLoading}
-                      markTagId={domainData.markTagId}
+                      markTagId={domainData?.markTagId}
                       domainData={domainData}
                       setDomainData={setDomainData}
-                      loading={loading}
                     />
                   )}
                   {domainData?.isWoocommerce && (
                     <WoocommerceMarktagInstallButton
-                      fullWidth
-                      setLoading={setLoading}
-                      markTagId={domainData.markTagId}
+                      markTagId={domainData?.markTagId}
                       domainData={domainData}
                       setDomainData={setDomainData}
-                      loading={loading}
                     />
-                  )} */}
-                  <Button size='sm' fullWidth variant='primary' onClick={() => setOpened(false)}>
+                  )}
+                  <ViewDocumentationButton />
+                  <Button variant='tertiary-gray' onClick={() => setOpened(false)}>
                     Skip for now
                   </Button>
                 </>
@@ -69,6 +84,7 @@ const InstallCode = ({ setOpened }) => {
                   <Button variant='secondary' onClick={() => setStep('choose')}>
                     Go back
                   </Button>
+                  <ViewDocumentationButton />
                   <Button variant='primary' onClick={() => setOpened(false)}>
                     Finish setup
                   </Button>

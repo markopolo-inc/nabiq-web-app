@@ -1,71 +1,56 @@
 import { FiShopify } from '@nabiq-icons';
-import { Button, Group } from '@nabiq-ui';
+import { Button } from '@nabiq-ui';
+import toast from 'react-hot-toast';
+import { useAppSelector } from 'src/store/hooks';
+import {
+  useInstallShopifyCodeMutation,
+  useLazyGetMarkTagByIdQuery,
+} from 'src/store/marktag/markopoloMarktagApi';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const ShopifyMarktagInstallButton = ({
-  setLoading,
-  markTagId,
-  domainData,
-  setDomainData,
-  loading,
-  fullWidth = false,
-}) => {
-  // const { selectedBrand: brandId } = useAppSelector((state) => state.brand);
+const ShopifyMarktagInstallButton = ({ markTagId, domainData, setDomainData }) => {
+  const { connectedBrand } = useAppSelector((state) => state.brand);
+  const [installShopifyCode, { isLoading: isInstalling }] = useInstallShopifyCodeMutation();
+  const [getMarkTagById, { isLoading: isFetching }] = useLazyGetMarkTagByIdQuery();
 
-  // const installShopify = async (action: 'add' | 'delete') => {
-  //   try {
-  //     setLoading(true);
-  //     const res = await markTagApi.installShopifyCode({
-  //       brandId,
-  //       markTagId,
-  //       action,
-  //     });
-  //     if (res.status === 200) {
-  //       toast.success(
-  //         action === 'add' ? 'Installed on shopify' : 'Removed from shopify'
-  //       );
-  //       toast.loading('Please wait!');
-  //       const selectedTag = await markTagApi.getMarkTagById({ markTagId });
-  //       if (selectedTag) {
-  //         setDomainData({
-  //           ...domainData,
-  //           ...selectedTag,
-  //         });
-  //       }
-  //       toast.dismiss();
-  //     }
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const installShopify = async (action: 'add' | 'delete') => {
+    await installShopifyCode({ brandId: connectedBrand?.resourceId, markTagId, action });
+    toast.success(action === 'add' ? 'Installed on shopify' : 'Removed from shopify');
+    toast.loading('Please wait!');
+    const selectedTag = await getMarkTagById(markTagId).unwrap();
+    if (selectedTag) {
+      setDomainData({
+        ...domainData,
+        ...selectedTag,
+      });
+    }
+    toast.dismiss();
+  };
+
+  const isLoading = isInstalling || isFetching;
 
   return (
-    <Group>
+    <>
       {domainData?.isShopify && !(domainData.shopifyScriptTag?.length > 0) && (
         <Button
-          fullWidth
-          variant='secondary'
-          leadingIcon={<FiShopify color='#96bf48' size={18} />}
-          size='sm'
-          //  onClick={() => installShopify('add')}
-          loading={loading}
+          variant='primary'
+          leadingIcon={<FiShopify size={18} />}
+          onClick={() => installShopify('add')}
+          loading={isLoading}
         >
           Install on Shopify
         </Button>
       )}
       {domainData?.isShopify && domainData?.shopifyScriptTag?.length > 0 && (
         <Button
-          fullWidth
-          size='sm'
-          variant='secondary'
+          variant='primary'
           leadingIcon={<FiShopify size={18} />}
-          //  onClick={() => installShopify('delete')}
-          loading={loading}
+          onClick={() => installShopify('delete')}
+          loading={isLoading}
         >
-          <Group gap={4}>Remove from Shopify</Group>
+          Remove from Shopify
         </Button>
       )}
-    </Group>
+    </>
   );
 };
 

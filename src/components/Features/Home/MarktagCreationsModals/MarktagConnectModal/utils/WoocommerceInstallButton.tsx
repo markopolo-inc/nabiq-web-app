@@ -1,73 +1,57 @@
-import { Button, Group } from '@nabiq-ui';
+import { FiWooCommerce } from '@nabiq-icons';
+import { Button } from '@nabiq-ui';
+import toast from 'react-hot-toast';
+import { useAppSelector } from 'src/store/hooks';
+import {
+  useInstallWooCommerceCodeMutation,
+  useLazyGetMarkTagByIdQuery,
+} from 'src/store/marktag/markopoloMarktagApi';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const WoocommerceMarktagInstallButton = ({
-  setLoading,
-  markTagId,
-  domainData,
-  setDomainData,
-  loading,
-  fullWidth = false,
-}) => {
-  // const { selectedBrand: brandId } = useAppSelector((state) => state.brand);
+const WoocommerceMarktagInstallButton = ({ markTagId, domainData, setDomainData }) => {
+  const { connectedBrand } = useAppSelector((state) => state.brand);
 
-  // const installWooCommerce = async (action: 'add' | 'delete') => {
-  //   try {
-  //     setLoading(true);
-  //     const res = await markTagApi.installWooCommerceCode({
-  //       brandId,
-  //       markTagId,
-  //       action,
-  //     });
+  const [installWooCommerceCode, { isLoading: isInstalling }] = useInstallWooCommerceCodeMutation();
+  const [getMarkTagById, { isLoading: isFetching }] = useLazyGetMarkTagByIdQuery();
 
-  //     if (res.status === 200) {
-  //       toast.success(
-  //         action === 'add'
-  //           ? 'Installed on woocommerce'
-  //           : 'Removed from woocommerce'
-  //       );
-  //       toast.loading('Please wait!');
-  //       const selectedTag = await markTagApi.getMarkTagById({ markTagId });
-  //       if (selectedTag) {
-  //         setDomainData({
-  //           ...domainData,
-  //           ...selectedTag,
-  //         });
-  //       }
-  //       toast.dismiss();
-  //     }
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const installWooCommerce = async (action: 'add' | 'delete') => {
+    await installWooCommerceCode({ brandId: connectedBrand?.resourceId, markTagId, action });
+    toast.success(action === 'add' ? 'Installed on WooCommerce' : 'Removed from WooCommerce');
+    toast.loading('Please wait!');
+    const selectedTag = await getMarkTagById(markTagId).unwrap();
+    if (selectedTag) {
+      setDomainData({
+        ...domainData,
+        ...selectedTag,
+      });
+    }
+    toast.dismiss();
+  };
+
+  const isLoading = isInstalling || isFetching;
 
   return (
-    <Group>
+    <>
       {domainData?.isWoocommerce && !(domainData?.woocommerceScriptTag?.length > 0) && (
         <Button
-          fullWidth
-          size='sm'
-          //  leadingIcon={<FaWordpress size={18} />}
+          leadingIcon={<FiWooCommerce size={18} />}
           variant='secondary'
-          // onClick={() => installWooCommerce('add')}
-          loading={loading}
+          onClick={() => installWooCommerce('add')}
+          loading={isLoading}
         >
           Install on WooCommerce
         </Button>
       )}
       {domainData?.isWoocommerce && domainData?.woocommerceScriptTag?.length > 0 && (
         <Button
-          fullWidth
-          size='sm'
           variant='secondary'
-          //  onClick={() => installWooCommerce('delete')}
-          loading={loading}
-          // leadingIcon={<FaWordpress size={18} />}
+          onClick={() => installWooCommerce('delete')}
+          loading={isLoading}
+          leadingIcon={<FiWooCommerce size={18} />}
         >
           Remove from WooCommerce
         </Button>
       )}
-    </Group>
+    </>
   );
 };
 

@@ -3,11 +3,6 @@ import { DomainDataType } from 'src/context/MarkTagContext';
 
 import { tagApiSlice } from '../tagApi/tagApiSlice';
 
-interface MarkTagResponse {
-  status: number;
-  data: DomainDataType;
-}
-
 const markopoloMarktagApi = tagApiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMarkopoloMarkTags: builder.query<any[], string>({
@@ -19,7 +14,7 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         },
       }),
     }),
-    getMarkTagById: builder.query<MarkTagResponse | null, string>({
+    getMarkTagById: builder.query<DomainDataType | null, string>({
       query: (markTagId) => ({
         url: '/get-tag',
         method: 'GET',
@@ -27,12 +22,6 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
           markTagId,
         },
       }),
-      transformResponse: (response: { status: number; data: any }) => {
-        if (response.status === 200) {
-          return { ...response.data, markTagId: response.data.resourceId };
-        }
-        return null;
-      },
       async onQueryStarted(_arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
@@ -75,8 +64,8 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         try {
           await queryFulfilled;
           toast.success('Domain registered successfully!');
-        } catch (error) {
-          toast.error(error?.response?.data?.message || 'Could not register domain!');
+        } catch (err) {
+          toast.error(err?.error?.data?.message || 'Could not register domain!');
         }
       },
     }),
@@ -101,6 +90,86 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         }
       },
     }),
+    getShopifyCustomDomain: builder.query<string | null, string>({
+      query: (brandId) => ({
+        url: '/get-shopify-custom-domain',
+        method: 'GET',
+        params: {
+          brandId,
+        },
+      }),
+      transformResponse: (data: { domainName: string }[]) => {
+        return data?.[0]?.domainName || null;
+      },
+      async onQueryStarted(_arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error(err?.error?.data?.message || 'Failed to get shopify custom domain!');
+        }
+      },
+    }),
+    getWoocommerceCustomDomain: builder.query<string | null, string>({
+      query: (brandId) => ({
+        url: '/get-woocommerce-custom-domain',
+        method: 'GET',
+        params: {
+          brandId,
+        },
+      }),
+      transformResponse: (data: { domainName: string }[]) => {
+        return data?.[0]?.domainName || null;
+      },
+      async onQueryStarted(_arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error(err?.error?.data?.message || 'Failed to get woocommerce custom domain!');
+        }
+      },
+    }),
+    installShopifyCode: builder.mutation<
+      any,
+      { brandId: string; markTagId: string; action: string }
+    >({
+      query: ({ brandId, markTagId, action }) => ({
+        url: '/install-code-shopify',
+        method: 'POST',
+        body: {
+          brandId,
+          markTagId,
+          action,
+        },
+      }),
+      async onQueryStarted(_arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (err) {
+          toast.error(err?.error?.data?.message || 'Failed to install Shopify code');
+        }
+      },
+    }),
+    installWooCommerceCode: builder.mutation<
+      any,
+      { brandId: string; markTagId: string; action: string }
+    >({
+      query: ({ brandId, markTagId, action }) => ({
+        url: '/install-code-woocommerce',
+        method: 'POST',
+        body: {
+          brandId,
+          markTagId,
+          action,
+        },
+      }),
+      async onQueryStarted(_arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          toast.error(error?.error?.data?.message || 'Failed to install WooCommerce code');
+        }
+      },
+    }),
   }),
 });
 
@@ -109,4 +178,8 @@ export const {
   useLazyGetMarkTagByIdQuery,
   useRegisterTagMutation,
   useVerifyTagSetupMutation,
+  useLazyGetShopifyCustomDomainQuery,
+  useLazyGetWoocommerceCustomDomainQuery,
+  useInstallShopifyCodeMutation,
+  useInstallWooCommerceCodeMutation,
 } = markopoloMarktagApi;

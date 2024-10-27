@@ -1,22 +1,35 @@
 import { Button, Select, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { DomainDataType, MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
+import { useUpdateSettingMutation } from 'src/store/company/companyApi';
 import { useAppSelector } from 'src/store/hooks';
-import { useRegisterTagMutation } from 'src/store/marktag/markopoloMarktagApi';
+import {
+  useLazyGetMarkTagByIdQuery,
+  useLazyGetShopifyCustomDomainQuery,
+  useLazyGetWoocommerceCustomDomainQuery,
+  useRegisterTagMutation,
+} from 'src/store/marktag/markopoloMarktagApi';
 import { useGetBrandsListQuery } from 'src/store/marktag/marktagApi';
+import { extractMainDomain } from 'src/utils/extractMainDomain';
 
 import HowItWorksModal from '../HowItworksModal';
 
 const RegisterDomain = () => {
   const { gray500, gray600, gray900 } = useGetColors();
+  const [updateSetting] = useUpdateSettingMutation();
   const { marktagType, domain, setDomain, setDomainData, setStep } =
     useContext<MarktagContextType>(MarkTagContext);
 
   const { connectedBrand } = useAppSelector((state) => state.brand);
-  const [resourceId, setResourceId] = useState<string>(connectedBrand?.resourceId || '');
+  const [brandId, setBrandId] = useState<string>(connectedBrand?.resourceId || '');
   const { data: brandsList, isLoading: isLoadingBrandList } = useGetBrandsListQuery();
+  const [getMarkTagDetails, { isLoading: isLoadingMarkTagDetails }] = useLazyGetMarkTagByIdQuery();
   const [registerTag, { isLoading }] = useRegisterTagMutation();
+  const [triggerShopifyDomain, { data: shopifyDomain, isLoading: isLoadingShopify }] =
+    useLazyGetShopifyCustomDomainQuery();
+  const [triggerWoocommerceDomain, { data: woocommerceDomain, isLoading: isLoadingWoocommerce }] =
+    useLazyGetWoocommerceCustomDomainQuery();
 
   const brandsListOptions = useMemo(
     () =>
@@ -28,33 +41,31 @@ const RegisterDomain = () => {
   );
 
   const selectedBrand = useMemo(
-    () => brandsList?.find((item) => item.resourceId === resourceId),
-    [brandsList, resourceId],
+    () => brandsList?.find((item) => item.resourceId === brandId),
+    [brandsList, brandId],
   );
 
-  // useEffect(() => {
-  //   if (marktagType === 'shopify') {
-  //     setLoading(true);
-  //     markTagApi
-  //       .getShopifyCustomDomain({ brandId })
-  //       .then((res) => {
-  //         setDomain(extractMainDomain(res));
-  //       })
-  //       .finally(() => setLoading(false));
-  //   }
-  //   if (marktagType === 'woocommerce') {
-  //     setLoading(true);
-  //     markTagApi
-  //       .getWoocommerceCustomDomain({ brandId })
-  //       .then((res) => {
-  //         setDomain(extractMainDomain(res));
-  //       })
-  //       .finally(() => setLoading(false));
-  //   }
-  // }, [marktagType]);
+  // get the custom domain for the brand
+  useEffect(() => {
+    if (marktagType === 'shopify' && brandId) {
+      triggerShopifyDomain(brandId);
+    }
+    if (marktagType === 'woocommerce' && brandId) {
+      triggerWoocommerceDomain(brandId);
+    }
+  }, [marktagType, brandId, triggerShopifyDomain, triggerWoocommerceDomain]);
+
+  useEffect(() => {
+    if (shopifyDomain && marktagType === 'shopify') {
+      setDomain(extractMainDomain(shopifyDomain));
+    }
+    if (woocommerceDomain && marktagType === 'woocommerce') {
+      setDomain(extractMainDomain(woocommerceDomain));
+    }
+  }, [shopifyDomain, woocommerceDomain, marktagType, setDomain]);
 
   const handleContinueMarkTag = async () => {
-    if (!resourceId) {
+    if (!brandId) {
       toast.error('Select a brand!');
       return;
     }
@@ -72,22 +83,44 @@ const RegisterDomain = () => {
     }
 
     const res = await registerTag({
-      brandId: resourceId,
-      domain: marktagType === 'client-side' ? 'example.com' : domain, // TODO: set a default domain for client-side
+      brandId,
+      domain: marktagType === 'client-side' ? 'mt-client.markopolo.ai' : domain,
       isClient: marktagType === 'client-side',
       isMobile: marktagType === 'mobile',
       isShopify: marktagType === 'shopify',
       isWoocommerce: marktagType === 'woocommerce',
     }).unwrap();
 
+    // save the selected brand
+    if (brandId !== connectedBrand?.resourceId) {
+      const brandPayload = {
+        resourceId: selectedBrand.resourceId,
+        companyId: selectedBrand.companyId,
+        brandName: selectedBrand.brandName,
+        brandWebsite: selectedBrand.brandWebsite,
+        brandLogo: selectedBrand.brandInfo.brandLogo,
+        connectedAccounts: selectedBrand.connectedAccounts,
+      };
+
+      updateSetting({ connectedBrand: brandPayload }).unwrap();
+    }
+
     if (res?.markTagId) {
       const shapedData: DomainDataType = {
         markTagId: res.markTagId,
         records: [res.record],
       };
-      setDomainData(shapedData);
-      setStep(marktagType === 'client-side' ? 'choose' : 'verify');
-      // TODO: fetch domain data for client-side
+
+      if (marktagType === 'client-side') {
+        const response = await getMarkTagDetails(res.markTagId).unwrap();
+
+        const domainData = { ...response, markTagId: response?.resourceId };
+        setDomainData(domainData);
+        setStep('choose');
+      } else {
+        setDomainData(shapedData);
+        setStep('verify');
+      }
     }
   };
 
@@ -105,11 +138,11 @@ const RegisterDomain = () => {
         className='mb-0'
         label='Brand'
         placeholder='Select brand'
-        value={resourceId}
-        onChange={(brandItem) => setResourceId(brandItem)}
+        value={brandId}
+        onChange={(brandItem) => setBrandId(brandItem)}
         data={brandsListOptions}
         leftSection={
-          resourceId && (
+          brandId && (
             <div className='flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-center text-xs font-semibold leading-4'>
               {selectedBrand?.brandName?.charAt(0)?.toUpperCase()}
             </div>
@@ -136,7 +169,7 @@ const RegisterDomain = () => {
       <Stack gap={12} mt={12}>
         <Button
           fullWidth
-          loading={isLoading}
+          loading={isLoading || isLoadingMarkTagDetails || isLoadingShopify || isLoadingWoocommerce}
           disabled={marktagType !== 'client-side' && domain?.length === 0}
           onClick={handleContinueMarkTag}
         >

@@ -30,7 +30,13 @@ const GuidedSupport = ({ setOpened }) => {
           <Button variant='secondary' onClick={() => setStep('choose')}>
             Go back
           </Button>
-          <Button variant='primary' onClick={() => setOpened(false)}>
+          <Button
+            variant='primary'
+            onClick={() => {
+              window.open('https://app.markopolo.ai/settings?to=billing', '_blank');
+              setOpened(false);
+            }}
+          >
             Book a call
           </Button>
         </Group>
