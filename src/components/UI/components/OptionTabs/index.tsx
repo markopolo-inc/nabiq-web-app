@@ -2,7 +2,10 @@ import cn from 'classnames';
 import React, { SetStateAction } from 'react';
 
 interface Option {
-  label: string | React.ReactNode | ((props: { value: string | number }) => React.ReactNode);
+  label:
+    | string
+    | React.ReactNode
+    | ((props: { value: string | number; isSelected: boolean }) => React.ReactNode);
   value: string | number;
 }
 
@@ -29,7 +32,9 @@ const OptionTabs: React.FC<{
               border: isSelected ? '0.75px solid rgba(13, 18, 28, 0.48)' : 'none',
             }}
           >
-            {typeof item.label === 'function' ? item.label({ value: item.value }) : item.label}
+            {typeof item.label === 'function'
+              ? item.label({ value: item.value, isSelected })
+              : item.label}
           </span>
         );
       })}
