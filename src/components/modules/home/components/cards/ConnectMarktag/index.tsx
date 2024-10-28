@@ -5,7 +5,7 @@ type ConnectMarktagPropsTypes = {
   onShowMarktag: () => void;
 };
 
-const ConnectMarktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
+export const ConnectMarktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
   const { primary500 } = useGetColors();
   return (
     <div className='bg-white rounded-xl p-8 shadow-lg flex flex-row gap-4 items-start min-h-[250px]'>
@@ -40,5 +40,3 @@ const ConnectMarktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
     </div>
   );
 };
-
-export default ConnectMarktag;

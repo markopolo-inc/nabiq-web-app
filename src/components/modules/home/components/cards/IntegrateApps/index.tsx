@@ -3,7 +3,7 @@ import { Button, GatewayLogo } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import type { GatewayType } from 'src/interfaces/brand.interface';
 
-const IntegrateApps = () => {
+export const IntegrateApps = () => {
   const navigate = useNavigate();
 
   return (
@@ -40,5 +40,3 @@ const IntegrateApps = () => {
     </div>
   );
 };
-
-export default IntegrateApps;

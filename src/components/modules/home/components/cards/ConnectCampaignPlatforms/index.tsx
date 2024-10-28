@@ -3,7 +3,7 @@ import { Button } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
 
-const ConnectCampaignPlatforms = () => {
+export const ConnectCampaignPlatforms = () => {
   const navigate = useNavigate();
   const { connectedBrand } = useAppSelector((state) => state.brand);
 
@@ -64,5 +64,3 @@ const ConnectCampaignPlatforms = () => {
     </div>
   );
 };
-
-export default ConnectCampaignPlatforms;

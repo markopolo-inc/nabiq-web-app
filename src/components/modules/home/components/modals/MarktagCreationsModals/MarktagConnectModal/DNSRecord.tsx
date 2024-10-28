@@ -38,11 +38,12 @@ const DNSRecord = () => {
       </Stack>
 
       <Stack gap={16} py={12}>
-        <TextInput label='Type' value={domainData?.records?.[0]?.type} />
+        <TextInput label='Type' readOnly value={domainData?.records?.[0]?.type} />
 
         <TextInput
           label='Name'
           value={domainData?.records?.[0]?.name}
+          readOnly
           rightSection={
             <FiCopy01
               size={16}
@@ -56,6 +57,7 @@ const DNSRecord = () => {
         <TextInput
           label='Value'
           value={domainData?.records?.[0]?.value}
+          readOnly
           rightSection={
             <FiCopy01
               size={16}
@@ -66,7 +68,7 @@ const DNSRecord = () => {
           }
         />
 
-        <TextInput label='TTL' value={domainData?.records?.[0]?.ttl} />
+        <TextInput label='TTL' readOnly value={domainData?.records?.[0]?.ttl} />
       </Stack>
 
       <Stack gap={12} pt={20}>

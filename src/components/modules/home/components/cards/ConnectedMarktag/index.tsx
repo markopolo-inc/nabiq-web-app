@@ -6,7 +6,7 @@ type ConnectedMarktagPropsTypes = {
   onShowMarktag: () => void;
 };
 
-const ConnectedMarktag = ({ onShowMarktag }: ConnectedMarktagPropsTypes) => {
+export const ConnectedMarktag = ({ onShowMarktag }: ConnectedMarktagPropsTypes) => {
   const { primary500 } = useGetColors();
   const { markTag } = useAppSelector((state) => state.brand);
 
@@ -41,5 +41,3 @@ const ConnectedMarktag = ({ onShowMarktag }: ConnectedMarktagPropsTypes) => {
     </div>
   );
 };
-
-export default ConnectedMarktag;

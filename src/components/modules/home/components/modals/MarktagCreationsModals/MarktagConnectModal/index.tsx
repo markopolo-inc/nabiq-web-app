@@ -14,7 +14,7 @@ const stepSizeMap: { [key: string]: number } = {
   support: 552,
 };
 
-const MarktagCreationsModals: React.FC<{
+export const MarktagCreationsModals: React.FC<{
   openedModal: boolean;
   setOpenedModal: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ openedModal, setOpenedModal }) => {
@@ -67,5 +67,3 @@ const MarktagCreationsModals: React.FC<{
     </MarkTagContext.Provider>
   );
 };
-
-export default MarktagCreationsModals;
