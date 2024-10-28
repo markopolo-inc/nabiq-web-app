@@ -53,3 +53,29 @@
   right: 0;
   margin: auto;
 }
+
+// Mantine checkbox
+.root {
+  --checkbox-size-sm: 16px;
+  --checkbox-size-md: 20px;
+}
+
+._input {
+  border-color: #cdd5df;
+  background-color: #fff;
+
+  &:checked {
+    border-color: #2972f5;
+    background-color: #2972f5;
+
+    &:disabled {
+      border-color: #cdd5df;
+      background-color: #fff;
+    }
+  }
+
+  &:disabled {
+    border-color: #cdd5df;
+    background-color: #fff;
+  }
+}
