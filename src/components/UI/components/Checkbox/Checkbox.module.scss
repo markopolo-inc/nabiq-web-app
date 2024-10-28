@@ -15,13 +15,21 @@
 
     &:disabled {
       border-color: $gray-300;
-      background-color: $white-base;
+      background-color: $gray-50;
+
+      &:hover {
+        cursor: not-allowed;
+      }
     }
   }
 
   &:disabled {
     border-color: $gray-300;
-    background-color: $white-base;
+    background-color: $gray-50;
+
+    &:hover {
+      cursor: not-allowed;
+    }
   }
 
   &:hover {
