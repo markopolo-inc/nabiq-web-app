@@ -13,13 +13,21 @@ import { useGetConfigsQuery } from 'src/store/controlRoom/controlRoom.api';
 export const appCategories = [
   {
     value: 'queued',
-    label: 'Queued',
-    icon: FiHourglass03,
+    label: ({ isSelected }: { isSelected: boolean }) => (
+      <div className='flex gap-2 items-center'>
+        <FiHourglass03 size={18} color={isSelected ? '#17B26A' : '#9AA4B2'} />
+        Queued
+      </div>
+    ),
   },
   {
     value: 'published',
-    label: 'Published',
-    icon: FiCheckVerified01,
+    label: ({ isSelected }: { isSelected: boolean }) => (
+      <div className='flex gap-2 items-center'>
+        <FiCheckVerified01 size={18} color={isSelected ? '#17B26A' : '#9AA4B2'} />
+        Published
+      </div>
+    ),
   },
 ];
 
