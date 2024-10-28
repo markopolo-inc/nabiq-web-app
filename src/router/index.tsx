@@ -28,6 +28,7 @@ const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
 const ConnectCampaignPlatforms = lazy(() => import('src/pages/ConnectCampaignPlatforms'));
 // const Test = lazy(() => import('src/pages/Test'));
 // const TestButton = lazy(() => import('src/pages/TestButton'));
+const TestCheckbox = lazy(() => import('src/pages/TestCheckbox'));
 
 const Router = () => {
   return (
@@ -73,6 +74,7 @@ const Router = () => {
           <Route path='/verify' element={<VerifyEmail />} />
           {/* <Route path='/test' element={<Test />} />
           <Route path='/test/btn' element={<TestButton />} /> */}
+          <Route path='/test/checkbox' element={<TestCheckbox />} />
         </Route>
       </Routes>
     </Suspense>
