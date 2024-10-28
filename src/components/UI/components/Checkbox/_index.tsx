@@ -3,7 +3,7 @@ import { ChangeEventHandler, useRef } from 'react';
 
 import { useGetColors } from '../../hooks';
 import Text from '../Text';
-import styles from './Checkbox.module.scss';
+import styles from './_Checkbox.module.scss';
 
 const Checkbox = ({
   indeterminate = false,

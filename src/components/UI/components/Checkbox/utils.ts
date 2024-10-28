@@ -18,28 +18,6 @@ export interface TCheckboxProps extends CheckboxProps {
   id?: string;
 }
 
-const getClassesByVariant = (variant: TCheckboxVariant) => {
-  switch (variant) {
-    case 'checkbox':
-      return cn('checkbox');
-    case 'radio':
-      return cn('radio');
-    default:
-      return '';
-  }
-};
-
-const getDisabledClasses = (variant: TCheckboxVariant) => {
-  switch (variant) {
-    case 'checkbox':
-      return cn('checkbox_disabled');
-    case 'radio':
-      return cn('radio_disabled');
-    default:
-      return '';
-  }
-};
-
 const getClassesBySize = (size: TCheckboxSize) => {
   switch (size) {
     case 'sm':
@@ -53,4 +31,4 @@ const getInputColor = () => {
   return cn(styles._input);
 };
 
-export { getClassesByVariant, getDisabledClasses, getClassesBySize, getInputColor };
+export { getClassesBySize, getInputColor };
