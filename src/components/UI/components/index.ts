@@ -24,7 +24,7 @@ export { default as TextArea } from './TextArea';
 export { default as PasswordInput } from './PasswordInput';
 export { default as Select } from './Select';
 export { default as StyledStepper } from './Stepper';
-export { default as Checkbox } from './Checkbox';
+export { default as Checkbox } from './Checkbox/index.tsx';
 export { default as OtpInput } from './OtpInput';
 
 export { default as Table } from './Table';
