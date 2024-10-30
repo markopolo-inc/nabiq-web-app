@@ -1,13 +1,12 @@
-import ConnectCampaignPlatforms from 'components/Features/Home/ConnectCampaignPlatforms';
-import ConnectMarktag from 'components/Features/Home/ConnectMarktag';
-import ConnectMarktagModal from 'components/Features/Home/ConnectMarktagModal';
-import CreateNewMarktagModal from 'components/Features/Home/CreateNewMarktagModal';
-import GuidedMarktagModal from 'components/Features/Home/GuidedMarktagModal';
-import InstallCodeManuallyModal from 'components/Features/Home/InstallCodeManuallyModal';
-import IntegrateApps from 'components/Features/Home/IntegrateApps';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
-import ConnectedMarktag from 'src/components/Features/Home/ConnectedMarktag';
+import {
+  ConnectCampaignPlatforms,
+  ConnectMarktag,
+  ConnectedMarktag,
+  IntegrateApps,
+  MarktagCreationsModals,
+} from 'src/components/modules/home';
 import { useAppSelector } from 'store/hooks';
 
 const Home = () => {
@@ -15,32 +14,12 @@ const Home = () => {
   const company = useAppSelector((state) => state.company);
 
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
-  const [showNewMarktagModal, setShowNewMarktagModal] = useState<boolean>(false);
-  const [showCodeMarktagModal, setShowCodearktagModal] = useState<boolean>(false);
-  const [showGuidedMarktagModal, setShowGuidedMarktagModal] = useState<boolean>(false);
 
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
 
-      <ConnectMarktagModal
-        showModal={showMarktagModal}
-        setShowModal={setShowMarktagModal}
-        setShowCreateNewModal={setShowNewMarktagModal}
-      />
-      <CreateNewMarktagModal
-        showModal={showNewMarktagModal}
-        setShowModal={setShowNewMarktagModal}
-      />
-      <InstallCodeManuallyModal
-        showModal={showCodeMarktagModal}
-        setShowModal={setShowCodearktagModal}
-      />
-
-      <GuidedMarktagModal
-        showModal={showGuidedMarktagModal}
-        setShowModal={setShowGuidedMarktagModal}
-      />
+      <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
       <div className='flex flex-col gap-16'>
         <div className='flex flex-col'>

@@ -99,8 +99,8 @@ const PlatformDetails = () => {
           disabled={isLoadingBrandList}
         />
 
-        {resourceId &&
-          (platforms.filter((item) => item.isConnected).length > 0 ? (
+        {resourceId && !isLoadingBrandList ? (
+          platforms.filter((item) => item.isConnected).length > 0 ? (
             <Stack gap={12}>
               <Text size='14px' weight={500} className='text-gray-700 leading-5'>
                 Connected platforms
@@ -119,14 +119,10 @@ const PlatformDetails = () => {
             <Text size='14px' weight={500} className='text-red-500 leading-5'>
               No connected platform found!
             </Text>
-          ))}
+          )
+        ) : null}
 
-        <Button
-          className='w-full !mt-12'
-          variant={!resourceId ? 'secondary' : 'primary'}
-          disabled={!resourceId}
-          onClick={handleConnect}
-        >
+        <Button className='w-full !mt-12' disabled={!resourceId} onClick={handleConnect}>
           Connect
         </Button>
       </div>

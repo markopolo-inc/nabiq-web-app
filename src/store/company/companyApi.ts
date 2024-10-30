@@ -47,6 +47,7 @@ export const companyApi = apiSlice.injectEndpoints({
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue?.data;
       },
+      invalidatesTags: ['Company'],
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
