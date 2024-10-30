@@ -27,6 +27,8 @@ export { default as StyledStepper } from './Stepper';
 export { default as Checkbox } from './Checkbox/index.tsx';
 export { default as OtpInput } from './OtpInput';
 
+// Data representation
+export { default as Alert } from './Alert';
 export { default as Table } from './Table';
 export { default as Avatar } from './Avatar';
 export { default as Dialog } from './Dialog';
@@ -40,6 +42,7 @@ export { default as Th } from './Th';
 export { default as Td } from './Td';
 export { default as OptionTabs } from './OptionTabs';
 export { default as Dropzone } from './Dropzone';
+export { default as List } from './List';
 
 // Typography
 export { default as Text } from './Text';

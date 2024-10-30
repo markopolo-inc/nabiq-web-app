@@ -1,0 +1,48 @@
+import { Command } from '@nabiq-icons';
+import { Button, Group, Stack, useGetColors } from '@nabiq-ui';
+import { useContext } from 'react';
+import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
+
+const GuidedSupport = ({ setOpened }) => {
+  const { primary500 } = useGetColors();
+  const { setStep } = useContext<MarktagContextType>(MarkTagContext);
+
+  return (
+    <Stack gap={64} align=''>
+      <Stack align='flex-start' className='mr-auto' gap={8}>
+        <div className='flex gap-4'>
+          <div className='flex items-center justify-center w-8 h-8 border border-success-50 rounded-full bg-gray-100'>
+            <Command size={12} color={primary500} fill={primary500} />
+          </div>
+
+          <Stack gap={8} className='pr-3'>
+            <p className='text-gray-900 text-[24px] font-semibold'>
+              Guided Implementation for MarkTag
+            </p>
+            <p className='text-gray-600 text-base font-normal'>
+              Let us help you setup ‘Marktag’ easily.
+            </p>
+          </Stack>
+        </div>
+      </Stack>
+      <Stack align='end'>
+        <Group gap={12}>
+          <Button variant='secondary' onClick={() => setStep('choose')}>
+            Go back
+          </Button>
+          <Button
+            variant='primary'
+            onClick={() => {
+              window.open('https://app.markopolo.ai/settings?to=billing', '_blank');
+              setOpened(false);
+            }}
+          >
+            Book a call
+          </Button>
+        </Group>
+      </Stack>
+    </Stack>
+  );
+};
+
+export default GuidedSupport;

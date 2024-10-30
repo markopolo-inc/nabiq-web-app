@@ -7,6 +7,7 @@ export { default as ArrowNarrowLeft } from './ArrowNarrowLeft';
 export { default as ArrowNarrowDown } from './ArrowNarrowDown';
 export { default as ArrowNarrowUpRight } from './ArrowNarrowUpRight';
 export { default as FiAnnouncement01 } from './Announcement01';
+export { default as FiAlertTriangle } from './AlertTriangle';
 
 // B
 
@@ -24,6 +25,7 @@ export { default as FiCircle } from './Circle';
 export { default as FiCursorClick01 } from './CursorClick01';
 export { default as FiCode } from './Code';
 export { default as FiCheckCircle } from './CheckCircle';
+export { default as FiCopy01 } from './Copy01';
 
 // D
 export { default as FiDataFlow02 } from './DataFlow02';
@@ -72,6 +74,7 @@ export { default as FiPrimitiveDot } from './PrimitiveDot';
 export { default as FiPuzzlePiece02 } from './PuzzlePiece02';
 export { default as FiPen } from './Pen';
 export { default as FiPlatformIcon } from './PlatformIcon';
+export { default as FiPhone01 } from './Phone01';
 
 // R
 
@@ -82,6 +85,7 @@ export { default as FiSettings01 } from './Settings01';
 export { default as FiSettings02 } from './Settings02';
 export { default as FiStar04 } from './Star04';
 export { default as FiShopify } from './Shopify';
+export { default as FiServer01 } from './Server01';
 
 // T
 export { default as FiTrash } from './Trash';
@@ -90,6 +94,9 @@ export { default as FiThumbsDown } from './ThumbsDown';
 
 // U
 export { default as FiUser03 } from './User03';
+
+// W
+export { default as FiWooCommerce } from './WooCommerce';
 
 // X
 export { default as XClose } from './XClose';
