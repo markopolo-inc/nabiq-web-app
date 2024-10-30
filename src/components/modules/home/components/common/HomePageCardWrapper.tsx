@@ -1,4 +1,4 @@
-export const HomePageCard = ({
+export const HomePageCardWrapper = ({
   children,
   icon,
 }: {

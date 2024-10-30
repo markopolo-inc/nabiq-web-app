@@ -41,11 +41,14 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
       <Stack gap={24}>
         {lines.map((line, index) => (
           <div className='flex gap-2 items-start'>
-            <Checkbox
-              size='sm'
-              checked={selected.includes(line)}
-              onChange={() => handleSelect(line)}
-            />
+            <span className='mt-1'>
+              <Checkbox
+                size='sm'
+                checked={selected.includes(line)}
+                onChange={() => handleSelect(line)}
+              />
+            </span>
+
             <p key={index} className='text-gray-700 text-sm font-medium'>
               {line}
             </p>
