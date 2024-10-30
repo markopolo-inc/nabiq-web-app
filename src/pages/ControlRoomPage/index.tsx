@@ -1,6 +1,6 @@
 import { FiCheckVerified01, FiHelpCircle, FiHourglass03 } from '@nabiq-icons';
-import { Button, ContentLoader, Group, OptionTabs, Stack } from '@nabiq-ui';
-import { useEffect, useState } from 'react';
+import { Button, ContentLoader, Group, Stack } from '@nabiq-ui';
+import { useState } from 'react';
 import {
   HowDoesFeedbackWorkModal,
   LearnMoreControlRoomModal,
@@ -32,26 +32,13 @@ export const appCategories = [
 ];
 
 const ControlRoom = () => {
-  const [category, setCategory] = useState<'queued' | 'published'>('queued');
+  const [category, _setCategory] = useState<'queued' | 'published'>('queued');
   const [showHowDoesFeedbackModal, setShowHowDoesFeedbackModal] = useState<boolean>(false);
   const [showLearnMoreControlRoomModal, setLearnMoreControlRoomModal] = useState<boolean>(false);
 
   const { data, isLoading } = useGetConfigsQuery({ type: category, limit: 10, page: 1 });
 
   const configs: IControlRoomConfig[] = data?.data?.configs || [];
-
-  useEffect(() => {
-    const hasVisited = localStorage.getItem('hasVisitedControlRoom');
-
-    if (!hasVisited) {
-      const timer = setTimeout(() => {
-        setLearnMoreControlRoomModal(true);
-        localStorage.setItem('hasVisitedControlRoom', 'true');
-      }, 1000);
-
-      return () => clearTimeout(timer);
-    }
-  }, []);
 
   return (
     <>
@@ -63,26 +50,42 @@ const ControlRoom = () => {
         showModal={showHowDoesFeedbackModal}
         setShowModal={setShowHowDoesFeedbackModal}
       />
-      <Stack gap={32}>
-        <Stack gap={64}>
-          <Group justify='space-between'>
-            <Stack gap={4}>
-              <p className='text-gray-900 text-3xl font-semibold'>Control room</p>
-              <p className='text-gray-600 text-base font-normal'>
-                View cohorts and approve content generated for campaigns.
-              </p>
-            </Stack>
+      <Stack gap={64}>
+        {/*<Stack gap={64}>*/}
+        {/*  <Group justify='space-between'>*/}
+        {/*    <Stack gap={4}>*/}
+        {/*      <p className='text-gray-900 text-3xl font-semibold'>Control room</p>*/}
+        {/*      <p className='text-gray-600 text-base font-normal'>*/}
+        {/*        View cohorts and approve content generated for campaigns.*/}
+        {/*      </p>*/}
+        {/*    </Stack>*/}
 
-            <Button
-              onClick={() => setShowHowDoesFeedbackModal(true)}
-              variant='link'
-              leadingIcon={<FiHelpCircle size={20} />}
-            >
-              What is control room?
-            </Button>
-          </Group>
-          <OptionTabs setActive={setCategory} active={category} options={appCategories} />
-        </Stack>
+        {/*    <Button*/}
+        {/*      onClick={() => setLearnMoreControlRoomModal(true)}*/}
+        {/*      variant='link'*/}
+        {/*      leadingIcon={<FiHelpCircle size={20} />}*/}
+        {/*    >*/}
+        {/*      What is control room?*/}
+        {/*    </Button>*/}
+        {/*  </Group>*/}
+        {/*  <OptionTabs setActive={setCategory} active={category} options={appCategories} />*/}
+        {/*</Stack>*/}
+        <Group justify='space-between'>
+          <Stack gap={4}>
+            <p className='text-gray-900 text-3xl font-semibold'>Control room</p>
+            <p className='text-gray-600 text-base font-normal'>
+              View cohorts and approve content generated for campaigns.
+            </p>
+          </Stack>
+
+          <Button
+            onClick={() => setLearnMoreControlRoomModal(true)}
+            variant='link'
+            leadingIcon={<FiHelpCircle size={20} />}
+          >
+            What is control room?
+          </Button>
+        </Group>
         {isLoading ? (
           <ContentLoader />
         ) : (
