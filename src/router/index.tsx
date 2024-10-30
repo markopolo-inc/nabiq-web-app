@@ -21,9 +21,10 @@ const TopPerformingCampaingBreakDown = lazy(
 );
 const NonPerformingCampaigns = lazy(() => import('src/pages/NonPerformingCampaigns'));
 const ControlRoom = lazy(() => import('pages/ControlRoomPage'));
-const ControlRoomCohort = lazy(() => import('src/pages/ControlRoomPage/Cohort'));
-const ControlRoomContent = lazy(() => import('src/pages/ControlRoomPage/Cohort/Content'));
-const ControlRoomPublished = lazy(() => import('src/pages/ControlRoomPage/PublishedContent'));
+const ContentSamples = lazy(() => import('pages/ControlRoomPage/ContentSamples'));
+// const ControlRoomCohort = lazy(() => import('src/pages/ControlRoomPage/Cohort'));
+// const ControlRoomContent = lazy(() => import('src/pages/ControlRoomPage/Cohort/Content'));
+// const ControlRoomPublished = lazy(() => import('src/pages/ControlRoomPage/PublishedContent'));
 const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
 const ConnectCampaignPlatforms = lazy(() => import('src/pages/ConnectCampaignPlatforms'));
 // const Test = lazy(() => import('src/pages/Test'));
@@ -41,12 +42,13 @@ const Router = () => {
               <Route path='/integrations' element={<IntegrationsPage />} />
               <Route path='/campaigns' element={<Campaigns />} />
               <Route path='/control-room' element={<ControlRoom />} />
-              <Route path='/control-room/cohort/:configId' element={<ControlRoomCohort />} />
-              <Route
-                path='/control-room/cohort/content/:configId'
-                element={<ControlRoomContent />}
-              />
-              <Route path='/control-room/published/:configId' element={<ControlRoomPublished />} />
+              <Route path='/control-room/content-samples' element={<ContentSamples />} />
+              {/*<Route path='/control-room/cohort/:configId' element={<ControlRoomCohort />} />*/}
+              {/*<Route*/}
+              {/*  path='/control-room/cohort/content/:configId'*/}
+              {/*  element={<ControlRoomContent />}*/}
+              {/*/>*/}
+              {/*<Route path='/control-room/published/:configId' element={<ControlRoomPublished />} />*/}
               {/* <Route path='/monitoring' element={<Monitoring />} /> */}
               <Route path='/monitoring' element={<TopPerformingCampaigns />} />
               <Route
