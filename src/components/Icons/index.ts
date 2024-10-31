@@ -59,6 +59,9 @@ export { default as FiLineChartUp05 } from './LineChartUp05';
 export { default as FiLifeBuoy01 } from './LifeBuoy01';
 export { LinkBroken01 as FiLinkBroken01 } from './LinkBroken01';
 
+// k
+export { default as Klaviyo } from './Klaviyo';
+
 // M
 export { default as FiMail01 } from './Mail01';
 export { default as Message } from './Message';
@@ -81,6 +84,7 @@ export { default as FiPhone01 } from './Phone01';
 // S
 export { default as FiSearchLg } from './SearchLg';
 export { default as FiSliders01 } from './Sliders01';
+export { default as SlashCircle01 } from './SlashCircle01';
 export { default as FiSettings01 } from './Settings01';
 export { default as FiSettings02 } from './Settings02';
 export { default as FiStar04 } from './Star04';
