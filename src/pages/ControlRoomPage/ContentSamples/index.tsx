@@ -1,10 +1,13 @@
-import { FiHelpCircle, Klaviyo, SlashCircle01 } from '@nabiq-icons';
-import { Breadcrumbs, Button, ContentLoader, Group, OptionTabs, Stack } from '@nabiq-ui';
+import { FiCheck, FiCrossX, FiHelpCircle, Klaviyo, SlashCircle01 } from '@nabiq-icons';
+import { Badge, Breadcrumbs, Button, Group, OptionTabs, Stack } from '@nabiq-ui';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { HowDoesFeedbackWorkModal, Published, Queued } from 'src/components/modules/control-room';
-import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
-import { useGetConfigsQuery } from 'src/store/controlRoom/controlRoom.api';
+import { useNavigate, useParams } from 'react-router-dom';
+import { HowDoesFeedbackWorkModal } from 'src/components/modules/control-room';
+import { IControlRoomConfigCohortContent } from 'src/interfaces/controlRoom.interface';
+import {
+  useGetConfigContentQuery,
+  useMarkConfigContentMutation,
+} from 'src/store/controlRoom/controlRoom.api';
 
 export const appCategories = [
   {
@@ -33,9 +36,16 @@ const ContentSamples = () => {
   const [category, setCategory] = useState<'queued' | 'published'>('queued');
   const [showHowDoesFeedbackModal, setShowHowDoesFeedbackModal] = useState<boolean>(false);
 
-  const { data, isLoading } = useGetConfigsQuery({ type: category, limit: 10, page: 1 });
+  const { configId } = useParams();
+  const [markConfig, { isLoading }] = useMarkConfigContentMutation();
 
-  const configs: IControlRoomConfig[] = data?.data?.configs || [];
+  const { data } = useGetConfigContentQuery(configId);
+  const configData: IControlRoomConfigCohortContent = data?.data || {};
+  const contents = configData?.contents || [];
+
+  const handleMarkConfig = async (contentId: string, status: 'irrelevant' | 'relevant') => {
+    await markConfig({ configId, payload: { id: contentId, status } }).unwrap();
+  };
 
   return (
     <>
@@ -80,14 +90,67 @@ const ContentSamples = () => {
 
           <OptionTabs setActive={setCategory} active={category} options={appCategories} />
 
-          {isLoading ? (
-            <ContentLoader />
-          ) : (
-            <Stack align='center'>
-              {category === 'queued' && <Queued configs={configs} />}
-              {category === 'published' && <Published configs={configs} />}
-            </Stack>
-          )}
+          {/*{isLoading ? (*/}
+          {/*  <ContentLoader />*/}
+          {/*) : (*/}
+          {/*  <Stack align='center'>*/}
+          {/*    {category === 'queued' && <Queued configs={configs} />}*/}
+          {/*    {category === 'published' && <Published configs={configs} />}*/}
+          {/*  </Stack>*/}
+          {/*)}*/}
+
+          <Stack align='center' gap={32}>
+            {contents?.map((content, idx) => (
+              <Stack
+                key={idx}
+                className='rounded-xl border-gray-200 border p-6 max-w-[744px]'
+                gap={24}
+              >
+                <Stack className='font-medium text-[12px] text-gray-600'>
+                  <p>Subject: {content?.subject}</p>
+                  <p>{content?.content}</p>
+                </Stack>
+                {!Boolean(content?.status) || content?.status === 'not_marked' ? (
+                  <Group justify='flex-end'>
+                    <Button
+                      disabled={isLoading}
+                      variant='secondary'
+                      size='sm'
+                      trailingIcon={<FiCrossX color='#4B5565' size={11} />}
+                      onClick={() => handleMarkConfig(content?.id, 'irrelevant')}
+                    >
+                      Irrelavant
+                    </Button>
+                    <Button
+                      disabled={isLoading}
+                      variant='secondary-black'
+                      size='sm'
+                      trailingIcon={<FiCheck size={16} color='white' strokeWidth={1} />}
+                      onClick={() => handleMarkConfig(content?.id, 'relevant')}
+                    >
+                      I find this relevant
+                    </Button>
+                  </Group>
+                ) : (
+                  <Group justify='flex-end'>
+                    {content?.status === 'relevant' && (
+                      <Badge color='success' size='lg'>
+                        <FiCheck size={16} strokeWidth={1} />
+                        Relevant
+                      </Badge>
+                    )}
+
+                    {content?.status === 'irrelevant' && (
+                      <Badge color='warning' size='lg'>
+                        <FiCrossX size={10} />
+                        Irrelevant
+                      </Badge>
+                    )}
+                  </Group>
+                )}
+              </Stack>
+            ))}
+          </Stack>
         </Stack>
       </Stack>
     </>

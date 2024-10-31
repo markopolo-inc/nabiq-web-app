@@ -123,7 +123,7 @@ export const ConfigCard = ({
               <Button
                 size='sm'
                 trailingIcon={<FiChevronRight />}
-                onClick={() => navigate(`/control-room/cohort/content/${config?.id}`)}
+                onClick={() => navigate(`/control-room/content-samples/${config?.id}`)}
               >
                 View content sample
               </Button>

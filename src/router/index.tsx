@@ -42,7 +42,8 @@ const Router = () => {
               <Route path='/integrations' element={<IntegrationsPage />} />
               <Route path='/campaigns' element={<Campaigns />} />
               <Route path='/control-room' element={<ControlRoom />} />
-              <Route path='/control-room/content-samples' element={<ContentSamples />} />
+              <Route path='/control-room/content-samples/:configId' element={<ContentSamples />} />
+              {/*// http://localhost:3000/control-room/cohort/content/797d7ab1-578a-4f07-a290-f3d829b70882*/}
               {/*<Route path='/control-room/cohort/:configId' element={<ControlRoomCohort />} />*/}
               {/*<Route*/}
               {/*  path='/control-room/cohort/content/:configId'*/}
