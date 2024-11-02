@@ -13,12 +13,6 @@ export const appCategories = [
   {
     value: 'samples',
     label: 'Samples',
-    // label: ({ isSelected }: { isSelected: boolean }) => (
-    //   <div className='flex gap-2 items-center'>
-    //     <FiHourglass03 size={18} color={isSelected ? '#17B26A' : '#9AA4B2'} />
-    //     Queued
-    //   </div>
-    // ),
   },
   {
     value: 'blocked_by_ai',

@@ -22,13 +22,15 @@ const ModalBody: React.FC<{
         </p>
       </div>
 
-      <Button
-        onClick={() => window.open('https://www.markopolo.ai/products/nabiq', '_blank')}
-        variant='link'
-        trailingIcon={<FiChevronRight color={primary600} />}
-      >
-        Learn more about control room
-      </Button>
+      <div className='bg-gray-50 rounded-xl px-6'>
+        <Button
+          onClick={() => window.open('https://www.markopolo.ai/products/nabiq', '_blank')}
+          variant='link'
+          trailingIcon={<FiChevronRight color={primary600} />}
+        >
+          Learn more about control room
+        </Button>
+      </div>
       <Button onClick={() => setOpened(false)} fullWidth variant='primary' size='md'>
         Got it
       </Button>
