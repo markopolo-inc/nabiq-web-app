@@ -19,19 +19,13 @@ export const ConfigCard = ({
       <Stack className='rounded-xl border-gray-200 border p-6 w-[552px]' gap={32}>
         <Stack gap={20}>
           <Group justify='space-between'>
-            {/*<Badge color='gray'>Step {config?.step}</Badge>*/}
-            <Badge color='gray'>Discover Bali</Badge>
-            {/*{config?.hasFeedBack && (*/}
-            {/*  <Badge color='success'>*/}
-            {/*    <FiDot size={8} color='#17B26A' />*/}
-            {/*    Feedback given*/}
-            {/*  </Badge>*/}
-            {/*)}*/}
-
-            <Badge color='success'>
-              <FiDot size={8} color='#17B26A' />
-              Feedback given
-            </Badge>
+            <Badge color='gray'>{config?.type}</Badge>
+            {config?.hasFeedBack && (
+              <Badge color='success'>
+                <FiDot size={8} color='#17B26A' />
+                Feedback given
+              </Badge>
+            )}
           </Group>
 
           {!isPublished && (
@@ -84,57 +78,24 @@ export const ConfigCard = ({
           )}
         </Stack>
 
-        {/*{isPublished && (*/}
-        {/*  <Group>*/}
-        {/*    <Button*/}
-        {/*      size='sm'*/}
-        {/*      trailingIcon={<FiChevronRight />}*/}
-        {/*      onClick={() => navigate(`/control-room/published/${config?.id}`)}*/}
-        {/*    >*/}
-        {/*      View published content*/}
-        {/*    </Button>*/}
-        {/*  </Group>*/}
-        {/*)}*/}
-
         {!isPublished && (
           <>
-            {/*{config?.status !== 'processing' ? (*/}
-            {/*  <Group>*/}
-            {/*    <Button*/}
-            {/*      size='sm'*/}
-            {/*      trailingIcon={<FiChevronRight />}*/}
-            {/*      onClick={() => navigate(`/control-room/cohort/content/${config?.id}`)}*/}
-            {/*    >*/}
-            {/*      View content sample*/}
-            {/*    </Button>*/}
-            {/*    <Button*/}
-            {/*      size='sm'*/}
-            {/*      variant='secondary-black'*/}
-            {/*      onClick={() => navigate(`/control-room/cohort/${config?.id}`)}*/}
-            {/*    >*/}
-            {/*      View cohort*/}
-            {/*    </Button>*/}
-            {/*  </Group>*/}
-            {/*) : (*/}
-            {/*  <></>*/}
-            {/*)}*/}
-
-            <Group>
-              <Button
-                size='sm'
-                trailingIcon={<FiChevronRight />}
-                onClick={() => navigate(`/control-room/content-samples/${config?.id}`)}
-              >
-                View content sample
-              </Button>
-              {/*<Button size='sm' variant='link'>*/}
-              {/*  125 identified individuals*/}
-              {/*</Button>*/}
-
-              <Badge size='lg' color='primary'>
-                125 identified individuals
-              </Badge>
-            </Group>
+            {config?.status !== 'processing' ? (
+              <Group>
+                <Button
+                  size='sm'
+                  trailingIcon={<FiChevronRight />}
+                  onClick={() => navigate(`/control-room/content-samples/${config?.id}`)}
+                >
+                  View content sample
+                </Button>
+                <Badge size='lg' color='primary'>
+                  125 identified individuals
+                </Badge>
+              </Group>
+            ) : (
+              <></>
+            )}
           </>
         )}
       </Stack>
