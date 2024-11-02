@@ -27,7 +27,7 @@ export const appCategories = [
 
 const ContentSamples = () => {
   const navigate = useNavigate();
-  const [category, setCategory] = useState<'queued' | 'published'>('queued');
+  const [category, setCategory] = useState<'samples' | 'blocked_by_ai'>('samples');
   const [showHowDoesFeedbackModal, setShowHowDoesFeedbackModal] = useState<boolean>(false);
 
   const { configId } = useParams();
