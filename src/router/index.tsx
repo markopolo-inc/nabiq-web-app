@@ -25,7 +25,7 @@ const ControlRoomCohort = lazy(() => import('src/pages/ControlRoomPage/Cohort'))
 const ControlRoomContent = lazy(() => import('src/pages/ControlRoomPage/Cohort/Content'));
 const ControlRoomPublished = lazy(() => import('src/pages/ControlRoomPage/PublishedContent'));
 const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
-const ConnectCampaignPlatforms = lazy(() => import('src/pages/ConnectCampaignPlatforms'));
+const ConnectCampaignPlatforms = lazy(() => import('src/pages/ConnectPlatforms'));
 // const Test = lazy(() => import('src/pages/Test'));
 // const TestButton = lazy(() => import('src/pages/TestButton'));
 const TestCheckbox = lazy(() => import('src/pages/TestCheckbox'));

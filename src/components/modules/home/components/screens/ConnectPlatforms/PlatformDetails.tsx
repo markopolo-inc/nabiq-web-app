@@ -1,12 +1,12 @@
 import { FiPlatformIcon } from '@nabiq-icons';
-import { Button, Select, Stack, Text } from '@nabiq-ui';
+import { Button, Group, Select, Stack, Text } from '@nabiq-ui';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUpdateSettingMutation } from 'src/store/company/companyApi';
 import { useAppSelector } from 'src/store/hooks.ts';
 import { useGetBrandsListQuery } from 'src/store/marktag/marktagApi.ts';
 
-const PlatformDetails = () => {
+export const PlatformDetails = () => {
   const navigate = useNavigate();
   const [updateSetting] = useUpdateSettingMutation();
   const user = useAppSelector((state) => state.user);
@@ -99,6 +99,26 @@ const PlatformDetails = () => {
           disabled={isLoadingBrandList}
         />
 
+        {!isLoadingBrandList && brandsListOptions?.length === 0 && (
+          <Group gap={6} className='-mt-4'>
+            <Text size='14px' weight={500} className='text-red-500 leading-5'>
+              No brands found!
+            </Text>
+            <Button
+              size='sm'
+              variant='link'
+              onClick={() => {
+                window.open(
+                  'https://app.markopolo.ai/login?redirect_uri=https://app.markopolo.ai/brand/dashboard',
+                  '_blank',
+                );
+              }}
+            >
+              Create a brand
+            </Button>
+          </Group>
+        )}
+
         {resourceId && !isLoadingBrandList ? (
           platforms.filter((item) => item.isConnected).length > 0 ? (
             <Stack gap={12}>
@@ -129,5 +149,3 @@ const PlatformDetails = () => {
     </div>
   );
 };
-
-export default PlatformDetails;

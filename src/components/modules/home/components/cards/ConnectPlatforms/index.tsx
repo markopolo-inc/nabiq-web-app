@@ -1,10 +1,12 @@
 import { ArrowNarrowUpRight, FiHexagon01, FiPlatformIcon } from '@nabiq-icons';
 import { Button } from '@nabiq-ui';
-import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
 
-export const ConnectCampaignPlatforms = () => {
-  const navigate = useNavigate();
+type ConnectedMarktagPropsTypes = {
+  onShowPlatform: () => void;
+};
+
+export const ConnectPlatforms = ({ onShowPlatform }: ConnectedMarktagPropsTypes) => {
   const { connectedBrand } = useAppSelector((state) => state.brand);
 
   const platforms = [
@@ -28,8 +30,7 @@ export const ConnectCampaignPlatforms = () => {
       <div className='flex gap-3 flex-col justify-between h-full'>
         <div className='flex flex-col gap-16'>
           <div className='flex flex-col gap-1'>
-            <p className='text-gray-900 text-lg font-semibold'>Connect campaign platforms</p>
-            <p className='text-gray-600 text-md font-medium'>Connect campaign with Markopolo.ai</p>
+            <p className='text-gray-900 text-lg font-semibold'>Connect platforms</p>
             <p className='text-gray-600 text-sm font-normal'>
               Connect and import data from ads you have run on facebook ads, google ads and linkedin
               ads.
@@ -40,7 +41,7 @@ export const ConnectCampaignPlatforms = () => {
           <Button
             className='!w-36'
             variant='secondary'
-            onClick={() => navigate('/connect-platforms')}
+            onClick={onShowPlatform}
             trailingIcon={
               platforms.filter((item) => item.isConnected)?.length ? (
                 <ArrowNarrowUpRight size={24} color='#4B5565' style={{ marginTop: 6 }} />

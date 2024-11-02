@@ -3,7 +3,7 @@ import { Button, Image, Text } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import logo from 'src/assets/logo/nabiq-dark-logo.png';
 
-const MarktagSidebar = () => {
+export const MarktagSidebar = () => {
   const navigate = useNavigate();
 
   return (
@@ -38,5 +38,3 @@ const MarktagSidebar = () => {
     </div>
   );
 };
-
-export default MarktagSidebar;

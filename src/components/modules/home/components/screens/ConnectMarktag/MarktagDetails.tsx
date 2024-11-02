@@ -12,7 +12,7 @@ import {
 
 type MarktagsType = MarktagsResponseInterface;
 
-const MarktagDetails = () => {
+export const MarktagDetails = () => {
   const navigate = useNavigate();
 
   const user = useAppSelector((state) => state.user);
@@ -138,5 +138,3 @@ const MarktagDetails = () => {
     </div>
   );
 };
-
-export default MarktagDetails;
