@@ -43,7 +43,7 @@ const ModalBody = ({ setOpened }) => {
   );
 };
 
-const CampaignFirstCreationModal: React.FC<{
+export const CampaignFirstCreationModal: React.FC<{
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ showModal, setShowModal }) => {
@@ -61,5 +61,3 @@ const CampaignFirstCreationModal: React.FC<{
     </Modal>
   );
 };
-
-export default CampaignFirstCreationModal;
