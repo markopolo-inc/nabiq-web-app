@@ -10,4 +10,7 @@ export { IntegrateApps } from 'components/modules/home/components/cards/Integrat
 
 // Screens
 export { PlatformDetails } from 'components/modules/home/components/screens/ConnectPlatforms/PlatformDetails';
+export { PlatformSidebar } from 'components/modules/home/components/screens/ConnectPlatforms/PlatformSidebar';
 export { MarktagDetails } from 'components/modules/home/components/screens/ConnectMarktag/MarktagDetails';
+export { MarktagSidebar } from 'components/modules/home/components/screens/ConnectMarktag/MarktagSidebar';
+export { ConnectionButton } from 'components/modules/home/components/screens/ConnectedPlatforms/ConnectionButton';

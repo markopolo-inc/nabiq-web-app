@@ -1,6 +1,5 @@
 import { HeaderTitle } from 'layouts';
-import { MarktagDetails } from 'src/components/modules/home';
-import { MarktagSidebar } from 'src/components/modules/home/components/screens/ConnectMarktag/MarktagSidebar';
+import { MarktagDetails, MarktagSidebar } from 'src/components/modules/home';
 
 const ConnectMarktag = () => {
   return (

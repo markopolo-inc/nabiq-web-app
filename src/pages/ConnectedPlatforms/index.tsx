@@ -1,5 +1,5 @@
-import { FiPlatformIcon, FiZap } from '@nabiq-icons';
-import { Button } from '@nabiq-ui';
+import { FiPlatformIcon } from '@nabiq-icons';
+import { ConnectionButton } from 'src/components/modules/home';
 import { HeaderTitle } from 'src/layouts';
 import { platformOptions } from 'src/lib/platform.lib';
 
@@ -27,32 +27,12 @@ const ConnectedPlatforms = () => {
                       <FiPlatformIcon platform={platform.value} size={32} />
                       <p className='text-gray-900 font-semibold text-lg'>{platform.name}</p>
                     </div>
-                    {/* {isConnected && (
-                      <Badge variant='outline' color='success'>
-                        Connected
-                      </Badge>
-                    )} */}
                   </div>
 
                   <p className='mt-6 text-gray-600 font-normal text-sm'>{platform.headline}</p>
                 </div>
-                <div className='flex gap-3'>
-                  <Button
-                    className='!w-40'
-                    leadingIcon={<FiZap fill='white' size={22} />}
-                    //   onClick={async () => {
-                    //     window.location.href = `${
-                    //       import.meta.env.VITE_BASE_API_URL
-                    //     }/${gateway.gateway}/oauth?${buildQueryString({
-                    //       brandId,
-                    //       token: await getAuthToken(),
-                    //       redirectUri: window.location.href,
-                    //     })}`;
-                    //   }}
-                  >
-                    Connect
-                  </Button>
-                </div>
+
+                <ConnectionButton />
               </div>
             ))}
           </div>

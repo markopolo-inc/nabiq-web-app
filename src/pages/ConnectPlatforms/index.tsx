@@ -1,6 +1,5 @@
 import { HeaderTitle } from 'layouts';
-import { PlatformDetails } from 'src/components/modules/home';
-import { PlatformSidebar } from 'src/components/modules/home/components/screens/ConnectPlatforms/PlatformSidebar';
+import { PlatformDetails, PlatformSidebar } from 'src/components/modules/home';
 
 const ConnectPlatforms = () => {
   return (
