@@ -13,7 +13,7 @@ const IntegrationsPage = lazy(() => import('pages/IntegrationsPage'));
 const Campaigns = lazy(() => import('pages/Campaigns'));
 const CreateCampaign = lazy(() => import('src/pages/CreateCampaignConfiguration'));
 const Settings = lazy(() => import('pages/Settings'));
-// const Monitoring = lazy(() => import('pages/Monitoring'));
+const Monitoring = lazy(() => import('pages/Monitoring'));
 const TopPerformingCampaigns = lazy(() => import('pages/TopPerformingCampaigns'));
 const TopPerformingCampaignDetails = lazy(() => import('src/pages/TopPerformingCampaignDetails'));
 const TopPerformingCampaingBreakDown = lazy(
@@ -22,9 +22,9 @@ const TopPerformingCampaingBreakDown = lazy(
 const NonPerformingCampaigns = lazy(() => import('src/pages/NonPerformingCampaigns'));
 const ControlRoom = lazy(() => import('pages/ControlRoomPage'));
 const ContentSamples = lazy(() => import('pages/ControlRoomPage/ContentSamples'));
-// const ControlRoomCohort = lazy(() => import('src/pages/ControlRoomPage/Cohort'));
-// const ControlRoomContent = lazy(() => import('src/pages/ControlRoomPage/Cohort/Content'));
-// const ControlRoomPublished = lazy(() => import('src/pages/ControlRoomPage/PublishedContent'));
+const ControlRoomCohort = lazy(() => import('src/pages/ControlRoomPage/Cohort'));
+const ControlRoomContent = lazy(() => import('src/pages/ControlRoomPage/Cohort/Content'));
+const ControlRoomPublished = lazy(() => import('src/pages/ControlRoomPage/PublishedContent'));
 const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
 const ConnectCampaignPlatforms = lazy(() => import('src/pages/ConnectCampaignPlatforms'));
 // const Test = lazy(() => import('src/pages/Test'));
@@ -43,14 +43,13 @@ const Router = () => {
               <Route path='/campaigns' element={<Campaigns />} />
               <Route path='/control-room' element={<ControlRoom />} />
               <Route path='/control-room/content-samples/:configId' element={<ContentSamples />} />
-              {/*// http://localhost:3000/control-room/cohort/content/797d7ab1-578a-4f07-a290-f3d829b70882*/}
-              {/*<Route path='/control-room/cohort/:configId' element={<ControlRoomCohort />} />*/}
-              {/*<Route*/}
-              {/*  path='/control-room/cohort/content/:configId'*/}
-              {/*  element={<ControlRoomContent />}*/}
-              {/*/>*/}
-              {/*<Route path='/control-room/published/:configId' element={<ControlRoomPublished />} />*/}
-              {/* <Route path='/monitoring' element={<Monitoring />} /> */}
+              <Route path='/control-room/cohort/:configId' element={<ControlRoomCohort />} />
+              <Route
+                path='/control-room/cohort/content/:configId'
+                element={<ControlRoomContent />}
+              />
+              <Route path='/control-room/published/:configId' element={<ControlRoomPublished />} />
+              <Route path='/monitoring' element={<Monitoring />} />
               <Route path='/monitoring' element={<TopPerformingCampaigns />} />
               <Route
                 path='/monitoring/top-performing-campaigns/:name/:campaignId'
