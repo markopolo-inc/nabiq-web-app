@@ -114,3 +114,9 @@ export interface BrandInterface {
   };
   connectedBrand?: ConnectedBrand;
 }
+
+export interface IPlatform {
+  name: string;
+  headline: string;
+  value: string;
+}

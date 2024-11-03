@@ -2,7 +2,7 @@ import { HeaderTitle } from 'layouts';
 import { PlatformDetails } from 'src/components/modules/home';
 import { PlatformSidebar } from 'src/components/modules/home/components/screens/ConnectPlatforms/PlatformSidebar';
 
-const ConnectCampaignPlatforms = () => {
+const ConnectPlatforms = () => {
   return (
     <>
       <HeaderTitle>Nabiq | Connect Platforms</HeaderTitle>
@@ -15,4 +15,4 @@ const ConnectCampaignPlatforms = () => {
   );
 };
 
-export default ConnectCampaignPlatforms;
+export default ConnectPlatforms;
