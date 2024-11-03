@@ -90,6 +90,7 @@ export { default as FiSettings02 } from './Settings02';
 export { default as FiStar04 } from './Star04';
 export { default as FiShopify } from './Shopify';
 export { default as FiServer01 } from './Server01';
+export { default as FiShield02 } from './Shield02';
 
 // T
 export { default as FiTrash } from './Trash';
