@@ -7,12 +7,11 @@ export interface IControlRoomConfig {
   detail: string;
   timeLeft: string;
   progress: number;
-  status: 'processing' | 'published' | 'queued';
+  status: 'ACTIVE' | 'IN_REVIEW' | 'processing';
   startDate: string;
   hasFeedBack: boolean;
   queuedAt: string;
   scheduledFor: string;
-  type?: 'Discover Bali' | 'Unveil the Wonders of Thailand' | 'Explore Singapore'; // @TODO: just for UI matching
   identifiedIndividuals?: number; // @TODO: just for UI matching
 }
 

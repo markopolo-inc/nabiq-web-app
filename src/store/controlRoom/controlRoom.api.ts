@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { apiSlice } from '../api/apiSlice';
 
 interface RequestQueryParams {
-  type: 'queued' | 'published';
+  // type: 'queued' | 'published';
   limit: number;
   page: number;
 }
