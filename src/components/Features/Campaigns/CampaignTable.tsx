@@ -48,7 +48,7 @@ const CampaignTable = ({ list, refetch }) => {
 
   const filteredList = useMemo(
     () =>
-      list.filter((item) => {
+      list?.filter((item) => {
         const statusMatch = active === 'all' || item.status === active;
 
         const nameMatch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
