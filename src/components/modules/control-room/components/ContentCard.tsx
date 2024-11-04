@@ -1,6 +1,6 @@
 import { FiCheck, FiCrossX, FiShield02 } from '@nabiq-icons';
 import { Badge, Button, Group, Stack } from '@nabiq-ui';
-import { ICohortContent } from 'src/interfaces/controlRoom.interface';
+import { IContentSampleType } from 'src/interfaces/controlRoom.interface';
 
 export const ContentCard = ({
   content,
@@ -8,18 +8,21 @@ export const ContentCard = ({
   handleMarkContent,
   isLoading,
 }: {
-  content: ICohortContent;
+  content: IContentSampleType;
   isBlockedByAI?: boolean;
   handleMarkContent: (contentId: string, status: 'relevant' | 'not_marked' | 'irrelevant') => void;
   isLoading: boolean;
 }) => {
-  console.log({ isBlockedByAI });
   return (
     <Stack className='rounded-xl border-gray-200 border p-6 max-w-[744px]' gap={24}>
       <Stack className='font-medium text-[12px] text-gray-600'>
         <p>Subject: {content?.subject}</p>
         <p>{content?.content}</p>
       </Stack>
+
+      {/*{!isBlockedByAI ? <Group gap={24} justify='space-between'>*/}
+      {/*</Group> : <></>}*/}
+
       {!Boolean(content?.status) || content?.status === 'not_marked' ? (
         <Group justify='flex-end'>
           <Button

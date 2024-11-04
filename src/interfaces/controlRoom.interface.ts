@@ -40,3 +40,11 @@ export interface IControlRoomConfigCohortContent {
   configName: string;
   contents: ICohortContent[];
 }
+
+export interface IContentSampleType {
+  content: string;
+  id: string;
+  status: 'relevant' | 'irrelevant' | 'not_marked';
+  subject: string;
+  channel: 'email' | 'sms';
+}

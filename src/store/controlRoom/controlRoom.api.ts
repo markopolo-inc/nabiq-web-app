@@ -1,4 +1,5 @@
 import toast from 'react-hot-toast';
+import { IContentSampleType } from 'src/interfaces/controlRoom.interface.ts';
 
 import { apiSlice } from '../api/apiSlice';
 
@@ -24,6 +25,14 @@ interface MarkContentRequestType {
   };
 }
 
+interface ContentSamplesResponseType {
+  data: {
+    configDetail: string;
+    configName: string;
+    contents: IContentSampleType[];
+  };
+}
+
 const controlRoomApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getConfigs: builder.query<ConfigResponseType, RequestQueryParams>({
@@ -32,6 +41,18 @@ const controlRoomApi = apiSlice.injectEndpoints({
         method: 'GET',
         params: { ...args },
       }),
+    }),
+    getContentSamples: builder.query<
+      ContentSamplesResponseType,
+      { configId: string; category: 'content' | 'blocked-content' }
+    >({
+      query: ({ configId, category }) => ({
+        url: `/control-room/config/${configId}/${category}`,
+        method: 'GET',
+      }),
+      providesTags: (_result, _error, { category }) => [
+        { type: 'ControlRoomConfigContent', id: category },
+      ],
     }),
     getConfigCohort: builder.query<any, string>({
       query: (configId) => ({
@@ -112,6 +133,7 @@ const controlRoomApi = apiSlice.injectEndpoints({
 
 export const {
   useGetConfigsQuery,
+  useGetContentSamplesQuery,
   useGetConfigCohortQuery,
   useGetConfigContentQuery,
   useMarkConfigContentMutation,
