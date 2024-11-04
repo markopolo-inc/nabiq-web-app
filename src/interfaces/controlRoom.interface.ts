@@ -12,6 +12,8 @@ export interface IControlRoomConfig {
   hasFeedBack: boolean;
   queuedAt: string;
   scheduledFor: string;
+  type?: 'Discover Bali' | 'Unveil the Wonders of Thailand' | 'Explore Singapore'; // @TODO: just for UI matching
+  identifiedIndividuals?: number; // @TODO: just for UI matching
 }
 
 export interface IControlRoomConfigCohort {
