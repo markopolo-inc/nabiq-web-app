@@ -12,7 +12,7 @@ import { CampaignInterface } from 'src/interfaces/campaign.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
-const CampaignTiming = () => {
+export const CampaignTiming = () => {
   const dispatch = useDispatch();
   const { campaign } = useAppSelector((state) => state);
   const handleChange = (field: keyof CampaignInterface, value) => {
@@ -65,6 +65,7 @@ const CampaignTiming = () => {
               '22:00',
               '23:00',
             ]}
+            value={campaign?.time}
             onChange={(value) => handleChange('time', value)}
           />
         </Group>
@@ -111,5 +112,3 @@ const CampaignTiming = () => {
     </Stack>
   );
 };
-
-export default CampaignTiming;

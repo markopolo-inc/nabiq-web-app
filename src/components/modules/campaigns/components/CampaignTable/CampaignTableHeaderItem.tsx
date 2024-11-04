@@ -4,7 +4,7 @@ type CampaignTableHeaderItemPropsType = {
   label: string;
 };
 
-const CampaignTableHeaderItem = ({ label }: CampaignTableHeaderItemPropsType) => {
+export const CampaignTableHeaderItem = ({ label }: CampaignTableHeaderItemPropsType) => {
   return (
     <div className='flex items-center gap-1'>
       <div className='text-xs font-medium text-gray-600'>{label}</div>
@@ -12,5 +12,3 @@ const CampaignTableHeaderItem = ({ label }: CampaignTableHeaderItemPropsType) =>
     </div>
   );
 };
-
-export default CampaignTableHeaderItem;

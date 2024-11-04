@@ -1,13 +1,13 @@
-import { FiCrossX, FiFileUpload, FiPlatformIcon } from '@nabiq-icons';
+import { FiCrossX, FiPlatformIcon, Logout01 } from '@nabiq-icons';
 import { Group, Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
-import CampaignAdsModal from 'components/Features/Campaigns/CampaignAdsModal';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { CampaignAdsModal } from 'src/components/modules/campaigns';
 import { CampaignInterface } from 'src/interfaces/campaign.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
-const CampaignDetailsForm = () => {
+export const CampaignDetailsForm = () => {
   const dispatch = useDispatch();
   const { campaign } = useAppSelector((state) => state);
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
@@ -87,7 +87,7 @@ const CampaignDetailsForm = () => {
 
         <Stack gap={6}>
           <Text size='14px' className='text-gray-700' weight={500}>
-            Import ads
+            Import content
           </Text>
 
           <Stack
@@ -97,15 +97,15 @@ const CampaignDetailsForm = () => {
             onClick={() => setShowGoalModal(true)}
           >
             <div className='flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 shadow-custom-xs p-2.5'>
-              <FiFileUpload color='#364152' size={20} strokeWidth={1.5} />
+              <Logout01 color='#364152' size={20} strokeWidth={1.5} />
             </div>
 
             <Stack gap={4} align='center'>
               <Text size='14px' className='text-primary-600' weight={600}>
-                Import ads from your connected platforms
+                Import content from your connected platforms
               </Text>
               <Text size='12px' className='text-gray-600'>
-                Ad accounts/Apps need to be connected
+                Apps need to be connected for this.
               </Text>
             </Stack>
           </Stack>
@@ -146,5 +146,3 @@ const CampaignDetailsForm = () => {
     </>
   );
 };
-
-export default CampaignDetailsForm;

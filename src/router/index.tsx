@@ -40,6 +40,7 @@ const Router = () => {
               <Route path='/' element={<Home />} />
               <Route path='/integrations' element={<IntegrationsPage />} />
               <Route path='/campaigns' element={<Campaigns />} />
+              <Route path='/campaigns/campaign-configuration' element={<CreateCampaign />} />
               <Route path='/control-room' element={<ControlRoom />} />
               <Route path='/control-room/cohort/:configId' element={<ControlRoomCohort />} />
               <Route
@@ -62,7 +63,6 @@ const Router = () => {
                 element={<NonPerformingCampaigns />}
               />
               <Route path='/settings' element={<Settings />} />
-              <Route path='/campaigns/campaign-configuration' element={<CreateCampaign />} />
             </Route>
             <Route path='/onboarding' element={<Onboarding />} />
             <Route path='/connect-marktag' element={<ConnectMarktag />} />
