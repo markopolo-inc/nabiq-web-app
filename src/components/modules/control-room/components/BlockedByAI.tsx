@@ -13,9 +13,9 @@ export const BlockedByAI: React.FC<{
         <ContentCard
           content={item}
           key={idx}
-          isBlockedByAI
           handleMarkContent={handleMarkContent}
           isLoading={isLoading}
+          isBlockedByAI
         />
       ))}
     </Stack>
