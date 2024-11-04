@@ -3,7 +3,7 @@ import { Button, Group, Stack, useGetColors } from '@nabiq-ui';
 import { useContext } from 'react';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
-const GuidedSupport = ({ setOpened }) => {
+const GuidedSupport = () => {
   const { primary500 } = useGetColors();
   const { setStep } = useContext<MarktagContextType>(MarkTagContext);
 
@@ -33,8 +33,7 @@ const GuidedSupport = ({ setOpened }) => {
           <Button
             variant='primary'
             onClick={() => {
-              window.open('https://app.markopolo.ai/settings?to=billing', '_blank');
-              setOpened(false);
+              setStep('calendly');
             }}
           >
             Book a call

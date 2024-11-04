@@ -105,7 +105,7 @@ const ModalBody = ({ setOpened }) => {
   );
 };
 
-const CampaignGoalModal: React.FC<{
+export const CampaignGoalModal: React.FC<{
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ showModal, setShowModal }) => {
@@ -122,5 +122,3 @@ const CampaignGoalModal: React.FC<{
     </Modal>
   );
 };
-
-export default CampaignGoalModal;

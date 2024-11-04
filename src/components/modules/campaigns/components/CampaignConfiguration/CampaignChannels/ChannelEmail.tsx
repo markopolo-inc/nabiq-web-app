@@ -14,7 +14,7 @@ import { useAppSelector } from 'src/store/hooks';
 //   type?: string;
 // }
 
-const ChannelEmail = () => {
+export const ChannelEmail = () => {
   const { emailIntegrations } = useAppSelector((state) => state.brand);
   const { campaign } = useAppSelector((state) => state);
   const dispatch = useDispatch();
@@ -77,5 +77,3 @@ const ChannelEmail = () => {
     </div>
   );
 };
-
-export default ChannelEmail;

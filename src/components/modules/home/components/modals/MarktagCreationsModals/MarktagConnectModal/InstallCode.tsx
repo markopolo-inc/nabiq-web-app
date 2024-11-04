@@ -5,6 +5,7 @@ import { Button, Group, Stack } from '@nabiq-ui';
 import { useContext } from 'react';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 import { getCodes } from 'src/lib/marktag/getCodes';
+import { useConnectMarktagMutation } from 'src/store/marktag/marktagApi';
 
 import CodeInstructionModal from '../CodeInstructionModal';
 import ShopifyMarktagInstallButton from './utils/ShopifyInstallButton';
@@ -13,6 +14,7 @@ import WoocommerceMarktagInstallButton from './utils/WoocommerceInstallButton';
 const InstallCode = ({ setOpened }) => {
   const { marktagType, domainData, setDomainData, setStep } =
     useContext<MarktagContextType>(MarkTagContext);
+  const [connect, { isLoading }] = useConnectMarktagMutation();
 
   const ViewDocumentationButton = () => (
     <Button
@@ -25,6 +27,13 @@ const InstallCode = ({ setOpened }) => {
       View documentation
     </Button>
   );
+
+  const handleFinishSetup = async () => {
+    const res = await connect(domainData);
+    if (res?.data?.success) {
+      setOpened(false);
+    }
+  };
 
   return (
     <Stack gap={32}>
@@ -85,7 +94,7 @@ const InstallCode = ({ setOpened }) => {
                     Go back
                   </Button>
                   <ViewDocumentationButton />
-                  <Button variant='primary' onClick={() => setOpened(false)}>
+                  <Button variant='primary' loading={isLoading} onClick={handleFinishSetup}>
                     Finish setup
                   </Button>
                 </>

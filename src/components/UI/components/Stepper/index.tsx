@@ -22,7 +22,6 @@ const StyledStepper = (props: StepperProps) => {
           flexDirection: 'column',
           padding: 0,
         },
-
         separator: {
           marginLeft: rem(-92),
           marginRight: rem(-110),
@@ -42,6 +41,7 @@ const StyledStepper = (props: StepperProps) => {
           lineHeight: '20px',
         },
       }}
+      color='#2972F5'
       {...props}
     />
   );

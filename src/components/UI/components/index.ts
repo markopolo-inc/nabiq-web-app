@@ -76,3 +76,6 @@ export { default as Tooltip } from './Tooltip';
 
 // Pagination
 export { default as Pagination } from './Pagination';
+
+// Loader
+export { default as Loader } from './Loader';

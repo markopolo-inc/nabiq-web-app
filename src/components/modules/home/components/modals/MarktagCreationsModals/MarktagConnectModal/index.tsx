@@ -12,6 +12,7 @@ const stepSizeMap: { [key: string]: number } = {
   code: 782,
   email: 672,
   support: 552,
+  calendly: 800,
 };
 
 export const MarktagCreationsModals: React.FC<{
