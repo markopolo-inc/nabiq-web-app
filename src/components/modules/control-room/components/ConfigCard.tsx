@@ -5,6 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
 import { formatTimeAgo } from 'src/utils/date.uitils';
 
+const statusMessages = {
+  processing: 'funnel is processing...',
+  IN_REVIEW: 'funnel is ready to view!',
+  ACTIVE: 'content samples are ready!',
+};
+
 export const ConfigCard = ({
   config,
   isPublished = false,
@@ -19,7 +25,7 @@ export const ConfigCard = ({
       <Stack className='rounded-xl border-gray-200 border p-6 w-[552px]' gap={32}>
         <Stack gap={20}>
           <Group justify='space-between'>
-            <Badge color='gray'>{config?.type}</Badge>
+            <Badge color='gray'>{config?.name}</Badge>
             {config?.hasFeedBack && (
               <Badge color='success'>
                 <FiDot size={8} color='#17B26A' />
@@ -32,11 +38,7 @@ export const ConfigCard = ({
             <Stack gap={4}>
               <p className='text-gray-900 font-semibold text-lg'>
                 '{config?.name}'{' '}
-                <span className='font-normal'>
-                  {config?.status === 'processing'
-                    ? 'funnel is processing...'
-                    : 'funnel is ready to view!'}
-                </span>
+                <span className='font-normal'>{statusMessages[config?.status]}</span>
               </p>
 
               <p className='text-gray-600 font-normal text-sm'>
@@ -89,9 +91,9 @@ export const ConfigCard = ({
                 >
                   View content sample
                 </Button>
-                <Badge size='lg' color='primary'>
-                  125 identified individuals
-                </Badge>
+                {/*<Badge size='lg' color='primary'>*/}
+                {/*  125 identified individuals*/}
+                {/*</Badge>*/}
               </Group>
             ) : (
               <></>

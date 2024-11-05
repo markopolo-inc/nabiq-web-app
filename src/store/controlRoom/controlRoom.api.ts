@@ -1,9 +1,13 @@
 import toast from 'react-hot-toast';
+import {
+  IApprovedMarkContentOperation,
+  IContentSampleType,
+  IMarkContentOperation,
+} from 'src/interfaces/controlRoom.interface.ts';
 
 import { apiSlice } from '../api/apiSlice';
 
 interface RequestQueryParams {
-  type: 'queued' | 'published';
   limit: number;
   page: number;
 }
@@ -17,10 +21,19 @@ interface ConfigResponseType {
 
 interface MarkContentRequestType {
   configId: string;
-  payload: {
-    id: string; // content id
-    status?: 'relevant' | 'irrelevant';
-    reaction?: 'liked' | 'disliked';
+  payload: IMarkContentOperation[];
+}
+
+interface ApprovedMarkContentRequestType {
+  configId: string;
+  payload: IApprovedMarkContentOperation;
+}
+
+interface ContentSamplesResponseType {
+  data: {
+    configDetail: string;
+    configName: string;
+    contents: IContentSampleType[];
   };
 }
 
@@ -32,6 +45,18 @@ const controlRoomApi = apiSlice.injectEndpoints({
         method: 'GET',
         params: { ...args },
       }),
+    }),
+    getContentSamples: builder.query<
+      ContentSamplesResponseType,
+      { configId: string; category: 'content' | 'blocked-content' }
+    >({
+      query: ({ configId, category }) => ({
+        url: `/control-room/config/${configId}/${category}`,
+        method: 'GET',
+      }),
+      providesTags: (_result, _error, { category, configId }) => [
+        { type: 'ControlRoomConfigContent', id: configId, category },
+      ],
     }),
     getConfigCohort: builder.query<any, string>({
       query: (configId) => ({
@@ -49,17 +74,35 @@ const controlRoomApi = apiSlice.injectEndpoints({
       ],
     }),
     markConfigContent: builder.mutation<any, MarkContentRequestType>({
-      invalidatesTags: (_result, _error, args) => [
-        { type: 'ControlRoomConfigContent', id: args.configId },
-      ],
       query: (args) => ({
         url: `/control-room/config/${args.configId}/content`,
         method: 'POST',
         body: {
-          operations: [{ ...args.payload }],
+          operations: args.payload,
         },
       }),
-
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || 'Successfully updated feedback!');
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to give feedback!');
+          return err;
+        }
+      },
+    }),
+    markApprovedConfigContent: builder.mutation<any, ApprovedMarkContentRequestType>({
+      invalidatesTags: (_result, _error, { configId }) => [
+        { type: 'ControlRoomConfigContent', id: configId },
+      ],
+      query: (args) => ({
+        url: `/control-room/config/${args.configId}/blocked-content`,
+        method: 'POST',
+        body: args.payload,
+      }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue?.data;
       },
@@ -112,9 +155,11 @@ const controlRoomApi = apiSlice.injectEndpoints({
 
 export const {
   useGetConfigsQuery,
+  useGetContentSamplesQuery,
   useGetConfigCohortQuery,
   useGetConfigContentQuery,
   useMarkConfigContentMutation,
+  useMarkApprovedConfigContentMutation,
   useReactConfigContentMutation,
   useGetConfigContentPublishedQuery,
 } = controlRoomApi;

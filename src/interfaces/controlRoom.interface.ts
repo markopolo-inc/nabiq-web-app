@@ -7,12 +7,11 @@ export interface IControlRoomConfig {
   detail: string;
   timeLeft: string;
   progress: number;
-  status: 'processing' | 'published' | 'queued';
+  status: 'ACTIVE' | 'IN_REVIEW' | 'processing';
   startDate: string;
   hasFeedBack: boolean;
   queuedAt: string;
   scheduledFor: string;
-  type?: 'Discover Bali' | 'Unveil the Wonders of Thailand' | 'Explore Singapore'; // @TODO: just for UI matching
   identifiedIndividuals?: number; // @TODO: just for UI matching
 }
 
@@ -40,4 +39,23 @@ export interface ICohortContent {
 export interface IControlRoomConfigCohortContent {
   configName: string;
   contents: ICohortContent[];
+}
+
+export interface IContentSampleType {
+  content: string;
+  id: string;
+  status: 'relevant' | 'irrelevant' | 'not_marked';
+  subject: string;
+  platform: GatewayType;
+  action?: 'not_marked' | 'approved' | 'blocked';
+}
+
+export interface IMarkContentOperation {
+  id: string;
+  status: 'relevant' | 'irrelevant';
+}
+
+export interface IApprovedMarkContentOperation {
+  contentId: string;
+  action: 'approved' | 'blocked';
 }
