@@ -1,5 +1,7 @@
 import { Button, Modal, OptionTabs, Stack } from '@nabiq-ui';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useCreateConstitutionalAIConfigMutation } from 'src/store/constitutional-ai/constitutional-ai.api';
+import { useAppSelector } from 'src/store/hooks';
 
 import Custom from './Custom';
 import { Presets } from './Presets';
@@ -7,6 +9,8 @@ import { Presets } from './Presets';
 const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>> }) => {
   const [selected, setSelected] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<'preset' | 'custom'>('preset');
+  const [createConstitutionalAIConfig] = useCreateConstitutionalAIConfigMutation();
+  const brand = useAppSelector((state) => state.brand);
 
   const handleSelect = (line: string) => {
     if (selected.includes(line)) {
@@ -16,7 +20,11 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
     }
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    await createConstitutionalAIConfig({
+      brandId: brand?.resourceId,
+      rules: selected,
+    }).unwrap();
     setSelected([]);
     setOpened(false);
   };

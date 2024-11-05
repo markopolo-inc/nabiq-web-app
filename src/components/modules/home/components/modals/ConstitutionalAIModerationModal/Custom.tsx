@@ -1,5 +1,6 @@
 import { FiPlus } from '@nabiq-icons';
 import { Button, Checkbox, Group, Stack, TextArea } from '@nabiq-ui';
+import classNames from 'classnames';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 const Custom = ({
@@ -105,7 +106,7 @@ const Custom = ({
       )}
 
       {step === 'list' ? (
-        <div className='grid grid-cols-2 gap-4'>
+        <div className={classNames('grid gap-4', customPrompts.length > 0 ? 'grid-cols-2' : '')}>
           <Button
             size='md'
             fullWidth
@@ -114,15 +115,17 @@ const Custom = ({
           >
             Confirm
           </Button>
-          <Button
-            fullWidth
-            size='md'
-            variant='secondary-black'
-            onClick={() => setStep('add')}
-            trailingIcon={<FiPlus size={18} />}
-          >
-            Add
-          </Button>
+          {customPrompts.length > 0 && (
+            <Button
+              fullWidth
+              size='md'
+              variant='secondary-black'
+              onClick={() => setStep('add')}
+              trailingIcon={<FiPlus size={18} />}
+            >
+              Add
+            </Button>
+          )}
         </div>
       ) : (
         <div className='grid grid-cols-2 gap-4'>
