@@ -48,3 +48,8 @@ export interface IContentSampleType {
   subject: string;
   platform: GatewayType;
 }
+
+export interface IMarkContentOperation {
+  id: string;
+  status: 'relevant' | 'irrelevant';
+}

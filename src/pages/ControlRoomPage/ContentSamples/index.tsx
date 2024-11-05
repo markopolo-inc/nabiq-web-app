@@ -1,12 +1,13 @@
 import { FiHelpCircle, Klaviyo, SlashCircle01 } from '@nabiq-icons';
 import { Breadcrumbs, Button, ContentLoader, Group, OptionTabs, Stack } from '@nabiq-ui';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   BlockedByAI,
   HowDoesFeedbackWorkModal,
   Samples,
 } from 'src/components/modules/control-room';
+import { IContentSampleType, IMarkContentOperation } from 'src/interfaces/controlRoom.interface.ts';
 import {
   useGetContentSamplesQuery,
   useMarkConfigContentMutation,
@@ -32,9 +33,9 @@ const ContentSamples = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState<'content' | 'blocked-content'>('content');
   const [showHowDoesFeedbackModal, setShowHowDoesFeedbackModal] = useState<boolean>(false);
+  const [addMarks, { isLoading }] = useMarkConfigContentMutation();
 
   const { configId } = useParams();
-  const [markConfig, { isLoading }] = useMarkConfigContentMutation();
 
   const { data: contentSamplesData, isLoading: isContentLoading } = useGetContentSamplesQuery({
     configId,
@@ -42,13 +43,34 @@ const ContentSamples = () => {
   });
   const contents = contentSamplesData?.data?.contents || [];
 
-  // const { data } = useGetConfigContentQuery(configId);
-  // const configData: IControlRoomConfigCohortContent = data?.data || {};
-  // const contents = configData?.contents || [];
+  const [_contents, setContents] = useState(contents);
+  const [operatoins, setOperations] = useState<IMarkContentOperation[] | []>([]);
 
   const handleMarkConfig = async (contentId: string, status: 'irrelevant' | 'relevant') => {
-    await markConfig({ configId, payload: { id: contentId, status } }).unwrap();
+    const newContents: IContentSampleType[] = _contents.map((content) => {
+      if (content.id === contentId) {
+        setOperations((prevState) => {
+          const updatedState = prevState.filter((item) => item.id !== contentId);
+          return [...updatedState, { id: contentId, status }];
+        });
+
+        return { ...content, status };
+      } else return content;
+    });
+
+    setContents(newContents);
   };
+
+  const saveChanges = async () => {
+    const response = await addMarks({ configId, payload: operatoins }).unwrap();
+    if (response?.status) {
+      navigate(-1);
+    }
+  };
+
+  useEffect(() => {
+    if (!!contentSamplesData?.data?.contents) setContents(contents);
+  }, [contents]);
 
   return (
     <>
@@ -85,7 +107,7 @@ const ContentSamples = () => {
                 How does feedback work?
               </Button>
 
-              <Button onClick={() => navigate(-1)} variant='primary'>
+              <Button onClick={saveChanges} variant='primary'>
                 Done
               </Button>
             </Group>
@@ -99,14 +121,14 @@ const ContentSamples = () => {
             <Stack align='center'>
               {category === 'content' && (
                 <Samples
-                  contents={contents}
+                  contents={_contents}
                   handleMarkContent={handleMarkConfig}
                   isLoading={isLoading}
                 />
               )}
               {category === 'blocked-content' && (
                 <BlockedByAI
-                  contents={contents}
+                  contents={_contents}
                   handleMarkContent={handleMarkConfig}
                   isLoading={isLoading}
                 />

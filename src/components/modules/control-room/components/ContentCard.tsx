@@ -10,7 +10,7 @@ export const ContentCard = ({
 }: {
   content: IContentSampleType;
   isBlockedByAI?: boolean;
-  handleMarkContent: (contentId: string, status: 'relevant' | 'not_marked' | 'irrelevant') => void;
+  handleMarkContent: (contentId: string, status: 'relevant' | 'irrelevant') => void;
   isLoading: boolean;
 }) => {
   return (
@@ -32,7 +32,6 @@ export const ContentCard = ({
               variant='secondary-black'
               size='md'
               trailingIcon={<FiCheck size={16} color='white' strokeWidth={1} />}
-              onClick={() => handleMarkContent(content?.id, 'relevant')}
             >
               Approve
             </Button>
@@ -64,7 +63,9 @@ export const ContentCard = ({
 
         {!isBlockedByAI && content.status === 'relevant' && (
           <Group justify='flex-end'>
-            <Button variant='link'>Change feedback</Button>
+            <Button variant='link' onClick={() => handleMarkContent(content?.id, 'irrelevant')}>
+              Change feedback
+            </Button>
             <Badge color='success' size='lg'>
               <FiCheck size={16} strokeWidth={1} />
               Relevant
@@ -74,7 +75,9 @@ export const ContentCard = ({
 
         {!isBlockedByAI && content.status === 'irrelevant' && (
           <Group justify='flex-end'>
-            <Button variant='link'>Change feedback</Button>
+            <Button variant='link' onClick={() => handleMarkContent(content?.id, 'relevant')}>
+              Change feedback
+            </Button>
             <Badge color='error' size='lg'>
               <FiCheck size={16} strokeWidth={1} color='#B42318' />
               Irrelevant

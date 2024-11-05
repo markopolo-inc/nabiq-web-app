@@ -1,10 +1,9 @@
 import toast from 'react-hot-toast';
-import { IContentSampleType } from 'src/interfaces/controlRoom.interface.ts';
+import { IContentSampleType, IMarkContentOperation } from 'src/interfaces/controlRoom.interface.ts';
 
 import { apiSlice } from '../api/apiSlice';
 
 interface RequestQueryParams {
-  // type: 'queued' | 'published';
   limit: number;
   page: number;
 }
@@ -18,11 +17,7 @@ interface ConfigResponseType {
 
 interface MarkContentRequestType {
   configId: string;
-  payload: {
-    id: string; // content id
-    status?: 'relevant' | 'irrelevant';
-    reaction?: 'liked' | 'disliked';
-  };
+  payload: IMarkContentOperation[];
 }
 
 interface ContentSamplesResponseType {
@@ -70,17 +65,13 @@ const controlRoomApi = apiSlice.injectEndpoints({
       ],
     }),
     markConfigContent: builder.mutation<any, MarkContentRequestType>({
-      invalidatesTags: (_result, _error, args) => [
-        { type: 'ControlRoomConfigContent', id: args.configId },
-      ],
       query: (args) => ({
         url: `/control-room/config/${args.configId}/content`,
         method: 'POST',
         body: {
-          operations: [{ ...args.payload }],
+          operations: args.payload,
         },
       }),
-
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue?.data;
       },
