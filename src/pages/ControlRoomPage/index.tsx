@@ -59,7 +59,7 @@ const ControlRoom = () => {
               <ConfigCard config={item} key={idx} />
             ))}
           </Stack>
-        </Stack>
+        )}
       </Stack>
     </>
   );
