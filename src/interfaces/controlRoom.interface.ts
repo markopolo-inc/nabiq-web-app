@@ -53,3 +53,8 @@ export interface IMarkContentOperation {
   id: string;
   status: 'relevant' | 'irrelevant';
 }
+
+export interface IApprovedMarkContentOperation {
+  contentId: string;
+  action: 'approved' | 'blocked';
+}

@@ -4,7 +4,7 @@ import { IContentSampleType } from 'src/interfaces/controlRoom.interface.ts';
 
 export const BlockedByAI: React.FC<{
   contents: IContentSampleType[];
-  handleMarkContent: (contentId: string, status: 'relevant' | 'not_marked' | 'irrelevant') => void;
+  handleMarkContent: (contentId: string, status: 'approved' | 'blocked') => void;
   isLoading: boolean;
 }> = ({ contents, handleMarkContent, isLoading }) => {
   return (

@@ -10,7 +10,10 @@ export const ContentCard = ({
 }: {
   content: IContentSampleType;
   isBlockedByAI?: boolean;
-  handleMarkContent: (contentId: string, status: 'relevant' | 'irrelevant') => void;
+  handleMarkContent: (
+    contentId: string,
+    status: 'relevant' | 'irrelevant' | 'approved' | 'blocked',
+  ) => void;
   isLoading: boolean;
 }) => {
   return (
@@ -32,6 +35,7 @@ export const ContentCard = ({
               variant='secondary-black'
               size='md'
               trailingIcon={<FiCheck size={16} color='white' strokeWidth={1} />}
+              onClick={() => handleMarkContent(content?.id, 'approved')}
             >
               Approve
             </Button>

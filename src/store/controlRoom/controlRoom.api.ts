@@ -1,5 +1,9 @@
 import toast from 'react-hot-toast';
-import { IContentSampleType, IMarkContentOperation } from 'src/interfaces/controlRoom.interface.ts';
+import {
+  IApprovedMarkContentOperation,
+  IContentSampleType,
+  IMarkContentOperation,
+} from 'src/interfaces/controlRoom.interface.ts';
 
 import { apiSlice } from '../api/apiSlice';
 
@@ -18,6 +22,11 @@ interface ConfigResponseType {
 interface MarkContentRequestType {
   configId: string;
   payload: IMarkContentOperation[];
+}
+
+interface ApprovedMarkContentRequestType {
+  configId: string;
+  payload: IApprovedMarkContentOperation;
 }
 
 interface ContentSamplesResponseType {
@@ -85,6 +94,25 @@ const controlRoomApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    markApprovedConfigContent: builder.mutation<any, ApprovedMarkContentRequestType>({
+      query: (args) => ({
+        url: `/control-room/config/${args.configId}/blocked-content`,
+        method: 'POST',
+        body: args.payload,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || 'Successfully updated feedback!');
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to give feedback!');
+          return err;
+        }
+      },
+    }),
     getConfigContentPublished: builder.query<any, string>({
       query: (configId) => ({
         url: `/control-room/config/${configId}/content/published`,
@@ -128,6 +156,7 @@ export const {
   useGetConfigCohortQuery,
   useGetConfigContentQuery,
   useMarkConfigContentMutation,
+  useMarkApprovedConfigContentMutation,
   useReactConfigContentMutation,
   useGetConfigContentPublishedQuery,
 } = controlRoomApi;

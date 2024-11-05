@@ -10,6 +10,7 @@ import {
 import { IContentSampleType, IMarkContentOperation } from 'src/interfaces/controlRoom.interface.ts';
 import {
   useGetContentSamplesQuery,
+  useMarkApprovedConfigContentMutation,
   useMarkConfigContentMutation,
 } from 'src/store/controlRoom/controlRoom.api.ts';
 
@@ -34,6 +35,8 @@ const ContentSamples = () => {
   const [category, setCategory] = useState<'content' | 'blocked-content'>('content');
   const [showHowDoesFeedbackModal, setShowHowDoesFeedbackModal] = useState<boolean>(false);
   const [addMarks, { isLoading }] = useMarkConfigContentMutation();
+  const [addBlockedMark, { isLoading: isMarkApprovedLoading }] =
+    useMarkApprovedConfigContentMutation();
 
   const { configId } = useParams();
 
@@ -66,6 +69,16 @@ const ContentSamples = () => {
     if (response?.status) {
       navigate(-1);
     }
+  };
+
+  const handleApprovedMarkConfig = async (contentId: string, status: 'approved' | 'blocked') => {
+    await addBlockedMark({
+      configId,
+      payload: {
+        contentId,
+        action: status,
+      },
+    }).unwrap();
   };
 
   useEffect(() => {
@@ -129,8 +142,8 @@ const ContentSamples = () => {
               {category === 'blocked-content' && (
                 <BlockedByAI
                   contents={_contents}
-                  handleMarkContent={handleMarkConfig}
-                  isLoading={isLoading}
+                  handleMarkContent={handleApprovedMarkConfig}
+                  isLoading={isMarkApprovedLoading}
                 />
               )}
             </Stack>
