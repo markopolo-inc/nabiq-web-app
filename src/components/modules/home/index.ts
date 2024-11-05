@@ -3,7 +3,7 @@ export { HomePageCardWrapper } from 'components/modules/home/components/common/H
 
 // Modals
 export { MarktagCreationsModals } from 'components/modules/home/components/modals/MarktagCreationsModals/MarktagConnectModal';
-export { ConstitutionalAIModerationModal } from 'components/modules/home/components/modals/ConstitutionalAIModerationModal';
+export { ConstitutionalAIModerationModal } from 'components/modules/home/components/modals/ConstitutionalAIModerationModal/ConstitutionalAIModerationModal';
 
 // Cards
 export { ConnectCampaignPlatforms } from 'components/modules/home/components/cards/ConnectCampaignPlatforms';
