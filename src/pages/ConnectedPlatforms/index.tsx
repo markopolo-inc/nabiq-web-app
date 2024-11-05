@@ -32,7 +32,7 @@ const ConnectedPlatforms = () => {
                   <p className='mt-6 text-gray-600 font-normal text-sm'>{platform.headline}</p>
                 </div>
 
-                <ConnectionButton />
+                <ConnectionButton platform={platform.value} />
               </div>
             ))}
           </div>
