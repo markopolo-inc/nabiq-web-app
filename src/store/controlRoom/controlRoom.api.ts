@@ -54,8 +54,8 @@ const controlRoomApi = apiSlice.injectEndpoints({
         url: `/control-room/config/${configId}/${category}`,
         method: 'GET',
       }),
-      providesTags: (_result, _error, { category }) => [
-        { type: 'ControlRoomConfigContent', id: category },
+      providesTags: (_result, _error, { category, configId }) => [
+        { type: 'ControlRoomConfigContent', id: configId, category },
       ],
     }),
     getConfigCohort: builder.query<any, string>({
@@ -95,6 +95,9 @@ const controlRoomApi = apiSlice.injectEndpoints({
       },
     }),
     markApprovedConfigContent: builder.mutation<any, ApprovedMarkContentRequestType>({
+      invalidatesTags: (_result, _error, { configId }) => [
+        { type: 'ControlRoomConfigContent', id: configId },
+      ],
       query: (args) => ({
         url: `/control-room/config/${args.configId}/blocked-content`,
         method: 'POST',

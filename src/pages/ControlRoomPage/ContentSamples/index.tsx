@@ -120,7 +120,7 @@ const ContentSamples = () => {
                 How does feedback work?
               </Button>
 
-              <Button onClick={saveChanges} variant='primary'>
+              <Button size='md' onClick={saveChanges} variant='primary'>
                 Done
               </Button>
             </Group>

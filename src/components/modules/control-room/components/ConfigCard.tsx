@@ -91,9 +91,9 @@ export const ConfigCard = ({
                 >
                   View content sample
                 </Button>
-                <Badge size='lg' color='primary'>
-                  125 identified individuals
-                </Badge>
+                {/*<Badge size='lg' color='primary'>*/}
+                {/*  125 identified individuals*/}
+                {/*</Badge>*/}
               </Group>
             ) : (
               <></>
