@@ -120,9 +120,11 @@ const ContentSamples = () => {
                 How does feedback work?
               </Button>
 
-              <Button size='md' onClick={saveChanges} variant='primary'>
-                Done
-              </Button>
+              {category === 'content' && (
+                <Button size='md' onClick={saveChanges} variant='primary'>
+                  Done
+                </Button>
+              )}
             </Group>
           </Group>
 
