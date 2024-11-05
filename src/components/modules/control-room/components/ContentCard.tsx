@@ -1,4 +1,4 @@
-import { FiCheck, FiCrossX, FiShield02 } from '@nabiq-icons';
+import { FiCheck, FiCrossX, FiShield02, SlashCircle01 } from '@nabiq-icons';
 import { Badge, Button, GatewayLogo, Group, Stack } from '@nabiq-ui';
 import { IContentSampleType } from 'src/interfaces/controlRoom.interface';
 
@@ -24,7 +24,7 @@ export const ContentCard = ({
       </Stack>
 
       <Group gap={24} justify='space-between' align='flex-end'>
-        {isBlockedByAI && content.status === 'not_marked' && (
+        {isBlockedByAI && (content?.action === 'not_marked' || content?.action === 'blocked') && (
           <>
             <Badge color='gray' size='lg'>
               <FiShield02 size={16} strokeWidth={1} />
@@ -41,6 +41,23 @@ export const ContentCard = ({
             </Button>
           </>
         )}
+
+        {isBlockedByAI && content?.action === 'approved' && (
+          <Group justify='flex-end' className='!w-full'>
+            <Button
+              variant='tertiary-destructive'
+              leadingIcon={<SlashCircle01 color='#B42318' size={11} />}
+              onClick={() => handleMarkContent(content?.id, 'blocked')}
+            >
+              Block
+            </Button>
+            <Badge color='success' size='lg'>
+              <FiCheck size={16} strokeWidth={1} />
+              Approved
+            </Badge>
+          </Group>
+        )}
+
         {!isBlockedByAI && <GatewayLogo app={content.platform ?? 'hubspot'} width={20} />}
         {!isBlockedByAI && content.status === 'not_marked' && (
           <Group justify='flex-end'>

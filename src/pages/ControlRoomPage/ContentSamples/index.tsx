@@ -47,7 +47,7 @@ const ContentSamples = () => {
   const contents = contentSamplesData?.data?.contents || [];
 
   const [_contents, setContents] = useState(contents);
-  const [operatoins, setOperations] = useState<IMarkContentOperation[] | []>([]);
+  const [operations, setOperations] = useState<IMarkContentOperation[] | []>([]);
 
   const handleMarkConfig = async (contentId: string, status: 'irrelevant' | 'relevant') => {
     const newContents: IContentSampleType[] = _contents.map((content) => {
@@ -65,7 +65,7 @@ const ContentSamples = () => {
   };
 
   const saveChanges = async () => {
-    const response = await addMarks({ configId, payload: operatoins }).unwrap();
+    const response = await addMarks({ configId, payload: operations }).unwrap();
     if (response?.status) {
       navigate(-1);
     }

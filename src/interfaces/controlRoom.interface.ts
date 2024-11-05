@@ -47,6 +47,7 @@ export interface IContentSampleType {
   status: 'relevant' | 'irrelevant' | 'not_marked';
   subject: string;
   platform: GatewayType;
+  action?: 'not_marked' | 'approved' | 'blocked';
 }
 
 export interface IMarkContentOperation {
