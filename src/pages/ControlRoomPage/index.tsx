@@ -44,21 +44,6 @@ const ControlRoom = () => {
               ))}
             </Stack>
           </Stack>
-          <Button
-            onClick={() => setLearnMoreControlRoomModal(true)}
-            variant='link'
-            leadingIcon={<FiHelpCircle size={20} />}
-          >
-            What is control room?
-          </Button>
-        </Group>
-
-        <Stack align='center'>
-          <Stack gap={32}>
-            {_configs.map((item, idx) => (
-              <ConfigCard config={item} key={idx} />
-            ))}
-          </Stack>
         )}
       </Stack>
     </>
