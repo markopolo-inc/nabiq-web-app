@@ -53,7 +53,9 @@ const ContentSamples = () => {
     const newContents: IContentSampleType[] = _contents.map((content) => {
       if (content.id === contentId) {
         setOperations((prevState) => {
-          const updatedState = prevState.filter((item) => item.id !== contentId);
+          const updatedState = prevState.filter(
+            (item: IMarkContentOperation) => item.id !== contentId,
+          );
           return [...updatedState, { id: contentId, status }];
         });
 
