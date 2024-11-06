@@ -33,7 +33,7 @@ export const ContentCard = ({
             <Button
               disabled={isLoading}
               variant='secondary-black'
-              size='md'
+              size='sm'
               trailingIcon={<FiCheck size={16} color='white' strokeWidth={1} />}
               onClick={() => handleMarkContent(content?.id, 'approved')}
             >
@@ -64,7 +64,7 @@ export const ContentCard = ({
             <Button
               disabled={isLoading}
               variant='secondary'
-              size='md'
+              size='sm'
               trailingIcon={<FiCrossX color='#4B5565' size={11} />}
               onClick={() => handleMarkContent(content?.id, 'irrelevant')}
             >
@@ -73,7 +73,7 @@ export const ContentCard = ({
             <Button
               disabled={isLoading}
               variant='secondary-black'
-              size='md'
+              size='sm'
               trailingIcon={<FiCheck size={16} color='white' strokeWidth={1} />}
               onClick={() => handleMarkContent(content?.id, 'relevant')}
             >
