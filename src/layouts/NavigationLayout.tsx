@@ -10,7 +10,7 @@ export const NavigationLayout = () => {
   // console.log("--- I am from Navigationlayout ---");
   const navigate = useNavigate();
   const { resourceId: companyId } = useAppSelector((state) => state.company);
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle, close }] = useDisclosure();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export const NavigationLayout = () => {
   }, [companyId]);
 
   useEffect(() => {
-    toggle();
+    close();
   }, [pathname]);
 
   return (
