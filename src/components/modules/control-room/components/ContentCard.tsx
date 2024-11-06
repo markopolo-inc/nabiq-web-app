@@ -21,6 +21,11 @@ export const ContentCard = ({
       <Stack className='font-medium text-[12px] text-gray-600'>
         <p>Subject: {content?.subject}</p>
         <p>{content?.content}</p>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: content?.subject,
+          }}
+        />
       </Stack>
 
       <Group gap={24} justify='space-between' align='flex-end'>
