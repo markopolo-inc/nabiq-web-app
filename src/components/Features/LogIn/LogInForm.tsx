@@ -1,12 +1,30 @@
 import { useForm } from '@mantine/form';
 import { Button, Image, PasswordInput, Text, TextInput } from '@nabiq-ui';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import googleLogo from 'src/assets/onboarding/google.svg';
 import { useGoogleSignInMutation, useLoginMutation } from 'src/store/auth/authApi';
 import { trimAllValuesOfObject } from 'src/utils/string.utils';
 
 const LogInForm = () => {
+  const location = useLocation();
   const [login, { isLoading }] = useLoginMutation();
   const [googleSignIn, { isLoading: isGoogleLoading }] = useGoogleSignInMutation();
+
+  useEffect(() => {
+    const checkAndAuthenticate = async () => {
+      const hash = location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const accessToken = params.get('access_token');
+      const tokenType = params.get('token_type');
+
+      if (accessToken && tokenType === 'Bearer') {
+        await googleSignIn({}).unwrap();
+      }
+    };
+
+    checkAndAuthenticate();
+  }, [location]);
 
   const form = useForm({
     initialValues: {
