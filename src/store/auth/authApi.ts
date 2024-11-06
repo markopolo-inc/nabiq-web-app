@@ -73,7 +73,7 @@ export const authApi = apiSlice.injectEndpoints({
           try {
             user = await Auth.currentAuthenticatedUser();
           } catch (error) {
-            if (error !== 'The user is not authenticated') {
+            if (error?.trim() !== 'The user is not authenticated') {
               throw error;
             }
           }
@@ -97,7 +97,7 @@ export const authApi = apiSlice.injectEndpoints({
           }, 100);
         } catch (error) {
           toast.dismiss(loading);
-          if (error !== 'The user is not authenticated') {
+          if (error?.trim() !== 'The user is not authenticated') {
             toast.error('Error signing in with Google!');
           }
         }
