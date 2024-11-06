@@ -15,6 +15,11 @@ export const appCategories = [
     label: 'SMS apps',
     icon: FiMessageDotCircle,
   },
+  {
+    value: 'ads',
+    label: 'Ads',
+    icon: FiMail01, // Todo: change this icon
+  },
   // {
   //   value: 'push',
   //   label: 'Push notification apps',
@@ -148,6 +153,26 @@ export const appOptions: IGateway[] = [
     learnMoreLink: '',
     isKeyIntegration: true,
     isOauthIntegration: false,
+  },
+  {
+    category: 'ads',
+    name: 'Facebook ads',
+    headline:
+      'Maximize your reach and engage your audience with highly targeted, data-driven ads that deliver measurable results.',
+    gateway: 'facebook',
+    learnMoreLink: '',
+    isKeyIntegration: false,
+    isOauthIntegration: true,
+  },
+  {
+    category: 'ads',
+    name: 'Google ads',
+    headline:
+      'Drive traffic and conversions with powerful, performance-focused Google Ads, reaching the right customers at the right time.',
+    gateway: 'google',
+    learnMoreLink: '',
+    isKeyIntegration: false,
+    isOauthIntegration: true,
   },
 ];
 

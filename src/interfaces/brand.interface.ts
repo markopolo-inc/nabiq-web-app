@@ -10,7 +10,9 @@ export type GatewayType =
   | 'sendgrid'
   | 'resend'
   | 'mailgun'
-  | 'whatsapp';
+  | 'whatsapp'
+  | 'facebook'
+  | 'google';
 
 export interface IntegrationInterface {
   // email
@@ -68,7 +70,7 @@ export interface IntegrationInterface {
 }
 
 export interface IGateway {
-  category: 'sms' | 'email' | 'push';
+  category: 'sms' | 'email' | 'push' | 'ads';
   name: string;
   headline: string;
   gateway: GatewayType;
@@ -77,7 +79,7 @@ export interface IGateway {
   isOauthIntegration: boolean;
 }
 
-interface connectedAccounts {
+export interface ConnectedAccounts {
   facebookAd: {
     id: string;
     name: string;
@@ -87,13 +89,14 @@ interface connectedAccounts {
     name: string;
   };
 }
-interface ConnectedBrand {
+
+export interface ConnectedBrand {
   resourceId: string;
   companyId: string;
   brandName: string;
   brandWebsite: string;
   brandLogo: string;
-  connectedAccounts: connectedAccounts;
+  connectedAccounts: ConnectedAccounts;
 }
 
 export interface BrandInterface {
@@ -115,8 +118,15 @@ export interface BrandInterface {
   connectedBrand?: ConnectedBrand;
 }
 
-export interface IPlatform {
+export interface Platform {
   name: string;
   headline: string;
   value: string;
+}
+
+export interface IPlatform {
+  id: number;
+  gateway: 'facebook' | 'google';
+  name: string;
+  isConnected: boolean;
 }
