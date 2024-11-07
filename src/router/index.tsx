@@ -1,6 +1,6 @@
 import { PageLoader } from '@nabiq-ui';
 import { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import { AppLayout, NavigationLayout, PrivateLayout } from 'src/layouts';
 
 const Home = lazy(() => import('pages/Home'));
@@ -25,9 +25,10 @@ const ResetPassword = lazy(() => import('pages/ResetPassword'));
 const VerifyEmail = lazy(() => import('pages/VerifyEmail'));
 const Onboarding = lazy(() => import('pages/Onboarding'));
 
-// const Test = lazy(() => import('src/pages/Test'));
-// const TestButton = lazy(() => import('src/pages/TestButton'));
-// const TestCheckbox = lazy(() => import('src/pages/TestCheckbox'));
+const Test = lazy(() => import('src/pages/Test'));
+const TestButton = lazy(() => import('src/pages/TestButton'));
+const TestCheckbox = lazy(() => import('src/pages/TestCheckbox'));
+const TestInputs = lazy(() => import('src/pages/TestInputs'));
 
 const Router = () => {
   return (
@@ -77,9 +78,12 @@ const Router = () => {
           <Route path='/reset-pass' element={<ResetPassword />} />
           <Route path='/verify' element={<VerifyEmail />} />
 
-          {/* <Route path='/test' element={<Test />} />
-          <Route path='/test/btn' element={<TestButton />} /> */}
-          {/*<Route path='/test/checkbox' element={<TestCheckbox />} />*/}
+          <Route path='/test' element={<Outlet />}>
+            <Route path='/test' element={<Test />} />
+            <Route path='btn' element={<TestButton />} />
+            <Route path='checkbox' element={<TestCheckbox />} />
+            <Route path='inputs' element={<TestInputs />} />
+          </Route>
         </Route>
       </Routes>
     </Suspense>
