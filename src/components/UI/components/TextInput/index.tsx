@@ -1,16 +1,23 @@
 import { TextInput as Input, TextInputProps } from '@mantine/core';
 import { useGetColors } from '@nabiq-ui';
+import cn from 'classnames';
 
 import Text from '../Text';
 import styles from './Input.module.scss';
 
-const TextInput = ({ label, required = false, ...rest }: TextInputProps) => {
+const TextInput = ({
+  label,
+  required = false,
+  leftSection,
+  rightSection,
+  ...rest
+}: TextInputProps) => {
   const { gray700 } = useGetColors();
 
   return (
     <Input
       classNames={{
-        input: styles.input,
+        input: cn(styles.input, leftSection ? '!pl-[33px]' : '', rightSection ? '!pr-[33px]' : ''),
         description: styles.description,
       }}
       label={
@@ -28,6 +35,8 @@ const TextInput = ({ label, required = false, ...rest }: TextInputProps) => {
           </Text>
         )
       }
+      leftSection={leftSection}
+      rightSection={rightSection}
       {...rest}
       inputWrapperOrder={['label', 'input', 'description', 'error']}
     />
