@@ -19,6 +19,7 @@ const TextInput = ({
       classNames={{
         input: cn(styles.input, leftSection ? '!pl-[33px]' : '', rightSection ? '!pr-[33px]' : ''),
         description: styles.description,
+        error: styles.error_description,
       }}
       label={
         label && (
