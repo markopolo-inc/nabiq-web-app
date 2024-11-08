@@ -11,6 +11,7 @@ const TextInput = ({ label, required = false, ...rest }: TextInputProps) => {
     <Input
       classNames={{
         input: styles.input,
+        description: styles.description,
       }}
       label={
         label && (
@@ -28,6 +29,7 @@ const TextInput = ({ label, required = false, ...rest }: TextInputProps) => {
         )
       }
       {...rest}
+      inputWrapperOrder={['label', 'input', 'description', 'error']}
     />
   );
 };
