@@ -30,6 +30,10 @@ const accountSelectionIds = {
       label: 'username',
     },
   },
+  whatsapp: {
+    accounts: { value: 'id', label: 'name' },
+    phoneNumber: {},
+  },
 };
 
 const AccountForm: React.FC<{
