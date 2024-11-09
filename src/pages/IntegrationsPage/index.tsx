@@ -1,12 +1,17 @@
 import { FiPlatformIcon, FiZap } from '@nabiq-icons';
 import { Badge, Button, GatewayLogo, OptionTabs } from '@nabiq-ui';
-import { ApiKeyModal, GatewayDisconnectModal } from 'components/modules/integrations';
+import {
+  AdAccountModal,
+  ApiKeyModal,
+  GatewayDisconnectModal,
+} from 'components/modules/integrations';
 import type { GatewayType, IGateway } from 'interfaces/brand.interface';
 import { HeaderTitle } from 'layouts';
 import { appCategories, appOptions } from 'lib/integration.lib';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { useGetLongLivedAccessTokenMutation } from 'src/store/integrations/integrations.api';
 import { useAppSelector } from 'store/hooks';
 import { getAuthToken } from 'utils/auth';
 import { buildQueryString } from 'utils/string.utils';
@@ -16,7 +21,9 @@ const IntegrationsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<'email' | 'sms' | 'push'>('email');
   const [selectedGateway, setSelectedGateway] = useState<IGateway | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
   const { emailIntegrations, smsIntegrations } = useAppSelector((state) => state.brand);
+  const [getLongLivedAccessToken] = useGetLongLivedAccessTokenMutation();
 
   const handleIntegrate = async ({ gateway }: { gateway: IGateway }) => {
     const token = await getAuthToken();
@@ -32,6 +39,8 @@ const IntegrationsPage = () => {
   return (
     <>
       <ApiKeyModal gateway={selectedGateway} showModal={showModal} setShowModal={setShowModal} />
+      <AdAccountModal gateway={selectedGateway} showPopup={showPopup} setShowPopup={setShowPopup} />
+
       <HeaderTitle>Nabiq - Integrations</HeaderTitle>
       <div className='flex flex-col gap-16'>
         <div className='flex flex-col'>
@@ -89,7 +98,7 @@ const IntegrationsPage = () => {
                     </div>
                     <div className='flex gap-3'>
                       {gateway.isOauthIntegration &&
-                        (gateway.gateway === 'facebook' ? (
+                        (gateway.gateway === 'facebook' && !isGatewayConnected ? (
                           <FacebookLogin
                             appId={import.meta.env.VITE_fb_APP_ID}
                             autoLoad={false}
@@ -103,11 +112,11 @@ const IntegrationsPage = () => {
                                 leadingIcon={<FiZap fill='white' size={18} />}
                                 onClick={renderProps.onClick}
                               >
-                                {isGatewayConnected ? 'Reconnect' : 'Integrate'}
+                                Integrate
                               </Button>
                             )}
-                            callback={(res) => {
-                              console.log('accessToken', res.accessToken);
+                            callback={async (res) => {
+                              await getLongLivedAccessToken(res.accessToken);
                             }}
                           />
                         ) : (
@@ -115,7 +124,14 @@ const IntegrationsPage = () => {
                           <Button
                             className='!w-40'
                             leadingIcon={<FiZap fill='white' size={22} />}
-                            onClick={() => handleIntegrate({ gateway })}
+                            onClick={() => {
+                              if (isGatewayConnected && gateway.category === 'ads') {
+                                setShowPopup(true);
+                                setSelectedGateway(gateway);
+                              } else {
+                                handleIntegrate({ gateway });
+                              }
+                            }}
                           >
                             {isGatewayConnected ? 'Reconnect' : 'Integrate'}
                           </Button>
