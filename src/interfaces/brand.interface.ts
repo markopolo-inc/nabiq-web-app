@@ -118,12 +118,6 @@ export interface BrandInterface {
   connectedBrand?: ConnectedBrand;
 }
 
-export interface Platform {
-  name: string;
-  headline: string;
-  value: string;
-}
-
 export interface IPlatform {
   id: number;
   gateway: 'facebook' | 'google';

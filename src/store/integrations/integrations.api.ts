@@ -87,7 +87,7 @@ const integrationsApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    // todo: these endpoints will replace with nabiq dadicated new endpoints
+    // todo: these endpoints will replace with nabiq dedicated new endpoints
     getLongLivedAccessToken: builder.mutation<any, { brandId: string; accessToken: string }>({
       query: ({ brandId, accessToken }) => ({
         url: '/v4/auth/fb/long-lived-token',

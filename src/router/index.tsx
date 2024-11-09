@@ -25,8 +25,6 @@ const ControlRoomCohort = lazy(() => import('src/pages/ControlRoomPage/Cohort'))
 const ControlRoomContent = lazy(() => import('src/pages/ControlRoomPage/Cohort/Content'));
 const ControlRoomPublished = lazy(() => import('src/pages/ControlRoomPage/PublishedContent'));
 const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
-const ConnectPlatforms = lazy(() => import('src/pages/ConnectPlatforms'));
-const ConnectedPlatforms = lazy(() => import('src/pages/ConnectedPlatforms'));
 // const Test = lazy(() => import('src/pages/Test'));
 // const TestButton = lazy(() => import('src/pages/TestButton'));
 const TestCheckbox = lazy(() => import('src/pages/TestCheckbox'));
@@ -64,11 +62,9 @@ const Router = () => {
               />
               <Route path='/settings' element={<Settings />} />
               <Route path='/campaigns/campaign-configuration' element={<CreateCampaign />} />
-              <Route path='/connected-platforms' element={<ConnectedPlatforms />} />
             </Route>
             <Route path='/onboarding' element={<Onboarding />} />
             <Route path='/connect-marktag' element={<ConnectMarktag />} />
-            <Route path='/connect-platforms' element={<ConnectPlatforms />} />
           </Route>
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />

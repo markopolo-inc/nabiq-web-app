@@ -2,8 +2,6 @@ import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
 import {
   ConnectMarktag,
-  ConnectPlatforms,
-  ConnectPlatformsModal,
   ConnectedMarktag,
   IntegrateApps,
   MarktagCreationsModals,
@@ -15,17 +13,12 @@ const Home = () => {
   const company = useAppSelector((state) => state.company);
 
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
-  const [showPlatformModal, setShowPlatformModal] = useState<boolean>(false);
 
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
 
       <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
-      <ConnectPlatformsModal
-        openedModal={showPlatformModal}
-        setOpenedModal={setShowPlatformModal}
-      />
 
       <div className='flex flex-col gap-16'>
         <div className='flex flex-col'>
@@ -37,13 +30,12 @@ const Home = () => {
         <div className='p-12 bg-gray-100 rounded-xl'>
           <div className='flex flex-col justify-center items-center'>
             <div className='gap-3 w-fit grid grid-cols-1 xl:grid-cols-2 justify-center'>
-              <ConnectPlatforms onShowPlatform={() => setShowPlatformModal(true)} />
-              <IntegrateApps />
               {Boolean(markTag) ? (
                 <ConnectedMarktag onShowMarktag={() => setShowMarktagModal(true)} />
               ) : (
                 <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
               )}
+              <IntegrateApps />
             </div>
           </div>
         </div>
