@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {
   ConnectMarktag,
   ConnectedMarktag,
+  ConstitutionalAIModerationCard,
   IntegrateApps,
   MarktagCreationsModals,
 } from 'src/components/modules/home';
@@ -36,6 +37,7 @@ const Home = () => {
                 <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
               )}
               <IntegrateApps />
+              <ConstitutionalAIModerationCard />
             </div>
           </div>
         </div>

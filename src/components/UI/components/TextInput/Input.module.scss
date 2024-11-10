@@ -3,11 +3,15 @@
 .input {
   height: 44px !important;
   padding: 10px 14px;
-  border-radius: 1rem !important;
+  border-radius: 16px !important;
   color: $gray-900 !important;
   background: $white-base !important;
   border: 1px solid $gray-300 !important;
   box-shadow: 0px 1px 2px 0px rgba(18, 25, 38, 0.05) !important;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
   &:focus {
     border: 1px solid $primary-300 !important;
     box-shadow:
@@ -23,4 +27,28 @@
   &::placeholder {
     color: $gray-500 !important;
   }
+
+  &[data-error='true'] {
+    border-color: $error-300 !important;
+
+    &:focus {
+      box-shadow:
+        0px 1px 2px 0px rgba(18, 25, 38, 0.05),
+        0px 0px 0px 4px rgba(240, 68, 56, 0.24) !important;
+    }
+  }
+}
+
+.description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: $gray-600;
+}
+
+.error_description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: $error-500 !important;
 }
