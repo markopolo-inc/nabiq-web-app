@@ -29,6 +29,7 @@ const Test = lazy(() => import('src/pages/Test'));
 const TestButton = lazy(() => import('src/pages/TestButton'));
 const TestCheckbox = lazy(() => import('src/pages/TestCheckbox'));
 const TestInputs = lazy(() => import('src/pages/TestInputs'));
+const TestTextarea = lazy(() => import('src/pages/TestTextarea'));
 
 const Router = () => {
   return (
@@ -83,6 +84,7 @@ const Router = () => {
             <Route path='btn' element={<TestButton />} />
             <Route path='checkbox' element={<TestCheckbox />} />
             <Route path='inputs' element={<TestInputs />} />
+            <Route path='textarea' element={<TestTextarea />} />
           </Route>
         </Route>
       </Routes>

@@ -7,7 +7,11 @@ const TextArea = ({ ...rest }: TextareaProps) => {
     <Textarea
       classNames={{
         input: styles.input,
+        description: styles.description,
+        error: styles.error_description,
       }}
+      rows={5}
+      inputWrapperOrder={['label', 'input', 'description', 'error']}
       {...rest}
     />
   );
