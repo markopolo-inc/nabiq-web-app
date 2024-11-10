@@ -19,7 +19,12 @@ export const apiSlice = createApi({
       return action.payload?.[reducerPath];
     }
   },
-  tagTypes: ['Company', 'ControlRoomConfigContent', 'ControlRoomConfigContentPublished'],
+  tagTypes: [
+    'Company',
+    'ControlRoomConfigContent',
+    'ControlRoomConfigContentPublished',
+    'ConstitutionalAIConfig',
+  ],
   endpoints: () => ({}),
   keepUnusedDataFor: 0,
   refetchOnFocus: true,

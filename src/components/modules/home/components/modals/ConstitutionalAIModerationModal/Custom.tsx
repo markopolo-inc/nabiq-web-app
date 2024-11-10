@@ -8,13 +8,16 @@ const Custom = ({
   handleConfirm,
   selectedPrompts = [],
   handleSelect,
+  customPrompts,
+  setCustomPrompts,
 }: {
   setSelected: Dispatch<SetStateAction<string[]>>;
   handleConfirm: () => void;
   selectedPrompts: string[];
   handleSelect: (prompt: string) => void;
+  customPrompts: string[];
+  setCustomPrompts: Dispatch<SetStateAction<string[]>>;
 }) => {
-  const [customPrompts, setCustomPrompts] = useState<string[]>([]);
   const [newPrompts, setNewPrompts] = useState<string[]>(['']);
   const [step, setStep] = useState<'add' | 'list'>('list');
 
