@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
+import CalendlyPopup from './CalendlyPopup';
 import ChooseOption from './ChooseOption';
 import ConnectMarktag from './ConnectMarktag';
 import CreateNew from './CreateNew';
@@ -17,12 +18,13 @@ const ModalBody = ({ setOpened }) => {
     <div style={{ padding: '4px 24px 24px' }}>
       {step === 'connect' && <ConnectMarktag />}
       {step === 'create' && <CreateNew />}
-      {step === 'register' && <RegisterDomain />}
+      {step === 'register' && <RegisterDomain setOpened={setOpened} />}
       {step === 'verify' && <DNSRecord />}
       {step === 'choose' && <ChooseOption />}
       {step === 'code' && <InstallCode setOpened={setOpened} />}
       {step === 'email' && <EmailToDeveloper setOpened={setOpened} />}
-      {step === 'support' && <GuidedSupport setOpened={setOpened} />}
+      {step === 'support' && <GuidedSupport />}
+      {step === 'calendly' && <CalendlyPopup />}
     </div>
   );
 };

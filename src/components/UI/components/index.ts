@@ -3,7 +3,7 @@ export { default as AppShell } from './AppShell';
 export { default as Group } from './Group';
 export { default as Modal } from './Modal';
 export { default as PageLoader } from './PageLoader/PageLoader';
-export { ContentLoader } from './ContentLoader/ContentLoader';
+export { default as ContentLoader } from './ContentLoader/ContentLoader';
 
 export { default as Breadcrumbs } from './Breadcrumbs';
 
@@ -76,3 +76,6 @@ export { default as Tooltip } from './Tooltip';
 
 // Pagination
 export { default as Pagination } from './Pagination';
+
+// Loader
+export { default as Loader } from './Loader';

@@ -1,10 +1,9 @@
 import { FiPlus } from '@nabiq-icons';
 import { Button, Group, Stack, TableLoader } from '@nabiq-ui';
-import CampaignGoalModal from 'components/Features/Campaigns/CampaignGoalModal';
-import CampaignTable from 'components/Features/Campaigns/CampaignTable';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { CampaignGoalModal, CampaignTable } from 'src/components/modules/campaigns';
 import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
 import { resetCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks.ts';

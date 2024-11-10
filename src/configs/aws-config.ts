@@ -17,9 +17,9 @@ const config = {
       domain: 'markopoloai.auth.ap-southeast-1.amazoncognito.com',
       scope: ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
       redirectSignIn: isLocalhost
-        ? 'https://localhost:5173/login'
+        ? 'https://localhost:3000/login'
         : 'https://nabiq.markopolo.ai/login',
-      redirectSignOut: isLocalhost ? 'https://localhost:5173' : 'https://nabiq.markopolo.ai',
+      redirectSignOut: isLocalhost ? 'https://localhost:3000' : 'https://nabiq.markopolo.ai',
       responseType: 'token',
     },
   },

@@ -6,7 +6,7 @@ import { GatewayType } from 'src/interfaces/brand.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
-const ChannelSMS = () => {
+export const ChannelSMS = () => {
   const { smsIntegrations } = useAppSelector((state) => state.brand);
   const { campaign } = useAppSelector((state) => state);
   const dispatch = useDispatch();
@@ -57,5 +57,3 @@ const ChannelSMS = () => {
     </div>
   );
 };
-
-export default ChannelSMS;

@@ -3,11 +3,13 @@ import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import CampaignChannels from 'src/components/Features/Campaigns/CampaignChannels';
-import CampaignDetailsForm from 'src/components/Features/Campaigns/CampaignDetailsForm';
-import CampaignFirstCreationModal from 'src/components/Features/Campaigns/CampaignFirstCreationModal';
-import CampaignTiming from 'src/components/Features/Campaigns/CampaignTiming';
-import Stepper from 'src/components/Features/Campaigns/Stepper';
+import {
+  CampaignChannels,
+  CampaignDetailsForm,
+  CampaignFirstCreationModal,
+  CampaignTiming,
+  Stepper,
+} from 'src/components/modules/campaigns';
 import { APIResponseType } from 'src/interfaces/response.interface';
 import {
   useCreateCampaignConfigMutation,

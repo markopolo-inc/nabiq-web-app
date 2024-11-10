@@ -1,4 +1,4 @@
-import { Button, Select, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
+import { Button, Group, Loader, Select, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { DomainDataType, MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
@@ -15,7 +15,7 @@ import { extractMainDomain } from 'src/utils/extractMainDomain';
 
 import HowItWorksModal from '../HowItworksModal';
 
-const RegisterDomain = () => {
+const RegisterDomain = ({ setOpened }) => {
   const { gray500, gray600, gray900 } = useGetColors();
   const [updateSetting] = useUpdateSettingMutation();
   const { marktagType, domain, setDomain, setDomainData, setStep } =
@@ -142,14 +142,39 @@ const RegisterDomain = () => {
         onChange={(brandItem) => setBrandId(brandItem)}
         data={brandsListOptions}
         leftSection={
-          brandId && (
-            <div className='flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-center text-xs font-semibold leading-4'>
-              {selectedBrand?.brandName?.charAt(0)?.toUpperCase()}
-            </div>
+          isLoadingBrandList ? (
+            <Loader color='#2972F5' size='xs' />
+          ) : (
+            brandId && (
+              <div className='flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-center text-xs font-semibold leading-4'>
+                {selectedBrand?.brandName?.charAt(0)?.toUpperCase()}
+              </div>
+            )
           )
         }
         disabled={isLoadingBrandList}
       />
+
+      {!isLoadingBrandList && brandsListOptions?.length === 0 && (
+        <Group gap={6} className='-mt-4'>
+          <Text size='14px' weight={500} className='text-red-500 leading-5'>
+            No brands found!
+          </Text>
+          <Button
+            size='sm'
+            variant='link'
+            onClick={() => {
+              window.open(
+                'https://app.markopolo.ai/login?redirect_uri=https://app.markopolo.ai/brand/dashboard',
+                '_blank',
+              );
+              setOpened(false);
+            }}
+          >
+            Create a brand
+          </Button>
+        </Group>
+      )}
 
       {marktagType !== 'client-side' && (
         <Stack gap={4}>

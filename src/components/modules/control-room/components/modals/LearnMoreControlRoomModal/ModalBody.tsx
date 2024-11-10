@@ -17,18 +17,20 @@ const ModalBody: React.FC<{
         <p className='text-2xl font-semibold text-gray-900'>What is control room?</p>
         <p className='text-base font-normal leading-6 text-gray-600'>
           Keep track of all your campaigns and their status in one place. Provide feedback to
-          content samples and get even better personalized content. You can also view the final
-          published content for each campaign’s respective steps.
+          content samples and get even better personalized content.
         </p>
       </div>
 
-      <Button
-        onClick={() => window.open('https://www.markopolo.ai/products/nabiq', '_blank')}
-        variant='link'
-        trailingIcon={<FiChevronRight color={primary600} />}
-      >
-        Learn more about control room
-      </Button>
+      <div className='bg-gray-50 rounded-xl px-6'>
+        <Button
+          onClick={() => window.open('https://www.markopolo.ai/products/nabiq', '_blank')}
+          variant='link'
+          trailingIcon={<FiChevronRight color={primary600} />}
+        >
+          Learn more about control room
+        </Button>
+      </div>
+
       <Button onClick={() => setOpened(false)} fullWidth variant='primary' size='md'>
         Got it
       </Button>

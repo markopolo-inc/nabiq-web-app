@@ -38,7 +38,7 @@ const colorMap = {
   active: 'success',
 };
 
-const CampaignTable = ({ list, refetch }) => {
+export const CampaignTable = ({ list, refetch }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [deleteConfig, { isLoading }] = useDeleteCampaignConfigMutation();
@@ -48,7 +48,7 @@ const CampaignTable = ({ list, refetch }) => {
 
   const filteredList = useMemo(
     () =>
-      list.filter((item) => {
+      list?.filter((item) => {
         const statusMatch = active === 'all' || item.status === active;
 
         const nameMatch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -211,5 +211,3 @@ const CampaignTable = ({ list, refetch }) => {
     </Table>
   );
 };
-
-export default CampaignTable;

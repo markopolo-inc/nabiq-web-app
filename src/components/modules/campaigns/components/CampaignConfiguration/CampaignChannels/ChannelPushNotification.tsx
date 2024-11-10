@@ -1,7 +1,7 @@
 import { ArrowNarrowUpRight, FiNotificationMessage } from '@nabiq-icons';
 import { Text } from '@nabiq-ui';
 
-const ChannelPushNotification = () => {
+export const ChannelPushNotification = () => {
   return (
     <div className='w-full flex justify-between items-center bg-white border border-gray-200 rounded-xl p-4 '>
       <div className='flex gap-4'>
@@ -19,5 +19,3 @@ const ChannelPushNotification = () => {
     </div>
   );
 };
-
-export default ChannelPushNotification;

@@ -86,12 +86,7 @@ const ModalBody = ({ setOpened }) => {
       <Stack className='px-8 py-5 border-b border-b-gray-200'>
         <Group justify='space-between'>
           <Group gap={8}>
-            <Text className='text-gray-900 font-semibold text-lg'>Ads</Text>
-            {!isLoading && (
-              <Badge color='blue' size='sm'>
-                {list?.length ?? 0} ads
-              </Badge>
-            )}
+            <Text className='text-gray-900 font-semibold text-lg'>Import content</Text>
           </Group>
 
           <Group gap={12}>
@@ -258,7 +253,7 @@ const ModalBody = ({ setOpened }) => {
   );
 };
 
-const CampaignAdsModal: React.FC<{
+export const CampaignAdsModal: React.FC<{
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ showModal, setShowModal }) => {
@@ -276,5 +271,3 @@ const CampaignAdsModal: React.FC<{
     </Modal>
   );
 };
-
-export default CampaignAdsModal;

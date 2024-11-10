@@ -8,7 +8,8 @@ export type StepType =
   | 'choose'
   | 'code'
   | 'email'
-  | 'support';
+  | 'support'
+  | 'calendly';
 
 export type DomainDataRecordType = {
   name: string;
