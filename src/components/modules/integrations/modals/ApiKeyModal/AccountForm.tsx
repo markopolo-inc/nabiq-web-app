@@ -1,10 +1,10 @@
 import { Alert } from '@mantine/core';
 import { Button, Select, Stack } from '@nabiq-ui';
-import { capitalize } from 'lodash';
 import { useState } from 'react';
 import { IGateway } from 'src/interfaces/brand.interface';
 import { useAppSelector } from 'src/store/hooks';
 import { useAddAccountsMutation } from 'src/store/integrations/integrations.api';
+import { camelCaseToCapitalized } from 'src/utils/string.utils';
 
 const accountSelectionIds = {
   // email
@@ -32,7 +32,10 @@ const accountSelectionIds = {
   },
   whatsapp: {
     accounts: { value: 'id', label: 'name' },
-    phoneNumber: {},
+    phoneNumber: {
+      value: 'display_phone_number',
+      label: 'display_phone_number',
+    },
   },
 };
 
@@ -94,7 +97,7 @@ const AccountForm: React.FC<{
                     ),
                   }))
                 }
-                label={capitalize(field)}
+                label={camelCaseToCapitalized(field)}
                 key={idx}
                 data={data}
               />
