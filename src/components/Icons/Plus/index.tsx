@@ -1,6 +1,12 @@
 import { PropTypes } from '../types';
 
-const Plus = ({ color = '#12B76A', size = 10, strokeWidth = 1.5, onClick, style }: PropTypes) => {
+const Plus = ({
+  color = 'currentColor',
+  size = 10,
+  strokeWidth = 1.5,
+  onClick,
+  style,
+}: PropTypes) => {
   return (
     <svg
       width={size}

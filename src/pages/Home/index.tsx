@@ -4,6 +4,7 @@ import {
   ConnectCampaignPlatforms,
   ConnectMarktag,
   ConnectedMarktag,
+  ConstitutionalAIModerationCard,
   IntegrateApps,
   MarktagCreationsModals,
 } from 'src/components/modules/home';
@@ -38,6 +39,7 @@ const Home = () => {
               ) : (
                 <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
               )}
+              <ConstitutionalAIModerationCard />
             </div>
           </div>
         </div>
