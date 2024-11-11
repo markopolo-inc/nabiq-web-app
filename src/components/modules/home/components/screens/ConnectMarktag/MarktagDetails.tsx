@@ -1,7 +1,9 @@
-import { Command } from '@nabiq-icons';
-import { Button, Select, Text } from '@nabiq-ui';
+import { Command, FiPlatformIcon } from '@nabiq-icons';
+import { Badge, Button, Group, Select, Stack, Text } from '@nabiq-ui';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getPlatformConnectionStatus } from 'src/lib/platform.lib';
+import { useUpdateSettingMutation } from 'src/store/company/companyApi';
 import { useAppSelector } from 'src/store/hooks.ts';
 import {
   MarktagsResponseInterface,
@@ -12,21 +14,30 @@ import {
 
 type MarktagsType = MarktagsResponseInterface;
 
-const MarktagDetails = () => {
+export const MarktagDetails = () => {
   const navigate = useNavigate();
-
   const user = useAppSelector((state) => state.user);
   const company = useAppSelector((state) => state.company);
+  const { connectedBrand } = useAppSelector((state) => state.brand);
 
-  const [resourceId, setResourceId] = useState<string>('');
+  const [resourceId, setResourceId] = useState<string>(connectedBrand?.resourceId || '');
   const [marktagsResourceId, setMarktagsResourceId] = useState<string>('');
   const [marktags, setMarktags] = useState<MarktagsType[]>([]);
 
   const { data: brandsList, isLoading: isLoadingBrandList } = useGetBrandsListQuery();
-
   const [getMarktag, { isLoading: isLoadingMarktag }] = useLazyGetMarktagUnderBrandQuery();
-
   const [connect] = useConnectMarktagMutation();
+  const [updateSetting] = useUpdateSettingMutation();
+
+  useEffect(() => {
+    if (resourceId) {
+      getMarktag(resourceId)
+        .unwrap()
+        .then((response) => {
+          setMarktags(response);
+        });
+    }
+  }, [resourceId]);
 
   const brandsListOptions = useMemo(
     () =>
@@ -38,9 +49,11 @@ const MarktagDetails = () => {
   );
 
   const selectedBrand = useMemo(
-    () => brandsListOptions?.find((item) => item.value === resourceId),
-    [brandsListOptions, resourceId],
+    () => brandsList?.find((item) => item.resourceId === resourceId),
+    [brandsList, resourceId],
   );
+
+  const platforms = getPlatformConnectionStatus(selectedBrand?.connectedAccounts);
 
   const marktagsListOptions = useMemo(
     () =>
@@ -56,24 +69,31 @@ const MarktagDetails = () => {
     [marktagsListOptions, marktagsResourceId],
   );
 
-  const onClick = async () => {
+  const handleConnect = async () => {
     if (!resourceId || !marktagsResourceId) return;
 
     const res = await connect(selectedMarktag);
     if (res?.data?.success) {
+      // save connected platfroms of the selected brand
+      if (platforms.filter((item) => item.isConnected).length > 0) {
+        const brandPayload = {
+          resourceId: selectedBrand.resourceId,
+          companyId: selectedBrand.companyId,
+          brandName: selectedBrand.brandName,
+          brandWebsite: selectedBrand.brandWebsite,
+          brandLogo: selectedBrand.brandInfo.brandLogo,
+          connectedAccounts: {
+            facebookAd: selectedBrand.connectedAccounts?.facebookAd || null,
+            googleAd: selectedBrand.connectedAccounts?.googleAd || null,
+          },
+        };
+
+        updateSetting({ connectedBrand: brandPayload }).unwrap();
+      }
+
       navigate('/');
     }
   };
-
-  useEffect(() => {
-    if (resourceId) {
-      getMarktag(resourceId)
-        .unwrap()
-        .then((response) => {
-          setMarktags(response);
-        });
-    }
-  }, [resourceId]);
 
   return (
     <div className='px-8 pt-20 lg:col-span-8 lg:px-20 lg:pt-48 pb-20 lg:pb-32'>
@@ -107,7 +127,7 @@ const MarktagDetails = () => {
           leftSection={
             resourceId && (
               <div className='flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-center text-xs font-semibold leading-4'>
-                {selectedBrand?.label?.charAt(0)?.toUpperCase()}
+                {selectedBrand?.brandName?.charAt(0)?.toUpperCase()}
               </div>
             )
           }
@@ -126,11 +146,59 @@ const MarktagDetails = () => {
           disabled={isLoadingMarktag}
         />
 
+        {!isLoadingBrandList && brandsListOptions?.length === 0 && (
+          <Group gap={6}>
+            <Text size='14px' weight={500} className='text-red-500 leading-5'>
+              No brands found!
+            </Text>
+            <Button
+              size='sm'
+              variant='link'
+              onClick={() => {
+                window.open(
+                  'https://app.markopolo.ai/login?redirect_uri=https://app.markopolo.ai/brand/dashboard',
+                  '_blank',
+                );
+              }}
+            >
+              Create a brand
+            </Button>
+          </Group>
+        )}
+
+        {resourceId &&
+          !isLoadingBrandList &&
+          platforms?.filter((item) => item.isConnected).length > 0 && (
+            <Stack gap={12}>
+              <Text size='14px' className='text-gray-600 leading-5'>
+                Below ad accounts will get connected automatically.
+              </Text>
+              <div className='flex gap-4'>
+                {platforms
+                  ?.filter((item) => item.isConnected)
+                  ?.map((item) => (
+                    <Badge
+                      key={item.id}
+                      color='gray'
+                      variant='filled'
+                      size='lg'
+                      className='px-3 py-1.5'
+                    >
+                      <FiPlatformIcon platform={item.gateway} size={14} />
+                      <Text size='14px' weight={500} className='text-gray-600'>
+                        {item.name}
+                      </Text>
+                    </Badge>
+                  ))}
+              </div>
+            </Stack>
+          )}
+
         <Button
           className='w-full !mt-12'
           variant={!resourceId || !marktagsResourceId ? 'secondary' : 'primary'}
           disabled={!resourceId || !marktagsResourceId}
-          onClick={onClick}
+          onClick={handleConnect}
         >
           Connect
         </Button>
@@ -138,5 +206,3 @@ const MarktagDetails = () => {
     </div>
   );
 };
-
-export default MarktagDetails;

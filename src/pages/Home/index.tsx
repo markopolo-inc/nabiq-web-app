@@ -1,7 +1,6 @@
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
 import {
-  ConnectCampaignPlatforms,
   ConnectMarktag,
   ConnectedMarktag,
   ConstitutionalAIModerationCard,
@@ -32,13 +31,12 @@ const Home = () => {
         <div className='p-12 bg-gray-100 rounded-xl'>
           <div className='flex flex-col justify-center items-center'>
             <div className='gap-3 w-fit grid grid-cols-1 xl:grid-cols-2 justify-center'>
-              <ConnectCampaignPlatforms />
-              <IntegrateApps />
               {Boolean(markTag) ? (
                 <ConnectedMarktag onShowMarktag={() => setShowMarktagModal(true)} />
               ) : (
                 <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
               )}
+              <IntegrateApps />
               <ConstitutionalAIModerationCard />
             </div>
           </div>
