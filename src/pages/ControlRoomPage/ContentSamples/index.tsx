@@ -32,6 +32,7 @@ export const appCategories = [
 
 const ContentSamples = () => {
   const navigate = useNavigate();
+  const [hasChanged, setHasChanged] = useState<boolean>(false);
   const [category, setCategory] = useState<'content' | 'blocked-content'>('content');
   const [showHowDoesFeedbackModal, setShowHowDoesFeedbackModal] = useState<boolean>(false);
   const [addMarks, { isLoading }] = useMarkConfigContentMutation();
@@ -53,6 +54,7 @@ const ContentSamples = () => {
     const newContents: IContentSampleType[] = _contents.map((content) => {
       if (content.id === contentId) {
         setOperations((prevState) => {
+          setHasChanged(true);
           const updatedState = prevState.filter(
             (item: IMarkContentOperation) => item.id !== contentId,
           );
@@ -69,9 +71,25 @@ const ContentSamples = () => {
   const saveChanges = async () => {
     const response = await addMarks({ configId, payload: operations }).unwrap();
     if (response?.status) {
+      setHasChanged(false);
       navigate(-1);
     }
   };
+
+  useEffect(() => {
+    if (!hasChanged) return;
+    const onBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+
+      event.returnValue = true;
+    };
+
+    window.addEventListener('beforeunload', onBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', onBeforeUnload);
+    };
+  }, [hasChanged]);
 
   const handleApprovedMarkConfig = async (contentId: string, status: 'approved' | 'blocked') => {
     await addBlockedMark({
