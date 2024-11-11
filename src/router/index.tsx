@@ -6,7 +6,6 @@ import { AppLayout, NavigationLayout, PrivateLayout } from 'src/layouts';
 const Home = lazy(() => import('pages/Home'));
 const Campaigns = lazy(() => import('pages/Campaigns'));
 const CreateCampaign = lazy(() => import('src/pages/CreateCampaignConfiguration'));
-const ConnectCampaignPlatforms = lazy(() => import('src/pages/ConnectCampaignPlatforms'));
 const TopPerformingCampaigns = lazy(() => import('pages/TopPerformingCampaigns'));
 const TopPerformingCampaignDetails = lazy(() => import('src/pages/TopPerformingCampaignDetails'));
 const TopPerformingCampaingBreakDown = lazy(
@@ -71,7 +70,6 @@ const Router = () => {
             </Route>
             <Route path='/onboarding' element={<Onboarding />} />
             <Route path='/connect-marktag' element={<ConnectMarktag />} />
-            <Route path='/connect-platforms' element={<ConnectCampaignPlatforms />} />
           </Route>
 
           <Route path='/signup' element={<SignUp />} />

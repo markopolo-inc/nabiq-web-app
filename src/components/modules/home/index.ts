@@ -6,8 +6,11 @@ export { MarktagCreationsModals } from 'components/modules/home/components/modal
 export { ConstitutionalAIModerationModal } from 'components/modules/home/components/modals/ConstitutionalAIModerationModal/ConstitutionalAIModerationModal';
 
 // Cards
-export { ConnectCampaignPlatforms } from 'components/modules/home/components/cards/ConnectCampaignPlatforms';
 export { ConnectedMarktag } from 'components/modules/home/components/cards/ConnectedMarktag';
 export { ConnectMarktag } from 'components/modules/home/components/cards/ConnectMarktag';
 export { IntegrateApps } from 'components/modules/home/components/cards/IntegrateApps';
 export { ConstitutionalAIModerationCard } from 'components/modules/home/components/cards/ConstitutionalAIModeration/ConstitutionalAIModerationCard';
+
+// Screens
+export { MarktagDetails } from 'components/modules/home/components/screens/ConnectMarktag/MarktagDetails';
+export { MarktagSidebar } from 'components/modules/home/components/screens/ConnectMarktag/MarktagSidebar';

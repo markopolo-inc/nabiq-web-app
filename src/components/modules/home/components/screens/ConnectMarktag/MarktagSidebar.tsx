@@ -3,7 +3,7 @@ import { Button, Image, Text } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
 import logo from 'src/assets/logo/nabiq-dark-logo.png';
 
-const PlatformSidebar = () => {
+export const MarktagSidebar = () => {
   const navigate = useNavigate();
 
   return (
@@ -18,10 +18,10 @@ const PlatformSidebar = () => {
         <Image className='w-36' src={logo} alt='' />
 
         <div className='mt-16 flex flex-col gap-3'>
-          <Text className='display-xl font-medium text-white'>Select Brand</Text>
+          <Text className='display-xl font-medium text-white'>Select Marktag</Text>
           <Text className='text-xl text-gray-300'>
-            Connect and import data from ads you have run on facebook ads, google ads and linkedin
-            ads.
+            Track first party customer data with cutting-edge precision. Capture and track all your
+            marketing data.
           </Text>
         </div>
       </div>
@@ -38,5 +38,3 @@ const PlatformSidebar = () => {
     </div>
   );
 };
-
-export default PlatformSidebar;
