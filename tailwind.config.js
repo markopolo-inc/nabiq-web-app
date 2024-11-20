@@ -115,6 +115,7 @@ export default {
           '0px 1px 2px 0px rgba(13, 18, 28, 0.48), 0px 0px 1px 0px rgba(13, 18, 28, 0.08)',
         'custom-secondary-black': '0px 1px 2px 0px rgba(13, 18, 28, 0.64), 0px 0px 0px 1px #303534',
         'custom-primary': '0px 1px 2px 0px rgba(13, 18, 28, 0.64), 0px 0px 0px 1px #0A52D6',
+        xs: '0px 1px 2px 0px rgba(18, 25, 38, 0.05)',
         sm: '0px 1px 3px 0px rgba(18, 25, 38, 0.10), 0px 1px 2px 0px rgba(18, 25, 38, 0.06)',
         md: '0px 4px 8px -2px rgba(18, 25, 38, 0.10), 0px 2px 4px -2px rgba(18, 25, 38, 0.06)',
         lg: '0px 12px 16px -4px rgba(18, 25, 38, 0.08), 0px 4px 6px -2px rgba(18, 25, 38, 0.03)',
