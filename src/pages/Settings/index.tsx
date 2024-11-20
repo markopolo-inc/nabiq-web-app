@@ -1,6 +1,6 @@
 import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
-import { Button, Dropzone, Grid, Group, Image, Select, Stack, TextInput } from '@nabiq-ui';
+import { Avatar, Button, Dropzone, Grid, Group, Select, Stack, TextInput } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -104,8 +104,8 @@ const Settings = () => {
 
                     <div className='flex gap-5'>
                       <div className='flex-none  w-16 h-16 rounded-full overflow-hidden'>
-                        <Image
-                          className='object-cover w-full h-full'
+                        <Avatar
+                          className='w-full h-full flex-none rounded-full focus:ring-4 ring-[#E0E0E0] !border-[0.75px] !border-gray-100 !shadow-sm'
                           src={form.getValues().profilePhoto}
                           alt='Avatar image'
                         />
