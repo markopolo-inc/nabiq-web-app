@@ -18,7 +18,7 @@ const TopMenu = () => {
     <Menu width={240} position='bottom-end'>
       <Menu.Target>
         <UnstyledButton
-          className='w-10 h-10 rounded-full focus:ring-4 ring-[#E0E0E0] !border-[0.75px] !border-gray-50'
+          className='w-10 h-10 rounded-full focus:ring-4 ring-[#E0E0E0] !border-[0.75px] !border-gray-100 !shadow-sm'
           style={{ border: 'inherit' }}
         >
           <Image
@@ -32,7 +32,7 @@ const TopMenu = () => {
       <Menu.Dropdown className='!p-0 border border-gray-200 shadow-custom-md rounded-lg'>
         <Menu.Label className='flex gap-3 py-3 px-4'>
           <Avatar
-            className='w-10 h-10 flex-none rounded-full focus:ring-4 ring-[#E0E0E0] !border-[0.75px] !border-gray-50'
+            className='w-10 h-10 flex-none rounded-full focus:ring-4 ring-[#E0E0E0] !border-[0.75px] !border-gray-100 !shadow-sm'
             src={company?.meta?.profilePhoto}
             alt={company?.meta?.userName}
             active
