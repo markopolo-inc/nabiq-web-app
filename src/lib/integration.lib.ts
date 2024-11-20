@@ -1,10 +1,16 @@
 import {
+  // FiData,
   FiMail01,
   FiMessageDotCircle, // FiNotificationMessage
 } from '@nabiq-icons';
 import type { GatewayType, IGateway } from 'src/interfaces/brand.interface';
 
 export const appCategories = [
+  {
+    value: 'data-sources',
+    label: 'Data sources',
+    // icon: FiData,
+  },
   {
     value: 'email',
     label: 'Email apps',
@@ -18,7 +24,7 @@ export const appCategories = [
   {
     value: 'ads',
     label: 'Ads',
-    icon: FiMail01, // Todo: change this icon
+    // icon: FiMail01, // Todo: change this icon
   },
   // {
   //   value: 'push',

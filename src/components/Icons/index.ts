@@ -30,6 +30,7 @@ export { default as FiCopy01 } from './Copy01';
 // D
 export { default as FiDataFlow02 } from './DataFlow02';
 export { default as FiDot } from './Dot';
+export { default as FiData } from './Data';
 
 // E
 export { default as Envelope } from './Envelope';
