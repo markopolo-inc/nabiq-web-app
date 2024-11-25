@@ -1,6 +1,7 @@
 import { FiPlus } from '@nabiq-icons';
 import {
   Button,
+  CloseButton,
   GatewayLogo,
   Modal,
   Select,
@@ -121,7 +122,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
     ).length || 0;
 
   return (
-    <div>
+    <div className='relative'>
       <Stack className='p-8 pb-5 border-b border-gray-200 sticky top-0 bg-white z-10 shadow-sm'>
         <GatewayLogo app='hubspot' width={32} />
         <Stack gap={0}>
@@ -130,6 +131,9 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
             Choose the data fields you want to bring over from Hubspot.
           </p>
         </Stack>
+        <div className='absolute top-8 right-8'>
+          <CloseButton onClick={() => setOpened(false)} />
+        </div>
       </Stack>
       <Stack className='px-8 py-5' gap={0}>
         <p className='text-lg font-semibold text-gray-900'>Mandatory field</p>
