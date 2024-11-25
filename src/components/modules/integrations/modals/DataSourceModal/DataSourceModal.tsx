@@ -24,11 +24,13 @@ import {
 } from 'src/store/integrations/data-sources.api';
 
 const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>> }) => {
-  const { resourceId: brandId } = useAppSelector((state) => state.brand);
-  const { data } = useGetDataSourcePropertiesQuery({
+  const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
+  const { data, isLoading } = useGetDataSourcePropertiesQuery({
     brandId,
     platform: 'hubspot',
   });
+
+  const savedDataSourceFields = datasourceIntegrations?.mappedFields?.hubspot || [];
 
   const [saveDataSourceProperties] = useSaveDataSourcePropertiesMutation();
 
@@ -44,14 +46,25 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
 
   useEffect(() => {
     setSelectedRequiredFields(
-      requiredFields?.map((_field) => ({
-        label: _field.label,
-        name: _field.value,
-        nabiqPropertyLabel: '',
-        nabiqPropertyName: '',
-      })),
+      requiredFields?.map((_field) => {
+        const savedField = savedDataSourceFields.find((field) => field.name === _field.value);
+        return {
+          label: _field.label,
+          name: _field.value,
+          nabiqPropertyLabel: savedField?.nabiqPropertyLabel || '',
+          nabiqPropertyName: savedField?.nabiqPropertyName || '',
+        };
+      }),
     );
-  }, []);
+  }, [savedDataSourceFields]);
+
+  useEffect(() => {
+    setSelectedOptionalFields(
+      savedDataSourceFields?.filter(
+        (field) => !requiredFields.map((item) => item.value).includes(field.name),
+      ),
+    );
+  }, [savedDataSourceFields]);
 
   const nabiqFields = data?.data || [];
 
@@ -139,10 +152,10 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
           </TableRow>
         </TableHead>
         <TableBody>
-          {requiredFields.map((field) => (
-            <TableRow key={field.value}>
+          {selectedRequiredFields.map((field) => (
+            <TableRow key={field.name}>
               <Td>
-                <Select data={requiredFields} value={field.value} size='sm' disabled />
+                <Select data={requiredFields} value={field.name} size='sm' disabled />
               </Td>
               <Td>
                 <div className='flex items-center justify-center'>
@@ -151,9 +164,12 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
               </Td>
               <Td>
                 <Select
+                  disabled={isLoading}
                   data={groupedFields || []}
                   size='sm'
                   searchable
+                  defaultDropdownOpened={false}
+                  value={field.nabiqPropertyName}
                   onChange={(value, option) => {
                     setSelectedRequiredFields((prev) =>
                       prev?.map((_field) =>
@@ -218,9 +234,11 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
               </Td>
               <Td>
                 <Select
+                  disabled={isLoading}
                   data={groupedFields || []}
                   size='sm'
                   searchable
+                  value={field.nabiqPropertyName}
                   onChange={(value, option) => {
                     setSelectedOptionalFields((prev) =>
                       prev?.map((_field, idx) =>

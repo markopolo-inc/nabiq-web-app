@@ -41,6 +41,7 @@ const dataSourcesApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: args,
       }),
+      invalidatesTags: ['Company'],
       async onQueryStarted(_args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
