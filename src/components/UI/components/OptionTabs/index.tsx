@@ -1,5 +1,6 @@
 import cn from 'classnames';
-import React, { SetStateAction } from 'react';
+import React, { SetStateAction, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Option {
   label:
@@ -14,13 +15,32 @@ const OptionTabs: React.FC<{
   setActive: React.Dispatch<SetStateAction<string | number>>;
   options: Option[];
 }> = ({ active, setActive, options }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const tabFromUrl = searchParams.get('selectedTab');
+
+    if (tabFromUrl && options.some((opt) => opt.value.toString() === tabFromUrl)) {
+      setActive(
+        // Convert to number if the active value is numeric, otherwise keep as string
+        !isNaN(Number(tabFromUrl)) ? Number(tabFromUrl) : tabFromUrl,
+      );
+    }
+  }, []);
+
   return (
     <div className='border border-gray-200 rounded-[10px] w-fit p-1 flex gap-3 bg-gray-50'>
       {options.map((item, idx) => {
         const isSelected = active === item.value;
         return (
           <span
-            onClick={() => setActive(item.value)}
+            onClick={() => {
+              setActive(item.value);
+              navigate({
+                search: `?selectedTab=${item.value.toString()}`,
+              });
+            }}
             className={cn(
               'cursor-pointer text-sm px-3 py-2 rounded-lg font-semibold flex',
               isSelected

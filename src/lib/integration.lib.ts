@@ -1,5 +1,5 @@
 import {
-  // FiData,
+  FiData,
   FiMail01,
   FiMessageDotCircle, // FiNotificationMessage
 } from '@nabiq-icons';
@@ -9,7 +9,7 @@ export const appCategories = [
   {
     value: 'data-sources',
     label: 'Data sources',
-    // icon: FiData,
+    icon: FiData,
   },
   {
     value: 'email',

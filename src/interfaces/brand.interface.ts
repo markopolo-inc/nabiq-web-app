@@ -14,6 +14,22 @@ export type GatewayType =
   | 'facebook'
   | 'google';
 
+export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify';
+
+export interface IMappedField {
+  group?: string;
+  name: string;
+  label: string;
+  nabiqPropertyName?: string;
+  nabiqPropertyLabel?: string;
+}
+
+export interface IDataSourceIntegrationInterface {
+  connectedAccounts: Record<TDataSourcePlatform, any>;
+  mappedFields: Record<TDataSourcePlatform, IMappedField[]>;
+  token: Record<TDataSourcePlatform, string>;
+}
+
 export interface IntegrationInterface {
   // email
   klaviyo?: {
@@ -110,6 +126,7 @@ export interface BrandInterface {
   resourceType?: 'Brand';
   emailIntegrations?: IntegrationInterface;
   smsIntegrations?: IntegrationInterface;
+  datasourceIntegrations?: IDataSourceIntegrationInterface;
   markTag?: {
     resourceId?: string;
     domain: string;

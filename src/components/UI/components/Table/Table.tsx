@@ -8,6 +8,8 @@ interface TableProps
   striped?: boolean;
   borderTopRightRadius?: string | number;
   borderTopLeftRadius?: string | number;
+  borderBottomRightRadius?: string | number;
+  borderBottomLeftRadius?: string | number;
   withBanner?: boolean;
   banner?: ReactNode;
   pagination?: ReactNode;
@@ -18,6 +20,8 @@ const Table = ({
   maxHeight = 550,
   borderTopRightRadius,
   borderTopLeftRadius,
+  borderBottomRightRadius,
+  borderBottomLeftRadius,
   className,
   style,
   withBanner = false,
@@ -45,8 +49,8 @@ const Table = ({
           maxHeight,
           borderTopRightRadius: withBanner ? 0 : borderTopRightRadius,
           borderTopLeftRadius: withBanner ? 0 : borderTopLeftRadius,
-          borderBottomRightRadius: pagination ? 0 : undefined,
-          borderBottomLeftRadius: pagination ? 0 : undefined,
+          borderBottomRightRadius: pagination ? 0 : borderBottomRightRadius,
+          borderBottomLeftRadius: pagination ? 0 : borderBottomLeftRadius,
           // borderTop: withBanner ? 'none' : '',
           ...style,
         }}

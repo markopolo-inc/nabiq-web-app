@@ -33,7 +33,7 @@ const integrationsApi = apiSlice.injectEndpoints({
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue?.data;
       },
-      async onQueryStarted(args, { queryFulfilled }) {
+      async onQueryStarted(_args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
           toast.success(res.data?.message || 'Saved successfully!');
