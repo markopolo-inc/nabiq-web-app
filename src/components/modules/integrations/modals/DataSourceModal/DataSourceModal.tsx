@@ -32,7 +32,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
 
   const savedDataSourceFields = datasourceIntegrations?.mappedFields?.hubspot || [];
 
-  const [saveDataSourceProperties] = useSaveDataSourcePropertiesMutation();
+  const [saveDataSourceProperties, { isLoading: isSaving }] = useSaveDataSourcePropertiesMutation();
 
   const [selectedRequiredFields, setSelectedRequiredFields] = useState<IMappedField[]>([]);
   const [selectedOptionalFields, setSelectedOptionalFields] = useState<IMappedField[]>([]);
@@ -192,7 +192,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
       <Stack className='px-8 py-5' gap={0}>
         <p className='text-lg font-semibold text-gray-900'>Optional fields</p>
         <p className='text-sm text-gray-600'>
-          {selectedOptionalFields.length} out of {mappedRequiredFieldsLength} mapped
+          {selectedOptionalFields.length} out of {mappedOptionalFieldsLength} mapped
         </p>
       </Stack>
       <Table
@@ -272,6 +272,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
       <Stack className='p-8'>
         <Button
           fullWidth
+          loading={isSaving}
           onClick={handleSave}
           disabled={
             mappedRequiredFieldsLength !== requiredFields.length ||
@@ -280,7 +281,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
         >
           Confirm
         </Button>
-        <Button variant='secondary' onClick={() => setOpened(false)} fullWidth>
+        <Button disabled={isSaving} variant='secondary' onClick={() => setOpened(false)} fullWidth>
           Cancel
         </Button>
       </Stack>
