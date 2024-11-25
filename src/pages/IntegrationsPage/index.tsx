@@ -11,8 +11,8 @@ import { HeaderTitle } from 'layouts';
 import { appCategories, appOptions } from 'lib/integration.lib';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { useGetLongLivedAccessTokenMutation } from 'src/store/integrations/integrations.api';
+// import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+// import { useGetLongLivedAccessTokenMutation } from 'src/store/integrations/integrations.api';
 import { useAppSelector } from 'store/hooks';
 import { getAuthToken } from 'utils/auth';
 import { buildQueryString } from 'utils/string.utils';
@@ -26,7 +26,7 @@ const IntegrationsPage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const { emailIntegrations, smsIntegrations } = useAppSelector((state) => state.brand);
-  const [getLongLivedAccessToken] = useGetLongLivedAccessTokenMutation();
+  // const [getLongLivedAccessToken] = useGetLongLivedAccessTokenMutation();
 
   const handleIntegrate = async ({ gateway }: { gateway: IGateway }) => {
     const token = await getAuthToken();
@@ -103,27 +103,28 @@ const IntegrationsPage = () => {
                       <div className='flex gap-3'>
                         {gateway.isOauthIntegration &&
                           (gateway.gateway === 'facebook' && !isGatewayConnected ? (
-                            <FacebookLogin
-                              appId={import.meta.env.VITE_fb_APP_ID}
-                              autoLoad={false}
-                              fields='name,email,picture'
-                              scope='public_profile,ads_management,ads_read,pages_show_list,pages_manage_ads,pages_read_engagement,read_insights,instagram_basic,business_management,leads_retrieval'
-                              redirectUri={window.location.href}
-                              responseType='token'
-                              render={(renderProps) => (
-                                <Button
-                                  className='!w-40'
-                                  leadingIcon={<FiZap fill='white' size={18} />}
-                                  onClick={renderProps.onClick}
-                                >
-                                  Integrate
-                                </Button>
-                              )}
-                              callback={async (res) => {
-                                await getLongLivedAccessToken(res.accessToken);
-                              }}
-                            />
+                            <></>
                           ) : (
+                            // <FacebookLogin
+                            //   appId={import.meta.env.VITE_fb_APP_ID}
+                            //   autoLoad={false}
+                            //   fields='name,email,picture'
+                            //   scope='public_profile,ads_management,ads_read,pages_show_list,pages_manage_ads,pages_read_engagement,read_insights,instagram_basic,business_management,leads_retrieval'
+                            //   redirectUri={window.location.href}
+                            //   responseType='token'
+                            //   render={(renderProps) => (
+                            //     <Button
+                            //       className='!w-40'
+                            //       leadingIcon={<FiZap fill='white' size={18} />}
+                            //       onClick={renderProps.onClick}
+                            //     >
+                            //       Integrate
+                            //     </Button>
+                            //   )}
+                            //   callback={async (res) => {
+                            //     await getLongLivedAccessToken(res.accessToken);
+                            //   }}
+                            // />
                             // others oauth platforms
                             <Button
                               className='!w-40'
