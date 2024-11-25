@@ -1,4 +1,4 @@
-import { FiCrossX, FiPlatformIcon, Logout01 } from '@nabiq-icons';
+import { FiCrossX, FiPlatformIcon } from '@nabiq-icons';
 import { Group, Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -85,7 +85,7 @@ export const CampaignDetailsForm = () => {
           </Text>
         </Stack>
 
-        <Stack gap={6}>
+        {/* <Stack gap={6}>
           <Text size='14px' className='text-gray-700' weight={500}>
             Import content
           </Text>
@@ -109,7 +109,7 @@ export const CampaignDetailsForm = () => {
               </Text>
             </Stack>
           </Stack>
-        </Stack>
+        </Stack> */}
 
         {campaign?.content?.length ? (
           <Stack gap={12}>

@@ -21,11 +21,11 @@ export const appCategories = [
     label: 'SMS apps',
     icon: FiMessageDotCircle,
   },
-  {
-    value: 'ads',
-    label: 'Ads',
-    // icon: FiMail01, // Todo: change this icon
-  },
+  // {
+  //   value: 'ads',
+  //   label: 'Ads',
+  //   // icon: FiMail01, // Todo: change this icon
+  // },
   // {
   //   value: 'push',
   //   label: 'Push notification apps',
