@@ -134,7 +134,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
       <Stack className='px-8 py-5' gap={0}>
         <p className='text-lg font-semibold text-gray-900'>Mandatory field</p>
         <p className='text-sm text-gray-600'>
-          {selectedRequiredFields.length || 0} out of {mappedOptionalFieldsLength} mapped
+          {mappedRequiredFieldsLength} out of {requiredFields.length || 0} mapped
         </p>
       </Stack>
       <Table
@@ -192,7 +192,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
       <Stack className='px-8 py-5' gap={0}>
         <p className='text-lg font-semibold text-gray-900'>Optional fields</p>
         <p className='text-sm text-gray-600'>
-          {selectedOptionalFields.length} out of {mappedOptionalFieldsLength} mapped
+          {mappedOptionalFieldsLength} out of {selectedOptionalFields.length} mapped
         </p>
       </Stack>
       <Table
