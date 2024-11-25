@@ -125,9 +125,9 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
       <Stack className='p-8 pb-5 border-b border-gray-200 sticky top-0 bg-white z-10 shadow-sm'>
         <GatewayLogo app='hubspot' width={32} />
         <Stack gap={0}>
-          <p className='text-2xl font-semibold text-gray-900'>Integrate Salesforce</p>
+          <p className='text-2xl font-semibold text-gray-900'>Integrate Hubspot</p>
           <p className='text-base text-gray-600'>
-            Choose the data fields you want to bring over from Salesforce.
+            Choose the data fields you want to bring over from Hubspot.
           </p>
         </Stack>
       </Stack>
