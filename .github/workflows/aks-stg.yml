@@ -1,4 +1,4 @@
-name: AKS - Production
+name: AKS - Staging
 
 on:
   push:
