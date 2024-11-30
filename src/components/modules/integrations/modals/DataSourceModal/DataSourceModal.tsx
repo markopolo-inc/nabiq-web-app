@@ -46,25 +46,24 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
   ];
 
   useEffect(() => {
-    setSelectedRequiredFields(
-      requiredFields?.map((_field) => {
-        const savedField = savedDataSourceFields.find((field) => field.name === _field.value);
-        return {
-          label: _field.label,
-          name: _field.value,
-          nabiqPropertyLabel: savedField?.nabiqPropertyLabel || '',
-          nabiqPropertyName: savedField?.nabiqPropertyName || '',
-        };
-      }),
-    );
-  }, [savedDataSourceFields]);
-
-  useEffect(() => {
-    setSelectedOptionalFields(
-      savedDataSourceFields?.filter(
-        (field) => !requiredFields.map((item) => item.value).includes(field.name),
-      ),
-    );
+    if (Object.keys(savedDataSourceFields).length > 0) {
+      setSelectedRequiredFields(
+        requiredFields?.map((_field) => {
+          const savedField = savedDataSourceFields.find((field) => field.name === _field.value);
+          return {
+            label: _field.label,
+            name: _field.value,
+            nabiqPropertyLabel: savedField?.nabiqPropertyLabel || '',
+            nabiqPropertyName: savedField?.nabiqPropertyName || '',
+          };
+        }),
+      );
+      setSelectedOptionalFields(
+        savedDataSourceFields?.filter(
+          (field) => !requiredFields.map((item) => item.value).includes(field.name),
+        ),
+      );
+    }
   }, [savedDataSourceFields]);
 
   const nabiqFields = data?.data || [];
@@ -222,8 +221,8 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
                   size='sm'
                   onChange={(e) => {
                     setSelectedOptionalFields((prev) =>
-                      prev?.map((_field) =>
-                        _field.name === field.name
+                      prev?.map((_field, idx) =>
+                        index === idx
                           ? { ..._field, name: e.target.value, label: e.target.value }
                           : _field,
                       ),
@@ -263,7 +262,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
         </TableBody>
       </Table>
       <Button
-        className='m-8 mb-0'
+        className='m-8'
         variant='secondary-black'
         size='sm'
         onClick={() =>
@@ -273,7 +272,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
       >
         Add field
       </Button>
-      <Stack className='p-8'>
+      <Stack className='p-8 sticky bottom-0 bg-white border-t border-gray-200'>
         <Button
           fullWidth
           loading={isSaving}
