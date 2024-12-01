@@ -103,6 +103,7 @@ export { default as FiUser03 } from './User03';
 
 // W
 export { default as FiWooCommerce } from './WooCommerce';
+export { WhatsAppIcon as FiWhatsApp } from './WhatsApp';
 
 // X
 export { default as XClose } from './XClose';

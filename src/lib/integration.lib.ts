@@ -1,7 +1,8 @@
 import {
   FiData,
   FiMail01,
-  FiMessageDotCircle, // FiNotificationMessage
+  FiMessageDotCircle,
+  FiWhatsApp, // FiNotificationMessage
 } from '@nabiq-icons';
 import type { GatewayType, IGateway } from 'src/interfaces/brand.interface';
 
@@ -20,6 +21,11 @@ export const appCategories = [
     value: 'sms',
     label: 'SMS apps',
     icon: FiMessageDotCircle,
+  },
+  {
+    value: 'whatsapp',
+    label: 'WhatsApp',
+    icon: FiWhatsApp,
   },
   // {
   //   value: 'ads',

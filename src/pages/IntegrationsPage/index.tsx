@@ -11,6 +11,7 @@ import { HeaderTitle } from 'layouts';
 import { appCategories, appOptions } from 'lib/integration.lib';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
+import { Whatsapp } from 'src/components/modules/integrations/components/Whatsapp';
 // import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 // import { useGetLongLivedAccessTokenMutation } from 'src/store/integrations/integrations.api';
 import { useAppSelector } from 'store/hooks';
@@ -20,7 +21,7 @@ import { buildQueryString } from 'utils/string.utils';
 const IntegrationsPage = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [selectedCategory, setSelectedCategory] = useState<
-    'email' | 'sms' | 'push' | 'data-sources'
+    'email' | 'sms' | 'push' | 'data-sources' | 'whatsapp'
   >('email');
   const [selectedGateway, setSelectedGateway] = useState<IGateway | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -178,6 +179,7 @@ const IntegrationsPage = () => {
             </div>
           )}
           {selectedCategory === 'data-sources' && <DataSources />}
+          {selectedCategory === 'whatsapp' && <Whatsapp />}
         </div>
       </div>
     </>
