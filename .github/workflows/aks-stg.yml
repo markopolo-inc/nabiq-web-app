@@ -51,7 +51,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            NODE_ENV=production
+            NODE_ENV=staging
 
   deploy:
     runs-on: ubuntu-latest

@@ -20,7 +20,7 @@ import { resetCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 import { setFirstCreationModal } from 'src/store/onboarding/onboardingSlice';
 
-const CreateCampaign = () => {
+export const EmailSmsCampaign = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
@@ -145,5 +145,3 @@ const CreateCampaign = () => {
     </>
   );
 };
-
-export default CreateCampaign;

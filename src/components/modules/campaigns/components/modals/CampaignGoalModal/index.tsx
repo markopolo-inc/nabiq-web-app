@@ -96,7 +96,9 @@ const ModalBody = ({ setOpened }) => {
                       }),
                     );
 
-                    navigate('/campaigns/campaign-configuration');
+                    navigate(
+                      `/campaigns/create-campaign?campaign-mode=email-sms&goal=${goal.type}`,
+                    );
                     setOpened(false);
                   }}
                   disabled={goal.isDisabled}

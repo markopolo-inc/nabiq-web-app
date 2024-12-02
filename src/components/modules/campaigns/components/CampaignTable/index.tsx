@@ -74,7 +74,7 @@ export const CampaignTable = ({ list, refetch }) => {
         ...payload,
       }),
     );
-    navigate('/campaigns/campaign-configuration');
+    navigate('/campaigns/create-campaign');
   };
 
   const handleDeleteCampaign = async ({ campaignId }) => {
