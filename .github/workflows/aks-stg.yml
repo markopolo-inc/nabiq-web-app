@@ -47,12 +47,12 @@ jobs:
         with:
           context: .
           push: true
-          file: Dockerfile.staging
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          file: Dockerfile.staging
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            NODE_ENV=production
+            NODE_ENV=staging
 
   deploy:
     runs-on: ubuntu-latest
