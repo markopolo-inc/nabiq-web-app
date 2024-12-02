@@ -16,6 +16,8 @@ export type GatewayType =
 
 export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify';
 
+export type SocialPlatform = 'facebook' | 'google';
+
 export interface IMappedField {
   group?: string;
   name: string;
@@ -30,7 +32,7 @@ export interface IDataSourceIntegrationInterface {
   token: Record<TDataSourcePlatform, string>;
 }
 
-export interface IntegrationInterface {
+export interface IEmailSMSIntegrationInterface {
   // email
   klaviyo?: {
     apiKey: string;
@@ -85,6 +87,10 @@ export interface IntegrationInterface {
   };
 }
 
+export interface ISocialIntegrationInterface {
+  socialTokens: Record<SocialPlatform, boolean>;
+}
+
 export interface IGateway {
   category: 'sms' | 'email' | 'push' | 'ads';
   name: string;
@@ -124,9 +130,10 @@ export interface BrandInterface {
   isTiktokAccountAdded?: boolean;
   resourceId?: string;
   resourceType?: 'Brand';
-  emailIntegrations?: IntegrationInterface;
-  smsIntegrations?: IntegrationInterface;
+  emailIntegrations?: IEmailSMSIntegrationInterface;
+  smsIntegrations?: IEmailSMSIntegrationInterface;
   datasourceIntegrations?: IDataSourceIntegrationInterface;
+  socialIntegrations?: ISocialIntegrationInterface;
   markTag?: {
     resourceId?: string;
     domain: string;

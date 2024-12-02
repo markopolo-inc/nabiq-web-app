@@ -1,9 +1,9 @@
 import toast from 'react-hot-toast';
-import type { GatewayType, IntegrationInterface } from 'src/interfaces/brand.interface';
+import type { GatewayType, IEmailSMSIntegrationInterface } from 'src/interfaces/brand.interface';
 
 import { apiSlice } from '../api/apiSlice';
 
-interface IntegrationPayload extends IntegrationInterface {
+interface IntegrationPayload extends IEmailSMSIntegrationInterface {
   brandId: string;
   gateway: GatewayType;
 }

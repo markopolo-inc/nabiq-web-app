@@ -10,10 +10,8 @@ import { buildQueryString } from 'src/utils/string.utils';
 import { WhatsAppConnectModal } from '../modals/AdAccountModal/WhatsAppConnectModal';
 
 export const Whatsapp = () => {
-  const { resourceId: brandId } = useAppSelector((state) => state.brand);
-  //   const location = useLocation();
+  const { resourceId: brandId, socialIntegrations } = useAppSelector((state) => state.brand);
   const navigate = useNavigate();
-  //   const connected = new URLSearchParams(location.search).get('connected');
   const [isShowModal, setIsShowModal] = useState(false);
   const [searchParams] = useSearchParams();
 
@@ -48,24 +46,26 @@ export const Whatsapp = () => {
             seamless, real-time communication.
           </p>
         </div>
-        {/* {!datasourceIntegrations?.connectedAccounts?.hubspot ? ( */}
-        <Button
-          className='!w-40'
-          leadingIcon={<FiZap fill='white' size={22} />}
-          onClick={async () => {
-            const token = await getAuthToken();
-            window.location.href = `${
-              import.meta.env.VITE_BASE_API_URL
-            }/auth/facebook?${buildQueryString({
-              brandId,
-              token,
-              redirectUri: window.location.href + '&connected=true',
-            })}`;
-          }}
-        >
-          Integrate
-        </Button>
-        <WhatsAppConnectModal showModal={isShowModal} setIsShowModal={setIsShowModal} />
+        {socialIntegrations?.socialTokens?.facebook ? (
+          <WhatsAppConnectModal showModal={isShowModal} setIsShowModal={setIsShowModal} />
+        ) : (
+          <Button
+            className='!w-40'
+            leadingIcon={<FiZap fill='white' size={22} />}
+            onClick={async () => {
+              const token = await getAuthToken();
+              window.location.href = `${
+                import.meta.env.VITE_BASE_API_URL
+              }/auth/facebook?${buildQueryString({
+                brandId,
+                token,
+                redirectUri: window.location.href + '&connected=true',
+              })}`;
+            }}
+          >
+            Integrate
+          </Button>
+        )}
       </div>
     </div>
   );
