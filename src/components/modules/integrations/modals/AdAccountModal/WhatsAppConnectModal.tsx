@@ -74,7 +74,13 @@ const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
           setName(waNumbers?.find((num) => num?.value === value)?.name);
         }}
       />
-      <Button className='!w-40' fullWidth loading={isSaving} onClick={handleSave}>
+      <Button
+        className='!w-40'
+        disabled={!number || !name || isSaving}
+        fullWidth
+        loading={isSaving}
+        onClick={handleSave}
+      >
         Done
       </Button>
     </div>
