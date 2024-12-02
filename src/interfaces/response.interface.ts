@@ -20,3 +20,9 @@ export type APIGetAdsResponseType = {
   message: string;
   list?: CampaignAdsItemInterface[];
 };
+
+export type IResponseInterface<T> = {
+  success: boolean;
+  message: string;
+  data?: T;
+};

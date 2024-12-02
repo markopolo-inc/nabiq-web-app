@@ -1,26 +1,33 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, GatewayLogo } from '@nabiq-ui';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
 import { getAuthToken } from 'src/utils/auth';
 import { buildQueryString } from 'src/utils/string.utils';
 
+import { WhatsAppConnectModal } from '../modals/AdAccountModal/WhatsAppConnectModal';
+
 export const Whatsapp = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
-  const location = useLocation();
+  //   const location = useLocation();
   const navigate = useNavigate();
-  const connected = new URLSearchParams(location.search).get('connected');
+  //   const connected = new URLSearchParams(location.search).get('connected');
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    if (connected) {
+    if (searchParams.has('connected')) {
+      setIsShowModal(true);
       const url = new URL(window.location.href);
       url.searchParams.delete('connected');
-      navigate(url.pathname + url.search);
-      toast.success('Whatsapp connected successfully');
+      navigate({ search: url.search }, { replace: true });
+      toast.success('Whatsapp connected successfully', {
+        id: 'whatsapp-connected',
+      });
     }
-  }, [connected]);
+  }, [searchParams]);
 
   return (
     <div className='gap-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
@@ -58,10 +65,7 @@ export const Whatsapp = () => {
         >
           Integrate
         </Button>
-        {/* ) : ( */}
-        {/* <></>
-            //   <DataSourceModal />
-            )} */}
+        <WhatsAppConnectModal showModal={isShowModal} setIsShowModal={setIsShowModal} />
       </div>
     </div>
   );
