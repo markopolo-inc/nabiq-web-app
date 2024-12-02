@@ -1,4 +1,5 @@
 import { toast } from 'react-hot-toast';
+import { TSocialPlatform } from 'src/interfaces/brand.interface';
 import { IResponseInterface } from 'src/interfaces/response.interface';
 
 import { apiSlice } from '../api/apiSlice';
@@ -83,6 +84,17 @@ const socialIntegrationsApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    disconnectPlatform: builder.mutation<
+      IResponseInterface,
+      { brandId: string; platform: TSocialPlatform }
+    >({
+      query: (args) => ({
+        url: '/brand/disconnect-platform',
+        method: 'DELETE',
+        body: { ...args },
+      }),
+      invalidatesTags: ['Company'],
+    }),
   }),
 });
 
@@ -90,4 +102,5 @@ export const {
   useGetFbBusinessAccountsQuery,
   useLazyGetWABusinessAccountsQuery,
   useSaveWANumberMutation,
+  useDisconnectPlatformMutation,
 } = socialIntegrationsApi;

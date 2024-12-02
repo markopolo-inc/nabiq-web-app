@@ -2,6 +2,7 @@
 export { default as AppShell } from './AppShell';
 export { default as Group } from './Group';
 export { default as Modal } from './Modal';
+export { default as ConfirmationModal } from './ConfirmationModal';
 export { default as PageLoader } from './PageLoader/PageLoader';
 export { default as ContentLoader } from './ContentLoader/ContentLoader';
 

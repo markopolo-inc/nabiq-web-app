@@ -16,7 +16,7 @@ export type GatewayType =
 
 export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify';
 
-export type SocialPlatform = 'facebook' | 'google';
+export type TSocialPlatform = 'facebook' | 'google';
 
 export interface IMappedField {
   group?: string;
@@ -88,7 +88,7 @@ export interface IEmailSMSIntegrationInterface {
 }
 
 export interface ISocialIntegrationInterface {
-  socialTokens: Record<SocialPlatform, boolean>;
+  socialTokens: Record<TSocialPlatform, boolean>;
 }
 
 export interface IGateway {

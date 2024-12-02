@@ -1,9 +1,10 @@
 import { FiZap } from '@nabiq-icons';
-import { Button, GatewayLogo } from '@nabiq-ui';
+import { Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
+import { useDisconnectPlatformMutation } from 'src/store/integrations/social-integrations.api';
 import { getAuthToken } from 'src/utils/auth';
 import { buildQueryString } from 'src/utils/string.utils';
 
@@ -14,6 +15,16 @@ export const Whatsapp = () => {
   const navigate = useNavigate();
   const [isShowModal, setIsShowModal] = useState(false);
   const [searchParams] = useSearchParams();
+  const [disconnectPlatform, { isLoading: isDisconnecting }] = useDisconnectPlatformMutation();
+  const [showDisconnectModal, setShowDisconnectModal] = useState(true);
+
+  const handleDisconnect = async () => {
+    const res = await disconnectPlatform({ brandId, platform: 'facebook' }).unwrap();
+    if (res.success) {
+      setShowDisconnectModal(false);
+      toast.success('Disconnected successfully');
+    }
+  };
 
   useEffect(() => {
     if (searchParams.has('connected')) {
@@ -47,7 +58,16 @@ export const Whatsapp = () => {
           </p>
         </div>
         {socialIntegrations?.socialTokens?.facebook ? (
-          <WhatsAppConnectModal showModal={isShowModal} setIsShowModal={setIsShowModal} />
+          <div className='flex gap-2 items-center'>
+            <WhatsAppConnectModal showModal={isShowModal} setIsShowModal={setIsShowModal} />
+            <Button
+              variant='tertiary-destructive'
+              onClick={() => setShowDisconnectModal(true)}
+              loading={isDisconnecting}
+            >
+              Disconnect
+            </Button>
+          </div>
         ) : (
           <Button
             className='!w-40'
@@ -67,6 +87,12 @@ export const Whatsapp = () => {
           </Button>
         )}
       </div>
+      <ConfirmationModal
+        onConfirm={handleDisconnect}
+        title='Are you sure you want to disconnect?'
+        showModal={showDisconnectModal}
+        setShowModal={setShowDisconnectModal}
+      />
     </div>
   );
 };
