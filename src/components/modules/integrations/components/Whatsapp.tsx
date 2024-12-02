@@ -1,5 +1,6 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
+import { WhatsAppConnectModal } from 'components/modules/integrations/modals/AdAccountModal/WhatsAppConnectModal';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -7,8 +8,6 @@ import { useAppSelector } from 'src/store/hooks';
 import { useDisconnectPlatformMutation } from 'src/store/integrations/social-integrations.api';
 import { getAuthToken } from 'src/utils/auth';
 import { buildQueryString } from 'src/utils/string.utils';
-
-import { WhatsAppConnectModal } from '../modals/AdAccountModal/WhatsAppConnectModal';
 
 export const Whatsapp = () => {
   const { resourceId: brandId, socialIntegrations } = useAppSelector((state) => state.brand);
@@ -27,27 +26,38 @@ export const Whatsapp = () => {
   };
 
   useEffect(() => {
-    if (searchParams.has('connected') && socialIntegrations?.socialTokens?.facebook) {
+    const url = new URL(window.location.href);
+    if (searchParams.has('success') && socialIntegrations?.socialTokens?.facebook) {
       setIsShowModal(true);
-      const url = new URL(window.location.href);
-      url.searchParams.delete('connected');
+      url.searchParams.delete('success');
       navigate({ search: url.search }, { replace: true });
       toast.success('Whatsapp connected successfully', {
         id: 'whatsapp-connected',
       });
     }
+
+    if (searchParams.has('error')) {
+      toast.error('Facebook authentication failed!', {
+        id: 'whatsapp-error',
+      });
+      url.searchParams.delete('error');
+      navigate({ search: url.search }, { replace: true });
+    }
   }, [searchParams]);
 
   return (
-    <div className='gap-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+    <div className='gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
       <div
         className='rounded-xl border border-gray-200 p-6 shadow-sm min-h-60 flex flex-col justify-between gap-8'
-        key='hubspot'
+        key='whatsapp'
       >
         <div>
           <div className='flex gap-6 justify-between items-center'>
             <div className='flex items-center gap-3'>
-              <GatewayLogo app='whatsapp' width={50} />
+              <div>
+                <GatewayLogo app='whatsapp' width={28} />
+              </div>
+
               <p className='text-gray-900 font-semibold text-lg'>Whatsapp</p>
             </div>
           </div>
@@ -79,7 +89,7 @@ export const Whatsapp = () => {
               }/auth/facebook?${buildQueryString({
                 brandId,
                 token,
-                redirectUri: window.location.href + '&connected=true',
+                redirectUri: window.location.href,
               })}`;
             }}
           >
