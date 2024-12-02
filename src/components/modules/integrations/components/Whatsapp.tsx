@@ -27,7 +27,7 @@ export const Whatsapp = () => {
   };
 
   useEffect(() => {
-    if (searchParams.has('connected')) {
+    if (searchParams.has('connected') && socialIntegrations?.socialTokens?.facebook) {
       setIsShowModal(true);
       const url = new URL(window.location.href);
       url.searchParams.delete('connected');
