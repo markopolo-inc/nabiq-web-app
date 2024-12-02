@@ -130,8 +130,8 @@ export const CampaignTable = ({ list, refetch }) => {
       {filteredList.length > 0 && (
         <TableHead>
           <TableRow>
-            {CAMPAIGN_TABLE_HEADERS.map((item) => (
-              <Th key={item}>
+            {CAMPAIGN_TABLE_HEADERS.map((item, idx) => (
+              <Th key={idx}>
                 <div className='flex items-center gap-1'>
                   <div className='text-xs font-medium text-gray-600'>{item}</div>
                   {item?.length ? <ArrowNarrowDown size={16} color='#475467' /> : null}
@@ -157,8 +157,8 @@ export const CampaignTable = ({ list, refetch }) => {
             </Td>
           </TableRow>
         ) : (
-          filteredList.map((item) => (
-            <TableRow>
+          filteredList.map((item, idx) => (
+            <TableRow key={idx}>
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
                   <div className='text-sm font-medium text-gray-900'>{item.name}</div>

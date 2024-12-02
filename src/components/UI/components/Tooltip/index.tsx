@@ -1,20 +1,17 @@
-import { useState } from 'react';
-
-import './Tooltip.css';
+import { Tooltip as MantineTooltip, TooltipProps } from '@mantine/core';
+import { forwardRef } from 'react';
 
 // For styling
 
-const Tooltip = ({ text, children }) => {
-  const [visible, setVisible] = useState(false);
-
-  const showTooltip = () => setVisible(true);
-  const hideTooltip = () => setVisible(false);
+const Tooltip = ({ children, ...props }: TooltipProps) => {
+  const TooltipIcon = forwardRef<HTMLSpanElement>((_props, ref) => {
+    return <span ref={ref}>{children}</span>;
+  });
 
   return (
-    <div className='tooltip-container' onMouseEnter={showTooltip} onMouseLeave={hideTooltip}>
-      {children}
-      {visible && <div className='tooltip-box'>{text}</div>}
-    </div>
+    <MantineTooltip {...props}>
+      <TooltipIcon />
+    </MantineTooltip>
   );
 };
 

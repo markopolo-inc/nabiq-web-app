@@ -25,7 +25,6 @@ const ControlRoom = () => {
   return (
     <>
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
-
       <LearnMoreControlRoomModal
         showModal={showLearnMoreControlRoomModal}
         setShowModal={setLearnMoreControlRoomModal}

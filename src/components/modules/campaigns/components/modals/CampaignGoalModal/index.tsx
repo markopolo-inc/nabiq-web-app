@@ -1,6 +1,6 @@
 import { FiCursorClick01, FiHelpCircle, FiInfinity, FiZapFast } from '@nabiq-icons';
 import { Badge, Button, Group, Modal, Stack, Tooltip } from '@nabiq-ui';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
@@ -42,6 +42,14 @@ const goals = [
   },
 ];
 
+const TooltipIcon = forwardRef<HTMLSpanElement>((props, ref) => {
+  return (
+    <span ref={ref} {...props}>
+      <FiHelpCircle color='#9AA4B2' size={20} style={{ cursor: 'pointer' }} />
+    </span>
+  );
+});
+
 const ModalBody = ({ setOpened }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,8 +63,8 @@ const ModalBody = ({ setOpened }) => {
           Select the campaign goal that matches your objective.
         </p>
       </Stack>
-      <Stack align='center'>
-        <Group>
+      <Stack align='center' justify='center'>
+        <Group align='center' justify='center'>
           {goals?.map((goal, idx) => {
             const Icon = goal.icon;
             return (
@@ -67,8 +75,8 @@ const ModalBody = ({ setOpened }) => {
               >
                 <Group justify={goal.badgeLabel ? 'space-between' : 'end'}>
                   {goal.badgeLabel ? <Badge color='warning'>{goal.badgeLabel}</Badge> : <></>}
-                  <Tooltip text={goal.tooltip}>
-                    <FiHelpCircle color='#9AA4B2' size={20} style={{ cursor: 'pointer' }} />
+                  <Tooltip label={goal.tooltip} multiline maw={300} zIndex={9999}>
+                    <TooltipIcon />
                   </Tooltip>
                 </Group>
                 <Stack align='center'>
