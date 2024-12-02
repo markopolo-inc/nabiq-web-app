@@ -16,7 +16,7 @@ export const Whatsapp = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [searchParams] = useSearchParams();
   const [disconnectPlatform, { isLoading: isDisconnecting }] = useDisconnectPlatformMutation();
-  const [showDisconnectModal, setShowDisconnectModal] = useState(true);
+  const [showDisconnectModal, setShowDisconnectModal] = useState(false);
 
   const handleDisconnect = async () => {
     const res = await disconnectPlatform({ brandId, platform: 'facebook' }).unwrap();
