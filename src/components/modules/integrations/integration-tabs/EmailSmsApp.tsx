@@ -30,7 +30,7 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
   return (
     <>
       <ApiKeyModal gateway={selectedGateway} showModal={showModal} setShowModal={setShowModal} />
-      <div className='gap-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+      <div className='gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
         {appOptions
           ?.filter((item) => item?.category === selectedTab)
           .map((gateway) => {
