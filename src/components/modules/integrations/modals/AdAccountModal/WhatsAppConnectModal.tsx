@@ -1,3 +1,4 @@
+import { ComboboxItem } from '@mantine/core';
 import { Button, GatewayLogo, Loader, Modal, Select } from '@nabiq-ui';
 import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from 'src/store/hooks';
@@ -7,6 +8,11 @@ import {
   useSaveWANumberMutation,
 } from 'src/store/integrations/social-integrations.api';
 
+interface NumberOption extends ComboboxItem {
+  name: string;
+  whatsAppBusinessAccountId: string;
+}
+
 const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const { data } = useGetFbBusinessAccountsQuery(brandId);
@@ -15,19 +21,26 @@ const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
   const [accountId, setAccountId] = useState('');
   const [number, setNumber] = useState('');
   const [name, setName] = useState('');
+  const [whatsAppBusinessAccountId, setWhatsAppBusinessAccountId] = useState('');
 
   const waNumbers = useMemo(() => {
     if (!waData) return [];
     const numbers = [];
     if (waData?.data?.length > 0) {
       waData?.data?.forEach((account) => {
-        numbers.push(...account?.phone_numbers?.data);
+        numbers.push(
+          ...account?.phone_numbers?.data?.map((num) => ({
+            ...num,
+            whatsAppBusinessAccountId: account?.id,
+          })),
+        );
       });
     }
     return numbers?.map((num) => ({
       label: `${num?.verified_name} (${num?.id})`,
       value: num?.id,
       name: num?.verified_name,
+      whatsAppBusinessAccountId: num?.whatsAppBusinessAccountId,
     }));
   }, [waData]);
 
@@ -46,7 +59,7 @@ const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
   }));
 
   const handleSave = async () => {
-    const res = await saveWANumber({ brandId, number, name }).unwrap();
+    const res = await saveWANumber({ brandId, number, name, whatsAppBusinessAccountId }).unwrap();
     if (res?.success) {
       setOpened(false);
     }
@@ -69,20 +82,23 @@ const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
         label='Select whatsapp number'
         placeholder='Whatsapp number'
         nothingFoundMessage={isLoading ? 'Loading...' : 'No whatsapp numbers found.'}
-        onChange={(value) => {
+        onChange={(value, option: NumberOption) => {
           setNumber(value);
-          setName(waNumbers?.find((num) => num?.value === value)?.name);
+          setName(option?.name);
+          setWhatsAppBusinessAccountId(option?.whatsAppBusinessAccountId);
         }}
       />
-      <Button
-        className='!w-40'
-        disabled={!number || !name || isSaving}
-        fullWidth
-        loading={isSaving}
-        onClick={handleSave}
-      >
-        Done
-      </Button>
+      <div className='mt-4'>
+        <Button
+          className='!w-40'
+          disabled={!number || !name || !whatsAppBusinessAccountId || isSaving}
+          fullWidth
+          loading={isSaving}
+          onClick={handleSave}
+        >
+          Done
+        </Button>
+      </div>
     </div>
   );
 };

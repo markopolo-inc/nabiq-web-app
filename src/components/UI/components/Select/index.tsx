@@ -42,6 +42,7 @@ const Select = ({
           </Text>
         )
       }
+      comboboxProps={{ transitionProps: { transition: 'slide-down', duration: 200 } }}
       rightSection={<FiChevronDown size={20} style={{ cursor: 'pointer' }} color={gray500} />}
       {...rest}
     />

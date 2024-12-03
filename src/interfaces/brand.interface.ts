@@ -89,6 +89,10 @@ export interface IEmailSMSIntegrationInterface {
 
 export interface ISocialIntegrationInterface {
   socialTokens: Record<TSocialPlatform, boolean>;
+  whatsApp?: {
+    name: string;
+    number: string;
+  };
 }
 
 export interface IGateway {

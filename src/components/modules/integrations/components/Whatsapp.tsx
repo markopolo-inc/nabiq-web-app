@@ -1,5 +1,5 @@
 import { FiZap } from '@nabiq-icons';
-import { Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
+import { Badge, Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
 import { WhatsAppConnectModal } from 'components/modules/integrations/modals/AdAccountModal/WhatsAppConnectModal';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -48,7 +48,7 @@ export const Whatsapp = () => {
   return (
     <div className='gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
       <div
-        className='rounded-xl border border-gray-200 p-6 shadow-sm min-h-60 flex flex-col justify-between gap-8'
+        className='rounded-xl border border-gray-200 p-6 shadow-sm min-h-[290px] flex flex-col justify-between gap-12'
         key='whatsapp'
       >
         <div>
@@ -60,12 +60,22 @@ export const Whatsapp = () => {
 
               <p className='text-gray-900 font-semibold text-lg'>Whatsapp</p>
             </div>
+            {socialIntegrations?.socialTokens?.facebook && (
+              <Badge color='success' size='sm'>
+                Connected
+              </Badge>
+            )}
           </div>
 
           <p className='mt-6 text-gray-600 font-normal text-sm'>
             Connect with customers instantly and securely using WhatsApp’s messaging platform for
             seamless, real-time communication.
           </p>
+          {socialIntegrations?.whatsApp?.number && (
+            <Badge color='gray' className='mt-[20px]'>
+              {socialIntegrations?.whatsApp?.number}
+            </Badge>
+          )}
         </div>
         {socialIntegrations?.socialTokens?.facebook ? (
           <div className='flex gap-2 items-center'>

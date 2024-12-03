@@ -66,6 +66,7 @@ const socialIntegrationsApi = apiSlice.injectEndpoints({
         brandId: string;
         number: string;
         name: string;
+        whatsAppBusinessAccountId: string;
       }
     >({
       query: (args) => ({
