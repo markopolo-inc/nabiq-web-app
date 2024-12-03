@@ -9,7 +9,7 @@ export const DataSources = () => {
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
 
   return (
-    <div className='gap-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+    <div className='gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
       <div
         className='rounded-xl border border-gray-200 p-6 shadow-sm min-h-60 flex flex-col justify-between gap-8'
         key='hubspot'
