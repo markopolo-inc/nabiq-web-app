@@ -30,7 +30,7 @@ export const MarktagSidebar = () => {
         <Button
           variant='secondary'
           leadingIcon={<ArrowNarrowLeft size={20} color='#4B5565' />}
-          onClick={() => navigate('/')}
+          onClick={() => navigate(-1)}
         >
           Go back
         </Button>
