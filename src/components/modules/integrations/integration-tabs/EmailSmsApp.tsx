@@ -1,0 +1,110 @@
+import { FiZap } from '@nabiq-icons';
+import { Badge, Button, GatewayLogo } from '@nabiq-ui';
+import { ApiKeyModal, GatewayDisconnectModal } from 'components/modules/integrations';
+import type { GatewayType, IGateway } from 'interfaces/brand.interface';
+import { appOptions } from 'lib/integration.lib';
+import { isEmpty } from 'lodash';
+import { useState } from 'react';
+import type { TOptionTab } from 'src/interfaces/modules/integrations';
+import { useAppSelector } from 'store/hooks';
+import { getAuthToken } from 'utils/auth';
+import { buildQueryString } from 'utils/string.utils';
+
+export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
+  const [selectedGateway, setSelectedGateway] = useState<IGateway | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const { resourceId: brandId } = useAppSelector((state) => state.brand);
+  const { emailIntegrations, smsIntegrations } = useAppSelector((state) => state.brand);
+
+  const handleIntegrate = async ({ gateway }: { gateway: IGateway }) => {
+    const token = await getAuthToken();
+    window.location.href = `${
+      import.meta.env.VITE_BASE_API_URL
+    }/${gateway.gateway}/oauth?${buildQueryString({
+      brandId,
+      token,
+      redirectUri: window.location.href,
+    })}`;
+  };
+
+  return (
+    <>
+      <ApiKeyModal gateway={selectedGateway} showModal={showModal} setShowModal={setShowModal} />
+      <div className='gap-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+        {appOptions
+          ?.filter((item) => item?.category === selectedTab)
+          .map((gateway) => {
+            const isGatewayConnected =
+              (gateway.category === 'email' && !isEmpty(emailIntegrations?.[gateway?.gateway])) ||
+              (gateway.category === 'sms' && !isEmpty(smsIntegrations?.[gateway?.gateway]));
+
+            return (
+              <div
+                className='rounded-xl border border-gray-200 p-6 shadow-sm min-h-60 flex flex-col justify-between gap-8'
+                key={gateway.gateway}
+              >
+                <div>
+                  <div className='flex gap-6 justify-between items-center'>
+                    <div className='flex items-center gap-3'>
+                      <GatewayLogo app={gateway.gateway as GatewayType} width={32} />
+                      <p className='text-gray-900 font-semibold text-lg'>{gateway.name}</p>
+                    </div>
+                    {isGatewayConnected && (
+                      <Badge variant='outline' color='success'>
+                        Connected
+                      </Badge>
+                    )}
+                  </div>
+
+                  <p className='mt-6 text-gray-600 font-normal text-sm'>{gateway.headline}</p>
+                </div>
+                <div className='flex gap-3'>
+                  {gateway.isOauthIntegration && (
+                    <Button
+                      className='!w-40'
+                      leadingIcon={<FiZap fill='white' size={22} />}
+                      onClick={() => {
+                        handleIntegrate({ gateway });
+                      }}
+                    >
+                      {isGatewayConnected ? 'Reconnect' : 'Integrate'}
+                    </Button>
+                  )}
+
+                  {gateway.isKeyIntegration && (
+                    <>
+                      {isGatewayConnected ? (
+                        <Button
+                          className='!w-40'
+                          variant='secondary'
+                          onClick={() => {
+                            setShowModal(true);
+                            setSelectedGateway(gateway);
+                          }}
+                        >
+                          Configure
+                        </Button>
+                      ) : (
+                        <Button
+                          className='!w-40'
+                          leadingIcon={<FiZap fill='white' size={18} />}
+                          onClick={() => {
+                            setShowModal(true);
+                            setSelectedGateway(gateway);
+                          }}
+                        >
+                          Integrate
+                        </Button>
+                      )}
+                    </>
+                  )}
+
+                  {isGatewayConnected && <GatewayDisconnectModal gateway={gateway} />}
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    </>
+  );
+};

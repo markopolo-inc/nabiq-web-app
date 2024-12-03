@@ -4,5 +4,7 @@ export { GatewayDisconnectModal } from 'components/modules/integrations/modals/G
 export { DataSourceModal } from 'components/modules/integrations/modals/DataSourceModal/DataSourceModal';
 export { WhatsAppConnectModal } from 'components/modules/integrations/modals/AdAccountModal/WhatsAppConnectModal';
 
-/*** Data Sources ***/
-export { DataSources } from 'components/modules/integrations/components/DataSources';
+/*** Integration Tabs ***/
+export { DataSources } from 'src/components/modules/integrations/integration-tabs/DataSources';
+export { Whatsapp } from 'src/components/modules/integrations/integration-tabs/Whatsapp';
+export { EmailSmsApp } from 'src/components/modules/integrations/integration-tabs/EmailSmsApp';
