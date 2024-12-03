@@ -1,6 +1,6 @@
 import { FiZap } from '@nabiq-icons';
 import { Badge, Button, GatewayLogo } from '@nabiq-ui';
-import { ApiKeyModal, GatewayDisconnectModal } from 'components/modules/integrations';
+import { ApiKeyModal, GatewayDisconnectModal } from 'components/modules/integrations/components';
 import type { GatewayType, IGateway } from 'interfaces/brand.interface';
 import { appOptions } from 'lib/integration.lib';
 import { isEmpty } from 'lodash';

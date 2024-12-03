@@ -1,6 +1,6 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, GatewayLogo } from '@nabiq-ui';
-import { DataSourceModal } from 'components/modules/integrations';
+import { DataSourceModal } from 'src/components/modules/integrations/components';
 import { useAppSelector } from 'src/store/hooks';
 import { getAuthToken } from 'src/utils/auth';
 import { buildQueryString } from 'src/utils/string.utils';
