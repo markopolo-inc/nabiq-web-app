@@ -1,9 +1,12 @@
 import { FiZap } from '@nabiq-icons';
-import { Badge, Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
+import { Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { WhatsAppConnectModal } from 'src/components/modules/integrations/components';
+import {
+  IntegrationCard,
+  WhatsAppConnectModal,
+} from 'src/components/modules/integrations/components';
 import { useAppSelector } from 'src/store/hooks';
 import { useDisconnectPlatformMutation } from 'src/store/integrations/social-integrations.api';
 import { getAuthToken } from 'src/utils/auth';
@@ -47,36 +50,13 @@ export const Whatsapp = () => {
 
   return (
     <div className='gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
-      <div
-        className='rounded-xl border border-gray-200 p-6 shadow-sm min-h-[290px] flex flex-col justify-between gap-12'
-        key='whatsapp'
+      <IntegrationCard
+        title='Whatsapp'
+        description='Connect with customers instantly and securely using WhatsApp’s messaging platform for
+              seamless, real-time communication.'
+        icon={<GatewayLogo app='whatsapp' width={28} />}
+        isConnected={!!socialIntegrations?.socialTokens?.facebook}
       >
-        <div>
-          <div className='flex gap-6 justify-between items-center'>
-            <div className='flex items-center gap-3'>
-              <div>
-                <GatewayLogo app='whatsapp' width={28} />
-              </div>
-
-              <p className='text-gray-900 font-semibold text-lg'>Whatsapp</p>
-            </div>
-            {socialIntegrations?.socialTokens?.facebook && (
-              <Badge color='success' size='sm'>
-                Connected
-              </Badge>
-            )}
-          </div>
-
-          <p className='mt-6 text-gray-600 font-normal text-sm'>
-            Connect with customers instantly and securely using WhatsApp’s messaging platform for
-            seamless, real-time communication.
-          </p>
-          {socialIntegrations?.whatsApp?.number && (
-            <Badge color='gray' className='mt-[20px]'>
-              {socialIntegrations?.whatsApp?.number}
-            </Badge>
-          )}
-        </div>
         {socialIntegrations?.socialTokens?.facebook ? (
           <div className='flex gap-2 items-center'>
             <WhatsAppConnectModal showModal={isShowModal} setIsShowModal={setIsShowModal} />
@@ -105,7 +85,7 @@ export const Whatsapp = () => {
             Integrate
           </Button>
         )}
-      </div>
+      </IntegrationCard>
       <ConfirmationModal
         onConfirm={handleDisconnect}
         title='Are you sure you want to disconnect?'

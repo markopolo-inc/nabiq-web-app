@@ -1,6 +1,10 @@
 import { FiZap } from '@nabiq-icons';
-import { Badge, Button, Card, GatewayLogo } from '@nabiq-ui';
-import { ApiKeyModal, GatewayDisconnectModal } from 'components/modules/integrations/components';
+import { Button, GatewayLogo } from '@nabiq-ui';
+import {
+  ApiKeyModal,
+  GatewayDisconnectModal,
+  IntegrationCard,
+} from 'components/modules/integrations/components';
 import type { GatewayType, IGateway } from 'interfaces/brand.interface';
 import { appOptions } from 'lib/integration.lib';
 import { isEmpty } from 'lodash';
@@ -39,22 +43,13 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
               (gateway.category === 'sms' && !isEmpty(smsIntegrations?.[gateway?.gateway]));
 
             return (
-              <Card key={gateway.gateway}>
-                <div>
-                  <div className='flex gap-6 justify-between items-center'>
-                    <div className='flex items-center gap-3'>
-                      <GatewayLogo app={gateway.gateway as GatewayType} width={32} />
-                      <p className='text-gray-900 font-semibold text-lg'>{gateway.name}</p>
-                    </div>
-                    {isGatewayConnected && (
-                      <Badge variant='outline' color='success'>
-                        Connected
-                      </Badge>
-                    )}
-                  </div>
-
-                  <p className='mt-6 text-gray-600 font-normal text-sm'>{gateway.headline}</p>
-                </div>
+              <IntegrationCard
+                key={gateway.gateway}
+                title={gateway.name}
+                description={gateway.headline}
+                icon={<GatewayLogo app={gateway.gateway as GatewayType} width={32} />}
+                isConnected={isGatewayConnected}
+              >
                 <div className='flex gap-3'>
                   {gateway.isOauthIntegration && (
                     <Button
@@ -98,7 +93,7 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
 
                   {isGatewayConnected && <GatewayDisconnectModal gateway={gateway} />}
                 </div>
-              </Card>
+              </IntegrationCard>
             );
           })}
       </div>
