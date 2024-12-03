@@ -1,5 +1,5 @@
 import { FiZap } from '@nabiq-icons';
-import { Badge, Button, GatewayLogo } from '@nabiq-ui';
+import { Badge, Button, Card, GatewayLogo } from '@nabiq-ui';
 import { ApiKeyModal, GatewayDisconnectModal } from 'components/modules/integrations/components';
 import type { GatewayType, IGateway } from 'interfaces/brand.interface';
 import { appOptions } from 'lib/integration.lib';
@@ -39,10 +39,7 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
               (gateway.category === 'sms' && !isEmpty(smsIntegrations?.[gateway?.gateway]));
 
             return (
-              <div
-                className='rounded-xl border border-gray-200 p-6 shadow-sm min-h-60 flex flex-col justify-between gap-8'
-                key={gateway.gateway}
-              >
+              <Card key={gateway.gateway}>
                 <div>
                   <div className='flex gap-6 justify-between items-center'>
                     <div className='flex items-center gap-3'>
@@ -101,7 +98,7 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
 
                   {isGatewayConnected && <GatewayDisconnectModal gateway={gateway} />}
                 </div>
-              </div>
+              </Card>
             );
           })}
       </div>

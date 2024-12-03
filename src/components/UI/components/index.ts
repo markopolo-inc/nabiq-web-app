@@ -5,6 +5,7 @@ export { default as Modal } from './Modal';
 export { default as ConfirmationModal } from './ConfirmationModal';
 export { default as PageLoader } from './PageLoader/PageLoader';
 export { default as ContentLoader } from './ContentLoader/ContentLoader';
+export { Card } from './Card';
 
 export { default as Breadcrumbs } from './Breadcrumbs';
 

@@ -1,25 +1,13 @@
 import { HeaderTitle } from 'layouts';
-import { useState } from 'react';
-import {
-  ConnectMarktag,
-  ConnectedMarktag,
-  ConstitutionalAIModerationCard,
-  IntegrateApps,
-  MarktagCreationsModals,
-} from 'src/components/modules/home';
+import { ConstitutionalAIModerationCard, IntegrateApps } from 'src/components/modules/home';
 import { useAppSelector } from 'store/hooks';
 
 const Home = () => {
-  const { markTag } = useAppSelector((state) => state.brand);
   const company = useAppSelector((state) => state.company);
-
-  const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
 
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
-
-      <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
       <div className='flex flex-col gap-16'>
         <div className='flex flex-col'>
@@ -31,11 +19,6 @@ const Home = () => {
         <div className='p-12 bg-gray-100 rounded-xl'>
           <div className='flex flex-col justify-center items-center'>
             <div className='gap-3 w-fit grid grid-cols-1 xl:grid-cols-2 justify-center'>
-              {Boolean(markTag) ? (
-                <ConnectedMarktag onShowMarktag={() => setShowMarktagModal(true)} />
-              ) : (
-                <ConnectMarktag onShowMarktag={() => setShowMarktagModal(true)} />
-              )}
               <IntegrateApps />
               <ConstitutionalAIModerationCard />
             </div>
