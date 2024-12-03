@@ -121,7 +121,7 @@ export const WhatsAppConnectModal = ({
       onClose={() => setIsShowModal(false)}
     >
       {({ setOpened }) => (
-        <Button className='!w-40' variant='secondary' onClick={() => setOpened(true)}>
+        <Button variant='secondary' onClick={() => setOpened(true)}>
           Configure
         </Button>
       )}

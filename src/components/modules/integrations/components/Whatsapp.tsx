@@ -90,7 +90,6 @@ export const Whatsapp = () => {
           </div>
         ) : (
           <Button
-            className='!w-40'
             leadingIcon={<FiZap fill='white' size={22} />}
             onClick={async () => {
               const token = await getAuthToken();
