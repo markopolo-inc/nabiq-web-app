@@ -56,7 +56,7 @@ const socialIntegrationsApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         const res = await queryFulfilled;
         if (!res?.data?.success) {
-          toast.error(res?.data?.message || 'Failed to get business accounts!');
+          toast.error('No numbers found!');
         }
       },
     }),
