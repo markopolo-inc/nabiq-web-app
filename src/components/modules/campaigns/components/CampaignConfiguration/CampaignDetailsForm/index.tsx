@@ -1,7 +1,7 @@
 import { FiCrossX, FiPlatformIcon } from '@nabiq-icons';
 import { Group, Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
 import { useDispatch } from 'react-redux';
-import { CampaignInterface } from 'src/interfaces/modules/campaign';
+import { ICampaign } from 'src/interfaces/modules/campaign';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -9,7 +9,7 @@ export const CampaignDetailsForm = () => {
   const dispatch = useDispatch();
   const { campaign } = useAppSelector((state) => state);
 
-  const handleChange = (field: keyof CampaignInterface, value) => {
+  const handleChange = (field: keyof ICampaign, value) => {
     dispatch(
       setCampaign({
         [field]: value,

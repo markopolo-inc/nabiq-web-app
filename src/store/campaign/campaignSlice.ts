@@ -1,8 +1,8 @@
 import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment-timezone';
-import { CampaignInterface } from 'src/interfaces/modules/campaign';
+import { ICampaign } from 'src/interfaces/modules/campaign';
 
-const initialState: Partial<CampaignInterface> = {
+const initialState: Partial<ICampaign> = {
   tone: 'informal',
   startDate: moment().format('YYYY-MM-DD'),
   endDate: moment().add(7, 'day').format('YYYY-MM-DD'),
@@ -19,7 +19,7 @@ const campaignSlice = createSlice({
     builder.addCase(revertAll, () => initialState);
   },
   reducers: {
-    setCampaign: (state, action: PayloadAction<Partial<CampaignInterface>>) => ({
+    setCampaign: (state, action: PayloadAction<Partial<ICampaign>>) => ({
       ...state,
       ...action.payload,
     }),

@@ -1,4 +1,4 @@
-import { CampaignAdsItemInterface, CampaignItemInterface } from 'src/interfaces/modules/campaign';
+import { ICampaignAdsItem, ICampaignItem } from 'src/interfaces/modules/campaign';
 
 export type APIResponseType = {
   success: boolean;
@@ -9,13 +9,13 @@ export type APIResponseType = {
 export type APIGetConfigsResponseType = {
   success: boolean;
   message: string;
-  data?: CampaignItemInterface[];
+  data?: ICampaignItem[];
 };
 
 export type APIGetAdsResponseType = {
   success: boolean;
   message: string;
-  list?: CampaignAdsItemInterface[];
+  list?: ICampaignAdsItem[];
 };
 
 export type IResponseInterface<T = null> = {

@@ -1,6 +1,7 @@
 import { FiHelpCircle } from '@nabiq-icons';
 import { Badge, Button, Group, Modal, Stack, Tooltip } from '@nabiq-ui';
 import cn from 'classnames';
+import moment from 'moment-timezone';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -104,6 +105,7 @@ const ModalBody = ({ setOpened }) => {
                           brandId,
                           tagId: markTag?.resourceId,
                           goal: selectedGoal,
+                          name: `Untitled Campaign-${moment().format('DD-MM-YYYY')}`,
                         }),
                       );
                       navigate(

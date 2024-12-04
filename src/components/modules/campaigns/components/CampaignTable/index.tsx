@@ -19,11 +19,11 @@ import moment from 'moment-timezone';
 import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CampaignItemInterface } from 'src/interfaces/modules/campaign';
+import { ICampaignItem } from 'src/interfaces/modules/campaign';
 import { useDeleteCampaignConfigMutation } from 'src/store/campaign/campaignApi';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 
-type ActivatedTabsType = 'all' | CampaignItemInterface['status'];
+type ActivatedTabsType = 'all' | ICampaignItem['status'];
 
 const CAMPAIGN_TABLE_HEADERS: string[] = [
   'Campaign name',

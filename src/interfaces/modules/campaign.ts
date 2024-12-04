@@ -4,12 +4,12 @@ export type TCampaignGoal = 'acquisition' | 'retention' | 'activation';
 
 export type TCampaignMedium = 'whatsapp' | 'email-sms';
 
-export interface ChannelInterface {
+export interface IChannel {
   channel: 'sms' | 'email' | 'notification';
   platform: GatewayType | 'none';
 }
 
-export interface CampaignItemInterface {
+export interface ICampaignItem {
   resourceId: string;
   resourceType: string;
   brandId: string;
@@ -24,7 +24,7 @@ export interface CampaignItemInterface {
   updatedAt: string;
 }
 
-export interface CampaignInterface {
+export interface ICampaign {
   resourceId?: string;
   brandId: string;
   tagId: string;
@@ -32,6 +32,8 @@ export interface CampaignInterface {
   name: string;
   details: string;
   link: string;
+  language: 'en' | 'ar';
+  instruction: string;
   tone: 'formal' | 'informal';
   startDate: string;
   endDate: string;
@@ -39,7 +41,7 @@ export interface CampaignInterface {
   stepCount: number;
   stepDelay: number;
   content: any[];
-  channels: ChannelInterface[];
+  channels: IChannel[];
 }
 
 interface Metrics {
@@ -49,7 +51,7 @@ interface Metrics {
   clicks: number | undefined;
 }
 
-export interface CampaignAdsItemInterface {
+export interface ICampaignAdsItem {
   id: string;
   title: string;
   description: string;
