@@ -57,7 +57,7 @@ export const mediums = [
   },
 ];
 
-export const campaignSteps = [
+export const emailSmsCampaignSteps = [
   {
     label: 'Campaign details',
     description: 'Enter the campaign details',
@@ -69,5 +69,20 @@ export const campaignSteps = [
   {
     label: 'Channels',
     description: 'Choose the main and additional channels',
+  },
+];
+
+export const whatsappCampaignSteps = [
+  {
+    label: 'Connection',
+    description: 'Connect WhatsApp & sync products',
+  },
+  {
+    label: 'Creation',
+    description: 'Set priorities for Captain Nabiq.',
+  },
+  {
+    label: 'Completion',
+    description: 'Captain Nabiq is on it—upload more leads if needed.',
   },
 ];

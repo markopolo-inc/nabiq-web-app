@@ -1,4 +1,4 @@
-import { Breadcrumbs, Button, PageLoader, Stack } from '@nabiq-ui';
+import { Breadcrumbs, Button, PageLoader, Stack, Stepper, StepperStep } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,10 +7,10 @@ import {
   CampaignChannels,
   CampaignDetailsForm,
   CampaignFirstCreationModal,
-  CampaignStepper,
   CampaignTiming,
 } from 'src/components/modules/campaigns';
 import { APIResponseType } from 'src/interfaces/response.interface';
+import { emailSmsCampaignSteps } from 'src/lib/campaign.lib';
 import {
   useCreateCampaignConfigMutation,
   useEditCampaignConfigMutation,
@@ -90,7 +90,7 @@ export const EmailSmsCampaign = () => {
       <HeaderTitle>Nabiq | Campaign Configuration</HeaderTitle>
       <CampaignFirstCreationModal showModal={showModal} setShowModal={setShowModal} />
 
-      <Stack gap={78}>
+      <Stack gap={64}>
         <Stack gap={20}>
           <Breadcrumbs />
 
@@ -129,7 +129,16 @@ export const EmailSmsCampaign = () => {
         </Stack>
 
         <Stack gap={64} w={960} className='mx-auto mb-12'>
-          <CampaignStepper active={active} setActive={handleStepChange} />
+          <Stepper
+            allowNextStepsSelect={true}
+            active={active}
+            onStepClick={handleStepChange}
+            size='xs'
+          >
+            {emailSmsCampaignSteps.map((step, index) => (
+              <StepperStep key={index} {...step} active={active} index={index} />
+            ))}
+          </Stepper>
 
           <Stack gap={32}>
             {(() => {

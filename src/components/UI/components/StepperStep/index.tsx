@@ -28,12 +28,11 @@ export const StepperStep = ({
         </Text>
       }
       description={
-        <Text
-          size='14px'
-          className={`${active === index ? 'text-primary-600' : 'text-gray-600'} leading-5`}
+        <div
+          className={`${active === index ? 'text-primary-600' : 'text-gray-600'} leading-5 max-w-[240px] text-sm`}
         >
           {description}
-        </Text>
+        </div>
       }
       icon={
         active > index ? (
