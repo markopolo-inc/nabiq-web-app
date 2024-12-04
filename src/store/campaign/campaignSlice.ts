@@ -1,6 +1,6 @@
 import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment-timezone';
-import { CampaignInterface } from 'src/interfaces/campaign.interface';
+import { CampaignInterface } from 'src/interfaces/modules/campaign';
 
 const initialState: Partial<CampaignInterface> = {
   tone: 'informal',

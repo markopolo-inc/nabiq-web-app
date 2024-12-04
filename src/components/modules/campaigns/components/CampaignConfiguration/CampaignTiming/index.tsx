@@ -8,7 +8,7 @@ import {
 } from '@nabiq-ui';
 import moment from 'moment-timezone';
 import { useDispatch } from 'react-redux';
-import { CampaignInterface } from 'src/interfaces/campaign.interface';
+import { CampaignInterface } from 'src/interfaces/modules/campaign';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 

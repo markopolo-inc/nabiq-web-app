@@ -1,4 +1,8 @@
-import { GatewayType } from './brand.interface';
+import { GatewayType } from 'src/interfaces/brand.interface';
+
+export type TCampaignGoal = 'acquisition' | 'retention' | 'activation';
+
+export type TCampaignMedium = 'whatsapp' | 'email-sms';
 
 export interface ChannelInterface {
   channel: 'sms' | 'email' | 'notification';
@@ -11,7 +15,7 @@ export interface CampaignItemInterface {
   brandId: string;
   tagId: string;
   status: 'active' | 'processing' | 'finished';
-  goal: 'acquisition';
+  goal: TCampaignGoal;
   name: string;
   details: string;
   funnels: any[];
@@ -24,7 +28,7 @@ export interface CampaignInterface {
   resourceId?: string;
   brandId: string;
   tagId: string;
-  goal: 'acquisition' | 'retention' | 'activation';
+  goal: TCampaignGoal;
   name: string;
   details: string;
   link: string;

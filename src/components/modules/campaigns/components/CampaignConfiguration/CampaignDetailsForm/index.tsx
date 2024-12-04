@@ -1,7 +1,7 @@
 import { FiCrossX, FiPlatformIcon } from '@nabiq-icons';
 import { Group, Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
 import { useDispatch } from 'react-redux';
-import { CampaignInterface } from 'src/interfaces/campaign.interface';
+import { CampaignInterface } from 'src/interfaces/modules/campaign';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 

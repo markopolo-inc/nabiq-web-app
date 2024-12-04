@@ -1,114 +1,122 @@
-import { FiCursorClick01, FiHelpCircle, FiInfinity, FiZapFast } from '@nabiq-icons';
+import { FiHelpCircle } from '@nabiq-icons';
 import { Badge, Button, Group, Modal, Stack, Tooltip } from '@nabiq-ui';
-import React, { forwardRef } from 'react';
+import cn from 'classnames';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { TCampaignGoal } from 'src/interfaces/modules/campaign';
+import { goals, mediums } from 'src/lib/campaign.lib';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
-const goals = [
-  {
-    title: 'Acquisition',
-    headline: 'To acquire new customers either for paying, trial or freemium.',
-    tooltip:
-      'Select this goal to attract new customers. Focus on acquiring paying users, trial users, or freemium users, depending on your business model.',
-    icon: FiZapFast,
-    color: '#EE46BC',
-    type: 'acquisition',
-    isDisabled: true,
-    badgeLabel: 'Coming soon',
-  },
-  {
-    title: 'Activation',
-    headline: 'To convert trail/freemium users to paying customers.',
-    tooltip:
-      'Choose this goal to convert trial or freemium users into paying customers. It’s all about getting existing users to take the next step.',
-    icon: FiCursorClick01,
-    color: '#2E90FA',
-    type: 'activation',
-    isDisabled: false,
-    badgeLabel: '',
-  },
-  {
-    title: 'Retention',
-    headline: 'To push recurring subscription, cross-sell and upsell.',
-    tooltip:
-      'Use this goal to increase customer loyalty. Boost recurring subscriptions, encourage cross-sells, or promote upsells to maintain and grow your customer base.',
-    icon: FiInfinity,
-    color: '#17B26A',
-    type: 'retention',
-    isDisabled: false,
-    badgeLabel: '',
-  },
-];
+const title = {
+  goal: 'New campaign',
+  medium: 'Select medium of campaign',
+};
 
-const TooltipIcon = forwardRef<HTMLSpanElement>((props, ref) => {
-  return (
-    <span ref={ref} {...props}>
-      <FiHelpCircle color='#9AA4B2' size={20} style={{ cursor: 'pointer' }} />
-    </span>
-  );
-});
+const subtitle = {
+  goal: 'Select the campaign goal that matches your objective.',
+  medium: 'Choose which medium to opt for to run this campaign.',
+};
 
 const ModalBody = ({ setOpened }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { resourceId: brandId, markTag } = useAppSelector((state) => state.brand);
+  const [step, setStep] = useState<'goal' | 'medium'>('goal');
+  const [selectedGoal, setSelectedGoal] = useState<TCampaignGoal | null>(null);
 
   return (
     <Stack className='p-8' gap={64} align='center'>
       <Stack align='center' gap={8}>
-        <p className='text-gray-900 text-[24px] font-semibold'>New campaign</p>
-        <p className='text-gray-600 text-base font-normal'>
-          Select the campaign goal that matches your objective.
-        </p>
+        <p className='text-gray-900 text-[24px] font-semibold'>{title[step]}</p>
+        <p className='text-gray-600 text-base font-normal'>{subtitle[step]}</p>
       </Stack>
       <Stack align='center' justify='center'>
         <Group align='center' justify='center'>
-          {goals?.map((goal, idx) => {
-            const Icon = goal.icon;
-            return (
-              <Stack
-                gap={24}
-                key={idx}
-                className='w-[310px] p-8 border shadow-sm border-gray-200 rounded-xl'
-              >
-                <Group justify={goal.badgeLabel ? 'space-between' : 'end'}>
-                  {goal.badgeLabel ? <Badge color='warning'>{goal.badgeLabel}</Badge> : <></>}
-                  <Tooltip label={goal.tooltip} multiline maw={300} zIndex={9999}>
-                    <TooltipIcon />
-                  </Tooltip>
-                </Group>
-                <Stack align='center'>
-                  <Icon size={32} color={goal.color} />
-                  <p className='text-gray-900 font-semibold text-lg'>{goal.title}</p>
-                </Stack>
-                <p className='text-gray-600 font-normal text-sm text-center'>{goal.headline}</p>
-                <Button
-                  onClick={() => {
-                    if (goal.isDisabled) return;
-
-                    dispatch(
-                      setCampaign({
-                        brandId,
-                        tagId: markTag?.resourceId,
-                        goal: goal.type as 'acquisition' | 'retention' | 'activation',
-                      }),
-                    );
-
-                    navigate(
-                      `/campaigns/create-campaign?campaign-mode=email-sms&goal=${goal.type}`,
-                    );
-                    setOpened(false);
-                  }}
-                  disabled={goal.isDisabled}
-                  fullWidth
+          {step === 'goal' &&
+            goals?.map((goal, idx) => {
+              const Icon = goal.icon;
+              return (
+                <Stack
+                  gap={24}
+                  key={idx}
+                  className='w-[310px] p-6 border shadow-sm border-gray-200 rounded-xl'
                 >
-                  Create
-                </Button>
-              </Stack>
-            );
-          })}
+                  <Group justify={goal.badgeLabel ? 'space-between' : 'end'}>
+                    {goal.badgeLabel ? <Badge color='warning'>{goal.badgeLabel}</Badge> : <></>}
+                    <Tooltip label={goal.tooltip} multiline maw={300} zIndex={9999}>
+                      <FiHelpCircle color='#9AA4B2' size={20} style={{ cursor: 'pointer' }} />
+                    </Tooltip>
+                  </Group>
+                  <Stack align='center'>
+                    <Icon size={32} color={goal.color} />
+                    <p className='text-gray-900 font-semibold text-lg'>{goal.title}</p>
+                  </Stack>
+                  <p className='text-gray-600 font-normal text-sm text-center'>{goal.headline}</p>
+                  <Button
+                    onClick={() => {
+                      if (goal.isDisabled) return;
+
+                      setSelectedGoal(goal.type as TCampaignGoal);
+
+                      setStep('medium');
+                    }}
+                    disabled={goal.isDisabled}
+                    fullWidth
+                  >
+                    Create
+                  </Button>
+                </Stack>
+              );
+            })}
+
+          {step === 'medium' &&
+            mediums?.map((medium, idx) => {
+              const Icon = medium.icon;
+              return (
+                <Stack
+                  gap={24}
+                  key={idx}
+                  className='w-[310px] p-6 border shadow-sm border-gray-200 rounded-xl'
+                >
+                  <Group
+                    justify='end'
+                    className={cn(medium.isRecommended ? 'opacity-100' : 'opacity-0')}
+                  >
+                    <Badge color='success'>Recommended</Badge>
+                  </Group>
+                  <Stack align='center'>
+                    <Icon size={32} color={medium.color} />
+                    <p className='text-gray-900 font-semibold text-lg'>{medium.title}</p>
+                  </Stack>
+                  <Stack align='center' className='text-center'>
+                    <p className='text-gray-600 font-normal text-sm w-56 text-center'>
+                      {medium.description}
+                    </p>
+                  </Stack>
+
+                  <Button
+                    fullWidth
+                    onClick={() => {
+                      dispatch(
+                        setCampaign({
+                          brandId,
+                          tagId: markTag?.resourceId,
+                          goal: selectedGoal,
+                        }),
+                      );
+                      navigate(
+                        `/campaigns/create-campaign?campaign-mode=${medium.type}&goal=${selectedGoal}`,
+                      );
+                      setOpened(false);
+                    }}
+                  >
+                    Select
+                  </Button>
+                </Stack>
+              );
+            })}
         </Group>
       </Stack>
     </Stack>
