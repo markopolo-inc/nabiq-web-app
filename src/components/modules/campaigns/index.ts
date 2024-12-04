@@ -1,6 +1,5 @@
 // Modals
 export { CampaignGoalModal } from 'components/modules/campaigns/components/modals/CampaignGoalModal';
-export { CampaignAdsModal } from 'components/modules/campaigns/components/modals/CampaignAdsModal';
 export { CampaignFirstCreationModal } from 'components/modules/campaigns/components/modals/CampaignFirstCreationModal';
 
 // Components

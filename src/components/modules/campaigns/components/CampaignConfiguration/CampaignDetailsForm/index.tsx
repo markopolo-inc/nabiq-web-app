@@ -1,8 +1,6 @@
 import { FiCrossX, FiPlatformIcon } from '@nabiq-icons';
 import { Group, Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { CampaignAdsModal } from 'src/components/modules/campaigns';
 import { CampaignInterface } from 'src/interfaces/campaign.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
@@ -10,7 +8,6 @@ import { useAppSelector } from 'src/store/hooks';
 export const CampaignDetailsForm = () => {
   const dispatch = useDispatch();
   const { campaign } = useAppSelector((state) => state);
-  const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
 
   const handleChange = (field: keyof CampaignInterface, value) => {
     dispatch(
@@ -31,8 +28,6 @@ export const CampaignDetailsForm = () => {
 
   return (
     <>
-      <CampaignAdsModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
-
       <Stack gap={32} w={960} className='mx-auto'>
         <TextInput
           label='Campaign name'
