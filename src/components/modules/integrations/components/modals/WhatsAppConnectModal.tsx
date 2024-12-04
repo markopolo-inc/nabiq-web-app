@@ -1,6 +1,8 @@
 import { ComboboxItem } from '@mantine/core';
 import { Button, GatewayLogo, Loader, Modal, Select } from '@nabiq-ui';
 import { useEffect, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
 import {
   useGetFbBusinessAccountsQuery,
@@ -112,6 +114,29 @@ export const WhatsAppConnectModal = ({
   setIsShowModal: (value: boolean) => void;
   showTrigger?: boolean;
 }) => {
+  const { socialIntegrations } = useAppSelector((state) => state.brand);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (searchParams.has('success') && socialIntegrations?.socialTokens?.facebook) {
+      setIsShowModal(true);
+      url.searchParams.delete('success');
+      navigate({ search: url.search }, { replace: true });
+      toast.success('Facebook connected successfully', {
+        id: 'whatsapp-connected',
+      });
+    }
+
+    if (searchParams.has('error')) {
+      toast.error('Facebook authentication failed!', {
+        id: 'whatsapp-error',
+      });
+      url.searchParams.delete('error');
+      navigate({ search: url.search }, { replace: true });
+    }
+  }, [searchParams]);
+
   return (
     <Modal
       size='sm'

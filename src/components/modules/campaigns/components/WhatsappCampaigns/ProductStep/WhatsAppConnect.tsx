@@ -3,12 +3,13 @@ import { Badge, Button, Card, Group, Stack } from '@nabiq-ui';
 import { useState } from 'react';
 import { WhatsAppConnectModal } from 'src/components/modules/integrations/components';
 import { useAppSelector } from 'src/store/hooks';
+import { getRedirectUri } from 'src/utils/auth';
 
 export const WhatsAppConnect = () => {
-  const { socialIntegrations } = useAppSelector((state) => state.brand);
+  const { socialIntegrations, resourceId: brandId } = useAppSelector((state) => state.brand);
   const [showWAConnectModal, setShowWAConnectModal] = useState(false);
 
-  const isConnected = socialIntegrations?.whatsApp?.number;
+  const isConnected = socialIntegrations?.socialTokens?.facebook;
   return (
     <Card className='!w-full !min-h-fit !p-6'>
       <Stack gap={24}>
@@ -24,7 +25,16 @@ export const WhatsAppConnect = () => {
           account?
         </p>
         {!isConnected ? (
-          <Button variant='secondary-black' leadingIcon={<FiWhatsApp size={17} />}>
+          <Button
+            variant='secondary-black'
+            leadingIcon={<FiWhatsApp size={17} />}
+            onClick={async () => {
+              window.location.href = await getRedirectUri('/auth/facebook', {
+                brandId,
+                redirectUri: window.location.href,
+              });
+            }}
+          >
             Connect
           </Button>
         ) : (

@@ -1,22 +1,18 @@
 import { FiZap } from '@nabiq-icons';
 import { Badge, Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   IntegrationCard,
   WhatsAppConnectModal,
 } from 'src/components/modules/integrations/components';
 import { useAppSelector } from 'src/store/hooks';
 import { useDisconnectPlatformMutation } from 'src/store/integrations/social-integrations.api';
-import { getAuthToken } from 'src/utils/auth';
-import { buildQueryString } from 'src/utils/string.utils';
+import { getRedirectUri } from 'src/utils/auth';
 
 export const Whatsapp = () => {
   const { resourceId: brandId, socialIntegrations } = useAppSelector((state) => state.brand);
-  const navigate = useNavigate();
   const [isShowModal, setIsShowModal] = useState(false);
-  const [searchParams] = useSearchParams();
   const [disconnectPlatform, { isLoading: isDisconnecting }] = useDisconnectPlatformMutation();
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
 
@@ -27,26 +23,6 @@ export const Whatsapp = () => {
       toast.success('Disconnected successfully');
     }
   };
-
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    if (searchParams.has('success') && socialIntegrations?.socialTokens?.facebook) {
-      setIsShowModal(true);
-      url.searchParams.delete('success');
-      navigate({ search: url.search }, { replace: true });
-      toast.success('Whatsapp connected successfully', {
-        id: 'whatsapp-connected',
-      });
-    }
-
-    if (searchParams.has('error')) {
-      toast.error('Facebook authentication failed!', {
-        id: 'whatsapp-error',
-      });
-      url.searchParams.delete('error');
-      navigate({ search: url.search }, { replace: true });
-    }
-  }, [searchParams]);
 
   return (
     <div className='gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
@@ -77,14 +53,10 @@ export const Whatsapp = () => {
           <Button
             leadingIcon={<FiZap fill='white' size={22} />}
             onClick={async () => {
-              const token = await getAuthToken();
-              window.location.href = `${
-                import.meta.env.VITE_BASE_API_URL
-              }/auth/facebook?${buildQueryString({
+              window.location.href = await getRedirectUri('/auth/facebook', {
                 brandId,
-                token,
                 redirectUri: window.location.href,
-              })}`;
+              });
             }}
           >
             Integrate
