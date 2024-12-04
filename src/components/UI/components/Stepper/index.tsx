@@ -1,6 +1,6 @@
 import { Stepper as StepperField, StepperProps, rem } from '@mantine/core';
 
-const StyledStepper = (props: StepperProps) => {
+const Stepper = (props: StepperProps) => {
   return (
     <StepperField
       styles={{
@@ -47,4 +47,4 @@ const StyledStepper = (props: StepperProps) => {
   );
 };
 
-export default StyledStepper;
+export default Stepper;

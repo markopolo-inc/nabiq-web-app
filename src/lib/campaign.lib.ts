@@ -56,3 +56,18 @@ export const mediums = [
     type: 'email-sms',
   },
 ];
+
+export const campaignSteps = [
+  {
+    label: 'Campaign details',
+    description: 'Enter the campaign details',
+  },
+  {
+    label: 'Timing',
+    description: 'Specify the content and approval timing',
+  },
+  {
+    label: 'Channels',
+    description: 'Choose the main and additional channels',
+  },
+];

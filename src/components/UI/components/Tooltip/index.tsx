@@ -7,7 +7,7 @@ const Tooltip = ({ children, ...props }: TooltipProps) => {
   });
 
   return (
-    <MantineTooltip {...props}>
+    <MantineTooltip {...props} radius='md' px={16} py={8}>
       <TooltipIcon />
     </MantineTooltip>
   );

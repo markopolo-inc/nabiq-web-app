@@ -5,7 +5,7 @@ export { CampaignFirstCreationModal } from 'components/modules/campaigns/compone
 // Components
 export { CampaignTable } from 'components/modules/campaigns/components/CampaignTable';
 export { CampaignTableHeaderItem } from 'components/modules/campaigns/components/CampaignTable/CampaignTableHeaderItem';
-export { Stepper } from 'src/components/modules/campaigns/components/CampaignConfiguration/Stepper';
+export { CampaignStepper } from 'src/components/modules/campaigns/components/CampaignConfiguration/CampaignStepper';
 export { CampaignTiming } from 'src/components/modules/campaigns/components/CampaignConfiguration/CampaignTiming';
 export { CampaignDetailsForm } from 'src/components/modules/campaigns/components/CampaignConfiguration/CampaignDetailsForm';
 export { CampaignChannels } from 'src/components/modules/campaigns/components/CampaignConfiguration/CampaignChannels';

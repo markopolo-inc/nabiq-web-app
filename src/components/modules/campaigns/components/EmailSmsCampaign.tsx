@@ -7,8 +7,8 @@ import {
   CampaignChannels,
   CampaignDetailsForm,
   CampaignFirstCreationModal,
+  CampaignStepper,
   CampaignTiming,
-  Stepper,
 } from 'src/components/modules/campaigns';
 import { APIResponseType } from 'src/interfaces/response.interface';
 import {
@@ -129,16 +129,19 @@ export const EmailSmsCampaign = () => {
         </Stack>
 
         <Stack gap={64} w={960} className='mx-auto mb-12'>
-          <Stepper active={active} setActive={handleStepChange} />
+          <CampaignStepper active={active} setActive={handleStepChange} />
 
           <Stack gap={32}>
-            {active === 0 ? (
-              <CampaignDetailsForm />
-            ) : active === 1 ? (
-              <CampaignTiming />
-            ) : (
-              <CampaignChannels />
-            )}
+            {(() => {
+              switch (active) {
+                case 0:
+                  return <CampaignDetailsForm />;
+                case 1:
+                  return <CampaignTiming />;
+                default:
+                  return <CampaignChannels />;
+              }
+            })()}
           </Stack>
         </Stack>
       </Stack>
