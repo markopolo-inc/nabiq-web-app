@@ -6,12 +6,14 @@ export const IntegrationCard = ({
   description,
   isConnected = false,
   children,
+  badge = null,
 }: {
   icon: React.ReactNode;
   title: string;
   description: string;
   isConnected?: boolean;
   children?: React.ReactNode;
+  badge?: React.ReactNode;
 }) => {
   return (
     <Card>
@@ -25,6 +27,7 @@ export const IntegrationCard = ({
         </div>
 
         <p className='mt-6 text-gray-600 font-normal text-sm'>{description}</p>
+        <div className='mt-5'>{badge && badge}</div>
       </div>
       {children}
     </Card>

@@ -1,5 +1,5 @@
 import { FiZap } from '@nabiq-icons';
-import { Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
+import { Badge, Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -56,6 +56,11 @@ export const Whatsapp = () => {
               seamless, real-time communication.'
         icon={<GatewayLogo app='whatsapp' width={28} />}
         isConnected={!!socialIntegrations?.socialTokens?.facebook}
+        badge={
+          socialIntegrations?.whatsApp?.number && (
+            <Badge color='gray'>{socialIntegrations?.whatsApp?.number}</Badge>
+          )
+        }
       >
         {socialIntegrations?.socialTokens?.facebook ? (
           <div className='flex gap-2 items-center'>

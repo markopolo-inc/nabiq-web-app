@@ -1,5 +1,5 @@
 import { FiCommand } from '@nabiq-icons';
-import { Button, useGetColors } from '@nabiq-ui';
+import { Badge, Button, useGetColors } from '@nabiq-ui';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -17,6 +17,14 @@ export const Marktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
       icon={<FiCommand size={32} color={primary500} fill={primary500} />}
       title='Marktag'
       isConnected={!!markTag}
+      badge={
+        markTag && (
+          <div className='flex items-center gap-3'>
+            <Badge color='gray'>{markTag?.domain}</Badge>
+            <Badge color='gray'>{markTag?.hostname}</Badge>
+          </div>
+        )
+      }
     >
       <div className='flex gap-8'>
         {markTag ? (
