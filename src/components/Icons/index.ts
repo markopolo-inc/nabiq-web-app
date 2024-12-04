@@ -36,7 +36,7 @@ export { default as FiData } from './Data';
 export { default as Envelope } from './Envelope';
 export { default as FiEye } from './Eye';
 export { default as FiEyeOff } from './EyeOff';
-
+export { default as FiEdit01 } from './Edit01';
 // F
 export { default as FiFileUpload } from './UploadCloud02';
 export { default as FileQuestion02 } from './FileQuestion02';

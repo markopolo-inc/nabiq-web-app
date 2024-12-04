@@ -10,3 +10,8 @@ export { CampaignDetailsForm } from 'src/components/modules/campaigns/components
 export { CampaignChannels } from 'src/components/modules/campaigns/components/CampaignConfiguration/CampaignChannels';
 export { EmailSmsCampaign } from 'src/components/modules/campaigns/components/EmailSmsCampaign';
 export { WhatsappCampaign } from 'src/components/modules/campaigns/components/WhatsappCampaign';
+
+// *** Whatsapp Campaigns ***
+export { ProductStep } from 'src/components/modules/campaigns/components/WhatsappCampaigns/ProductStep';
+export { CreationStep } from 'src/components/modules/campaigns/components/WhatsappCampaigns/CreationStep';
+export { CompletionStep } from 'src/components/modules/campaigns/components/WhatsappCampaigns/CompletionStep';

@@ -106,9 +106,11 @@ const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
 export const WhatsAppConnectModal = ({
   showModal,
   setIsShowModal,
+  showTrigger = true,
 }: {
   showModal: boolean;
   setIsShowModal: (value: boolean) => void;
+  showTrigger?: boolean;
 }) => {
   return (
     <Modal
@@ -120,11 +122,13 @@ export const WhatsAppConnectModal = ({
       body={() => <ModalBody setOpened={setIsShowModal} />}
       onClose={() => setIsShowModal(false)}
     >
-      {({ setOpened }) => (
-        <Button variant='secondary' onClick={() => setOpened(true)}>
-          Configure
-        </Button>
-      )}
+      {({ setOpened }) =>
+        showTrigger ? (
+          <Button variant='secondary' onClick={() => setOpened(true)}>
+            Configure
+          </Button>
+        ) : null
+      }
     </Modal>
   );
 };

@@ -1,6 +1,7 @@
 import { Breadcrumbs, Button, Group, Stack, Stepper, StepperStep } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
+import { CompletionStep, CreationStep, ProductStep } from 'src/components/modules/campaigns';
 import { whatsappCampaignSteps } from 'src/lib/campaign.lib';
 
 export const WhatsappCampaign = () => {
@@ -18,7 +19,12 @@ export const WhatsappCampaign = () => {
           <Breadcrumbs />
           <Group justify='space-between' align='center'>
             <p className='text-gray-900 font-semibold text-xl'>Configure your campaign</p>
-            <Button variant='primary'>Continue</Button>
+            <Button
+              variant='primary'
+              onClick={() => setActive((current) => (current < 3 ? current + 1 : current))}
+            >
+              Continue
+            </Button>
           </Group>
         </Stack>
 
@@ -32,6 +38,9 @@ export const WhatsappCampaign = () => {
             <StepperStep key={index} {...step} active={active} index={index} />
           ))}
         </Stepper>
+        {active === 0 && <ProductStep />}
+        {active === 1 && <CreationStep />}
+        {active === 2 && <CompletionStep />}
       </Stack>
     </>
   );
