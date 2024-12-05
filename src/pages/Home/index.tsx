@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { HeaderTitle } from 'layouts';
 import { useEffect } from 'react';
+import { Cookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { ConstitutionalAIModerationCard, IntegrateApps } from 'src/components/modules/home';
 import {
@@ -12,6 +13,9 @@ import { useAppSelector } from 'store/hooks';
 const Home = () => {
   const company = useAppSelector((state) => state.company);
   const navigate = useNavigate();
+  const cookies = new Cookies();
+
+  console.log('cookies', cookies.getAll());
 
   useEffect(() => {
     setTimeout(() => {
