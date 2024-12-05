@@ -1,9 +1,28 @@
 import { HeaderTitle } from 'layouts';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ConstitutionalAIModerationCard, IntegrateApps } from 'src/components/modules/home';
+import {
+  clearShopifyCookies,
+  getShopifyCookies,
+} from 'src/utils/modules/integrations/shopify.utils';
 import { useAppSelector } from 'store/hooks';
 
 const Home = () => {
   const company = useAppSelector((state) => state.company);
+  const navigate = useNavigate();
+  const { nbqsSessionId, shop } = getShopifyCookies();
+
+  useEffect(() => {
+    let isActive = true;
+    if (nbqsSessionId && shop && isActive) {
+      clearShopifyCookies();
+      navigate('/integrations?selectedTab=ecommerce&connected=shopify');
+    }
+    return () => {
+      isActive = false;
+    };
+  }, [nbqsSessionId, shop]);
 
   return (
     <>

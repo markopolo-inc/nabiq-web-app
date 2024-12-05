@@ -6,6 +6,7 @@ import MailGun from 'assets/integraions/MailGunLogo.svg';
 import OneSignal from 'assets/integraions/OneSignalLogo.svg';
 import Postmark from 'assets/integraions/PostmarkLogo.svg';
 import Resend from 'assets/integraions/Resend.svg';
+import Salla from 'assets/integraions/SallaLogo.svg';
 import SendGrid from 'assets/integraions/SendGridLogo.svg';
 import Shopify from 'assets/integraions/ShopifyLogo.svg';
 import Sinch from 'assets/integraions/SinchLogo.svg';
@@ -33,6 +34,7 @@ const GatewayLogo: React.FC<{
     mailgun: MailGun,
     whatsapp: WhatsApp,
     shopify: Shopify,
+    salla: Salla,
   };
 
   return <Image src={logo?.[app]} style={{ width }} />;

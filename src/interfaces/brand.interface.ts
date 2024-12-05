@@ -13,9 +13,12 @@ export type GatewayType =
   | 'whatsapp'
   | 'facebook'
   | 'google'
-  | 'shopify';
+  | 'shopify'
+  | 'salla';
 
 export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify';
+
+export type TECommercePlatform = 'shopify' | 'salla';
 
 export type TSocialPlatform = 'facebook' | 'google';
 
