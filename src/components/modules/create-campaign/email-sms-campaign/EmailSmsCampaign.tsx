@@ -8,7 +8,7 @@ import {
   CampaignDetailsForm,
   CampaignFirstCreationModal,
   CampaignTiming,
-} from 'src/components/modules/create-campaign';
+} from 'src/components/modules/create-campaign/email-sms-campaign';
 import { APIResponseType } from 'src/interfaces/response.interface';
 import { emailSmsCampaignSteps } from 'src/lib/campaign.lib';
 import {

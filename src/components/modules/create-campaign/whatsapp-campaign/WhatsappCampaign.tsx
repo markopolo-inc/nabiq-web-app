@@ -1,7 +1,11 @@
 import { Breadcrumbs, Button, Group, Stack, Stepper, StepperStep } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
-import { CompletionStep, CreationStep, ProductStep } from 'src/components/modules/create-campaign';
+import {
+  CompletionStep,
+  CreationStep,
+  ProductStep,
+} from 'src/components/modules/create-campaign/whatsapp-campaign';
 import { whatsappCampaignSteps } from 'src/lib/campaign.lib';
 
 export const WhatsappCampaign = () => {

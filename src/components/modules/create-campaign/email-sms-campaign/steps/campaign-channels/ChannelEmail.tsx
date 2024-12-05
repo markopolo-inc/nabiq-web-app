@@ -1,35 +1,15 @@
 import { Envelope } from '@nabiq-icons';
 import { GatewayLogo, Group, Select, Text } from '@nabiq-ui';
 import { capitalize } from 'lodash';
-// import { HTMLAttributes, ReactNode, forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { GatewayType } from 'src/interfaces/brand.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
-// interface SelectItemProps extends HTMLAttributes<HTMLDivElement> {
-//   label: string;
-//   value: any;
-//   icon?: ReactNode;
-//   type?: string;
-// }
-
 export const ChannelEmail = () => {
   const { emailIntegrations } = useAppSelector((state) => state.brand);
   const { campaign } = useAppSelector((state) => state);
   const dispatch = useDispatch();
-
-  // const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
-  //   ({ label, icon, ...others }, ref) => (
-  //     <div ref={ref} {...others}>
-  //       <Group wrap='nowrap'>
-  //         <Text style={{ margin: 0 }}>
-  //           {icon && icon}&nbsp; &nbsp;{label}
-  //         </Text>
-  //       </Group>
-  //     </div>
-  //   ),
-  // );
 
   return (
     <div className='w-full flex justify-between items-center bg-white border border-gray-200 rounded-xl p-4 '>
