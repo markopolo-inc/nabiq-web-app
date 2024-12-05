@@ -2,10 +2,8 @@ import { FiZap } from '@nabiq-icons';
 import { Badge, Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import {
-  IntegrationCard,
-  WhatsAppConnectModal,
-} from 'src/components/modules/integrations/components';
+import { IntegrationCard } from 'src/components/modules/integrations/components';
+import { WhatsAppConnectModal } from 'src/components/modules/integrations/integration-tabs/whats-app';
 import { useAppSelector } from 'src/store/hooks';
 import { useDisconnectPlatformMutation } from 'src/store/integrations/social-integrations.api';
 import { getRedirectUri } from 'src/utils/auth';

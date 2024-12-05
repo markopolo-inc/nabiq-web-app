@@ -1,7 +1,7 @@
 import { FiEdit01, FiWhatsApp } from '@nabiq-icons';
 import { Badge, Button, Card, Group, Stack } from '@nabiq-ui';
 import { useState } from 'react';
-import { WhatsAppConnectModal } from 'src/components/modules/integrations/components';
+import { WhatsAppConnectModal } from 'src/components/modules/integrations';
 import { useAppSelector } from 'src/store/hooks';
 import { getRedirectUri } from 'src/utils/auth';
 

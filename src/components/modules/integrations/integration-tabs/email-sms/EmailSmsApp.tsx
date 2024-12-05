@@ -1,14 +1,14 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, GatewayLogo } from '@nabiq-ui';
-import {
-  ApiKeyModal,
-  GatewayDisconnectModal,
-  IntegrationCard,
-} from 'components/modules/integrations/components';
+import { IntegrationCard } from 'components/modules/integrations/components';
 import type { GatewayType, IGateway } from 'interfaces/brand.interface';
 import { appOptions } from 'lib/integration.lib';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
+import {
+  ApiKeyModal,
+  GatewayDisconnectModal,
+} from 'src/components/modules/integrations/integration-tabs/email-sms';
 import type { TOptionTab } from 'src/interfaces/modules/integrations';
 import { useAppSelector } from 'store/hooks';
 import { getAuthToken } from 'utils/auth';

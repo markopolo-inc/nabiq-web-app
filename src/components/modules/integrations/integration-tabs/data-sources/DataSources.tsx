@@ -1,12 +1,12 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, GatewayLogo } from '@nabiq-ui';
 import { useState } from 'react';
+import { IntegrationCard } from 'src/components/modules/integrations/components';
 import {
   DataSourceModal,
-  IntegrationCard,
   Marktag,
   MarktagCreationsModals,
-} from 'src/components/modules/integrations/components';
+} from 'src/components/modules/integrations/integration-tabs/data-sources';
 import { useAppSelector } from 'src/store/hooks';
 import { getAuthToken } from 'src/utils/auth';
 import { buildQueryString } from 'src/utils/string.utils';
