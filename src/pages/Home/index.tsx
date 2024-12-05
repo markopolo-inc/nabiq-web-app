@@ -1,7 +1,5 @@
-/* eslint-disable no-console */
 import { HeaderTitle } from 'layouts';
 import { useEffect } from 'react';
-import { Cookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { ConstitutionalAIModerationCard, IntegrateApps } from 'src/components/modules/home';
 import {
@@ -13,25 +11,16 @@ import { useAppSelector } from 'store/hooks';
 const Home = () => {
   const company = useAppSelector((state) => state.company);
   const navigate = useNavigate();
-  const cookies = new Cookies();
-
-  console.log('cookies', cookies.getAll());
+  const { nbqsSessionId, shop } = getShopifyCookies();
 
   useEffect(() => {
-    setTimeout(() => {
-      const { nbqsSessionId, shop } = getShopifyCookies();
-      console.log('Checking Shopify cookies for session and shop information...');
-      if (nbqsSessionId && shop) {
-        navigate(
-          `/integrations?selectedTab=ecommerce&connected=shopify&nbqs_session_id=${nbqsSessionId}&shopify_shop=${shop}`,
-        );
-        clearShopifyCookies();
-        console.log('Shopify cookies found and cleared. Redirecting to integrations page...');
-      } else {
-        console.log('No Shopify cookies found.');
-      }
-    }, 2000);
-  }, []);
+    if (nbqsSessionId && shop) {
+      clearShopifyCookies();
+      navigate(
+        `/integrations?selectedTab=ecommerce&connected=shopify&nbqs_session_id=${nbqsSessionId}&shopify_shop=${shop}`,
+      );
+    }
+  }, [nbqsSessionId, shop]);
 
   return (
     <>

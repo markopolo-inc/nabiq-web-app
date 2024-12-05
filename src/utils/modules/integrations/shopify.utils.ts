@@ -1,22 +1,18 @@
-import Cookies from 'js-cookie';
-
-const domain = import.meta.env.VITE_COOKIE_SHOPIFY_DOMAIN;
+import { Cookies } from 'react-cookie';
 
 export const getShopifyCookies = () => {
-  const installationInit =
-    Cookies.get('shopify_installation', {
-      domain,
-      signed: true,
-    }) || false;
-  const shop = Cookies.get('shopify_shop', { domain, signed: true }) || null;
-  const nbqsSessionId = Cookies.get('nbqs_session_id', { domain, signed: true }) || null;
-  return { installationInit, shop, nbqsSessionId };
+  const cookies = new Cookies();
+  const installationInit = cookies.get('shopify_installation') || false;
+  const shop = cookies.get('shopify_shop') || null;
+  const nbqsSessionId = cookies.get('nbqs_session_id') || null;
+  return { installationInit, shop, nbqsSessionId, cookies: cookies.get('_dd_s') };
 };
 
 export const clearShopifyCookies = () => {
-  Cookies.remove('shopify_installation', { domain, signed: true });
-  Cookies.remove('shopify_shop', { domain, signed: true });
-  Cookies.remove('shopify_installation.sig', { domain, signed: true });
-  Cookies.remove('shopify_shop.sig', { domain, signed: true });
-  Cookies.remove('nbqs_session_id', { domain, signed: true });
+  const cookies = new Cookies();
+  cookies.remove('shopify_installation');
+  cookies.remove('shopify_shop');
+  cookies.remove('shopify_installation.sig');
+  cookies.remove('shopify_shop.sig');
+  cookies.remove('nbqs_session_id');
 };
