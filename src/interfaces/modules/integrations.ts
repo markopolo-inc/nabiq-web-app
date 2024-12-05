@@ -1,1 +1,7 @@
-export type TOptionTab = 'email' | 'sms' | 'push' | 'data-sources' | 'whatsapp';
+export type TOptionTab =
+  | 'email'
+  | 'sms'
+  | 'push-notification'
+  | 'data-sources'
+  | 'whatsapp'
+  | 'ecommerce';

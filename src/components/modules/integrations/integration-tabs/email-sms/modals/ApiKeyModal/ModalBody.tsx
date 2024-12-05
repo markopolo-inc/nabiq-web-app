@@ -1,8 +1,8 @@
 import { useForm } from '@mantine/form';
 import { Button, GatewayLogo, TextInput } from '@nabiq-ui';
 import type { IGateway } from 'interfaces/brand.interface';
-import { gatewayFields } from 'lib/integration.lib';
 import React, { SetStateAction, useState } from 'react';
+import { gatewayFields } from 'src/lib/integration';
 import { useAppSelector } from 'src/store/hooks';
 import { hasEmptyField } from 'src/utils/object.utils';
 import { camelCaseToCapitalized, trimAllValuesOfObject } from 'src/utils/string.utils';

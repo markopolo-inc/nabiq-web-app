@@ -1,9 +1,15 @@
 import { OptionTabs } from '@nabiq-ui';
-import { DataSources, EmailSmsApp, Whatsapp } from 'components/modules/integrations';
+import {
+  DataSources,
+  ECommerce,
+  EmailSmsApp,
+  PushNotification,
+  Whatsapp,
+} from 'components/modules/integrations';
 import { HeaderTitle } from 'layouts';
-import { appCategories } from 'lib/integration.lib';
 import { useState } from 'react';
 import type { TOptionTab } from 'src/interfaces/modules/integrations';
+import { appCategories } from 'src/lib/integration';
 
 const IntegrationsPage = () => {
   const [selectedTab, setSelectedTab] = useState<TOptionTab>('data-sources');
@@ -19,22 +25,47 @@ const IntegrationsPage = () => {
           </p>
         </div>
         <div className='flex flex-col gap-6'>
-          <OptionTabs
-            setActive={setSelectedTab}
-            active={selectedTab}
-            options={appCategories?.map((item) => ({
-              ...item,
-              label: (
-                <div className='flex gap-2 items-center'>
-                  {item.icon && <item.icon size={18} />}
-                  {item.label}
-                </div>
-              ),
-            }))}
-          />
-          {['email', 'sms'].includes(selectedTab) && <EmailSmsApp selectedTab={selectedTab} />}
-          {selectedTab === 'data-sources' && <DataSources />}
-          {selectedTab === 'whatsapp' && <Whatsapp />}
+          <div className='flex-nowrap overflow-x-auto pb-3'>
+            <OptionTabs
+              setActive={setSelectedTab}
+              active={selectedTab}
+              options={appCategories?.map((item) => ({
+                ...item,
+                label: (
+                  <div className='flex gap-2 items-center'>
+                    {item.icon && (
+                      <span>
+                        <item.icon
+                          size={18}
+                          color={selectedTab === item.value ? '#364152' : '#9AA4B2'}
+                          strokeWidth={1.6}
+                        />
+                      </span>
+                    )}
+                    {item.label}
+                  </div>
+                ),
+              }))}
+            />
+          </div>
+
+          {(() => {
+            switch (selectedTab) {
+              case 'email':
+              case 'sms':
+                return <EmailSmsApp selectedTab={selectedTab} />;
+              case 'data-sources':
+                return <DataSources />;
+              case 'whatsapp':
+                return <Whatsapp />;
+              case 'push-notification':
+                return <PushNotification />;
+              case 'ecommerce':
+                return <ECommerce />;
+              default:
+                return null;
+            }
+          })()}
         </div>
       </div>
     </>

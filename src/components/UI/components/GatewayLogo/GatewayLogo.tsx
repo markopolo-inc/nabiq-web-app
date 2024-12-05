@@ -7,6 +7,7 @@ import OneSignal from 'assets/integraions/OneSignalLogo.svg';
 import Postmark from 'assets/integraions/PostmarkLogo.svg';
 import Resend from 'assets/integraions/Resend.svg';
 import SendGrid from 'assets/integraions/SendGridLogo.svg';
+import Shopify from 'assets/integraions/ShopifyLogo.svg';
 import Sinch from 'assets/integraions/SinchLogo.svg';
 import Twillio from 'assets/integraions/TwillioLogo.svg';
 import WhatsApp from 'assets/integraions/WhatsappLogo.svg';
@@ -31,6 +32,7 @@ const GatewayLogo: React.FC<{
     onesignal: OneSignal,
     mailgun: MailGun,
     whatsapp: WhatsApp,
+    shopify: Shopify,
   };
 
   return <Image src={logo?.[app]} style={{ width }} />;

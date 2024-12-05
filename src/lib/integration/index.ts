@@ -1,16 +1,28 @@
 import {
   FiData,
   FiMail01,
-  FiMessageDotCircle,
-  FiWhatsApp, // FiNotificationMessage
+  FiMessageSmileCircle,
+  FiNotificationMessage,
+  FiShoppingBag03,
+  FiWhatsApp,
 } from '@nabiq-icons';
 import type { GatewayType, IGateway } from 'src/interfaces/brand.interface';
+import { TOptionTab } from 'src/interfaces/modules/integrations';
 
-export const appCategories = [
+export const appCategories: Array<{
+  value: TOptionTab;
+  label: string;
+  icon: React.ElementType;
+}> = [
   {
     value: 'data-sources',
     label: 'Data sources',
     icon: FiData,
+  },
+  {
+    value: 'ecommerce',
+    label: 'E-commerce apps',
+    icon: FiShoppingBag03,
   },
   {
     value: 'email',
@@ -20,7 +32,7 @@ export const appCategories = [
   {
     value: 'sms',
     label: 'SMS apps',
-    icon: FiMessageDotCircle,
+    icon: FiMessageSmileCircle,
   },
   {
     value: 'whatsapp',
@@ -32,11 +44,11 @@ export const appCategories = [
   //   label: 'Ads',
   //   // icon: FiMail01, // Todo: change this icon
   // },
-  // {
-  //   value: 'push',
-  //   label: 'Push notification apps',
-  //   icon: FiNotificationMessage,
-  // },
+  {
+    value: 'push-notification',
+    label: 'Push notification apps',
+    icon: FiNotificationMessage,
+  },
 ];
 
 export const appOptions: IGateway[] = [
@@ -156,16 +168,16 @@ export const appOptions: IGateway[] = [
     isKeyIntegration: true,
     isOauthIntegration: false,
   },
-  {
-    category: 'sms',
-    name: 'WhatsApp',
-    headline:
-      'Connect with customers instantly and securely using WhatsApp’s widely adopted messaging platform for seamless communication.',
-    gateway: 'whatsapp',
-    learnMoreLink: '',
-    isKeyIntegration: true,
-    isOauthIntegration: false,
-  },
+  // {
+  //   category: 'sms',
+  //   name: 'WhatsApp',
+  //   headline:
+  //     'Connect with customers instantly and securely using WhatsApp’s widely adopted messaging platform for seamless communication.',
+  //   gateway: 'whatsapp',
+  //   learnMoreLink: '',
+  //   isKeyIntegration: true,
+  //   isOauthIntegration: false,
+  // },
   {
     category: 'ads',
     name: 'Facebook ads',

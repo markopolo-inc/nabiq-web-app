@@ -26,6 +26,7 @@ export { default as FiCursorClick01 } from './CursorClick01';
 export { default as FiCode } from './Code';
 export { default as FiCheckCircle } from './CheckCircle';
 export { default as FiCopy01 } from './Copy01';
+export { CursorBox as FiCursorBox } from './CursorBox';
 
 // D
 export { default as FiDataFlow02 } from './DataFlow02';
@@ -67,6 +68,7 @@ export { default as Klaviyo } from './Klaviyo';
 export { default as FiMail01 } from './Mail01';
 export { default as Message } from './Message';
 export { default as FiMinus } from './Minus';
+export { MessageSmileCircle as FiMessageSmileCircle } from './MessageSmileCircle';
 
 // N
 export { default as FiNotificationMessage } from './NotificationMessage';
@@ -92,6 +94,7 @@ export { default as FiStar04 } from './Star04';
 export { default as FiShopify } from './Shopify';
 export { default as FiServer01 } from './Server01';
 export { default as FiShield02 } from './Shield02';
+export { ShoppingBag03 as FiShoppingBag03 } from './ShoppingBag03';
 
 // T
 export { default as FiTrash } from './Trash';

@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import React, { SetStateAction, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 interface Option {
   label:
@@ -16,9 +16,9 @@ const OptionTabs: React.FC<{
   options: Option[];
 }> = ({ active, setActive, options }) => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
     const tabFromUrl = searchParams.get('selectedTab');
 
     if (tabFromUrl && options.some((opt) => opt.value.toString() === tabFromUrl)) {
@@ -30,7 +30,7 @@ const OptionTabs: React.FC<{
   }, []);
 
   return (
-    <div className='border border-gray-200 rounded-[10px] w-fit p-1 flex gap-3 bg-gray-50'>
+    <div className='border border-gray-200 rounded-[10px] w-fit p-1 flex gap-3 flex-nowrap bg-gray-50'>
       {options.map((item, idx) => {
         const isSelected = active === item.value;
         return (
@@ -42,7 +42,7 @@ const OptionTabs: React.FC<{
               });
             }}
             className={cn(
-              'cursor-pointer text-sm px-3 py-2 rounded-lg font-semibold flex',
+              'cursor-pointer text-sm px-3 py-2 rounded-lg font-semibold flex whitespace-nowrap',
               isSelected
                 ? 'bg-white text-gray-700 shadow-custom-secondary'
                 : 'bg-gray-50 text-gray-500',

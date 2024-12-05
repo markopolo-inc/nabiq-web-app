@@ -12,7 +12,8 @@ export type GatewayType =
   | 'mailgun'
   | 'whatsapp'
   | 'facebook'
-  | 'google';
+  | 'google'
+  | 'shopify';
 
 export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify';
 
