@@ -4,7 +4,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { AppLayout, NavigationLayout, PrivateLayout } from 'src/layouts';
 
 const Home = lazy(() => import('pages/Home'));
-const Campaigns = lazy(() => import('pages/Campaigns'));
+const CampaignsListPage = lazy(() => import('pages/CampaignsListPage'));
 const CreateCampaign = lazy(() => import('src/pages/CreateCampaignPage'));
 const TopPerformingCampaigns = lazy(() => import('pages/TopPerformingCampaigns'));
 const TopPerformingCampaignDetails = lazy(() => import('src/pages/TopPerformingCampaignDetails'));
@@ -40,7 +40,7 @@ const Router = () => {
               <Route path='/' element={<Home />} />
 
               {/* Campaigns */}
-              <Route path='/campaigns' element={<Campaigns />} />
+              <Route path='/campaigns' element={<CampaignsListPage />} />
               <Route path='/campaigns/create-campaign' element={<CreateCampaign />} />
 
               {/* Monitoring */}

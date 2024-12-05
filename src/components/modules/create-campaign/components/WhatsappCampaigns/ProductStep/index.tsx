@@ -1,5 +1,5 @@
 import { Stack } from '@nabiq-ui';
-import { WhatsAppConnect } from 'src/components/modules/campaigns/components/WhatsappCampaigns/ProductStep/WhatsAppConnect';
+import { WhatsAppConnect } from 'src/components/modules/create-campaign/components/WhatsappCampaigns/ProductStep/WhatsAppConnect';
 
 export const ProductStep = () => {
   return (

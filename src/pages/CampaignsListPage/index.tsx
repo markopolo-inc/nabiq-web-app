@@ -8,7 +8,7 @@ import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
 import { resetCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks.ts';
 
-const Campaigns = () => {
+const CampaignsListPage = () => {
   const dispatch = useDispatch();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const { isLoading, data: campaignList, refetch } = useGetCampaignConfigsQuery(brandId);
@@ -68,4 +68,4 @@ const Campaigns = () => {
   );
 };
 
-export default Campaigns;
+export default CampaignsListPage;

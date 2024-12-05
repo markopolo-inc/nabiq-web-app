@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { EmailSmsCampaign, WhatsappCampaign } from 'src/components/modules/campaigns';
+import { EmailSmsCampaign, WhatsappCampaign } from 'src/components/modules/create-campaign';
 import { TCampaignMedium } from 'src/interfaces/modules/campaign';
 
-const CreateCampaign = () => {
+const CreateCampaignPage = () => {
   const [searchParams] = useSearchParams();
 
   const campaignMedium: TCampaignMedium = useMemo(
@@ -19,4 +19,4 @@ const CreateCampaign = () => {
   );
 };
 
-export default CreateCampaign;
+export default CreateCampaignPage;

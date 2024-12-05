@@ -6,9 +6,9 @@ import { Toaster } from 'react-hot-toast';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+import Router from 'src/router';
+import { persistor, store } from 'src/store';
 
-import Router from './router';
-import { persistor, store } from './store';
 import './styles/fonts.css';
 
 const App = () => {
