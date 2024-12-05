@@ -156,7 +156,7 @@ export const CampaignTable = ({ list, refetch }) => {
           </TableRow>
         ) : (
           filteredList.map((item, idx) => (
-            <TableRow key={idx}>
+            <TableRow key={idx} className='odd:!bg-gray-50 even:!bg-white hover:!bg-primary-100'>
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
                   <div className='text-sm font-medium text-gray-900'>{item.name}</div>
