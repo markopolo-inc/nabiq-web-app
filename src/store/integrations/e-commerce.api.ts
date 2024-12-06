@@ -10,7 +10,6 @@ const eCommercesApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: args,
         credentials: 'include',
-        mode: 'cors',
       }),
       invalidatesTags: ['Company'],
       async onQueryStarted(_args, { queryFulfilled }) {
