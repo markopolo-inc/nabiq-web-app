@@ -6,7 +6,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useConnectShopifyMutation } from 'src/store/integrations/e-commerce.api';
 // import { useAppSelector } from 'src/store/hooks';
 import { getRedirectUri } from 'src/utils/auth';
-import { clearShopifyCookies } from 'src/utils/modules/integrations/shopify.utils';
+
+// import { clearShopifyCookies } from 'src/utils/modules/integrations/shopify.utils';
 
 export const ECommerce = () => {
   // const { resourceId: brandId } = useAppSelector((state) => state.brand);
@@ -16,19 +17,14 @@ export const ECommerce = () => {
 
   useEffect(() => {
     if (searchParams.get('connected') === 'shopify') {
-      const nbqsSessionId = searchParams.get('nbqs_session_id') || null;
-      const shop = searchParams.get('shopify_shop') || null;
       connectShopify({
-        shop,
-        nbqsSessionId,
+        email: 'dipikesh.singh.915@gmail.com',
       })
         .unwrap()
         .then()
         .finally(() => {
-          clearShopifyCookies();
+          // clearShopifyCookies();
           searchParams.delete('connected');
-          searchParams.delete('nbqs_session_id');
-          searchParams.delete('shopify_shop');
           navigate({
             search: searchParams.toString(),
           });

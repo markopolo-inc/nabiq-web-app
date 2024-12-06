@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { HeaderTitle } from 'layouts';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,18 +11,14 @@ import { useAppSelector } from 'store/hooks';
 const Home = () => {
   const company = useAppSelector((state) => state.company);
   const navigate = useNavigate();
-  const { nbqsSessionId, shop } = getShopifyCookies();
+  const { installationInit, shop } = getShopifyCookies();
 
   useEffect(() => {
-    console.log('nbqsSessionId', nbqsSessionId);
-    console.log('shop', shop);
-    if (nbqsSessionId && shop) {
+    if (installationInit && shop) {
       clearShopifyCookies();
-      navigate(
-        `/integrations?selectedTab=ecommerce&connected=shopify&nbqs_session_id=${nbqsSessionId}&shopify_shop=${shop}`,
-      );
+      navigate(`/integrations?selectedTab=ecommerce&connected=shopify`);
     }
-  }, [nbqsSessionId, shop]);
+  }, [installationInit, shop]);
 
   return (
     <>
