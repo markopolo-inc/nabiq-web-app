@@ -9,7 +9,7 @@ const eCommercesApi = apiSlice.injectEndpoints({
         url: '/shopify/direct/connect',
         method: 'POST',
         body: args,
-        credentials: 'same-origin',
+        credentials: 'include',
         mode: 'cors',
       }),
       invalidatesTags: ['Company'],
