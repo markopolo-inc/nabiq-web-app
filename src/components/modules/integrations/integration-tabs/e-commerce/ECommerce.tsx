@@ -3,14 +3,14 @@ import { Button, GatewayLogo } from '@nabiq-ui';
 import { IntegrationCard } from 'components/modules/integrations/components';
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useAppSelector } from 'src/store/hooks';
 import { useConnectShopifyMutation } from 'src/store/integrations/e-commerce.api';
-// import { useAppSelector } from 'src/store/hooks';
 import { getRedirectUri } from 'src/utils/auth';
 
 // import { clearShopifyCookies } from 'src/utils/modules/integrations/shopify.utils';
 
 export const ECommerce = () => {
-  // const { resourceId: brandId } = useAppSelector((state) => state.brand);
+  const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [searchParams] = useSearchParams();
   const [connectShopify, { isLoading }] = useConnectShopifyMutation();
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ export const ECommerce = () => {
         </Button>
       </IntegrationCard>
 
-      {/* <IntegrationCard
+      <IntegrationCard
         title='Salla'
         description='Expand your reach with Salla—your comprehensive eCommerce solution for seamless store management, effective marketing, and increased sales.'
         icon={<GatewayLogo app='salla' width={32} />}
@@ -76,7 +76,7 @@ export const ECommerce = () => {
         >
           Connect store
         </Button>
-      </IntegrationCard> */}
+      </IntegrationCard>
     </div>
   );
 };
