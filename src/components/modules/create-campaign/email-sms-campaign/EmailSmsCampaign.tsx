@@ -1,4 +1,4 @@
-import { Breadcrumbs, Button, PageLoader, Stack, Stepper, StepperStep } from '@nabiq-ui';
+import { Breadcrumbs, Button, Group, PageLoader, Stack, Stepper, StepperStep } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -103,7 +103,20 @@ export const EmailSmsCampaign = () => {
                 Provide all the details for configuring your campaign
               </p>
             </Stack>
-            <Stack>
+            <Group>
+              {active !== 0 && (
+                <Button
+                  variant='link'
+                  onClick={() => {
+                    setActive((step) => {
+                      return step - 1;
+                    });
+                  }}
+                  size='md'
+                >
+                  Go back
+                </Button>
+              )}
               <Button
                 variant='primary'
                 onClick={nextStep}
@@ -124,7 +137,7 @@ export const EmailSmsCampaign = () => {
                     : 'Create'
                   : 'Continue'}
               </Button>
-            </Stack>
+            </Group>
           </div>
         </Stack>
 

@@ -1,5 +1,5 @@
-import { FiCrossX, FiPlatformIcon } from '@nabiq-icons';
-import { Group, Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
+// import { FiCrossX, FiPlatformIcon } from '@nabiq-icons';
+import { Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
 import { useDispatch } from 'react-redux';
 import { ICampaign } from 'src/interfaces/modules/campaign';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
@@ -17,14 +17,14 @@ export const CampaignDetailsForm = () => {
     );
   };
 
-  const handleRemoveAd = ({ value }) => {
-    const selectedAdsList = campaign?.content?.filter((item) => item?.id !== value);
-    dispatch(
-      setCampaign({
-        content: selectedAdsList,
-      }),
-    );
-  };
+  // const handleRemoveAd = ({ value }) => {
+  //   const selectedAdsList = campaign?.content?.filter((item) => item?.id !== value);
+  //   dispatch(
+  //     setCampaign({
+  //       content: selectedAdsList,
+  //     }),
+  //   );
+  // };
 
   return (
     <>
@@ -105,7 +105,7 @@ export const CampaignDetailsForm = () => {
             </Stack>
           </Stack>
         </Stack> */}
-
+        {/* 
         {campaign?.content?.length ? (
           <Stack gap={12}>
             {campaign?.content?.map((item) => (
@@ -136,7 +136,21 @@ export const CampaignDetailsForm = () => {
               </Group>
             ))}
           </Stack>
-        ) : null}
+        ) : null} */}
+        <Stack gap={6}>
+          <Select
+            data={[
+              { label: 'English', value: 'en' },
+              { label: 'Arabic', value: 'ar' },
+            ]}
+            label='Content language'
+            value={campaign?.language}
+            onChange={(value) => handleChange('language', value)}
+          />
+          <Text size='14px' className='text-gray-600'>
+            Contents will be generated in the selected language
+          </Text>
+        </Stack>
       </Stack>
     </>
   );
