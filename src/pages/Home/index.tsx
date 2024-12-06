@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { HeaderTitle } from 'layouts';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +15,8 @@ const Home = () => {
   const { nbqsSessionId, shop } = getShopifyCookies();
 
   useEffect(() => {
+    console.log('nbqsSessionId', nbqsSessionId);
+    console.log('shop', shop);
     if (nbqsSessionId && shop) {
       clearShopifyCookies();
       navigate(
