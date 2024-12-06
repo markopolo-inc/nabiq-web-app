@@ -2,6 +2,7 @@ import { FiZap } from '@nabiq-icons';
 import { Button, GatewayLogo } from '@nabiq-ui';
 import { IntegrationCard } from 'components/modules/integrations/components';
 import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
 import { useConnectShopifyMutation } from 'src/store/integrations/e-commerce.api';
@@ -29,6 +30,16 @@ export const ECommerce = () => {
             search: searchParams.toString(),
           });
         });
+    }
+
+    if (searchParams.get('success') === 'salla') {
+      toast.success('Salla connected successfully!', {
+        id: 'salla-connect',
+      });
+      searchParams.delete('success');
+      navigate({
+        search: searchParams.toString(),
+      });
     }
   }, [searchParams]);
 
