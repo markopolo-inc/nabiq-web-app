@@ -1,24 +1,24 @@
 import { HeaderTitle } from 'layouts';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ConstitutionalAIModerationCard, IntegrateApps } from 'src/components/modules/home';
-import {
-  clearShopifyCookies,
-  getShopifyCookies,
-} from 'src/utils/modules/integrations/shopify.utils';
+import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
 import { useAppSelector } from 'store/hooks';
 
 const Home = () => {
   const company = useAppSelector((state) => state.company);
   const navigate = useNavigate();
-  const { installationInit, shop } = getShopifyCookies();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    if (installationInit && shop) {
-      clearShopifyCookies();
-      navigate(`/integrations?selectedTab=ecommerce&connected=shopify`);
+    const installationId = searchParams.get(QUERY_PARAMS.INSTALLATION_ID);
+    const shopifyShop = searchParams.get(QUERY_PARAMS.SHOPIFY_SHOP);
+    if (installationId && shopifyShop) {
+      navigate(
+        `/integrations?selectedTab=ecommerce&${QUERY_PARAMS.INSTALLATION_ID}=${installationId}&${QUERY_PARAMS.SHOPIFY_SHOP}=${shopifyShop}`,
+      );
     }
-  }, [installationInit, shop]);
+  }, [searchParams]);
 
   return (
     <>

@@ -1,15 +1,15 @@
 import toast from 'react-hot-toast';
+import { IResponseInterface } from 'src/interfaces/response.interface';
 
 import { apiSlice } from '../api/apiSlice';
 
 const eCommercesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    connectShopify: builder.mutation<any, any>({
+    connectShopify: builder.mutation<IResponseInterface, any>({
       query: (args) => ({
         url: '/shopify/direct/connect',
         method: 'POST',
         body: args,
-        credentials: 'include',
       }),
       invalidatesTags: ['Company'],
       async onQueryStarted(_args, { queryFulfilled }) {

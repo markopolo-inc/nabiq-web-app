@@ -16,7 +16,7 @@ export type GatewayType =
   | 'shopify'
   | 'salla';
 
-export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify';
+export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify' | 'salla';
 
 export type TECommercePlatform = 'shopify' | 'salla';
 
@@ -30,10 +30,24 @@ export interface IMappedField {
   nabiqPropertyLabel?: string;
 }
 
+interface SallaStore {
+  id: number;
+  name: string;
+  email: string;
+  avatar: string;
+  domain: string;
+}
+
+export interface IConnectedAccountFields {
+  scope?: string;
+  shop?: string;
+  store?: SallaStore;
+}
+
 export interface IDataSourceIntegrationInterface {
-  connectedAccounts: Record<TDataSourcePlatform, any>;
+  connectedAccounts: Record<TDataSourcePlatform, IConnectedAccountFields>;
   mappedFields: Record<TDataSourcePlatform, IMappedField[]>;
-  token: Record<TDataSourcePlatform, string>;
+  tokens: Record<TDataSourcePlatform, boolean>;
 }
 
 export interface IEmailSMSIntegrationInterface {

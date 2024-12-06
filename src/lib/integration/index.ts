@@ -219,3 +219,8 @@ export const gatewayFields: Record<'email' | 'sms', Partial<Record<GatewayType, 
     whatsapp: ['businessId', 'phoneNumberId', 'accessToken'],
   },
 };
+
+export const APPS = {
+  SHOPIFY: 'shopify',
+  SALLA: 'salla',
+};
