@@ -15,9 +15,13 @@ const eCommercesApi = apiSlice.injectEndpoints({
       async onQueryStarted(_args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Shopify connected successfully!');
+          toast.success(res.data?.message || 'Shopify connected successfully!', {
+            id: 'shopify-connect',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to connect Shopify!');
+          toast.error(err?.error.message || 'Failed to connect Shopify!', {
+            id: 'shopify-connect',
+          });
           return err;
         }
       },
