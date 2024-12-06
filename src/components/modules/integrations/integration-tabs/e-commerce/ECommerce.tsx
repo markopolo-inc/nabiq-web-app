@@ -5,8 +5,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ShopifyConnectModal } from 'src/components/modules/integrations/integration-tabs/e-commerce';
-import { APPS } from 'src/lib/integration';
-import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
+import { QUERY_PARAMS, QUERY_PARAMS_VALUES } from 'src/lib/integration/ecommerce';
 import { useAppSelector } from 'src/store/hooks';
 import { getRedirectUri } from 'src/utils/auth';
 
@@ -16,7 +15,7 @@ export const ECommerce = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (searchParams.get(QUERY_PARAMS.SUCCESS) === APPS.SALLA) {
+    if (searchParams.get(QUERY_PARAMS.SUCCESS) === QUERY_PARAMS_VALUES.SALLA_CONNECT) {
       toast.success('Salla connected successfully!', {
         id: 'salla-connect',
       });
