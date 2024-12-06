@@ -1,18 +1,30 @@
 import { FiZap } from '@nabiq-icons';
-import { Badge, Button, GatewayLogo } from '@nabiq-ui';
+import { Badge, Button, ConfirmationModal, GatewayLogo, Group } from '@nabiq-ui';
 import { IntegrationCard } from 'components/modules/integrations/components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ShopifyConnectModal } from 'src/components/modules/integrations/integration-tabs/e-commerce';
+import { TDataSourcePlatform } from 'src/interfaces/brand.interface';
 import { QUERY_PARAMS, QUERY_PARAMS_VALUES } from 'src/lib/integration/ecommerce';
 import { useAppSelector } from 'src/store/hooks';
+import { useDisconnectPlatformMutation } from 'src/store/integrations/social-integrations.api';
 import { getRedirectUri } from 'src/utils/auth';
 
 export const ECommerce = () => {
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [disconnectPlatform, { isLoading: isDisconnecting }] = useDisconnectPlatformMutation();
+  const [showDisconnectModal, setShowDisconnectModal] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState<TDataSourcePlatform | null>(null);
+
+  const handleDisconnect = async (platform: TDataSourcePlatform) => {
+    const res = await disconnectPlatform({ brandId, platform }).unwrap();
+    if (res.success) {
+      setShowDisconnectModal(null);
+    }
+  };
 
   useEffect(() => {
     if (searchParams.get(QUERY_PARAMS.SUCCESS) === QUERY_PARAMS_VALUES.SALLA_CONNECT) {
@@ -48,25 +60,38 @@ export const ECommerce = () => {
             )
           }
         >
-          <Button
-            leadingIcon={<FiZap fill='white' size={22} />}
-            variant={isShopifyConnected ? 'secondary' : 'primary'}
-            onClick={async () => {
-              window.location.href = await getRedirectUri(
-                '/shopify/install/direct',
-                {
-                  // brandId,
-                  // redirectUri: window.location.href,
-                  shop: import.meta.env.VITE_SHOPIFY_APP_NAME,
-                },
-                {
-                  sendToken: false,
-                },
-              );
-            }}
-          >
-            {isShopifyConnected ? 'Reconnect store' : 'Connect store'}
-          </Button>
+          <Group>
+            <Button
+              leadingIcon={<FiZap fill='white' size={22} />}
+              variant={isShopifyConnected ? 'secondary' : 'primary'}
+              onClick={async () => {
+                window.location.href = await getRedirectUri(
+                  '/shopify/install/direct',
+                  {
+                    // brandId,
+                    // redirectUri: window.location.href,
+                    shop: import.meta.env.VITE_SHOPIFY_APP_NAME,
+                  },
+                  {
+                    sendToken: false,
+                  },
+                );
+              }}
+            >
+              {isShopifyConnected ? 'Reconnect store' : 'Connect store'}
+            </Button>
+            {isShopifyConnected && (
+              <Button
+                variant='tertiary-destructive'
+                onClick={() => {
+                  setSelectedPlatform('shopify');
+                  setShowDisconnectModal(true);
+                }}
+              >
+                Disconnect
+              </Button>
+            )}
+          </Group>
         </IntegrationCard>
 
         <IntegrationCard
@@ -88,21 +113,41 @@ export const ECommerce = () => {
             )
           }
         >
-          <Button
-            leadingIcon={<FiZap fill='white' size={22} />}
-            variant={isSallaConnected ? 'secondary' : 'primary'}
-            onClick={async () => {
-              window.location.href = await getRedirectUri('/salla/oauth', {
-                brandId,
-                redirectUri: window.location.href,
-              });
-            }}
-          >
-            {isSallaConnected ? 'Reconnect store' : 'Connect store'}
-          </Button>
+          <Group>
+            <Button
+              leadingIcon={<FiZap fill='white' size={22} />}
+              variant={isSallaConnected ? 'secondary' : 'primary'}
+              onClick={async () => {
+                window.location.href = await getRedirectUri('/salla/oauth', {
+                  brandId,
+                  redirectUri: window.location.href,
+                });
+              }}
+              disabled={isDisconnecting}
+            >
+              {isSallaConnected ? 'Reconnect store' : 'Connect store'}
+            </Button>
+            {isSallaConnected && (
+              <Button
+                variant='tertiary-destructive'
+                onClick={() => {
+                  setSelectedPlatform('salla');
+                  setShowDisconnectModal(true);
+                }}
+              >
+                Disconnect
+              </Button>
+            )}
+          </Group>
         </IntegrationCard>
       </div>
       <ShopifyConnectModal />
+      <ConfirmationModal
+        title='Are you sure you want to disconnect this platform?'
+        showModal={showDisconnectModal}
+        setShowModal={setShowDisconnectModal}
+        onConfirm={() => handleDisconnect(selectedPlatform)}
+      />
     </>
   );
 };

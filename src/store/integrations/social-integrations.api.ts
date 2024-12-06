@@ -1,5 +1,5 @@
 import { toast } from 'react-hot-toast';
-import { TSocialPlatform } from 'src/interfaces/brand.interface';
+import { TDataSourcePlatform, TSocialPlatform } from 'src/interfaces/brand.interface';
 import { IResponseInterface } from 'src/interfaces/response.interface';
 
 import { apiSlice } from '../api/apiSlice';
@@ -87,7 +87,7 @@ const socialIntegrationsApi = apiSlice.injectEndpoints({
     }),
     disconnectPlatform: builder.mutation<
       IResponseInterface,
-      { brandId: string; platform: TSocialPlatform }
+      { brandId: string; platform: TSocialPlatform | TDataSourcePlatform }
     >({
       query: (args) => ({
         url: '/brand/disconnect-platform',
@@ -95,6 +95,15 @@ const socialIntegrationsApi = apiSlice.injectEndpoints({
         body: { ...args },
       }),
       invalidatesTags: ['Company'],
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || `Disconnected successfully!`);
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to disconnect!');
+          return err;
+        }
+      },
     }),
   }),
 });

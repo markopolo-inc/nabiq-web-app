@@ -5,7 +5,7 @@ export const getShopifyCookies = () => {
   const installationInit = cookies.get('shopify_installation') || false;
   const shop = cookies.get('shopify_shop') || null;
   const nbqsSessionId = cookies.get('nbqs_session_id') || null;
-  return { installationInit, shop, nbqsSessionId, cookies: cookies.get('_dd_s') };
+  return { installationInit, shop, nbqsSessionId };
 };
 
 export const clearShopifyCookies = () => {

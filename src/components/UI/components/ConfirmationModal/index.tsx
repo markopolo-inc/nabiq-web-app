@@ -44,7 +44,6 @@ const ConfirmationModal = ({ title, showModal, setShowModal, onConfirm }) => {
       toggleFromOutside={showModal}
       setToggleFromOutside={setShowModal}
       withNoHeader
-      withCustomClose
       body={({ setOpened }) => (
         <ModalBody setOpened={setOpened} title={title} onConfirm={onConfirm} />
       )}
