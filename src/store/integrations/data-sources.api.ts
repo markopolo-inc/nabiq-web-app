@@ -1,5 +1,6 @@
 import { toast } from 'react-hot-toast';
 import { IMappedField, TDataSourcePlatform } from 'src/interfaces/brand.interface';
+import { IResponseInterface } from 'src/interfaces/response.interface';
 
 import { apiSlice } from '../api/apiSlice';
 
@@ -52,8 +53,31 @@ const dataSourcesApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    disconnectDataSource: builder.mutation<
+      IResponseInterface,
+      { brandId: string; platform: TDataSourcePlatform }
+    >({
+      query: (args) => ({
+        url: '/brand/disconnect-datasource-platform',
+        method: 'DELETE',
+        body: { ...args },
+      }),
+      invalidatesTags: ['Company'],
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || `Disconnected successfully!`);
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to disconnect!');
+          return err;
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetDataSourcePropertiesQuery, useSaveDataSourcePropertiesMutation } =
-  dataSourcesApi;
+export const {
+  useGetDataSourcePropertiesQuery,
+  useSaveDataSourcePropertiesMutation,
+  useDisconnectDataSourceMutation,
+} = dataSourcesApi;

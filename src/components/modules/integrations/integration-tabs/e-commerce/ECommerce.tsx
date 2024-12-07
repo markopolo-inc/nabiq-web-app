@@ -8,19 +8,19 @@ import { ShopifyConnectModal } from 'src/components/modules/integrations/integra
 import { TDataSourcePlatform } from 'src/interfaces/brand.interface';
 import { QUERY_PARAMS, QUERY_PARAMS_VALUES } from 'src/lib/integration/ecommerce';
 import { useAppSelector } from 'src/store/hooks';
-import { useDisconnectPlatformMutation } from 'src/store/integrations/social-integrations.api';
+import { useDisconnectDataSourceMutation } from 'src/store/integrations/data-sources.api';
 import { getRedirectUri } from 'src/utils/auth';
 
 export const ECommerce = () => {
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [disconnectPlatform, { isLoading: isDisconnecting }] = useDisconnectPlatformMutation();
+  const [disconnectDataSource, { isLoading: isDisconnecting }] = useDisconnectDataSourceMutation();
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState<TDataSourcePlatform | null>(null);
 
   const handleDisconnect = async (platform: TDataSourcePlatform) => {
-    const res = await disconnectPlatform({ brandId, platform }).unwrap();
+    const res = await disconnectDataSource({ brandId, platform }).unwrap();
     if (res.success) {
       setShowDisconnectModal(null);
     }
