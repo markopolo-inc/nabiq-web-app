@@ -42,6 +42,7 @@ export interface IConnectedAccountFields {
   scope?: string;
   shop?: string;
   store?: SallaStore;
+  domain?: string;
 }
 
 export interface IDataSourceIntegrationInterface {

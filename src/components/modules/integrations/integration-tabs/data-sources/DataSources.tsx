@@ -1,5 +1,5 @@
 import { FiZap } from '@nabiq-icons';
-import { Button, GatewayLogo } from '@nabiq-ui';
+import { Badge, Button, GatewayLogo } from '@nabiq-ui';
 import { useState } from 'react';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import {
@@ -26,6 +26,13 @@ export const DataSources = () => {
           description='Empower your business growth through comprehensive CRM platform that integrates
               marketing, sales, and customer service tools.'
           icon={<GatewayLogo app='hubspot' width={32} />}
+          badge={
+            datasourceIntegrations?.connectedAccounts?.hubspot?.domain && (
+              <Badge color='gray'>
+                {datasourceIntegrations?.connectedAccounts?.hubspot?.domain}
+              </Badge>
+            )
+          }
         >
           {!datasourceIntegrations?.connectedAccounts?.hubspot ? (
             <Button

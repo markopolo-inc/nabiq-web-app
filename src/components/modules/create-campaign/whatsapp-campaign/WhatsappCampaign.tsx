@@ -1,18 +1,34 @@
-import { Breadcrumbs, Button, Group, Stack, Stepper, StepperStep } from '@nabiq-ui';
+import { Breadcrumbs, Button, Group, Stack, Stepper, StepperStep, Tooltip } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   CompletionStep,
   CreationStep,
   ProductStep,
 } from 'src/components/modules/create-campaign/whatsapp-campaign';
 import { whatsappCampaignSteps } from 'src/lib/campaign.lib';
+import { useAppSelector } from 'src/store/hooks';
 
 export const WhatsappCampaign = () => {
   const [active, setActive] = useState(0);
   const handleStepChange = (newStep: number) => {
     setActive(newStep);
   };
+  const { campaign } = useAppSelector((state) => state);
+
+  const validationErrors = useMemo(() => {
+    return [];
+  }, [campaign]);
+
+  const errors = (
+    <div>
+      {validationErrors.map((error) => (
+        <div key={error} className='text-purple-400'>
+          {error}
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <>
@@ -23,12 +39,28 @@ export const WhatsappCampaign = () => {
           <Breadcrumbs />
           <Group justify='space-between' align='center'>
             <p className='text-gray-900 font-semibold text-xl'>Configure your campaign</p>
-            <Button
-              variant='primary'
-              onClick={() => setActive((current) => (current < 3 ? current + 1 : current))}
-            >
-              Continue
-            </Button>
+            <Group>
+              {active > 0 && (
+                <Button
+                  variant='link'
+                  size='md'
+                  onClick={() => {
+                    setActive(active - 1);
+                  }}
+                >
+                  Go back
+                </Button>
+              )}
+              <Tooltip label={errors} disabled={validationErrors.length === 0} position='left'>
+                <Button
+                  disabled={validationErrors.length > 0}
+                  variant='primary'
+                  onClick={() => setActive((current) => (current < 3 ? current + 1 : current))}
+                >
+                  Continue
+                </Button>
+              </Tooltip>
+            </Group>
           </Group>
         </Stack>
 

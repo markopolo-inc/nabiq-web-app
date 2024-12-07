@@ -9,7 +9,8 @@ export const WhatsAppConnect = () => {
   const { socialIntegrations, resourceId: brandId } = useAppSelector((state) => state.brand);
   const [showWAConnectModal, setShowWAConnectModal] = useState(false);
 
-  const isConnected = socialIntegrations?.socialTokens?.facebook;
+  const isConnected =
+    socialIntegrations?.socialTokens?.facebook && socialIntegrations?.whatsApp?.number;
   return (
     <Card className='!w-full !min-h-fit !p-6'>
       <Stack gap={24}>
@@ -24,31 +25,37 @@ export const WhatsAppConnect = () => {
           Link your WhatsApp Business account to launch a conversational SMS campaign. Don't have an
           account?
         </p>
-        {!isConnected ? (
-          <Button
-            variant='secondary-black'
-            leadingIcon={<FiWhatsApp size={17} />}
-            onClick={async () => {
-              window.location.href = await getRedirectUri('/auth/facebook', {
-                brandId,
-                redirectUri: window.location.href,
-              });
-            }}
-          >
-            Connect
-          </Button>
-        ) : (
-          <Group justify='space-between'>
+        <Group justify='space-between'>
+          {!socialIntegrations?.socialTokens?.facebook ? (
             <Button
-              variant='link'
-              leadingIcon={<FiEdit01 size={16} />}
-              onClick={() => setShowWAConnectModal(true)}
+              variant='secondary-black'
+              leadingIcon={<FiWhatsApp size={17} />}
+              onClick={async () => {
+                window.location.href = await getRedirectUri('/auth/facebook', {
+                  brandId,
+                  redirectUri: window.location.href,
+                });
+              }}
             >
-              Reconfigure
+              Connect
             </Button>
-            <Badge color='gray'>{socialIntegrations?.whatsApp?.number}</Badge>
-          </Group>
-        )}
+          ) : (
+            <Group justify='space-between'>
+              <Button
+                variant='link'
+                leadingIcon={<FiEdit01 size={14} />}
+                onClick={() => setShowWAConnectModal(true)}
+              >
+                Configure
+              </Button>
+              <Badge color='gray'>{socialIntegrations?.whatsApp?.number}</Badge>
+            </Group>
+          )}
+          {isConnected && <Badge color='gray'>{socialIntegrations?.whatsApp?.number}</Badge>}
+          {socialIntegrations?.socialTokens?.facebook && !socialIntegrations?.whatsApp?.number && (
+            <Badge color='error'>Number is not available</Badge>
+          )}
+        </Group>
       </Stack>
       <WhatsAppConnectModal
         showModal={showWAConnectModal}

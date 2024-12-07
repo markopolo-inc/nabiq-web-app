@@ -60,3 +60,5 @@ export interface ICampaignAdsItem {
   type: string;
   metrics: Metrics;
 }
+
+export type TProductSource = 'shopify' | 'salla';

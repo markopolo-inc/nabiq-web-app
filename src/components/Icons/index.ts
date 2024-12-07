@@ -95,6 +95,7 @@ export { default as FiShopify } from './Shopify';
 export { default as FiServer01 } from './Server01';
 export { default as FiShield02 } from './Shield02';
 export { ShoppingBag03 as FiShoppingBag03 } from './ShoppingBag03';
+export { default as FiSalla } from './Salla';
 
 // T
 export { default as FiTrash } from './Trash';
