@@ -159,13 +159,22 @@ export const CampaignTable = ({ list, refetch }) => {
         {filteredList.length === 0 ? (
           <TableRow>
             <Td className='py-10 px-8' colSpan={7}>
-              <Stack align='center' gap={4}>
-                <p className='text-gray-900 font-semibold text-base'>
-                  No campaigns {list.length === 0 ? 'created yet' : 'found!'}
-                </p>
-                <p className='text-gray-600 text-sm'>
-                  Your {list.length === 0 ? 'created' : 'filtered'} campaigns will show up here.
-                </p>
+              <Stack align='center' gap={16}>
+                {list.length !== 0 ? (
+                  <div className='border border-gray-200 shadow-xs rounded-[10px] p-[11px]'>
+                    <FiSearchLg size={24} color='#364152' />
+                  </div>
+                ) : (
+                  <></>
+                )}
+                <Stack align='center' gap={4}>
+                  <p className='text-gray-900 font-semibold text-base'>
+                    No campaigns {list.length === 0 ? 'created yet' : 'found!'}
+                  </p>
+                  <p className='text-gray-600 text-sm'>
+                    Your {list.length === 0 ? 'created' : 'filtered'} campaigns will show up here.
+                  </p>
+                </Stack>
               </Stack>
             </Td>
           </TableRow>
