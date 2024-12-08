@@ -1,12 +1,14 @@
 import { Breadcrumbs, Button, Group, Stack, Stepper, StepperStep, Tooltip } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiDot } from 'src/components/Icons';
 import {
   CompletionStep,
   CreationStep,
   ProductStep,
 } from 'src/components/modules/create-campaign/whatsapp-campaign';
+import { useWhatsAppCampaignValidation } from 'src/hooks/modules/campaigns';
 import { whatsappCampaignSteps } from 'src/lib/campaign.lib';
 import { useCreateWhatsappCampaignConfigMutation } from 'src/store/campaign/campaignApi';
 import { useAppSelector } from 'src/store/hooks';
@@ -26,19 +28,17 @@ export const WhatsappCampaign = () => {
   };
   const [createCampaignConfig, { isLoading }] = useCreateWhatsappCampaignConfigMutation();
   const { campaign } = useAppSelector((state) => state);
-
-  const validationErrors = useMemo(() => {
-    return [];
-  }, [campaign]);
+  const { errors: validationErrors } = useWhatsAppCampaignValidation(active);
 
   const errors = (
-    <div>
+    <ul>
       {validationErrors.map((error) => (
-        <div key={error} className='text-purple-400'>
+        <li key={error} className='text-orange-600 flex items-center gap-2'>
+          <FiDot size={8} />
           {error}
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 
   return (
