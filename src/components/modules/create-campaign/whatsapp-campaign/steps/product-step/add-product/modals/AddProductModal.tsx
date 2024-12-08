@@ -1,3 +1,4 @@
+import { FiBox } from '@nabiq-icons';
 import { Button, Card, Modal, Stack } from '@nabiq-ui';
 import { TProductSource } from 'src/interfaces/modules/campaign';
 import { productSources } from 'src/lib/campaign.lib';
@@ -51,7 +52,7 @@ export const AddProductModal = () => {
       withNoHeader
     >
       {({ setOpened }) =>
-        campaign.product.length > 0 ? (
+        campaign.productSource ? (
           <Button
             variant='link'
             size='sm'
@@ -61,7 +62,11 @@ export const AddProductModal = () => {
             Change how I want to add product
           </Button>
         ) : (
-          <Button variant='secondary' onClick={() => setOpened(true)}>
+          <Button
+            variant='secondary'
+            onClick={() => setOpened(true)}
+            leadingIcon={<FiBox size={18} />}
+          >
             Add product
           </Button>
         )

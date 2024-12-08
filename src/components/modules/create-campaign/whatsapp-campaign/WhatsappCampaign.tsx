@@ -7,13 +7,22 @@ import {
   ProductStep,
 } from 'src/components/modules/create-campaign/whatsapp-campaign';
 import { whatsappCampaignSteps } from 'src/lib/campaign.lib';
+import { useCreateCampaignConfigMutation } from 'src/store/campaign/campaignApi';
 import { useAppSelector } from 'src/store/hooks';
 
 export const WhatsappCampaign = () => {
   const [active, setActive] = useState(0);
-  const handleStepChange = (newStep: number) => {
-    setActive(newStep);
+  const handleStepChange = async (newStep: number) => {
+    if (newStep === 2) {
+      const res = await createCampaignConfig(campaign).unwrap();
+      if (res.success) {
+        setActive(3);
+      }
+    } else {
+      setActive(newStep);
+    }
   };
+  const [createCampaignConfig, { isLoading }] = useCreateCampaignConfigMutation();
   const { campaign } = useAppSelector((state) => state);
 
   const validationErrors = useMemo(() => {
@@ -47,6 +56,7 @@ export const WhatsappCampaign = () => {
                   onClick={() => {
                     setActive(active - 1);
                   }}
+                  disabled={isLoading}
                 >
                   Go back
                 </Button>
@@ -55,7 +65,8 @@ export const WhatsappCampaign = () => {
                 <Button
                   disabled={validationErrors.length > 0}
                   variant='primary'
-                  onClick={() => setActive((current) => (current < 3 ? current + 1 : current))}
+                  onClick={() => handleStepChange(active + 1)}
+                  loading={isLoading}
                 >
                   Continue
                 </Button>
@@ -81,6 +92,7 @@ export const WhatsappCampaign = () => {
             case 1:
               return <CreationStep />;
             case 2:
+            case 3:
               return <CompletionStep />;
             default:
               return null;

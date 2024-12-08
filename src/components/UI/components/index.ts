@@ -29,6 +29,7 @@ export { default as Stepper } from './Stepper';
 export { StepperStep } from './StepperStep';
 export { default as Checkbox } from './Checkbox/index.tsx';
 export { default as OtpInput } from './OtpInput';
+export { default as MultiSelect } from './MultiSelect';
 
 // Data representation
 export { default as Alert } from './Alert';

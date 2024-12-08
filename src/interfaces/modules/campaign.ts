@@ -78,4 +78,5 @@ export interface ISallaProduct {
   title: string;
   description: string;
   images: Array<{ src: string }>;
+  categories: string[];
 }

@@ -10,6 +10,7 @@ export { default as FiAnnouncement01 } from './Announcement01';
 export { default as FiAlertTriangle } from './AlertTriangle';
 
 // B
+export { FiBox } from './Box';
 
 // C
 export { default as Calendar } from './Calendar';

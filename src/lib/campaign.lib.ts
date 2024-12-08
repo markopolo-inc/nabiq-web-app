@@ -1,4 +1,12 @@
-import { FiAnnouncement01, FiCursorClick01, FiInfinity, FiWhatsApp, FiZapFast } from '@nabiq-icons';
+import {
+  FiAnnouncement01,
+  FiCursorClick01,
+  FiInfinity,
+  FiSalla,
+  FiShopify,
+  FiWhatsApp,
+  FiZapFast,
+} from '@nabiq-icons';
 
 export const goals = [
   {
@@ -84,5 +92,20 @@ export const whatsappCampaignSteps = [
   {
     label: 'Completion',
     description: 'Captain Nabiq is on it—upload more leads if needed.',
+  },
+];
+
+export const productSources = [
+  {
+    title: 'Shopify',
+    platform: 'shopify',
+    headline: 'Connect your Shopify store to upload products directly',
+    icon: FiShopify,
+  },
+  {
+    title: 'Salla',
+    platform: 'salla',
+    headline: 'Connect your Salla store to import products easily.',
+    icon: FiSalla,
   },
 ];

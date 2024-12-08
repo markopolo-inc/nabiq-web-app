@@ -1,6 +1,5 @@
-import { Loader, MultiSelect } from '@mantine/core';
 import { FiSalla } from '@nabiq-icons';
-import { Avatar, Group, Stack } from '@nabiq-ui';
+import { Avatar, Group, Loader, MultiSelect, Stack } from '@nabiq-ui';
 import { useEffect, useMemo, useState } from 'react';
 import { ISallaProduct } from 'src/interfaces/modules/campaign';
 import { useCampaignDispatch } from 'src/store/hooks';
@@ -43,19 +42,25 @@ export const SallaProducts = () => {
         autoComplete='on'
         label='Products'
         data={products}
+        styles={{
+          option: {
+            padding: 4,
+            width: '100%',
+          },
+        }}
         value={value}
         rightSection={isLoading ? <Loader size={16} /> : null}
         onChange={setValue}
         placeholder='Select products'
         renderOption={(option: { option: TOption }) => (
-          <Group gap={12} wrap='nowrap'>
+          <Group gap={12} wrap='nowrap' className='bg-gray-100 rounded-lg p-2 w-full'>
             <div>
               <Avatar src={option.option.avatar} size={32} />
             </div>
 
             <Stack gap={0}>
               <p className='text-gray-900 font-semibold'>{option.option.label}</p>
-              <p className='text-gray-600 text-sm truncate'>{option.option.description}</p>
+              <p className='text-gray-600 text-sm'>{option.option.categories.join(', ')}</p>
             </Stack>
           </Group>
         )}
