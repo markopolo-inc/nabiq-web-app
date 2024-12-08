@@ -74,9 +74,18 @@ export const WhatsappCampaign = () => {
             <StepperStep key={index} {...step} active={active} index={index} />
           ))}
         </Stepper>
-        {active === 0 && <ProductStep />}
-        {active === 1 && <CreationStep />}
-        {active === 2 && <CompletionStep />}
+        {(() => {
+          switch (active) {
+            case 0:
+              return <ProductStep />;
+            case 1:
+              return <CreationStep />;
+            case 2:
+              return <CompletionStep />;
+            default:
+              return null;
+          }
+        })()}
       </Stack>
     </>
   );

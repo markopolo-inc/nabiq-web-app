@@ -1,4 +1,4 @@
-import { ICampaignAdsItem, ICampaignItem } from 'src/interfaces/modules/campaign';
+import { ICampaignAdsItem, ICampaignItem, IShopifyProduct } from 'src/interfaces/modules/campaign';
 
 export type APIResponseType = {
   success: boolean;
@@ -22,4 +22,5 @@ export type IResponseInterface<T = null> = {
   success: boolean;
   message: string;
   data?: T;
+  products?: IShopifyProduct[];
 };

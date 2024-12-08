@@ -17,11 +17,10 @@ import {
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ICampaignItem } from 'src/interfaces/modules/campaign';
 import { useDeleteCampaignConfigMutation } from 'src/store/campaign/campaignApi';
-import { setCampaign } from 'src/store/campaign/campaignSlice';
+import { useCampaignDispatch } from 'src/store/hooks';
 
 type ActivatedTabsType = 'all' | ICampaignItem['status'];
 
@@ -40,7 +39,7 @@ const colorMap = {
 
 export const CampaignTable = ({ list, refetch }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatchCampaign = useCampaignDispatch();
   const [deleteConfig, { isLoading }] = useDeleteCampaignConfigMutation();
 
   const [active, setActive] = useState<ActivatedTabsType>('all');
@@ -69,11 +68,10 @@ export const CampaignTable = ({ list, refetch }) => {
       ...payload
     } = selectedCampaign;
 
-    dispatch(
-      setCampaign({
-        ...payload,
-      }),
-    );
+    dispatchCampaign({
+      ...payload,
+    });
+
     navigate('/campaigns/create-campaign');
   };
 

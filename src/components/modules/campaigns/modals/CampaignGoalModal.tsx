@@ -3,12 +3,10 @@ import { Badge, Button, Group, Modal, Stack, Tooltip } from '@nabiq-ui';
 import cn from 'classnames';
 import moment from 'moment-timezone';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TCampaignGoal } from 'src/interfaces/modules/campaign';
 import { goals, mediums } from 'src/lib/campaign.lib';
-import { setCampaign } from 'src/store/campaign/campaignSlice';
-import { useAppSelector } from 'src/store/hooks';
+import { useAppSelector, useCampaignDispatch } from 'src/store/hooks';
 
 const title = {
   goal: 'New campaign',
@@ -22,8 +20,8 @@ const subtitle = {
 
 const ModalBody = ({ setOpened }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { resourceId: brandId, markTag } = useAppSelector((state) => state.brand);
+  const dispatchCampaign = useCampaignDispatch();
   const [step, setStep] = useState<'goal' | 'medium'>('goal');
   const [selectedGoal, setSelectedGoal] = useState<TCampaignGoal | null>(null);
 
@@ -75,6 +73,7 @@ const ModalBody = ({ setOpened }) => {
           {step === 'medium' &&
             mediums?.map((medium, idx) => {
               const Icon = medium.icon;
+
               return (
                 <Stack
                   gap={24}
@@ -100,14 +99,13 @@ const ModalBody = ({ setOpened }) => {
                   <Button
                     fullWidth
                     onClick={() => {
-                      dispatch(
-                        setCampaign({
-                          brandId,
-                          tagId: markTag?.resourceId,
-                          goal: selectedGoal,
-                          name: `Untitled Campaign-${moment().format('DD-MM-YYYY')}`,
-                        }),
-                      );
+                      dispatchCampaign({
+                        brandId,
+                        tagId: markTag?.resourceId,
+                        goal: selectedGoal,
+                        name: `Untitled Campaign-${moment().format('DD-MM-YYYY')}`,
+                      });
+
                       navigate(
                         `/campaigns/create-campaign?campaign-mode=${medium.type}&goal=${selectedGoal}`,
                       );

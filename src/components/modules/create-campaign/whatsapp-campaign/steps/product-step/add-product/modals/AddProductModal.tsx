@@ -1,32 +1,12 @@
-import { FiSalla, FiShopify } from '@nabiq-icons';
 import { Button, Card, Modal, Stack } from '@nabiq-ui';
-import { Dispatch, SetStateAction } from 'react';
 import { TProductSource } from 'src/interfaces/modules/campaign';
+import { productSources } from 'src/lib/campaign.lib';
+import { useCampaignDispatch, useCampaignSelector } from 'src/store/hooks';
 
-const productSources = [
-  {
-    title: 'Shopify',
-    platform: 'shopify',
-    headline: 'Connect your Shopify store to upload products directly',
-    icon: FiShopify,
-  },
-  {
-    title: 'Salla',
-    platform: 'salla',
-    headline: 'Connect your Salla store to import products easily.',
-    icon: FiSalla,
-  },
-];
+const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
+  const campaign = useCampaignSelector();
+  const dispatchCampaign = useCampaignDispatch();
 
-const ModalBody = ({
-  setOpened,
-  selectedPlatform,
-  setSelectedPlatform,
-}: {
-  setOpened: (state: boolean) => void;
-  selectedPlatform: TProductSource;
-  setSelectedPlatform: Dispatch<SetStateAction<TProductSource>>;
-}) => {
   return (
     <Stack gap={64} className='p-8'>
       <Stack gap={0}>
@@ -44,12 +24,14 @@ const ModalBody = ({
             <Button
               fullWidth
               onClick={() => {
-                setSelectedPlatform(source.platform as TProductSource);
+                dispatchCampaign({
+                  productSource: source.platform as TProductSource,
+                });
                 setOpened(false);
               }}
-              disabled={selectedPlatform === source.platform}
+              disabled={campaign.productSource === source.platform}
             >
-              {selectedPlatform === source.platform ? 'Selected' : 'Select'}
+              {campaign.productSource === source.platform ? 'Selected' : 'Select'}
             </Button>
           </Card>
         ))}
@@ -58,31 +40,32 @@ const ModalBody = ({
   );
 };
 
-export const AddProductModal = ({
-  selectedPlatform,
-  setSelectedPlatform,
-}: {
-  selectedPlatform: TProductSource;
-  setSelectedPlatform: Dispatch<SetStateAction<TProductSource>>;
-}) => {
+export const AddProductModal = () => {
+  const campaign = useCampaignSelector();
+
   return (
     <Modal
       withCustomClose
       title={() => 'Add Product'}
-      body={({ setOpened }) => (
-        <ModalBody
-          setOpened={setOpened}
-          selectedPlatform={selectedPlatform}
-          setSelectedPlatform={setSelectedPlatform}
-        />
-      )}
+      body={({ setOpened }) => <ModalBody setOpened={setOpened} />}
       withNoHeader
     >
-      {({ setOpened }) => (
-        <Button variant='secondary' onClick={() => setOpened(true)}>
-          Add product
-        </Button>
-      )}
+      {({ setOpened }) =>
+        campaign.product.length > 0 ? (
+          <Button
+            variant='link'
+            size='sm'
+            className='!p-0 mt-[-12px]'
+            onClick={() => setOpened(true)}
+          >
+            Change how I want to add product
+          </Button>
+        ) : (
+          <Button variant='secondary' onClick={() => setOpened(true)}>
+            Add product
+          </Button>
+        )
+      }
     </Modal>
   );
 };

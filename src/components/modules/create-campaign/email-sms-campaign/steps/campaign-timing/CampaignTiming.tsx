@@ -7,20 +7,16 @@ import {
   Text,
 } from '@nabiq-ui';
 import moment from 'moment-timezone';
-import { useDispatch } from 'react-redux';
 import { ICampaign } from 'src/interfaces/modules/campaign';
-import { setCampaign } from 'src/store/campaign/campaignSlice';
-import { useAppSelector } from 'src/store/hooks';
+import { useCampaignDispatch, useCampaignSelector } from 'src/store/hooks';
 
 export const CampaignTiming = () => {
-  const dispatch = useDispatch();
-  const { campaign } = useAppSelector((state) => state);
+  const dispatchCampaign = useCampaignDispatch();
+  const campaign = useCampaignSelector();
   const handleChange = (field: keyof ICampaign, value) => {
-    dispatch(
-      setCampaign({
-        [field]: value,
-      }),
-    );
+    dispatchCampaign({
+      [field]: value,
+    });
   };
 
   return (

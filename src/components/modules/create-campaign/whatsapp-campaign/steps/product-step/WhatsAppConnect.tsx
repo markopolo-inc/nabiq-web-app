@@ -48,13 +48,15 @@ export const WhatsAppConnect = () => {
               >
                 Configure
               </Button>
-              <Badge color='gray'>{socialIntegrations?.whatsApp?.number}</Badge>
             </Group>
           )}
-          {isConnected && <Badge color='gray'>{socialIntegrations?.whatsApp?.number}</Badge>}
-          {socialIntegrations?.socialTokens?.facebook && !socialIntegrations?.whatsApp?.number && (
-            <Badge color='error'>Number is not available</Badge>
-          )}
+          <Group gap={8}>
+            {isConnected && <Badge color='gray'>{socialIntegrations?.whatsApp?.number}</Badge>}
+            {socialIntegrations?.socialTokens?.facebook &&
+              !socialIntegrations?.whatsApp?.number && (
+                <Badge color='error'>Number is not available</Badge>
+              )}
+          </Group>
         </Group>
       </Stack>
       <WhatsAppConnectModal

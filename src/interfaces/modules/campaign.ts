@@ -42,6 +42,8 @@ export interface ICampaign {
   stepDelay: number;
   content: any[];
   channels: IChannel[];
+  product: IShopifyProduct[] | ISallaProduct[] | null;
+  productSource: TProductSource | null;
 }
 
 interface Metrics {
@@ -62,3 +64,18 @@ export interface ICampaignAdsItem {
 }
 
 export type TProductSource = 'shopify' | 'salla';
+
+export interface IShopifyProduct {
+  url: string;
+  title: string;
+  images: string[];
+  productId: string;
+  resourceId: string;
+}
+
+export interface ISallaProduct {
+  productId: string;
+  title: string;
+  description: string;
+  images: Array<{ src: string }>;
+}
