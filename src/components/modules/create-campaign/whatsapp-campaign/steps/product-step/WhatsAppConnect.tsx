@@ -18,7 +18,7 @@ export const WhatsAppConnect = () => {
           <p className='text-gray-900 text-lg font-semibold'>
             1. Connect your WhatsApp business account
           </p>
-          {isConnected && <Badge color='success'>Connected</Badge>}
+          {socialIntegrations?.socialTokens?.facebook && <Badge color='success'>Connected</Badge>}
         </Group>
 
         <p className='text-gray-600 text-sm'>
