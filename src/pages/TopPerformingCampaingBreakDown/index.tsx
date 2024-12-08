@@ -1,4 +1,4 @@
-import { TopPerformingCampaignBreakdown } from 'src/components/modules/monitoring/TopPerformingCampaignBreakdown';
+import { TopPerformingCampaignBreakdown } from 'src/components/modules/old-monitoring/TopPerformingCampaignBreakdown';
 
 const TopPerformingCampaingBreakDown = () => {
   return <TopPerformingCampaignBreakdown />;

@@ -83,3 +83,6 @@ export { default as Pagination } from './Pagination';
 
 // Loader
 export { default as Loader } from './Loader';
+
+// Skeleton
+export { default as Skeleton } from './Skeleton';

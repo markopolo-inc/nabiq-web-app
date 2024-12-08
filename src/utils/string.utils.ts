@@ -36,21 +36,31 @@ export function camelCaseToCapitalized(str) {
  * Formats a metric value with a unit based on the provided type.
  *
  * @param {string | number} value - The value to be formatted.
- * @param {'count' | 'percentage' | 'amount'} type - The type of unit to be applied.
+ * @param {'number' | 'percentage' | 'currency' | 'count' | 'amount' | 'boolean'} type - The type of unit to be applied.
  * @return {string} The formatted metric value with the unit.
  */
 export const formatMetricUnit = (
   value: string | number,
-  type: 'count' | 'percentage' | 'amount' | 'boolean',
+  type: 'number' | 'percentage' | 'currency' | 'count' | 'amount' | 'boolean',
 ) => {
   const TypeMap = {
     count: '',
     percentage: '%',
     amount: '$',
+    currency: '$',
     boolean: '',
   };
   if (type === 'boolean') {
     return Boolean(value) ? 'Yes' : 'No';
   }
-  return `${type !== 'percentage' ? TypeMap[type] : ''}${formatNumber(value)}${type === 'percentage' ? TypeMap[type] : ''}`;
+  if (type === 'number') {
+    return formatNumber(value);
+  }
+  if (type === 'currency' || type === 'amount') {
+    return `${TypeMap[type]}${formatNumber(value)}`;
+  }
+  if (type === 'percentage') {
+    return `${formatNumber(value)}${TypeMap[type]}`;
+  }
+  return `${TypeMap[type]}${formatNumber(value)}`;
 };

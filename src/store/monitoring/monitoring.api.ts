@@ -80,6 +80,23 @@ const monitoringApi = apiSlice.injectEndpoints({
         params: { userId, campaignId },
       }),
     }),
+    getMetricCards: builder.query<any, { timeRange: string; configIds: string[] }>({
+      query: ({ timeRange, configIds }) => ({
+        url: `cohort/metrics`,
+        method: 'GET',
+        params: { timeRange, configIds },
+      }),
+    }),
+    getMonitoringPerformanceTrend: builder.query<
+      any,
+      { configId: string; timeRange: string; metrics: string[]; valueType: string }
+    >({
+      query: ({ configId, timeRange, metrics, valueType }) => ({
+        url: `cohort/performance/trend`,
+        method: 'GET',
+        params: { configId, timeRange, metrics, valueType },
+      }),
+    }),
   }),
 });
 
@@ -94,4 +111,6 @@ export const {
   useGetLowMonitoringCampaignQuery,
   useGetAudienceForCampaignQuery,
   useGetAudienceBreakdownQuery,
+  useGetMetricCardsQuery,
+  useGetMonitoringPerformanceTrendQuery,
 } = monitoringApi;
