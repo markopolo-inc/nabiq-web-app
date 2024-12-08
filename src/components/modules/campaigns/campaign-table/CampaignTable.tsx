@@ -1,10 +1,20 @@
-import { ArrowNarrowDown, FiSearchLg, FiTrash } from '@nabiq-icons';
+import {
+  ArrowNarrowDown,
+  FiBarChart04,
+  FiDotsVertical,
+  FiMail01,
+  FiMessageDotCircle,
+  FiSearchLg,
+  FiTrash,
+} from '@nabiq-icons';
 import {
   Badge,
   Button,
   Group,
+  Menu,
   OptionTabs,
   Stack,
+  Switch,
   Table,
   TableBody,
   TableHead,
@@ -13,6 +23,8 @@ import {
   Text,
   TextInput,
   Th,
+  Tooltip,
+  UnstyledButton,
 } from '@nabiq-ui';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
@@ -25,16 +37,19 @@ import { useCampaignDispatch } from 'src/store/hooks';
 type ActivatedTabsType = 'all' | ICampaignItem['status'];
 
 const CAMPAIGN_TABLE_HEADERS: string[] = [
-  'Campaign name',
   'Status',
-  'Last modified',
+  'Campaign name',
+  'Medium',
+  'Leads',
   'Date created',
-  '',
+  'Conversion level',
+  'Actions',
 ];
 
 const colorMap = {
-  processing: 'warning',
-  active: 'success',
+  high: 'success',
+  medium: 'warning',
+  low: 'error',
 };
 
 export const CampaignTable = ({ list, refetch }) => {
@@ -159,23 +174,33 @@ export const CampaignTable = ({ list, refetch }) => {
             <TableRow key={idx} className='odd:!bg-gray-50 even:!bg-white hover:!bg-primary-100'>
               <Td className='py-4 px-6'>
                 <Stack align='left' gap={4}>
+                  <Switch checked={idx % 2 === 0} />
+                </Stack>
+              </Td>
+              <Td className='py-4 px-6'>
+                <Stack align='left' gap={4}>
                   <div className='text-sm font-medium text-gray-900'>{item.name}</div>
-                  <div className='text-xs font-medium text-gray-600'>{item.details}</div>
+                  <Tooltip label={item.details}>
+                    <div className='text-xs font-medium text-gray-600 truncate w-[234px]'>
+                      {item.details}
+                    </div>
+                  </Tooltip>
                 </Stack>
               </Td>
 
               <Td className='py-4 px-6'>
-                <Stack align='left' gap={4}>
-                  <Badge color={(colorMap?.[item.status] as 'gray') || 'gray'}>
-                    {capitalize(item.status)}
-                  </Badge>
+                <Stack align='left' gap={4} className='flex-row'>
+                  <div className='p-2'>
+                    <FiMail01 size={20} color='#475467' />
+                  </div>
+                  <div className='p-2'>
+                    <FiMessageDotCircle size={20} color='#475467' />
+                  </div>
                 </Stack>
               </Td>
 
               <Td className='py-4 px-6'>
-                <Stack align='left' gap={4}>
-                  {moment(item.updatedAt).format('MMM DD, YYYY [at] hh:mm a')}
-                </Stack>
+                <Stack align='left'>1119/13000</Stack>
               </Td>
 
               <Td className='py-4 px-6'>
@@ -185,21 +210,44 @@ export const CampaignTable = ({ list, refetch }) => {
               </Td>
 
               <Td className='py-4 px-6'>
-                <Stack align='center' gap={4} className='flex-row justify-center'>
-                  <div
-                    className={`p-3 ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-                    onClick={() => handleDeleteCampaign({ campaignId: item.resourceId })}
-                  >
-                    <FiTrash size={20} color='#475467' />
-                  </div>
+                <Stack align='left' gap={4}>
+                  <Badge color={(colorMap?.[item.status] as 'success') || 'success'}>
+                    {capitalize('High')}
+                  </Badge>
+                </Stack>
+              </Td>
 
+              <Td className='py-4 px-6'>
+                <Stack align='center' className='flex-row' gap={12}>
                   <Button
-                    variant='tertiary'
-                    size='sm'
+                    variant='secondary-black'
                     onClick={() => handleEditCampaign({ campaignId: item.resourceId })}
                   >
-                    View
+                    Details
                   </Button>
+                  <Button variant='secondary'>
+                    <FiBarChart04 color='#364152' size={20} />
+                  </Button>
+
+                  <Menu width={240} position='bottom-end'>
+                    <Menu.Target>
+                      <UnstyledButton>
+                        <FiDotsVertical size={20} color='#475467' style={{ cursor: 'pointer' }} />
+                      </UnstyledButton>
+                    </Menu.Target>
+
+                    <Menu.Dropdown className='!p-0 !rounded-2xl !shadown-none !border-none'>
+                      <Button
+                        variant='secondary'
+                        fullWidth
+                        onClick={() => handleDeleteCampaign({ campaignId: item.resourceId })}
+                        disabled={isLoading}
+                      >
+                        <FiTrash size={20} color='#F04438' />
+                        Delete
+                      </Button>
+                    </Menu.Dropdown>
+                  </Menu>
                 </Stack>
               </Td>
             </TableRow>
