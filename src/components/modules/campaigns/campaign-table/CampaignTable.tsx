@@ -1,5 +1,4 @@
 import {
-  ArrowNarrowDown,
   FiBarChart04,
   FiDotsVertical,
   FiMail01,
@@ -148,7 +147,6 @@ export const CampaignTable = ({ list, refetch }) => {
               <Th key={idx}>
                 <div className='flex items-center gap-1'>
                   <div className='text-xs font-medium text-gray-600'>{item}</div>
-                  {item?.length ? <ArrowNarrowDown size={16} color='#475467' /> : null}
                 </div>
               </Th>
             ))}
