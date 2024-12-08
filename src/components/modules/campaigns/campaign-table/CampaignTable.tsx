@@ -32,7 +32,8 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ICampaignItem } from 'src/interfaces/modules/campaign';
 import { useDeleteCampaignConfigMutation } from 'src/store/campaign/campaignApi';
-import { useCampaignDispatch } from 'src/store/hooks';
+
+// import { useCampaignDispatch } from 'src/store/hooks';
 
 type ActivatedTabsType = 'all' | ICampaignItem['status'];
 
@@ -54,7 +55,7 @@ const colorMap = {
 
 export const CampaignTable = ({ list, refetch }) => {
   const navigate = useNavigate();
-  const dispatchCampaign = useCampaignDispatch();
+  // const dispatchCampaign = useCampaignDispatch();
   const [deleteConfig, { isLoading }] = useDeleteCampaignConfigMutation();
 
   const [active, setActive] = useState<ActivatedTabsType>('all');
@@ -71,24 +72,24 @@ export const CampaignTable = ({ list, refetch }) => {
     [active, searchTerm, list],
   );
 
-  const handleEditCampaign = ({ campaignId }) => {
-    const selectedCampaign = list?.find((item) => item.resourceId === campaignId);
-    const {
-      createdAt: _createdAt,
-      funnels: _funnels,
-      job: _job,
-      resourceType: _resourceType,
-      status: _status,
-      updatedAt: _updatedAt,
-      ...payload
-    } = selectedCampaign;
-
-    dispatchCampaign({
-      ...payload,
-    });
-
-    navigate('/campaigns/create-campaign');
-  };
+  // const handleEditCampaign = ({ campaignId }) => {
+  //   const selectedCampaign = list?.find((item) => item.resourceId === campaignId);
+  //   const {
+  //     createdAt: _createdAt,
+  //     funnels: _funnels,
+  //     job: _job,
+  //     resourceType: _resourceType,
+  //     status: _status,
+  //     updatedAt: _updatedAt,
+  //     ...payload
+  //   } = selectedCampaign;
+  //
+  //   dispatchCampaign({
+  //     ...payload,
+  //   });
+  //
+  //   navigate('/campaigns/create-campaign');
+  // };
 
   const handleDeleteCampaign = async ({ campaignId }) => {
     if (!window.confirm('Are you want to delete this campaign?')) return;
@@ -230,7 +231,7 @@ export const CampaignTable = ({ list, refetch }) => {
                 <Stack align='center' className='flex-row' gap={12}>
                   <Button
                     variant='secondary-black'
-                    onClick={() => handleEditCampaign({ campaignId: item.resourceId })}
+                    onClick={() => navigate(`/campaigns/details/${item.resourceId}`)}
                   >
                     Details
                   </Button>
