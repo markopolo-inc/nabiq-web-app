@@ -1,17 +1,19 @@
 import { Breadcrumbs, Button, Group, Stack, Stepper, StepperStep, Tooltip } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   CompletionStep,
   CreationStep,
   ProductStep,
 } from 'src/components/modules/create-campaign/whatsapp-campaign';
 import { whatsappCampaignSteps } from 'src/lib/campaign.lib';
-import { useCreateCampaignConfigMutation } from 'src/store/campaign/campaignApi';
+import { useCreateWhatsappCampaignConfigMutation } from 'src/store/campaign/campaignApi';
 import { useAppSelector } from 'src/store/hooks';
 
 export const WhatsappCampaign = () => {
   const [active, setActive] = useState(0);
+  const navigate = useNavigate();
   const handleStepChange = async (newStep: number) => {
     if (newStep === 2) {
       const res = await createCampaignConfig(campaign).unwrap();
@@ -22,7 +24,7 @@ export const WhatsappCampaign = () => {
       setActive(newStep);
     }
   };
-  const [createCampaignConfig, { isLoading }] = useCreateCampaignConfigMutation();
+  const [createCampaignConfig, { isLoading }] = useCreateWhatsappCampaignConfigMutation();
   const { campaign } = useAppSelector((state) => state);
 
   const validationErrors = useMemo(() => {
@@ -48,30 +50,38 @@ export const WhatsappCampaign = () => {
           <Breadcrumbs />
           <Group justify='space-between' align='center'>
             <p className='text-gray-900 font-semibold text-xl'>Configure your campaign</p>
-            <Group>
-              {active > 0 && (
-                <Button
-                  variant='link'
-                  size='md'
-                  onClick={() => {
-                    setActive(active - 1);
-                  }}
-                  disabled={isLoading}
-                >
-                  Go back
+            {active === 3 ? (
+              <Group>
+                <Button variant='link' size='md' onClick={() => navigate('/campaigns')}>
+                  Go to campaigns
                 </Button>
-              )}
-              <Tooltip label={errors} disabled={validationErrors.length === 0} position='left'>
-                <Button
-                  disabled={validationErrors.length > 0}
-                  variant='primary'
-                  onClick={() => handleStepChange(active + 1)}
-                  loading={isLoading}
-                >
-                  Continue
-                </Button>
-              </Tooltip>
-            </Group>
+              </Group>
+            ) : (
+              <Group>
+                {active > 0 && (
+                  <Button
+                    variant='link'
+                    size='md'
+                    onClick={() => {
+                      setActive(active - 1);
+                    }}
+                    disabled={isLoading}
+                  >
+                    Go back
+                  </Button>
+                )}
+                <Tooltip label={errors} disabled={validationErrors.length === 0} position='left'>
+                  <Button
+                    disabled={validationErrors.length > 0}
+                    variant='primary'
+                    onClick={() => handleStepChange(active + 1)}
+                    loading={isLoading}
+                  >
+                    Continue
+                  </Button>
+                </Tooltip>
+              </Group>
+            )}
           </Group>
         </Stack>
 

@@ -45,6 +45,42 @@ export const campaignApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    createWhatsappCampaignConfig: builder.mutation<APIResponseType, any>({
+      query: (args) => {
+        // const filteredContent = args.content.length
+        //   ? args.content.map((item) => ({
+        //       title: item.title,
+        //       description: item.description,
+        //       image: item.image,
+        //     }))
+        //   : [];
+        const { list: _list, ...restArgs } = args;
+        const newArgs = {
+          ...restArgs,
+          // content: filteredContent
+        };
+
+        return {
+          url: `/cohort/wa`,
+          method: 'POST',
+          body: {
+            ...newArgs,
+          },
+        };
+      },
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue?.data;
+      },
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || 'Created campaign successfully!');
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to create!');
+          return err;
+        }
+      },
+    }),
     editCampaignConfig: builder.mutation<APIResponseType, any>({
       query: (args) => {
         const filteredContent = args.content.length
@@ -144,4 +180,5 @@ export const {
   useDeleteCampaignConfigMutation,
   useGetCampaignConfigsQuery,
   useGetCampaignAdsResultQuery,
+  useCreateWhatsappCampaignConfigMutation,
 } = campaignApi;
