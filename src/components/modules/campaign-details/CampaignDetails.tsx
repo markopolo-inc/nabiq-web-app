@@ -5,6 +5,7 @@ import {
   Button,
   GatewayLogo,
   Group,
+  Image,
   Pagination,
   Stack,
   useGetColors,
@@ -12,9 +13,10 @@ import {
 import cn from 'classnames';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Xarrow, { Xwrapper, useXarrow } from 'react-xarrows';
+import LoaderGif from 'src/assets/loader/loading.gif';
 import {
   useGetAudienceBreakdownQuery,
   useGetAudienceForCampaignQuery,
@@ -51,7 +53,7 @@ export const CampaignDetails = () => {
     page,
     limit: PAGE_SIZE,
   });
-  const { data: audienceBreakdownData } = useGetAudienceBreakdownQuery({
+  const { data: audienceBreakdownData, isFetching } = useGetAudienceBreakdownQuery({
     userId,
     campaignId,
   });
@@ -183,41 +185,54 @@ export const CampaignDetails = () => {
                     key={`breakdownElem${idx}`}
                     id={`breakdownElem${idx}`}
                   >
-                    <Group justify='space-between'>
-                      <GatewayLogo app={item?.platform} width={24} />
-                      <Badge color='gray'>Step {item?.step}</Badge>
-                    </Group>
-                    <Stack gap={0} className='mt-4'>
-                      <p className='text-gray-900 font-semibold'>{capitalize(item?.channel)}</p>
-                      <p className='text-gray-600 font-normal text-sm'>
-                        Sent on {moment(item?.sentOn).format('MMM D, YYYY')} at{' '}
-                        {moment(item?.sentOn).format('h:mm a')}
-                      </p>
-                    </Stack>
-                    {/* <Group className='mt-9 tex-sm text-gray-600' justify='space-between'>
+                    {isFetching ? (
+                      <Image src={LoaderGif} alt='Loading...' className='w-56 mx-auto' />
+                    ) : (
+                      <Fragment>
+                        <Group justify='space-between'>
+                          <GatewayLogo app={item?.platform} width={24} />
+                          <Badge color='gray'>Step {item?.step}</Badge>
+                        </Group>
+                        <Stack gap={0} className='mt-4'>
+                          <p className='text-gray-900 font-semibold'>{capitalize(item?.channel)}</p>
+                          <p className='text-gray-600 font-normal text-sm'>
+                            Sent on {moment(item?.sentOn).format('MMM D, YYYY')} at{' '}
+                            {moment(item?.sentOn).format('h:mm a')}
+                          </p>
+                        </Stack>
+                        {/* <Group className='mt-9 tex-sm text-gray-600' justify='space-between'>
                   <p>Link click?</p>
                   <p>Yes</p>
                 </Group> */}
-                    <div className='mt-4'>
-                      {Object.keys(item?.metrics || {}).map((key, index) => (
-                        <Group className='tex-sm text-gray-600' justify='space-between' key={index}>
-                          <p>{key}:</p>
-                          <p>
-                            {formatMetricUnit(item?.metrics[key]?.value, item?.metrics[key]?.type)}
-                          </p>
-                        </Group>
-                      ))}
-                    </div>
-                    <Button
-                      className='mt-9'
-                      trailingIcon={<FiChevronRight size={18} />}
-                      onClick={() => {
-                        setShowDrawer(true);
-                        setSelectedContent({ ...item, email: selectedEmail });
-                      }}
-                    >
-                      View
-                    </Button>
+                        <div className='mt-4'>
+                          {Object.keys(item?.metrics || {}).map((key, index) => (
+                            <Group
+                              className='tex-sm text-gray-600'
+                              justify='space-between'
+                              key={index}
+                            >
+                              <p>{key}:</p>
+                              <p>
+                                {formatMetricUnit(
+                                  item?.metrics[key]?.value,
+                                  item?.metrics[key]?.type,
+                                )}
+                              </p>
+                            </Group>
+                          ))}
+                        </div>
+                        <Button
+                          className='mt-9'
+                          trailingIcon={<FiChevronRight size={18} />}
+                          onClick={() => {
+                            setShowDrawer(true);
+                            setSelectedContent({ ...item, email: selectedEmail });
+                          }}
+                        >
+                          View
+                        </Button>
+                      </Fragment>
+                    )}
                   </div>
                 ))}
                 {subArrows.map((arrow, index) => (
