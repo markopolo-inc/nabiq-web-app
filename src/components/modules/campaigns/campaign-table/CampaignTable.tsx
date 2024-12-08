@@ -253,19 +253,18 @@ export const CampaignTable = ({ list, refetch }) => {
                         </UnstyledButton>
                       </Menu.Target>
 
-                      <Menu.Dropdown className='!p-0 !rounded-2xl !shadown-none !border-none'>
-                        <Button
-                          variant='secondary'
-                          fullWidth
+                      <Menu.Dropdown className='!py-[1px] !px-0 !rounded-2xl border-gray-200'>
+                        <Menu.Item
+                          className='!rounded-2xl py-2.5 px-4'
+                          leftSection={<FiTrash size={20} color='#F04438' />}
                           onClick={() => {
                             setCampaignId(item.resourceId);
                             handleDeleteCampaign();
                           }}
                           disabled={isLoading}
                         >
-                          <FiTrash size={20} color='#F04438' />
                           Delete
-                        </Button>
+                        </Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
                   </Stack>
