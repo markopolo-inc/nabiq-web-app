@@ -15,23 +15,29 @@ import {
   Th,
 } from '@nabiq-ui';
 import { IconArrowNarrowRight } from '@tabler/icons-react';
-import _ from 'lodash';
+import _, { capitalize } from 'lodash';
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
-import { IMappedField } from 'src/interfaces/brand.interface';
+import { IMappedField, TDataSourcePlatform } from 'src/interfaces/brand.interface';
 import { useAppSelector } from 'src/store/hooks';
 import {
   useGetDataSourcePropertiesQuery,
   useSaveDataSourcePropertiesMutation,
 } from 'src/store/integrations/data-sources.api';
 
-const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>> }) => {
+const ModalBody = ({
+  setOpened,
+  platform,
+}: {
+  setOpened: Dispatch<SetStateAction<boolean>>;
+  platform: TDataSourcePlatform;
+}) => {
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
   const { data, isLoading } = useGetDataSourcePropertiesQuery({
     brandId,
-    platform: 'hubspot',
+    platform,
   });
 
-  const savedDataSourceFields = datasourceIntegrations?.mappedFields?.hubspot || [];
+  const savedDataSourceFields = datasourceIntegrations?.mappedFields?.[platform] || [];
 
   const [saveDataSourceProperties, { isLoading: isSaving }] = useSaveDataSourcePropertiesMutation();
 
@@ -102,7 +108,7 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
   const handleSave = async () => {
     const res = await saveDataSourceProperties({
       brandId,
-      platform: 'hubspot',
+      platform,
       data: [...selectedRequiredFields, ...selectedOptionalFields],
     })?.unwrap();
     if (res.success) {
@@ -123,11 +129,11 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
   return (
     <div className='relative'>
       <Stack className='p-8 pb-5 border-b border-gray-200 sticky top-0 bg-white z-10 shadow-sm'>
-        <GatewayLogo app='hubspot' width={32} />
+        <GatewayLogo app={platform} width={32} />
         <Stack gap={0}>
-          <p className='text-2xl font-semibold text-gray-900'>Integrate Hubspot</p>
+          <p className='text-2xl font-semibold text-gray-900'>Integrate {capitalize(platform)}</p>
           <p className='text-base text-gray-600'>
-            Choose the data fields you want to bring over from Hubspot.
+            Choose the data fields you want to bring over from {capitalize(platform)}.
           </p>
         </Stack>
         <div className='absolute top-8 right-8'>
@@ -292,9 +298,12 @@ const ModalBody = ({ setOpened }: { setOpened: Dispatch<SetStateAction<boolean>>
   );
 };
 
-export const DataSourceModal = () => {
+export const DataSourceModal = ({ platform }: { platform: TDataSourcePlatform }) => {
   return (
-    <Modal withNoHeader body={({ setOpened }) => <ModalBody setOpened={setOpened} />}>
+    <Modal
+      withNoHeader
+      body={({ setOpened }) => <ModalBody setOpened={setOpened} platform={platform} />}
+    >
       {({ setOpened }) => (
         <Button className='!w-40' variant='secondary' onClick={() => setOpened(true)}>
           Configure

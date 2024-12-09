@@ -15,7 +15,9 @@ import { buildQueryString } from 'src/utils/string.utils';
 export const DataSources = () => {
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
-  const [showDisconnectModal, setShowDisconnectModal] = useState<boolean>(false);
+  const [showShopifyDisconnectModal, setShowShopifyDisconnectModal] = useState<boolean>(false);
+  const [showSalesforceDisconnectModal, setShowSalesforceDisconnectModal] =
+    useState<boolean>(false);
   const [disconnect, { isLoading: isDisconnecting }] = useDisconnectDataSourceMutation();
 
   const handleDisconnectHubspot = async () => {
@@ -23,7 +25,15 @@ export const DataSources = () => {
       brandId,
       platform: 'hubspot',
     });
-    setShowDisconnectModal(false);
+    setShowShopifyDisconnectModal(false);
+  };
+
+  const handleDisconnectSalesforce = async () => {
+    await disconnect({
+      brandId,
+      platform: 'salesforce',
+    });
+    setShowSalesforceDisconnectModal(false);
   };
 
   return (
@@ -34,6 +44,7 @@ export const DataSources = () => {
         <IntegrationCard
           key='hubspot'
           title='Hubspot'
+          isConnected={!!datasourceIntegrations?.connectedAccounts?.hubspot}
           description='Empower your business growth through comprehensive CRM platform that integrates
               marketing, sales, and customer service tools.'
           icon={<GatewayLogo app='hubspot' width={32} />}
@@ -66,10 +77,10 @@ export const DataSources = () => {
             </Group>
           ) : (
             <Group>
-              <DataSourceModal />
+              <DataSourceModal platform='hubspot' />
               <Button
                 variant='tertiary-destructive'
-                onClick={() => setShowDisconnectModal(true)}
+                onClick={() => setShowShopifyDisconnectModal(true)}
                 loading={isDisconnecting}
               >
                 Disconnect
@@ -80,6 +91,7 @@ export const DataSources = () => {
         <IntegrationCard
           key='salesforce'
           title='Salesforce'
+          isConnected={!!datasourceIntegrations?.connectedAccounts?.salesforce}
           description='Leverage Salesforce as a data source for seamless, data-driven customer engagement.'
           icon={<GatewayLogo app='salesforce' width={32} />}
           badge={
@@ -104,15 +116,29 @@ export const DataSources = () => {
               Integrate
             </Button>
           ) : (
-            <DataSourceModal />
+            <Group>
+              <Button
+                variant='tertiary-destructive'
+                onClick={() => setShowSalesforceDisconnectModal(true)}
+                loading={isDisconnecting}
+              >
+                Disconnect
+              </Button>
+            </Group>
           )}
         </IntegrationCard>
       </div>
       <ConfirmationModal
         onConfirm={handleDisconnectHubspot}
-        title='Are you sure you want to disconnect?'
-        showModal={showDisconnectModal}
-        setShowModal={setShowDisconnectModal}
+        title='Are you sure you want to disconnect hubspot?'
+        showModal={showShopifyDisconnectModal}
+        setShowModal={setShowShopifyDisconnectModal}
+      />
+      <ConfirmationModal
+        onConfirm={handleDisconnectSalesforce}
+        title='Are you sure you want to disconnect salesforce?'
+        showModal={showSalesforceDisconnectModal}
+        setShowModal={setShowSalesforceDisconnectModal}
       />
     </>
   );
