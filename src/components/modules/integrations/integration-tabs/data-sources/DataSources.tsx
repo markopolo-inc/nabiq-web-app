@@ -8,7 +8,7 @@ import {
   MarktagCreationsModals,
 } from 'src/components/modules/integrations/integration-tabs/data-sources';
 import { useAppSelector } from 'src/store/hooks';
-import { getAuthToken } from 'src/utils/auth';
+import { getAuthToken, getOAuthUrl } from 'src/utils/auth';
 import { buildQueryString } from 'src/utils/string.utils';
 
 export const DataSources = () => {
@@ -48,6 +48,38 @@ export const DataSources = () => {
                   platform: 'hubspot',
                   redirectUrl: window.location.href,
                 })}`;
+              }}
+            >
+              Integrate
+            </Button>
+          ) : (
+            <DataSourceModal />
+          )}
+        </IntegrationCard>
+        <IntegrationCard
+          key='salesforce'
+          title='Salesforce'
+          description='Empower your business growth through comprehensive CRM platform that integrates
+              marketing, sales, and customer service tools.'
+          icon={<GatewayLogo app='hubspot' width={32} />}
+          badge={
+            datasourceIntegrations?.connectedAccounts?.hubspot?.domain && (
+              <Badge color='gray'>
+                {datasourceIntegrations?.connectedAccounts?.hubspot?.domain}
+              </Badge>
+            )
+          }
+        >
+          {!datasourceIntegrations?.connectedAccounts?.salesforce ? (
+            <Button
+              className='!w-36'
+              leadingIcon={<FiZap fill='white' size={22} />}
+              onClick={async () => {
+                window.location.href = await getOAuthUrl('/datasource/integrate-using-oauth', {
+                  brandId,
+                  platform: 'salesforce',
+                  redirectUrl: window.location.href,
+                });
               }}
             >
               Integrate

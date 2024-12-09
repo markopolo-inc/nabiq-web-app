@@ -6,7 +6,7 @@ import { IntegrationCard } from 'src/components/modules/integrations/components'
 import { WhatsAppConnectModal } from 'src/components/modules/integrations/integration-tabs/whats-app';
 import { useAppSelector } from 'src/store/hooks';
 import { useDisconnectPlatformMutation } from 'src/store/integrations/social-integrations.api';
-import { getRedirectUri } from 'src/utils/auth';
+import { getOAuthUrl } from 'src/utils/auth';
 
 export const Whatsapp = () => {
   const { resourceId: brandId, socialIntegrations } = useAppSelector((state) => state.brand);
@@ -51,7 +51,7 @@ export const Whatsapp = () => {
           <Button
             leadingIcon={<FiZap fill='white' size={22} />}
             onClick={async () => {
-              window.location.href = await getRedirectUri('/auth/facebook', {
+              window.location.href = await getOAuthUrl('/auth/facebook', {
                 brandId,
                 redirectUri: window.location.href,
               });

@@ -3,7 +3,7 @@ import { Badge, Button, Card, Group, Stack } from '@nabiq-ui';
 import { useState } from 'react';
 import { WhatsAppConnectModal } from 'src/components/modules/integrations';
 import { useAppSelector } from 'src/store/hooks';
-import { getRedirectUri } from 'src/utils/auth';
+import { getOAuthUrl } from 'src/utils/auth';
 
 export const WhatsAppConnect = () => {
   const { socialIntegrations, resourceId: brandId } = useAppSelector((state) => state.brand);
@@ -31,7 +31,7 @@ export const WhatsAppConnect = () => {
               variant='secondary-black'
               leadingIcon={<FiWhatsApp size={17} />}
               onClick={async () => {
-                window.location.href = await getRedirectUri('/auth/facebook', {
+                window.location.href = await getOAuthUrl('/auth/facebook', {
                   brandId,
                   redirectUri: window.location.href,
                 });

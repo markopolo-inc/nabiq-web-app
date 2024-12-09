@@ -11,7 +11,7 @@ const getAuthToken = async () => {
   }
 };
 
-const getRedirectUri = async (
+const getOAuthUrl = async (
   url: string,
   params: Record<string, string>,
   option: {
@@ -27,4 +27,4 @@ const getRedirectUri = async (
   })}`;
 };
 
-export { getAuthToken, getRedirectUri };
+export { getAuthToken, getOAuthUrl };

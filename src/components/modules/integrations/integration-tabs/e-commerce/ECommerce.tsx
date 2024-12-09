@@ -9,7 +9,7 @@ import { TDataSourcePlatform } from 'src/interfaces/brand.interface';
 import { QUERY_PARAMS, QUERY_PARAMS_VALUES } from 'src/lib/integration/ecommerce';
 import { useAppSelector } from 'src/store/hooks';
 import { useDisconnectDataSourceMutation } from 'src/store/integrations/data-sources.api';
-import { getRedirectUri } from 'src/utils/auth';
+import { getOAuthUrl } from 'src/utils/auth';
 
 export const ECommerce = () => {
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
@@ -65,7 +65,7 @@ export const ECommerce = () => {
               leadingIcon={<FiZap fill='white' size={22} />}
               variant={isShopifyConnected ? 'secondary' : 'primary'}
               onClick={async () => {
-                window.location.href = await getRedirectUri(
+                window.location.href = await getOAuthUrl(
                   '/shopify/install/direct',
                   {
                     // brandId,
@@ -118,7 +118,7 @@ export const ECommerce = () => {
               leadingIcon={<FiZap fill='white' size={22} />}
               variant={isSallaConnected ? 'secondary' : 'primary'}
               onClick={async () => {
-                window.location.href = await getRedirectUri('/salla/oauth', {
+                window.location.href = await getOAuthUrl('/salla/oauth', {
                   brandId,
                   redirectUri: window.location.href,
                 });
