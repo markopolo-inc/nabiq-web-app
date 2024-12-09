@@ -130,6 +130,7 @@ export const DataSources = () => {
         <IntegrationCard
           key='salesforce'
           title='Salesforce'
+          isConnected={!!datasourceIntegrations?.connectedAccounts?.salesforce}
           description='Leverage Salesforce as a data source for seamless, data-driven customer engagement.'
           icon={<GatewayLogo app='salesforce' width={32} />}
           badge={
@@ -154,7 +155,15 @@ export const DataSources = () => {
               Integrate
             </Button>
           ) : (
-            <DataSourceModal />
+            <Group>
+              <Button
+                variant='tertiary-destructive'
+                onClick={() => setShowSalesforceDisconnectModal(true)}
+                loading={isDisconnecting}
+              >
+                Disconnect
+              </Button>
+            </Group>
           )}
         </IntegrationCard>
       </div>
