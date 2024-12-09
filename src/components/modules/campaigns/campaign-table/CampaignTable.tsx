@@ -242,7 +242,12 @@ export const CampaignTable = ({ list, refetch }) => {
                     >
                       Details
                     </Button>
-                    <Button variant='secondary'>
+                    <Button
+                      variant='secondary'
+                      onClick={() =>
+                        navigate(`/campaigns/report/${item.resourceId}?name=${item.name}`)
+                      }
+                    >
                       <FiBarChart04 color='#364152' size={20} />
                     </Button>
 
