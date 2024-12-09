@@ -127,6 +127,38 @@ export const DataSources = () => {
             </Group>
           )}
         </IntegrationCard>
+        <IntegrationCard
+          key='salesforce'
+          title='Salesforce'
+          description='Empower your business growth through comprehensive CRM platform that integrates
+              marketing, sales, and customer service tools.'
+          icon={<GatewayLogo app='hubspot' width={32} />}
+          badge={
+            datasourceIntegrations?.connectedAccounts?.hubspot?.domain && (
+              <Badge color='gray'>
+                {datasourceIntegrations?.connectedAccounts?.hubspot?.domain}
+              </Badge>
+            )
+          }
+        >
+          {!datasourceIntegrations?.connectedAccounts?.salesforce ? (
+            <Button
+              className='!w-36'
+              leadingIcon={<FiZap fill='white' size={22} />}
+              onClick={async () => {
+                window.location.href = await getOAuthUrl('/datasource/integrate-using-oauth', {
+                  brandId,
+                  platform: 'salesforce',
+                  redirectUrl: window.location.href,
+                });
+              }}
+            >
+              Integrate
+            </Button>
+          ) : (
+            <DataSourceModal />
+          )}
+        </IntegrationCard>
       </div>
       <ConfirmationModal
         onConfirm={handleDisconnectHubspot}
