@@ -130,9 +130,8 @@ export const DataSources = () => {
         <IntegrationCard
           key='salesforce'
           title='Salesforce'
-          description='Empower your business growth through comprehensive CRM platform that integrates
-              marketing, sales, and customer service tools.'
-          icon={<GatewayLogo app='hubspot' width={32} />}
+          description='Leverage Salesforce as a data source for seamless, data-driven customer engagement.'
+          icon={<GatewayLogo app='salesforce' width={32} />}
           badge={
             datasourceIntegrations?.connectedAccounts?.hubspot?.domain && (
               <Badge color='gray'>
@@ -146,10 +145,9 @@ export const DataSources = () => {
               className='!w-36'
               leadingIcon={<FiZap fill='white' size={22} />}
               onClick={async () => {
-                window.location.href = await getOAuthUrl('/datasource/integrate-using-oauth', {
+                window.location.href = await getOAuthUrl('/salesforce/auth/connect', {
                   brandId,
-                  platform: 'salesforce',
-                  redirectUrl: window.location.href,
+                  redirectUri: window.location.href,
                 });
               }}
             >
