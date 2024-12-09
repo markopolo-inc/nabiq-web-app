@@ -1,5 +1,5 @@
 import { FiZap } from '@nabiq-icons';
-import { Badge, Button, GatewayLogo } from '@nabiq-ui';
+import { Badge, Button, ConfirmationModal, GatewayLogo, Group } from '@nabiq-ui';
 import { useState } from 'react';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import {
@@ -8,12 +8,23 @@ import {
   MarktagCreationsModals,
 } from 'src/components/modules/integrations/integration-tabs/data-sources';
 import { useAppSelector } from 'src/store/hooks';
+import { useDisconnectDataSourceMutation } from 'src/store/integrations/data-sources.api';
 import { getAuthToken, getOAuthUrl } from 'src/utils/auth';
 import { buildQueryString } from 'src/utils/string.utils';
 
 export const DataSources = () => {
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
+  const [showDisconnectModal, setShowDisconnectModal] = useState<boolean>(false);
+  const [disconnect, { isLoading: isDisconnecting }] = useDisconnectDataSourceMutation();
+
+  const handleDisconnectHubspot = async () => {
+    await disconnect({
+      brandId,
+      platform: 'hubspot',
+    });
+    setShowDisconnectModal(false);
+  };
 
   return (
     <>
@@ -35,33 +46,42 @@ export const DataSources = () => {
           }
         >
           {!datasourceIntegrations?.connectedAccounts?.hubspot ? (
-            <Button
-              className='!w-36'
-              leadingIcon={<FiZap fill='white' size={22} />}
-              onClick={async () => {
-                const token = await getAuthToken();
-                window.location.href = `${
-                  import.meta.env.VITE_BASE_API_URL
-                }/datasource/integrate-using-oauth?${buildQueryString({
-                  brandId,
-                  token,
-                  platform: 'hubspot',
-                  redirectUrl: window.location.href,
-                })}`;
-              }}
-            >
-              Integrate
-            </Button>
+            <Group>
+              <Button
+                className='!w-36'
+                leadingIcon={<FiZap fill='white' size={22} />}
+                onClick={async () => {
+                  const token = await getAuthToken();
+                  window.location.href = `${
+                    import.meta.env.VITE_BASE_API_URL
+                  }/hubspot/oauth?${buildQueryString({
+                    brandId,
+                    token,
+                    redirectUri: window.location.href,
+                  })}`;
+                }}
+              >
+                Integrate
+              </Button>
+            </Group>
           ) : (
-            <DataSourceModal />
+            <Group>
+              <DataSourceModal />
+              <Button
+                variant='tertiary-destructive'
+                onClick={() => setShowDisconnectModal(true)}
+                loading={isDisconnecting}
+              >
+                Disconnect
+              </Button>
+            </Group>
           )}
         </IntegrationCard>
         <IntegrationCard
           key='salesforce'
           title='Salesforce'
-          description='Empower your business growth through comprehensive CRM platform that integrates
-              marketing, sales, and customer service tools.'
-          icon={<GatewayLogo app='hubspot' width={32} />}
+          description='Leverage Salesforce as a data source for seamless, data-driven customer engagement.'
+          icon={<GatewayLogo app='salesforce' width={32} />}
           badge={
             datasourceIntegrations?.connectedAccounts?.hubspot?.domain && (
               <Badge color='gray'>
@@ -75,10 +95,9 @@ export const DataSources = () => {
               className='!w-36'
               leadingIcon={<FiZap fill='white' size={22} />}
               onClick={async () => {
-                window.location.href = await getOAuthUrl('/datasource/integrate-using-oauth', {
+                window.location.href = await getOAuthUrl('/salesforce/auth/connect', {
                   brandId,
-                  platform: 'salesforce',
-                  redirectUrl: window.location.href,
+                  redirectUri: window.location.href,
                 });
               }}
             >
@@ -89,6 +108,12 @@ export const DataSources = () => {
           )}
         </IntegrationCard>
       </div>
+      <ConfirmationModal
+        onConfirm={handleDisconnectHubspot}
+        title='Are you sure you want to disconnect?'
+        showModal={showDisconnectModal}
+        setShowModal={setShowDisconnectModal}
+      />
     </>
   );
 };
