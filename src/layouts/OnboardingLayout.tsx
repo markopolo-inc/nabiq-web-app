@@ -1,0 +1,39 @@
+import { Image } from '@mantine/core';
+import { motion } from 'framer-motion';
+import NabiqLogo from 'src/assets/logo/nabiq-dark-logo.png';
+import OnboardingImage from 'src/assets/onboarding/sidesection-bg.png';
+
+export const OnboardingLayout = ({
+  rightSection,
+  children,
+}: {
+  rightSection: React.ReactNode;
+  children: React.ReactNode;
+}) => {
+  return (
+    <div className='flex flex-col h-screen w-screen'>
+      <div className='fixed top-0 left-0 w-screen bg-gray-950 h-[56px] flex flex-col justify-center items-center z-10'>
+        <Image src={NabiqLogo} alt='Nabiq' className='w-[85px]' />
+      </div>
+      <div className='grid grid-cols-1 md:grid-cols-[43%_57%] flex-1 mt-[56px]'>
+        <div className='bg-gray-50'>{children}</div>
+        <motion.div
+          initial={{ opacity: 0, x: 200 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className='bg-cover bg-center md:flex items-center justify-end hidden'
+          style={{ backgroundImage: `url(${OnboardingImage})` }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            className='w-[80%]'
+          >
+            {rightSection}
+          </motion.div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
