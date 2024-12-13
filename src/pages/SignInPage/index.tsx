@@ -1,19 +1,17 @@
 import { Image } from '@nabiq-ui';
 import { HeaderTitle, OnboardingLayout } from 'layouts';
 import SignUpImage from 'src/assets/onboarding/sign-up-image.png.png';
-import { VerificationForm } from 'src/components/modules/sign-up';
 
-const SignUp = () => {
+const SignInPage = () => {
   return (
     <>
-      <HeaderTitle>Nabiq | Signup</HeaderTitle>
+      <HeaderTitle>Nabiq | Signin</HeaderTitle>
 
       <OnboardingLayout rightSection={<Image src={SignUpImage} alt='Signup' />}>
-        <VerificationForm />
-        {/* <SignUpForm /> */}
+        hello
       </OnboardingLayout>
     </>
   );
 };
 
-export default SignUp;
+export default SignInPage;

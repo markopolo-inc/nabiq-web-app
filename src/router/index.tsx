@@ -22,7 +22,7 @@ const Settings = lazy(() => import('pages/Settings'));
 const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
 
 const SignUp = lazy(() => import('src/pages/SignUpPage'));
-const LogIn = lazy(() => import('pages/LogIn'));
+const SignInPage = lazy(() => import('pages/SignInPage'));
 const ResetPassword = lazy(() => import('pages/ResetPassword'));
 const VerifyEmail = lazy(() => import('pages/VerifyEmail'));
 const Onboarding = lazy(() => import('pages/Onboarding'));
@@ -82,7 +82,7 @@ const Router = () => {
           </Route>
 
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/login' element={<LogIn />} />
+          <Route path='/login' element={<SignInPage />} />
           <Route path='/reset-pass' element={<ResetPassword />} />
           <Route path='/verify' element={<VerifyEmail />} />
 
