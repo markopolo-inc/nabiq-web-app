@@ -44,7 +44,7 @@ const Home = () => {
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
       <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
-      <Stack gap={64} align='center' className='bg-primary-50 py-40'>
+      <Stack gap={64} align='center' className='bg-primary-50 py-16'>
         <Header />
 
         <Stack gap={24} className='flex-row w-full'>
@@ -65,7 +65,7 @@ const Home = () => {
             ))}
           </Stack>
 
-          <Stack className='relative'>
+          <Stack className='relative w-full min-h-[274px]'>
             <IntegrateChannels />
             <CreateFirstCampaignCard onClick={() => setShowGoalModal((prevState) => !prevState)} />
             <ConnectFirstMarkTagCard

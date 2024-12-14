@@ -34,7 +34,7 @@ export const IntegrateChannels: React.FC = () => {
   return (
     <Stack
       gap={42}
-      className='w-full rounded-[20px] border border-white backdrop-blur bg-white/48 p-6'
+      className='absolute z-30 w-full rounded-[20px] border border-white backdrop-blur bg-white/48 p-6'
     >
       <Stack className='flex-row' justify='space-between'>
         <Stack gap={4}>
