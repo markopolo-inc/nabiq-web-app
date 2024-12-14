@@ -3,10 +3,11 @@ import React, { useRef, useState } from 'react';
 interface OTPInputProps {
   length?: number;
   value?: string;
+  label?: string;
   onChange?: (value: string) => void;
 }
 
-export const OTPInput: React.FC<OTPInputProps> = ({ length = 6, onChange }) => {
+export const OTPInput: React.FC<OTPInputProps> = ({ length = 6, onChange, label = null }) => {
   const [otp, setOtp] = useState<string[]>(new Array(length).fill(''));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -52,20 +53,37 @@ export const OTPInput: React.FC<OTPInputProps> = ({ length = 6, onChange }) => {
   };
 
   return (
-    <div className='flex gap-3'>
-      {otp.map((_, index) => (
-        <input
-          key={index}
-          ref={(ref) => (inputRefs.current[index] = ref)}
-          type='text'
-          maxLength={1}
-          value={otp[index]}
-          onChange={(e) => handleChange(e, index)}
-          onKeyDown={(e) => handleKeyDown(e, index)}
-          className='w-20 h-20 text-[36px] font-medium text-gray-400 text-center border border-gray-300 rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
-          onPaste={handlePaste}
-        />
-      ))}
+    <div className='flex flex-col gap-[6px]'>
+      {label && <p className='text-sm font-medium text-gray-700'>{label}</p>}
+      <div className='flex gap-3'>
+        {otp.map((_, index) => (
+          <input
+            key={index}
+            ref={(ref) => (inputRefs.current[index] = ref)}
+            type='text'
+            maxLength={1}
+            placeholder='0'
+            onFocus={() => {
+              const input = inputRefs.current[index];
+              if (input) {
+                input.placeholder = '';
+              }
+            }}
+            onBlur={() => {
+              // Use optional chaining with nullish coalescing to safely set placeholder
+              const input = inputRefs.current[index];
+              if (input) {
+                input.placeholder = '0';
+              }
+            }}
+            value={otp[index]}
+            onChange={(e) => handleChange(e, index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+            className={`w-20 h-20 text-[52px] font-medium text-primary-600 text-center border  rounded-2xl focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 placeholder:text-gray-300 ${otp[index] ? 'border-primary-600 border-[2px]' : 'border-gray-300'}`}
+            onPaste={handlePaste}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -76,8 +94,7 @@ export const VerificationForm = () => {
   };
   return (
     <div className='flex flex-col gap-4'>
-      <h2 className='text-xl font-semibold text-gray-900'>Verification code</h2>
-      <OTPInput onChange={handleOTPChange} />
+      <OTPInput onChange={handleOTPChange} label='Verification code' />
     </div>
   );
 };
