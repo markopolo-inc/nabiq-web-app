@@ -5,6 +5,8 @@ import { AppLayout, NavigationLayout, PrivateLayout } from 'src/layouts';
 
 const Home = lazy(() => import('pages/Home'));
 const CampaignsListPage = lazy(() => import('pages/CampaignsListPage'));
+const CampaignDetails = lazy(() => import('pages/CampaignDetails'));
+const CampaignReport = lazy(() => import('pages/CampaignReport'));
 const CreateCampaign = lazy(() => import('src/pages/CreateCampaignPage'));
 const Monitoring = lazy(() => import('pages/Monitoring'));
 const TopPerformingCampaigns = lazy(() => import('pages/TopPerformingCampaigns'));
@@ -42,6 +44,8 @@ const Router = () => {
 
               {/* Campaigns */}
               <Route path='/campaigns' element={<CampaignsListPage />} />
+              <Route path='/campaigns/details/:campaignId' element={<CampaignDetails />} />
+              <Route path='/campaigns/report/:campaignId' element={<CampaignReport />} />
               <Route path='/campaigns/create-campaign' element={<CreateCampaign />} />
 
               {/* Monitoring */}
