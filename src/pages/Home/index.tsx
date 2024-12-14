@@ -1,14 +1,30 @@
+import { FiGreenCheckCircle } from '@nabiq-icons';
+import { Group, Stack } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ConstitutionalAIModerationCard, IntegrateApps } from 'src/components/modules/home';
+import { CampaignGoalModal } from 'src/components/modules/campaigns';
+import {
+  ConnectFirstMarkTagCard,
+  CreateFirstCampaignCard,
+  Header,
+  IntegrateChannels,
+} from 'src/components/modules/home';
 import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
-import { useAppSelector } from 'store/hooks';
+
+type HeaderType = { id: number; text: string; isDone: boolean };
+
+const headers: HeaderType[] = [
+  { id: 1, text: 'Integrate channels', isDone: true },
+  { id: 2, text: 'Create your first campaign', isDone: false },
+  { id: 3, text: 'Connect MarkTag', isDone: false },
+];
 
 const Home = () => {
-  const company = useAppSelector((state) => state.company);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
+  const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
 
   useEffect(() => {
     const installationId = searchParams.get(QUERY_PARAMS.INSTALLATION_ID);
@@ -23,23 +39,36 @@ const Home = () => {
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
+      <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
 
-      <div className='flex flex-col gap-16'>
-        <div className='flex flex-col'>
-          <p className='text-gray-900 font-semibold text-4xl'>Hello, {company?.meta?.userName}</p>
-          <p className='text-gray-600 font-normal text-lg'>
-            Welcome to your marketing co-pilot captain.
-          </p>
-        </div>
-        <div className='p-12 bg-gray-100 rounded-xl'>
-          <div className='flex flex-col justify-center items-center'>
-            <div className='gap-3 w-fit grid grid-cols-1 xl:grid-cols-2 justify-center'>
-              <IntegrateApps />
-              <ConstitutionalAIModerationCard />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Stack gap={64} align='center' className='bg-primary-50 py-40'>
+        <Header />
+
+        <Stack gap={24} className='flex-row w-full'>
+          <Stack gap={16} className='max-w-[372px] w-full'>
+            {headers.map((header) => (
+              <Group
+                key={header.id}
+                gap={16}
+                className={`p-[15px] rounded-xl bg-white border ${!header.isDone ? 'border-primary-600' : 'border-gray-200'}`}
+              >
+                {!header.isDone ? (
+                  <div className='text-base font-normal text-gray-950'>{header.id}</div>
+                ) : (
+                  <FiGreenCheckCircle color='#fff' />
+                )}
+                <p className='text-base font-semibold text-gray-950'>{header.text}</p>
+              </Group>
+            ))}
+          </Stack>
+
+          <Stack className='relative'>
+            <IntegrateChannels />
+            <CreateFirstCampaignCard onClick={() => setShowGoalModal((prevState) => !prevState)} />
+            <ConnectFirstMarkTagCard />
+          </Stack>
+        </Stack>
+      </Stack>
     </>
   );
 };
