@@ -1,4 +1,5 @@
 // A
+export { default as FiAsset51 } from './Asset51';
 export { default as FiAlertCircle } from './AlertCircle';
 export { default as ArrowRight } from './ArrowRight';
 export { default as ArrowUp } from './ArrowUp';
@@ -14,6 +15,8 @@ export { FiBox } from './Box';
 
 // C
 export { default as Calendar } from './Calendar';
+export { default as FiCreateFirstCampaign } from './CreateFirstCampaign';
+export { default as FiConnectFirstMarkTag } from './ConnectFirstMarkTag';
 export { default as FiCheckVerified01 } from './CheckVerified01';
 export { default as Command } from './Command';
 export { default as Command2 } from './Command2';
@@ -26,6 +29,7 @@ export { default as FiCircle } from './Circle';
 export { default as FiCursorClick01 } from './CursorClick01';
 export { default as FiCode } from './Code';
 export { default as FiCheckCircle } from './CheckCircle';
+export { default as FiGreenCheckCircle } from './GreenCheckCircle';
 export { default as FiCopy01 } from './Copy01';
 export { CursorBox as FiCursorBox } from './CursorBox';
 
@@ -55,6 +59,7 @@ export { default as FiHourglass03 } from './Hourglass03';
 
 // I
 export { default as FiInfinity } from './Infinity';
+export { default as FiIntegrationsIcon } from './IntegrationsIcon';
 
 // L
 export { default as Logout01 } from './Logout01';
@@ -78,6 +83,7 @@ export { default as FiMessageDotCircle } from './MessageDotsCircle';
 
 // P
 export { default as FiPlus } from './Plus';
+export { default as FiPlus02 } from './Plus02';
 export { default as FiPrimitiveDot } from './PrimitiveDot';
 export { default as FiPuzzlePiece02 } from './PuzzlePiece02';
 export { default as FiPen } from './Pen';
