@@ -85,6 +85,7 @@ export default {
       },
       opacity: {
         15: '.15',
+        48: '.48',
       },
       spacing: {
         7: '1.75rem',
