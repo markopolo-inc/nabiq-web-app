@@ -1,10 +1,12 @@
 import { FiConnectFirstMarkTag } from '@nabiq-icons';
 import { Button, Stack } from '@nabiq-ui';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
-export const ConnectFirstMarkTagCard: React.FC = () => {
-  const navigate = useNavigate();
+type ConnectFirstMarkTagCardPropType = {
+  onClick: () => void;
+};
+
+export const ConnectFirstMarkTagCard: React.FC<ConnectFirstMarkTagCardPropType> = ({ onClick }) => {
   return (
     <Stack
       gap={160}
@@ -19,7 +21,7 @@ export const ConnectFirstMarkTagCard: React.FC = () => {
           </p>
         </Stack>
 
-        <Button variant='primary' onClick={() => navigate('/connect-marktag')}>
+        <Button variant='primary' onClick={onClick}>
           Connect
         </Button>
       </Stack>

@@ -10,6 +10,7 @@ import {
   Header,
   IntegrateChannels,
 } from 'src/components/modules/home';
+import { MarktagCreationsModals } from 'src/components/modules/integrations/integration-tabs/data-sources';
 import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
 
 type HeaderType = { id: number; text: string; isDone: boolean };
@@ -25,6 +26,7 @@ const Home = () => {
   const [searchParams] = useSearchParams();
 
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
+  const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
 
   useEffect(() => {
     const installationId = searchParams.get(QUERY_PARAMS.INSTALLATION_ID);
@@ -40,6 +42,7 @@ const Home = () => {
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
+      <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
       <Stack gap={64} align='center' className='bg-primary-50 py-40'>
         <Header />
@@ -65,7 +68,9 @@ const Home = () => {
           <Stack className='relative'>
             <IntegrateChannels />
             <CreateFirstCampaignCard onClick={() => setShowGoalModal((prevState) => !prevState)} />
-            <ConnectFirstMarkTagCard />
+            <ConnectFirstMarkTagCard
+              onClick={() => setShowMarktagModal((prevState) => !prevState)}
+            />
           </Stack>
         </Stack>
       </Stack>
