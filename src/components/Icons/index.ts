@@ -11,7 +11,7 @@ export { default as FiAlertTriangle } from './AlertTriangle';
 
 // B
 export { FiBox } from './Box';
-
+export { default as FiBarChart04 } from './BarChart04';
 // C
 export { default as Calendar } from './Calendar';
 export { default as FiCheckVerified01 } from './CheckVerified01';
@@ -32,6 +32,7 @@ export { CursorBox as FiCursorBox } from './CursorBox';
 // D
 export { default as FiDataFlow02 } from './DataFlow02';
 export { default as FiDot } from './Dot';
+export { default as FiDotsVertical } from './DotsVertical';
 export { default as FiData } from './Data';
 
 // E
