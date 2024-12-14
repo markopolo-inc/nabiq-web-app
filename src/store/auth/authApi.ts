@@ -15,9 +15,9 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
-        const { email, password } = arg;
-        const loading = toast.loading('Logging in...');
+        const { email, password, onLoading } = arg;
         try {
+          onLoading && onLoading(true);
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
@@ -30,7 +30,7 @@ export const authApi = apiSlice.injectEndpoints({
             toast.error(error?.message || 'Something went wrong!');
           }
         } finally {
-          toast.dismiss(loading);
+          onLoading && onLoading(false);
         }
       },
     }),
@@ -40,7 +40,6 @@ export const authApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(arg, { dispatch }) {
         const { name, email, password } = arg;
-        const loading = toast.loading('Signin in...');
         try {
           // Add user to cognito
           await Auth.signUp({
@@ -56,8 +55,6 @@ export const authApi = apiSlice.injectEndpoints({
           window.location.href = `/verify`;
         } catch (error) {
           toast.error(error?.message || 'Something went wrong');
-        } finally {
-          toast.dismiss(loading);
         }
       },
     }),

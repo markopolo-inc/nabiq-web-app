@@ -1,4 +1,5 @@
 import { Image } from '@mantine/core';
+import cn from 'classnames';
 import { motion } from 'framer-motion';
 import NabiqLogo from 'src/assets/logo/nabiq-dark-logo.png';
 import OnboardingImage from 'src/assets/onboarding/sidesection-bg.png';
@@ -6,8 +7,10 @@ import OnboardingImage from 'src/assets/onboarding/sidesection-bg.png';
 export const OnboardingLayout = ({
   rightSection,
   children,
+  rightSectionClassName = '',
 }: {
   rightSection: React.ReactNode;
+  rightSectionClassName?: string;
   children: React.ReactNode;
 }) => {
   return (
@@ -25,7 +28,10 @@ export const OnboardingLayout = ({
           initial={{ opacity: 0, x: 200 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 1.2 }}
-          className='bg-cover bg-center lg:flex items-center justify-end hidden'
+          className={cn(
+            'bg-cover bg-center lg:flex items-center justify-end hidden',
+            rightSectionClassName,
+          )}
           style={{ backgroundImage: `url(${OnboardingImage})` }}
         >
           <motion.div
