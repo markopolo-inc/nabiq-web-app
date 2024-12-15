@@ -4,14 +4,18 @@ import React from 'react';
 
 type ConnectFirstMarkTagCardPropType = {
   onClick: () => void;
+  isActive: boolean;
 };
 
-export const ConnectFirstMarkTagCard: React.FC<ConnectFirstMarkTagCardPropType> = ({ onClick }) => {
+export const ConnectFirstMarkTagCard: React.FC<ConnectFirstMarkTagCardPropType> = ({
+  onClick,
+  isActive,
+}) => {
   return (
     <Stack
       gap={160}
       align='center'
-      className='absolute top-8 left-[calc(0%+32px)] z-10 w-[calc(100%-64px)] flex-row rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px]'
+      className={`absolute ${isActive ? '' : 'top-8 left-[calc(0%+32px)] z-10 w-[calc(100%-64px)]'} flex-row rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px]`}
     >
       <Stack gap={40}>
         <Stack gap={4}>
