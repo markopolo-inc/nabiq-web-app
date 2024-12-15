@@ -18,3 +18,6 @@ export { CreateFirstCampaignCard } from 'components/modules/home/components/card
 // Screens
 export { MarktagDetails } from 'components/modules/home/components/screens/ConnectMarktag/MarktagDetails';
 export { MarktagSidebar } from 'components/modules/home/components/screens/ConnectMarktag/MarktagSidebar';
+
+// Tables
+export { PerformanceTrend } from 'components/modules/home/components/Table/performance-trend/PerformanceTrend.tsx';

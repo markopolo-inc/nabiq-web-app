@@ -9,6 +9,7 @@ import {
   CreateFirstCampaignCard,
   Header,
   IntegrateChannels,
+  PerformanceTrend,
 } from 'src/components/modules/home';
 import { MarktagCreationsModals } from 'src/components/modules/integrations/integration-tabs/data-sources';
 import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
@@ -39,6 +40,10 @@ const Home = () => {
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
 
+  const [timeRange, _setTimeRange] = useState<
+    'last_year' | 'last_month' | 'last_week' | 'last_3_day'
+  >('last_year');
+
   const isIntegratedChannel =
     !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations);
   const isFirstCampaignDone = !!campaignList?.data?.length;
@@ -64,7 +69,7 @@ const Home = () => {
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
       <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
-      <Stack gap={64} align='center' className='min-h-[calc(100vh-0px)] pt-16 px-6 bg-home-hero'>
+      <Stack gap={24} className='min-h-[calc(100vh-0px)] pt-16 px-6 bg-home-hero'>
         <Header />
 
         <Stack gap={24} className='flex-row w-full'>
@@ -106,7 +111,7 @@ const Home = () => {
             </Group>
           </Stack>
 
-          <Stack className='relative w-full min-h-[274px]'>
+          <Stack className='relative w-full min-h-[248px]'>
             {isIntegratedChannel && <IntegrateChannels />}
             {!isFirstCampaignDone && (
               <CreateFirstCampaignCard
@@ -119,6 +124,11 @@ const Home = () => {
               onClick={() => setShowMarktagModal((prevState) => !prevState)}
             />
           </Stack>
+        </Stack>
+
+        <Stack className='flex-row' gap={24}>
+          <PerformanceTrend timeRange={timeRange} />
+          {/*<PerformanceTrend timeRange={timeRange} />*/}
         </Stack>
       </Stack>
     </>
