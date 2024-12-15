@@ -20,7 +20,8 @@ interface TransformedData {
 
 export const PerformanceTrend: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
-}> = ({ timeRange }) => {
+  isOnboardingDone: boolean;
+}> = ({ timeRange, isOnboardingDone }) => {
   const navigate = useNavigate();
   const [valueType, setValueType] = useState<'number' | 'percentage'>('number');
   const [graphData, setGraphData] = useState<TransformedData[]>([]);
@@ -68,7 +69,7 @@ export const PerformanceTrend: FC<{
   return (
     <Stack
       gap={20}
-      className='rounded-[20px] border border-white p-6 max-w-[669px] w-full backdrop-blur bg-white/48 shadow-lg'
+      className={`${isOnboardingDone ? 'w-auto' : 'max-w-[669px]'} w-full rounded-[20px] border border-white p-6 backdrop-blur bg-white/48 shadow-lg`}
     >
       <div className='flex justify-between items-center'>
         <Stack gap={4}>

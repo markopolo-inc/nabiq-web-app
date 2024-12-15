@@ -14,12 +14,15 @@ export { IntegrateChannels } from 'components/modules/home/components/cards/Inte
 export { IntegrationCard } from 'components/modules/home/components/cards/IntegrationCard';
 export { ConnectFirstMarkTagCard } from 'components/modules/home/components/cards/ConnectFirstMarkTagCard';
 export { CreateFirstCampaignCard } from 'components/modules/home/components/cards/CreateFirstCampaignCard';
-export { MetricCards } from 'components/modules/home/components/cards/metric-cards/MetricCards.tsx';
-export { MetricsCard } from 'components/modules/home/components/cards/MetricsCard/MetricsCard.tsx';
+export { MetricCards } from 'components/modules/home/components/cards/metric-cards/MetricCards';
+export { MetricsCard } from 'components/modules/home/components/cards/MetricsCard/MetricsCard';
+export { QuickActionsCard } from 'components/modules/home/components/cards/QuickActionsCard';
 
 // Screens
 export { MarktagDetails } from 'components/modules/home/components/screens/ConnectMarktag/MarktagDetails';
 export { MarktagSidebar } from 'components/modules/home/components/screens/ConnectMarktag/MarktagSidebar';
+export { QuickActions } from 'components/modules/home/components/screens/QuickActions';
+export { OnBoardingItems } from 'components/modules/home/components/screens/OnBoardingItems';
 
 // Tables
 export { PerformanceTrend } from 'components/modules/home/components/Table/performance-trend/PerformanceTrend.tsx';

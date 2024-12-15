@@ -25,7 +25,8 @@ const appCategories: Array<{
 
 export const MetricCards: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
-}> = ({ timeRange }) => {
+  isOnboardingDone: boolean;
+}> = ({ timeRange, isOnboardingDone }) => {
   const [selectedTab, setSelectedTab] = useState<TOptionTab>('email');
 
   const { data, isLoading } = useGetMetricCardsQuery({
@@ -77,7 +78,10 @@ export const MetricCards: FC<{
         />
       </Stack>
 
-      <Stack gap={16} className='grid grid-cols-2'>
+      <Stack
+        className={`grid grid-cols-1 ${isOnboardingDone ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}
+        gap={16}
+      >
         {isLoading
           ? Array.from({ length: 6 }, (_, index) => (
               <Skeleton
