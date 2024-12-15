@@ -1,13 +1,14 @@
 import { useForm } from '@mantine/form';
 import { Button, Image, PasswordInput, Stack, TextInput } from '@nabiq-ui';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import GoogleLogo from 'src/assets/onboarding/google.svg';
 import { useGoogleSignInMutation, useSignupMutation } from 'src/store/auth/authApi';
 import { trimAllValuesOfObject } from 'src/utils/string.utils';
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) => void }) => {
+  const location = useLocation();
   const [signup] = useSignupMutation();
   const [googleSignIn, { isLoading: isGoogleLoading }] = useGoogleSignInMutation();
   const [isLoading, setIsLoading] = useState(false);
@@ -25,15 +26,36 @@ export const SignUpForm = () => {
     },
   });
 
+  const onLoading = (loading: boolean) => {
+    setIsLoading(loading);
+  };
+
+  const onSuccess = () => {
+    setIsSignedUp(true);
+  };
+
   const handleFormSubmit = async (values) => {
-    setIsLoading(true);
-    await signup({ ...values }).unwrap();
-    setIsLoading(false);
+    await signup({ ...values, onLoading, onSuccess }).unwrap();
   };
 
   const handleGoogleSignIn = async () => {
     await googleSignIn({}).unwrap();
   };
+
+  useEffect(() => {
+    const checkAndAuthenticate = async () => {
+      const hash = location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const accessToken = params.get('access_token');
+      const tokenType = params.get('token_type');
+
+      if (accessToken && tokenType === 'Bearer') {
+        await googleSignIn({}).unwrap();
+      }
+    };
+
+    checkAndAuthenticate();
+  }, [location]);
 
   return (
     <Stack gap={36}>
@@ -89,7 +111,7 @@ export const SignUpForm = () => {
               label='Password'
               placeholder='Set password'
               description='Password must contain at least 8 characters.'
-              // {...form.getInputProps('password')}
+              {...form.getInputProps('password')}
             />
           </motion.div>
           <motion.div

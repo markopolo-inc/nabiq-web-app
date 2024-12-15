@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import NabiqLogo from 'src/assets/logo/nabiq-dark-logo.png';
 import OnboardingImage from 'src/assets/onboarding/sidesection-bg.png';
 
-const TOPBAR_HEIGHT = '46px';
+const TOPBAR_HEIGHT = '56px';
 
 export const OnboardingLayout = ({
   rightSection,

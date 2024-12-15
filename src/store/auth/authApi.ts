@@ -39,8 +39,9 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
-        const { name, email, password } = arg;
+        const { name, email, password, onLoading, onSuccess } = arg;
         try {
+          onLoading && onLoading(true);
           // Add user to cognito
           await Auth.signUp({
             username: email,
@@ -50,11 +51,13 @@ export const authApi = apiSlice.injectEndpoints({
             },
           });
           dispatch(setUserEmail(email));
-
+          onSuccess && onSuccess();
           toast.success('Successfully sign up.');
-          window.location.href = `/verify`;
+          // window.location.href = `/verify`;
         } catch (error) {
           toast.error(error?.message || 'Something went wrong');
+        } finally {
+          onLoading && onLoading(false);
         }
       },
     }),
@@ -106,16 +109,16 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(_arg) {
-        const { email, confirmationPin } = _arg;
-        const loading = toast.loading('Verifying...');
+        const { email, confirmationPin, onLoading, onSuccess } = _arg;
         try {
+          onLoading && onLoading(true);
           await Auth.confirmSignUp(email, confirmationPin);
           toast.success('Verification successful!');
-          window.location.href = '/login';
+          onSuccess && onSuccess();
         } catch (error) {
           toast.error(error?.message || 'Something went wrong!');
         } finally {
-          toast.dismiss(loading);
+          onLoading && onLoading(false);
         }
       },
     }),

@@ -7,11 +7,13 @@ import { SignUpForm, VerificationForm } from 'src/components/modules/sign-up';
 
 const SignUp = () => {
   const [searchParams] = useSearchParams();
-  const [isSignedUp, setIsSignedUp] = useState(false);
+  const [isSignedUp, setIsSignedUp] = useState(true);
 
   useEffect(() => {
     const step = searchParams.get('step');
-    setIsSignedUp(step === 'verification');
+    if (step === 'verification') {
+      setIsSignedUp(true);
+    }
   }, [searchParams]);
 
   return (
@@ -19,7 +21,7 @@ const SignUp = () => {
       <HeaderTitle>Nabiq | Signup</HeaderTitle>
 
       <OnboardingLayout rightSection={<Image src={SignUpImage} alt='Signup' />}>
-        {isSignedUp ? <VerificationForm /> : <SignUpForm />}
+        {isSignedUp ? <VerificationForm /> : <SignUpForm setIsSignedUp={setIsSignedUp} />}
       </OnboardingLayout>
     </>
   );
