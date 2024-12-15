@@ -59,7 +59,7 @@ export const OTPInput: React.FC<OTPInputProps> = ({ length = 6, onChange, label 
   return (
     <div className='flex flex-col gap-[6px]'>
       {label && <p className='text-sm font-medium text-gray-700'>{label}</p>}
-      <div className='flex gap-3'>
+      <div className='flex gap-3 w-full'>
         {otp.map((_, index) => (
           <input
             key={index}
@@ -74,7 +74,6 @@ export const OTPInput: React.FC<OTPInputProps> = ({ length = 6, onChange, label 
               }
             }}
             onBlur={() => {
-              // Use optional chaining with nullish coalescing to safely set placeholder
               const input = inputRefs.current[index];
               if (input) {
                 input.placeholder = '0';
@@ -83,7 +82,9 @@ export const OTPInput: React.FC<OTPInputProps> = ({ length = 6, onChange, label 
             value={otp[index]}
             onChange={(e) => handleChange(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
-            className={`w-20 h-20 text-[52px] font-medium text-primary-600 text-center border  rounded-2xl focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 placeholder:text-gray-300 ${otp[index] ? 'border-primary-600 border-[2px]' : 'border-gray-300'}`}
+            className={`flex-1 aspect-square min-w-0 text-[32px] font-medium text-primary-600 text-center border rounded-2xl focus:outline-none focus:border-primary-600 focus:ring-1 focus:ring-primary-600 placeholder:text-gray-300 ${
+              otp[index] ? 'border-primary-600 border-[2px]' : 'border-gray-300'
+            }`}
             onPaste={handlePaste}
           />
         ))}
