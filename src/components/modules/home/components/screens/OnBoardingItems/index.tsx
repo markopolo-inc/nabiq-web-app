@@ -1,6 +1,6 @@
 import { FiGreenCheckCircle } from '@nabiq-icons';
 import { Group, Stack } from '@nabiq-ui';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ConnectFirstMarkTagCard,
   CreateFirstCampaignCard,
@@ -36,64 +36,80 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
 
   const { data: campaignList } = useGetCampaignConfigsQuery(brandId);
 
-  const isIntegratedChannel =
-    !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations);
-  const isFirstCampaignDone = !!campaignList?.data?.length;
-  const isConnectedMarkTag = !!markTag?.resourceId;
+  const [activeCard, setActiveCard] = useState<
+    'integration_channel' | 'first_campaign' | 'mark_tag' | undefined
+  >(undefined);
 
-  const isIntegratedChannelCardActive = !isFirstCampaignDone && !isConnectedMarkTag;
-  const isFirstCampaignCardActive = !isIntegratedChannel && !isConnectedMarkTag;
-  const isMarkTagCardActive = !isIntegratedChannel && isFirstCampaignDone && !isConnectedMarkTag;
+  const isIntegrationChannelDone = !(
+    !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations)
+  );
+  const isFirstCampaignDone = !!campaignList?.data?.length;
+  const isMarkTagDone = Boolean(markTag?.resourceId);
+
+  useEffect(() => {
+    if (!isIntegrationChannelDone) {
+      setActiveCard('integration_channel');
+      return;
+    }
+    if (!isFirstCampaignDone) {
+      setActiveCard('first_campaign');
+      return;
+    }
+    if (!isMarkTagDone) {
+      setActiveCard('mark_tag');
+    }
+  }, []);
 
   return (
     <Stack gap={24} className='flex-row w-full'>
       <Stack gap={16} className='max-w-[372px] w-full'>
         <Group
           gap={16}
-          className={`p-[15px] rounded-xl bg-white border ${isIntegratedChannelCardActive ? 'border-primary-600' : 'border-gray-200'}`}
+          className={`p-[15px] rounded-xl bg-white border ${activeCard === 'integration_channel' ? 'border-primary-600' : 'border-gray-200'}`}
         >
-          {isIntegratedChannel ? (
-            <div className='text-base font-normal text-gray-950'>1</div>
-          ) : (
+          {isIntegrationChannelDone ? (
             <FiGreenCheckCircle color='#fff' />
+          ) : (
+            <div className='text-base font-normal text-gray-950'>1</div>
           )}
           <p className='text-base font-semibold text-gray-950'>Integrate channels</p>
         </Group>
 
         <Group
           gap={16}
-          className={`p-[15px] rounded-xl bg-white border  ${isFirstCampaignCardActive ? 'border-primary-600' : 'border-gray-200'}`}
+          className={`p-[15px] rounded-xl bg-white border  ${activeCard === 'first_campaign' ? 'border-primary-600' : 'border-gray-200'}`}
         >
-          {!isFirstCampaignDone ? (
-            <div className='text-base font-normal text-gray-950'>2</div>
-          ) : (
+          {isFirstCampaignDone ? (
             <FiGreenCheckCircle color='#fff' />
+          ) : (
+            <div className='text-base font-normal text-gray-950'>2</div>
           )}
           <p className='text-base font-semibold text-gray-950'>Create your first campaign</p>
         </Group>
 
         <Group
           gap={16}
-          className={`p-[15px] rounded-xl bg-white border ${isMarkTagCardActive ? 'border-primary-600' : 'border-gray-200'}`}
+          className={`p-[15px] rounded-xl bg-white border ${activeCard === 'mark_tag' ? 'border-primary-600' : 'border-gray-200'}`}
         >
-          {!isConnectedMarkTag ? (
-            <div className='text-base font-normal text-gray-950'>3</div>
-          ) : (
+          {isMarkTagDone ? (
             <FiGreenCheckCircle color='#fff' />
+          ) : (
+            <div className='text-base font-normal text-gray-950'>3</div>
           )}
           <p className='text-base font-semibold text-gray-950'>Connect MarkTag</p>
         </Group>
       </Stack>
 
       <Stack className='relative w-full min-h-[248px]'>
-        {isIntegratedChannel && <IntegrateChannels />}
-        {!isFirstCampaignDone && <CreateFirstCampaignCard onClick={onClickShowGoalModal} />}
-
-        {!isIntegratedChannel && isFirstCampaignDone && (
-          <ConnectFirstMarkTagCard
-            isActive={isConnectedMarkTag}
-            onClick={onClickShowMarkTagModal}
+        {activeCard === 'integration_channel' && <IntegrateChannels />}
+        {activeCard === 'first_campaign' && (
+          <CreateFirstCampaignCard
+            isActive={activeCard === 'first_campaign'}
+            onClick={onClickShowGoalModal}
           />
+        )}
+        {activeCard === 'mark_tag' && (
+          <ConnectFirstMarkTagCard isActive={isMarkTagDone} onClick={onClickShowMarkTagModal} />
         )}
       </Stack>
     </Stack>

@@ -24,7 +24,12 @@ const Home = () => {
     'last_year' | 'last_month' | 'last_week' | 'last_3_day'
   >('last_year');
 
-  const isOnboardingDone = false;
+  const integrateChannels = false;
+  const firstCampaign = false;
+  const markTagConnect = false;
+
+  const isOnboardingDone = integrateChannels && firstCampaign && markTagConnect;
+  const isOnBoardingMetricsShow = integrateChannels && firstCampaign;
 
   useEffect(() => {
     const installationId = searchParams.get(QUERY_PARAMS.INSTALLATION_ID);
@@ -54,12 +59,12 @@ const Home = () => {
           />
         )}
 
-        {
+        {isOnBoardingMetricsShow && (
           <Stack className={`${isOnboardingDone ? 'flex-col-reverse' : 'flex-row'} `} gap={24}>
             <PerformanceTrend isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
             <MetricCards isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
           </Stack>
-        }
+        )}
       </Stack>
     </>
   );
