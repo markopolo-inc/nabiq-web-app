@@ -32,6 +32,7 @@ export { default as FiCheckCircle } from './CheckCircle';
 export { default as FiGreenCheckCircle } from './GreenCheckCircle';
 export { default as FiCopy01 } from './Copy01';
 export { CursorBox as FiCursorBox } from './CursorBox';
+export { default as RiCodeAiFill } from './CodeAiFill';
 
 // D
 export { default as FiDataFlow02 } from './DataFlow02';
@@ -46,6 +47,7 @@ export { default as FiEdit01 } from './Edit01';
 // F
 export { default as FiFileUpload } from './UploadCloud02';
 export { default as FileQuestion02 } from './FileQuestion02';
+export { default as RiFlashLight } from './FlashLightFill';
 
 // G
 export { default as FiGlobe01 } from './Globe01';
@@ -76,6 +78,7 @@ export { default as FiMail01 } from './Mail01';
 export { default as Message } from './Message';
 export { default as FiMinus } from './Minus';
 export { MessageSmileCircle as FiMessageSmileCircle } from './MessageSmileCircle';
+export { default as RiMegaPhoneFill } from './MegaPhoneFill';
 
 // N
 export { default as FiNotificationMessage } from './NotificationMessage';
@@ -104,6 +107,7 @@ export { default as FiServer01 } from './Server01';
 export { default as FiShield02 } from './Shield02';
 export { ShoppingBag03 as FiShoppingBag03 } from './ShoppingBag03';
 export { default as FiSalla } from './Salla';
+export { default as RiShieldFill } from './ShieldFill';
 
 // T
 export { default as FiTrash } from './Trash';
