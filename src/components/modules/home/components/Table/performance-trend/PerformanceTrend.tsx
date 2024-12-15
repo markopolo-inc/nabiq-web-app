@@ -66,7 +66,10 @@ export const PerformanceTrend: FC<{
   }, [performanceData]);
 
   return (
-    <Stack gap={20} className='border border-gray-200 shadow-sm rounded-xl p-6'>
+    <Stack
+      gap={20}
+      className='rounded-[20px] border border-white p-6 max-w-[669px] w-full backdrop-blur bg-white/48 shadow-lg'
+    >
       <div className='flex justify-between items-center'>
         <Stack gap={4}>
           <p className='text-gray-900 text-lg font-semibold'>Performance Trend</p>

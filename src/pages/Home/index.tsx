@@ -9,6 +9,7 @@ import {
   CreateFirstCampaignCard,
   Header,
   IntegrateChannels,
+  MetricCards,
   PerformanceTrend,
 } from 'src/components/modules/home';
 import { MarktagCreationsModals } from 'src/components/modules/integrations/integration-tabs/data-sources';
@@ -69,7 +70,7 @@ const Home = () => {
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
       <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
-      <Stack gap={24} className='min-h-[calc(100vh-0px)] pt-16 px-6 bg-home-hero'>
+      <Stack gap={24} className='min-h-[calc(100vh+112px)] pt-16 px-6 bg-home-hero'>
         <Header />
 
         <Stack gap={24} className='flex-row w-full'>
@@ -119,17 +120,21 @@ const Home = () => {
               />
             )}
 
-            <ConnectFirstMarkTagCard
-              isActive={isConnectedMarkTag}
-              onClick={() => setShowMarktagModal((prevState) => !prevState)}
-            />
+            {!isIntegratedChannel && isFirstCampaignDone && (
+              <ConnectFirstMarkTagCard
+                isActive={isConnectedMarkTag}
+                onClick={() => setShowMarktagModal((prevState) => !prevState)}
+              />
+            )}
           </Stack>
         </Stack>
 
-        <Stack className='flex-row' gap={24}>
-          <PerformanceTrend timeRange={timeRange} />
-          {/*<PerformanceTrend timeRange={timeRange} />*/}
-        </Stack>
+        {!isIntegratedChannel && isFirstCampaignDone && (
+          <Stack className='flex-row' gap={24}>
+            <PerformanceTrend timeRange={timeRange} />
+            <MetricCards timeRange={timeRange} />
+          </Stack>
+        )}
       </Stack>
     </>
   );

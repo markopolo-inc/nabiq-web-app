@@ -14,6 +14,8 @@ export { IntegrateChannels } from 'components/modules/home/components/cards/Inte
 export { IntegrationCard } from 'components/modules/home/components/cards/IntegrationCard';
 export { ConnectFirstMarkTagCard } from 'components/modules/home/components/cards/ConnectFirstMarkTagCard';
 export { CreateFirstCampaignCard } from 'components/modules/home/components/cards/CreateFirstCampaignCard';
+export { MetricCards } from 'components/modules/home/components/cards/metric-cards/MetricCards.tsx';
+export { MetricsCard } from 'components/modules/home/components/cards/MetricsCard/MetricsCard.tsx';
 
 // Screens
 export { MarktagDetails } from 'components/modules/home/components/screens/ConnectMarktag/MarktagDetails';
