@@ -44,7 +44,7 @@ const Home = () => {
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
       <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
-      <Stack gap={64} align='center' className='bg-primary-50 py-16'>
+      <Stack gap={64} align='center' className='min-h-[calc(100vh-0px)] pt-16 px-6 bg-home-hero'>
         <Header />
 
         <Stack gap={24} className='flex-row w-full'>
