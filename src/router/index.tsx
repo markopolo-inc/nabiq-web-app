@@ -1,7 +1,9 @@
 import { PageLoader } from '@nabiq-ui';
+import SignInPage from 'pages/SignInPage';
 import { Suspense, lazy } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { AppLayout, NavigationLayout, PrivateLayout } from 'src/layouts';
+import SignUpPage from 'src/pages/SignUpPage';
 
 const Home = lazy(() => import('pages/Home'));
 const CampaignsListPage = lazy(() => import('pages/CampaignsListPage'));
@@ -21,10 +23,9 @@ const ContentSamples = lazy(() => import('pages/ControlRoomPage/ContentSamples')
 const Settings = lazy(() => import('pages/Settings'));
 const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
 
-const SignUp = lazy(() => import('src/pages/SignUpPage'));
-const SignInPage = lazy(() => import('pages/SignInPage'));
+// const SignUpPage = lazy(() => import('src/pages/SignUpPage'));
+// const SignInPage = lazy(() => import('pages/SignInPage'));
 const ResetPassword = lazy(() => import('pages/ResetPassword'));
-const VerifyEmail = lazy(() => import('pages/VerifyEmail'));
 const Onboarding = lazy(() => import('pages/Onboarding'));
 
 const Test = lazy(() => import('src/pages/Test'));
@@ -81,10 +82,9 @@ const Router = () => {
             <Route path='/connect-marktag' element={<ConnectMarktag />} />
           </Route>
 
-          <Route path='/signup' element={<SignUp />} />
+          <Route path='/signup' element={<SignUpPage />} />
           <Route path='/login' element={<SignInPage />} />
           <Route path='/reset-pass' element={<ResetPassword />} />
-          <Route path='/verify' element={<VerifyEmail />} />
 
           <Route path='/test' element={<Outlet />}>
             <Route path='/test' element={<Test />} />
