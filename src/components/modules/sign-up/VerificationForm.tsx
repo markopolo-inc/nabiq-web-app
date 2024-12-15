@@ -79,6 +79,7 @@ export const OTPInput: React.FC<OTPInputProps> = ({ length = 6, onChange, label 
                 input.placeholder = '0';
               }
             }}
+            autoFocus={index === 0}
             value={otp[index]}
             onChange={(e) => handleChange(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
