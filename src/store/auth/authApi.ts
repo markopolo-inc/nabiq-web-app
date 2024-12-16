@@ -15,14 +15,14 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
-        const { email, password, onLoading, onUnverified } = arg;
+        const { email, password, onLoading, onUnverified, onSuccess } = arg;
         try {
           onLoading && onLoading(true);
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
           toast.success('Successfully logged in.');
-          window.location.href = '/';
+          onSuccess && onSuccess();
         } catch (error) {
           if (error?.code === UserNotConfirmedException) {
             dispatch(setUserEmail(email));
