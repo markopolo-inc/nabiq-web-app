@@ -1,4 +1,4 @@
-import { AppShell, Burger, Group, Image, useDisclosure } from '@nabiq-ui';
+import { AppShell, Burger, Group, Image, PageLoader, useDisclosure } from '@nabiq-ui';
 import Sidebar from 'components/Features/Sidebar';
 import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
@@ -23,7 +23,7 @@ export const NavigationLayout = () => {
     close();
   }, [pathname]);
 
-  return (
+  return companyId ? (
     <AppShell
       header={{ height: 72 }}
       navbar={{ width: 300, breakpoint: 'md', collapsed: { mobile: !opened } }}
@@ -48,5 +48,7 @@ export const NavigationLayout = () => {
         </div>
       </AppShell.Main>
     </AppShell>
+  ) : (
+    <PageLoader />
   );
 };

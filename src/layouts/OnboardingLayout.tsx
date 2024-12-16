@@ -22,8 +22,12 @@ export const OnboardingLayout = ({
       >
         <Image src={NabiqLogo} alt='Nabiq' className='w-[70px]' />
       </div>
-      <div className={`grid grid-cols-1 lg:grid-cols-[43%_57%] flex-1 mt-[${TOPBAR_HEIGHT}]`}>
-        <div className='bg-gray-50 w-full flex justify-center lg:justify-start items-start p-[64px] h-full max-h-full overflow-y-auto'>
+      <div
+        className={`grid grid-cols-1 lg:grid-cols-[43%_57%] flex-1 mt-[${TOPBAR_HEIGHT}] h-[calc(100vh-${TOPBAR_HEIGHT})]`}
+      >
+        <div
+          className={`bg-gray-50 w-full flex justify-center lg:justify-start items-start p-[64px] max-h-full h-full overflow-y-auto`}
+        >
           <div className='flex w-full h-full justify-center items-center max-w-[416px]'>
             <div className='w-full'>{children}</div>
           </div>

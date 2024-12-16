@@ -1,28 +1,50 @@
-import OnboardingForm from 'components/Features/Onboarding/OnboardingForm';
-import OnboardingSidebar from 'components/Features/Onboarding/OnboardingSidebar';
-import { HeaderTitle } from 'layouts';
+import {
+  CompanyCreation,
+  GuideNabiq,
+  LeadsDatabase,
+  RightSection,
+  SampleContents,
+} from 'components/modules/onboarding';
+import { HeaderTitle, OnboardingLayout } from 'layouts';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from 'store/hooks';
+import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 const Onboarding = () => {
   const navigate = useNavigate();
   const { resourceId: companyId } = useAppSelector((state) => state.company);
-
+  const { step } = useAppSelector((state) => state.onboarding);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     if (companyId) {
       navigate('/');
     }
   }, [companyId]);
 
+  useEffect(() => {
+    dispatch(setOnboardingStep('company_creation'));
+  }, []);
+
   return (
     <>
-      <HeaderTitle>Nabiq | Onboarding</HeaderTitle>
-
-      <div className='min-h-screen mx-auto max-w-full lg:grid lg:grid-cols-12 lg:gap-x-8'>
-        <OnboardingSidebar />
-        <OnboardingForm />
-      </div>
+      <HeaderTitle>Nabiq | Create your company</HeaderTitle>
+      <OnboardingLayout rightSection={<RightSection />}>
+        {(() => {
+          switch (step) {
+            case 'company_creation':
+              return <CompanyCreation />;
+            case 'lead_database':
+              return <LeadsDatabase />;
+            case 'guide_nabiq':
+              return <GuideNabiq />;
+            case 'sample_content':
+              return <SampleContents />;
+            default:
+              return null;
+          }
+        })()}
+      </OnboardingLayout>
     </>
   );
 };

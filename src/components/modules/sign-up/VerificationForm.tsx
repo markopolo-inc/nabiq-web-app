@@ -39,7 +39,7 @@ export const VerificationForm = () => {
         transition={{ duration: 0.7, delay: 0.5 }}
       >
         <Stack gap={64}>
-          <Stack gap={9}>
+          <Stack gap={8}>
             <p className='text-2xl font-semibold text-gray-950'>Check your email to continue</p>
             <p className='font-normal text-gray-500'>
               We sent a verification code to <span className='text-gray-700'>{email}</span>
