@@ -7,7 +7,7 @@ import { SignUpForm, VerificationForm } from 'src/components/modules/sign-up';
 
 const SignUp = () => {
   const [searchParams] = useSearchParams();
-  const [isSignedUp, setIsSignedUp] = useState(true);
+  const [isSignedUp, setIsSignedUp] = useState(false);
 
   useEffect(() => {
     const step = searchParams.get('step');
