@@ -2,9 +2,13 @@ import { useForm } from '@mantine/form';
 import { Button, Image, PasswordInput, Stack, TextInput } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GoogleLogo from 'src/assets/onboarding/google.svg';
-import { useGoogleSignInMutation, useLoginMutation } from 'src/store/auth/authApi';
+import {
+  useGoogleSignInMutation,
+  useLoginMutation,
+  useResendVerificationCodeMutation,
+} from 'src/store/auth/authApi';
 import { trimAllValuesOfObject } from 'src/utils/string.utils';
 
 export const SignInForm = () => {
@@ -12,6 +16,8 @@ export const SignInForm = () => {
   const [login] = useLoginMutation();
   const [isLoading, setIsLoading] = useState(false);
   const [googleSignIn, { isLoading: isGoogleLoading }] = useGoogleSignInMutation();
+  const [resend] = useResendVerificationCodeMutation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkAndAuthenticate = async () => {
@@ -43,8 +49,13 @@ export const SignInForm = () => {
     setIsLoading(loading);
   };
 
+  const onUnverified = () => {
+    navigate('/signup?step=verification');
+    resend({ email: form.values.email });
+  };
+
   const handleFormSubmit = async (values) => {
-    await login({ ...values, onLoading }).unwrap();
+    await login({ ...values, onLoading, onUnverified }).unwrap();
   };
 
   const handleGoogleSignIn = async () => {

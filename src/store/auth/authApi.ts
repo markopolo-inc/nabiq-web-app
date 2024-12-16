@@ -15,7 +15,7 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
-        const { email, password, onLoading } = arg;
+        const { email, password, onLoading, onUnverified } = arg;
         try {
           onLoading && onLoading(true);
           await Auth.signIn(email, password);
@@ -25,7 +25,8 @@ export const authApi = apiSlice.injectEndpoints({
           window.location.href = '/';
         } catch (error) {
           if (error?.code === UserNotConfirmedException) {
-            window.location.href = '/verify';
+            dispatch(setUserEmail(email));
+            onUnverified && onUnverified();
           } else {
             toast.error(error?.message || 'Something went wrong!');
           }
