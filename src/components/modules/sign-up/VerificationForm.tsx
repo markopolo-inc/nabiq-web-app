@@ -1,4 +1,5 @@
 import { Button, OtpInput, Stack } from '@nabiq-ui';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useResendVerificationCodeMutation, useVerifyMutation } from 'src/store/auth/authApi';
@@ -32,40 +33,52 @@ export const VerificationForm = () => {
   };
   return (
     <Stack gap={200}>
-      <Stack gap={64}>
-        <Stack gap={9}>
-          <p className='text-2xl font-semibold text-gray-950'>Check your email to continue</p>
-          <p className='font-normal text-gray-500'>
-            We sent a verification code to <span className='text-gray-700'>{email}</span>
-          </p>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.5 }}
+      >
+        <Stack gap={64}>
+          <Stack gap={9}>
+            <p className='text-2xl font-semibold text-gray-950'>Check your email to continue</p>
+            <p className='font-normal text-gray-500'>
+              We sent a verification code to <span className='text-gray-700'>{email}</span>
+            </p>
+          </Stack>
+          <OtpInput onChange={handleOTPChange} label='Verification code' />
         </Stack>
-        <OtpInput onChange={handleOTPChange} label='Verification code' />
-      </Stack>
-
-      <Stack>
-        <Button
-          fullWidth
-          variant='primary'
-          loading={isLoading}
-          disabled={confirmationPin?.length !== 6 || !email}
-          onClick={() => verify({ email, confirmationPin, onLoading, onSuccess })}
-        >
-          Verify
-        </Button>
-        <div className='flex justify-center items-center gap-1'>
-          <p className='text-gray-700 text-sm font-normal text-center'>
-            Having trouble with the code?
-          </p>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+        className='space-y-5'
+      >
+        <Stack>
           <Button
-            disabled={!email}
-            onClick={() => resend({ email })}
-            variant='link'
-            className='px-0'
+            fullWidth
+            variant='primary'
+            loading={isLoading}
+            disabled={confirmationPin?.length !== 6 || !email}
+            onClick={() => verify({ email, confirmationPin, onLoading, onSuccess })}
           >
-            Resend
+            Verify
           </Button>
-        </div>
-      </Stack>
+          <div className='flex justify-center items-center gap-1'>
+            <p className='text-gray-700 text-sm font-normal text-center'>
+              Having trouble with the code?
+            </p>
+            <Button
+              disabled={!email}
+              onClick={() => resend({ email })}
+              variant='link'
+              className='px-0'
+            >
+              Resend
+            </Button>
+          </div>
+        </Stack>
+      </motion.div>
     </Stack>
   );
 };
