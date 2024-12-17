@@ -37,8 +37,8 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
   const { data: campaignList } = useGetCampaignConfigsQuery(brandId);
 
   const [activeCard, setActiveCard] = useState<
-    'integration_channel' | 'first_campaign' | 'mark_tag' | undefined
-  >(undefined);
+    'integration_channel' | 'first_campaign' | 'mark_tag'
+  >('integration_channel');
 
   const isIntegrationChannelDone = !(
     !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations)
@@ -101,15 +101,19 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
       </Stack>
 
       <Stack className='relative w-full min-h-[248px]'>
-        {activeCard === 'integration_channel' && <IntegrateChannels />}
-        {activeCard === 'first_campaign' && (
+        {!isIntegrationChannelDone && <IntegrateChannels />}
+        {!isFirstCampaignDone && (
           <CreateFirstCampaignCard
-            isActive={activeCard === 'first_campaign'}
+            isActive={Boolean(activeCard === 'first_campaign')}
             onClick={onClickShowGoalModal}
           />
         )}
-        {activeCard === 'mark_tag' && (
-          <ConnectFirstMarkTagCard isActive={isMarkTagDone} onClick={onClickShowMarkTagModal} />
+        {!isMarkTagDone && (
+          <ConnectFirstMarkTagCard
+            isIntegratedChannel={isIntegrationChannelDone}
+            isActive={Boolean(activeCard === 'mark_tag')}
+            onClick={onClickShowMarkTagModal}
+          />
         )}
       </Stack>
     </Stack>

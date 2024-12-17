@@ -5,18 +5,26 @@ import React from 'react';
 type ConnectFirstMarkTagCardPropType = {
   onClick: () => void;
   isActive: boolean;
+  isIntegratedChannel: boolean;
 };
 
 export const ConnectFirstMarkTagCard: React.FC<ConnectFirstMarkTagCardPropType> = ({
   onClick,
   isActive,
+  isIntegratedChannel,
 }) => {
+  const classes = isActive
+    ? 'top-0 left-0 z-10 w-full'
+    : isIntegratedChannel
+      ? 'top-4 left-[calc(0%+16px)] z-10 w-[calc(100%-32px)]'
+      : 'top-8 left-[calc(0%+32px)] z-10 w-[calc(100%-64px)]';
+
   return (
     <Stack
       gap={160}
       justify='space-between'
       align='center'
-      className={`absolute ${isActive ? 'w-full' : 'top-8 left-[calc(0%+32px)] z-10 w-[calc(100%-64px)]'} flex-row rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px] shadow-lg`}
+      className={`absolute ${classes} flex-row rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px] shadow-lg`}
     >
       <Stack gap={40}>
         <Stack gap={4} className='max-w-[360px] w-full'>

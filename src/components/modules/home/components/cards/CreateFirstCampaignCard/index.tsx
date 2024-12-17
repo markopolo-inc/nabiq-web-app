@@ -15,7 +15,7 @@ export const CreateFirstCampaignCard: React.FC<CreateFirstCampaignCardPropsType>
     <Stack
       gap={160}
       align='center'
-      className={`absolute ${isActive ? '' : 'top-4 left-[calc(0%+16px)] z-20 w-[calc(100%-32px)]'} flex-row rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px] shadow-lg`}
+      className={`absolute ${isActive ? 'top-0 left-0 z-20 w-full' : 'top-4 left-[calc(0%+16px)] z-20 w-[calc(100%-32px)]'} flex-row rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px] shadow-lg`}
     >
       <Stack gap={40}>
         <Stack gap={4}>
