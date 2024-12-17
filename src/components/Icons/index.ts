@@ -82,6 +82,7 @@ export { default as Klaviyo } from './Klaviyo';
 
 // M
 export { default as FiMail01 } from './Mail01';
+export { default as FiMascot } from './Mascot';
 export { default as Message } from './Message';
 export { default as FiMinus } from './Minus';
 export { MessageSmileCircle as FiMessageSmileCircle } from './MessageSmileCircle';
