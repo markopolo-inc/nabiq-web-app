@@ -6,45 +6,25 @@ import {
   CreateFirstCampaignCard,
   IntegrateChannels,
 } from 'src/components/modules/home';
-import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
-import { useAppSelector } from 'src/store/hooks.ts';
-
-function isObjectNotEmpty(obj) {
-  // Check if the object exists and is not null
-  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
-    // Check if the object has any own properties
-    return Object.keys(obj).length > 0;
-  }
-  return false;
-}
 
 type OnBoardingItemsProps = {
   onClickShowGoalModal: () => void;
   onClickShowMarkTagModal: () => void;
+  isIntegrationChannelDone: boolean;
+  isFirstCampaignDone: boolean;
+  isMarkTagDone: boolean;
 };
 
 export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
   onClickShowGoalModal,
   onClickShowMarkTagModal,
+  isIntegrationChannelDone,
+  isFirstCampaignDone,
+  isMarkTagDone,
 }) => {
-  const {
-    resourceId: brandId,
-    emailIntegrations,
-    smsIntegrations,
-    markTag,
-  } = useAppSelector((state) => state.brand);
-
-  const { data: campaignList } = useGetCampaignConfigsQuery(brandId);
-
   const [activeCard, setActiveCard] = useState<
     'integration_channel' | 'first_campaign' | 'mark_tag'
   >('integration_channel');
-
-  const isIntegrationChannelDone = !(
-    !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations)
-  );
-  const isFirstCampaignDone = !!campaignList?.data?.length;
-  const isMarkTagDone = Boolean(markTag?.resourceId);
 
   useEffect(() => {
     if (!isIntegrationChannelDone) {

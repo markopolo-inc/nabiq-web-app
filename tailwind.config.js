@@ -126,6 +126,12 @@ export default {
         'home-hero': "url('/img_1.png')",
       },
     },
+    backgroundSize: {
+      auto: 'auto',
+      cover: 'cover',
+      contain: 'contain',
+      '100%': '100%',
+    },
   },
   variants: {
     scale: ['responsive', 'hover', 'focus', 'group-hover'],

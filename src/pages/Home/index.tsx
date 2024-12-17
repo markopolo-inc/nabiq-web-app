@@ -12,10 +12,28 @@ import {
 } from 'src/components/modules/home';
 import { MarktagCreationsModals } from 'src/components/modules/integrations/integration-tabs/data-sources';
 import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
+import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
+import { useAppSelector } from 'src/store/hooks.ts';
+
+function isObjectNotEmpty(obj) {
+  // Check if the object exists and is not null
+  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+    // Check if the object has any own properties
+    return Object.keys(obj).length > 0;
+  }
+  return false;
+}
 
 const Home = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
+  const {
+    resourceId: brandId,
+    emailIntegrations,
+    smsIntegrations,
+    markTag,
+  } = useAppSelector((state) => state.brand);
 
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
   const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
@@ -24,12 +42,16 @@ const Home = () => {
     'last_year' | 'last_month' | 'last_week' | 'last_3_day'
   >('last_year');
 
-  const integrateChannels = false;
-  const firstCampaign = false;
-  const markTagConnect = false;
+  const { data: campaignList } = useGetCampaignConfigsQuery(brandId);
 
-  const isOnboardingDone = integrateChannels && firstCampaign && markTagConnect;
-  const isOnBoardingMetricsShow = integrateChannels && firstCampaign;
+  const isIntegrationChannelDone = !(
+    !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations)
+  );
+  const isFirstCampaignDone = !!campaignList?.data?.length;
+  const isMarkTagDone = Boolean(markTag?.resourceId);
+
+  const isOnboardingDone = isIntegrationChannelDone && isFirstCampaignDone && isMarkTagDone;
+  const isOnBoardingMetricsShow = isIntegrationChannelDone && isFirstCampaignDone;
 
   useEffect(() => {
     const installationId = searchParams.get(QUERY_PARAMS.INSTALLATION_ID);
@@ -49,7 +71,7 @@ const Home = () => {
 
       <Stack
         gap={48}
-        className='min-h-[calc(100vh+112px)] pt-16 px-6 bg-home-hero bg-no-repeat bg-cover'
+        className='min-h-[calc(100vh+112px)] pt-16 px-6 bg-home-hero bg-no-repeat bg-100%'
       >
         <Header />
 
@@ -57,6 +79,9 @@ const Home = () => {
 
         {!isOnboardingDone && (
           <OnBoardingItems
+            isIntegrationChannelDone={isIntegrationChannelDone}
+            isFirstCampaignDone={isFirstCampaignDone}
+            isMarkTagDone={isMarkTagDone}
             onClickShowGoalModal={() => setShowGoalModal((prevState) => !prevState)}
             onClickShowMarkTagModal={() => setShowMarktagModal((prevState) => !prevState)}
           />
