@@ -11,15 +11,13 @@ export const onboardApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Company'],
       async onQueryStarted(_arg, { queryFulfilled }) {
-        const loading = toast.loading('Onboarding user...');
         try {
           await queryFulfilled;
         } catch (err) {
           toast.error('Failed to create user!');
           throw new Error(err);
-        } finally {
-          toast.dismiss(loading);
         }
       },
     }),

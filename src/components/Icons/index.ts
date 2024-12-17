@@ -39,6 +39,7 @@ export { default as FiDataFlow02 } from './DataFlow02';
 export { default as FiDot } from './Dot';
 export { default as FiDotsVertical } from './DotsVertical';
 export { default as FiData } from './Data';
+export { default as FiDatabase01 } from './Database01';
 
 // E
 export { default as Envelope } from './Envelope';
@@ -109,6 +110,7 @@ export { default as FiShield02 } from './Shield02';
 export { ShoppingBag03 as FiShoppingBag03 } from './ShoppingBag03';
 export { default as FiSalla } from './Salla';
 export { default as RiShieldFill } from './ShieldFill';
+export { default as FiShoppingBag02 } from './ShoppingBag02';
 
 // T
 export { default as FiTrash } from './Trash';
