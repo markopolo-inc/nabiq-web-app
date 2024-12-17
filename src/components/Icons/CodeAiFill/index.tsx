@@ -90,8 +90,8 @@ const CodeAiFill = ({ size = 28, onClick, style }: PropTypes) => {
           y2='20.5998'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#418EFF' />
-          <stop offset='1' stop-color='#2C5FC0' />
+          <stop stopColor='#418EFF' />
+          <stop offset='1' stopColor='#2C5FC0' />
         </linearGradient>
         <clipPath id='clip0_571_11888'>
           <rect width={size} height={size} fill='white' />

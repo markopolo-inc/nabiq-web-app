@@ -11,7 +11,7 @@ const FlashLight = ({ size = 28, onClick, style }: PropTypes) => {
       viewBox='0 0 28 28'
       fill='none'
     >
-      <g clip-path='url(#clip0_571_11912)'>
+      <g clipPath='url(#clip0_571_11912)'>
         <g filter='url(#filter0_dii_571_11912)'>
           <path
             d='M15.1667 11.6667H23.3334L12.8334 26.8333V16.3333H4.66675L15.1667 1.16666V11.6667Z'
@@ -27,9 +27,9 @@ const FlashLight = ({ size = 28, onClick, style }: PropTypes) => {
           width='35.5556'
           height='42.5555'
           filterUnits='userSpaceOnUse'
-          color-interpolation-filters='sRGB'
+          colorInterpolationFilters='sRGB'
         >
-          <feFlood flood-opacity='0' result='BackgroundImageFix' />
+          <feFlood floodOpacity='0' result='BackgroundImageFix' />
           <feColorMatrix
             in='SourceAlpha'
             type='matrix'
@@ -90,8 +90,8 @@ const FlashLight = ({ size = 28, onClick, style }: PropTypes) => {
           y2='26.8333'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#FF52DB' />
-          <stop offset='1' stop-color='#B93792' />
+          <stop stopColor='#FF52DB' />
+          <stop offset='1' stopColor='#B93792' />
         </linearGradient>
         <clipPath id='clip0_571_11912'>
           <rect width='28' height='28' fill='white' />
