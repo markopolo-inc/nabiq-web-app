@@ -47,7 +47,10 @@ const Home = () => {
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
       <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
-      <Stack gap={48} className='min-h-[calc(100vh+112px)] pt-16 px-6 bg-home-hero bg-no-repeat'>
+      <Stack
+        gap={48}
+        className='min-h-[calc(100vh+112px)] pt-16 px-6 bg-home-hero bg-no-repeat bg-cover'
+      >
         <Header />
 
         {isOnboardingDone && <QuickActions />}
