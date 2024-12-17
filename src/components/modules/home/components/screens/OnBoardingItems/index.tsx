@@ -41,8 +41,8 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
   }, []);
 
   return (
-    <Stack gap={24} className='flex-row w-full'>
-      <Stack gap={16} className='max-w-[372px] w-full'>
+    <Stack gap={24} className='flex-col lg:flex-row w-full'>
+      <Stack gap={16} className='lg:max-w-[372px] w-full'>
         <Group
           gap={16}
           className={`p-[15px] rounded-xl bg-white border ${activeCard === 'integration_channel' ? 'border-primary-600' : 'border-gray-200'}`}

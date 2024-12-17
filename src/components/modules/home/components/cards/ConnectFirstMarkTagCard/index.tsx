@@ -21,10 +21,10 @@ export const ConnectFirstMarkTagCard: React.FC<ConnectFirstMarkTagCardPropType> 
 
   return (
     <Stack
-      gap={160}
+      gap={16}
       justify='space-between'
       align='center'
-      className={`absolute ${classes} flex-row rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px] shadow-lg`}
+      className={`absolute ${classes} flex-row justify-between rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px] shadow-lg`}
     >
       <Stack gap={40}>
         <Stack gap={4} className='max-w-[360px] w-full'>
