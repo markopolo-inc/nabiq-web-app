@@ -1,16 +1,20 @@
 import { useForm } from '@mantine/form';
 import { Button, Select, Stack, TextInput } from '@nabiq-ui';
 import { Auth } from 'aws-amplify';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { CompanyCreationInterface } from 'src/interfaces/company.interface';
+import { useAppSelector } from 'src/store/hooks';
 import { useOnboardUserMutation } from 'src/store/onboarding/onboardingApi';
 import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
 import { trimAllValuesOfObject } from 'src/utils/string.utils';
 
+import { StepCount } from './StepCount';
+
 export const CompanyCreation = () => {
   const [isLoadingUser, setIsLoading] = useState(false);
   const [onboardUser, { isLoading }] = useOnboardUserMutation();
+  const { resourceId: companyId, companyName } = useAppSelector((state) => state.company);
 
   const form = useForm<CompanyCreationInterface>({
     initialValues: {
@@ -46,9 +50,18 @@ export const CompanyCreation = () => {
     }
   };
 
+  useEffect(() => {
+    if (companyId) {
+      form.setValues({
+        businessName: companyName,
+      });
+    }
+  }, [companyId]);
+
   return (
     <Stack gap={64}>
-      <Stack>
+      <Stack gap={32}>
+        <StepCount step={1} />
         <Stack gap={8}>
           <p className='text-2xl font-semibold text-gray-950'>Let’s get to know you</p>
           <p className='font-normal text-gray-500'>Help us understand your business better.</p>
@@ -64,8 +77,9 @@ export const CompanyCreation = () => {
             <TextInput
               label='Business Name'
               placeholder='e.g John’s company'
-              {...form.getInputProps('businessName')}
+              disabled={!!companyId}
               required
+              {...form.getInputProps('businessName')}
             />
             <Select
               label='Industry'
@@ -87,6 +101,7 @@ export const CompanyCreation = () => {
                 { value: 'technology', label: 'Technology' },
                 { value: 'travel_hospitality', label: 'Travel & Hospitality' },
               ]}
+              disabled={!!companyId}
               {...form.getInputProps('industry')}
             />
             <Select
@@ -100,12 +115,14 @@ export const CompanyCreation = () => {
               required
               label='Business size'
               placeholder='Select your business size'
+              disabled={!!companyId}
               {...form.getInputProps('businessSize')}
             />
             <TextInput
               required
               label='Website URL'
               placeholder='Paste your website URL here'
+              disabled={!!companyId}
               description={
                 form.errors.website
                   ? null
@@ -114,9 +131,15 @@ export const CompanyCreation = () => {
               {...form.getInputProps('website')}
             />
           </div>
-          <Button fullWidth type='submit' loading={isLoading || isLoadingUser}>
-            Create business
-          </Button>
+          {!companyId ? (
+            <Button fullWidth type='submit' loading={isLoading || isLoadingUser}>
+              Create business
+            </Button>
+          ) : (
+            <Button fullWidth type='button' loading={isLoading || isLoadingUser}>
+              Continue
+            </Button>
+          )}
         </Stack>
       </form>
     </Stack>
