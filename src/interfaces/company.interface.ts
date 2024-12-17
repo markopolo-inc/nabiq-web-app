@@ -3,6 +3,7 @@ export interface CompanyInterface {
   _id?: string;
   resourceId?: string;
   companyName?: string;
+  isOnboardingCompleted?: boolean;
   meta?: {
     cognitoId: string;
     userName: string;
@@ -12,4 +13,14 @@ export interface CompanyInterface {
     businessSize: string;
     profilePhoto: string;
   };
+}
+
+export interface CompanyCreationInterface {
+  businessName: string;
+  industry: string;
+  businessSize: string;
+  website: string;
+  cognitoId?: string;
+  userName?: string;
+  userEmail?: string;
 }

@@ -13,23 +13,37 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 const Onboarding = () => {
   const navigate = useNavigate();
-  const { resourceId: companyId } = useAppSelector((state) => state.company);
+  const { resourceId: companyId, isOnboardingCompleted } = useAppSelector((state) => state.company);
   const { step } = useAppSelector((state) => state.onboarding);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (companyId) {
+    if (companyId && isOnboardingCompleted) {
       navigate('/');
+    }
+  }, [companyId, isOnboardingCompleted]);
+
+  useEffect(() => {
+    if (companyId) {
+      dispatch(setOnboardingStep('lead_database'));
+    } else {
+      dispatch(setOnboardingStep('company_creation'));
     }
   }, [companyId]);
 
-  useEffect(() => {
-    dispatch(setOnboardingStep('company_creation'));
-  }, []);
+  const righSectionClasss = {
+    company_creation: 'justify-end',
+    lead_database: 'justify-end',
+    guide_nabiq: 'justify-center',
+    sample_content: 'justify-center',
+  };
 
   return (
     <>
       <HeaderTitle>Nabiq | Create your company</HeaderTitle>
-      <OnboardingLayout rightSection={<RightSection />}>
+      <OnboardingLayout
+        rightSection={<RightSection />}
+        rightSectionClassName={righSectionClasss[step]}
+      >
         {(() => {
           switch (step) {
             case 'company_creation':

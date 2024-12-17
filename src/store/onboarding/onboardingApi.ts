@@ -1,10 +1,11 @@
 import toast from 'react-hot-toast';
+import { CompanyCreationInterface } from 'src/interfaces/company.interface';
 
 import { apiSlice } from '../api/apiSlice';
 
 export const onboardApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    onboardUser: builder.mutation({
+    onboardUser: builder.mutation<void, CompanyCreationInterface>({
       query: (data) => ({
         url: '/onboard',
         method: 'POST',
@@ -14,10 +15,8 @@ export const onboardApi = apiSlice.injectEndpoints({
         const loading = toast.loading('Onboarding user...');
         try {
           await queryFulfilled;
-          toast.success('Onboarding successful!');
-          window.location.href = '/';
         } catch (err) {
-          toast.error('Failed to onboard user!');
+          toast.error('Failed to create user!');
           throw new Error(err);
         } finally {
           toast.dismiss(loading);
