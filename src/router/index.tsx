@@ -26,7 +26,7 @@ const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
 // const SignUpPage = lazy(() => import('src/pages/SignUpPage'));
 // const SignInPage = lazy(() => import('pages/SignInPage'));
 const ResetPassword = lazy(() => import('pages/ResetPassword'));
-const Onboarding = lazy(() => import('pages/Onboarding'));
+const OnboardingPage = lazy(() => import('src/pages/OnboardingPage'));
 
 const Test = lazy(() => import('src/pages/Test'));
 const TestButton = lazy(() => import('src/pages/TestButton'));
@@ -78,7 +78,7 @@ const Router = () => {
               {/* Settings */}
               <Route path='/settings' element={<Settings />} />
             </Route>
-            <Route path='/onboarding' element={<Onboarding />} />
+            <Route path='/onboarding' element={<OnboardingPage />} />
             <Route path='/connect-marktag' element={<ConnectMarktag />} />
           </Route>
 
