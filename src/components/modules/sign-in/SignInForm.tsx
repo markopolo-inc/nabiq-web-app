@@ -54,13 +54,8 @@ export const SignInForm = () => {
     resend({ email: form.values.email });
   };
 
-  const onSuccess = () => {
-    window.location.href = '/';
-    // navigate('/');
-  };
-
   const handleFormSubmit = async (values) => {
-    await login({ ...values, onLoading, onUnverified, onSuccess }).unwrap();
+    await login({ ...values, onLoading, onUnverified }).unwrap();
   };
 
   const handleGoogleSignIn = async () => {

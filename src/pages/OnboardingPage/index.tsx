@@ -5,22 +5,16 @@ import {
   RightSection,
   SampleContents,
 } from 'components/modules/onboarding';
+import { motion } from 'framer-motion';
 import { HeaderTitle, OnboardingLayout } from 'layouts';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 const Onboarding = () => {
-  const navigate = useNavigate();
-  const { resourceId: companyId, isOnboardingComplete } = useAppSelector((state) => state.company);
+  const { resourceId: companyId } = useAppSelector((state) => state.company);
   const { step } = useAppSelector((state) => state.onboarding);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (companyId && isOnboardingComplete) {
-      navigate('/');
-    }
-  }, [companyId, isOnboardingComplete]);
 
   useEffect(() => {
     if (companyId) {
@@ -47,13 +41,49 @@ const Onboarding = () => {
         {(() => {
           switch (step) {
             case 'company_creation':
-              return <CompanyCreation />;
+              return (
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <CompanyCreation />
+                </motion.div>
+              );
             case 'lead_database':
-              return <LeadsDatabase />;
+              return (
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <LeadsDatabase />
+                </motion.div>
+              );
             case 'guide_nabiq':
-              return <GuideNabiq />;
+              return (
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <GuideNabiq />
+                </motion.div>
+              );
             case 'sample_content':
-              return <SampleContents />;
+              return (
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <SampleContents />
+                </motion.div>
+              );
             default:
               return null;
           }

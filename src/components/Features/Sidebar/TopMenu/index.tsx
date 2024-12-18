@@ -1,6 +1,7 @@
 import { rem } from '@mantine/core';
 import { FiSettings02, HelpCircle02, Logout01 } from '@nabiq-icons';
 import { Avatar, Image, Menu, UnstyledButton, useGetColors } from '@nabiq-ui';
+import AvatarImage from 'src/assets/logo/avatar.png';
 import { useLogoutMutation } from 'src/store/auth/authApi';
 import { useAppSelector } from 'src/store/hooks.ts';
 
@@ -22,7 +23,7 @@ const TopMenu = () => {
           style={{ border: 'inherit' }}
         >
           <Image
-            src={company?.meta?.profilePhoto}
+            src={company?.meta?.profilePhoto || AvatarImage}
             className='w-[32px] h-[32px] rounded-full'
             alt={company?.meta?.userName}
           />
@@ -33,7 +34,7 @@ const TopMenu = () => {
         <Menu.Label className='flex gap-3 py-3 px-4'>
           <Avatar
             className='w-10 h-10 flex-none rounded-full focus:ring-4 ring-[#E0E0E0] !border-[0.75px] !border-gray-100 !shadow-sm'
-            src={company?.meta?.profilePhoto}
+            src={company?.meta?.profilePhoto || AvatarImage}
             alt={company?.meta?.userName}
             active
             size='md'

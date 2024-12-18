@@ -6,6 +6,8 @@ import { getAuthToken } from 'src/utils/auth';
 
 export const PrivateLayout = () => {
   const [logout] = useLogoutMutation();
+
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   useEffect(() => {
     const handleWindowFocus = async () => {
       const res = await getAuthToken();
@@ -22,8 +24,8 @@ export const PrivateLayout = () => {
       window.removeEventListener('focus', handleWindowFocus);
     };
   }, []);
+
   // console.log("--- I am from PrivateLayout ---");
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   return <>{!isAuthenticated ? <Navigate to={'/login'} /> : <Outlet />}</>;
 };

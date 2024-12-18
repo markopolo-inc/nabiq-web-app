@@ -1,23 +1,16 @@
 import { AppShell, Burger, Group, Image, PageLoader, useDisclosure } from '@nabiq-ui';
 import Sidebar from 'components/Features/Sidebar';
 import { useEffect } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import NabiqLogo from 'src/assets/logo/nabiq-dark-logo.png';
 import TopMenu from 'src/components/Features/Sidebar/TopMenu';
 import { useAppSelector } from 'src/store/hooks';
 
 export const NavigationLayout = () => {
   // console.log("--- I am from Navigationlayout ---");
-  const navigate = useNavigate();
   const { resourceId: companyId, isOnboardingComplete } = useAppSelector((state) => state.company);
   const [opened, { toggle, close }] = useDisclosure();
   const { pathname } = useLocation();
-
-  useEffect(() => {
-    if (!companyId || !isOnboardingComplete) {
-      navigate('/onboarding');
-    }
-  }, [companyId, isOnboardingComplete]);
 
   useEffect(() => {
     close();
@@ -44,7 +37,7 @@ export const NavigationLayout = () => {
       </AppShell.Navbar>
       <AppShell.Main>
         <div className='p-4 w-full mx-auto'>
-          <Outlet />
+          {companyId && isOnboardingComplete ? <Outlet /> : <PageLoader />}
         </div>
       </AppShell.Main>
     </AppShell>
