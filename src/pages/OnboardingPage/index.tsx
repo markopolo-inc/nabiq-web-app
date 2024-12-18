@@ -13,14 +13,14 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 const Onboarding = () => {
   const navigate = useNavigate();
-  const { resourceId: companyId, isOnboardingCompleted } = useAppSelector((state) => state.company);
+  const { resourceId: companyId, isOnboardingComplete } = useAppSelector((state) => state.company);
   const { step } = useAppSelector((state) => state.onboarding);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (companyId && isOnboardingCompleted) {
+    if (companyId && isOnboardingComplete) {
       navigate('/');
     }
-  }, [companyId, isOnboardingCompleted]);
+  }, [companyId, isOnboardingComplete]);
 
   useEffect(() => {
     if (companyId) {

@@ -1,15 +1,34 @@
 import { FiChevronLeft, FiStar06 } from '@nabiq-icons';
 import { Button, Group, Stack, TextArea } from '@nabiq-ui';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { RootState } from 'src/store';
+import {
+  useGenerateSampleContentMutation,
+  useUpdateOnboardingStatusMutation,
+} from 'src/store/onboarding/onboardingApi';
 import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
 
 import { StepCount } from './StepCount';
 
 export const GuideNabiq = () => {
   const dispatch = useDispatch();
+  const { resourceId: brandId } = useSelector((state: RootState) => state.brand);
+  const { resourceId: companyId } = useSelector((state: RootState) => state.company);
+  const [generateSampleContent, { isLoading: isGeneratingSampleContent }] =
+    useGenerateSampleContentMutation();
+  const [updateOnboardingStatus, { isLoading: isUpdatingOnboardingStatus }] =
+    useUpdateOnboardingStatusMutation();
+  const navigate = useNavigate();
 
-  const handleSkipStep = () => {
-    // TODO: set isOnboardingCompleted to true
+  const [prompt, setPrompt] = useState('');
+
+  const handleSkipStep = async () => {
+    const res = await updateOnboardingStatus({ companyId, isOnboardingComplete: true }).unwrap();
+    if (res.success) {
+      navigate('/');
+    }
   };
 
   return (
@@ -26,12 +45,20 @@ export const GuideNabiq = () => {
       </Stack>
       <Stack className='min-w-[520px]'>
         <TextArea
+          value={prompt}
           label='Instructions'
           placeholder='Tell us how to engage your leads—mention key products, discounts, or goals.'
           rows={10}
+          onChange={(e) => setPrompt(e.target.value)}
         />
       </Stack>
-      <Button fullWidth trailingIcon={<FiStar06 size={18} />}>
+      <Button
+        disabled={!prompt}
+        fullWidth
+        onClick={() => generateSampleContent({ brandId, prompt })}
+        loading={isGeneratingSampleContent}
+        trailingIcon={<FiStar06 size={18} />}
+      >
         Generate sample content
       </Button>
       <Group>
@@ -39,10 +66,15 @@ export const GuideNabiq = () => {
           variant='link'
           onClick={() => dispatch(setOnboardingStep('lead_database'))}
           leadingIcon={<FiChevronLeft />}
+          disabled={isGeneratingSampleContent}
         >
           Go back
         </Button>
-        <Button variant='secondary' onClick={() => handleSkipStep()}>
+        <Button
+          variant='secondary'
+          onClick={() => handleSkipStep()}
+          loading={isUpdatingOnboardingStatus}
+        >
           Skip this step
         </Button>
       </Group>

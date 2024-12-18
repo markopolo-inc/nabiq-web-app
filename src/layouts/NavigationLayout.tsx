@@ -9,15 +9,15 @@ import { useAppSelector } from 'src/store/hooks';
 export const NavigationLayout = () => {
   // console.log("--- I am from Navigationlayout ---");
   const navigate = useNavigate();
-  const { resourceId: companyId, isOnboardingCompleted } = useAppSelector((state) => state.company);
+  const { resourceId: companyId, isOnboardingComplete } = useAppSelector((state) => state.company);
   const [opened, { toggle, close }] = useDisclosure();
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (!companyId || !isOnboardingCompleted) {
+    if (!companyId || !isOnboardingComplete) {
       navigate('/onboarding');
     }
-  }, [companyId, isOnboardingCompleted]);
+  }, [companyId, isOnboardingComplete]);
 
   useEffect(() => {
     close();

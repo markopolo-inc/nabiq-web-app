@@ -1,5 +1,6 @@
 import toast from 'react-hot-toast';
 import { CompanyCreationInterface } from 'src/interfaces/company.interface';
+import { IResponseInterface } from 'src/interfaces/response.interface';
 
 import { apiSlice } from '../api/apiSlice';
 
@@ -21,7 +22,7 @@ export const onboardApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    generateSampleContent: builder.mutation<void, { brandId: string }>({
+    generateSampleContent: builder.mutation<void, { brandId: string; prompt: string }>({
       query: (data) => ({
         url: '/onboard/generate-sample-content',
         method: 'POST',
@@ -30,7 +31,7 @@ export const onboardApi = apiSlice.injectEndpoints({
     }),
     markSampleContentAsRead: builder.mutation<
       void,
-      { brandId: string; sampleContentId: string; status: 'read' | 'unread' }
+      { brandId: string; sampleContentId: string; status: 'relevant' | 'irrelevant' }
     >({
       query: (data) => ({
         url: '/onboard/mark-sample-content-as-read',
@@ -38,7 +39,23 @@ export const onboardApi = apiSlice.injectEndpoints({
         body: { ...data },
       }),
     }),
+    updateOnboardingStatus: builder.mutation<
+      IResponseInterface,
+      { companyId: string; isOnboardingComplete: boolean }
+    >({
+      invalidatesTags: ['Company'],
+      query: (data) => ({
+        url: '/onboard',
+        method: 'PUT',
+        body: { ...data },
+      }),
+    }),
   }),
 });
 
-export const { useOnboardUserMutation, useGenerateSampleContentMutation } = onboardApi;
+export const {
+  useOnboardUserMutation,
+  useGenerateSampleContentMutation,
+  useMarkSampleContentAsReadMutation,
+  useUpdateOnboardingStatusMutation,
+} = onboardApi;
