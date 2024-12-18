@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import {
   DataSourceModal,
+  ECommerce,
   Marktag,
   MarktagCreationsModals,
 } from 'src/components/modules/integrations/integration-tabs/data-sources';
@@ -127,45 +128,7 @@ export const DataSources = () => {
             </Group>
           )}
         </IntegrationCard>
-        <IntegrationCard
-          key='salesforce'
-          title='Salesforce'
-          isConnected={!!datasourceIntegrations?.connectedAccounts?.salesforce}
-          description='Leverage Salesforce as a data source for seamless, data-driven customer engagement.'
-          icon={<GatewayLogo app='salesforce' width={32} />}
-          badge={
-            datasourceIntegrations?.connectedAccounts?.hubspot?.domain && (
-              <Badge color='gray'>
-                {datasourceIntegrations?.connectedAccounts?.hubspot?.domain}
-              </Badge>
-            )
-          }
-        >
-          {!datasourceIntegrations?.connectedAccounts?.salesforce ? (
-            <Button
-              className='!w-36'
-              leadingIcon={<FiZap fill='white' size={22} />}
-              onClick={async () => {
-                window.location.href = await getOAuthUrl('/salesforce/auth/connect', {
-                  brandId,
-                  redirectUri: window.location.href,
-                });
-              }}
-            >
-              Integrate
-            </Button>
-          ) : (
-            <Group>
-              <Button
-                variant='tertiary-destructive'
-                onClick={() => setShowSalesforceDisconnectModal(true)}
-                loading={isDisconnecting}
-              >
-                Disconnect
-              </Button>
-            </Group>
-          )}
-        </IntegrationCard>
+        <ECommerce />
       </div>
       <ConfirmationModal
         onConfirm={handleDisconnectHubspot}
