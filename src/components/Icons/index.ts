@@ -119,6 +119,8 @@ export { default as FiSalla } from './Salla';
 export { default as RiShieldFill } from './ShieldFill';
 export { default as FiShoppingBag02 } from './ShoppingBag02';
 export { default as FiStar06 } from './Star06';
+export { default as FiSend01 } from './Send01';
+
 // T
 export { default as FiTrash } from './Trash';
 export { default as FiThumbsUp } from './ThumbsUp';
