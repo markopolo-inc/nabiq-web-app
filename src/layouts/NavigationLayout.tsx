@@ -2,7 +2,7 @@ import { AppShell, Burger, Group, Image, PageLoader, useDisclosure } from '@nabi
 import Sidebar from 'components/Features/Sidebar';
 import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import NabiqLogo from 'src/assets/logo/nabiq-logo.png';
+import NabiqLogo from 'src/assets/logo/nabiq-dark-logo.png';
 import TopMenu from 'src/components/Features/Sidebar/TopMenu';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -25,15 +25,15 @@ export const NavigationLayout = () => {
 
   return companyId ? (
     <AppShell
-      header={{ height: 72 }}
+      header={{ height: 56 }}
       navbar={{ width: 300, breakpoint: 'md', collapsed: { mobile: !opened } }}
       padding='md'
     >
-      <AppShell.Header className='px-8'>
+      <AppShell.Header px='sm' className='bg-gray-950'>
         <Group h='100%' px='md' className='justify-between'>
           <Group>
-            <Burger opened={opened} onClick={toggle} hiddenFrom='md' size='sm' />
-            <Image src={NabiqLogo} alt='Nabiq' className='w-24' />
+            <Burger opened={opened} onClick={toggle} hiddenFrom='md' color='white' size='sm' />
+            <Image src={NabiqLogo} alt='Nabiq' className='w-[74px]' />
           </Group>
 
           <TopMenu />
