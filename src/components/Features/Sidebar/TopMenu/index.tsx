@@ -18,12 +18,12 @@ const TopMenu = () => {
     <Menu width={240} position='bottom-end'>
       <Menu.Target>
         <UnstyledButton
-          className='w-10 h-10 rounded-full focus:ring-4 ring-[#E0E0E0] !border-[0.75px] !border-gray-100 !shadow-sm'
+          className='w-8 h-8 rounded-full focus:ring-2 ring-[#E0E0E0] !border-[0.75px] !border-gray-100 !shadow-sm'
           style={{ border: 'inherit' }}
         >
           <Image
             src={company?.meta?.profilePhoto}
-            className='w-[38.5px] h-[38.5px] rounded-full'
+            className='w-[32px] h-[32px] rounded-full'
             alt={company?.meta?.userName}
           />
         </UnstyledButton>
