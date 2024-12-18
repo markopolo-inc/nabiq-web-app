@@ -44,7 +44,7 @@ const Mascot = ({
     <path
       d='M10.9744 24.5612L29.6637 12.1665C29.6637 12.1665 29.4606 9.74422 22.6254 12.0237C22.6254 12.0237 26.1415 7.25109 21.6853 1.41016L1.41406 14.4459C1.41406 14.4459 9.09402 25.5433 9.10542 25.5587C7.6677 25.0266 6.27455 25.4323 5.77596 26.3117C5.46706 26.8561 5.5676 27.4642 5.64638 27.7714C6.01126 28.6322 6.46113 29.1931 6.80631 29.5475C7.60447 30.3672 8.10721 30.3518 8.52183 31.112C8.94579 31.8886 8.64519 32.317 9.12719 32.7638C9.51383 33.1223 10.1793 33.2836 10.7805 33.0535C11.5963 32.7412 11.7839 31.904 11.7964 31.8455C12.0431 32.5286 12.437 33.4634 13.062 34.4927C13.6819 35.5138 15.5239 38.5349 18.7196 39.8559C22.6824 41.4934 28.4447 40.3973 31.1108 36.4229C32.6387 34.1444 32.6408 31.678 32.5579 30.5162'
       stroke='url(#paint2_linear_4_256)'
-      stroke-opacity='0.03'
+      strokeOpacity='0.03'
       strokeWidth={strokeWidth}
       strokeLinecap='round'
       strokeLinejoin='round'
@@ -59,7 +59,7 @@ const Mascot = ({
     <path
       d='M22.6244 12.0234C18.1744 14.9829 13.7244 17.9435 9.27539 20.903'
       stroke='url(#paint3_linear_4_256)'
-      stroke-opacity='0.03'
+      strokeOpacity='0.03'
       strokeWidth={strokeWidth}
       strokeLinecap='round'
       strokeLinejoin='round'
@@ -74,7 +74,7 @@ const Mascot = ({
     <path
       d='M15.9648 25.5748C15.9648 25.5748 16.991 22.3739 20.0759 23.5511'
       stroke='url(#paint4_linear_4_256)'
-      stroke-opacity='0.03'
+      strokeOpacity='0.03'
       strokeWidth={strokeWidth}
       strokeLinecap='round'
       strokeLinejoin='round'
@@ -89,7 +89,7 @@ const Mascot = ({
     <path
       d='M23.8457 21.3873C23.8457 21.3873 24.8719 18.1864 27.9567 19.3636'
       stroke='url(#paint5_linear_4_256)'
-      stroke-opacity='0.03'
+      strokeOpacity='0.03'
       strokeWidth={strokeWidth}
       strokeLinecap='round'
       strokeLinejoin='round'
@@ -104,7 +104,7 @@ const Mascot = ({
     <path
       d='M11.6387 29.3438C11.6387 29.3438 12.0906 31.201 11.7942 31.8461'
       stroke='url(#paint6_linear_4_256)'
-      stroke-opacity='0.03'
+      strokeOpacity='0.03'
       strokeWidth={strokeWidth}
       strokeLinecap='round'
       strokeLinejoin='round'
@@ -119,7 +119,7 @@ const Mascot = ({
     <path
       d='M8.15039 28.0352C8.15039 28.0352 10.2888 28.783 9.87836 30.1277'
       stroke='url(#paint7_linear_4_256)'
-      stroke-opacity='0.03'
+      strokeOpacity='0.03'
       strokeWidth={strokeWidth}
       strokeLinecap='round'
       strokeLinejoin='round'
@@ -134,7 +134,7 @@ const Mascot = ({
     <path
       d='M25.5996 34.3922L28.9747 32.2617'
       stroke='url(#paint8_linear_4_256)'
-      stroke-opacity='0.03'
+      strokeOpacity='0.03'
       strokeWidth={strokeWidth}
       strokeLinecap='round'
       strokeLinejoin='round'
@@ -149,7 +149,7 @@ const Mascot = ({
     <path
       d='M23.8666 27.676L26.7846 26.1393C26.7846 26.1393 25.9491 21.0636 21.2617 20.9023'
       stroke='url(#paint9_linear_4_256)'
-      stroke-opacity='0.03'
+      strokeOpacity='0.03'
       strokeWidth={strokeWidth}
       strokeLinecap='round'
       strokeLinejoin='round'
