@@ -85,6 +85,7 @@ export default {
       },
       opacity: {
         15: '.15',
+        48: '.48',
       },
       spacing: {
         7: '1.75rem',
@@ -121,6 +122,15 @@ export default {
         lg: '0px 12px 16px -4px rgba(18, 25, 38, 0.08), 0px 4px 6px -2px rgba(18, 25, 38, 0.03)',
         xl: '0px 24px 48px -12px rgba(18, 25, 38, 0.18)',
       },
+      backgroundImage: {
+        'home-hero': "url('/img_1.png')",
+      },
+    },
+    backgroundSize: {
+      auto: 'auto',
+      cover: 'cover',
+      contain: 'contain',
+      '100%': '100%',
     },
   },
   variants: {
