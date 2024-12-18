@@ -21,7 +21,24 @@ export const onboardApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    generateSampleContent: builder.mutation<void, { brandId: string }>({
+      query: (data) => ({
+        url: '/onboard/generate-sample-content',
+        method: 'POST',
+        body: { ...data },
+      }),
+    }),
+    markSampleContentAsRead: builder.mutation<
+      void,
+      { brandId: string; sampleContentId: string; status: 'read' | 'unread' }
+    >({
+      query: (data) => ({
+        url: '/onboard/mark-sample-content-as-read',
+        method: 'POST',
+        body: { ...data },
+      }),
+    }),
   }),
 });
 
-export const { useOnboardUserMutation } = onboardApi;
+export const { useOnboardUserMutation, useGenerateSampleContentMutation } = onboardApi;

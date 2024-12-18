@@ -1,12 +1,20 @@
 import { FiDatabase01, FiShoppingBag02 } from '@nabiq-icons';
-import { Accordion, Button, GatewayLogo, Group, Stack } from '@nabiq-ui';
+import { Accordion, Button, GatewayLogo, Stack } from '@nabiq-ui';
 import { useDispatch } from 'react-redux';
+import { useAppSelector } from 'src/store/hooks';
 import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
+import { getOAuthUrl } from 'src/utils/auth';
 
 import { StepCount } from './StepCount';
 
 export const LeadsDatabase = () => {
   const dispatch = useDispatch();
+  const { datasourceIntegrations, resourceId: brandId } = useAppSelector((state) => state.brand);
+
+  const isConnected = datasourceIntegrations?.tokens
+    ? Object.values(datasourceIntegrations.tokens).some(Boolean)
+    : false;
+
   return (
     <Stack gap={64}>
       <Stack gap={32}>
@@ -28,41 +36,84 @@ export const LeadsDatabase = () => {
               Subjects, participants and timestamps will be visible to your team, Content won’t be
               visible unless shared.
             </p>
-            <Group className='p-1'>
-              <Button leadingIcon={<GatewayLogo app='shopify' width={20} />}>
+            <div className='grid grid-cols-2 gap-2 p-1'>
+              <Button
+                fullWidth
+                trailingIcon={<GatewayLogo app='shopify' width={20} />}
+                onClick={async () => {
+                  window.location.href = await getOAuthUrl(
+                    '/shopify/install/direct',
+                    {
+                      // brandId,
+                      // redirectUri: window.location.href,
+                      shop: import.meta.env.VITE_SHOPIFY_APP_NAME,
+                    },
+                    {
+                      sendToken: false,
+                    },
+                  );
+                }}
+              >
                 Connect Shopify
               </Button>
               <Button
+                fullWidth
                 variant='secondary-black'
-                leadingIcon={<GatewayLogo app='salla' width={20} />}
+                trailingIcon={<GatewayLogo app='salla' width={20} />}
+                onClick={async () => {
+                  window.location.href = await getOAuthUrl('/salla/oauth', {
+                    brandId,
+                    redirectUri: window.location.href,
+                  });
+                }}
               >
                 Connect Salla
               </Button>
-            </Group>
+            </div>
           </Stack>
         </Accordion>
-        <Accordion title='Sync from marketplace' icon={<FiDatabase01 size={20} color='#697586' />}>
+        <Accordion title='Sync from CRM' icon={<FiDatabase01 size={20} color='#697586' />}>
           <Stack gap={24}>
             <p className='text-sm text-gray-600'>
               Participants and timestamps will be visible to your team. Subject lines and contents
               won’t be visible unless shared.
             </p>
-            <Group className='p-1'>
-              <Button leadingIcon={<GatewayLogo app='hubspot' width={20} />}>
+            <div className='grid grid-cols-2 gap-2 p-1'>
+              <Button
+                fullWidth
+                trailingIcon={<GatewayLogo app='hubspot' width={20} />}
+                onClick={async () => {
+                  window.location.href = await getOAuthUrl('/hubspot/oauth', {
+                    brandId,
+                    redirectUri: window.location.href,
+                  });
+                }}
+              >
                 Connect Hubspot
               </Button>
               <Button
+                fullWidth
                 variant='secondary-black'
-                leadingIcon={<GatewayLogo app='salesforce' width={20} />}
+                trailingIcon={<GatewayLogo app='salesforce' width={20} />}
+                disabled={datasourceIntegrations?.tokens.salesforce}
+                onClick={async () => {
+                  window.location.href = await getOAuthUrl('/salesforce/auth/connect', {
+                    brandId,
+                    redirectUri: window.location.href,
+                  });
+                }}
               >
-                Connect Salesforce
+                {datasourceIntegrations?.tokens.salesforce
+                  ? 'Salesforce connected'
+                  : 'Connect Salesforce'}
               </Button>
-            </Group>
+            </div>
           </Stack>
         </Accordion>
       </Stack>
       <Button
         fullWidth
+        disabled={!isConnected}
         onClick={() => {
           dispatch(setOnboardingStep('guide_nabiq'));
         }}

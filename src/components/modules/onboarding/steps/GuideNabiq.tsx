@@ -1,3 +1,4 @@
+import { FiChevronLeft, FiStar06 } from '@nabiq-icons';
 import { Button, Group, Stack, TextArea } from '@nabiq-ui';
 import { useDispatch } from 'react-redux';
 import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
@@ -27,11 +28,18 @@ export const GuideNabiq = () => {
         <TextArea
           label='Instructions'
           placeholder='Tell us how to engage your leads—mention key products, discounts, or goals.'
+          rows={10}
         />
       </Stack>
-      <Button fullWidth>Generate sample content</Button>
+      <Button fullWidth trailingIcon={<FiStar06 size={18} />}>
+        Generate sample content
+      </Button>
       <Group>
-        <Button variant='link' onClick={() => dispatch(setOnboardingStep('lead_database'))}>
+        <Button
+          variant='link'
+          onClick={() => dispatch(setOnboardingStep('lead_database'))}
+          leadingIcon={<FiChevronLeft />}
+        >
           Go back
         </Button>
         <Button variant='secondary' onClick={() => handleSkipStep()}>

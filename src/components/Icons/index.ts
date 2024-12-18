@@ -23,6 +23,7 @@ export { default as Command2 } from './Command2';
 export { default as FiCheck } from './Check';
 export { default as FiChevronRight } from './ChevronRight';
 export { default as FiChevronDown } from './ChevronDown';
+export { default as FiChevronLeft } from './ChevronLeft';
 export { default as FiCommand } from './Command';
 export { default as FiCrossX } from './CrossX';
 export { default as FiCircle } from './Circle';
@@ -111,7 +112,7 @@ export { ShoppingBag03 as FiShoppingBag03 } from './ShoppingBag03';
 export { default as FiSalla } from './Salla';
 export { default as RiShieldFill } from './ShieldFill';
 export { default as FiShoppingBag02 } from './ShoppingBag02';
-
+export { default as FiStar06 } from './Star06';
 // T
 export { default as FiTrash } from './Trash';
 export { default as FiThumbsUp } from './ThumbsUp';

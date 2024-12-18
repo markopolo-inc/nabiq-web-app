@@ -14,6 +14,7 @@ export const authApi = apiSlice.injectEndpoints({
       queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
+      invalidatesTags: ['Company'],
       async onQueryStarted(arg, { dispatch }) {
         const { email, password, onLoading, onUnverified, onSuccess } = arg;
         try {
