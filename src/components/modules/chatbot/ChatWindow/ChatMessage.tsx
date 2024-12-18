@@ -7,6 +7,8 @@ type ChatMessageProps = {
   isNabiq?: boolean;
   isDeliver?: boolean;
   isBotTexting?: boolean;
+  tappedMessage?: boolean;
+  isStartAgain?: boolean;
 };
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({
@@ -14,6 +16,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   message,
   isDeliver = false,
   isBotTexting = false,
+  tappedMessage = false,
+  isStartAgain = false,
 }) => {
   if (isNabiq) {
     return (
@@ -43,6 +47,32 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
             </div>
           )}
         </div>
+      </div>
+    );
+  } else if (tappedMessage) {
+    return (
+      <div className='w-max ml-auto flex flex-col flex-end gap-1.5 hover:cursor-pointer'>
+        <div className=' bg-white border border-gray-200 shadow-sm py-2.5 px-3.5 rounded-2xl rounded-ee-none'>
+          <p className='font-normal text-sm text-gray-900'>{message}</p>
+        </div>
+        {isDeliver && (
+          <p className='font-normal text-xs leading-[18px] text-gray-600 text-end'>
+            Delivered just now
+          </p>
+        )}
+      </div>
+    );
+  } else if (isStartAgain) {
+    return (
+      <div className='w-max ml-auto flex flex-col flex-end gap-1.5 hover:cursor-pointer'>
+        <div className=' bg-white border border-gray-200 shadow-sm py-2.5 px-3.5 rounded-2xl rounded-se-none'>
+          <p className='font-normal text-sm text-gray-900'>{message}</p>
+        </div>
+        {isDeliver && (
+          <p className='font-normal text-xs leading-[18px] text-gray-600 text-end'>
+            Delivered just now
+          </p>
+        )}
       </div>
     );
   } else {
