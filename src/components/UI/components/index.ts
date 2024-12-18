@@ -7,7 +7,6 @@ export { default as PageLoader } from './PageLoader/PageLoader';
 export { default as ContentLoader } from './ContentLoader/ContentLoader';
 export { Card } from './Card';
 export { Accordion } from './Accordion';
-
 export { default as Breadcrumbs } from './Breadcrumbs';
 
 // Buttons
