@@ -14,7 +14,8 @@ export type GatewayType =
   | 'facebook'
   | 'google'
   | 'shopify'
-  | 'salla';
+  | 'salla'
+  | 'salesforce';
 
 export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify' | 'salla';
 

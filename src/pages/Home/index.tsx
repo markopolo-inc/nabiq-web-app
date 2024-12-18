@@ -1,14 +1,57 @@
+import { Stack } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ConstitutionalAIModerationCard, IntegrateApps } from 'src/components/modules/home';
+import { CampaignGoalModal } from 'src/components/modules/campaigns';
+import {
+  Header,
+  MetricCards,
+  OnBoardingItems,
+  PerformanceTrend,
+  QuickActions,
+} from 'src/components/modules/home';
+import { MarktagCreationsModals } from 'src/components/modules/integrations/integration-tabs/data-sources';
 import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
-import { useAppSelector } from 'store/hooks';
+import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
+import { useAppSelector } from 'src/store/hooks.ts';
+
+function isObjectNotEmpty(obj) {
+  // Check if the object exists and is not null
+  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+    // Check if the object has any own properties
+    return Object.keys(obj).length > 0;
+  }
+  return false;
+}
 
 const Home = () => {
-  const company = useAppSelector((state) => state.company);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
+  const {
+    resourceId: brandId,
+    emailIntegrations,
+    smsIntegrations,
+    markTag,
+  } = useAppSelector((state) => state.brand);
+
+  const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
+  const [showMarktagModal, setShowMarktagModal] = useState<boolean>(false);
+
+  const [timeRange, _setTimeRange] = useState<
+    'last_year' | 'last_month' | 'last_week' | 'last_3_day'
+  >('last_year');
+
+  const { data: campaignList } = useGetCampaignConfigsQuery(brandId);
+
+  const isIntegrationChannelDone = !(
+    !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations)
+  );
+  const isFirstCampaignDone = !!campaignList?.data?.length;
+  const isMarkTagDone = Boolean(markTag?.resourceId);
+
+  const isOnboardingDone = isIntegrationChannelDone && isFirstCampaignDone && isMarkTagDone;
+  const isOnBoardingMetricsShow = isIntegrationChannelDone && isFirstCampaignDone;
 
   useEffect(() => {
     const installationId = searchParams.get(QUERY_PARAMS.INSTALLATION_ID);
@@ -23,23 +66,34 @@ const Home = () => {
   return (
     <>
       <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
+      <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
+      <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
-      <div className='flex flex-col gap-16'>
-        <div className='flex flex-col'>
-          <p className='text-gray-900 font-semibold text-4xl'>Hello, {company?.meta?.userName}</p>
-          <p className='text-gray-600 font-normal text-lg'>
-            Welcome to your marketing co-pilot captain.
-          </p>
-        </div>
-        <div className='p-12 bg-gray-100 rounded-xl'>
-          <div className='flex flex-col justify-center items-center'>
-            <div className='gap-3 w-fit grid grid-cols-1 xl:grid-cols-2 justify-center'>
-              <IntegrateApps />
-              <ConstitutionalAIModerationCard />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Stack
+        gap={48}
+        className='min-h-[calc(100vh+112px)] pt-16 px-6 bg-home-hero bg-no-repeat bg-100%'
+      >
+        <Header />
+
+        {isOnboardingDone && <QuickActions />}
+
+        {!isOnboardingDone && (
+          <OnBoardingItems
+            isIntegrationChannelDone={isIntegrationChannelDone}
+            isFirstCampaignDone={isFirstCampaignDone}
+            isMarkTagDone={isMarkTagDone}
+            onClickShowGoalModal={() => setShowGoalModal((prevState) => !prevState)}
+            onClickShowMarkTagModal={() => setShowMarktagModal((prevState) => !prevState)}
+          />
+        )}
+
+        {isOnBoardingMetricsShow && (
+          <Stack className={`${isOnboardingDone ? 'flex-col-reverse' : 'flex-row'} `} gap={24}>
+            <PerformanceTrend isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
+            <MetricCards isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
+          </Stack>
+        )}
+      </Stack>
     </>
   );
 };
