@@ -3,7 +3,7 @@ export interface CompanyInterface {
   _id?: string;
   resourceId?: string;
   companyName?: string;
-  isOnboardingCompleted?: boolean;
+  isOnboardingComplete?: boolean;
   meta?: {
     cognitoId: string;
     userName: string;
