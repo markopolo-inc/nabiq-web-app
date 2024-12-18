@@ -30,6 +30,7 @@
     "@mantine/dropzone": "^7.12.2",
     "@mantine/form": "^7.10.1",
     "@mantine/hooks": "^7.10.1",
+    "@novu/react": "^2.6.2",
     "@reduxjs/toolkit": "^2.2.5",
     "@tabler/icons-react": "^3.14.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",

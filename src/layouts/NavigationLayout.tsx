@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import NabiqLogo from 'src/assets/logo/nabiq-logo.png';
 import TopMenu from 'src/components/Features/Sidebar/TopMenu';
+import { NotificationPopover } from 'src/components/modules/notifications';
 import { useAppSelector } from 'src/store/hooks';
 
 export const NavigationLayout = () => {
@@ -36,7 +37,10 @@ export const NavigationLayout = () => {
             <Image src={NabiqLogo} alt='Nabiq' className='w-24' />
           </Group>
 
-          <TopMenu />
+          <Group>
+            <NotificationPopover />
+            <TopMenu />
+          </Group>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p='md' className='!bg-gray-25 border-r !border-gray-200'>
