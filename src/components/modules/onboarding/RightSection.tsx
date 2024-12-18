@@ -32,7 +32,18 @@ export const RightSection = () => {
           >
             <Image src={GuideNabiqImage} alt='Guide Nabiq' />
           </motion.div>
-          <p className='text-xl font-medium text-gray-900'>Generated content will show up here</p>
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className='flex flex-col gap-4 items-center'
+          >
+            <p className='text-xl font-medium text-gray-900'>Generated content will show up here</p>
+            <p className='text-sm text-gray-600 text-center'>
+              Tell us what you’re looking for in your contents—who it’s for, what to say, and how to
+              say it. The clearer you are, the better Nabiq can deliver.
+            </p>
+          </motion.div>
         </Stack>
       );
     default:
