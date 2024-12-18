@@ -1,9 +1,16 @@
 import { ContentLoader } from '@nabiq-ui';
+import OnboardingPage from 'pages/OnboardingPage';
 import SignInPage from 'pages/SignInPage';
 import SignUpPage from 'pages/SignUpPage';
 import { Suspense, lazy } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { AppLayout, NavigationLayout, PrivateLayout } from 'src/layouts';
+// Test
+import Test from 'src/pages/Test';
+import TestButton from 'src/pages/TestButton';
+import TestCheckbox from 'src/pages/TestCheckbox';
+import TestInputs from 'src/pages/TestInputs';
+import TestTextarea from 'src/pages/TestTextarea';
 
 const delayedLazy = (importFn: () => Promise<any>, delay = 1000) => {
   return lazy(() =>
@@ -33,18 +40,29 @@ const ContentSamples = delayedLazy(() => import('pages/ControlRoomPage/ContentSa
 const Settings = delayedLazy(() => import('pages/Settings'));
 const ConnectMarktag = delayedLazy(() => import('src/pages/ConnetMarktag'));
 const ResetPassword = delayedLazy(() => import('pages/ResetPassword'));
-const OnboardingPage = delayedLazy(() => import('src/pages/OnboardingPage'));
-const Test = delayedLazy(() => import('src/pages/Test'));
-const TestButton = delayedLazy(() => import('src/pages/TestButton'));
-const TestCheckbox = delayedLazy(() => import('src/pages/TestCheckbox'));
-const TestInputs = delayedLazy(() => import('src/pages/TestInputs'));
-const TestTextarea = delayedLazy(() => import('src/pages/TestTextarea'));
 
 const Router = () => {
   return (
     <Routes>
       <Route path='/' element={<AppLayout />}>
-        <Route path='/' element={<PrivateLayout />}>
+        {/* Public Routes */}
+        <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/login' element={<SignInPage />} />
+        <Route path='/reset-pass' element={<ResetPassword />} />
+
+        <Route element={<PrivateLayout />}>
+          {/* Onboarding Route */}
+          <Route path='/onboarding' element={<OnboardingPage />} />
+          <Route
+            path='/connect-marktag'
+            element={
+              <Suspense fallback={<ContentLoader />}>
+                <ConnectMarktag />
+              </Suspense>
+            }
+          />
+
+          {/* Main App Routes - Require Onboarding */}
           <Route path='/' element={<NavigationLayout />}>
             <Route
               path='/'
@@ -169,17 +187,11 @@ const Router = () => {
               }
             />
           </Route>
-          <Route path='/onboarding' element={<OnboardingPage />} />
-          <Route path='/connect-marktag' element={<ConnectMarktag />} />
         </Route>
-
-        <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/login' element={<SignInPage />} />
-        <Route path='/reset-pass' element={<ResetPassword />} />
 
         {process.env.NODE_ENV === 'development' && (
           <Route path='/test' element={<Outlet />}>
-            <Route path='/test' element={<Test />} />
+            <Route path='test' element={<Test />} />
             <Route path='btn' element={<TestButton />} />
             <Route path='checkbox' element={<TestCheckbox />} />
             <Route path='inputs' element={<TestInputs />} />

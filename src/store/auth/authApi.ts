@@ -14,7 +14,6 @@ export const authApi = apiSlice.injectEndpoints({
       queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
-      invalidatesTags: ['Company'],
       async onQueryStarted(arg, { dispatch }) {
         const { email, password, onLoading, onUnverified, onSuccess } = arg;
         try {
@@ -147,16 +146,18 @@ export const authApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(_arg, { dispatch }) {
         Auth.signOut();
-        dispatch(logout());
+
         const loading = toast.loading('Logging out...');
-        toast.dismiss(loading);
-        dispatch({ type: 'store/reset' });
-        dispatch(apiSlice.util.resetApiState());
-        persistor.purge().then((_) => {
-          // resolved
-        });
-        window.localStorage.clear();
-        window.location.href = '/login';
+        setTimeout(() => {
+          dispatch(logout());
+          dispatch({ type: 'store/reset' });
+          dispatch(apiSlice.util.resetApiState());
+          persistor.purge().then((_) => {
+            // resolved
+          });
+          toast.dismiss(loading);
+          window.localStorage.clear();
+        }, 2000);
       },
     }),
   }),
