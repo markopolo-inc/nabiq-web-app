@@ -72,6 +72,7 @@ export { default as FiLineChartUp05 } from './LineChartUp05';
 export { default as FiLifeBuoy01 } from './LifeBuoy01';
 export { LinkBroken01 as FiLinkBroken01 } from './LinkBroken01';
 export { LayoutAlt04 as FiLayoutAlt04 } from './LayoutAlt04';
+export { default as FiLineChartUp01 } from './LineChartUp01';
 
 // k
 export { default as Klaviyo } from './Klaviyo';
