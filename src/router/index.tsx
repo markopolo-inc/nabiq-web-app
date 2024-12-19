@@ -39,7 +39,6 @@ const ControlRoom = delayedLazy(() => import('pages/ControlRoomPage'));
 const ContentSamples = delayedLazy(() => import('pages/ControlRoomPage/ContentSamples'));
 const Settings = delayedLazy(() => import('pages/Settings'));
 const ConnectMarktag = delayedLazy(() => import('src/pages/ConnetMarktag'));
-const ResetPassword = delayedLazy(() => import('pages/ResetPassword'));
 
 const Router = () => {
   return (
@@ -48,7 +47,6 @@ const Router = () => {
         {/* Public Routes */}
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/login' element={<SignInPage />} />
-        <Route path='/reset-pass' element={<ResetPassword />} />
 
         <Route element={<PrivateLayout />}>
           {/* Onboarding Route */}
