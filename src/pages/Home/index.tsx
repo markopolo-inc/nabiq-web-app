@@ -88,7 +88,7 @@ const Home = () => {
         )}
 
         {isOnBoardingMetricsShow && (
-          <Stack className={`${isOnboardingDone ? 'flex-col-reverse' : 'flex-row'} `} gap={24}>
+          <Stack className={`${isOnboardingDone ? 'flex-col-reverse gap-12' : 'flex-row gap-6'} `}>
             <PerformanceTrend isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
             <MetricCards isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
           </Stack>
