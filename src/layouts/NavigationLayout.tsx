@@ -43,7 +43,8 @@ export const NavigationLayout = () => {
         <Sidebar />
       </AppShell.Navbar>
       <AppShell.Main>
-        <div className='p-4 w-full mx-auto'>
+        {/*<div className='p-4 w-full mx-auto'>*/}
+        <div className='w-full mx-auto'>
           <Outlet />
         </div>
       </AppShell.Main>
