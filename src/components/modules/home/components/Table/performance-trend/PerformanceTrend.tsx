@@ -1,7 +1,6 @@
-import { FiPlus } from '@nabiq-icons';
-import { Button, Group, OptionTabs, Stack } from '@nabiq-ui';
+import { FiLineChartUp01 } from '@nabiq-icons';
+import { Group, OptionTabs, Stack } from '@nabiq-ui';
 import { FC, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   CartesianGrid,
   Line,
@@ -22,7 +21,6 @@ export const PerformanceTrend: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
   isOnboardingDone: boolean;
 }> = ({ timeRange, isOnboardingDone }) => {
-  const navigate = useNavigate();
   const [valueType, setValueType] = useState<'number' | 'percentage'>('number');
   const [graphData, setGraphData] = useState<TransformedData[]>([]);
 
@@ -69,7 +67,7 @@ export const PerformanceTrend: FC<{
   return (
     <Stack
       gap={20}
-      className={`${isOnboardingDone ? 'w-auto' : 'max-w-[669px]'} w-full rounded-[20px] border border-white p-6 backdrop-blur bg-white/48 shadow-lg`}
+      className={`${isOnboardingDone ? 'w-auto' : 'max-w-[669px]'} w-full h-fit rounded-[20px] border border-white p-6 backdrop-blur bg-white/48 shadow-lg`}
     >
       <div className='flex justify-between items-center'>
         <Stack gap={4}>
@@ -89,9 +87,12 @@ export const PerformanceTrend: FC<{
             { label: '%', value: 'percentage' },
           ]}
         />
-        <Group gap={12} className='px-2 py-2' style={{ marginBottom: -50 }}>
-          {graphData?.length > 0 &&
-            performanceData?.data?.names?.map((metric: string, index: number) => (
+      </Group>
+
+      <Stack className='bg-white p-6 rounded-xl border border-gray-200 shadow-xs' gap={0}>
+        {!!graphData?.length && (
+          <Group gap={12} className='ps-2 self-end'>
+            {performanceData?.data?.names?.map((metric: string, index: number) => (
               <div key={metric} className='flex items-center'>
                 <div
                   className={`w-2.5 h-2.5 rounded-full mr-2 ${
@@ -107,74 +108,74 @@ export const PerformanceTrend: FC<{
                 <span className='text-sm text-gray-600'>{metric}</span>
               </div>
             ))}
-        </Group>
-      </Group>
+          </Group>
+        )}
 
-      {isLoading ? (
-        <p className='text-gray-600'>Loading performance data...</p>
-      ) : error ? (
-        <p className='text-red-600'>Error loading performance data</p>
-      ) : graphData?.length === 0 ? (
-        <Stack align='center' gap={24} p={24}>
-          <Stack gap={4} align='center'>
-            <p className='text-gray-900 font-semibold'>No data to show at this moment</p>
-            <p className='text-gray-600 text-sm'>
-              Launch a campaign to see performance trend data.
-            </p>
+        {isLoading ? (
+          <p className='text-gray-600'>Loading performance data...</p>
+        ) : error ? (
+          <p className='text-red-600'>Error loading performance data</p>
+        ) : graphData?.length === 0 ? (
+          <Stack align='center' gap={24} p={24}>
+            <div className='p-3 bg-white border border-gray-200 shadow-xs rounded-[10px]'>
+              <FiLineChartUp01 />
+            </div>
+
+            <Stack gap={4} align='center'>
+              <p className='text-gray-900 font-semibold text-base'>
+                Data will be rolling in shortly!
+              </p>
+              <p className='text-gray-600 font-normal text-sm'>
+                Your data will show up here when ready.
+              </p>
+            </Stack>
           </Stack>
-
-          <Button
-            leadingIcon={<FiPlus size={20} color='white' />}
-            onClick={() => navigate(`/campaigns`)}
-          >
-            Create campaign
-          </Button>
-        </Stack>
-      ) : (
-        <ResponsiveContainer width='100%' height={300}>
-          <LineChart
-            data={graphData}
-            margin={{ top: 30, right: 30, left: 20, bottom: 15 }}
-            className='text-gray-600'
-          >
-            <CartesianGrid strokeDasharray='3 3' vertical={false} />
-            <XAxis
-              dataKey='time'
-              strokeDasharray='3 3'
-              opacity={0.4}
-              stroke='#181819'
-              interval='equidistantPreserveStart'
-            ></XAxis>
-            <YAxis
-              tickFormatter={(value) => value}
-              tickCount={7}
-              strokeDasharray='3 3'
-              opacity={0.4}
-              stroke='#181819'
-            />
-            <Tooltip />
-            {performanceData?.data?.names?.map((metric: string, index: number) => (
-              <Line
-                key={metric}
-                type='monotone'
-                dataKey={metric}
-                stroke={
-                  [
-                    '#2972F5', // Contacted
-                    '#DD2590', // Delivered
-                    '#9f7aea', // Opened
-                    '#28a745', // Clicked
-                    '#ffc107', // Replied
-                    '#6f42c1', // Interested
-                  ][index]
-                }
-                strokeWidth={2}
-                dot={null}
+        ) : (
+          <ResponsiveContainer width='100%' height={300}>
+            <LineChart
+              data={graphData}
+              margin={{ top: 5, right: 0, left: 0, bottom: 0 }}
+              className='text-gray-600'
+            >
+              <CartesianGrid strokeDasharray='3 3' vertical={false} />
+              <XAxis
+                dataKey='time'
+                strokeDasharray='3 3'
+                opacity={0.4}
+                stroke='#181819'
+                interval='equidistantPreserveStart'
+              ></XAxis>
+              <YAxis
+                tickFormatter={(value) => value}
+                tickCount={7}
+                strokeDasharray='3 3'
+                opacity={0.4}
+                stroke='#181819'
               />
-            ))}
-          </LineChart>
-        </ResponsiveContainer>
-      )}
+              <Tooltip />
+              {performanceData?.data?.names?.map((metric: string, index: number) => (
+                <Line
+                  key={metric}
+                  type='monotone'
+                  dataKey={metric}
+                  stroke={
+                    [
+                      '#2972F5', // Contacted
+                      '#DD2590', // Delivered
+                      '#9f7aea', // Opened
+                      '#28a745', // Clicked
+                      '#ffc107', // Replied
+                      '#6f42c1', // Interested
+                    ][index]
+                  }
+                  strokeWidth={2}
+                  dot={null}
+                />
+              ))}
+            </LineChart>
+          </ResponsiveContainer>
+        )}
+      </Stack>
     </Stack>
   );
 };
