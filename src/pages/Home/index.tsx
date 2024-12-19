@@ -71,7 +71,7 @@ const Home = () => {
 
       <Stack
         gap={48}
-        className='min-h-[calc(100vh-72px)] -m-4 py-8 px-6 bg-home-hero bg-no-repeat bg-100% bg-fixed'
+        className='min-h-[calc(100vh-56px)] -m-4 py-8 px-6 bg-home-hero bg-no-repeat bg-100% bg-fixed'
       >
         <Header />
 
