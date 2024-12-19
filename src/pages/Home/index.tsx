@@ -48,6 +48,7 @@ const Home = () => {
     !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations)
   );
   const isFirstCampaignDone = !!campaignList?.data?.length;
+
   const isMarkTagDone = Boolean(markTag?.resourceId);
 
   const isOnboardingDone = isIntegrationChannelDone && isFirstCampaignDone && isMarkTagDone;
