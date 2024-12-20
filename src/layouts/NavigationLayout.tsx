@@ -1,9 +1,8 @@
 import { AppShell, Burger, Group, Image, PageLoader, useDisclosure } from '@nabiq-ui';
-import Sidebar from 'components/Features/Sidebar';
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import NabiqLogo from 'src/assets/logo/nabiq-dark-logo.png';
-import TopMenu from 'src/components/Features/Sidebar/TopMenu';
+import { Sidebar, TopMenu } from 'src/components/modules/navigation';
 import { useAppSelector } from 'src/store/hooks';
 
 export const NavigationLayout = () => {
@@ -19,7 +18,7 @@ export const NavigationLayout = () => {
   return companyId ? (
     <AppShell
       header={{ height: 56 }}
-      navbar={{ width: 300, breakpoint: 'md', collapsed: { mobile: !opened } }}
+      navbar={{ width: 228, breakpoint: 'md', collapsed: { mobile: !opened } }}
       padding='md'
     >
       <AppShell.Header px='sm' className='bg-gray-950'>

@@ -34,7 +34,7 @@ const MenuItem = ({ item }) => {
   );
 };
 
-const Sidebar = () => {
+export const Sidebar = () => {
   return (
     <div className='h-screen'>
       <div className='h-full flex flex-col justify-between overflow-y-auto'>
@@ -52,5 +52,3 @@ const Sidebar = () => {
     </div>
   );
 };
-
-export default Sidebar;

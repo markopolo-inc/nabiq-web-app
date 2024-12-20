@@ -5,7 +5,7 @@ import AvatarImage from 'src/assets/logo/avatar.png';
 import { useLogoutMutation } from 'src/store/auth/authApi';
 import { useAppSelector } from 'src/store/hooks.ts';
 
-const TopMenu = () => {
+export const TopMenu = () => {
   const company = useAppSelector((state) => state.company);
 
   const { gray500 } = useGetColors();
@@ -78,5 +78,3 @@ const TopMenu = () => {
     </Menu>
   );
 };
-
-export default TopMenu;
