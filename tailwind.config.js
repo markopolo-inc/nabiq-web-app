@@ -123,7 +123,7 @@ export default {
         xl: '0px 24px 48px -12px rgba(18, 25, 38, 0.18)',
       },
       backgroundImage: {
-        'home-hero': "url('/img_1.png')",
+        'home-hero': "url('./src/assets/bg.png')",
       },
     },
     backgroundSize: {

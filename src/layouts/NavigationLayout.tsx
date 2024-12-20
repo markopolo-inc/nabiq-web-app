@@ -19,7 +19,7 @@ export const NavigationLayout = () => {
     <AppShell
       header={{ height: 56 }}
       navbar={{ width: 228, breakpoint: 'md', collapsed: { mobile: !opened } }}
-      padding='md'
+      // padding='md'
     >
       <AppShell.Header px='sm' className='bg-gray-950'>
         <Group h='100%' px='md' className='justify-between'>

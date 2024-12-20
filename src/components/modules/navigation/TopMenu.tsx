@@ -1,5 +1,5 @@
 import { rem } from '@mantine/core';
-import { FiSettings02, HelpCircle02, Logout01 } from '@nabiq-icons';
+import { FiSettings02, Logout01 } from '@nabiq-icons';
 import { Avatar, Image, Menu, UnstyledButton, useGetColors } from '@nabiq-ui';
 import AvatarImage from 'src/assets/logo/avatar.png';
 import { useLogoutMutation } from 'src/store/auth/authApi';
@@ -55,7 +55,7 @@ export const TopMenu = () => {
         >
           Settings
         </Menu.Item>
-
+        {/* 
         <Menu.Item
           className='text-sm font-medium leading-5 text-gray-700'
           component='a'
@@ -63,9 +63,9 @@ export const TopMenu = () => {
           leftSection={<HelpCircle02 style={{ width: rem(16), height: rem(16) }} color={gray500} />}
         >
           Support
-        </Menu.Item>
+        </Menu.Item> */}
 
-        <Menu.Divider />
+        {/* <Menu.Divider /> */}
 
         <Menu.Item
           onClick={handleLogout}

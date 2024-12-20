@@ -1,5 +1,6 @@
 import { useGetColors } from '@nabiq-ui';
 import cn from 'classnames';
+import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { lowerPartOptions, sideBarCategories } from 'src/lib/sidebarOptions';
 
@@ -32,7 +33,12 @@ export const Sidebar = () => {
       <div className='h-full flex flex-col justify-between overflow-y-auto'>
         <div className='flex flex-col gap-3.5'>
           {sideBarCategories?.map((category, idx) => (
-            <div key={idx}>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.5 * (idx + 1), staggerChildren: 0.1 }}
+              key={idx}
+            >
               {category?.title && (
                 <p className='text-sm font-medium text-gray-500 px-2 py-2'>{category?.title}</p>
               )}
@@ -41,7 +47,7 @@ export const Sidebar = () => {
                   {category?.options?.map((item, index) => <MenuItem item={item} key={index} />)}
                 </ul>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
         <div>

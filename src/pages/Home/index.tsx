@@ -1,5 +1,5 @@
 import { Stack } from '@nabiq-ui';
-import { HeaderTitle } from 'layouts';
+import { HeaderTitle, PageLayout } from 'layouts';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CampaignGoalModal } from 'src/components/modules/campaigns';
@@ -69,30 +69,33 @@ const Home = () => {
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
       <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
-      <Stack
-        gap={48}
-        className='min-h-[calc(100vh-56px)] -m-4 py-8 px-6 bg-home-hero bg-no-repeat bg-100% bg-fixed'
-      >
-        <Header />
+      <Stack className='min-h-[calc(100vh-56px)] bg-home-hero bg-no-repeat bg-100% bg-fixed'>
+        <PageLayout>
+          <Header />
 
-        {isOnboardingDone && <QuickActions />}
+          {isOnboardingDone && <QuickActions />}
 
-        {!isOnboardingDone && (
-          <OnBoardingItems
-            isIntegrationChannelDone={isIntegrationChannelDone}
-            isFirstCampaignDone={isFirstCampaignDone}
-            isMarkTagDone={isMarkTagDone}
-            onClickShowGoalModal={() => setShowGoalModal((prevState) => !prevState)}
-            onClickShowMarkTagModal={() => setShowMarktagModal((prevState) => !prevState)}
-          />
-        )}
+          {!isOnboardingDone && (
+            <OnBoardingItems
+              isIntegrationChannelDone={isIntegrationChannelDone}
+              isFirstCampaignDone={isFirstCampaignDone}
+              isMarkTagDone={isMarkTagDone}
+              onClickShowGoalModal={() => setShowGoalModal((prevState) => !prevState)}
+              onClickShowMarkTagModal={() => setShowMarktagModal((prevState) => !prevState)}
+            />
+          )}
 
-        {isOnBoardingMetricsShow && (
-          <Stack className={`${isOnboardingDone ? 'flex-col-reverse gap-12' : 'flex-row gap-6'} `}>
-            <PerformanceTrend isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
-            <MetricCards isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
-          </Stack>
-        )}
+          <div className='mt-12'>
+            {isOnBoardingMetricsShow && (
+              <Stack
+                className={`${isOnboardingDone ? 'flex-col-reverse gap-6' : 'flex-row gap-6'} `}
+              >
+                <PerformanceTrend isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
+                <MetricCards isOnboardingDone={isOnboardingDone} timeRange={timeRange} />
+              </Stack>
+            )}
+          </div>
+        </PageLayout>
       </Stack>
     </>
   );
