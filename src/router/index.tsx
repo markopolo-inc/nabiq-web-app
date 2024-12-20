@@ -7,6 +7,8 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { AppLayout, NavigationLayout, PrivateLayout } from 'src/layouts';
 // Test
 import Test from 'src/pages/Test';
+import Table from 'src/pages/Test/Table';
+import Tabs from 'src/pages/Test/Tabs';
 import TestButton from 'src/pages/TestButton';
 import TestCheckbox from 'src/pages/TestCheckbox';
 import TestInputs from 'src/pages/TestInputs';
@@ -194,6 +196,8 @@ const Router = () => {
             <Route path='checkbox' element={<TestCheckbox />} />
             <Route path='inputs' element={<TestInputs />} />
             <Route path='textarea' element={<TestTextarea />} />
+            <Route path='tabs' element={<Tabs />} />
+            <Route path='table' element={<Table />} />
           </Route>
         )}
         <Route path='*' element={<div>404 not found</div>} />
