@@ -31,7 +31,7 @@ export const NavigationLayout = () => {
           <TopMenu />
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p='md' className='!bg-gray-25 border-r !border-gray-200'>
+      <AppShell.Navbar className='!bg-gray-100 !border-none'>
         <Sidebar />
       </AppShell.Navbar>
       <AppShell.Main>
