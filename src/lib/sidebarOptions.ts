@@ -1,57 +1,74 @@
 import {
-  // FiDataFlow02,
-  FiAnnouncement01,
-  FiHomeLine,
-  FiLineChartUp05,
-  FiPuzzlePiece02,
-  FiSettings01,
-  FiSliders01,
+  FiApps2AiFill,
+  FiBarChartBoxAiFill,
+  FiEquilizer2Fill,
+  FiHomeFill,
+  FiMegaphoneFill,
+  FiQuestionFill,
+  FiSettings3Fill,
 } from '@nabiq-icons';
 
-export const sidebarOptions = [
+export const sideBarCategories = [
   {
-    title: 'Home',
-    Icon: FiHomeLine,
-    to: '/',
-    menuRegex: new RegExp(/^\/$/, 'i'),
-  },
-  // {
-  //   title: "Co-Pilot",
-  //   Icon: FiDataFlow02,
-  //   to: "/co-pilot",
-  //   menuRegex: new RegExp(/^\/co-pilot/, "i"),
-  // },
-  {
-    title: 'Campaigns',
-    Icon: FiAnnouncement01,
-    to: '/campaigns',
-    menuRegex: new RegExp(/^\/campaigns/, 'i'),
+    title: null,
+    options: [
+      {
+        title: 'Home',
+        Icon: FiHomeFill,
+        to: '/',
+        menuRegex: new RegExp(/^\/$/, 'i'),
+      },
+    ],
   },
   {
-    title: 'Monitoring',
-    Icon: FiLineChartUp05,
-    to: '/monitoring',
-    menuRegex: new RegExp(/^\/monitoring/, 'i'),
+    title: 'Engage',
+    options: [
+      {
+        title: 'Campaigns',
+        Icon: FiMegaphoneFill,
+        to: '/campaigns',
+        menuRegex: new RegExp(/^\/campaigns/, 'i'),
+      },
+      {
+        title: 'Control room',
+        Icon: FiEquilizer2Fill,
+        to: '/control-room',
+        menuRegex: new RegExp(/^\/control-room/, 'i'),
+      },
+      {
+        title: 'Monitoring',
+        Icon: FiBarChartBoxAiFill,
+        to: '/monitoring',
+        menuRegex: new RegExp(/^\/monitoring/, 'i'),
+      },
+    ],
   },
   {
-    title: 'Integrations',
-    Icon: FiPuzzlePiece02,
-    to: '/integrations',
-    menuRegex: new RegExp(/^\/integrations/, 'i'),
-  },
-  {
-    title: 'Control room',
-    Icon: FiSliders01,
-    to: '/control-room',
-    menuRegex: new RegExp(/^\/control-room/, 'i'),
+    title: 'Explore',
+    options: [
+      {
+        title: 'Integrations',
+        Icon: FiApps2AiFill,
+        to: '/integrations',
+        menuRegex: new RegExp(/^\/integrations/, 'i'),
+      },
+    ],
   },
 ];
+
+export const sidebarOptions = [];
 
 export const lowerPartOptions = [
   {
     title: 'Settings',
-    Icon: FiSettings01,
+    Icon: FiSettings3Fill,
     to: '/settings',
     menuRegex: new RegExp(/^\/settings/, 'i'),
+  },
+  {
+    title: 'Support',
+    Icon: FiQuestionFill,
+    to: '#',
+    menuRegex: new RegExp(/^\/help/, 'i'),
   },
 ];
