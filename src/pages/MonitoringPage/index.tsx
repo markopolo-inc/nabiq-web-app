@@ -7,7 +7,7 @@ import {
   PerformanceTrend,
 } from 'src/components/modules/monitoring';
 
-const Monitoring = () => {
+const MonitoringPage = () => {
   const [timeRange, setTimeRange] = useState<
     'last_year' | 'last_month' | 'last_week' | 'last_3_day'
   >('last_year');
@@ -22,4 +22,4 @@ const Monitoring = () => {
   );
 };
 
-export default Monitoring;
+export default MonitoringPage;

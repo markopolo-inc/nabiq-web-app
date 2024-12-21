@@ -27,13 +27,10 @@ const CampaignsListPage = delayedLazy(() => import('pages/CampaignsListPage'));
 const CampaignDetails = delayedLazy(() => import('pages/CampaignDetails'));
 const CampaignReport = delayedLazy(() => import('pages/CampaignReport'));
 const CreateCampaign = delayedLazy(() => import('src/pages/CreateCampaignPage'));
-const Monitoring = delayedLazy(() => import('pages/Monitoring'));
+const MonitoringPage = delayedLazy(() => import('src/pages/MonitoringPage'));
 const TopPerformingCampaigns = delayedLazy(() => import('pages/TopPerformingCampaigns'));
 const TopPerformingCampaignDetails = delayedLazy(
   () => import('src/pages/TopPerformingCampaignDetails'),
-);
-const TopPerformingCampaingBreakDown = delayedLazy(
-  () => import('src/pages/TopPerformingCampaingBreakDown'),
 );
 const NonPerformingCampaigns = delayedLazy(() => import('src/pages/NonPerformingCampaigns'));
 const IntegrationsPage = delayedLazy(() => import('pages/IntegrationsPage'));
@@ -112,7 +109,7 @@ const Router = () => {
                 path='/monitoring'
                 element={
                   <Suspense fallback={<ContentLoader />}>
-                    <Monitoring />
+                    <MonitoringPage />
                   </Suspense>
                 }
               />
@@ -129,14 +126,6 @@ const Router = () => {
                 element={
                   <Suspense fallback={<ContentLoader />}>
                     <TopPerformingCampaignDetails />
-                  </Suspense>
-                }
-              />
-              <Route
-                path='/monitoring/:name/breakdown/:campaignId'
-                element={
-                  <Suspense fallback={<ContentLoader />}>
-                    <TopPerformingCampaingBreakDown />
                   </Suspense>
                 }
               />
