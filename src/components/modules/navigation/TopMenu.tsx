@@ -1,13 +1,14 @@
 import { rem } from '@mantine/core';
 import { FiSettings02, Logout01 } from '@nabiq-icons';
 import { Avatar, Image, Menu, UnstyledButton, useGetColors } from '@nabiq-ui';
+import { useNavigate } from 'react-router-dom';
 import AvatarImage from 'src/assets/logo/avatar.png';
 import { useLogoutMutation } from 'src/store/auth/authApi';
 import { useAppSelector } from 'src/store/hooks.ts';
 
 export const TopMenu = () => {
   const company = useAppSelector((state) => state.company);
-
+  const navigate = useNavigate();
   const { gray500 } = useGetColors();
   const [logout] = useLogoutMutation();
 
@@ -49,8 +50,8 @@ export const TopMenu = () => {
 
         <Menu.Item
           className='text-sm font-medium leading-5 text-gray-700'
-          component='a'
-          href='/settings'
+          component='button'
+          onClick={() => navigate('/settings')}
           leftSection={<FiSettings02 style={{ width: rem(16), height: rem(16) }} color={gray500} />}
         >
           Settings

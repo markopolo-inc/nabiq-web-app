@@ -3,16 +3,10 @@ import OnboardingPage from 'pages/OnboardingPage';
 import SignInPage from 'pages/SignInPage';
 import SignUpPage from 'pages/SignUpPage';
 import { Suspense, lazy } from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppLayout, NavigationLayout, PageLayout, PrivateLayout } from 'src/layouts';
-// Test
-import Test from 'src/pages/Test';
-import Table from 'src/pages/Test/Table';
-import Tabs from 'src/pages/Test/Tabs';
-import TestButton from 'src/pages/TestButton';
-import TestCheckbox from 'src/pages/TestCheckbox';
-import TestInputs from 'src/pages/TestInputs';
-import TestTextarea from 'src/pages/TestTextarea';
+
+import { TestRoutes } from './TestRoutes';
 
 const delayedLazy = (importFn: () => Promise<any>, delay = 1000) => {
   return lazy(() =>
@@ -22,22 +16,17 @@ const delayedLazy = (importFn: () => Promise<any>, delay = 1000) => {
   );
 };
 
-const HomePage = delayedLazy(() => import('src/pages/HomePage'));
+const HomePage = delayedLazy(() => import('pages/HomePage'));
 const CampaignsListPage = delayedLazy(() => import('pages/CampaignsListPage'));
-const CampaignDetails = delayedLazy(() => import('pages/CampaignDetails'));
-const CampaignReport = delayedLazy(() => import('pages/CampaignReport'));
-const CreateCampaign = delayedLazy(() => import('src/pages/CreateCampaignPage'));
-const MonitoringPage = delayedLazy(() => import('src/pages/MonitoringPage'));
-const TopPerformingCampaigns = delayedLazy(() => import('pages/TopPerformingCampaigns'));
-const TopPerformingCampaignDetails = delayedLazy(
-  () => import('src/pages/TopPerformingCampaignDetails'),
-);
-const NonPerformingCampaigns = delayedLazy(() => import('src/pages/NonPerformingCampaigns'));
+const CampaignDetailsPage = delayedLazy(() => import('src/pages/CampaignDetailsPage'));
+const CampaignReportPage = delayedLazy(() => import('src/pages/CampaignReportPage'));
+const CreateCampaignPage = delayedLazy(() => import('pages/CreateCampaignPage'));
+const MonitoringPage = delayedLazy(() => import('pages/MonitoringPage'));
 const IntegrationsPage = delayedLazy(() => import('pages/IntegrationsPage'));
 const ControlRoom = delayedLazy(() => import('pages/ControlRoomPage'));
 const ContentSamples = delayedLazy(() => import('pages/ControlRoomPage/ContentSamples'));
-const Settings = delayedLazy(() => import('pages/Settings'));
-const ConnectMarktag = delayedLazy(() => import('src/pages/ConnetMarktag'));
+const SettingsPage = delayedLazy(() => import('src/pages/SettingsPage'));
+const ConnectMarktag = delayedLazy(() => import('pages/ConnetMarktag'));
 
 const Router = () => {
   return (
@@ -83,7 +72,7 @@ const Router = () => {
                 path='/campaigns/details/:campaignId'
                 element={
                   <Suspense fallback={<ContentLoader />}>
-                    <CampaignDetails />
+                    <CampaignDetailsPage />
                   </Suspense>
                 }
               />
@@ -91,7 +80,7 @@ const Router = () => {
                 path='/campaigns/report/:campaignId'
                 element={
                   <Suspense fallback={<ContentLoader />}>
-                    <CampaignReport />
+                    <CampaignReportPage />
                   </Suspense>
                 }
               />
@@ -99,7 +88,7 @@ const Router = () => {
                 path='/campaigns/create-campaign'
                 element={
                   <Suspense fallback={<ContentLoader />}>
-                    <CreateCampaign />
+                    <CreateCampaignPage />
                   </Suspense>
                 }
               />
@@ -110,30 +99,6 @@ const Router = () => {
                 element={
                   <Suspense fallback={<ContentLoader />}>
                     <MonitoringPage />
-                  </Suspense>
-                }
-              />
-              <Route
-                path='/monitoring/top-performing-campaigns'
-                element={
-                  <Suspense fallback={<ContentLoader />}>
-                    <TopPerformingCampaigns />
-                  </Suspense>
-                }
-              />
-              <Route
-                path='/monitoring/top-performing-campaigns/:name/:campaignId'
-                element={
-                  <Suspense fallback={<ContentLoader />}>
-                    <TopPerformingCampaignDetails />
-                  </Suspense>
-                }
-              />
-              <Route
-                path='/monitoring/non-performing-campaigns'
-                element={
-                  <Suspense fallback={<ContentLoader />}>
-                    <NonPerformingCampaigns />
                   </Suspense>
                 }
               />
@@ -171,7 +136,7 @@ const Router = () => {
                 path='/settings'
                 element={
                   <Suspense fallback={<ContentLoader />}>
-                    <Settings />
+                    <SettingsPage />
                   </Suspense>
                 }
               />
@@ -179,17 +144,8 @@ const Router = () => {
           </Route>
         </Route>
 
-        {process.env.NODE_ENV === 'development' && (
-          <Route path='/test' element={<Outlet />}>
-            <Route path='test' element={<Test />} />
-            <Route path='btn' element={<TestButton />} />
-            <Route path='checkbox' element={<TestCheckbox />} />
-            <Route path='inputs' element={<TestInputs />} />
-            <Route path='textarea' element={<TestTextarea />} />
-            <Route path='tabs' element={<Tabs />} />
-            <Route path='table' element={<Table />} />
-          </Route>
-        )}
+        <TestRoutes />
+
         <Route path='*' element={<div>404 not found</div>} />
       </Route>
     </Routes>
