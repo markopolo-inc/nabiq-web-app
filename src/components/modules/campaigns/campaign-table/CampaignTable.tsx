@@ -5,6 +5,7 @@ import {
   FiMessageDotCircle,
   FiSearchLg,
   FiTrash,
+  FiWhatsApp,
 } from '@nabiq-icons';
 import {
   Badge,
@@ -13,8 +14,7 @@ import {
   Group,
   Menu,
   OptionTabs,
-  Stack,
-  Switch,
+  Stack, // Switch,
   Table,
   TableBody,
   TableHead,
@@ -38,7 +38,7 @@ import { useDeleteCampaignConfigMutation } from 'src/store/campaign/campaignApi'
 type ActivatedTabsType = 'all' | ICampaignItem['status'];
 
 const CAMPAIGN_TABLE_HEADERS: string[] = [
-  'Status',
+  // 'Status',
   'Campaign name',
   'Medium',
   'Leads',
@@ -74,30 +74,11 @@ export const CampaignTable = ({ list, refetch }) => {
     [active, searchTerm, list],
   );
 
-  // const handleEditCampaign = ({ campaignId }) => {
-  //   const selectedCampaign = list?.find((item) => item.resourceId === campaignId);
-  //   const {
-  //     createdAt: _createdAt,
-  //     funnels: _funnels,
-  //     job: _job,
-  //     resourceType: _resourceType,
-  //     status: _status,
-  //     updatedAt: _updatedAt,
-  //     ...payload
-  //   } = selectedCampaign;
-  //
-  //   dispatchCampaign({
-  //     ...payload,
-  //   });
-  //
-  //   navigate('/campaigns/create-campaign');
-  // };
-
   const handleDeleteCampaign = async () => {
     setShowDisconnectModal(true);
   };
 
-  const handleDisconnect = async () => {
+  const handleDelete = async () => {
     if (!campaignId) return;
 
     const res = await deleteConfig(campaignId).unwrap();
@@ -134,8 +115,8 @@ export const CampaignTable = ({ list, refetch }) => {
           <TextInput
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
-            styles={{ input: { paddingLeft: 40 } }}
-            leftSection={<FiSearchLg size={26} color='#697586' />}
+            styles={{ input: { paddingLeft: 50 } }}
+            leftSection={<FiSearchLg size={18} color='#697586' />}
             leftSectionWidth={40}
             leftSectionPointerEvents='none'
             className='w-[400px]'
@@ -189,11 +170,11 @@ export const CampaignTable = ({ list, refetch }) => {
           ) : (
             filteredList.map((item, idx) => (
               <TableRow key={idx} className='odd:!bg-gray-50 even:!bg-white hover:!bg-primary-100'>
-                <Td className='py-4 px-6'>
+                {/* <Td className='py-4 px-6'>
                   <Stack align='left' gap={4}>
                     <Switch checked={idx % 2 === 0} />
                   </Stack>
-                </Td>
+                </Td> */}
                 <Td className='py-4 px-6'>
                   <Stack align='left' gap={4}>
                     <div className='text-sm font-medium text-gray-900'>{item.name}</div>
@@ -207,17 +188,25 @@ export const CampaignTable = ({ list, refetch }) => {
 
                 <Td className='py-4 px-6'>
                   <Stack align='left' gap={4} className='flex-row'>
-                    <div className='p-2'>
-                      <FiMail01 size={20} color='#475467' />
-                    </div>
-                    <div className='p-2'>
-                      <FiMessageDotCircle size={20} color='#475467' />
-                    </div>
+                    {item.isWA ? (
+                      <div className='p-2'>
+                        <FiWhatsApp size={22} />
+                      </div>
+                    ) : (
+                      <>
+                        <div className='p-2'>
+                          <FiMail01 size={20} color='#475467' />
+                        </div>
+                        <div className='p-2'>
+                          <FiMessageDotCircle size={20} color='#475467' />
+                        </div>
+                      </>
+                    )}
                   </Stack>
                 </Td>
 
                 <Td className='py-4 px-6'>
-                  <Stack align='left'>1119/13000</Stack>
+                  <Stack align='left'>-</Stack>
                 </Td>
 
                 <Td className='py-4 px-6'>
@@ -228,9 +217,13 @@ export const CampaignTable = ({ list, refetch }) => {
 
                 <Td className='py-4 px-6'>
                   <Stack align='left' gap={4}>
-                    <Badge color={(colorMap?.[item.status] as 'success') || 'success'}>
-                      {capitalize('High')}
-                    </Badge>
+                    {item?.conversionLevel ? (
+                      <Badge color={colorMap?.[item?.conversionLevel?.toLowerCase()]}>
+                        {capitalize(item?.conversionLevel)}
+                      </Badge>
+                    ) : (
+                      <div className='text-xs font-medium text-gray-600'>-</div>
+                    )}
                   </Stack>
                 </Td>
 
@@ -280,10 +273,10 @@ export const CampaignTable = ({ list, refetch }) => {
         </TableBody>
       </Table>
       <ConfirmationModal
-        title='Are you sure you want to disconnect this platform?'
+        title='Are you sure you want to delete this campaign?'
         showModal={showDisconnectModal}
         setShowModal={setShowDisconnectModal}
-        onConfirm={handleDisconnect}
+        onConfirm={handleDelete}
       />
     </Fragment>
   );

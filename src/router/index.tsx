@@ -22,7 +22,7 @@ const delayedLazy = (importFn: () => Promise<any>, delay = 1000) => {
   );
 };
 
-const Home = delayedLazy(() => import('pages/Home'));
+const HomePage = delayedLazy(() => import('src/pages/HomePage'));
 const CampaignsListPage = delayedLazy(() => import('pages/CampaignsListPage'));
 const CampaignDetails = delayedLazy(() => import('pages/CampaignDetails'));
 const CampaignReport = delayedLazy(() => import('pages/CampaignReport'));
@@ -68,7 +68,7 @@ const Router = () => {
               path='/'
               element={
                 <Suspense fallback={<ContentLoader />}>
-                  <Home />
+                  <HomePage />
                 </Suspense>
               }
             />
