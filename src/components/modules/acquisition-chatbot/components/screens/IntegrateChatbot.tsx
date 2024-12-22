@@ -15,7 +15,7 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
   (function () {
     const config = {
       botName: "NabiqBot",
-      apiKey: ${apiKey}, // Replace with actual API key
+      apiKey: "${apiKey}", // Replace with actual API key
       welcomeMessage: "Hi! How can I help?",
       themeColor: "#007BFF",
       position: "bottom-right",
