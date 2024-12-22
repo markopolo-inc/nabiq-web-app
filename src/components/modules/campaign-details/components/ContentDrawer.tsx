@@ -47,9 +47,9 @@ const ContentDrawer = ({
               {moment(selectedContent?.sentOn).format('h:mm a')}
             </Badge>
           </Group>
-          <p className='text-gray-600 text-xs font-medium mt-8 leading-6'>
+          <pre className='text-gray-600 text-xs font-medium mt-8 leading-6 whitespace-pre-wrap'>
             {selectedContent?.content}
-          </p>
+          </pre>
         </div>
       </DrawerBody>
     </Drawer>

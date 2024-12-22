@@ -48,15 +48,21 @@ export const CampaignDetails = () => {
   const [selectedContent, setSelectedContent] = useState<any>(null);
   const [page, setPage] = useState<number>(1);
   const [selectedAudienceIdx, setSelectedAudienceIdx] = useState<number>(null);
-  const { data: audienceData } = useGetAudienceForCampaignQuery({
+  const { data: audienceData, isLoading: isLoadingAudience } = useGetAudienceForCampaignQuery({
     campaignId,
     page,
     limit: PAGE_SIZE,
   });
-  const { data: audienceBreakdownData, isFetching } = useGetAudienceBreakdownQuery({
+  const {
+    data: audienceBreakdownData,
+    isFetching,
+    isLoading,
+  } = useGetAudienceBreakdownQuery({
     userId,
     campaignId,
   });
+
+  const isLoadingBreakdown = isLoadingAudience || isLoading || isFetching;
 
   const audience = audienceData?.data?.audience || [];
   const totalAudience = audienceData?.data?.total ?? 0;
@@ -69,7 +75,7 @@ export const CampaignDetails = () => {
     if (div2Ref.current !== null && selectedAudienceIdx !== null) {
       addArrow(`listElem${selectedAudienceIdx}`, 'breakdownElem0');
     }
-  }, [audience, breakdown, selectedAudienceIdx]);
+  }, [audience, selectedAudienceIdx, div2Ref]);
 
   useEffect(() => {
     const newSubArrows = breakdown.slice(0, -1).map((_item, idx) => ({
@@ -129,46 +135,52 @@ export const CampaignDetails = () => {
         <div className='grid grid-cols-12 gap-20 relative mt-8'>
           <Stack className='col-span-6'>
             <p className='text-sm font-normal text-gray-600'>Audience</p>
-            <Stack
-              className='rounded-md border border-gray-20 p-1 max-h-fit max-w-[428px]'
-              gap={8}
-              onScroll={updateXarrow}
-            >
-              {audience.map((user, idx) => (
-                <Stack
-                  className={cn(
-                    'rounded-md border-[2px] border-gray-200 bg-white shadow-sm p-4 max-w-[418px] cursor-pointer',
-                    idx === selectedAudienceIdx ? 'border-primary-600' : '',
-                  )}
-                  ref={div1Ref}
-                  gap={16}
-                  key={`listElem${idx}`}
-                  onClick={() => {
-                    setUserId(user.id);
-                    setSelectedAudienceIdx(idx);
-                    setSelectedEmail(user.email);
-                    // addArrow(`elem${idx}`, 'breakdownElem');
-                  }}
-                  id={`listElem${idx}`}
-                >
-                  <p className='text-gray-900 font-semibold'>ID: {user.id}</p>
-                  <Group>
-                    <Badge color='gray'>{user.email}</Badge>
-                    <Badge color='gray'>{user.phone}</Badge>
-                  </Group>
+            {isLoadingAudience && (
+              <Image src={LoaderGif} alt='Loading...' className='w-56 mx-auto' />
+            )}
+            {!isLoadingAudience && audience?.length > 0 && (
+              <Stack className='bg-gray-50 rounded-xl p-2 border border-gray-200'>
+                <Stack className='max-h-fit w-full' gap={8} onScroll={updateXarrow}>
+                  {audience.map((user, idx) => (
+                    <Stack
+                      className={cn(
+                        'rounded-lg border border-gray-200 bg-white shadow-sm p-4 cursor-pointer',
+                        idx === selectedAudienceIdx ? 'border-[2px] border-primary-600' : '',
+                      )}
+                      ref={div1Ref}
+                      gap={16}
+                      key={`listElem${idx}`}
+                      onClick={() => {
+                        setUserId(user.id);
+                        setSelectedAudienceIdx(idx);
+                        setSelectedEmail(user.email);
+                        // addArrow(`elem${idx}`, 'breakdownElem');
+                      }}
+                      id={`listElem${idx}`}
+                    >
+                      <p className='text-gray-900 font-semibold'>ID: {user.id}</p>
+                      <Group>
+                        <Badge color='gray'>{user.email}</Badge>
+                        <Badge color='gray'>{user.phone}</Badge>
+                      </Group>
+                    </Stack>
+                  ))}
                 </Stack>
-              ))}
-            </Stack>
-            <Pagination
-              total={totalPages}
-              onChange={(value) => {
-                addArrow('', '');
-                setSelectedAudienceIdx(null);
-                setPage(value);
-                setUserId(null);
-              }}
-              value={page}
-            />
+                <Pagination
+                  total={totalPages}
+                  onChange={(value) => {
+                    addArrow('', '');
+                    setSelectedAudienceIdx(null);
+                    setPage(value);
+                    setUserId(null);
+                  }}
+                  value={page}
+                />
+              </Stack>
+            )}
+            {!isLoadingAudience && audience?.length === 0 && (
+              <p className='text-gray-600 font-normal text-sm'>No audience found!</p>
+            )}
           </Stack>
 
           <Stack className='col-span-6'>
@@ -185,7 +197,7 @@ export const CampaignDetails = () => {
                     key={`breakdownElem${idx}`}
                     id={`breakdownElem${idx}`}
                   >
-                    {isFetching ? (
+                    {isLoadingBreakdown ? (
                       <Image src={LoaderGif} alt='Loading...' className='w-56 mx-auto' />
                     ) : (
                       <Fragment>
