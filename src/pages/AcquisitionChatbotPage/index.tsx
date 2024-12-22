@@ -1,5 +1,5 @@
 import { FiCopy02, FiHelpCircle } from '@nabiq-icons';
-import { Button, Group, Stack } from '@nabiq-ui';
+import { Button, Stack } from '@nabiq-ui';
 import toast from 'react-hot-toast';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
@@ -32,7 +32,7 @@ const AcquisitionChatbotPage = () => {
   return (
     <>
       <Stack gap={64} align='center'>
-        <Group justify='space-between'>
+        <Stack className='w-full items-start flex-row' justify='space-between'>
           <Stack gap={4}>
             <p className='text-gray-900 text-3xl font-semibold'>Acquisition chatbot</p>
             <p className='text-gray-600 text-base font-normal'>
@@ -42,7 +42,7 @@ const AcquisitionChatbotPage = () => {
           <Button variant='link' leadingIcon={<FiHelpCircle size={20} />}>
             Need help integrating chatbot?
           </Button>
-        </Group>
+        </Stack>
 
         <Stack
           gap={24}
