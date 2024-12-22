@@ -1,17 +1,35 @@
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import { useEffect, useState } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+import LoaderGif from 'src/assets/logo/logo.svg';
 import Router from 'src/router';
 import { persistor, store } from 'src/store';
 
-import './styles/fonts.css';
-
 const App = () => {
+  const [loading, setLoading] = useState(true);
+  const handleLoading = () => {
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener('load', handleLoading);
+    return () => window.removeEventListener('load', handleLoading);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className='absolute top-1/2 left-1/2 transform x -translate-x-1/2 -translate-y-1/2 flex items-center justify-center flex-col opacity-50'>
+        <img src={LoaderGif} alt='Loading...' className='w-48' />
+      </div>
+    );
+  }
+
   return (
     <HelmetProvider>
       <Provider store={store}>
