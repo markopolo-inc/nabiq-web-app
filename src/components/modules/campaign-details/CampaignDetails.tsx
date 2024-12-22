@@ -1,4 +1,5 @@
-import { FiChevronRight } from '@nabiq-icons';
+import { useDebouncedCallback } from '@mantine/hooks';
+import { Calendar, FiChevronRight, FiStar04 } from '@nabiq-icons';
 import {
   Badge,
   Breadcrumbs,
@@ -7,7 +8,9 @@ import {
   Group,
   Image,
   Pagination,
+  Select,
   Stack,
+  TextInput,
   useGetColors,
 } from '@nabiq-ui';
 import cn from 'classnames';
@@ -48,10 +51,24 @@ export const CampaignDetails = () => {
   const [selectedContent, setSelectedContent] = useState<any>(null);
   const [page, setPage] = useState<number>(1);
   const [selectedAudienceIdx, setSelectedAudienceIdx] = useState<number>(null);
-  const { data: audienceData, isLoading: isLoadingAudience } = useGetAudienceForCampaignQuery({
+  const [filter, setFilter] = useState({
+    search: '',
+    dateRange: 'last_week',
+  });
+  const {
+    data: audienceData,
+    isLoading: isLoadingAudience,
+    isFetching: isFetchingAudience,
+  } = useGetAudienceForCampaignQuery({
     campaignId,
     page,
     limit: PAGE_SIZE,
+    filter: Object.keys(filter).reduce((acc, key) => {
+      if (filter[key]) {
+        acc[key] = filter[key];
+      }
+      return acc;
+    }, {}),
   });
   const {
     data: audienceBreakdownData,
@@ -62,7 +79,8 @@ export const CampaignDetails = () => {
     campaignId,
   });
 
-  const isLoadingBreakdown = isLoadingAudience || isLoading || isFetching;
+  const isLoadingAudienceData = isLoadingAudience || isFetchingAudience;
+  const isLoadingBreakdown = isLoadingAudienceData || isLoading || isFetching;
 
   const audience = audienceData?.data?.audience || [];
   const totalAudience = audienceData?.data?.total ?? 0;
@@ -70,6 +88,16 @@ export const CampaignDetails = () => {
 
   const breakdown = audienceBreakdownData?.data || [];
   const isNoData = !!breakdown?.[0]?.noData;
+  const [search, setSearch] = useState('');
+
+  const handleSearch = useDebouncedCallback(
+    (value) => setFilter({ ...filter, search: value }),
+    500,
+  );
+
+  useEffect(() => {
+    handleSearch(search);
+  }, [search]);
 
   useEffect(() => {
     if (div2Ref.current !== null && selectedAudienceIdx !== null) {
@@ -110,12 +138,14 @@ export const CampaignDetails = () => {
           Go back
         </Button>
       </Group>
-      {/* <Group justify='space-between' className='mt-[64px]'>
+      <Group justify='space-between' className='mt-[64px]'>
         <Group>
           <Select
             leftSection={<Calendar size={18} color='#697586' />}
-            value={timeRange}
-            onChange={(value) => setTimeRange(value as 'today' | 'last_week' | 'last_month')}
+            value={filter.dateRange}
+            onChange={(value) =>
+              setFilter({ ...filter, dateRange: value as 'today' | 'last_week' | 'last_month' })
+            }
             data={[
               { label: 'Today', value: 'today' },
               {
@@ -129,16 +159,21 @@ export const CampaignDetails = () => {
             ]}
           />
         </Group>
-        <TextInput placeholder='Search audience' className='w-[264px]' />
-      </Group> */}
+        <TextInput
+          placeholder='Search audience'
+          className='w-[264px]'
+          value={search}
+          onChange={(e) => setSearch(e.currentTarget.value)}
+        />
+      </Group>
       <Xwrapper>
         <div className='grid grid-cols-12 gap-20 relative mt-8'>
           <Stack className='col-span-6'>
             <p className='text-sm font-normal text-gray-600'>Audience</p>
-            {isLoadingAudience && (
+            {isLoadingAudienceData && (
               <Image src={LoaderGif} alt='Loading...' className='w-56 mx-auto' />
             )}
-            {!isLoadingAudience && audience?.length > 0 && (
+            {!isLoadingAudienceData && audience?.length > 0 && (
               <Stack className='bg-gray-50 rounded-xl p-2 border border-gray-200'>
                 <Stack className='max-h-fit w-full' gap={8} onScroll={updateXarrow}>
                   {audience.map((user, idx) => (
@@ -158,7 +193,18 @@ export const CampaignDetails = () => {
                       }}
                       id={`listElem${idx}`}
                     >
-                      <p className='text-gray-900 font-semibold'>ID: {user.id}</p>
+                      <Group justify='space-between'>
+                        <p className='text-gray-900 font-semibold'>ID: {user.id}</p>
+                        {user.isEnhanced && (
+                          <Badge color='success'>
+                            Nabiq enhanced <FiStar04 />
+                          </Badge>
+                        )}
+                      </Group>
+
+                      {user.description && (
+                        <p className='text-gray-600 font-normal text-xs'>{user.description}</p>
+                      )}
                       <Group>
                         <Badge color='gray'>{user.email}</Badge>
                         <Badge color='gray'>{user.phone}</Badge>
@@ -178,7 +224,7 @@ export const CampaignDetails = () => {
                 />
               </Stack>
             )}
-            {!isLoadingAudience && audience?.length === 0 && (
+            {!isLoadingAudienceData && audience?.length === 0 && (
               <p className='text-gray-600 font-normal text-sm'>No audience found!</p>
             )}
           </Stack>

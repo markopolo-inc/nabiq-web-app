@@ -64,15 +64,24 @@ const monitoringApi = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
-    getAudienceForCampaign: builder.query<any, { campaignId: string; page: number; limit: number }>(
+    getAudienceForCampaign: builder.query<
+      any,
       {
-        query: ({ campaignId, page = 1, limit = 50 }) => ({
-          url: `monitoring/campaign/audience`,
-          method: 'POST',
-          body: { campaignId, page, limit },
-        }),
-      },
-    ),
+        campaignId: string;
+        page: number;
+        limit: number;
+        filter: {
+          dateRange?: string;
+          search?: string;
+        };
+      }
+    >({
+      query: ({ campaignId, page = 1, limit = 50, filter }) => ({
+        url: `monitoring/campaign/audience`,
+        method: 'POST',
+        body: { campaignId, page, limit, filter },
+      }),
+    }),
     getAudienceBreakdown: builder.query<any, { userId: string; campaignId: string }>({
       query: ({ userId, campaignId }) => ({
         url: `monitoring/campaign/audience/breakdown`,
