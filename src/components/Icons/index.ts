@@ -18,6 +18,7 @@ export { default as Calendar } from './Calendar';
 export { default as FiCreateFirstCampaign } from './CreateFirstCampaign';
 export { default as FiConnectFirstMarkTag } from './ConnectFirstMarkTag';
 export { default as FiCheckVerified01 } from './CheckVerified01';
+export { default as FiChatSmileAiFill } from './ChatSmileAiFill';
 export { default as Command } from './Command';
 export { default as Command2 } from './Command2';
 export { default as FiCheck } from './Check';

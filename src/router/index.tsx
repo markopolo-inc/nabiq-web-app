@@ -132,6 +132,8 @@ const Router = () => {
                 }
               />
 
+              <Route path='/acquisition-chatbot' element={<h1>Acquisition chatbot</h1>} />
+
               {/* Settings */}
               <Route
                 path='/settings'
