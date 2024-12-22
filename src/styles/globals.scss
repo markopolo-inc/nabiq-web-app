@@ -36,7 +36,9 @@
 @layer base {
   body {
     direction: ltr;
-    font-family: var(--font-geist), sans-serif !important;
-    @apply bg-white text-gray-900 text-base;
+    font-family: 'Geist', sans-serif !important;
   }
+}
+pre {
+  font-family: 'Geist';
 }
