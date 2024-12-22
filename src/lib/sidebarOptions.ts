@@ -1,6 +1,7 @@
 import {
   FiApps2AiFill,
   FiBarChartBoxAiFill,
+  FiChatSmileAiFill,
   FiEquilizer2Fill,
   FiHomeFill,
   FiMegaphoneFill,
@@ -53,6 +54,12 @@ export const sideBarCategories = [
         menuRegex: new RegExp(/^\/integrations/, 'i'),
       },
     ],
+  },
+  {
+    title: 'Acquisition chatbot',
+    Icon: FiChatSmileAiFill,
+    to: '/acquisition-chatbot',
+    menuRegex: new RegExp(/^\/acquisition-chatbot/, 'i'),
   },
 ];
 
