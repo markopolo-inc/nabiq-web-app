@@ -27,7 +27,7 @@ const IntegrationsPage = delayedLazy(() => import('pages/IntegrationsPage'));
 const ControlRoom = delayedLazy(() => import('pages/ControlRoomPage'));
 const ContentSamples = delayedLazy(() => import('pages/ControlRoomPage/ContentSamples'));
 const SettingsPage = delayedLazy(() => import('src/pages/SettingsPage'));
-const ConnectMarktag = delayedLazy(() => import('pages/ConnetMarktag'));
+const ConnectMarktag = delayedLazy(() => import('src/pages/ConnectMarktag'));
 
 const Router = () => {
   return (

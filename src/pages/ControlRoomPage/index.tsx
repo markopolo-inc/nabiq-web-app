@@ -48,7 +48,7 @@ const ControlRoom = () => {
 
         {isLoading && <ContentLoader />}
 
-        {configs.length === 0 && (
+        {!isLoading && configs.length === 0 && (
           <Stack align='center' gap={24}>
             <Stack gap={16} align='center'>
               <div className='border border-gray-200 bg-white shadow-xs p-3 rounded-[10px]'>
@@ -69,7 +69,7 @@ const ControlRoom = () => {
           </Stack>
         )}
 
-        {!!configs.length && (
+        {!isLoading && configs.length > 0 && (
           <Stack align='center'>
             <Stack gap={32}>
               {configs.map((item, idx) => (
