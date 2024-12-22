@@ -1,4 +1,5 @@
 import { ContentLoader } from '@nabiq-ui';
+import NotFoundPage from 'pages/NotFoundPage';
 import OnboardingPage from 'pages/OnboardingPage';
 import SignInPage from 'pages/SignInPage';
 import SignUpPage from 'pages/SignUpPage';
@@ -144,9 +145,9 @@ const Router = () => {
           </Route>
         </Route>
 
-        <TestRoutes />
+        {import.meta.env.DEV && <Route path='/test/*' element={<TestRoutes />} />}
 
-        <Route path='*' element={<div>404 not found</div>} />
+        <Route path='*' element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
