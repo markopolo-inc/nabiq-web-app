@@ -53,13 +53,13 @@ export const sideBarCategories = [
         to: '/integrations',
         menuRegex: new RegExp(/^\/integrations/, 'i'),
       },
+      {
+        title: 'Acquisition chatbot',
+        Icon: FiChatSmileAiFill,
+        to: '/acquisition-chatbot',
+        menuRegex: new RegExp(/^\/acquisition-chatbot/, 'i'),
+      },
     ],
-  },
-  {
-    title: 'Acquisition chatbot',
-    Icon: FiChatSmileAiFill,
-    to: '/acquisition-chatbot',
-    menuRegex: new RegExp(/^\/acquisition-chatbot/, 'i'),
   },
 ];
 
