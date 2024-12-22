@@ -1,10 +1,45 @@
-import { PageLoader } from '@nabiq-ui';
 import { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useGetCompanyQuery } from 'src/store/company/companyApi';
+import { useAppSelector } from 'src/store/hooks';
 
 export const AppLayout = () => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { resourceId: companyId, isOnboardingComplete } = useAppSelector((state) => state.company);
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const {
+    refetch: refetchCompany,
+    isFetching: isFetchingCompany,
+    isLoading: isLoadingCompany,
+  } = useGetCompanyQuery();
+  useEffect(() => {
+    if (isAuthenticated && !isFetchingCompany && !isLoadingCompany) {
+      if (['/login', '/signup'].includes(pathname)) {
+        navigate('/');
+        return;
+      }
+      if (companyId && isOnboardingComplete && pathname === '/onboarding') {
+        navigate('/');
+      }
+      if (!companyId && !isOnboardingComplete && pathname !== '/onboarding') {
+        navigate('/onboarding');
+      }
+    }
+  }, [
+    companyId,
+    isOnboardingComplete,
+    pathname,
+    isAuthenticated,
+    isFetchingCompany,
+    isLoadingCompany,
+  ]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      refetchCompany();
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const unListen = () => {
@@ -18,7 +53,10 @@ export const AppLayout = () => {
       unListen();
     };
   }, [pathname]);
-  // console.log("--- I am from AppLayout ---");
-  const { isLoading: isLoadingCompany } = useGetCompanyQuery();
-  return isLoadingCompany ? <PageLoader /> : <Outlet />;
+  // console.log('--- I am from AppLayout ---');
+  if (isFetchingCompany || isLoadingCompany) {
+    return null;
+  }
+
+  return <Outlet />;
 };

@@ -6,7 +6,7 @@ export { default as ConfirmationModal } from './ConfirmationModal';
 export { default as PageLoader } from './PageLoader/PageLoader';
 export { default as ContentLoader } from './ContentLoader/ContentLoader';
 export { Card } from './Card';
-
+export { Accordion } from './Accordion';
 export { default as Breadcrumbs } from './Breadcrumbs';
 
 // Buttons
@@ -27,6 +27,7 @@ export { default as PasswordInput } from './PasswordInput';
 export { default as Select } from './Select';
 export { default as Stepper } from './Stepper';
 export { StepperStep } from './StepperStep';
+export { default as Switch } from './Switch';
 export { default as Checkbox } from './Checkbox/index.tsx';
 export { default as OtpInput } from './OtpInput';
 export { default as MultiSelect } from './MultiSelect';

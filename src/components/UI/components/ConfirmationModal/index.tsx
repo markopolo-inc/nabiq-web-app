@@ -14,11 +14,11 @@ const ModalBody = ({ setOpened, title = 'Are you sure?', onConfirm }) => {
         </Button>
         <Button
           variant='primary-destructive'
-          onClick={() => {
+          onClick={async () => {
             if (onConfirm) {
               try {
                 setIsLoading(true);
-                onConfirm();
+                await onConfirm();
               } catch (_err) {
                 return _err;
               } finally {

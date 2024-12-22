@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import {
   DataSourceModal,
+  ECommerce,
   Marktag,
   MarktagCreationsModals,
 } from 'src/components/modules/integrations/integration-tabs/data-sources';
@@ -127,6 +128,7 @@ export const DataSources = () => {
             </Group>
           )}
         </IntegrationCard>
+        <ECommerce />
       </div>
       <ConfirmationModal
         onConfirm={handleDisconnectHubspot}

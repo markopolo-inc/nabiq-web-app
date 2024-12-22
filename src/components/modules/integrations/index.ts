@@ -3,6 +3,5 @@ export { DataSources } from 'src/components/modules/integrations/integration-tab
 export { Whatsapp } from 'src/components/modules/integrations/integration-tabs/whats-app/Whatsapp';
 export { EmailSmsApp } from 'src/components/modules/integrations/integration-tabs/email-sms/EmailSmsApp';
 export { PushNotification } from 'src/components/modules/integrations/integration-tabs/push-notification/PushNotification';
-export { ECommerce } from 'src/components/modules/integrations/integration-tabs/e-commerce/ECommerce';
 
 export * from 'src/components/modules/integrations/integration-tabs/whats-app';

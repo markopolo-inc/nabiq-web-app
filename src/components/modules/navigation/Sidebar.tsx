@@ -1,0 +1,62 @@
+import { useGetColors } from '@nabiq-ui';
+import cn from 'classnames';
+import { motion } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
+import { lowerPartOptions, sideBarCategories } from 'src/lib/sidebarOptions';
+
+const MenuItem = ({ item }) => {
+  const { pathname } = useLocation();
+  const isSelected = item?.menuRegex?.test(pathname);
+  const { gray950, primary600 } = useGetColors();
+
+  const Icon = item.Icon;
+  return (
+    <Link
+      to={item.to}
+      className={cn('px-2 py-1.5', isSelected ? 'bg-white rounded-lg shadow-sm' : '')}
+    >
+      <div className='flex gap-3 items-center'>
+        <Icon size={18} fill={isSelected ? primary600 : gray950} />
+        <span
+          className={`${isSelected ? 'text-primary-600' : 'text-gray-050'} text-sm font-medium`}
+        >
+          {item.title}
+        </span>
+      </div>
+    </Link>
+  );
+};
+
+export const Sidebar = () => {
+  return (
+    <div className='h-screen pl-6 pr-8 py-8'>
+      <div className='h-full flex flex-col justify-between overflow-y-auto'>
+        <div className='flex flex-col gap-3.5'>
+          {sideBarCategories?.map((category, idx) => (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.5 * (idx + 1), staggerChildren: 0.1 }}
+              key={idx}
+            >
+              {category?.title && (
+                <p className='text-sm font-medium text-gray-500 px-2 py-2'>{category?.title}</p>
+              )}
+              <div className='flex-1'>
+                <ul className='flex flex-col gap-2'>
+                  {category?.options?.map((item, index) => <MenuItem item={item} key={index} />)}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        <div>
+          <ul className='flex flex-col gap-2'>
+            <p className='text-sm font-medium text-gray-500 px-2'>Account</p>
+            {lowerPartOptions?.map((item, idx) => <MenuItem key={idx} item={item} />)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};

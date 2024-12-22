@@ -1,7 +1,6 @@
 import { OptionTabs } from '@nabiq-ui';
 import {
   DataSources,
-  ECommerce,
   EmailSmsApp,
   PushNotification,
   Whatsapp,
@@ -60,8 +59,6 @@ const IntegrationsPage = () => {
                 return <Whatsapp />;
               case 'push-notification':
                 return <PushNotification />;
-              case 'ecommerce':
-                return <ECommerce />;
               default:
                 return null;
             }

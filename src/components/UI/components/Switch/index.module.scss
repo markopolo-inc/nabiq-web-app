@@ -1,0 +1,18 @@
+.input {
+  &:checked {
+    + .track {
+      background: #2972f5;
+    }
+  }
+}
+
+.track {
+  background: #eef2f6;
+  border: none;
+  --switch-height: 20px;
+  --switch-width: 36px;
+}
+
+.thumb {
+  --switch-thumb-size: 16px;
+}

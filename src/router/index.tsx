@@ -1,97 +1,155 @@
-import { PageLoader } from '@nabiq-ui';
+import { ContentLoader } from '@nabiq-ui';
+import NotFoundPage from 'pages/NotFoundPage';
+import OnboardingPage from 'pages/OnboardingPage';
+import SignInPage from 'pages/SignInPage';
+import SignUpPage from 'pages/SignUpPage';
 import { Suspense, lazy } from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
-import { AppLayout, NavigationLayout, PrivateLayout } from 'src/layouts';
+import { Route, Routes } from 'react-router-dom';
+import { AppLayout, NavigationLayout, PageLayout, PrivateLayout } from 'src/layouts';
 
-const Home = lazy(() => import('pages/Home'));
-const CampaignsListPage = lazy(() => import('pages/CampaignsListPage'));
-const CreateCampaign = lazy(() => import('src/pages/CreateCampaignPage'));
-const Monitoring = lazy(() => import('pages/Monitoring'));
-const TopPerformingCampaigns = lazy(() => import('pages/TopPerformingCampaigns'));
-const TopPerformingCampaignDetails = lazy(() => import('src/pages/TopPerformingCampaignDetails'));
-const TopPerformingCampaingBreakDown = lazy(
-  () => import('src/pages/TopPerformingCampaingBreakDown'),
-);
-const NonPerformingCampaigns = lazy(() => import('src/pages/NonPerformingCampaigns'));
-const IntegrationsPage = lazy(() => import('pages/IntegrationsPage'));
-const ControlRoom = lazy(() => import('pages/ControlRoomPage'));
-const ContentSamples = lazy(() => import('pages/ControlRoomPage/ContentSamples'));
-const Settings = lazy(() => import('pages/Settings'));
-const ConnectMarktag = lazy(() => import('src/pages/ConnetMarktag'));
+import { TestRoutes } from './TestRoutes';
 
-const SignUp = lazy(() => import('pages/SignUp'));
-const LogIn = lazy(() => import('pages/LogIn'));
-const ResetPassword = lazy(() => import('pages/ResetPassword'));
-const VerifyEmail = lazy(() => import('pages/VerifyEmail'));
-const Onboarding = lazy(() => import('pages/Onboarding'));
+const delayedLazy = (importFn: () => Promise<any>, delay = 1000) => {
+  return lazy(() =>
+    Promise.all([importFn(), new Promise((resolve) => setTimeout(resolve, delay))]).then(
+      ([module]) => module,
+    ),
+  );
+};
 
-const Test = lazy(() => import('src/pages/Test'));
-const TestButton = lazy(() => import('src/pages/TestButton'));
-const TestCheckbox = lazy(() => import('src/pages/TestCheckbox'));
-const TestInputs = lazy(() => import('src/pages/TestInputs'));
-const TestTextarea = lazy(() => import('src/pages/TestTextarea'));
+const HomePage = delayedLazy(() => import('pages/HomePage'));
+const CampaignsListPage = delayedLazy(() => import('pages/CampaignsListPage'));
+const CampaignDetailsPage = delayedLazy(() => import('src/pages/CampaignDetailsPage'));
+const CampaignReportPage = delayedLazy(() => import('src/pages/CampaignReportPage'));
+const CreateCampaignPage = delayedLazy(() => import('pages/CreateCampaignPage'));
+const MonitoringPage = delayedLazy(() => import('pages/MonitoringPage'));
+const IntegrationsPage = delayedLazy(() => import('pages/IntegrationsPage'));
+const ControlRoom = delayedLazy(() => import('pages/ControlRoomPage'));
+const ContentSamples = delayedLazy(() => import('pages/ControlRoomPage/ContentSamples'));
+const SettingsPage = delayedLazy(() => import('src/pages/SettingsPage'));
+const ConnectMarktag = delayedLazy(() => import('src/pages/ConnectMarktagPage'));
 
 const Router = () => {
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Routes>
-        <Route path='/' element={<AppLayout />}>
-          <Route path='/' element={<PrivateLayout />}>
-            <Route path='/' element={<NavigationLayout />}>
-              <Route path='/' element={<Home />} />
+    <Routes>
+      <Route path='/' element={<AppLayout />}>
+        {/* Public Routes */}
+        <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/login' element={<SignInPage />} />
 
+        <Route element={<PrivateLayout />}>
+          {/* Onboarding Route */}
+          <Route path='/onboarding' element={<OnboardingPage />} />
+          <Route
+            path='/connect-marktag'
+            element={
+              <Suspense fallback={<ContentLoader />}>
+                <ConnectMarktag />
+              </Suspense>
+            }
+          />
+
+          {/* Main App Routes - Require Onboarding */}
+          <Route path='/' element={<NavigationLayout />}>
+            <Route
+              path='/'
+              element={
+                <Suspense fallback={<ContentLoader />}>
+                  <HomePage />
+                </Suspense>
+              }
+            />
+            <Route element={<PageLayout />}>
               {/* Campaigns */}
-              <Route path='/campaigns' element={<CampaignsListPage />} />
-              <Route path='/campaigns/create-campaign' element={<CreateCampaign />} />
+              <Route
+                path='/campaigns'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <CampaignsListPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/campaigns/details/:campaignId'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <CampaignDetailsPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/campaigns/report/:campaignId'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <CampaignReportPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/campaigns/create-campaign'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <CreateCampaignPage />
+                  </Suspense>
+                }
+              />
 
               {/* Monitoring */}
-              <Route path='/monitoring' element={<Monitoring />} />
               <Route
-                path='/monitoring/top-performing-campaigns'
-                element={<TopPerformingCampaigns />}
-              />
-              <Route
-                path='/monitoring/top-performing-campaigns/:name/:campaignId'
-                element={<TopPerformingCampaignDetails />}
-              />
-              <Route
-                path='/monitoring/:name/breakdown/:campaignId'
-                element={<TopPerformingCampaingBreakDown />}
-              />
-              <Route
-                path='/monitoring/non-performing-campaigns'
-                element={<NonPerformingCampaigns />}
+                path='/monitoring'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <MonitoringPage />
+                  </Suspense>
+                }
               />
 
               {/* Integrations */}
-              <Route path='/integrations' element={<IntegrationsPage />} />
+              <Route
+                path='/integrations'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <IntegrationsPage />
+                  </Suspense>
+                }
+              />
 
               {/* Control room */}
-              <Route path='/control-room' element={<ControlRoom />} />
-              <Route path='/control-room/content-samples/:configId' element={<ContentSamples />} />
+              <Route
+                path='/control-room'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <ControlRoom />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/control-room/content-samples/:configId'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <ContentSamples />
+                  </Suspense>
+                }
+              />
 
               {/* Settings */}
-              <Route path='/settings' element={<Settings />} />
+              <Route
+                path='/settings'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <SettingsPage />
+                  </Suspense>
+                }
+              />
             </Route>
-            <Route path='/onboarding' element={<Onboarding />} />
-            <Route path='/connect-marktag' element={<ConnectMarktag />} />
-          </Route>
-
-          <Route path='/signup' element={<SignUp />} />
-          <Route path='/login' element={<LogIn />} />
-          <Route path='/reset-pass' element={<ResetPassword />} />
-          <Route path='/verify' element={<VerifyEmail />} />
-
-          <Route path='/test' element={<Outlet />}>
-            <Route path='/test' element={<Test />} />
-            <Route path='btn' element={<TestButton />} />
-            <Route path='checkbox' element={<TestCheckbox />} />
-            <Route path='inputs' element={<TestInputs />} />
-            <Route path='textarea' element={<TestTextarea />} />
           </Route>
         </Route>
-      </Routes>
-    </Suspense>
+
+        {import.meta.env.DEV && <Route path='/test/*' element={<TestRoutes />} />}
+
+        <Route path='*' element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 };
 

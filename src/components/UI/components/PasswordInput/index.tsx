@@ -14,6 +14,8 @@ const PasswordInput = ({ label, required, description, ...rest }: PasswordInputP
         classNames={{
           input: styles.input,
           innerInput: styles.innerInput,
+          description: styles.description,
+          error: styles.error_description,
         }}
         label={
           label && (

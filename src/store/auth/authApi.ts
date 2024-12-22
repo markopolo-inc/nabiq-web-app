@@ -15,22 +15,23 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
-        const { email, password } = arg;
-        const loading = toast.loading('Logging in...');
+        const { email, password, onLoading, onUnverified, onSuccess } = arg;
         try {
+          onLoading && onLoading(true);
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
           toast.success('Successfully logged in.');
-          window.location.href = '/';
+          onSuccess && onSuccess();
         } catch (error) {
           if (error?.code === UserNotConfirmedException) {
-            window.location.href = '/verify';
+            dispatch(setUserEmail(email));
+            onUnverified && onUnverified();
           } else {
             toast.error(error?.message || 'Something went wrong!');
           }
         } finally {
-          toast.dismiss(loading);
+          onLoading && onLoading(false);
         }
       },
     }),
@@ -39,9 +40,9 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(arg, { dispatch }) {
-        const { name, email, password } = arg;
-        const loading = toast.loading('Signin in...');
+        const { name, email, password, onLoading, onSuccess } = arg;
         try {
+          onLoading && onLoading(true);
           // Add user to cognito
           await Auth.signUp({
             username: email,
@@ -51,13 +52,13 @@ export const authApi = apiSlice.injectEndpoints({
             },
           });
           dispatch(setUserEmail(email));
-
+          onSuccess && onSuccess();
           toast.success('Successfully sign up.');
-          window.location.href = `/verify`;
+          // window.location.href = `/verify`;
         } catch (error) {
           toast.error(error?.message || 'Something went wrong');
         } finally {
-          toast.dismiss(loading);
+          onLoading && onLoading(false);
         }
       },
     }),
@@ -109,16 +110,16 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(_arg) {
-        const { email, confirmationPin } = _arg;
-        const loading = toast.loading('Verifying...');
+        const { email, confirmationPin, onLoading, onSuccess } = _arg;
         try {
+          onLoading && onLoading(true);
           await Auth.confirmSignUp(email, confirmationPin);
           toast.success('Verification successful!');
-          window.location.href = '/login';
+          onSuccess && onSuccess();
         } catch (error) {
           toast.error(error?.message || 'Something went wrong!');
         } finally {
-          toast.dismiss(loading);
+          onLoading && onLoading(false);
         }
       },
     }),
@@ -145,16 +146,18 @@ export const authApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(_arg, { dispatch }) {
         Auth.signOut();
-        dispatch(logout());
+
         const loading = toast.loading('Logging out...');
-        toast.dismiss(loading);
-        dispatch({ type: 'store/reset' });
-        dispatch(apiSlice.util.resetApiState());
-        persistor.purge().then((_) => {
-          // resolved
-        });
-        window.localStorage.clear();
-        window.location.href = '/login';
+        setTimeout(() => {
+          dispatch(logout());
+          dispatch({ type: 'store/reset' });
+          dispatch(apiSlice.util.resetApiState());
+          persistor.purge().then((_) => {
+            // resolved
+          });
+          toast.dismiss(loading);
+          window.localStorage.clear();
+        }, 2000);
       },
     }),
   }),

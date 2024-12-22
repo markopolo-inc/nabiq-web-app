@@ -3,7 +3,6 @@ import {
   FiMail01,
   FiMessageSmileCircle,
   FiNotificationMessage,
-  FiShoppingBag03,
   FiWhatsApp,
 } from '@nabiq-icons';
 import type { GatewayType, IGateway } from 'src/interfaces/brand.interface';
@@ -18,11 +17,6 @@ export const appCategories: Array<{
     value: 'data-sources',
     label: 'Data sources',
     icon: FiData,
-  },
-  {
-    value: 'ecommerce',
-    label: 'E-commerce apps',
-    icon: FiShoppingBag03,
   },
   {
     value: 'email',

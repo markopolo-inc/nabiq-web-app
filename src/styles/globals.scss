@@ -35,13 +35,27 @@
 
 @layer base {
   body {
-    font-family: var(--font-geist), sans-serif !important;
-    @apply bg-white text-gray-900 text-base;
+    direction: ltr;
+    font-family: 'Geist', sans-serif !important;
   }
 }
 
 // Novu Notifications Custom Styles
-// .nv-preferences__button,
-// .nt-text-foreground-alpha-200 {
-//   display: none;
-// }
+.nv-preferences__button,
+.nt-text-foreground-alpha-200 {
+  display: none;
+}
+.nt-z-10 {
+  z-index: 999;
+}
+.nt-h-\[600px\] {
+  height: fit-content;
+}
+.nt-overflow-y-auto {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+pre {
+  font-family: 'Geist';
+}

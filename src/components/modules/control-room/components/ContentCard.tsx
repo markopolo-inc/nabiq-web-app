@@ -20,7 +20,7 @@ export const ContentCard = ({
     <Stack className='rounded-xl border-gray-200 border p-6 max-w-[744px]' gap={24}>
       <Stack className='font-medium text-[12px] text-gray-600'>
         <p>Subject: {content?.subject}</p>
-        <p>{content?.content}</p>
+        <pre className='whitespace-pre-wrap text-gray-600'>{content?.content}</pre>
       </Stack>
 
       <Group gap={24} justify='space-between' align='flex-end'>
