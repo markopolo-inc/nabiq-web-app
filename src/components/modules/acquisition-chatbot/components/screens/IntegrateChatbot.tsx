@@ -4,14 +4,18 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
-export const IntegrateChatbot: React.FC = () => {
+type IntegrateChatbotProps = {
+  apiKey: string;
+};
+
+export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) => {
   const code = `
 <!-- Chatbot Integration Script -->
 <script>
   (function () {
     const config = {
       botName: "NabiqBot",
-      apiKey: "YOUR_API_KEY", // Replace with actual API key
+      apiKey: ${apiKey}, // Replace with actual API key
       welcomeMessage: "Hi! How can I help?",
       themeColor: "#007BFF",
       position: "bottom-right",

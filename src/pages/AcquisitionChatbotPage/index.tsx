@@ -1,8 +1,13 @@
 import { FiHelpCircle } from '@nabiq-icons';
 import { Button, Stack } from '@nabiq-ui';
 import { IntegrateChatbot } from 'src/components/modules/acquisition-chatbot';
+import { useGetAcquisitionApiKeyQuery } from 'src/store/acquisition/acquisition.ts';
+import { useAppSelector } from 'src/store/hooks.ts';
 
 const AcquisitionChatbotPage = () => {
+  const { resourceId: brandId } = useAppSelector((state) => state.brand);
+
+  const { data } = useGetAcquisitionApiKeyQuery(brandId);
   return (
     <>
       <Stack gap={64} align='center'>
@@ -18,7 +23,7 @@ const AcquisitionChatbotPage = () => {
           </Button>
         </Stack>
 
-        <IntegrateChatbot />
+        <IntegrateChatbot apiKey={data?.apiKey ?? 'N/A'} />
       </Stack>
     </>
   );
