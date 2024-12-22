@@ -31,7 +31,7 @@ const AcquisitionChatbotPage = () => {
 
   return (
     <>
-      <Stack gap={64}>
+      <Stack gap={64} align='center'>
         <Group justify='space-between'>
           <Stack gap={4}>
             <p className='text-gray-900 text-3xl font-semibold'>Acquisition chatbot</p>
@@ -44,7 +44,10 @@ const AcquisitionChatbotPage = () => {
           </Button>
         </Group>
 
-        <Stack gap={24} className='bg-white border border-gray-200 rounded-xl p-6 shadow-sm'>
+        <Stack
+          gap={24}
+          className='max-w-[768px] w-full bg-white border border-gray-200 rounded-xl p-6 shadow-sm'
+        >
           <Stack gap={4}>
             <p className='text-gray-900 text-lg font-semibold'>Integrate chatbot</p>
             <p className='text-gray-600 text-sm font-normal'>
@@ -53,7 +56,7 @@ const AcquisitionChatbotPage = () => {
           </Stack>
 
           <Stack className='rounded-xl p-4 bg-gray-50'>
-            <Stack className='rounded-xl p-6 bg-white border border-gray-200 flex-col' gap={12}>
+            <Stack className='rounded-xl p-6 bg-white border border-gray-200 flex-col' gap={0}>
               <Button
                 className='self-end'
                 variant='primary'
@@ -65,7 +68,7 @@ const AcquisitionChatbotPage = () => {
 
               <SyntaxHighlighter
                 language='html'
-                className='!bg-transparent font-medium text-base text-gray-600'
+                className='!bg-transparent font-medium text-base text-gray-600 overflow-x-scroll block'
                 // @ts-expect-error ts error
                 style={{ all: 'unset' }}
               >
