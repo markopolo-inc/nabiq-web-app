@@ -89,6 +89,7 @@ export { default as RiMegaPhoneFill } from './MegaPhoneFillShades';
 // N
 export { default as FiNotificationMessage } from './NotificationMessage';
 export { default as FiMessageDotCircle } from './MessageDotsCircle';
+export { default as FiNotificationIcon } from './NotificationIcon';
 
 // P
 export { default as FiPlus } from './Plus';
