@@ -5,6 +5,8 @@ import MonitoringImage from 'assets/onboarding/monitoring.png';
 import { motion } from 'framer-motion';
 import { useAppSelector } from 'src/store/hooks';
 
+import { GeneratedContents } from './right-section/GeneratedContents';
+
 export const RightSection = () => {
   const { step } = useAppSelector((state) => state.onboarding);
   switch (step) {
@@ -46,6 +48,8 @@ export const RightSection = () => {
           </motion.div>
         </Stack>
       );
+    case 'sample_content':
+      return <GeneratedContents />;
     default:
       return <Image src={MonitoringImage} alt='Monitoring' />;
   }

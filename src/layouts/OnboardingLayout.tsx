@@ -17,11 +17,11 @@ export const OnboardingLayout = ({
 }) => {
   return (
     <div className='flex flex-col h-screen w-screen'>
-      <div
+      <motion.div
         className={`fixed top-0 left-0 w-screen bg-gray-950 h-[56px] flex flex-col justify-center items-center z-10`}
       >
         <Image src={NabiqLogo} alt='Nabiq' className='w-[70px]' />
-      </div>
+      </motion.div>
       <div
         className={`grid grid-cols-1 lg:grid-cols-[43%_57%] flex-1 mt-[56px] h-[calc(100vh-56px)]`}
       >

@@ -42,7 +42,8 @@ const Home = () => {
     'last_year' | 'last_month' | 'last_week' | 'last_3_day'
   >('last_year');
 
-  const { data: campaignList } = useGetCampaignConfigsQuery(brandId);
+  const { data: campaignList, isLoading: isLoadingCampaignList } =
+    useGetCampaignConfigsQuery(brandId);
 
   const isIntegrationChannelDone = !(
     !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations)
@@ -73,9 +74,9 @@ const Home = () => {
         <PageLayout>
           <Header />
 
-          {isOnboardingDone && <QuickActions />}
+          {isOnboardingDone && !isLoadingCampaignList && <QuickActions />}
 
-          {!isOnboardingDone && (
+          {!isOnboardingDone && !isLoadingCampaignList && (
             <OnBoardingItems
               isIntegrationChannelDone={isIntegrationChannelDone}
               isFirstCampaignDone={isFirstCampaignDone}

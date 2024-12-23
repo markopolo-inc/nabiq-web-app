@@ -9,12 +9,16 @@ interface OnboardingState {
   user: any;
   isFirstCreationModal: boolean;
   step: TOnboardingStep;
+  prompt: string;
+  isSampleContentGenerated: boolean;
 }
 
 const initialState: OnboardingState = {
   user: undefined,
   isFirstCreationModal: false,
   step: 'company_creation',
+  prompt: '',
+  isSampleContentGenerated: false,
 };
 
 const onboardingSlice = createSlice({
@@ -27,8 +31,19 @@ const onboardingSlice = createSlice({
     setOnboardingStep: (state, action: PayloadAction<TOnboardingStep>) => {
       state.step = action.payload;
     },
+    setGeneratePrompt: (state, action: PayloadAction<string>) => {
+      state.prompt = action.payload;
+    },
+    setIsSampleContentGenerated: (state, action: PayloadAction<boolean>) => {
+      state.isSampleContentGenerated = action.payload;
+    },
   },
 });
 
-export const { setFirstCreationModal, setOnboardingStep } = onboardingSlice.actions;
+export const {
+  setFirstCreationModal,
+  setOnboardingStep,
+  setGeneratePrompt,
+  setIsSampleContentGenerated,
+} = onboardingSlice.actions;
 export default onboardingSlice.reducer;

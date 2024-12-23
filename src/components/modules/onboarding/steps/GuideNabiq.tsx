@@ -8,7 +8,11 @@ import {
   useGenerateSampleContentMutation,
   useUpdateOnboardingStatusMutation,
 } from 'src/store/onboarding/onboardingApi';
-import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
+import {
+  setGeneratePrompt,
+  setIsSampleContentGenerated,
+  setOnboardingStep,
+} from 'src/store/onboarding/onboardingSlice';
 
 import { StepCount } from './StepCount';
 
@@ -28,6 +32,15 @@ export const GuideNabiq = () => {
     const res = await updateOnboardingStatus({ companyId, isOnboardingComplete: true }).unwrap();
     if (res.success) {
       navigate('/');
+    }
+  };
+
+  const handleGenerateSampleContent = async () => {
+    const res = await generateSampleContent({ brandId, prompt }).unwrap();
+    if (res.success) {
+      dispatch(setIsSampleContentGenerated(true));
+      dispatch(setGeneratePrompt(prompt));
+      dispatch(setOnboardingStep('sample_content'));
     }
   };
 
@@ -55,7 +68,7 @@ export const GuideNabiq = () => {
       <Button
         disabled={!prompt}
         fullWidth
-        onClick={() => generateSampleContent({ brandId, prompt })}
+        onClick={() => handleGenerateSampleContent()}
         loading={isGeneratingSampleContent}
         trailingIcon={<FiStar06 size={18} />}
       >

@@ -22,7 +22,10 @@ export const onboardApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    generateSampleContent: builder.mutation<void, { brandId: string; prompt: string }>({
+    generateSampleContent: builder.mutation<
+      IResponseInterface,
+      { brandId: string; prompt: string }
+    >({
       query: (data) => ({
         url: '/onboard/generate-sample-content',
         method: 'POST',
