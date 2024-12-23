@@ -36,7 +36,7 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <MantineProvider
             theme={{
-              fontFamily: 'Geist',
+              fontFamily: 'Geist, sans-serif',
             }}
           >
             <Toaster position='top-center' reverseOrder={false} />
