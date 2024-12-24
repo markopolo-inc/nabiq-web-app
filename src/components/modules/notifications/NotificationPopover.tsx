@@ -1,13 +1,13 @@
-import { useGetColors } from '@nabiq-ui';
+import { FiNotificationIcon } from '@nabiq-icons';
+import { Button, useGetColors } from '@nabiq-ui';
 import { Inbox } from '@novu/react';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiNotificationIcon } from 'src/components/Icons';
 import { useAppSelector } from 'src/store/hooks';
 
 export const NotificationPopover: FC = () => {
   const navigate = useNavigate();
-  const { gray500 } = useGetColors();
+  const { whiteBase } = useGetColors();
   const { resourceId: companyId } = useAppSelector((state) => state.company);
 
   const appearance = {
@@ -20,12 +20,12 @@ export const NotificationPopover: FC = () => {
     <div className='mt-1'>
       <Inbox
         renderBell={(unreadCount) => (
-          <div className='relative p-1 rounded-lg shadow-sm hover:shadow-md hover:bg-gray-300 text-gray-500'>
+          <Button variant='secondary-black' size='sm' className='relative'>
             {unreadCount ? (
-              <div className='absolute top-1 right-1 w-2 h-2 bg-red-600 border border-gray-50 rounded-full'></div>
+              <div className='absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 border border-gray-50 rounded-full'></div>
             ) : null}
-            <FiNotificationIcon size={20} color={gray500} />
-          </div>
+            <FiNotificationIcon size={20} color={whiteBase} />
+          </Button>
         )}
         applicationIdentifier={import.meta.env.VITE_NOTIFICATION_APP_ID}
         subscriberId={companyId}
