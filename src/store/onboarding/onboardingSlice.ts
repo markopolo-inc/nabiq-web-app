@@ -11,6 +11,13 @@ interface OnboardingState {
   step: TOnboardingStep;
   prompt: string;
   isSampleContentGenerated: boolean;
+  sampleContents: Array<{
+    id: string;
+    content: string;
+    subject: string;
+    status: string;
+    channel: 'email' | 'sms';
+  }>;
 }
 
 const initialState: OnboardingState = {
@@ -19,6 +26,7 @@ const initialState: OnboardingState = {
   step: 'company_creation',
   prompt: '',
   isSampleContentGenerated: false,
+  sampleContents: [],
 };
 
 const onboardingSlice = createSlice({
@@ -37,6 +45,20 @@ const onboardingSlice = createSlice({
     setIsSampleContentGenerated: (state, action: PayloadAction<boolean>) => {
       state.isSampleContentGenerated = action.payload;
     },
+    setSampleContents: (
+      state,
+      action: PayloadAction<
+        Array<{
+          id: string;
+          content: string;
+          subject: string;
+          status: string;
+          channel: 'email' | 'sms';
+        }>
+      >,
+    ) => {
+      state.sampleContents = action.payload;
+    },
   },
 });
 
@@ -45,5 +67,6 @@ export const {
   setOnboardingStep,
   setGeneratePrompt,
   setIsSampleContentGenerated,
+  setSampleContents,
 } = onboardingSlice.actions;
 export default onboardingSlice.reducer;

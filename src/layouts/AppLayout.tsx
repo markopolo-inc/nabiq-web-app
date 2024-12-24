@@ -22,7 +22,7 @@ export const AppLayout = () => {
       if (companyId && isOnboardingComplete && pathname === '/onboarding') {
         navigate('/');
       }
-      if (!companyId && !isOnboardingComplete && pathname !== '/onboarding') {
+      if ((!companyId || !isOnboardingComplete) && pathname !== '/onboarding') {
         navigate('/onboarding');
       }
     }

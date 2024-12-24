@@ -12,6 +12,7 @@ import {
   setGeneratePrompt,
   setIsSampleContentGenerated,
   setOnboardingStep,
+  setSampleContents,
 } from 'src/store/onboarding/onboardingSlice';
 
 import { StepCount } from './StepCount';
@@ -41,6 +42,7 @@ export const GuideNabiq = () => {
       dispatch(setIsSampleContentGenerated(true));
       dispatch(setGeneratePrompt(prompt));
       dispatch(setOnboardingStep('sample_content'));
+      dispatch(setSampleContents(res.data));
     }
   };
 

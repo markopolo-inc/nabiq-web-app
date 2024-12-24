@@ -1,9 +1,9 @@
 import { FiChevronLeft } from '@nabiq-icons';
 import { Button, Group, Stack, TextArea } from '@nabiq-ui';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from 'src/store';
+import { useAppSelector } from 'src/store/hooks';
 import { useUpdateOnboardingStatusMutation } from 'src/store/onboarding/onboardingApi';
 import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
 
@@ -11,12 +11,11 @@ import { StepCount } from './StepCount';
 
 export const SampleContents = () => {
   const dispatch = useDispatch();
-  const { resourceId: companyId } = useSelector((state: RootState) => state.company);
+  const { resourceId: companyId } = useAppSelector((state: RootState) => state.company);
   const [updateOnboardingStatus, { isLoading: isUpdatingOnboardingStatus }] =
     useUpdateOnboardingStatusMutation();
+  const { prompt } = useAppSelector((state: RootState) => state.onboarding);
   const navigate = useNavigate();
-
-  const [prompt, setPrompt] = useState('');
 
   const handleSkipStep = async () => {
     const res = await updateOnboardingStatus({ companyId, isOnboardingComplete: true }).unwrap();
@@ -43,7 +42,6 @@ export const SampleContents = () => {
           placeholder='Tell us how to engage your leads—mention key products, discounts, or goals.'
           rows={10}
           disabled
-          onChange={(e) => setPrompt(e.target.value)}
         />
       </Stack>
       <Group>
