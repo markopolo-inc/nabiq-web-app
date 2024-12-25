@@ -12,6 +12,7 @@ import { StepCount } from './StepCount';
 export const SampleContents = () => {
   const dispatch = useDispatch();
   const { resourceId: companyId } = useAppSelector((state: RootState) => state.company);
+  const { isMarkedContent } = useAppSelector((state: RootState) => state.onboarding);
   const [updateOnboardingStatus, { isLoading: isUpdatingOnboardingStatus }] =
     useUpdateOnboardingStatusMutation();
   const { prompt } = useAppSelector((state: RootState) => state.onboarding);
@@ -44,22 +45,28 @@ export const SampleContents = () => {
           disabled
         />
       </Stack>
-      <Group>
-        <Button
-          variant='link'
-          onClick={() => dispatch(setOnboardingStep('guide_nabiq'))}
-          leadingIcon={<FiChevronLeft />}
-        >
-          Go back
+      {isMarkedContent ? (
+        <Button fullWidth onClick={() => handleSkipStep()}>
+          Go to dashboard
         </Button>
-        <Button
-          variant='secondary'
-          onClick={() => handleSkipStep()}
-          loading={isUpdatingOnboardingStatus}
-        >
-          Skip this step
-        </Button>
-      </Group>
+      ) : (
+        <Group>
+          <Button
+            variant='link'
+            onClick={() => dispatch(setOnboardingStep('guide_nabiq'))}
+            leadingIcon={<FiChevronLeft />}
+          >
+            Go back
+          </Button>
+          <Button
+            variant='secondary'
+            onClick={() => handleSkipStep()}
+            loading={isUpdatingOnboardingStatus}
+          >
+            Skip this step
+          </Button>
+        </Group>
+      )}
     </Stack>
   );
 };

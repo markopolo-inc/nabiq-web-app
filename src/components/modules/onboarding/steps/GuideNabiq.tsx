@@ -1,15 +1,17 @@
 import { FiChevronLeft, FiStar06 } from '@nabiq-icons';
 import { Button, Group, Stack, TextArea } from '@nabiq-ui';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from 'src/store';
+import { useAppSelector } from 'src/store/hooks';
 import {
   useGenerateSampleContentMutation,
   useUpdateOnboardingStatusMutation,
 } from 'src/store/onboarding/onboardingApi';
 import {
   setGeneratePrompt,
+  setIsMarkedContent,
   setIsSampleContentGenerated,
   setOnboardingStep,
   setSampleContents,
@@ -19,8 +21,8 @@ import { StepCount } from './StepCount';
 
 export const GuideNabiq = () => {
   const dispatch = useDispatch();
-  const { resourceId: brandId } = useSelector((state: RootState) => state.brand);
-  const { resourceId: companyId } = useSelector((state: RootState) => state.company);
+  const { resourceId: brandId } = useAppSelector((state: RootState) => state.brand);
+  const { resourceId: companyId } = useAppSelector((state: RootState) => state.company);
   const [generateSampleContent, { isLoading: isGeneratingSampleContent }] =
     useGenerateSampleContentMutation();
   const [updateOnboardingStatus, { isLoading: isUpdatingOnboardingStatus }] =
@@ -43,6 +45,7 @@ export const GuideNabiq = () => {
       dispatch(setGeneratePrompt(prompt));
       dispatch(setOnboardingStep('sample_content'));
       dispatch(setSampleContents(res.data));
+      dispatch(setIsMarkedContent(false));
     }
   };
 

@@ -48,7 +48,7 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
           className={`p-[15px] rounded-xl bg-white border ${activeCard === 'integration_channel' ? 'border-primary-600' : 'border-gray-200'}`}
         >
           {isIntegrationChannelDone ? (
-            <FiGreenCheckCircle color='#fff' />
+            <FiGreenCheckCircle color='#079455' />
           ) : (
             <div className='text-base font-normal text-gray-950'>1</div>
           )}
@@ -60,7 +60,7 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
           className={`p-[15px] rounded-xl bg-white border  ${activeCard === 'first_campaign' ? 'border-primary-600' : 'border-gray-200'}`}
         >
           {isFirstCampaignDone ? (
-            <FiGreenCheckCircle color='#fff' />
+            <FiGreenCheckCircle color='#079455' />
           ) : (
             <div className='text-base font-normal text-gray-950'>2</div>
           )}
@@ -72,7 +72,7 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
           className={`p-[15px] rounded-xl bg-white border ${activeCard === 'mark_tag' ? 'border-primary-600' : 'border-gray-200'}`}
         >
           {isMarkTagDone ? (
-            <FiGreenCheckCircle color='#fff' />
+            <FiGreenCheckCircle color='#079455' />
           ) : (
             <div className='text-base font-normal text-gray-950'>3</div>
           )}

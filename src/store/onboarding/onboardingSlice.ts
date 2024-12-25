@@ -18,6 +18,7 @@ interface OnboardingState {
     status: string;
     channel: 'email' | 'sms';
   }>;
+  isMarkedContent: boolean;
 }
 
 const initialState: OnboardingState = {
@@ -27,6 +28,7 @@ const initialState: OnboardingState = {
   prompt: '',
   isSampleContentGenerated: false,
   sampleContents: [],
+  isMarkedContent: false,
 };
 
 const onboardingSlice = createSlice({
@@ -59,6 +61,10 @@ const onboardingSlice = createSlice({
     ) => {
       state.sampleContents = action.payload;
     },
+    setIsMarkedContent: (state, action: PayloadAction<boolean>) => {
+      state.isMarkedContent = action.payload;
+    },
+    resetOnboarding: () => initialState,
   },
 });
 
@@ -68,5 +74,7 @@ export const {
   setGeneratePrompt,
   setIsSampleContentGenerated,
   setSampleContents,
+  resetOnboarding,
+  setIsMarkedContent,
 } = onboardingSlice.actions;
 export default onboardingSlice.reducer;
