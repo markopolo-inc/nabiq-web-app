@@ -41,7 +41,7 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
   }, []);
 
   return (
-    <Stack gap={24} className='flex-col lg:flex-row w-full'>
+    <Stack gap={24} className='flex-col lg:flex-row w-full mt-8'>
       <Stack gap={16} className='lg:max-w-[372px] w-full'>
         <Group
           gap={16}
