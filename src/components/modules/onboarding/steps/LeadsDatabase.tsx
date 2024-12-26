@@ -76,7 +76,7 @@ export const LeadsDatabase = () => {
           <Stack gap={24}>
             <p className='text-sm text-gray-600'>
               Participants and timestamps will be visible to your team. Subject lines and contents
-              won’t be visible unless shared.
+              won't be visible unless shared.
             </p>
             <div className='grid grid-cols-2 gap-2 p-1'>
               <Button
