@@ -1,5 +1,6 @@
 import { FiChevronLeft } from '@nabiq-icons';
 import { Button, Group, Stack, TextArea } from '@nabiq-ui';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from 'src/store';
@@ -20,8 +21,14 @@ export const SampleContents = () => {
 
   const handleSkipStep = async () => {
     const res = await updateOnboardingStatus({ companyId, isOnboardingComplete: true }).unwrap();
+    const id = toast.loading('Taking you to the dashboard...', {
+      id: 'skip-step',
+    });
     if (res.success) {
-      navigate('/');
+      setTimeout(() => {
+        navigate('/');
+        toast.dismiss(id);
+      }, 2000);
     }
   };
 
