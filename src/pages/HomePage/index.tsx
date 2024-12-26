@@ -2,6 +2,7 @@ import { Stack } from '@nabiq-ui';
 import { HeaderTitle, PageLayout } from 'layouts';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import BackgroundImage from 'src/assets/bg.png';
 import { CampaignGoalModal } from 'src/components/modules/campaigns';
 import {
   Header,
@@ -70,7 +71,10 @@ const Home = () => {
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
       <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 
-      <Stack className='min-h-[calc(100vh-56px)] bg-home-hero bg-no-repeat bg-100% bg-fixed'>
+      <Stack
+        className='min-h-[calc(100vh-56px)] bg-no-repeat bg-100% bg-fixed'
+        style={{ backgroundImage: `url(${BackgroundImage})` }}
+      >
         <PageLayout>
           <Header />
 
