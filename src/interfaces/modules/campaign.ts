@@ -5,7 +5,7 @@ export type TCampaignGoal = 'acquisition' | 'retention' | 'activation';
 export type TCampaignMedium = 'whatsapp' | 'email-sms';
 
 export interface IChannel {
-  channel: 'sms' | 'email' | 'notification';
+  channel: 'sms' | 'email' | 'push-notification';
   platform: GatewayType | 'none';
 }
 
