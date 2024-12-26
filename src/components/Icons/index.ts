@@ -32,6 +32,7 @@ export { default as FiCode } from './Code';
 export { default as FiCheckCircle } from './CheckCircle';
 export { default as FiGreenCheckCircle } from './GreenCheckCircle';
 export { default as FiCopy01 } from './Copy01';
+export { default as FiCopy02 } from './Copy02';
 export { CursorBox as FiCursorBox } from './CursorBox';
 export { default as RiCodeAiFill } from './CodeAiFill';
 

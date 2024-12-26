@@ -30,7 +30,13 @@ const Instructions = ({
   );
 };
 
-const ModalBody = () => {
+const ModalBody = ({
+  setOpened,
+  setShowFirebaseCodecopyModal,
+}: {
+  setOpened: (value: boolean) => void;
+  setShowFirebaseCodecopyModal: (value: boolean) => void;
+}) => {
   const [showInstructions, setShowInstructions] = useState(false);
   const [json, setJson] = useState('');
   const [jsonError, setJsonError] = useState('');
@@ -62,7 +68,8 @@ const ModalBody = () => {
     try {
       const res = await integrateFirebase(payload).unwrap();
       if (res?.success) {
-        // to do
+        setShowFirebaseCodecopyModal(true);
+        setOpened(false);
       }
     } catch (e) {
       return null;
@@ -112,13 +119,27 @@ const ModalBody = () => {
   );
 };
 
-export const IntegrateFirebaseModal = () => {
+export const IntegrateFirebaseModal = ({
+  setShowFirebaseCodecopyModal,
+}: {
+  setShowFirebaseCodecopyModal: (value: boolean) => void;
+}) => {
   const { markTag, pushIntegrations } = useAppSelector((state) => state.brand);
 
   const isMarkTagConnected = markTag?.resourceId;
   const isPushNotificationConnected = pushIntegrations?.firebase?.connected;
   return (
-    <Modal withNoHeader withCustomClose body={() => <ModalBody />} size='md'>
+    <Modal
+      withNoHeader
+      withCustomClose
+      body={({ setOpened }) => (
+        <ModalBody
+          setOpened={setOpened}
+          setShowFirebaseCodecopyModal={setShowFirebaseCodecopyModal}
+        />
+      )}
+      size='md'
+    >
       {({ setOpened }) => (
         <Button
           leadingIcon={isMarkTagConnected ? <FiZap fill='white' size={18} /> : null}

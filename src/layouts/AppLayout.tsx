@@ -54,7 +54,7 @@ export const AppLayout = () => {
     };
   }, [pathname]);
   // console.log('--- I am from AppLayout ---');
-  if (isFetchingCompany || isLoadingCompany) {
+  if (!isAuthenticated && (isFetchingCompany || isLoadingCompany)) {
     return null;
   }
 
