@@ -1,16 +1,33 @@
-import { Image, Stack } from '@nabiq-ui';
-import PushNotificationImage from 'assets/integraions/notification-image.png';
+import { Badge, GatewayLogo } from '@nabiq-ui';
+import { IntegrationCard } from 'components/modules/integrations/components';
+import { useAppSelector } from 'src/store/hooks';
+
+import { IntegrateFirebaseModal } from '.';
 
 export const PushNotification = () => {
+  const { markTag, pushIntegrations } = useAppSelector((state) => state.brand);
+
+  const isMarkTagConnected = markTag?.resourceId;
+  const isPushNotificationConnected = pushIntegrations?.firebase?.connected;
   return (
-    <Stack align='center' justify='center' className='mt-16' gap={24}>
-      <Image src={PushNotificationImage} alt='push-notification' className='w-[120px]' />
-      <Stack gap={4} align='center'>
-        <p className='font-semibold text-gray-900'>Comming soon!</p>
-        <p className='text-gray-600 text-sm'>
-          You will soon be able to integrate push notification apps.
-        </p>
-      </Stack>
-    </Stack>
+    <div className='gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
+      <IntegrationCard
+        isConnected={isPushNotificationConnected}
+        title='Firebase'
+        description={`Deliver seamless push notifications and boost user engagement with Firebase’s reliable and scalable messaging platform.`}
+        icon={<GatewayLogo app='firebase' width={32} />}
+        badge={
+          <>
+            {!isMarkTagConnected && (
+              <Badge size='sm' color='error'>
+                You need to connect a marktag connection first
+              </Badge>
+            )}
+          </>
+        }
+      >
+        <IntegrateFirebaseModal />
+      </IntegrationCard>
+    </div>
   );
 };

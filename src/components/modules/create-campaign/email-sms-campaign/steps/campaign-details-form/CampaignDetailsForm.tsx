@@ -17,15 +17,6 @@ export const CampaignDetailsForm = () => {
     );
   };
 
-  // const handleRemoveAd = ({ value }) => {
-  //   const selectedAdsList = campaign?.content?.filter((item) => item?.id !== value);
-  //   dispatch(
-  //     setCampaign({
-  //       content: selectedAdsList,
-  //     }),
-  //   );
-  // };
-
   return (
     <>
       <Stack gap={32} w={960} className='mx-auto'>
@@ -80,63 +71,6 @@ export const CampaignDetailsForm = () => {
           </Text>
         </Stack>
 
-        {/* <Stack gap={6}>
-          <Text size='14px' className='text-gray-700' weight={500}>
-            Import content
-          </Text>
-
-          <Stack
-            gap={12}
-            align='center'
-            className='py-4 px-6 rounded-lg border border-[#EAECF0] cursor-pointer'
-            onClick={() => setShowGoalModal(true)}
-          >
-            <div className='flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 shadow-custom-xs p-2.5'>
-              <Logout01 color='#364152' size={20} strokeWidth={1.5} />
-            </div>
-
-            <Stack gap={4} align='center'>
-              <Text size='14px' className='text-primary-600' weight={600}>
-                Import content from your connected platforms
-              </Text>
-              <Text size='12px' className='text-gray-600'>
-                Apps need to be connected for this.
-              </Text>
-            </Stack>
-          </Stack>
-        </Stack> */}
-        {/* 
-        {campaign?.content?.length ? (
-          <Stack gap={12}>
-            {campaign?.content?.map((item) => (
-              <Group
-                key={item?.id}
-                align='start'
-                justify='space-between'
-                className='p-4 rounded-lg border border-[#EAECF0]'
-              >
-                <Group gap={8} align='start'>
-                  <FiPlatformIcon platform={item?.platform} size={20} />
-                  <Stack gap={2}>
-                    <Text size='14px' className='text-gray-700' weight={500}>
-                      {item?.title}
-                    </Text>
-                    <Text size='14px' className='text-gray-600'>
-                      {item?.type}
-                    </Text>
-                  </Stack>
-                </Group>
-
-                <FiCrossX
-                  size={10}
-                  color='#9AA4B2'
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => handleRemoveAd({ value: item?.id })}
-                />
-              </Group>
-            ))}
-          </Stack>
-        ) : null} */}
         <Stack gap={6}>
           <Select
             data={[

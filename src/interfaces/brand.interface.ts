@@ -15,7 +15,8 @@ export type GatewayType =
   | 'google'
   | 'shopify'
   | 'salla'
-  | 'salesforce';
+  | 'salesforce'
+  | 'firebase';
 
 export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify' | 'salla';
 
@@ -146,6 +147,15 @@ export interface ConnectedBrand {
   connectedAccounts: ConnectedAccounts;
 }
 
+export interface IPushNotificationIntegration {
+  firebase: {
+    projectId: string;
+    pk_ce_encrypted: string;
+    iv: string;
+    connected: boolean;
+  };
+}
+
 export interface BrandInterface {
   brandName?: string;
   companyId?: string;
@@ -159,6 +169,7 @@ export interface BrandInterface {
   smsIntegrations?: IEmailSMSIntegrationInterface;
   datasourceIntegrations?: IDataSourceIntegrationInterface;
   socialIntegrations?: ISocialIntegrationInterface;
+  pushIntegrations?: IPushNotificationIntegration;
   markTag?: {
     resourceId?: string;
     domain: string;

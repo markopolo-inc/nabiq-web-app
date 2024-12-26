@@ -1,6 +1,16 @@
-import { Breadcrumbs, Button, Group, PageLoader, Stack, Stepper, StepperStep } from '@nabiq-ui';
+import {
+  Breadcrumbs,
+  Button,
+  ContentLoader,
+  Group,
+  PageLoader,
+  Stack,
+  Stepper,
+  StepperStep,
+} from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -58,8 +68,12 @@ export const EmailSmsCampaign = () => {
       }
 
       if (res.success) {
-        navigate('/campaigns');
-        dispatch(resetCampaign());
+        toast.success(res.message || 'Campaign created successfully');
+
+        setTimeout(() => {
+          navigate('/campaigns');
+          dispatch(resetCampaign());
+        }, 2000);
 
         if (!isFirstCreationModal && campaignList?.data?.length === 1) {
           setShowModal(true);
@@ -85,11 +99,16 @@ export const EmailSmsCampaign = () => {
     }
   };
 
+  const isLoading = isCreateConfigLoading || isEditConfigLoading;
+
+  if (isLoading) {
+    return <ContentLoader />;
+  }
+
   return (
     <>
       <HeaderTitle>Nabiq | Campaign Configuration</HeaderTitle>
       <CampaignFirstCreationModal showModal={showModal} setShowModal={setShowModal} />
-
       <Stack gap={64}>
         <Stack gap={20}>
           <Breadcrumbs />
