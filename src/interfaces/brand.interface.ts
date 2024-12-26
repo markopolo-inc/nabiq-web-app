@@ -123,6 +123,7 @@ export interface IGateway {
   learnMoreLink: string;
   isKeyIntegration: boolean;
   isOauthIntegration: boolean;
+  oauthUrl?: string;
 }
 
 export interface ConnectedAccounts {

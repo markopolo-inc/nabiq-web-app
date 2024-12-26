@@ -33,11 +33,6 @@ export const appCategories: Array<{
     label: 'WhatsApp',
     icon: FiWhatsApp,
   },
-  // {
-  //   value: 'ads',
-  //   label: 'Ads',
-  //   // icon: FiMail01, // Todo: change this icon
-  // },
   {
     value: 'push-notification',
     label: 'Push notification apps',
@@ -52,8 +47,9 @@ export const appOptions: IGateway[] = [
     headline: 'Enhance your e-commerce marketing with data-driven email automation.',
     gateway: 'klaviyo',
     learnMoreLink: '',
-    isKeyIntegration: true,
-    isOauthIntegration: false,
+    isKeyIntegration: false,
+    isOauthIntegration: true,
+    oauthUrl: '/email/klaviyo/oauth',
   },
   {
     category: 'email',
@@ -63,6 +59,7 @@ export const appOptions: IGateway[] = [
     learnMoreLink: '',
     isKeyIntegration: false,
     isOauthIntegration: true,
+    oauthUrl: '/email/hubspot/oauth',
   },
   {
     category: 'email',
@@ -161,36 +158,6 @@ export const appOptions: IGateway[] = [
     learnMoreLink: '',
     isKeyIntegration: true,
     isOauthIntegration: false,
-  },
-  // {
-  //   category: 'sms',
-  //   name: 'WhatsApp',
-  //   headline:
-  //     'Connect with customers instantly and securely using WhatsApp’s widely adopted messaging platform for seamless communication.',
-  //   gateway: 'whatsapp',
-  //   learnMoreLink: '',
-  //   isKeyIntegration: true,
-  //   isOauthIntegration: false,
-  // },
-  {
-    category: 'ads',
-    name: 'Facebook ads',
-    headline:
-      'Maximize your reach and engage your audience with highly targeted, data-driven ads that deliver measurable results.',
-    gateway: 'facebook',
-    learnMoreLink: '',
-    isKeyIntegration: false,
-    isOauthIntegration: true,
-  },
-  {
-    category: 'ads',
-    name: 'Google ads',
-    headline:
-      'Drive traffic and conversions with powerful, performance-focused Google Ads, reaching the right customers at the right time.',
-    gateway: 'google',
-    learnMoreLink: '',
-    isKeyIntegration: false,
-    isOauthIntegration: true,
   },
 ];
 

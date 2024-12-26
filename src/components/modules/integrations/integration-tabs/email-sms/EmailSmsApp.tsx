@@ -11,8 +11,7 @@ import {
 import type { TOptionTab } from 'src/interfaces/modules/integrations';
 import { appOptions } from 'src/lib/integration';
 import { useAppSelector } from 'store/hooks';
-import { getAuthToken } from 'utils/auth';
-import { buildQueryString } from 'utils/string.utils';
+import { getOAuthUrl } from 'utils/auth';
 
 export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
   const [selectedGateway, setSelectedGateway] = useState<IGateway | null>(null);
@@ -20,15 +19,11 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const { emailIntegrations, smsIntegrations } = useAppSelector((state) => state.brand);
 
-  const handleIntegrate = async ({ gateway }: { gateway: IGateway }) => {
-    const token = await getAuthToken();
-    window.location.href = `${
-      import.meta.env.VITE_BASE_API_URL
-    }/${gateway.gateway}/oauth?${buildQueryString({
+  const handleIntegrate = async (authUrl: string) => {
+    window.location.href = await getOAuthUrl(authUrl, {
       brandId,
-      token,
       redirectUri: window.location.href,
-    })}`;
+    });
   };
 
   return (
@@ -56,7 +51,7 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
                       className='!w-40'
                       leadingIcon={<FiZap fill='white' size={22} />}
                       onClick={() => {
-                        handleIntegrate({ gateway });
+                        handleIntegrate(gateway.oauthUrl);
                       }}
                     >
                       {isGatewayConnected ? 'Reconnect' : 'Integrate'}
