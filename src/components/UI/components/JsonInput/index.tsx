@@ -1,10 +1,10 @@
-import { Textarea, TextareaProps } from '@mantine/core';
+import { JsonInputProps, JsonInput as MantineJsonInput } from '@mantine/core';
 
-import styles from './TextArea.module.scss';
+import styles from './index.module.scss';
 
-const TextArea = ({ ...rest }: TextareaProps) => {
+export const JsonInput = ({ ...props }: JsonInputProps) => {
   return (
-    <Textarea
+    <MantineJsonInput
       classNames={{
         input: styles.input,
         description: styles.description,
@@ -12,9 +12,7 @@ const TextArea = ({ ...rest }: TextareaProps) => {
         label: styles.label,
       }}
       inputWrapperOrder={['label', 'input', 'description', 'error']}
-      {...rest}
+      {...props}
     />
   );
 };
-
-export default TextArea;

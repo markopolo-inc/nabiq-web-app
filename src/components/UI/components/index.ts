@@ -29,8 +29,9 @@ export { default as Stepper } from './Stepper';
 export { StepperStep } from './StepperStep';
 export { default as Switch } from './Switch';
 export { default as Checkbox } from './Checkbox/index.tsx';
-export { default as OtpInput } from './OtpInput';
+export { OtpInput } from './OtpInput';
 export { default as MultiSelect } from './MultiSelect';
+export { JsonInput } from './JsonInput';
 
 // Data representation
 export { default as Alert } from './Alert';

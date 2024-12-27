@@ -1,5 +1,5 @@
 import { FiZap } from '@nabiq-icons';
-import { Button, GatewayLogo, Modal, Stack, TextArea } from '@nabiq-ui';
+import { Button, GatewayLogo, JsonInput, Modal, Stack } from '@nabiq-ui';
 import { useState } from 'react';
 import { useAppSelector } from 'src/store/hooks';
 import { useIntegrateFirebaseMutation } from 'src/store/integrations/push-notification';
@@ -95,13 +95,13 @@ const ModalBody = ({
               <p className='text-gray-600'>Enter your service account JSON.</p>
             </Stack>
           </Stack>
-          <TextArea
+          <JsonInput
             placeholder='Enter JSON'
             label='JSON'
             value={json}
-            onChange={(e) => {
-              setJson(e.target.value);
-              validateJson(e.target.value);
+            onChange={(value) => {
+              setJson(value);
+              validateJson(value);
             }}
             error={jsonError}
             rows={15}

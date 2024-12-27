@@ -45,7 +45,12 @@ export const VerificationForm = () => {
               We sent a verification code to <span className='text-gray-700'>{email}</span>
             </p>
           </Stack>
-          <OtpInput onChange={handleOTPChange} label='Verification code' />
+          <OtpInput
+            onChange={handleOTPChange}
+            length={6}
+            placeholder='0'
+            label='Verification code'
+          />
         </Stack>
       </motion.div>
       <motion.div
