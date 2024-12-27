@@ -14,6 +14,7 @@ import Shopify from 'assets/integraions/ShopifyLogo.svg';
 import Sinch from 'assets/integraions/SinchLogo.svg';
 import Twillio from 'assets/integraions/TwillioLogo.svg';
 import WhatsApp from 'assets/integraions/WhatsappLogo.svg';
+import Zoho from 'assets/integraions/ZohoLogo.svg';
 import Klaviyo from 'assets/integraions/klavioLogo.svg';
 import React from 'react';
 import type { GatewayType } from 'src/interfaces/brand.interface';
@@ -39,6 +40,7 @@ const GatewayLogo: React.FC<{
     salla: Salla,
     salesforce: SalesForce,
     firebase: Firebase,
+    zoho: Zoho,
   };
 
   return <Image src={logo?.[app]} style={{ width }} />;

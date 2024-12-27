@@ -81,6 +81,25 @@ const dataSourcesApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getZohoRegions: builder.query<IResponseInterface, void>({
+      query: () => ({
+        url: '/zoho/region',
+        method: 'GET',
+      }),
+    }),
+    saveZohoRegion: builder.query<
+      IResponseInterface,
+      {
+        brandId: string;
+        region: string;
+      }
+    >({
+      query: (args) => ({
+        url: '/zoho/region',
+        method: 'POST',
+        body: args,
+      }),
+    }),
   }),
 });
 
@@ -88,4 +107,5 @@ export const {
   useGetDataSourcePropertiesQuery,
   useSaveDataSourcePropertiesMutation,
   useDisconnectDataSourceMutation,
+  useGetZohoRegionsQuery,
 } = dataSourcesApi;

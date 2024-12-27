@@ -16,9 +16,10 @@ export type GatewayType =
   | 'shopify'
   | 'salla'
   | 'salesforce'
-  | 'firebase';
+  | 'firebase'
+  | 'zoho';
 
-export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify' | 'salla';
+export type TDataSourcePlatform = 'hubspot' | 'salesforce' | 'shopify' | 'salla' | 'zoho';
 
 export type TECommercePlatform = 'shopify' | 'salla';
 

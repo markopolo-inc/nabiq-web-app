@@ -5,6 +5,7 @@ import {
   Marktag,
   MarktagCreationsModals,
   Salesforce,
+  Zoho,
 } from 'src/components/modules/integrations/integration-tabs/data-sources';
 
 export const DataSources = () => {
@@ -18,6 +19,7 @@ export const DataSources = () => {
         <Hubspot />
         <Salesforce />
         <ECommerce />
+        <Zoho />
       </div>
     </>
   );
