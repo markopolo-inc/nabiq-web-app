@@ -49,7 +49,13 @@ const ModalBody = ({
         setJsonError('');
         return;
       }
-      JSON.parse(value);
+      const parsedJson = JSON.parse(value);
+
+      if (!parsedJson.project_id || !parsedJson.private_key || !parsedJson.client_email) {
+        setJsonError('Missing required fields: project_id, private_key, or client_email');
+        return;
+      }
+
       setJsonError('');
     } catch (e) {
       setJsonError('Invalid JSON. Please check again.');
