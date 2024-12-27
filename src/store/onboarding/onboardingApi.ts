@@ -17,7 +17,9 @@ export const onboardApi = apiSlice.injectEndpoints({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error('Failed to create user!');
+          toast.error('Failed to create user!', {
+            id: 'create-user-error',
+          });
           throw new Error(err);
         }
       },

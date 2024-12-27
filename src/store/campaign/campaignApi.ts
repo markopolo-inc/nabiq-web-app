@@ -38,9 +38,13 @@ export const campaignApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Created campaign successfully!');
+          toast.success(res.data?.message || 'Created campaign successfully!', {
+            id: 'create-campaign-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to create!');
+          toast.error(err?.error.message || 'Failed to create!', {
+            id: 'create-campaign-error',
+          });
           return err;
         }
       },
@@ -74,9 +78,13 @@ export const campaignApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Created campaign successfully!');
+          toast.success(res.data?.message || 'Created campaign successfully!', {
+            id: 'create-whatsapp-campaign-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to create!');
+          toast.error(err?.error.message || 'Failed to create!', {
+            id: 'create-whatsapp-campaign-error',
+          });
           return err;
         }
       },
@@ -107,9 +115,13 @@ export const campaignApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Campaign update campaign successfully!');
+          toast.success(res.data?.message || 'Campaign update campaign successfully!', {
+            id: 'edit-campaign-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to update!');
+          toast.error(err?.error.message || 'Failed to update!', {
+            id: 'edit-campaign-error',
+          });
           return err;
         }
       },
@@ -130,9 +142,13 @@ export const campaignApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Campaign update campaign successfully!');
+          toast.success(res.data?.message || 'Campaign update campaign successfully!', {
+            id: 'delete-campaign-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to update!');
+          toast.error(err?.error.message || 'Failed to update!', {
+            id: 'delete-campaign-error',
+          });
           return err;
         }
       },

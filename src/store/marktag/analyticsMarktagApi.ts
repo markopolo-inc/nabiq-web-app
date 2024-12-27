@@ -17,10 +17,14 @@ const markopoloMarktagApi = markopoloApiSlice.injectEndpoints({
         try {
           const result = await queryFulfilled;
           if (result?.data?.status === 200 || result?.data?.status === 201) {
-            toast.success('Instructions of Marktag Setup sent to developer successfully');
+            toast.success('Instructions of Marktag Setup sent to developer successfully', {
+              id: 'send-email-instruction-success',
+            });
           }
         } catch (error) {
-          toast.error(error?.response?.data?.message || 'Failed to send instructions!');
+          toast.error(error?.response?.data?.message || 'Failed to send instructions!', {
+            id: 'send-email-instruction-error',
+          });
         }
       },
     }),

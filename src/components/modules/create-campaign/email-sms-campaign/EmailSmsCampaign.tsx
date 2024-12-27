@@ -68,7 +68,9 @@ export const EmailSmsCampaign = () => {
       }
 
       if (res.success) {
-        toast.success(res.message || 'Campaign created successfully');
+        toast.success(res.message || 'Campaign created successfully', {
+          id: 'campaign-created',
+        });
 
         setTimeout(() => {
           navigate('/campaigns');

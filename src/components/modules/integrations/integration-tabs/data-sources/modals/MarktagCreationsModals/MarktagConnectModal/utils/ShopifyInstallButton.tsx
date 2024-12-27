@@ -14,8 +14,10 @@ const ShopifyMarktagInstallButton = ({ markTagId, domainData, setDomainData }) =
 
   const installShopify = async (action: 'add' | 'delete') => {
     await installShopifyCode({ brandId: connectedBrand?.resourceId, markTagId, action });
-    toast.success(action === 'add' ? 'Installed on shopify' : 'Removed from shopify');
-    toast.loading('Please wait!');
+    toast.success(action === 'add' ? 'Installed on shopify' : 'Removed from shopify', {
+      id: 'shopify-installed',
+    });
+    toast.loading('Please wait!', { id: 'shopify-loading' });
     const selectedTag = await getMarkTagById(markTagId).unwrap();
     if (selectedTag) {
       setDomainData({

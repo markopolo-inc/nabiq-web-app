@@ -26,9 +26,13 @@ const pushNotificationApi = apiSlice.injectEndpoints({
       async onQueryStarted(_args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Saved successfully!');
+          toast.success(res.data?.message || 'Saved successfully!', {
+            id: 'integrate-firebase-success',
+          });
         } catch (err) {
-          toast.error(err?.error?.data?.message || 'Failed to save information!');
+          toast.error(err?.error?.data?.message || 'Failed to save information!', {
+            id: 'integrate-firebase-error',
+          });
           return err;
         }
       },

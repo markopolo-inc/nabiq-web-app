@@ -15,8 +15,10 @@ const WoocommerceMarktagInstallButton = ({ markTagId, domainData, setDomainData 
 
   const installWooCommerce = async (action: 'add' | 'delete') => {
     await installWooCommerceCode({ brandId: connectedBrand?.resourceId, markTagId, action });
-    toast.success(action === 'add' ? 'Installed on WooCommerce' : 'Removed from WooCommerce');
-    toast.loading('Please wait!');
+    toast.success(action === 'add' ? 'Installed on WooCommerce' : 'Removed from WooCommerce', {
+      id: 'woocommerce-installed',
+    });
+    toast.loading('Please wait!', { id: 'woocommerce-loading' });
     const selectedTag = await getMarkTagById(markTagId).unwrap();
     if (selectedTag) {
       setDomainData({

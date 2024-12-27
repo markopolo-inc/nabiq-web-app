@@ -36,9 +36,13 @@ const integrationsApi = apiSlice.injectEndpoints({
       async onQueryStarted(_args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Saved successfully!');
+          toast.success(res.data?.message || 'Saved successfully!', {
+            id: 'integrate-gateway-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to save information!');
+          toast.error(err?.error.message || 'Failed to save information!', {
+            id: 'integrate-gateway-error',
+          });
           return err;
         }
       },
@@ -58,9 +62,13 @@ const integrationsApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || `Disconnected gateway!`);
+          toast.success(res.data?.message || `Disconnected gateway!`, {
+            id: 'disconnect-gateway-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to disconnect!');
+          toast.error(err?.error.message || 'Failed to disconnect!', {
+            id: 'disconnect-gateway-error',
+          });
           return err;
         }
       },
@@ -80,9 +88,13 @@ const integrationsApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Saved successfully!');
+          toast.success(res.data?.message || 'Saved successfully!', {
+            id: 'add-accounts-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to save information!');
+          toast.error(err?.error.message || 'Failed to save information!', {
+            id: 'add-accounts-error',
+          });
           return err;
         }
       },

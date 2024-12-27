@@ -46,9 +46,13 @@ const dataSourcesApi = apiSlice.injectEndpoints({
       async onQueryStarted(_args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Saved successfully!');
+          toast.success(res.data?.message || 'Saved successfully!', {
+            id: 'save-data-source-properties-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to save information!');
+          toast.error(err?.error.message || 'Failed to save information!', {
+            id: 'save-data-source-properties-error',
+          });
           return err;
         }
       },
@@ -66,9 +70,13 @@ const dataSourcesApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || `Disconnected successfully!`);
+          toast.success(res.data?.message || `Disconnected successfully!`, {
+            id: 'disconnect-data-source-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to disconnect!');
+          toast.error(err?.error.message || 'Failed to disconnect!', {
+            id: 'disconnect-data-source-error',
+          });
           return err;
         }
       },

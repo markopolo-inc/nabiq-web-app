@@ -66,18 +66,18 @@ const RegisterDomain = ({ setOpened }) => {
 
   const handleContinueMarkTag = async () => {
     if (!brandId) {
-      toast.error('Select a brand!');
+      toast.error('Select a brand!', { id: 'select-brand' });
       return;
     }
 
     if (marktagType !== 'client-side') {
       if (!domain) {
-        toast.error('Enter a domain!');
+        toast.error('Enter a domain!', { id: 'enter-domain' });
         return;
       }
 
       if (domain?.toLowerCase()?.includes('https://') || domain?.toLowerCase()?.includes('www.')) {
-        toast.error('Domain cannot contain https:// or www.');
+        toast.error('Domain cannot contain https:// or www.', { id: 'domain-error' });
         return;
       }
     }

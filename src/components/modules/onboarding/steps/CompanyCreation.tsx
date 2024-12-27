@@ -44,7 +44,7 @@ export const CompanyCreation = () => {
       });
       setOnboardingStep('lead_database');
     } catch (err) {
-      toast.error('Failed to get user data!');
+      toast.error('Failed to get user data!', { id: 'user-data-error' });
     } finally {
       setIsLoading(false);
     }

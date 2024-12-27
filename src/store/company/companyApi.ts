@@ -51,9 +51,13 @@ export const companyApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Update successfully!');
+          toast.success(res.data?.message || 'Update successfully!', {
+            id: 'update-setting-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to updated!');
+          toast.error(err?.error.message || 'Failed to updated!', {
+            id: 'update-setting-error',
+          });
           return err;
         }
       },

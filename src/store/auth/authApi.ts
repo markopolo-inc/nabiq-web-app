@@ -21,14 +21,14 @@ export const authApi = apiSlice.injectEndpoints({
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
-          toast.success('Successfully logged in.');
+          toast.success('Successfully logged in.', { id: 'login-success' });
           onSuccess && onSuccess();
         } catch (error) {
           if (error?.code === UserNotConfirmedException) {
             dispatch(setUserEmail(email));
             onUnverified && onUnverified();
           } else {
-            toast.error(error?.message || 'Something went wrong!');
+            toast.error(error?.message || 'Something went wrong!', { id: 'login-error' });
           }
         } finally {
           onLoading && onLoading(false);
@@ -53,10 +53,10 @@ export const authApi = apiSlice.injectEndpoints({
           });
           dispatch(setUserEmail(email));
           onSuccess && onSuccess();
-          toast.success('Successfully sign up.');
+          toast.success('Successfully sign up.', { id: 'signup-success' });
           // window.location.href = `/verify`;
         } catch (error) {
-          toast.error(error?.message || 'Something went wrong');
+          toast.error(error?.message || 'Something went wrong', { id: 'signup-error' });
         } finally {
           onLoading && onLoading(false);
         }
@@ -67,7 +67,9 @@ export const authApi = apiSlice.injectEndpoints({
         return { data: null }; // No-op response
       },
       async onQueryStarted(_arg, { dispatch }) {
-        const loading = toast.loading('Signing in with Google...');
+        const loading = toast.loading('Signing in with Google...', {
+          id: 'google-signin-loading',
+        });
 
         try {
           let user: any = null;
@@ -91,7 +93,7 @@ export const authApi = apiSlice.injectEndpoints({
           dispatch(setUserEmail(email));
 
           toast.dismiss(loading);
-          toast.success('Successfully signed in with Google.');
+          toast.success('Successfully signed in with Google.', { id: 'google-signin-success' });
 
           setTimeout(() => {
             window.location.href = '/';
@@ -99,7 +101,7 @@ export const authApi = apiSlice.injectEndpoints({
         } catch (error) {
           toast.dismiss(loading);
           if (error?.trim() !== 'The user is not authenticated') {
-            toast.error('Error signing in with Google!');
+            toast.error('Error signing in with Google!', { id: 'google-signin-error' });
           }
         }
       },
@@ -114,10 +116,10 @@ export const authApi = apiSlice.injectEndpoints({
         try {
           onLoading && onLoading(true);
           await Auth.confirmSignUp(email, confirmationPin);
-          toast.success('Verification successful!');
+          toast.success('Verification successful!', { id: 'verify-success' });
           onSuccess && onSuccess();
         } catch (error) {
-          toast.error(error?.message || 'Something went wrong!');
+          toast.error(error?.message || 'Something went wrong!', { id: 'verify-error' });
         } finally {
           onLoading && onLoading(false);
         }
@@ -129,12 +131,14 @@ export const authApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(_arg) {
         const { email } = _arg;
-        const loading = toast.loading('Resending code...');
+        const loading = toast.loading('Resending code...', {
+          id: 'resend-code-loading',
+        });
         try {
           await Auth.resendSignUp(email);
-          toast.success('Code has been sent to your email!');
+          toast.success('Code has been sent to your email!', { id: 'resend-code-success' });
         } catch (error) {
-          toast.error(error?.message || 'Something went wrong!');
+          toast.error(error?.message || 'Something went wrong!', { id: 'resend-code-error' });
         } finally {
           toast.dismiss(loading);
         }
@@ -147,7 +151,9 @@ export const authApi = apiSlice.injectEndpoints({
       async onQueryStarted(_arg, { dispatch }) {
         Auth.signOut();
 
-        const loading = toast.loading('Logging out...');
+        const loading = toast.loading('Logging out...', {
+          id: 'logout-loading',
+        });
         setTimeout(() => {
           dispatch(logout());
           dispatch({ type: 'store/reset' });

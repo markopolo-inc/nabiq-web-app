@@ -87,9 +87,13 @@ const controlRoomApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Successfully updated feedback!');
+          toast.success(res.data?.message || 'Successfully updated feedback!', {
+            id: 'mark-config-content-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to give feedback!');
+          toast.error(err?.error.message || 'Failed to give feedback!', {
+            id: 'mark-config-content-error',
+          });
           return err;
         }
       },
@@ -109,9 +113,13 @@ const controlRoomApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Successfully updated feedback!');
+          toast.success(res.data?.message || 'Successfully updated feedback!', {
+            id: 'mark-approved-config-content-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to give feedback!');
+          toast.error(err?.error.message || 'Failed to give feedback!', {
+            id: 'mark-approved-config-content-error',
+          });
           return err;
         }
       },
@@ -143,9 +151,13 @@ const controlRoomApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Successfully updated feedback!');
+          toast.success(res.data?.message || 'Successfully updated feedback!', {
+            id: 'react-config-content-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to give feedback!');
+          toast.error(err?.error.message || 'Failed to give feedback!', {
+            id: 'react-config-content-error',
+          });
           return err;
         }
       },

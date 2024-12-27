@@ -18,7 +18,7 @@ export const Whatsapp = () => {
     const res = await disconnectPlatform({ brandId, platform: 'facebook' }).unwrap();
     if (res.success) {
       setShowDisconnectModal(false);
-      toast.success('Disconnected successfully');
+      toast.success('Disconnected successfully', { id: 'disconnect-success' });
     }
   };
 

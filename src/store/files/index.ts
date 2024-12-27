@@ -20,7 +20,9 @@ const uploadToServer = async (companyId: string, file: File) => {
       return res.data;
     }
   } catch (error: any) {
-    toast.error(error?.response?.data?.errors?.[0] || `Failed to upload file!`);
+    toast.error(error?.response?.data?.errors?.[0] || `Failed to upload file!`, {
+      id: 'upload-file-error',
+    });
   }
 };
 

@@ -56,7 +56,9 @@ const socialIntegrationsApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         const res = await queryFulfilled;
         if (!res?.data?.success) {
-          toast.error('No numbers found!');
+          toast.error('No numbers found!', {
+            id: 'get-wa-numbers-error',
+          });
         }
       },
     }),
@@ -78,9 +80,13 @@ const socialIntegrationsApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || `Saved successfully!`);
+          toast.success(res.data?.message || `Saved successfully!`, {
+            id: 'save-wa-number-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to save!');
+          toast.error(err?.error.message || 'Failed to save!', {
+            id: 'save-wa-number-error',
+          });
           return err;
         }
       },
@@ -98,9 +104,13 @@ const socialIntegrationsApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || `Disconnected successfully!`);
+          toast.success(res.data?.message || `Disconnected successfully!`, {
+            id: 'disconnect-platform-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to disconnect!');
+          toast.error(err?.error.message || 'Failed to disconnect!', {
+            id: 'disconnect-platform-error',
+          });
           return err;
         }
       },

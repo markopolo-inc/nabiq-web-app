@@ -42,9 +42,13 @@ const marktagApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
-          toast.success(res.data?.message || 'Connected marktag successfully!');
+          toast.success(res.data?.message || 'Connected marktag successfully!', {
+            id: 'connect-marktag-success',
+          });
         } catch (err) {
-          toast.error(err?.error.message || 'Failed to connect!');
+          toast.error(err?.error.message || 'Failed to connect!', {
+            id: 'connect-marktag-error',
+          });
           return err;
         }
       },

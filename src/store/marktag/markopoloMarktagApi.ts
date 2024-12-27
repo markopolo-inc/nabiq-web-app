@@ -26,7 +26,9 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(err?.error?.data?.message || 'Failed to get mark tag details!');
+          toast.error(err?.error?.data?.message || 'Failed to get mark tag details!', {
+            id: 'get-mark-tag-details-error',
+          });
         }
       },
     }),
@@ -63,9 +65,13 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
       async onQueryStarted(_arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success('Domain registered successfully!');
+          toast.success('Domain registered successfully!', {
+            id: 'register-domain-success',
+          });
         } catch (err) {
-          toast.error(err?.error?.data?.message || 'Could not register domain!');
+          toast.error(err?.error?.data?.message || 'Could not register domain!', {
+            id: 'register-domain-error',
+          });
         }
       },
     }),
@@ -81,12 +87,18 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         try {
           const result = await queryFulfilled;
           if (result?.data?.serverCreated) {
-            toast.success('Setup verified successfully!');
+            toast.success('Setup verified successfully!', {
+              id: 'verify-setup-success',
+            });
           } else {
-            toast.error(result?.data?.message || 'Setup verification failed!');
+            toast.error(result?.data?.message || 'Setup verification failed!', {
+              id: 'verify-setup-error',
+            });
           }
         } catch (err) {
-          toast.error(err?.error?.data?.message || 'Could not verify setup!');
+          toast.error(err?.error?.data?.message || 'Could not verify setup!', {
+            id: 'verify-setup-error',
+          });
         }
       },
     }),
@@ -105,7 +117,9 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(err?.error?.data?.message || 'Failed to get shopify custom domain!');
+          toast.error(err?.error?.data?.message || 'Failed to get shopify custom domain!', {
+            id: 'get-shopify-custom-domain-error',
+          });
         }
       },
     }),
@@ -124,7 +138,9 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(err?.error?.data?.message || 'Failed to get woocommerce custom domain!');
+          toast.error(err?.error?.data?.message || 'Failed to get woocommerce custom domain!', {
+            id: 'get-woocommerce-custom-domain-error',
+          });
         }
       },
     }),
@@ -145,7 +161,9 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         try {
           await queryFulfilled;
         } catch (err) {
-          toast.error(err?.error?.data?.message || 'Failed to install Shopify code');
+          toast.error(err?.error?.data?.message || 'Failed to install Shopify code', {
+            id: 'install-shopify-code-error',
+          });
         }
       },
     }),
@@ -166,7 +184,9 @@ const markopoloMarktagApi = tagApiSlice.injectEndpoints({
         try {
           await queryFulfilled;
         } catch (error) {
-          toast.error(error?.error?.data?.message || 'Failed to install WooCommerce code');
+          toast.error(error?.error?.data?.message || 'Failed to install WooCommerce code', {
+            id: 'install-woocommerce-code-error',
+          });
         }
       },
     }),

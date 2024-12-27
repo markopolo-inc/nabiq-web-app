@@ -25,7 +25,7 @@ const ModalBody = () => {
             leadingIcon={<FiCopy02 />}
             onClick={() => {
               navigator.clipboard.writeText(codeText + 'USER_FCM_TOKEN' + codeEnd);
-              toast.success('Code copied to clipboard!');
+              toast.success('Code copied to clipboard!', { id: 'code-copied' });
             }}
           >
             Copy

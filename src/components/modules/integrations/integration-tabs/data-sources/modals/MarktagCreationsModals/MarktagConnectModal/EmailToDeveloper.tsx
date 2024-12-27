@@ -27,7 +27,7 @@ const EmailToDeveloper = ({ setOpened }) => {
         username: userName,
       });
     } else {
-      toast.error('Invalid email address!');
+      toast.error('Invalid email address!', { id: 'invalid-email' });
     }
   };
 

@@ -14,7 +14,7 @@ const DNSRecord = () => {
 
   const handleCopy = (value) => {
     navigator.clipboard.writeText(value);
-    toast.success('Copy to clipboard');
+    toast.success('Copy to clipboard', { id: 'copy-to-clipboard' });
   };
 
   const handleVerifyRecords = async () => {
