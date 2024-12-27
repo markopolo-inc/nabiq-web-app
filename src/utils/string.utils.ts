@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { formatNumber } from './number';
 
 /**
@@ -63,4 +65,8 @@ export const formatMetricUnit = (
     return `${formatNumber(value)}${TypeMap[type]}`;
   }
   return `${TypeMap[type]}${formatNumber(value)}`;
+};
+
+export const generateUUID = () => {
+  return uuidv4();
 };
