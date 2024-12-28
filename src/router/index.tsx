@@ -28,6 +28,7 @@ const ControlRoom = delayedLazy(() => import('pages/ControlRoomPage'));
 const ContentSamples = delayedLazy(() => import('pages/ControlRoomPage/ContentSamples'));
 const SettingsPage = delayedLazy(() => import('src/pages/SettingsPage'));
 const ConnectMarktag = delayedLazy(() => import('src/pages/ConnectMarktagPage'));
+const AcquisitionChatbot = delayedLazy(() => import('pages/AcquisitionChatbotPage'));
 
 const Router = () => {
   return (
@@ -132,7 +133,15 @@ const Router = () => {
                 }
               />
 
-              <Route path='/acquisition-chatbot' element={<h1>Acquisition chatbot</h1>} />
+              {/*Acquisition chatbot*/}
+              <Route
+                path='/acquisition-chatbot'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <AcquisitionChatbot />
+                  </Suspense>
+                }
+              />
 
               {/* Settings */}
               <Route
