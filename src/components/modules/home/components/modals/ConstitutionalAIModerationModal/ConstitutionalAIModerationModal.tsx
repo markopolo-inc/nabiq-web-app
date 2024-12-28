@@ -1,4 +1,4 @@
-import { Button, Modal, OptionTabs, Stack } from '@nabiq-ui';
+import { Modal, OptionTabs, Stack } from '@nabiq-ui';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   useCreateConstitutionalAIConfigMutation,
@@ -99,9 +99,13 @@ const ModalBody = ({
 };
 
 export const ConstitutionalAIModerationModal = ({
+  showModal,
+  setShowModal,
   savedRules,
   isCompleted,
 }: {
+  showModal: boolean;
+  setShowModal: (value: boolean) => void;
   savedRules: string[];
   isCompleted: boolean;
 }) => {
@@ -109,21 +113,13 @@ export const ConstitutionalAIModerationModal = ({
     <Modal
       withCustomClose
       withNoHeader
+      toggleFromOutside={showModal}
+      setToggleFromOutside={setShowModal}
       body={({ setOpened }) => (
         <ModalBody setOpened={setOpened} savedRules={savedRules} isCompleted={isCompleted} />
       )}
     >
-      {({ setOpened }) =>
-        isCompleted ? (
-          <Button variant='link' onClick={() => setOpened(true)} size='md'>
-            Change feedback
-          </Button>
-        ) : (
-          <Button variant='secondary' className='!w-36' onClick={() => setOpened(true)}>
-            Help shape fair AI
-          </Button>
-        )
-      }
+      {() => <></>}
     </Modal>
   );
 };

@@ -87,7 +87,7 @@ const dataSourcesApi = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
-    saveZohoRegion: builder.query<
+    saveZohoRegion: builder.mutation<
       IResponseInterface,
       {
         brandId: string;
@@ -99,6 +99,19 @@ const dataSourcesApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: args,
       }),
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          toast.success(res.data?.message || `Saved successfully!`, {
+            id: 'save-zoho-region-success',
+          });
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to save!', {
+            id: 'save-zoho-region-error',
+          });
+          return err;
+        }
+      },
     }),
   }),
 });
@@ -108,4 +121,5 @@ export const {
   useSaveDataSourcePropertiesMutation,
   useDisconnectDataSourceMutation,
   useGetZohoRegionsQuery,
+  useSaveZohoRegionMutation,
 } = dataSourcesApi;

@@ -8,9 +8,8 @@ import { getOAuthUrl } from 'src/utils/auth';
 export const Zoho = () => {
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
 
-  const { data: regions } = useGetZohoRegionsQuery();
+  const { data: _regions } = useGetZohoRegionsQuery();
 
-  console.log(regions);
   return (
     <IntegrationCard
       title='Zoho'
