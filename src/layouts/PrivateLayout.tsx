@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { ChatWidget, ChatWindow } from 'src/components/modules/chatbot';
 import { useLogoutMutation } from 'src/store/auth/authApi';
 import { useAppSelector } from 'src/store/hooks';
 import { getAuthToken } from 'src/utils/auth';
 
 export const PrivateLayout = () => {
-  const [isChatbotOpen, setIsChatbotOpen] = useState<boolean>(false);
-
   const [logout] = useLogoutMutation();
 
   const { isAuthenticated } = useAppSelector((state) => state.auth);
@@ -30,20 +27,5 @@ export const PrivateLayout = () => {
 
   // console.log("--- I am from PrivateLayout ---");
 
-  return (
-    <>
-      {!isAuthenticated ? (
-        <Navigate to={'/login'} />
-      ) : (
-        <>
-          <Outlet />
-          {isChatbotOpen ? <ChatWindow onClick={() => setIsChatbotOpen(false)} /> : <></>}
-          <ChatWidget
-            isOpen={isChatbotOpen}
-            onClick={() => setIsChatbotOpen((prevState) => !prevState)}
-          />
-        </>
-      )}
-    </>
-  );
+  return <>{!isAuthenticated ? <Navigate to={'/login'} /> : <Outlet />}</>;
 };
