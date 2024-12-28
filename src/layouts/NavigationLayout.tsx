@@ -19,7 +19,7 @@ export const NavigationLayout = () => {
   return companyId ? (
     <AppShell
       header={{ height: 56 }}
-      navbar={{ width: 228, breakpoint: 'md', collapsed: { mobile: !opened } }}
+      navbar={{ width: 240, breakpoint: 'md', collapsed: { mobile: !opened } }}
       // padding='md'
     >
       <AppShell.Header px='sm' className='bg-gray-950'>
