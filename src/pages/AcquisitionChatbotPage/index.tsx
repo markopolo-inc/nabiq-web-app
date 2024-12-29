@@ -1,5 +1,4 @@
-import { FiHelpCircle } from '@nabiq-icons';
-import { Button, Stack } from '@nabiq-ui';
+import { Stack } from '@nabiq-ui';
 import { IntegrateChatbot } from 'src/components/modules/acquisition-chatbot';
 import { useGetAcquisitionApiKeyQuery } from 'src/store/acquisition/acquisition.ts';
 import { useAppSelector } from 'src/store/hooks.ts';
@@ -18,9 +17,9 @@ const AcquisitionChatbotPage = () => {
               Convert visitors into leads with the acquisition chatbot.
             </p>
           </Stack>
-          <Button variant='link' leadingIcon={<FiHelpCircle size={20} />}>
-            Need help integrating chatbot?
-          </Button>
+          {/*<Button variant='link' leadingIcon={<FiHelpCircle size={20} />}>*/}
+          {/*  Need help integrating chatbot?*/}
+          {/*</Button>*/}
         </Stack>
 
         <IntegrateChatbot apiKey={data?.apiKey ?? 'N/A'} />
