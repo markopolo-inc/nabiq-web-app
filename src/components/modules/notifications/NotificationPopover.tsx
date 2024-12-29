@@ -1,4 +1,4 @@
-import { FiNotificationIcon } from '@nabiq-icons';
+import { FiBell02 } from '@nabiq-icons';
 import { Button, useGetColors } from '@nabiq-ui';
 import { Inbox } from '@novu/react';
 import { FC } from 'react';
@@ -20,11 +20,11 @@ export const NotificationPopover: FC = () => {
     <div className='mt-1'>
       <Inbox
         renderBell={(unreadCount) => (
-          <Button variant='secondary-black' size='sm' className='relative'>
+          <Button variant='secondary-black' size='sm' className='relative !rounded-full'>
             {unreadCount ? (
               <div className='absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 border border-gray-50 rounded-full'></div>
             ) : null}
-            <FiNotificationIcon size={20} color={whiteBase} />
+            <FiBell02 size={20} color={whiteBase} />
           </Button>
         )}
         applicationIdentifier={import.meta.env.VITE_NOTIFICATION_APP_ID}

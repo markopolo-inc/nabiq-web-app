@@ -1,5 +1,6 @@
 import { FiMail01, FiMessageSmileCircle } from '@nabiq-icons';
 import { OptionTabs, Skeleton, Stack } from '@nabiq-ui';
+import { motion } from 'framer-motion';
 import { FC, useState } from 'react';
 import { MetricsCard } from 'src/components/modules/home/';
 import type { TOptionTab } from 'src/interfaces/modules/integrations.ts';
@@ -43,9 +44,11 @@ export const MetricCards: FC<{
     })) || [];
 
   return (
-    <Stack
-      className='p-6 rounded-[20px] border border-white backdrop-blur bg-white/48 w-full shadow-lg'
-      gap={24}
+    <motion.div
+      className='flex flex-col p-6 rounded-[20px] border border-white backdrop-blur bg-white/48 w-full shadow-lg gap-6'
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.5 }}
     >
       <Stack gap={20}>
         <Stack gap={4}>
@@ -100,6 +103,6 @@ export const MetricCards: FC<{
               />
             ))}
       </Stack>
-    </Stack>
+    </motion.div>
   );
 };

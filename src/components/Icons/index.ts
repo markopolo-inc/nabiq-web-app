@@ -13,6 +13,8 @@ export { default as FiAlertTriangle } from './AlertTriangle';
 // B
 export { FiBox } from './Box';
 export { default as FiBarChart04 } from './BarChart04';
+export { FiBell02 } from './Bell02';
+
 // C
 export { default as Calendar } from './Calendar';
 export { default as FiCreateFirstCampaign } from './CreateFirstCampaign';

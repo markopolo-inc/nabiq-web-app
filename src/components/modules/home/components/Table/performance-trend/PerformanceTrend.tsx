@@ -1,5 +1,6 @@
 import { FiLineChartUp01 } from '@nabiq-icons';
 import { Group, OptionTabs, Stack } from '@nabiq-ui';
+import { motion } from 'framer-motion';
 import { FC, useEffect, useState } from 'react';
 import {
   CartesianGrid,
@@ -65,9 +66,11 @@ export const PerformanceTrend: FC<{
   }, [performanceData]);
 
   return (
-    <Stack
-      gap={20}
-      className={`${isOnboardingDone ? 'w-auto' : 'max-w-[669px]'} w-full h-fit rounded-[20px] border border-white p-6 backdrop-blur bg-white/48 shadow-lg`}
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.5 }}
+      className={`${isOnboardingDone ? 'w-auto' : 'max-w-[669px]'} flex flex-col gap-5 w-full h-fit rounded-[20px] border border-white p-6 backdrop-blur bg-white/48 shadow-lg`}
     >
       <div className='flex justify-between items-center'>
         <Stack gap={4}>
@@ -176,6 +179,6 @@ export const PerformanceTrend: FC<{
           </ResponsiveContainer>
         )}
       </Stack>
-    </Stack>
+    </motion.div>
   );
 };
