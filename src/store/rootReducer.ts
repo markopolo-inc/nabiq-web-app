@@ -1,6 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 import { apiSlice } from './api/apiSlice';
+import appReducer from './app/app.slice';
 import authReducer from './auth/authSlice';
 import brandReducer from './brand/brandSlice';
 import campaignReducer from './campaign/campaignSlice';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   brand: brandReducer,
   campaign: campaignReducer,
+  app: appReducer,
 });
 
 export default rootReducer;
