@@ -13,13 +13,18 @@ import { persistor, store } from 'src/store';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-  const handleLoading = () => {
-    setLoading(false);
-  };
 
   useEffect(() => {
-    window.addEventListener('load', handleLoading);
-    return () => window.removeEventListener('load', handleLoading);
+    const handleComplete = () => {
+      setLoading(false);
+    };
+
+    if (document.readyState === 'complete') {
+      handleComplete();
+    } else {
+      window.addEventListener('load', handleComplete);
+      return () => window.removeEventListener('load', handleComplete);
+    }
   }, []);
 
   if (loading) {
