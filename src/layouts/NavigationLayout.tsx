@@ -22,7 +22,7 @@ export const NavigationLayout = () => {
       header={{ height: 56 }}
       navbar={{ width: 240, breakpoint: 'md', collapsed: { mobile: !opened } }}
     >
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
         <AppShell.Header px='sm' className='bg-gray-950'>
           <Group h='100%' px='md' className='justify-between'>
             <Group>
@@ -38,16 +38,18 @@ export const NavigationLayout = () => {
           </Group>
         </AppShell.Header>
       </motion.div>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
         <AppShell.Navbar className='!bg-gray-100 !border-none '>
           <Sidebar />
         </AppShell.Navbar>
       </motion.div>
-      <AppShell.Main>
-        <div className='w-full mx-auto'>
-          {companyId && isOnboardingComplete ? <Outlet /> : <PageLoader />}
-        </div>
-      </AppShell.Main>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
+        <AppShell.Main>
+          <div className='w-full mx-auto'>
+            {companyId && isOnboardingComplete ? <Outlet /> : <PageLoader />}
+          </div>
+        </AppShell.Main>
+      </motion.div>
     </AppShell>
   ) : (
     <PageLoader />

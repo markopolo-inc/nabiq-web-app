@@ -25,7 +25,7 @@ export const GeneratedContents = () => {
   };
   return isMarkedContent ? (
     <motion.div
-      className='relative p-8 rounded-[20px] border border-white bg-white/48 backdrop-blur-lg flex justify-center items-center gap-[64px]'
+      className='relative p-8 flex-col rounded-[20px] border border-white bg-white/48 backdrop-blur-lg flex justify-center items-center gap-[32px]'
       initial={{ opacity: 0, scale: 0.2 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}

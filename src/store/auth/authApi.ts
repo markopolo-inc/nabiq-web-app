@@ -50,6 +50,9 @@ export const authApi = apiSlice.injectEndpoints({
             attributes: {
               'custom:fullName': name,
             },
+            autoSignIn: {
+              enabled: true,
+            },
           });
           dispatch(setUserEmail(email));
           onSuccess && onSuccess();
@@ -120,7 +123,6 @@ export const authApi = apiSlice.injectEndpoints({
           onSuccess && onSuccess();
         } catch (error) {
           toast.error(error?.message || 'Something went wrong!', { id: 'verify-error' });
-        } finally {
           onLoading && onLoading(false);
         }
       },

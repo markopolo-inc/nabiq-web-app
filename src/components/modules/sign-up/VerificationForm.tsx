@@ -1,8 +1,10 @@
 import { Button, OtpInput, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useResendVerificationCodeMutation, useVerifyMutation } from 'src/store/auth/authApi';
+import { setIsAuthenticated } from 'src/store/auth/authSlice';
 import { useAppSelector } from 'src/store/hooks';
 
 export const VerificationForm = () => {
@@ -10,6 +12,7 @@ export const VerificationForm = () => {
 
   const [verify] = useVerifyMutation();
   const [resend] = useResendVerificationCodeMutation();
+  const dispatch = useDispatch();
   const { email } = useAppSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -25,7 +28,10 @@ export const VerificationForm = () => {
   };
 
   const onSuccess = () => {
-    navigate('/login');
+    setTimeout(() => {
+      dispatch(setIsAuthenticated(true));
+      navigate('/');
+    }, 1000);
   };
 
   const handleOTPChange = (_value: string) => {
