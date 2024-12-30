@@ -25,7 +25,7 @@ export const GeneratedContents = () => {
   };
   return isMarkedContent ? (
     <motion.div
-      className='relative p-8 rounded-[20px] border border-white bg-white/48 backdrop-blur-8 flex justify-center items-center gap-[64px]'
+      className='relative p-8 rounded-[20px] border border-white bg-white/48 backdrop-blur-lg flex justify-center items-center gap-[64px]'
       initial={{ opacity: 0, scale: 0.2 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
@@ -46,7 +46,7 @@ export const GeneratedContents = () => {
           <div
             key={index}
             className={cn(
-              'rounded-[20px] border border-white absolute p-8',
+              'rounded-[20px] border border-white absolute p-8 backdrop-blur-lg',
               'transform -translate-x-1/2 bg-white/48',
               index !== contents?.length - 1 && 'h-[40px]',
             )}
@@ -57,7 +57,6 @@ export const GeneratedContents = () => {
               left: '50%',
               boxShadow:
                 '0px 12px 16px -4px rgba(18, 25, 38, 0.08), 0px 4px 6px -2px rgba(18, 25, 38, 0.03)',
-              backdropFilter: 'blur(16px)',
               overflow: 'hidden',
             }}
           >

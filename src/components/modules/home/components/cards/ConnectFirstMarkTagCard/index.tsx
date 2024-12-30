@@ -27,7 +27,7 @@ export const ConnectFirstMarkTagCard: React.FC<ConnectFirstMarkTagCardPropType> 
       transition={{ duration: 0.5 }}
     >
       <Stack
-        className={`absolute ${classes} flex-row rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px] shadow-lg items-center justify-between gap-4`}
+        className={`absolute ${classes} flex-row rounded-[20px] border border-white backdrop-blur-lg bg-white/48 p-[39px] shadow-lg items-center justify-between gap-4`}
       >
         <Stack gap={40}>
           <Stack gap={4} className='max-w-[360px] w-full'>

@@ -15,7 +15,7 @@ export const IntegrateChannels: React.FC = () => {
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.6 }}
-      className='absolute z-30 w-full rounded-[20px] border border-white backdrop-blur bg-white/48 px-6 py-[26px] shadow-lg flex flex-col gap-[42px]'
+      className='absolute z-30 w-full rounded-[20px] border border-white backdrop-blur-lg bg-white/48 px-6 py-[26px] shadow-lg flex flex-col gap-[42px]'
     >
       <Stack className='flex-row' justify='space-between'>
         <Stack gap={4}>

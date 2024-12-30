@@ -70,7 +70,7 @@ export const PerformanceTrend: FC<{
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.5 }}
-      className={`${isOnboardingDone ? 'w-auto' : 'max-w-[669px]'} flex flex-col gap-5 w-full h-fit rounded-[20px] border border-white p-6 backdrop-blur bg-white/48 shadow-lg`}
+      className={`${isOnboardingDone ? 'w-auto' : 'max-w-[669px]'} flex flex-col gap-5 w-full h-fit rounded-[20px] border border-white p-6 backdrop-blur-lg bg-white/48 shadow-lg`}
     >
       <div className='flex justify-between items-center'>
         <Stack gap={4}>

@@ -35,7 +35,7 @@ export const QuickActionsCard: React.FC<QuickActionsProps> = ({
         transition: { duration: 0.2 },
       }}
       variants={item}
-      className='flex-row flex gap-4 rounded-[20px] border border-white bg-white/48 backdrop-blur py-4 px-6 shadow-lg cursor-pointer'
+      className='flex-row flex gap-4 rounded-[20px] border border-white bg-white/48 backdrop-blur-lg py-4 px-6 shadow-lg cursor-pointer'
       onClick={() => onClick && onClick()}
     >
       {icon && <Icon />}

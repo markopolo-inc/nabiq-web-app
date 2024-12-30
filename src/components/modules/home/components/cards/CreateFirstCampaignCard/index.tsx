@@ -17,7 +17,7 @@ export const CreateFirstCampaignCard: React.FC<CreateFirstCampaignCardPropsType>
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className={`absolute ${isActive ? 'top-0 left-0 z-20 w-full' : 'top-4 left-[calc(0%+16px)] z-20 w-[calc(100%-32px)]'} flex-row justify-between rounded-[20px] border border-white backdrop-blur bg-white/48 p-[39px] shadow-lg flex gap-4 items-center`}
+      className={`absolute ${isActive ? 'top-0 left-0 z-20 w-full' : 'top-4 left-[calc(0%+16px)] z-20 w-[calc(100%-32px)]'} flex-row justify-between rounded-[20px] border border-white backdrop-blur-lg bg-white/48 p-[39px] shadow-lg flex gap-4 items-center`}
     >
       <Stack gap={40}>
         <Stack gap={4}>
