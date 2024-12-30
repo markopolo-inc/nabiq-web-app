@@ -15,3 +15,6 @@ export { OnboardingLayout } from 'layouts/OnboardingLayout';
 
 /*** Page Layout ***/
 export { PageLayout } from 'layouts/PageLayout';
+
+/*** Public Layout ***/
+export { PublicLayout } from 'layouts/PublicLayout';

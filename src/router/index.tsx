@@ -5,7 +5,7 @@ import SignInPage from 'pages/SignInPage';
 import SignUpPage from 'pages/SignUpPage';
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { AppLayout, NavigationLayout, PageLayout, PrivateLayout } from 'src/layouts';
+import { AppLayout, NavigationLayout, PageLayout, PrivateLayout, PublicLayout } from 'src/layouts';
 
 import { TestRoutes } from './TestRoutes';
 
@@ -35,8 +35,10 @@ const Router = () => {
     <Routes>
       <Route path='/' element={<AppLayout />}>
         {/* Public Routes */}
-        <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/login' element={<SignInPage />} />
+        <Route element={<PublicLayout />}>
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/login' element={<SignInPage />} />
+        </Route>
 
         <Route element={<PrivateLayout />}>
           {/* Onboarding Route */}

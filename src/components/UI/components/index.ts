@@ -8,6 +8,7 @@ export { default as ContentLoader } from './ContentLoader/ContentLoader';
 export { Card } from './Card';
 export { Accordion } from './Accordion';
 export { default as Breadcrumbs } from './Breadcrumbs';
+export { Topbar } from './Topbar';
 
 // Buttons
 export { default as Button } from './Button';

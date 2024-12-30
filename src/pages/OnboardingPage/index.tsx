@@ -1,3 +1,4 @@
+import { Topbar } from '@nabiq-ui';
 import {
   CompanyCreation,
   GuideNabiq,
@@ -34,6 +35,7 @@ const Onboarding = () => {
   return (
     <>
       <HeaderTitle>Nabiq | Create your company</HeaderTitle>
+      <Topbar />
       <OnboardingLayout
         rightSection={<RightSection />}
         rightSectionClassName={righSectionClasss[step]}
