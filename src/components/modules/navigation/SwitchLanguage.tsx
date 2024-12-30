@@ -9,6 +9,7 @@ export const SwitchLanguage = () => {
   const { i18n } = useTranslation();
   const { language } = useAppSelector((state) => state.app);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const setLangDir = () => {
     if (i18n.resolvedLanguage) {
@@ -32,7 +33,7 @@ export const SwitchLanguage = () => {
       className='text-white bg-transparent border-none text-sm font-semibold flex items-center gap-2'
     >
       <FiTranslation01 color='white' size={16} strokeWidth={2} />
-      {language === 'en' ? 'Switch to Arabic' : 'Switch to English'}
+      {t('common.button.switch_language')}
     </button>
   );
 };

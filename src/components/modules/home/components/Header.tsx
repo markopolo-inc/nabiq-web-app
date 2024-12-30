@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
 
       <Stack align='center' gap={4}>
         <h2 className='text-2xl font-semibold text-gray-900'>
-          {t('home.title', { name: userName?.split(' ')[0] })}
+          {t('translation.home.title', { name: userName?.split(' ')[0] })}
         </h2>
         <p className='text-base font-normal text-gray-600'>
           This is your marketing co-pilot captain, Nabiq.

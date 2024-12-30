@@ -1,3 +1,4 @@
+import i18nextLoader from '@kainstar/vite-plugin-i18next-loader';
 import react from '@vitejs/plugin-react-swc';
 import fs from 'fs';
 import path from 'path';
@@ -9,7 +10,11 @@ export default defineConfig({
   define: {
     global: 'window',
   },
-  plugins: [react(), viteTsconfigPaths()],
+  plugins: [
+    react(),
+    viteTsconfigPaths(),
+    i18nextLoader({ paths: ['./src/services/i18next/locales'] }),
+  ],
   build: {
     outDir: 'build',
   },
