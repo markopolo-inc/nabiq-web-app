@@ -1,4 +1,5 @@
 import { FiTranslation01 } from '@nabiq-icons';
+import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -26,7 +27,9 @@ export const SwitchLanguage = () => {
   }, [language]);
 
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       onClick={() => {
         dispatch(setLanguage(language === 'en' ? 'ar' : 'en'));
       }}
@@ -34,6 +37,6 @@ export const SwitchLanguage = () => {
     >
       <FiTranslation01 color='white' size={16} strokeWidth={2} />
       {t('common.button.switch_language')}
-    </button>
+    </motion.button>
   );
 };
