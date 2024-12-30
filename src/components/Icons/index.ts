@@ -127,6 +127,7 @@ export { default as FiSend01 } from './Send01';
 export { default as FiTrash } from './Trash';
 export { default as FiThumbsUp } from './ThumbsUp';
 export { default as FiThumbsDown } from './ThumbsDown';
+export { Translation01 as FiTranslation01 } from './Translation01';
 
 // U
 export { default as FiUser03 } from './User03';
