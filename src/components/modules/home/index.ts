@@ -9,7 +9,6 @@ export { ConstitutionalAIModerationModal } from 'components/modules/home/compone
 
 // Cards
 export { IntegrateApps } from 'components/modules/home/components/cards/IntegrateApps';
-export { ConstitutionalAIModerationCard } from 'components/modules/home/components/cards/ConstitutionalAIModeration/ConstitutionalAIModerationCard';
 export { IntegrateChannels } from 'components/modules/home/components/cards/IntegrateChannels';
 export { IntegrationCard } from 'components/modules/home/components/cards/IntegrationCard';
 export { ConnectFirstMarkTagCard } from 'components/modules/home/components/cards/ConnectFirstMarkTagCard';
