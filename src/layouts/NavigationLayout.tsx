@@ -1,4 +1,5 @@
 import { AppShell, Burger, Group, Image, PageLoader, useDisclosure } from '@nabiq-ui';
+import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import NabiqLogo from 'src/assets/logo/nabiq-dark-logo.png';
@@ -20,27 +21,29 @@ export const NavigationLayout = () => {
     <AppShell
       header={{ height: 56 }}
       navbar={{ width: 240, breakpoint: 'md', collapsed: { mobile: !opened } }}
-      // padding='md'
     >
-      <AppShell.Header px='sm' className='bg-gray-950'>
-        <Group h='100%' px='md' className='justify-between'>
-          <Group>
-            <Burger opened={opened} onClick={toggle} hiddenFrom='md' color='white' size='sm' />
-            <Image src={NabiqLogo} alt='Nabiq' className='w-[74px]' />
-          </Group>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+        <AppShell.Header px='sm' className='bg-gray-950'>
+          <Group h='100%' px='md' className='justify-between'>
+            <Group>
+              <Burger opened={opened} onClick={toggle} hiddenFrom='md' color='white' size='sm' />
+              <Image src={NabiqLogo} alt='Nabiq' className='w-[74px]' />
+            </Group>
 
-          <Group>
-            <SwitchLanguage />
-            <NotificationPopover />
-            <TopMenu />
+            <Group>
+              <SwitchLanguage />
+              <NotificationPopover />
+              <TopMenu />
+            </Group>
           </Group>
-        </Group>
-      </AppShell.Header>
-      <AppShell.Navbar className='!bg-gray-100 !border-none'>
-        <Sidebar />
-      </AppShell.Navbar>
+        </AppShell.Header>
+      </motion.div>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+        <AppShell.Navbar className='!bg-gray-100 !border-none '>
+          <Sidebar />
+        </AppShell.Navbar>
+      </motion.div>
       <AppShell.Main>
-        {/*<div className='p-4 w-full mx-auto'>*/}
         <div className='w-full mx-auto'>
           {companyId && isOnboardingComplete ? <Outlet /> : <PageLoader />}
         </div>

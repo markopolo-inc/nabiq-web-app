@@ -21,7 +21,7 @@ export const authApi = apiSlice.injectEndpoints({
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
-          toast.success('Successfully logged in.', { id: 'login-success' });
+          // toast.success('Successfully logged in.', { id: 'login-success' });
           onSuccess && onSuccess();
         } catch (error) {
           if (error?.code === UserNotConfirmedException) {

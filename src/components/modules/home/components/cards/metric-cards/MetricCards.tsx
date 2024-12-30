@@ -81,9 +81,8 @@ export const MetricCards: FC<{
         />
       </Stack>
 
-      <Stack
-        className={`grid grid-cols-1 ${isOnboardingDone ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}
-        gap={16}
+      <motion.div
+        className={`grid grid-cols-1 ${isOnboardingDone ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-4`}
       >
         {isLoading
           ? Array.from({ length: 6 }, (_, index) => (
@@ -93,16 +92,17 @@ export const MetricCards: FC<{
                 className='w-[264px] border border-gray-200 rounded-xl p-6 gap-4'
               />
             ))
-          : metrics?.map((item) => (
+          : metrics?.map((item, index) => (
               <MetricsCard
                 key={item?.name}
+                index={index}
                 name={item?.name}
                 change={item?.change}
                 type={item?.type}
                 value={item?.value}
               />
             ))}
-      </Stack>
+      </motion.div>
     </motion.div>
   );
 };
