@@ -38,7 +38,7 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
     if (!isMarkTagDone) {
       setActiveCard('mark_tag');
     }
-  }, []);
+  }, [isIntegrationChannelDone, isFirstCampaignDone, isMarkTagDone]);
 
   return (
     <Stack gap={24} className='flex-col lg:flex-row w-full mt-8'>
