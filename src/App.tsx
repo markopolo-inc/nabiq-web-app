@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import LoaderGif from 'src/assets/logo/logo.svg';
 import Router from 'src/router';
+import 'src/services/i18next';
 import { persistor, store } from 'src/store';
 
 const App = () => {

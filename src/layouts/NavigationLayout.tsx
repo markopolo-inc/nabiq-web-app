@@ -2,7 +2,7 @@ import { AppShell, Burger, Group, Image, PageLoader, useDisclosure } from '@nabi
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import NabiqLogo from 'src/assets/logo/nabiq-dark-logo.png';
-import { Sidebar, TopMenu } from 'src/components/modules/navigation';
+import { Sidebar, SwitchLanguage, TopMenu } from 'src/components/modules/navigation';
 import { NotificationPopover } from 'src/components/modules/notifications';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -30,6 +30,7 @@ export const NavigationLayout = () => {
           </Group>
 
           <Group>
+            <SwitchLanguage />
             <NotificationPopover />
             <TopMenu />
           </Group>
