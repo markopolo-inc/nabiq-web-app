@@ -14,6 +14,14 @@ export const LeadsDatabase = () => {
   const isConnected = datasourceIntegrations?.tokens
     ? Object.values(datasourceIntegrations.tokens).some(Boolean)
     : false;
+  const isIntegrationConnected = (integration: 'shopify' | 'salla' | 'hubspot' | 'salesforce') => {
+    return datasourceIntegrations?.tokens?.[integration] || false;
+  };
+
+  const isShopifyConnected = isIntegrationConnected('shopify');
+  const isSallaConnected = isIntegrationConnected('salla');
+  const isHubspotConnected = isIntegrationConnected('hubspot');
+  const isSalesforceConnected = isIntegrationConnected('salesforce');
 
   return (
     <Stack gap={64}>
@@ -39,13 +47,12 @@ export const LeadsDatabase = () => {
             <div className='grid grid-cols-2 gap-2 p-1'>
               <Button
                 fullWidth
+                disabled={isShopifyConnected}
                 trailingIcon={<GatewayLogo app='shopify' width={20} />}
                 onClick={async () => {
                   window.location.href = await getOAuthUrl(
                     '/shopify/install/direct',
                     {
-                      // brandId,
-                      // redirectUri: window.location.href,
                       shop: import.meta.env.VITE_SHOPIFY_APP_NAME,
                     },
                     {
@@ -54,12 +61,13 @@ export const LeadsDatabase = () => {
                   );
                 }}
               >
-                Connect Shopify
+                {isShopifyConnected ? 'Shopify connected' : 'Connect Shopify'}
               </Button>
               <Button
                 fullWidth
                 variant='secondary-black'
                 trailingIcon={<GatewayLogo app='salla' width={20} />}
+                disabled={isSallaConnected}
                 onClick={async () => {
                   window.location.href = await getOAuthUrl('/salla/oauth', {
                     brandId,
@@ -67,7 +75,7 @@ export const LeadsDatabase = () => {
                   });
                 }}
               >
-                Connect Salla
+                {isSallaConnected ? 'Salla connected' : 'Connect Salla'}
               </Button>
             </div>
           </Stack>
@@ -82,6 +90,7 @@ export const LeadsDatabase = () => {
               <Button
                 fullWidth
                 trailingIcon={<GatewayLogo app='hubspot' width={20} />}
+                disabled={isHubspotConnected}
                 onClick={async () => {
                   window.location.href = await getOAuthUrl('/hubspot/oauth', {
                     brandId,
@@ -89,13 +98,13 @@ export const LeadsDatabase = () => {
                   });
                 }}
               >
-                Connect Hubspot
+                {isHubspotConnected ? 'Hubspot connected' : 'Connect Hubspot'}
               </Button>
               <Button
                 fullWidth
                 variant='secondary-black'
                 trailingIcon={<GatewayLogo app='salesforce' width={20} />}
-                disabled={datasourceIntegrations?.tokens.salesforce}
+                disabled={isSalesforceConnected}
                 onClick={async () => {
                   window.location.href = await getOAuthUrl('/salesforce/auth/connect', {
                     brandId,
@@ -103,9 +112,7 @@ export const LeadsDatabase = () => {
                   });
                 }}
               >
-                {datasourceIntegrations?.tokens.salesforce
-                  ? 'Salesforce connected'
-                  : 'Connect Salesforce'}
+                {isSalesforceConnected ? 'Salesforce connected' : 'Connect Salesforce'}
               </Button>
             </div>
           </Stack>

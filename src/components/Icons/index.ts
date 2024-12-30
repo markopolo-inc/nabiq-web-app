@@ -70,7 +70,6 @@ export { default as FiHourglass03 } from './Hourglass03';
 export { HomeFill as FiHomeFill } from './HomeFill';
 // I
 export { default as FiInfinity } from './Infinity';
-export { default as FiIntegrationsIcon } from './IntegrationsIcon';
 
 // L
 export { default as Logout01 } from './Logout01';

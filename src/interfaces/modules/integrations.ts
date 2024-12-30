@@ -5,3 +5,9 @@ export type TOptionTab =
   | 'data-sources'
   | 'whatsapp'
   | 'ecommerce';
+
+export interface IIntegrationCard {
+  id: number;
+  name: string;
+  gateway: string;
+}

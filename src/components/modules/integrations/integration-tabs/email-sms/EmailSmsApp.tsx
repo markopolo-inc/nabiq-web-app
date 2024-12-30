@@ -46,64 +46,57 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
                 (gateway.category === 'sms' && !isEmpty(smsIntegrations?.[gateway?.gateway]));
 
               return (
-                <motion.div
-                // initial={{ opacity: 0, scale: 0.2 }}
-                // animate={{ opacity: 1, scale: 1 }}
-                // transition={{ duration: 0.5, type: 'spring', stiffness: 80 }}
-                // exit={{ opacity: 0, scale: 0 }}
+                <IntegrationCard
+                  key={generateUUID()}
+                  title={gateway.name}
+                  description={gateway.headline}
+                  icon={<GatewayLogo app={gateway.gateway as GatewayType} width={32} />}
+                  isConnected={isGatewayConnected}
                 >
-                  <IntegrationCard
-                    key={generateUUID()}
-                    title={gateway.name}
-                    description={gateway.headline}
-                    icon={<GatewayLogo app={gateway.gateway as GatewayType} width={32} />}
-                    isConnected={isGatewayConnected}
-                  >
-                    <div className='flex gap-3'>
-                      {gateway.isOauthIntegration && (
-                        <Button
-                          className='!w-40'
-                          leadingIcon={<FiZap fill='white' size={22} />}
-                          onClick={() => {
-                            handleIntegrate(gateway.oauthUrl);
-                          }}
-                        >
-                          {isGatewayConnected ? 'Reconnect' : 'Integrate'}
-                        </Button>
-                      )}
+                  <div className='flex gap-3'>
+                    {gateway.isOauthIntegration && (
+                      <Button
+                        className='!w-40'
+                        leadingIcon={<FiZap fill='white' size={22} />}
+                        onClick={() => {
+                          handleIntegrate(gateway.oauthUrl);
+                        }}
+                      >
+                        {isGatewayConnected ? 'Reconnect' : 'Integrate'}
+                      </Button>
+                    )}
 
-                      {gateway.isKeyIntegration && (
-                        <>
-                          {isGatewayConnected ? (
-                            <Button
-                              className='!w-40'
-                              variant='secondary'
-                              onClick={() => {
-                                setShowModal(true);
-                                setSelectedGateway(gateway);
-                              }}
-                            >
-                              Configure
-                            </Button>
-                          ) : (
-                            <Button
-                              className='!w-40'
-                              leadingIcon={<FiZap fill='white' size={18} />}
-                              onClick={() => {
-                                setShowModal(true);
-                                setSelectedGateway(gateway);
-                              }}
-                            >
-                              Integrate
-                            </Button>
-                          )}
-                        </>
-                      )}
+                    {gateway.isKeyIntegration && (
+                      <>
+                        {isGatewayConnected ? (
+                          <Button
+                            className='!w-40'
+                            variant='secondary'
+                            onClick={() => {
+                              setShowModal(true);
+                              setSelectedGateway(gateway);
+                            }}
+                          >
+                            Configure
+                          </Button>
+                        ) : (
+                          <Button
+                            className='!w-40'
+                            leadingIcon={<FiZap fill='white' size={18} />}
+                            onClick={() => {
+                              setShowModal(true);
+                              setSelectedGateway(gateway);
+                            }}
+                          >
+                            Integrate
+                          </Button>
+                        )}
+                      </>
+                    )}
 
-                      {isGatewayConnected && <GatewayDisconnectModal gateway={gateway} />}
-                    </div>
-                  </IntegrationCard>
-                </motion.div>
+                    {isGatewayConnected && <GatewayDisconnectModal gateway={gateway} />}
+                  </div>
+                </IntegrationCard>
               );
             })}
         </motion.div>

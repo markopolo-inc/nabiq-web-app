@@ -1,40 +1,21 @@
 import { FiChevronRight } from '@nabiq-icons';
 import { Button, Group, Stack, useGetColors } from '@nabiq-ui';
+import { motion } from 'framer-motion';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IntegrationCard } from 'src/components/modules/home';
-import { IIntegrationCard } from 'src/interfaces/integrations.interface.ts';
+import { integrations } from 'src/lib/home/integrations';
 
-const integrations: IIntegrationCard[] = [
-  {
-    id: 1,
-    name: 'Klaviyo',
-  },
-  {
-    id: 2,
-    name: 'Postmark',
-  },
-  {
-    id: 3,
-    name: 'SendGrid',
-  },
-  {
-    id: 4,
-    name: 'Twillio',
-  },
-  {
-    id: 5,
-    name: 'Click Send',
-  },
-];
 export const IntegrateChannels: React.FC = () => {
   const navigate = useNavigate();
   const { primary600 } = useGetColors();
 
   return (
-    <Stack
-      gap={42}
-      className='absolute z-30 w-full rounded-[20px] border border-white backdrop-blur bg-white/48 px-6 py-[26px] shadow-lg'
+    <motion.div
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.6 }}
+      className='absolute z-30 w-full rounded-[20px] border border-white backdrop-blur bg-white/48 px-6 py-[26px] shadow-lg flex flex-col gap-[42px]'
     >
       <Stack className='flex-row' justify='space-between'>
         <Stack gap={4}>
@@ -47,7 +28,7 @@ export const IntegrateChannels: React.FC = () => {
         <Button
           variant='link'
           trailingIcon={<FiChevronRight size={20} color={primary600} />}
-          onClick={() => navigate('/integrations')}
+          onClick={() => navigate('/integrations?selectedTab=email')}
         >
           View all
         </Button>
@@ -55,9 +36,14 @@ export const IntegrateChannels: React.FC = () => {
 
       <Group gap={24}>
         {integrations.map((integration) => (
-          <IntegrationCard name={integration.name} id={integration.id} key={integration.id} />
+          <IntegrationCard
+            name={integration.name}
+            gateway={integration.gateway}
+            id={integration.id}
+            key={integration.id}
+          />
         ))}
       </Group>
-    </Stack>
+    </motion.div>
   );
 };
