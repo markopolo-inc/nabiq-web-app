@@ -2,7 +2,6 @@ import { FiCopy02 } from '@nabiq-icons';
 import { Button, Stack } from '@nabiq-ui';
 import React from 'react';
 import toast from 'react-hot-toast';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 type IntegrateChatbotProps = {
   apiKey: string;
@@ -56,15 +55,9 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
           >
             Copy
           </Button>
-
-          <SyntaxHighlighter
-            language='html'
-            className='!bg-transparent font-medium text-base text-gray-600 overflow-x-scroll block'
-            // @ts-expect-error ts error
-            style={{ all: 'unset' }}
-          >
+          <code className='font-medium text-base text-gray-600 block whitespace-pre-wrap'>
             {code}
-          </SyntaxHighlighter>
+          </code>
         </Stack>
       </Stack>
     </Stack>
