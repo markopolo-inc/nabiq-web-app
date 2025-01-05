@@ -47,7 +47,7 @@ export const RightSection = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5 }}
                       exit={{ opacity: 0 }}
-                      className='!pt-20 w-[376px]'
+                      className='!pt-20 w-[192px]'
                     >
                       <Image src={NabiqLoader} alt='Guide Nabiq' />
                     </motion.div>

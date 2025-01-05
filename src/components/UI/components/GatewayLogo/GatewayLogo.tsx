@@ -8,6 +8,7 @@ import OneSignal from 'assets/integraions/OneSignalLogo.svg';
 import Postmark from 'assets/integraions/PostmarkLogo.svg';
 import Resend from 'assets/integraions/Resend.svg';
 import SalesForce from 'assets/integraions/SalesforceLogo.svg';
+import SallaLight from 'assets/integraions/SallaLightLogo.png';
 import Salla from 'assets/integraions/SallaLogo.svg';
 import SendGrid from 'assets/integraions/SendGridLogo.svg';
 import Shopify from 'assets/integraions/ShopifyLogo.svg';
@@ -22,7 +23,8 @@ import type { GatewayType } from 'src/interfaces/brand.interface';
 const GatewayLogo: React.FC<{
   app: GatewayType;
   width?: number | string;
-}> = ({ app, width = 50 }) => {
+  variant?: 'light' | 'dark';
+}> = ({ app, width = 50, variant = 'dark' }) => {
   const logo: Partial<Record<GatewayType, string>> = {
     hubspot: Hubspot,
     klaviyo: Klaviyo,
@@ -37,7 +39,7 @@ const GatewayLogo: React.FC<{
     mailgun: MailGun,
     whatsapp: WhatsApp,
     shopify: Shopify,
-    salla: Salla,
+    salla: variant === 'light' ? SallaLight : Salla,
     salesforce: SalesForce,
     firebase: Firebase,
     zoho: Zoho,

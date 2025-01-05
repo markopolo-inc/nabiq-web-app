@@ -41,14 +41,14 @@ export const LeadsDatabase = () => {
         >
           <Stack gap={24}>
             <p className='text-sm text-gray-600'>
-              Subjects, participants and timestamps will be visible to your team, Content won’t be
+              Subjects, participants and timestamps will be visible to your team, Content won't be
               visible unless shared.
             </p>
             <div className='grid grid-cols-2 gap-2 p-1'>
               <Button
                 fullWidth
                 disabled={isShopifyConnected}
-                trailingIcon={<GatewayLogo app='shopify' width={20} />}
+                leadingIcon={<GatewayLogo app='shopify' width={20} />}
                 onClick={async () => {
                   window.location.href = await getOAuthUrl(
                     '/shopify/install/direct',
@@ -66,7 +66,7 @@ export const LeadsDatabase = () => {
               <Button
                 fullWidth
                 variant='secondary-black'
-                trailingIcon={<GatewayLogo app='salla' width={20} />}
+                leadingIcon={<GatewayLogo app='salla' width={20} variant='light' />}
                 disabled={isSallaConnected}
                 onClick={async () => {
                   window.location.href = await getOAuthUrl('/salla/oauth', {
@@ -89,7 +89,7 @@ export const LeadsDatabase = () => {
             <div className='grid grid-cols-2 gap-2 p-1'>
               <Button
                 fullWidth
-                trailingIcon={<GatewayLogo app='hubspot' width={20} />}
+                leadingIcon={<GatewayLogo app='hubspot' width={20} />}
                 disabled={isHubspotConnected}
                 onClick={async () => {
                   window.location.href = await getOAuthUrl('/hubspot/oauth', {
@@ -103,7 +103,7 @@ export const LeadsDatabase = () => {
               <Button
                 fullWidth
                 variant='secondary-black'
-                trailingIcon={<GatewayLogo app='salesforce' width={20} />}
+                leadingIcon={<GatewayLogo app='salesforce' width={20} />}
                 disabled={isSalesforceConnected}
                 onClick={async () => {
                   window.location.href = await getOAuthUrl('/salesforce/auth/connect', {
