@@ -14,6 +14,7 @@ import {
   setGeneratePrompt,
   setIsMarkedContent,
   setIsSampleContentGenerated,
+  setIsSampleContentLoading,
   setOnboardingStep,
   setSampleContents,
 } from 'src/store/onboarding/onboardingSlice';
@@ -24,6 +25,7 @@ export const GuideNabiq = () => {
   const dispatch = useDispatch();
   const { resourceId: brandId } = useAppSelector((state: RootState) => state.brand);
   const { resourceId: companyId } = useAppSelector((state: RootState) => state.company);
+  const { isSampleContentLoading } = useAppSelector((state) => state.onboarding);
   const [generateSampleContent, { isLoading: isGeneratingSampleContent }] =
     useGenerateSampleContentMutation();
   const [updateOnboardingStatus, { isLoading: isUpdatingOnboardingStatus }] =
@@ -46,13 +48,21 @@ export const GuideNabiq = () => {
   };
 
   const handleGenerateSampleContent = async () => {
+    dispatch(setIsSampleContentLoading(true));
     const res = await generateSampleContent({ brandId, prompt }).unwrap();
     if (res.success) {
-      dispatch(setIsSampleContentGenerated(true));
-      dispatch(setGeneratePrompt(prompt));
-      dispatch(setOnboardingStep('sample_content'));
-      dispatch(setSampleContents(res.data));
-      dispatch(setIsMarkedContent(false));
+      setTimeout(() => {
+        dispatch(setGeneratePrompt(prompt));
+        dispatch(setSampleContents(res.data));
+      }, 2000);
+      setTimeout(() => {
+        dispatch(setIsSampleContentGenerated(true));
+        dispatch(setOnboardingStep('sample_content'));
+        dispatch(setIsMarkedContent(false));
+        dispatch(setIsSampleContentLoading(false));
+      }, 3000);
+    } else {
+      dispatch(setIsSampleContentLoading(false));
     }
   };
 
@@ -63,7 +73,7 @@ export const GuideNabiq = () => {
         <Stack gap={8}>
           <p className='text-2xl font-semibold text-gray-950'>Guide Nabiq</p>
           <p className='font-normal text-gray-500'>
-            We’re ready to create a sample campaign! Share your ideas to help us tailor it to your
+            We're ready to create a sample campaign! Share your ideas to help us tailor it to your
             needs.
           </p>
         </Stack>
@@ -81,7 +91,7 @@ export const GuideNabiq = () => {
         disabled={!prompt}
         fullWidth
         onClick={() => handleGenerateSampleContent()}
-        loading={isGeneratingSampleContent}
+        loading={isGeneratingSampleContent || isSampleContentLoading}
         trailingIcon={<FiStar06 size={18} />}
       >
         Generate sample content
@@ -91,7 +101,7 @@ export const GuideNabiq = () => {
           variant='link'
           onClick={() => dispatch(setOnboardingStep('lead_database'))}
           leadingIcon={<FiChevronLeft />}
-          disabled={isGeneratingSampleContent}
+          disabled={isGeneratingSampleContent || isSampleContentLoading}
         >
           Go back
         </Button>
@@ -99,6 +109,7 @@ export const GuideNabiq = () => {
           variant='secondary'
           onClick={() => handleSkipStep()}
           loading={isUpdatingOnboardingStatus}
+          disabled={isGeneratingSampleContent || isSampleContentLoading}
         >
           Skip this step
         </Button>
