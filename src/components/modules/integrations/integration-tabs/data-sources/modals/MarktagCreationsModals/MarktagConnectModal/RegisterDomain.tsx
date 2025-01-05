@@ -84,7 +84,7 @@ const RegisterDomain = ({ setOpened }) => {
 
     const res = await registerTag({
       brandId,
-      domain: marktagType === 'client-side' ? 'mtag-client.markopolo.ai' : domain,
+      domain: marktagType === 'client-side' ? 'mtag.markopolo.ai' : domain,
       isClient: marktagType === 'client-side',
       isMobile: marktagType === 'mobile',
       isShopify: marktagType === 'shopify',
