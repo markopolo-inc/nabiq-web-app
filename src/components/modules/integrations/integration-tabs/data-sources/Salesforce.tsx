@@ -1,5 +1,5 @@
 import { FiZap } from '@nabiq-icons';
-import { Badge, Button, ConfirmationModal, GatewayLogo, Group } from '@nabiq-ui';
+import { Button, ConfirmationModal, GatewayLogo, Group } from '@nabiq-ui';
 import { useState } from 'react';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import { useAppSelector } from 'src/store/hooks';
@@ -28,11 +28,6 @@ export const Salesforce = () => {
         isConnected={!!datasourceIntegrations?.connectedAccounts?.salesforce}
         description='Leverage Salesforce as a data source for seamless, data-driven customer engagement.'
         icon={<GatewayLogo app='salesforce' width={32} />}
-        badge={
-          datasourceIntegrations?.connectedAccounts?.hubspot?.domain && (
-            <Badge color='gray'>{datasourceIntegrations?.connectedAccounts?.hubspot?.domain}</Badge>
-          )
-        }
       >
         {!datasourceIntegrations?.connectedAccounts?.salesforce ? (
           <Button
