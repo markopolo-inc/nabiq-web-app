@@ -1,7 +1,6 @@
 import { FiZap } from '@nabiq-icons';
 import { Badge, Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import { WhatsAppConnectModal } from 'src/components/modules/integrations/integration-tabs/whats-app';
 import { useAppSelector } from 'src/store/hooks';
@@ -18,7 +17,6 @@ export const Whatsapp = () => {
     const res = await disconnectPlatform({ brandId, platform: 'facebook' }).unwrap();
     if (res.success) {
       setShowDisconnectModal(false);
-      toast.success('Disconnected successfully', { id: 'disconnect-success' });
     }
   };
 
