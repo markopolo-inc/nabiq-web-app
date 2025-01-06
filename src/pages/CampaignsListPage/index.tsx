@@ -61,7 +61,7 @@ const CampaignsListPage = () => {
         {isLoading ? (
           <TableLoader />
         ) : (
-          <CampaignTable list={campaignList?.data} refetch={refetch} />
+          <CampaignTable list={campaignList?.data || []} refetch={refetch} />
         )}
       </Stack>
     </>

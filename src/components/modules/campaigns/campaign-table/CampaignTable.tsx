@@ -53,7 +53,13 @@ const colorMap = {
   low: 'error',
 };
 
-export const CampaignTable = ({ list, refetch }) => {
+export const CampaignTable = ({
+  list,
+  refetch,
+}: {
+  list: ICampaignItem[];
+  refetch: () => void;
+}) => {
   const [showDisconnectModal, setShowDisconnectModal] = useState<boolean>(false);
   const [campaignId, setCampaignId] = useState<null | string>(null);
   const navigate = useNavigate();

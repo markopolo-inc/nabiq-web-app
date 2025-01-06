@@ -10,6 +10,8 @@ export interface IChannel {
 }
 
 export interface ICampaignItem {
+  isWA: boolean;
+  conversionLevel: string;
   resourceId: string;
   resourceType: string;
   brandId: string;
