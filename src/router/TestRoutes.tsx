@@ -5,6 +5,7 @@ import Test from 'src/pages/Test';
 import AnimationTest from 'src/pages/Test/AnimationTest';
 import TestButton from 'src/pages/Test/Button';
 import TestCheckbox from 'src/pages/Test/Checkbox';
+import ErrorTrigger from 'src/pages/Test/ErrorTrigger';
 import TestInputs from 'src/pages/Test/Inputs';
 import Table from 'src/pages/Test/Table';
 import Tabs from 'src/pages/Test/Tabs';
@@ -21,6 +22,7 @@ export const TestRoutes = () => {
       <Route path='tabs' element={<Tabs />} />
       <Route path='table' element={<Table />} />
       <Route path='animation' element={<AnimationTest />} />
+      <Route path='error' element={<ErrorTrigger />} />
       <Route path='*' element={<NotFoundPage />} />
     </Routes>
   );
