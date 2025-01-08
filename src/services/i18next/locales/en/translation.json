@@ -18,7 +18,7 @@
   "home_page": {
     "notifications_title": "Notifications",
     "notifications_empty": "No notifications",
-    "welcome_message": "Welcome aboard, {First Name} !",
+    "welcome_message": "Welcome aboard, {{name}}!",
     "welcome_subtitle": "This is your marketing co-pilot captain, Nabiq.",
     "channels_integration": "Integrate channels",
     "channels_suggestion": "We suggest you to connect at least one channel.",

@@ -1,4 +1,5 @@
 import { RiCodeAiFill, RiFlashLight, RiMegaPhoneFill, RiShieldFill } from '@nabiq-icons';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 export const useQuickActions = ({
@@ -9,6 +10,8 @@ export const useQuickActions = ({
   setShowConstitutionalAIModerationModal: (value: boolean) => void;
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   return [
     {
       id: 1,
@@ -24,7 +27,7 @@ export const useQuickActions = ({
     },
     {
       id: 2,
-      header: 'Create a campaign',
+      header: t('home_page.campaign_create_first'),
       subHeader: 'Launch a campaign to connect with your audience.',
       icon: RiMegaPhoneFill,
       onClick: () => {

@@ -2,6 +2,7 @@ import { useForm } from '@mantine/form';
 import { Button, Image, PasswordInput, Stack, TextInput } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import GoogleLogo from 'src/assets/onboarding/google.svg';
 import { useGoogleSignInMutation, useSignupMutation } from 'src/store/auth/authApi';
@@ -12,7 +13,7 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
   const [signup] = useSignupMutation();
   const [googleSignIn, { isLoading: isGoogleLoading }] = useGoogleSignInMutation();
   const [isLoading, setIsLoading] = useState(false);
-
+  const { t } = useTranslation();
   const form = useForm({
     initialValues: {
       name: '',
@@ -71,7 +72,7 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
           transition={{ duration: 0.7, delay: 1 }}
         >
           <Stack gap={32}>
-            <p className='text-gray-950 text-2xl font-semibold'>Create your Nabiq account</p>
+            <p className='text-gray-950 text-2xl font-semibold'>{t('onboarding.create_account')}</p>
             <Button
               variant='secondary-black'
               leadingIcon={<Image src={GoogleLogo} alt='' />}

@@ -18,7 +18,7 @@
   "home_page": {
     "notifications_title": "الإشعارات",
     "notifications_empty": "لا توجد إشعارات",
-    "welcome_message": "مرحبًا بك، {الاسم الأول}!",
+    "welcome_message": "مرحبًا بك، {{name}}",
     "welcome_subtitle": "إليك الكابتن نبيق، مساعدك في مجال التسويق.",
     "channels_integration": "ربط القنوات",
     "channels_suggestion": "نوصي بربط قناة واحدة على الأقل.",
