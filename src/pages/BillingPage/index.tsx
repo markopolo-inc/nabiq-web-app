@@ -1,10 +1,11 @@
 import { Stack } from '@nabiq-ui';
-import { PaymentMethodCard } from 'components/modules/billing';
+import { BillingDetailsCard, PaymentMethodCard } from 'components/modules/billing';
 
 const BillingPage = () => {
   return (
-    <Stack>
+    <Stack gap={24}>
       <PaymentMethodCard />
+      <BillingDetailsCard />
     </Stack>
   );
 };

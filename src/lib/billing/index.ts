@@ -1,0 +1,102 @@
+interface Feature {
+  name: string;
+  description?: string;
+  pro: boolean | string;
+  enterprise: boolean | string;
+}
+
+export const features: Feature[] = [
+  {
+    name: 'Data source integration',
+    pro: 'Up to 5',
+    enterprise: 'Unlimited',
+  },
+  {
+    name: 'Premium engagement channels',
+    description: 'Email, SMS, Push Notifications and Messenger',
+    pro: true,
+    enterprise: true,
+  },
+  {
+    name: 'Automated segmentation',
+    pro: true,
+    enterprise: true,
+  },
+  {
+    name: 'Sales conversational bot',
+    description: 'Messenger',
+    pro: true,
+    enterprise: true,
+  },
+  {
+    name: 'Basic campaign performance insights',
+    pro: true,
+    enterprise: true,
+  },
+  {
+    name: 'Monitoring',
+    pro: true,
+    enterprise: true,
+  },
+  {
+    name: 'Lead booking system',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'Advanced personalization',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'AI Constitutions',
+    description: 'Customizable AI rules for messaging, content moderation, and compliance',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'Predictive segmentation and Campaign intelligence',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'Real-time product recommendations',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'Personalized assistance',
+    description: 'Support from a dedicated account manager',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'Detailed reports and insights',
+    description: 'Including real-time tracking of customer behaviors and preferences',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'Enterprise-Grade security and compliance',
+    description: 'Enhanced security features, including data encryption and compliance with GDPR',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'Priority Support',
+    description: '24/7 support with a dedicated support team available',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'Onboarding and Training',
+    description: 'Comprehensive onboarding and training sessions for teams',
+    pro: false,
+    enterprise: true,
+  },
+  {
+    name: 'WhatsApp add-on cost',
+    pro: true,
+    enterprise: false,
+  },
+];
