@@ -38,6 +38,7 @@ export { default as FiCopy01 } from './Copy01';
 export { default as FiCopy02 } from './Copy02';
 export { CursorBox as FiCursorBox } from './CursorBox';
 export { default as RiCodeAiFill } from './CodeAiFill';
+export { CreditCardPlus as FiCreditCardPlus } from './CreditCardPlus';
 
 // D
 export { default as FiDataFlow02 } from './DataFlow02';

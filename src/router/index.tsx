@@ -29,6 +29,7 @@ const ContentSamples = delayedLazy(() => import('pages/ControlRoomPage/ContentSa
 const SettingsPage = delayedLazy(() => import('src/pages/SettingsPage'));
 const ConnectMarktag = delayedLazy(() => import('src/pages/ConnectMarktagPage'));
 const AcquisitionChatbot = delayedLazy(() => import('pages/AcquisitionChatbotPage'));
+const BillingPage = delayedLazy(() => import('pages/BillingPage'));
 
 const Router = () => {
   return (
@@ -141,6 +142,16 @@ const Router = () => {
                 element={
                   <Suspense fallback={<ContentLoader />}>
                     <AcquisitionChatbot />
+                  </Suspense>
+                }
+              />
+
+              {/* Billing */}
+              <Route
+                path='/billing'
+                element={
+                  <Suspense fallback={<ContentLoader />}>
+                    <BillingPage />
                   </Suspense>
                 }
               />
