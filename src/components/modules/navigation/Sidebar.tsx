@@ -1,6 +1,7 @@
 import { useGetColors } from '@nabiq-ui';
 import cn from 'classnames';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { lowerPartOptions, sideBarCategories } from 'src/lib/sidebarOptions';
 
@@ -8,6 +9,7 @@ const MenuItem = ({ item }) => {
   const { pathname } = useLocation();
   const isSelected = item?.menuRegex?.test(pathname);
   const { gray950, primary600 } = useGetColors();
+  const { t } = useTranslation();
 
   const Icon = item.Icon;
   return (
@@ -20,7 +22,7 @@ const MenuItem = ({ item }) => {
         <span
           className={`${isSelected ? 'text-primary-600' : 'text-gray-050'} text-sm font-medium`}
         >
-          {item.title}
+          {t(item.title)}
         </span>
       </div>
     </Link>

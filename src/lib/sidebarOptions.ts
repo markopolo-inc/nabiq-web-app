@@ -14,7 +14,7 @@ export const sideBarCategories = [
     title: null,
     options: [
       {
-        title: 'Home',
+        title: 'navigation.nav_home',
         Icon: FiHomeFill,
         to: '/',
         menuRegex: new RegExp(/^\/$/, 'i'),
@@ -25,19 +25,19 @@ export const sideBarCategories = [
     title: 'Engage',
     options: [
       {
-        title: 'Campaigns',
+        title: 'navigation.nav_campaigns',
         Icon: FiMegaphoneFill,
         to: '/campaigns',
         menuRegex: new RegExp(/^\/campaigns/, 'i'),
       },
       {
-        title: 'Control room',
+        title: 'navigation.nav_control_room',
         Icon: FiEquilizer2Fill,
         to: '/control-room',
         menuRegex: new RegExp(/^\/control-room/, 'i'),
       },
       {
-        title: 'Monitoring',
+        title: 'navigation.nav_monitoring',
         Icon: FiBarChartBoxAiFill,
         to: '/monitoring',
         menuRegex: new RegExp(/^\/monitoring/, 'i'),
@@ -48,13 +48,13 @@ export const sideBarCategories = [
     title: 'Explore',
     options: [
       {
-        title: 'Integrations',
+        title: 'navigation.nav_integrations',
         Icon: FiApps2AiFill,
         to: '/integrations',
         menuRegex: new RegExp(/^\/integrations/, 'i'),
       },
       {
-        title: 'Acquisition chatbot',
+        title: 'navigation.nav_chatbot',
         Icon: FiChatSmileAiFill,
         to: '/acquisition-chatbot',
         menuRegex: new RegExp(/^\/acquisition-chatbot/, 'i'),
@@ -67,13 +67,13 @@ export const sidebarOptions = [];
 
 export const lowerPartOptions = [
   {
-    title: 'Settings',
+    title: 'navigation.nav_settings',
     Icon: FiSettings3Fill,
     to: '/settings',
     menuRegex: new RegExp(/^\/settings/, 'i'),
   },
   {
-    title: 'Support',
+    title: 'navigation.nav_support',
     Icon: FiQuestionFill,
     to: '#',
     menuRegex: new RegExp(/^\/help/, 'i'),
