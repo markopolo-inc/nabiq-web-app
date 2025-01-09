@@ -80,13 +80,13 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
               loading={isGoogleLoading}
               onClick={handleGoogleSignIn}
             >
-              Sign up with Google
+              {t('onboarding.google_signup')}
             </Button>
           </Stack>
         </motion.div>
         <div className='flex items-center gap-4'>
           <div className='h-[1px] flex-1 bg-gray-300' />
-          <p className='text-gray-700 text-sm font-normal'>Or, sign up with email</p>
+          <p className='text-gray-700 text-sm font-normal'>{t('onboarding.email_signup')}</p>
           <div className='h-[1px] flex-1 bg-gray-300' />
         </div>
       </Stack>
@@ -104,21 +104,19 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
             className='space-y-5'
           >
             <TextInput
-              label='Full Name'
+              label={t('onboarding.full_name')}
               placeholder='e.g John Doe'
               {...form.getInputProps('name')}
             />
             <TextInput
-              label='Email'
+              label={t('onboarding.email')}
               placeholder='e.g johndoe@gmail.com'
               {...form.getInputProps('email')}
             />
             <PasswordInput
-              label='Password'
-              placeholder='Set password'
-              description={
-                form.errors.password ? null : 'Password must contain at least 8 characters.'
-              }
+              label={t('onboarding.password')}
+              placeholder={t('onboarding.set_password')}
+              description={form.errors.password ? null : t('onboarding.password_requirement')}
               {...form.getInputProps('password')}
             />
           </motion.div>
@@ -129,12 +127,12 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
             className='flex flex-col gap-8'
           >
             <Button fullWidth loading={isLoading} type='submit'>
-              Sign up
+              {t('onboarding.signup')}
             </Button>
             <p className='text-gray-700 text-sm font-normal text-center'>
-              Already have an account?{' '}
+              {t('onboarding.signin_prompt')}{' '}
               <Link className='text-primary-600' to='/login'>
-                Sign in
+                {t('onboarding.signin')}
               </Link>
             </p>
           </motion.div>
