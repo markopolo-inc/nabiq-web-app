@@ -1,6 +1,7 @@
 import { Button, OtpInput, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useResendVerificationCodeMutation, useVerifyMutation } from 'src/store/auth/authApi';
@@ -8,6 +9,7 @@ import { setIsAuthenticated } from 'src/store/auth/authSlice';
 import { useAppSelector } from 'src/store/hooks';
 
 export const VerificationForm = () => {
+  const { t } = useTranslation();
   const [confirmationPin, setConfirmationPin] = useState<string>('');
 
   const [verify] = useVerifyMutation();
@@ -46,9 +48,9 @@ export const VerificationForm = () => {
       >
         <Stack gap={64}>
           <Stack gap={8}>
-            <p className='text-2xl font-semibold text-gray-950'>Check your email to continue</p>
+            <p className='text-2xl font-semibold text-gray-950'>{t('onboarding.email_check')}</p>
             <p className='font-normal text-gray-500'>
-              We sent a verification code to <span className='text-gray-700'>{email}</span>
+              {t('onboarding.verification_sent')} <span className='text-gray-700'>{email}</span>
             </p>
           </Stack>
           <OtpInput
@@ -73,11 +75,11 @@ export const VerificationForm = () => {
             disabled={confirmationPin?.length !== 6 || !email}
             onClick={() => verify({ email, confirmationPin, onLoading, onSuccess })}
           >
-            Verify
+            {t('onboarding.verify')}
           </Button>
           <div className='flex justify-center items-center gap-1'>
             <p className='text-gray-700 text-sm font-normal text-center'>
-              Having trouble with the code?
+              {t('onboarding.resend_code')}
             </p>
             <Button
               disabled={!email}
