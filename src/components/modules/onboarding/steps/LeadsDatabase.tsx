@@ -1,5 +1,6 @@
 import { FiDatabase01, FiShoppingBag02 } from '@nabiq-icons';
 import { Accordion, Button, GatewayLogo, Stack } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'src/store/hooks';
 import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
@@ -8,6 +9,7 @@ import { getOAuthUrl } from 'src/utils/auth';
 import { StepCount } from './StepCount';
 
 export const LeadsDatabase = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { datasourceIntegrations, resourceId: brandId } = useAppSelector((state) => state.brand);
 
@@ -28,22 +30,17 @@ export const LeadsDatabase = () => {
       <Stack gap={32}>
         <StepCount step={2} />
         <Stack gap={8}>
-          <p className='text-2xl font-semibold text-gray-950'>Sync your lead database</p>
-          <p className='font-normal text-gray-500'>
-            Connect your CRM or store to instantly create campaigns for your leads.
-          </p>
+          <p className='text-2xl font-semibold text-gray-950'>{t('onboarding.sync_leads')}</p>
+          <p className='font-normal text-gray-500'>{t('onboarding.connect_crm')}</p>
         </Stack>
       </Stack>
       <Stack gap={16} className='min-w-[520px]'>
         <Accordion
-          title='Sync from marketplace'
+          title={t('onboarding.sync_marketplace')}
           icon={<FiShoppingBag02 size={20} color='#697586' />}
         >
           <Stack gap={24}>
-            <p className='text-sm text-gray-600'>
-              Subjects, participants and timestamps will be visible to your team, Content won't be
-              visible unless shared.
-            </p>
+            <p className='text-sm text-gray-600'>{t('onboarding.team_visibility')}</p>
             <div className='grid grid-cols-2 gap-2 p-1'>
               <Button
                 fullWidth
@@ -125,7 +122,7 @@ export const LeadsDatabase = () => {
           dispatch(setOnboardingStep('guide_nabiq'));
         }}
       >
-        Continue
+        {t('onboarding.continue')}
       </Button>
     </Stack>
   );
