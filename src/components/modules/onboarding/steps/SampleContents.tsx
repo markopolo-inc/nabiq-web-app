@@ -1,6 +1,7 @@
 import { FiChevronLeft } from '@nabiq-icons';
 import { Button, Group, Stack, TextArea } from '@nabiq-ui';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from 'src/store';
@@ -11,6 +12,7 @@ import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
 import { StepCount } from './StepCount';
 
 export const SampleContents = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { resourceId: companyId } = useAppSelector((state: RootState) => state.company);
   const { isMarkedContent } = useAppSelector((state: RootState) => state.onboarding);
@@ -46,8 +48,8 @@ export const SampleContents = () => {
       <Stack className='min-w-[520px]'>
         <TextArea
           value={prompt}
-          label='Instructions'
-          placeholder='Tell us how to engage your leads—mention key products, discounts, or goals.'
+          label={t('onboarding.instructions')}
+          placeholder={t('onboarding.engagement_prompt')}
           rows={10}
           disabled
         />
@@ -63,14 +65,14 @@ export const SampleContents = () => {
             onClick={() => dispatch(setOnboardingStep('guide_nabiq'))}
             leadingIcon={<FiChevronLeft />}
           >
-            Go back
+            {t('onboarding.go_back')}
           </Button>
           <Button
             variant='secondary'
             onClick={() => handleSkipStep()}
             loading={isUpdatingOnboardingStatus}
           >
-            Skip this step
+            {t('onboarding.skip_step')}
           </Button>
         </Group>
       )}
