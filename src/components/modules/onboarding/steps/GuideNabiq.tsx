@@ -2,6 +2,7 @@ import { FiChevronLeft, FiStar06 } from '@nabiq-icons';
 import { Button, Group, Stack, TextArea } from '@nabiq-ui';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from 'src/store';
@@ -22,6 +23,7 @@ import {
 import { StepCount } from './StepCount';
 
 export const GuideNabiq = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { resourceId: brandId } = useAppSelector((state: RootState) => state.brand);
   const { resourceId: companyId } = useAppSelector((state: RootState) => state.company);
@@ -71,18 +73,15 @@ export const GuideNabiq = () => {
       <Stack gap={32}>
         <StepCount step={3} />
         <Stack gap={8}>
-          <p className='text-2xl font-semibold text-gray-950'>Guide Nabiq</p>
-          <p className='font-normal text-gray-500'>
-            We're ready to create a sample campaign! Share your ideas to help us tailor it to your
-            needs.
-          </p>
+          <p className='text-2xl font-semibold text-gray-950'>{t('onboarding.guide_nabiq')}</p>
+          <p className='font-normal text-gray-500'>{t('onboarding.sample_campaign')}</p>
         </Stack>
       </Stack>
       <Stack className='min-w-[520px]'>
         <TextArea
           value={prompt}
-          label='Instructions'
-          placeholder='Tell us how to engage your leads—mention key products, discounts, or goals.'
+          label={t('onboarding.instructions')}
+          placeholder={t('onboarding.engagement_prompt')}
           rows={10}
           onChange={(e) => setPrompt(e.target.value)}
         />
@@ -103,7 +102,7 @@ export const GuideNabiq = () => {
           leadingIcon={<FiChevronLeft />}
           disabled={isGeneratingSampleContent || isSampleContentLoading}
         >
-          Go back
+          {t('onboarding.go_back')}
         </Button>
         <Button
           variant='secondary'
@@ -111,7 +110,7 @@ export const GuideNabiq = () => {
           loading={isUpdatingOnboardingStatus}
           disabled={isGeneratingSampleContent || isSampleContentLoading}
         >
-          Skip this step
+          {t('onboarding.skip_step')}
         </Button>
       </Group>
     </Stack>
