@@ -3,6 +3,7 @@ import { Button, Select, Stack, TextInput } from '@nabiq-ui';
 import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { CompanyCreationInterface } from 'src/interfaces/company.interface';
 import { useAppSelector } from 'src/store/hooks';
 import { useOnboardUserMutation } from 'src/store/onboarding/onboardingApi';
@@ -12,6 +13,7 @@ import { trimAllValuesOfObject } from 'src/utils/string.utils';
 import { StepCount } from './StepCount';
 
 export const CompanyCreation = () => {
+  const { t } = useTranslation();
   const [isLoadingUser, setIsLoading] = useState(false);
   const [onboardUser, { isLoading }] = useOnboardUserMutation();
   const { resourceId: companyId, companyName } = useAppSelector((state) => state.company);
@@ -63,8 +65,8 @@ export const CompanyCreation = () => {
       <Stack gap={32}>
         <StepCount step={1} />
         <Stack gap={8}>
-          <p className='text-2xl font-semibold text-gray-950'>Let’s get to know you</p>
-          <p className='font-normal text-gray-500'>Help us understand your business better.</p>
+          <p className='text-2xl font-semibold text-gray-950'>{t('onboarding_intro.title')}</p>
+          <p className='font-normal text-gray-500'>{t('onboarding_intro.subtitle')}</p>
         </Stack>
       </Stack>
       <form
@@ -75,14 +77,14 @@ export const CompanyCreation = () => {
         <Stack gap={64}>
           <div className='space-y-5'>
             <TextInput
-              label='Business Name'
+              label={t('onboarding_intro.business_name')}
               placeholder='e.g John’s company'
               disabled={!!companyId}
               required
               {...form.getInputProps('businessName')}
             />
             <Select
-              label='Industry'
+              label={t('onboarding_intro.industry')}
               placeholder='Select your industry'
               required
               data={[
@@ -113,14 +115,14 @@ export const CompanyCreation = () => {
                 { value: '500+', label: '500+ employees' },
               ]}
               required
-              label='Business size'
+              label={t('onboarding_intro.business_size')}
               placeholder='Select your business size'
               disabled={!!companyId}
               {...form.getInputProps('businessSize')}
             />
             <TextInput
               required
-              label='Website URL'
+              label={t('onboarding_intro.website')}
               placeholder='Paste your website URL here'
               disabled={!!companyId}
               description={
@@ -133,11 +135,11 @@ export const CompanyCreation = () => {
           </div>
           {!companyId ? (
             <Button fullWidth type='submit' loading={isLoading || isLoadingUser}>
-              Create business
+              {t('onboarding_intro.create_business')}
             </Button>
           ) : (
             <Button fullWidth type='button' loading={isLoading || isLoadingUser}>
-              Continue
+              {t('onboarding.continue')}
             </Button>
           )}
         </Stack>
