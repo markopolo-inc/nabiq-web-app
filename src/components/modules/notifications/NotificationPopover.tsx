@@ -2,10 +2,12 @@ import { FiBell02 } from '@nabiq-icons';
 import { Button, useGetColors } from '@nabiq-ui';
 import { Inbox } from '@novu/react';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
 
 export const NotificationPopover: FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { whiteBase } = useGetColors();
   const { resourceId: companyId } = useAppSelector((state) => state.company);
@@ -33,9 +35,9 @@ export const NotificationPopover: FC = () => {
         appearance={appearance}
         localization={{
           // @ts-expect-error: This is necessary because the type definition is not compatible
-          'inbox.title': 'Notifications',
-          'inbox.filters.labels.default': 'Notifications',
-          'notifications.emptyNotice': 'No notifications',
+          'inbox.title': t('home_page.notifications_title'),
+          'inbox.filters.labels.default': t('home_page.notifications_title'),
+          'notifications.emptyNotice': t('home_page.notifications_empty'),
         }}
       />
     </div>
