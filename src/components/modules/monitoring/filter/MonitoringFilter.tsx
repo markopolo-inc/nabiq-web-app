@@ -1,6 +1,7 @@
 import { Calendar } from '@nabiq-icons';
 import { Group, Select, useGetColors } from '@nabiq-ui';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type timeRangeType = 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
 
@@ -8,6 +9,7 @@ export const MonitoringFilter: FC<{
   timeRange: timeRangeType;
   setTimeRange: (value: timeRangeType) => void;
 }> = ({ timeRange, setTimeRange }) => {
+  const { t } = useTranslation();
   const { gray600 } = useGetColors();
 
   return (
@@ -17,22 +19,22 @@ export const MonitoringFilter: FC<{
         value={timeRange}
         onChange={(value: timeRangeType) => setTimeRange(value)}
         data={[
-          { label: 'Last year', value: 'last_year' },
+          { label: t('monitoring.last_year'), value: 'last_year' },
           {
-            label: 'Last month',
+            label: t('monitoring.last_month'),
             value: 'last_month',
           },
           {
-            label: 'Last week',
+            label: t('monitoring.last_week'),
             value: 'last_week',
           },
           {
-            label: 'Last 3 days',
+            label: t('monitoring.last_3_days'),
             value: 'last_3_day',
           },
         ]}
       />
-      <Select value='All campaigns' data={['All campaigns']} />
+      <Select value={t('monitoring.all_campaigns')} data={[t('monitoring.all_campaigns')]} />
     </Group>
   );
 };
