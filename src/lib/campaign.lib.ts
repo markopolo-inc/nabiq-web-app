@@ -10,8 +10,8 @@ import {
 
 export const goals = [
   {
-    title: 'Acquisition',
-    headline: 'To acquire new customers either for paying, trial or freemium.',
+    title: 'create_campaign.goal_acquisition',
+    headline: 'create_campaign.goal_acquisition_desc',
     tooltip:
       'Select this goal to attract new customers. Focus on acquiring paying users, trial users, or freemium users, depending on your business model.',
     icon: FiZapFast,
@@ -21,8 +21,8 @@ export const goals = [
     badgeLabel: 'Coming soon',
   },
   {
-    title: 'Activation',
-    headline: 'To convert trail/freemium users to paying customers.',
+    title: 'create_campaign.goal_activation',
+    headline: 'create_campaign.goal_activation_desc',
     tooltip:
       'Choose this goal to convert trial or freemium users into paying customers. It’s all about getting existing users to take the next step.',
     icon: FiCursorClick01,
@@ -32,8 +32,8 @@ export const goals = [
     badgeLabel: '',
   },
   {
-    title: 'Retention',
-    headline: 'To push recurring subscription, cross-sell and upsell.',
+    title: 'create_campaign.goal_retention',
+    headline: 'create_campaign.goal_retention_desc',
     tooltip:
       'Use this goal to increase customer loyalty. Boost recurring subscriptions, encourage cross-sells, or promote upsells to maintain and grow your customer base.',
     icon: FiInfinity,
@@ -47,8 +47,7 @@ export const goals = [
 export const mediums = [
   {
     title: 'WhatsApp',
-    description:
-      'Enable two-way conversations between Nabiq and your leads. Requires a WhatsApp Business account and inventory in Nabiq.',
+    description: 'create_campaign.whatsapp_desc',
     icon: FiWhatsApp,
     isRecommended: true,
     color: '#387AF6',
@@ -56,8 +55,7 @@ export const mediums = [
   },
   {
     title: 'Email and SMS',
-    description:
-      'One way conversation between Nabiq and your leads. Integrate with your email/SMS/push notification channels.',
+    description: 'create_campaign.one_way_desc',
     icon: FiAnnouncement01,
     isRecommended: false,
     color: '#387AF6',
