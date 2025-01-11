@@ -17,6 +17,7 @@ import cn from 'classnames';
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { Fragment, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import Xarrow, { Xwrapper, useXarrow } from 'react-xarrows';
 import LoaderGif from 'src/assets/loader/loading.gif';
@@ -31,6 +32,7 @@ import ContentDrawer from './components/ContentDrawer';
 const PAGE_SIZE = 10;
 
 export const CampaignDetails = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { primary600, gray400 } = useGetColors();
   const updateXarrow = useXarrow();
@@ -131,11 +133,11 @@ export const CampaignDetails = () => {
             {capitalize(name?.split('-').join(' '))} Discover Bali
           </p>
           <p className='text-gray-600 text-base font-normal'>
-            List of audience and individual campaign funnel details.
+            {t('campaign_details.list_description')}
           </p>
         </Stack>
         <Button size='md' variant='secondary' onClick={() => navigate(-1)}>
-          Go back
+          {t('campaign_details.go_back')}
         </Button>
       </Group>
       <Group justify='space-between' className='mt-[64px]'>
@@ -147,20 +149,20 @@ export const CampaignDetails = () => {
               setFilter({ ...filter, dateRange: value as 'today' | 'last_week' | 'last_month' })
             }
             data={[
-              { label: 'Today', value: 'today' },
+              { label: t('campaign_details.today'), value: 'today' },
               {
-                label: 'Last week',
+                label: t('campaign_details.last_week'),
                 value: 'last_week',
               },
               {
-                label: 'Last month',
+                label: t('campaign_details.last_month'),
                 value: 'last_month',
               },
             ]}
           />
         </Group>
         <TextInput
-          placeholder='Search audience'
+          placeholder={t('campaign_details.search_audience')}
           className='w-[264px]'
           value={search}
           onChange={(e) => setSearch(e.currentTarget.value)}
