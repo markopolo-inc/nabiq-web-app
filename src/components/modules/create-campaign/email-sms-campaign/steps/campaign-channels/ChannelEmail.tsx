@@ -1,12 +1,14 @@
 import { Envelope } from '@nabiq-icons';
 import { GatewayLogo, Group, Select, Text } from '@nabiq-ui';
 import { capitalize } from 'lodash';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { GatewayType } from 'src/interfaces/brand.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
 export const ChannelEmail = () => {
+  const { t } = useTranslation();
   const { emailIntegrations } = useAppSelector((state) => state.brand);
   const { campaign } = useAppSelector((state) => state);
   const dispatch = useDispatch();
@@ -16,7 +18,7 @@ export const ChannelEmail = () => {
       <div className='flex gap-3'>
         <Envelope size={24} color='#9AA4B2' />
         <Text size='18px' color='#121926' weight={900} className='leading-7'>
-          Email
+          {t('onboarding.email')}
         </Text>
       </div>
       <Select
