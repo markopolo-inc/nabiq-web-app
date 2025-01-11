@@ -2,6 +2,7 @@ import { FiPlus } from '@nabiq-icons';
 import { Button, Checkbox, Group, Stack, TextArea } from '@nabiq-ui';
 import classNames from 'classnames';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Custom = ({
   setSelected,
@@ -18,6 +19,7 @@ const Custom = ({
   customPrompts: string[];
   setCustomPrompts: Dispatch<SetStateAction<string[]>>;
 }) => {
+  const { t } = useTranslation();
   const [newPrompts, setNewPrompts] = useState<string[]>(['']);
   const [step, setStep] = useState<'add' | 'list'>('list');
 
@@ -139,10 +141,10 @@ const Custom = ({
               setStep('list');
             }}
           >
-            Save changes
+            {t('settings.save_changes')}
           </Button>
           <Button variant='secondary' fullWidth onClick={() => setStep('list')}>
-            Go back
+            {t('campaign_details.go_back')}
           </Button>
         </div>
       )}
