@@ -1,6 +1,7 @@
 import { FiPlus } from '@nabiq-icons';
 import { Button, Group, OptionTabs, Stack } from '@nabiq-ui';
 import { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import {
   CartesianGrid,
@@ -21,6 +22,7 @@ interface TransformedData {
 export const PerformanceTrend: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
 }> = ({ timeRange }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [valueType, setValueType] = useState<'number' | 'percentage'>('number');
   const [graphData, setGraphData] = useState<TransformedData[]>([]);
@@ -69,9 +71,11 @@ export const PerformanceTrend: FC<{
     <Stack gap={20} className='border border-gray-200 shadow-sm rounded-xl p-6'>
       <div className='flex justify-between items-center'>
         <Stack gap={4}>
-          <p className='text-gray-900 text-lg font-semibold'>Performance Trend</p>
+          <p className='text-gray-900 text-lg font-semibold'>
+            {t('home_page.performance_trend_title')}
+          </p>
           <p className='text-gray-600 text-sm font-normal'>
-            Trends in your campaign metrics over time
+            {t('home_page.performance_trend_description')}
           </p>
         </Stack>
       </div>
