@@ -45,7 +45,7 @@ export const useQuickActions = ({
     },
     {
       id: 4,
-      header: 'Integrate channels',
+      header: t('home_page.channels_integration'),
       subHeader: 'Send marketing campaigns to your audience.',
       icon: RiFlashLight,
       onClick: () => {
