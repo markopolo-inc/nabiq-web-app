@@ -7,10 +7,12 @@ import {
   Text,
 } from '@nabiq-ui';
 import moment from 'moment-timezone';
+import { useTranslation } from 'react-i18next';
 import { ICampaign } from 'src/interfaces/modules/campaign';
 import { useCampaignDispatch, useCampaignSelector } from 'src/store/hooks';
 
 export const CampaignTiming = () => {
+  const { t } = useTranslation();
   const dispatchCampaign = useCampaignDispatch();
   const campaign = useCampaignSelector();
   const handleChange = (field: keyof ICampaign, value) => {
@@ -25,7 +27,7 @@ export const CampaignTiming = () => {
         <Group grow className='justify-between'>
           <DatePickerInput
             dropdownType='modal'
-            label='Campaign starts on'
+            label={t('create_campaign_form.start_date')}
             allowDeselect
             value={new Date(campaign?.startDate)}
             onChange={(value) => handleChange('startDate', moment(value).format('YYYY-MM-DD'))}
@@ -71,7 +73,7 @@ export const CampaignTiming = () => {
 
       <Stack gap={20}>
         <Select
-          label='What is the maximum no. of steps you want for this campaign?'
+          label={t('create_campaign_form.max_steps')}
           value={String(campaign?.stepCount)}
           onChange={(value) => handleChange('stepCount', Number(value))}
           data={['1', '2', '3', '4', '5', '6']}
@@ -79,13 +81,13 @@ export const CampaignTiming = () => {
         />
 
         <Text size='14px' className='text-gray-600'>
-          Interval at which each step will be generated
+          {t('create_campaign_form.step_interval')}{' '}
         </Text>
       </Stack>
 
       <Stack gap={20}>
         <Select
-          label='What should be the minimum delay between each step?'
+          label={t('create_campaign_form.min_delay')}
           value={String(campaign?.stepDelay)}
           data={['1', '2', '3', '4', '5', '6']}
           placeholder='Select steps'
@@ -93,13 +95,13 @@ export const CampaignTiming = () => {
         />
 
         <Text size='14px' className='text-gray-600'>
-          Interval at which each step will be generated
+          {t('create_campaign_form.step_interval')}{' '}
         </Text>
       </Stack>
 
       <DatePickerInput
         dropdownType='modal'
-        label='Campaign ends on'
+        label={t('create_campaign_form.end_date')}
         allowDeselect
         value={new Date(campaign?.endDate)}
         onChange={(value) => handleChange('endDate', moment(value).format('YYYY-MM-DD'))}
