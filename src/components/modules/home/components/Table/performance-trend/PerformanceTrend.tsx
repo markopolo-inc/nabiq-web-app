@@ -2,6 +2,7 @@ import { FiLineChartUp01 } from '@nabiq-icons';
 import { Group, OptionTabs, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   CartesianGrid,
   Line,
@@ -22,6 +23,7 @@ export const PerformanceTrend: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
   isOnboardingDone: boolean;
 }> = ({ timeRange, isOnboardingDone }) => {
+  const { t } = useTranslation();
   const [valueType, setValueType] = useState<'number' | 'percentage'>('number');
   const [graphData, setGraphData] = useState<TransformedData[]>([]);
 
@@ -74,9 +76,11 @@ export const PerformanceTrend: FC<{
     >
       <div className='flex justify-between items-center'>
         <Stack gap={4}>
-          <p className='text-gray-900 text-lg font-semibold'>Performance Trend</p>
+          <p className='text-gray-900 text-lg font-semibold'>
+            {t('home_page.performance_trend_title')}
+          </p>
           <p className='text-gray-600 text-sm font-normal'>
-            Trends in your campaign metrics over time
+            {t('home_page.performance_trend_description')}
           </p>
         </Stack>
       </div>
