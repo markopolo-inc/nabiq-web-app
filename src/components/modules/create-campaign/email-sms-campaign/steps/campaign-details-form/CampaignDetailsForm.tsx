@@ -1,11 +1,13 @@
 // import { FiCrossX, FiPlatformIcon } from '@nabiq-icons';
 import { Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { ICampaign } from 'src/interfaces/modules/campaign';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
 export const CampaignDetailsForm = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { campaign } = useAppSelector((state) => state);
 
@@ -21,7 +23,7 @@ export const CampaignDetailsForm = () => {
     <>
       <Stack gap={32} w={960} className='mx-auto'>
         <TextInput
-          label='Campaign name'
+          label={t('campaigns.name')}
           placeholder='Enter campaign name'
           value={campaign?.name}
           onChange={(e) => handleChange('name', e.currentTarget.value)}
@@ -29,34 +31,34 @@ export const CampaignDetailsForm = () => {
 
         <Stack gap={6}>
           <TextArea
-            label='Campaign details'
+            label={t('create_campaign_form.details_title')}
             placeholder='Enter campaign details'
             rows={4}
             value={campaign?.details}
             onChange={(e) => handleChange('details', e.currentTarget.value)}
           />
           <Text size='14px' className='text-gray-600'>
-            Provide the text of your campaign
+            {t('create_campaign_form.text_prompt')}{' '}
           </Text>
         </Stack>
 
         <Stack gap={6}>
           <TextInput
-            label='Campaign link'
+            label={t('create_campaign_form.campaign_link')}
             placeholder='www.mywebsite/offer2'
             value={campaign?.link}
             onChange={(e) => handleChange('link', e.currentTarget.value)}
           />
           <Text size='14px' className='text-gray-600'>
-            Destination link where you want to redirect users after clicking your campaign
+            {t('create_campaign_form.link_desc')}{' '}
           </Text>
         </Stack>
 
         <Stack gap={6}>
           <Select
-            label='Content tone'
+            label={t('create_campaign_form.content_tone')}
             placeholder='Pick value'
-            defaultValue='Content tone'
+            defaultValue={t('create_campaign_form.content_tone')}
             value={campaign?.tone}
             onChange={(value) => handleChange('tone', value)}
             data={[
@@ -77,12 +79,12 @@ export const CampaignDetailsForm = () => {
               { label: 'English', value: 'en' },
               { label: 'Arabic', value: 'ar' },
             ]}
-            label='Content language'
+            label={t('create_campaign_form.content_language')}
             value={campaign?.language}
             onChange={(value) => handleChange('language', value)}
           />
           <Text size='14px' className='text-gray-600'>
-            Contents will be generated in the selected language
+            {t('create_campaign_form.language_desc')}
           </Text>
         </Stack>
       </Stack>
