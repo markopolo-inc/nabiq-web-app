@@ -1,12 +1,14 @@
 import { Message } from '@nabiq-icons';
 import { GatewayLogo, Group, Select, Text } from '@nabiq-ui';
 import { capitalize } from 'lodash';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { GatewayType } from 'src/interfaces/brand.interface';
 import { setCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks';
 
 export const ChannelSMS = () => {
+  const { t } = useTranslation();
   const { smsIntegrations } = useAppSelector((state) => state.brand);
   const { campaign } = useAppSelector((state) => state);
   const dispatch = useDispatch();
@@ -16,7 +18,7 @@ export const ChannelSMS = () => {
       <div className='flex gap-4'>
         <Message size={24} color='#9AA4B2' />
         <Text size='18px' color='#121926' weight={900} className='leading-7'>
-          SMS
+          {t('home_page.channel_sms')}
         </Text>
       </div>
       <Select

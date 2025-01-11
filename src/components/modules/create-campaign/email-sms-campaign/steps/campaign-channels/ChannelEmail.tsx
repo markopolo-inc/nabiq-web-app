@@ -18,7 +18,7 @@ export const ChannelEmail = () => {
       <div className='flex gap-3'>
         <Envelope size={24} color='#9AA4B2' />
         <Text size='18px' color='#121926' weight={900} className='leading-7'>
-          {t('onboarding.email')}
+          {t('home_page.email')}
         </Text>
       </div>
       <Select
