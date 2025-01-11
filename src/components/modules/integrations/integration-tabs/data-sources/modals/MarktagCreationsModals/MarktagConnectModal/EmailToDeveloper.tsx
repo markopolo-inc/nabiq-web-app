@@ -2,11 +2,13 @@ import { FiMail01 } from '@nabiq-icons';
 import { Button, Group, Stack, Text, TextArea, TextInput, useGetColors } from '@nabiq-ui';
 import { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 import { useAppSelector } from 'src/store/hooks';
 import { useSendEmailInstructionMutation } from 'src/store/marktag/analyticsMarktagApi';
 
 const EmailToDeveloper = ({ setOpened }) => {
+  const { t } = useTranslation();
   const { gray600, gray900, primary500, primary700 } = useGetColors();
   const { setStep } = useContext<MarktagContextType>(MarkTagContext);
   const { userName } = useAppSelector((state) => state.user);
@@ -102,7 +104,7 @@ Event Setup Guide: https://markopolo-inc.github.io/marktag-docs/web-sdk/usage`}
         <Stack align='end'>
           <Group gap={12}>
             <Button variant='secondary' onClick={() => setStep('choose')}>
-              Go back
+              {t('campaign_details.back')}
             </Button>
             <Button
               style={{ marginTop: '16px' }}
