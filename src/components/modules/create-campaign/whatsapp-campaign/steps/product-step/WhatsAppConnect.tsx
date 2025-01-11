@@ -1,11 +1,13 @@
 import { FiEdit01, FiWhatsApp } from '@nabiq-icons';
 import { Badge, Button, Card, Group, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { WhatsAppConnectModal } from 'src/components/modules/integrations';
 import { useAppSelector } from 'src/store/hooks';
 import { getOAuthUrl } from 'src/utils/auth';
 
 export const WhatsAppConnect = () => {
+  const { t } = useTranslation();
   const { socialIntegrations, resourceId: brandId } = useAppSelector((state) => state.brand);
   const [showWAConnectModal, setShowWAConnectModal] = useState(false);
 
@@ -16,7 +18,7 @@ export const WhatsAppConnect = () => {
       <Stack gap={24}>
         <Group justify='space-between'>
           <p className='text-gray-900 text-lg font-semibold'>
-            1. Connect your WhatsApp business account
+            1. {t('create_campaign_whatsapp.connect_prompt')}
           </p>
           {socialIntegrations?.socialTokens?.facebook && <Badge color='success'>Connected</Badge>}
         </Group>
