@@ -2,6 +2,7 @@ import { FiPlus } from '@nabiq-icons';
 import { Button, Group, Stack, TableLoader } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { CampaignGoalModal, CampaignTable } from 'src/components/modules/campaigns';
 import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
@@ -9,6 +10,7 @@ import { resetCampaign } from 'src/store/campaign/campaignSlice';
 import { useAppSelector } from 'src/store/hooks.ts';
 
 const CampaignsListPage = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const { isLoading, data: campaignList, refetch } = useGetCampaignConfigsQuery(brandId);
@@ -53,7 +55,7 @@ const CampaignsListPage = () => {
                   <FiPlus size={20} color='white' />
                 </Button>
               </div>
-              <p className='text-gray-900 font-semibold'>Create your first campaign</p>
+              <p className='text-gray-900 font-semibold'>{t('home_page.campaign_create_first')}</p>
             </Stack>
           </div>
         )}

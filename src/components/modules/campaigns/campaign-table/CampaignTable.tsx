@@ -29,6 +29,7 @@ import {
 import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { Fragment, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ICampaignItem } from 'src/interfaces/modules/campaign';
 import { useDeleteCampaignConfigMutation } from 'src/store/campaign/campaignApi';
@@ -39,12 +40,12 @@ type ActivatedTabsType = 'all' | ICampaignItem['status'];
 
 const CAMPAIGN_TABLE_HEADERS: string[] = [
   // 'Status',
-  'Campaign name',
-  'Medium',
-  'Leads',
-  'Date created',
-  'Conversion level',
-  'Actions',
+  'campaigns.name',
+  'campaigns.medium',
+  'campaigns.leads',
+  'campaigns.date_created',
+  'campaigns.conversion_level',
+  'campaigns.actions',
 ];
 
 const colorMap = {
@@ -60,6 +61,7 @@ export const CampaignTable = ({
   list: ICampaignItem[];
   refetch: () => void;
 }) => {
+  const { t } = useTranslation();
   const [showDisconnectModal, setShowDisconnectModal] = useState<boolean>(false);
   const [campaignId, setCampaignId] = useState<null | string>(null);
   const navigate = useNavigate();
@@ -100,7 +102,7 @@ export const CampaignTable = ({
         <Text className='text-gray-900 font-semibold text-lg'>Campaign</Text>
 
         <Badge color='blue' size='sm'>
-          {filteredList.length || 0} campaigns
+          {filteredList.length || 0} {t('navigation.nav_campaigns')}
         </Badge>
       </Group>
       <Stack className='py-3 px-4'>
@@ -142,7 +144,7 @@ export const CampaignTable = ({
               {CAMPAIGN_TABLE_HEADERS.map((item, idx) => (
                 <Th key={idx}>
                   <div className='flex items-center gap-1'>
-                    <div className='text-xs font-medium text-gray-600'>{item}</div>
+                    <div className='text-xs font-medium text-gray-600'>{t(item)}</div>
                   </div>
                 </Th>
               ))}
