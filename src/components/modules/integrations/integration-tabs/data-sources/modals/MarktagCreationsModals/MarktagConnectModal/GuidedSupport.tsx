@@ -1,9 +1,11 @@
 import { Command } from '@nabiq-icons';
 import { Button, Group, Stack, useGetColors } from '@nabiq-ui';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
 const GuidedSupport = () => {
+  const { t } = useTranslation();
   const { primary500 } = useGetColors();
   const { setStep } = useContext<MarktagContextType>(MarkTagContext);
 
@@ -28,7 +30,7 @@ const GuidedSupport = () => {
       <Stack align='end'>
         <Group gap={12}>
           <Button variant='secondary' onClick={() => setStep('choose')}>
-            Go back
+            {t('campaign_details.back')}
           </Button>
           <Button
             variant='primary'
