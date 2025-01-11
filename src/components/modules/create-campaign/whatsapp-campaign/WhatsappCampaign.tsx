@@ -1,6 +1,7 @@
 import { Breadcrumbs, Button, Group, Stack, Stepper, StepperStep, Tooltip } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { FiDot } from 'src/components/Icons';
 import {
@@ -14,6 +15,7 @@ import { useCreateWhatsappCampaignConfigMutation } from 'src/store/campaign/camp
 import { useAppSelector } from 'src/store/hooks';
 
 export const WhatsappCampaign = () => {
+  const { t } = useTranslation();
   const [active, setActive] = useState(0);
   const navigate = useNavigate();
   const handleStepChange = async (newStep: number) => {
@@ -67,7 +69,7 @@ export const WhatsappCampaign = () => {
                     }}
                     disabled={isLoading}
                   >
-                    Go back
+                    {t('campaign_details.go_back')}
                   </Button>
                 )}
                 <Tooltip label={errors} disabled={validationErrors.length === 0} position='left'>
@@ -77,7 +79,7 @@ export const WhatsappCampaign = () => {
                     onClick={() => handleStepChange(active + 1)}
                     loading={isLoading}
                   >
-                    Continue
+                    {t('onboarding.continue')}
                   </Button>
                 </Tooltip>
               </Group>
