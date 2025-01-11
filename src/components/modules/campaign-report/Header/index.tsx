@@ -1,8 +1,10 @@
 import { Breadcrumbs, Button, Group, Stack } from '@nabiq-ui';
 import { capitalize } from 'lodash';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export const CampaignReportHeader = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -16,7 +18,7 @@ export const CampaignReportHeader = () => {
             Tropical Treasures: {capitalize(name?.split('-').join(' '))}
           </p>
           <p className='text-gray-600 text-base font-normal'>
-            List of audience and individual campaign funnel details.
+            {t('campaign_details.list_description')}
           </p>
         </Stack>
         <Button size='md' variant='secondary' onClick={() => navigate(-1)}>
