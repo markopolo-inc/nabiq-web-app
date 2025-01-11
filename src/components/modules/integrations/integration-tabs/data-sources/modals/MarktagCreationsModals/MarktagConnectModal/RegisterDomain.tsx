@@ -1,6 +1,7 @@
 import { Button, Group, Loader, Select, Stack, Text, TextInput, useGetColors } from '@nabiq-ui';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { DomainDataType, MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 import { useUpdateSettingMutation } from 'src/store/company/companyApi';
 import { useAppSelector } from 'src/store/hooks';
@@ -16,6 +17,7 @@ import { extractMainDomain } from 'src/utils/extractMainDomain';
 import HowItWorksModal from '../HowItworksModal';
 
 const RegisterDomain = ({ setOpened }) => {
+  const { t } = useTranslation();
   const { gray500, gray600, gray900 } = useGetColors();
   const [updateSetting] = useUpdateSettingMutation();
   const { marktagType, domain, setDomain, setDomainData, setStep } =
@@ -198,7 +200,7 @@ const RegisterDomain = ({ setOpened }) => {
           disabled={marktagType !== 'client-side' && domain?.length === 0}
           onClick={handleContinueMarkTag}
         >
-          Continue
+          {t('onboarding.continue')}
         </Button>
         <HowItWorksModal />
       </Stack>
