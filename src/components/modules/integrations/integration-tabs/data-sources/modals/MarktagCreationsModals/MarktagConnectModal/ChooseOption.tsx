@@ -1,9 +1,11 @@
 import { Envelope, FiCode, FiLifeBuoy01 } from '@nabiq-icons';
 import { Button, Group, Stack, Text, useGetColors } from '@nabiq-ui';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
 const ChooseOption = () => {
+  const { t } = useTranslation();
   const { gray600, gray900 } = useGetColors();
   const { setStep } = useContext<MarktagContextType>(MarkTagContext);
 
@@ -12,7 +14,7 @@ const ChooseOption = () => {
       icon: <FiCode size={32} color='#0BA5EC' />,
       title: 'Install code manually',
       description: 'Setup everything by yourself',
-      buttonLabel: 'Continue',
+      buttonLabel: 'onboarding.continue',
       buttonAction: () => {
         setStep('code');
       },
@@ -21,7 +23,7 @@ const ChooseOption = () => {
       icon: <Envelope size={32} color='#EE46BC' />,
       title: 'Email to developer',
       description: "Setup with developer's help",
-      buttonLabel: 'Continue',
+      buttonLabel: 'onboarding.continue',
       buttonAction: () => {
         setStep('email');
       },
@@ -30,7 +32,7 @@ const ChooseOption = () => {
       icon: <FiLifeBuoy01 size={32} color='#669F2A' />,
       title: 'Get support',
       description: 'Get us to help you setup!',
-      buttonLabel: 'Continue',
+      buttonLabel: 'onboarding.continue',
       buttonAction: () => {
         setStep('support');
       },
@@ -64,7 +66,7 @@ const ChooseOption = () => {
               {card.description}
             </Text>
             <Button variant='primary' fullWidth onClick={card.buttonAction}>
-              {card.buttonLabel}
+              {t(card.buttonLabel)}
             </Button>
           </div>
         ))}
