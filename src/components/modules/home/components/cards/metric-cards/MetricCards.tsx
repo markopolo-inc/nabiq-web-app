@@ -2,6 +2,7 @@ import { FiMail01, FiMessageSmileCircle } from '@nabiq-icons';
 import { OptionTabs, Skeleton, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MetricsCard } from 'src/components/modules/home/';
 import type { TOptionTab } from 'src/interfaces/modules/integrations.ts';
 import { IMetricData, IMetrics } from 'src/interfaces/monitoring.interface.ts';
@@ -28,6 +29,7 @@ export const MetricCards: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
   isOnboardingDone: boolean;
 }> = ({ timeRange, isOnboardingDone }) => {
+  const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState<TOptionTab>('email');
 
   const { data, isLoading } = useGetMetricCardsQuery({
@@ -52,7 +54,7 @@ export const MetricCards: FC<{
     >
       <Stack gap={20}>
         <Stack gap={4}>
-          <p className='text-gray-900 text-lg font-semibold'>Metrics</p>
+          <p className='text-gray-900 text-lg font-semibold'>{t('home_page.metrics_title')}</p>
           <p className='text-gray-600 text-sm font-normal'>
             Your data will show up here when ready.
           </p>
