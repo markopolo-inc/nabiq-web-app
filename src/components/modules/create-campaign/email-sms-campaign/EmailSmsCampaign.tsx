@@ -11,6 +11,7 @@ import {
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -31,6 +32,7 @@ import { useAppSelector } from 'src/store/hooks';
 import { setFirstCreationModal } from 'src/store/onboarding/onboardingSlice';
 
 export const EmailSmsCampaign = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
@@ -135,7 +137,7 @@ export const EmailSmsCampaign = () => {
                   }}
                   size='md'
                 >
-                  Go back
+                  {t('onboarding.go_back')}
                 </Button>
               )}
               <Button
@@ -156,7 +158,7 @@ export const EmailSmsCampaign = () => {
                   ? campaignConfig?.resourceId?.length
                     ? 'Update'
                     : 'Create'
-                  : 'Continue'}
+                  : t('onboarding.continue')}
               </Button>
             </Group>
           </div>
