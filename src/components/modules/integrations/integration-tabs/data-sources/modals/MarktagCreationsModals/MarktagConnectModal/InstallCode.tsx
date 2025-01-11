@@ -3,6 +3,7 @@ import '@mantine/code-highlight/styles.css';
 import { FileQuestion02 } from '@nabiq-icons';
 import { Button, Group, Stack } from '@nabiq-ui';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 import { getCodes } from 'src/lib/marktag/getCodes';
 import { useConnectMarktagMutation } from 'src/store/marktag/marktagApi';
@@ -12,6 +13,7 @@ import ShopifyMarktagInstallButton from './utils/ShopifyInstallButton';
 import WoocommerceMarktagInstallButton from './utils/WoocommerceInstallButton';
 
 const InstallCode = ({ setOpened }) => {
+  const { t } = useTranslation();
   const { marktagType, domainData, setDomainData, setStep } =
     useContext<MarktagContextType>(MarkTagContext);
   const [connect, { isLoading }] = useConnectMarktagMutation();
@@ -91,7 +93,7 @@ const InstallCode = ({ setOpened }) => {
               {!(domainData?.isWoocommerce || domainData?.isShopify) && (
                 <>
                   <Button variant='secondary' onClick={() => setStep('choose')}>
-                    Go back
+                    {t('onboarding.go_back')}
                   </Button>
                   <ViewDocumentationButton />
                   <Button variant='primary' loading={isLoading} onClick={handleFinishSetup}>
