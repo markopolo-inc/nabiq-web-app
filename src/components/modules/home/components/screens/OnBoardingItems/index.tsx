@@ -1,6 +1,7 @@
 import { FiGreenCheckCircle } from '@nabiq-icons';
 import { Group, Stack } from '@nabiq-ui';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ConnectFirstMarkTagCard,
   CreateFirstCampaignCard,
@@ -22,6 +23,7 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
   isFirstCampaignDone,
   isMarkTagDone,
 }) => {
+  const { t } = useTranslation();
   const [activeCard, setActiveCard] = useState<
     'integration_channel' | 'first_campaign' | 'mark_tag'
   >('integration_channel');
@@ -52,7 +54,9 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
           ) : (
             <div className='text-base font-normal text-gray-950'>1</div>
           )}
-          <p className='text-base font-semibold text-gray-950'>Integrate channels</p>
+          <p className='text-base font-semibold text-gray-950'>
+            {t('home_page.channels_integration')}
+          </p>
         </Group>
 
         <Group
@@ -64,7 +68,10 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
           ) : (
             <div className='text-base font-normal text-gray-950'>2</div>
           )}
-          <p className='text-base font-semibold text-gray-950'>Create your first campaign</p>
+
+          <p className='text-base font-semibold text-gray-950'>
+            {t('home_page.campaign_create_first')}
+          </p>
         </Group>
 
         <Group
@@ -76,7 +83,7 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
           ) : (
             <div className='text-base font-normal text-gray-950'>3</div>
           )}
-          <p className='text-base font-semibold text-gray-950'>Connect MarkTag</p>
+          <p className='text-base font-semibold text-gray-950'>{t('home_page.marktag_connect')}</p>
         </Group>
       </Stack>
 
