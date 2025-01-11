@@ -15,7 +15,7 @@ export const CampaignReport = () => {
     <Stack gap={64}>
       <CampaignReportHeader />
       <MetricCards timeRange={timeRange} />
-      <ChannelPerformance timeRange={timeRange} />
+      <ChannelPerformance />
     </Stack>
   );
 };
