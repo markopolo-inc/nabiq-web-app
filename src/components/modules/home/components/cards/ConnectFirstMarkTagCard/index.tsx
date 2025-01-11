@@ -2,6 +2,7 @@ import { FiConnectFirstMarkTag } from '@nabiq-icons';
 import { Button, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 type ConnectFirstMarkTagCardPropType = {
   onClick: () => void;
@@ -14,6 +15,7 @@ export const ConnectFirstMarkTagCard: React.FC<ConnectFirstMarkTagCardPropType> 
   isActive,
   isIntegratedChannel,
 }) => {
+  const { t } = useTranslation();
   const classes = isActive
     ? 'top-0 left-0 z-10 w-full'
     : isIntegratedChannel
@@ -31,14 +33,16 @@ export const ConnectFirstMarkTagCard: React.FC<ConnectFirstMarkTagCardPropType> 
       >
         <Stack gap={40}>
           <Stack gap={4} className='max-w-[360px] w-full'>
-            <h4 className='font-semibold text-xl leading-[30px] text-gray-950'>Connect MarkTag </h4>
+            <h4 className='font-semibold text-xl leading-[30px] text-gray-950'>
+              {t('home_page.marktag_connect')}
+            </h4>
             <p className='font-normal text-sm text-gray-600'>
-              Track your first party customer marketing data with cutting-edge precision.
+              {t('home_page.tracking_description')}
             </p>
           </Stack>
 
           <Button variant='primary' onClick={onClick}>
-            Connect
+            {t('home_page.common_connect')}
           </Button>
         </Stack>
 
