@@ -2,6 +2,7 @@ import { FiCreateFirstCampaign, FiPlus02 } from '@nabiq-icons';
 import { Button, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 type CreateFirstCampaignCardPropsType = {
   onClick: () => void;
@@ -12,6 +13,7 @@ export const CreateFirstCampaignCard: React.FC<CreateFirstCampaignCardPropsType>
   onClick,
   isActive,
 }) => {
+  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -22,11 +24,9 @@ export const CreateFirstCampaignCard: React.FC<CreateFirstCampaignCardPropsType>
       <Stack gap={40}>
         <Stack gap={4}>
           <h4 className='font-semibold text-xl leading-[30px] text-gray-950'>
-            Create your first campaign
+            {t('home_page.campaign_create_first')}
           </h4>
-          <p className='font-normal text-sm text-gray-600'>
-            Launch a campaign to connect with your audience in a way that feels personal and real!
-          </p>
+          <p className='font-normal text-sm text-gray-600'>{t('home_page.campaign_launch_cta')} </p>
         </Stack>
 
         <Button
@@ -34,7 +34,7 @@ export const CreateFirstCampaignCard: React.FC<CreateFirstCampaignCardPropsType>
           leadingIcon={<FiPlus02 size={20} color='white' />}
           onClick={onClick}
         >
-          Create
+          {t('home_page.common_create')}
         </Button>
       </Stack>
 
