@@ -1,5 +1,6 @@
 import { FiCommand } from '@nabiq-icons';
 import { Badge, Button, useGetColors } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -8,6 +9,7 @@ type ConnectMarktagPropsTypes = {
 };
 
 export const Marktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
+  const { t } = useTranslation();
   const { markTag } = useAppSelector((state) => state.brand);
   const { primary500 } = useGetColors();
   return (
@@ -34,7 +36,7 @@ export const Marktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
         ) : (
           <>
             <Button onClick={onShowMarktag} className='!w-36'>
-              Connect
+              {t('home_page.common_connect')}
             </Button>
             <Button
               onClick={() =>
