@@ -3,6 +3,7 @@ import { useForm } from '@mantine/form';
 import { Avatar, Button, Dropzone, Grid, Group, Select, Stack, TextInput } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useUpdateSettingMutation } from 'store/company/companyApi';
 import { useAppSelector } from 'store/hooks';
@@ -10,6 +11,7 @@ import { uploadFile } from 'utils/fileUpload';
 import { trimAllValuesOfObject } from 'utils/string.utils';
 
 const Settings = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [files, setFiles] = useState<FileWithPath[]>([]);
 
@@ -61,16 +63,14 @@ const Settings = () => {
           <Stack gap={64}>
             <div className='flex justify-between'>
               <Stack gap={4}>
-                <p className='text-gray-900 font-semibold text-3xl'>Settings</p>
-                <p className='text-gray-600 font-normal'>
-                  Customize and configure your nabiq profile.
-                </p>
+                <p className='text-gray-900 font-semibold text-3xl'>{t('settings.title')}</p>
+                <p className='text-gray-600 font-normal'>{t('settings.description')}</p>
               </Stack>
               <Group>
                 <Button onClick={() => navigate('/')} variant='secondary'>
-                  Cancel
+                  {t('settings.cancel')}
                 </Button>
-                <Button type='submit'>Save changes</Button>
+                <Button type='submit'>{t('settings.save_changes')}</Button>
               </Group>
             </div>
           </Stack>
@@ -79,27 +79,27 @@ const Settings = () => {
             <Grid>
               <Grid.Col span={6}>
                 <p className='font-open text-md font-semibold leading-6 text-left text-gray-700'>
-                  Personal details
+                  {t('settings.personal_details')}
                 </p>
-                <p className='text-gray-600 font-normal'>Your personal and security settings.</p>
+                <p className='text-gray-600 font-normal'>{t('settings.security_settings')}</p>
               </Grid.Col>
               <Grid.Col span={6}>
                 <div className='space-y-5'>
                   <TextInput
-                    label='Name'
+                    label={t('settings.name')}
                     placeholder='Enter your name'
                     {...form.getInputProps('userName')}
                   />
 
                   <TextInput
-                    label='Email'
+                    label={t('settings.email')}
                     placeholder='Enter your email'
                     {...form.getInputProps('userEmail')}
                   />
 
                   <div className='flex flex-col gap-1.5'>
-                    <p className='font-open text-sm font-medium leading-5 text-left text-gray-700'>
-                      Avatar
+                    <p className='font-open text-sm font-medium leading-5 text-auto text-gray-700'>
+                      {t('settings.avatar')}
                     </p>
 
                     <div className='flex gap-5'>
@@ -122,15 +122,15 @@ const Settings = () => {
             <Grid>
               <Grid.Col span={6}>
                 <p className='font-open text-md font-semibold leading-6 text-left text-gray-700'>
-                  Business details
+                  {t('settings.business_details')}
                 </p>
-                <p className='text-gray-600 font-normal'>Your business details.</p>
+                <p className='text-gray-600 font-normal'>{t('settings.business_desc')}</p>
               </Grid.Col>
               <Grid.Col span={6}>
                 <div className='space-y-5'>
                   <TextInput
                     required
-                    label='Business name'
+                    label={t('settings.business_name')}
                     placeholder='Enter business name'
                     {...form.getInputProps('businessName')}
                   />
@@ -152,7 +152,7 @@ const Settings = () => {
                       { value: 'technology', label: 'Technology' },
                       { value: 'travel_hospitality', label: 'Travel & Hospitality' },
                     ]}
-                    label='Industry'
+                    label={t('settings.industry')}
                     placeholder='Select industry'
                     {...form.getInputProps('industry')}
                   />
@@ -165,7 +165,7 @@ const Settings = () => {
                       { value: '201-500', label: '201-500 employees' },
                       { value: '500+', label: '500+ employees' },
                     ]}
-                    label='Business size'
+                    label={t('settings.business_size')}
                     placeholder='Select business size'
                     {...form.getInputProps('businessSize')}
                   />
