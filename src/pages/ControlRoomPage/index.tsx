@@ -1,6 +1,7 @@
 import { FiHelpCircle, FiPlus, FiSliders01 } from '@nabiq-icons';
 import { Button, ContentLoader, Group, Stack, useGetColors } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { CampaignGoalModal } from 'src/components/modules/campaigns';
 import { ConfigCard, LearnMoreControlRoomModal } from 'src/components/modules/control-room';
@@ -9,6 +10,7 @@ import { resetCampaign } from 'src/store/campaign/campaignSlice.ts';
 import { useGetConfigsQuery } from 'src/store/controlRoom/controlRoom.api.ts';
 
 const ControlRoom = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { gray700 } = useGetColors();
   const [showLearnMoreControlRoomModal, setLearnMoreControlRoomModal] = useState<boolean>(false);
@@ -32,9 +34,11 @@ const ControlRoom = () => {
       <Stack gap={configs.length === 0 ? 160 : 64}>
         <Group justify='space-between'>
           <Stack gap={4}>
-            <p className='text-gray-900 text-3xl font-semibold'>Control room</p>
+            <p className='text-gray-900 text-3xl font-semibold'>
+              {t('navigation.nav_control_room')}
+            </p>
             <p className='text-gray-600 text-base font-normal'>
-              View launched campaigns and give feedback to content samples.
+              {t('control_room.campaigns_feedback')}
             </p>
           </Stack>
           <Button
@@ -42,7 +46,7 @@ const ControlRoom = () => {
             variant='link'
             leadingIcon={<FiHelpCircle size={20} />}
           >
-            What is control room?
+            {t('control_room.what_is')}
           </Button>
         </Group>
 
