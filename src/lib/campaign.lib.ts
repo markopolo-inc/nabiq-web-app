@@ -17,7 +17,7 @@ export const goals = [
     icon: FiZapFast,
     color: '#EE46BC',
     type: 'acquisition',
-    isDisabled: true,
+    isDisabled: false,
     badgeLabel: 'Coming soon',
   },
   {
