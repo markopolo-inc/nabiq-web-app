@@ -2,10 +2,12 @@ import { FiChevronRight } from '@nabiq-icons';
 import { Button, Image, useGetColors } from '@nabiq-ui';
 import ControlRoomAvatar from 'assets/control-room/control-room-modal-avatar.svg';
 import React, { SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ModalBody: React.FC<{
   setOpened: React.Dispatch<SetStateAction<boolean>>;
 }> = ({ setOpened }) => {
+  const { t } = useTranslation();
   const { primary600 } = useGetColors();
   return (
     <div className='p-8 flex flex-col gap-6'>
@@ -14,10 +16,9 @@ const ModalBody: React.FC<{
       </div>
 
       <div className='flex flex-col gap-1'>
-        <p className='text-2xl font-semibold text-gray-900'>What is control room?</p>
+        <p className='text-2xl font-semibold text-gray-900'>{t('control_room.what_is')}</p>
         <p className='text-base font-normal leading-6 text-gray-600'>
-          Keep track of all your campaigns and their status in one place. Provide feedback to
-          content samples and get even better personalized content.
+          {t('control_room.description')}
         </p>
       </div>
 
