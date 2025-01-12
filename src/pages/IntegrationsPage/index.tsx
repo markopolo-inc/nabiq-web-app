@@ -8,10 +8,12 @@ import {
 import { AnimatePresence } from 'framer-motion';
 import { HeaderTitle } from 'layouts';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { TOptionTab } from 'src/interfaces/modules/integrations';
 import { appCategories } from 'src/lib/integration';
 
 const IntegrationsPage = () => {
+  const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState<TOptionTab>('data-sources');
 
   return (
@@ -20,10 +22,10 @@ const IntegrationsPage = () => {
       <AnimatePresence>
         <div className='flex flex-col gap-16'>
           <div className='flex flex-col'>
-            <p className='text-gray-900 font-semibold text-4xl'>Integrations</p>
-            <p className='text-gray-600 font-normal text-lg'>
-              Integrate email, sms and push notification apps to build custom marketing funnels.
+            <p className='text-gray-900 font-semibold text-4xl'>
+              {t('navigation.nav_integrations')}
             </p>
+            <p className='text-gray-600 font-normal text-lg'>{t('integrations.general_desc')} </p>
           </div>
           <div className='flex flex-col gap-6'>
             <div className='flex-nowrap overflow-x-auto pb-3'>

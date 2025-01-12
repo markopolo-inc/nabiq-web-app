@@ -44,7 +44,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'Klaviyo',
-    headline: 'Enhance your e-commerce marketing with data-driven email automation.',
+    headline: 'integrations.klaviyo_desc',
     gateway: 'klaviyo',
     learnMoreLink: '',
     isKeyIntegration: false,
@@ -54,7 +54,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'Hubspot',
-    headline: 'Increase sales with personalized email campaigns designed for online retailers.',
+    headline: 'integrations.hubspot_descc',
     gateway: 'hubspot',
     learnMoreLink: '',
     isKeyIntegration: false,
@@ -64,7 +64,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'Postmark',
-    headline: 'Increase sales with personalized email campaigns designed for online retailers.',
+    headline: 'integrations.postmark_desc',
     gateway: 'postmark',
     learnMoreLink: '',
     isKeyIntegration: true,
@@ -73,8 +73,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'OneSignal',
-    headline:
-      'Engage your audience effectively with push notifications, emails, SMS, and in-app messages all from one platform.',
+    headline: 'integrations.onesignal_desc',
     gateway: 'onesignal',
     learnMoreLink: '',
     isKeyIntegration: true,
@@ -83,8 +82,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'SendGrid',
-    headline:
-      'Enhance your email deliverability for both transactional and marketing emails with a trusted cloud-based service.',
+    headline: 'integrations.sendgrid_desc',
     gateway: 'sendgrid',
     learnMoreLink: '',
     isKeyIntegration: true,
@@ -93,7 +91,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'Resend',
-    headline: 'Simplify your transactional email delivery with reliable and scalable API service.',
+    headline: 'integrations.resend_desc',
     gateway: 'resend',
     learnMoreLink: '',
     isKeyIntegration: true,
@@ -102,8 +100,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'MailGun',
-    headline:
-      'Automate your email workflows effortlessly with robust APIs for sending, receiving, and tracking emails.',
+    headline: 'integrations.mailgun_desc',
     gateway: 'mailgun',
     learnMoreLink: '',
     isKeyIntegration: true,
@@ -112,8 +109,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'Click Send',
-    headline:
-      'Streamline your business communications with versatile platform for SMS, email, and direct mail.',
+    headline: 'integrations.clicksend_desc',
     gateway: 'clicksend',
     learnMoreLink: '',
     isKeyIntegration: true,
@@ -122,8 +118,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'sms',
     name: 'Twilio',
-    headline:
-      'Enhance customer engagement with flexible and powerful communication APIs for messaging, voice, and video.',
+    headline: 'integrations.twilio_desc',
     gateway: 'twilio',
     learnMoreLink: '',
     isKeyIntegration: true,
@@ -132,8 +127,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'sms',
     name: 'Sinch',
-    headline:
-      'Boost your customer interactions with scalable and reliable messaging, voice, and video communication solutions.',
+    headline: 'integrations.sinch_desc',
     gateway: 'sinch',
     learnMoreLink: '',
     isKeyIntegration: true,
@@ -142,8 +136,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'sms',
     name: 'Flow Route',
-    headline:
-      'Simplify your communication infrastructure with robust SIP trunking and messaging solutions.',
+    headline: 'integrations.flowroute_desc',
     gateway: 'flowroute',
     learnMoreLink: '',
     isKeyIntegration: true,
@@ -152,8 +145,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'sms',
     name: 'Click Send',
-    headline:
-      'Streamline your business communications with versatile platform for SMS, email, and direct mail.',
+    headline: 'integrations.clicksend_desc',
     gateway: 'clicksend',
     learnMoreLink: '',
     isKeyIntegration: true,
