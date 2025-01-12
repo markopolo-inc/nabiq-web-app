@@ -2,6 +2,7 @@ import { FiDatabase01, FiShoppingBag02 } from '@nabiq-icons';
 import { Accordion, Button, GatewayLogo, Stack } from '@nabiq-ui';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { ShopifyConnectModal } from 'src/components/modules/integrations/integration-tabs/data-sources/modals/ShopifyConnectModal';
 import { useAppSelector } from 'src/store/hooks';
 import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
 import { getOAuthUrl } from 'src/utils/auth';
@@ -124,6 +125,7 @@ export const LeadsDatabase = () => {
       >
         {t('onboarding.continue')}
       </Button>
+      <ShopifyConnectModal />
     </Stack>
   );
 };
