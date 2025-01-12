@@ -10,8 +10,8 @@ import { goals, mediums } from 'src/lib/campaign.lib';
 import { useAppSelector, useCampaignDispatch } from 'src/store/hooks';
 
 const title = {
-  goal: 'New campaign',
-  medium: 'Select medium of campaign',
+  goal: 'create_campaign.new_campaign',
+  medium: 'create_campaign.medium_selection',
 };
 
 const subtitle = {
