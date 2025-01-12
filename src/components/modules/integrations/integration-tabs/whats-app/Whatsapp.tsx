@@ -1,6 +1,7 @@
 import { FiZap } from '@nabiq-icons';
 import { Badge, Button, ConfirmationModal, GatewayLogo } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import { WhatsAppConnectModal } from 'src/components/modules/integrations/integration-tabs/whats-app';
 import { useAppSelector } from 'src/store/hooks';
@@ -8,6 +9,7 @@ import { useDisconnectPlatformMutation } from 'src/store/integrations/social-int
 import { getOAuthUrl } from 'src/utils/auth';
 
 export const Whatsapp = () => {
+  const { t } = useTranslation();
   const { resourceId: brandId, socialIntegrations } = useAppSelector((state) => state.brand);
   const [isShowModal, setIsShowModal] = useState(false);
   const [disconnectPlatform, { isLoading: isDisconnecting }] = useDisconnectPlatformMutation();
@@ -24,8 +26,7 @@ export const Whatsapp = () => {
     <div className='gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
       <IntegrationCard
         title='Whatsapp'
-        description='Connect with customers instantly and securely using WhatsApp’s messaging platform for
-              seamless, real-time communication.'
+        description={t('integrations.whatsapp_desc')}
         icon={<GatewayLogo app='whatsapp' width={28} />}
         isConnected={!!socialIntegrations?.socialTokens?.facebook}
         badge={

@@ -54,7 +54,7 @@ export const appOptions: IGateway[] = [
   {
     category: 'email',
     name: 'Hubspot',
-    headline: 'integrations.hubspot_descc',
+    headline: 'integrations.hubspot_desc',
     gateway: 'hubspot',
     learnMoreLink: '',
     isKeyIntegration: false,

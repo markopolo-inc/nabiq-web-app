@@ -14,8 +14,7 @@ export const Marktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
   const { primary500 } = useGetColors();
   return (
     <IntegrationCard
-      description='Track first party customer data with cutting-edge precision. Capture and track all your
-          marketing data.'
+      description={t('integrations.datasource.tracking_desc')}
       icon={<FiCommand size={32} color={primary500} fill={primary500} />}
       title='Marktag'
       isConnected={!!markTag}
