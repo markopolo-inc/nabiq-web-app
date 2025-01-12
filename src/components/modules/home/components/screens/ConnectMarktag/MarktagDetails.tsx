@@ -1,6 +1,7 @@
 import { Command, FiPlatformIcon } from '@nabiq-icons';
 import { Badge, Button, Group, Select, Stack, Text } from '@nabiq-ui';
 import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { getPlatformConnectionStatus } from 'src/lib/platform.lib';
 import { useUpdateSettingMutation } from 'src/store/company/companyApi';
@@ -15,6 +16,7 @@ import {
 type MarktagsType = MarktagsResponseInterface;
 
 export const MarktagDetails = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
   const company = useAppSelector((state) => state.company);
@@ -98,7 +100,9 @@ export const MarktagDetails = () => {
   return (
     <div className='px-8 pt-20 lg:col-span-8 lg:px-20 lg:pt-48 pb-20 lg:pb-32'>
       <div className='mx-auto lg:max-w-md lg:mx-0 space-y-5'>
-        <Text className='display-sm font-medium text-gray-900 mb-7'>Your business details</Text>
+        <Text className='display-sm font-medium text-gray-900 mb-7'>
+          {t('settings.business_desc')}
+        </Text>
 
         <div className='flex gap-3'>
           <div className='py-1 px-3 border border-primary-200 rounded-2xl'>
