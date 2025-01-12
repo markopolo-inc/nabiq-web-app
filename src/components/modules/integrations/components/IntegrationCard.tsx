@@ -1,5 +1,6 @@
 import { Badge, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 export const IntegrationCard = ({
   icon,
@@ -16,6 +17,7 @@ export const IntegrationCard = ({
   children?: React.ReactNode;
   badge?: React.ReactNode;
 }) => {
+  const { t } = useTranslation();
   return (
     <motion.div
       whileHover={{
@@ -33,7 +35,7 @@ export const IntegrationCard = ({
           {isConnected && <Badge color='success'>Connected</Badge>}
         </div>
 
-        <p className='mt-6 text-gray-600 font-normal text-sm'>{description}</p>
+        <p className='mt-6 text-gray-600 font-normal text-sm'>{t(description)}</p>
         <div className='mt-5'>{badge && badge}</div>
       </Stack>
       {children}

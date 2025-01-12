@@ -2,6 +2,7 @@ import { useForm } from '@mantine/form';
 import { Button, GatewayLogo, TextInput } from '@nabiq-ui';
 import type { IGateway } from 'interfaces/brand.interface';
 import React, { SetStateAction, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { gatewayFields } from 'src/lib/integration';
 import { useAppSelector } from 'src/store/hooks';
 import { hasEmptyField } from 'src/utils/object.utils';
@@ -14,6 +15,7 @@ const ModalBody: React.FC<{
   setOpened: React.Dispatch<SetStateAction<boolean>>;
   gateway: IGateway;
 }> = ({ setOpened, gateway }) => {
+  const { t } = useTranslation();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [integrate, { isLoading }] = useIntegrateGatewayMutation();
   const [responseMsg, setResponseMsg] = useState('');
@@ -108,7 +110,7 @@ const ModalBody: React.FC<{
               onClick={() => setOpened(false)}
               disabled={isLoading}
             >
-              Cancel
+              {t('settings.settings')}
             </Button>
           </div>
         </form>
