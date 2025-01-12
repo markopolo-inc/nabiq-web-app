@@ -1,6 +1,7 @@
 import { FiZap } from '@nabiq-icons';
 import { Badge, Button, ConfirmationModal, GatewayLogo, Group } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import { DataSourceModal } from 'src/components/modules/integrations/integration-tabs/data-sources';
 import { useAppSelector } from 'src/store/hooks';
@@ -8,6 +9,7 @@ import { useDisconnectDataSourceMutation } from 'src/store/integrations/data-sou
 import { getOAuthUrl } from 'src/utils/auth';
 
 export const Hubspot = () => {
+  const { t } = useTranslation();
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
 
   const [showShopifyDisconnectModal, setShowShopifyDisconnectModal] = useState<boolean>(false);
@@ -29,8 +31,7 @@ export const Hubspot = () => {
         key='hubspot'
         title='Hubspot'
         isConnected={!!datasourceIntegrations?.connectedAccounts?.hubspot}
-        description='Empower your business growth through comprehensive CRM platform that integrates
-      marketing, sales, and customer service tools.'
+        description={t('integrations.datasource.crm_desc')}
         icon={<GatewayLogo app='hubspot' width={32} />}
         badge={
           datasourceIntegrations?.connectedAccounts?.hubspot?.domain && (

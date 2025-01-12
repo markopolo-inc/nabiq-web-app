@@ -3,6 +3,7 @@ import { Badge, Button, ConfirmationModal, GatewayLogo, Group } from '@nabiq-ui'
 import { IntegrationCard } from 'components/modules/integrations/components';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ShopifyConnectModal } from 'src/components/modules/integrations/integration-tabs/data-sources/modals/ShopifyConnectModal';
 import { TDataSourcePlatform } from 'src/interfaces/brand.interface';
@@ -12,6 +13,7 @@ import { useDisconnectDataSourceMutation } from 'src/store/integrations/data-sou
 import { getOAuthUrl } from 'src/utils/auth';
 
 export const ECommerce = () => {
+  const { t } = useTranslation();
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -45,7 +47,7 @@ export const ECommerce = () => {
     <>
       <IntegrationCard
         title='Shopify'
-        description='Boost your business with Shopify—your all-in-one eCommerce platform for effortless store management, marketing, and sales growth.'
+        description={t('integrations.datasource.shopify_desc')}
         icon={<GatewayLogo app='shopify' width={32} />}
         isConnected={isShopifyConnected}
         badge={
@@ -93,7 +95,7 @@ export const ECommerce = () => {
 
       <IntegrationCard
         title='Salla'
-        description='Expand your reach with Salla—your comprehensive eCommerce solution for seamless store management, effective marketing, and increased sales.'
+        description={t('integrations.datasource.salla_desc')}
         icon={<GatewayLogo app='salla' width={32} />}
         isConnected={isSallaConnected}
         badge={
