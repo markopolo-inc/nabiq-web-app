@@ -1,6 +1,7 @@
 import { FiChevronRight, FiDot } from '@nabiq-icons';
 import { Badge, Button, Group, Progress, Stack } from '@nabiq-ui';
 import moment from 'moment-timezone';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { IControlRoomConfig } from 'src/interfaces/controlRoom.interface';
 import { formatTimeAgo } from 'src/utils/date.uitils';
@@ -18,6 +19,7 @@ export const ConfigCard = ({
   config: IControlRoomConfig;
   isPublished?: boolean;
 }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <Stack gap={8}>
@@ -43,8 +45,8 @@ export const ConfigCard = ({
 
               <p className='text-gray-600 font-normal text-sm'>
                 {config?.status === 'processing'
-                  ? 'Our AI is building you the perfect cohorts and contents within.'
-                  : 'View cohorts and give feedback on sample funnel contents.'}
+                  ? t('control_room.ai_building')
+                  : t('control_room.cohorts_feedback')}
               </p>
             </Stack>
           )}
