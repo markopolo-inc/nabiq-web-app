@@ -1,2 +1,2 @@
-export * from './payment-method/PaymentMethodCard';
-export * from './details/BillingDetailsCard';
+export * from './payment-method';
+export * from './details';

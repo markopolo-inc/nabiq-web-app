@@ -1,32 +1,22 @@
-import { FiCreditCardPlus } from '@nabiq-icons';
 import { Button, Group, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import { usePaymentDetails } from 'src/hooks/modules/billing';
 
-import { AddPaymentMethodModal } from './modals';
+import { AddPaymentMethodModal, TrialDetails } from './components';
 
 export const PaymentMethodCard = () => {
   const [showModal, setShowModal] = useState(false);
+  const { paymentPlan } = usePaymentDetails();
   return (
     <Stack className='border border-gray-200 shadow-xs p-4 rounded-xl'>
-      <Group justify='space-between'>
-        <Group gap={16}>
-          <Group
-            className='rounded-lg border border-gray-200 shadow-xs p-[10px]'
-            align='center'
-            justify='center'
-          >
-            <FiCreditCardPlus size={20} color='#364152' />
-          </Group>
-
-          <p className='text-sm text-gray-700 font-semibold'>
-            There are 12 days left on your free trial.
-          </p>
+      {paymentPlan === 'trial' && (
+        <Group justify='space-between'>
+          <TrialDetails />
+          <Button variant='secondary-black' onClick={() => setShowModal(true)}>
+            Add payment method
+          </Button>
         </Group>
-
-        <Button variant='secondary-black' onClick={() => setShowModal(true)}>
-          Add payment method
-        </Button>
-      </Group>
+      )}
       <AddPaymentMethodModal showModal={showModal} setShowModal={setShowModal} />
     </Stack>
   );

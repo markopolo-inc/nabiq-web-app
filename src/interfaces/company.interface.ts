@@ -1,3 +1,5 @@
+import { IPayment } from 'src/interfaces/modules/billing';
+
 export interface CompanyInterface {
   id?: string;
   _id?: string;
@@ -13,6 +15,7 @@ export interface CompanyInterface {
     businessSize: string;
     profilePhoto: string;
   };
+  payment?: IPayment;
 }
 
 export interface CompanyCreationInterface {

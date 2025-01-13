@@ -24,3 +24,9 @@ export function formatTimeAgo(dateTimeString) {
     return `${date.format('hh:mm A')}, ${date.format('DD MMM, YYYY')}`;
   }
 }
+
+export function getDateDifference(from: string, to: string) {
+  const fromDate = moment(from);
+  const toDate = moment(to);
+  return fromDate.diff(toDate, 'days');
+}
