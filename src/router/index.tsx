@@ -56,7 +56,7 @@ const Router = () => {
             }
           />
           <Route
-            path='/plans'
+            path='/billing/plans'
             element={
               <Suspense fallback={<ContentLoader />}>
                 <PlansPage />

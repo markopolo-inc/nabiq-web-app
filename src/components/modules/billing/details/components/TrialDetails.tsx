@@ -1,8 +1,10 @@
 import { Badge, Button, Group, Stack } from '@nabiq-ui';
+import { useNavigate } from 'react-router-dom';
 import { usePaymentDetails } from 'src/hooks/modules/billing';
 
 export const TrialDetails = () => {
   const { trialDaysLeft, paymentPlan } = usePaymentDetails();
+  const navigate = useNavigate();
 
   return (
     <Stack gap={24}>
@@ -26,7 +28,7 @@ export const TrialDetails = () => {
       <p className='text-lg font-semibold text-gray-900'>
         $0 <span className='text-gray-600 text-sm font-normal'>per month</span>
       </p>
-      <Button>Explore plans</Button>
+      <Button onClick={() => navigate('/billing/plans')}>Explore plans</Button>
     </Stack>
   );
 };
