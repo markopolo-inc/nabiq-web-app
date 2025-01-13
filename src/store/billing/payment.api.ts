@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast';
 import { IResponseInterface } from 'src/interfaces/response.interface';
 
 import { apiSlice } from '../api/apiSlice';
@@ -21,12 +22,24 @@ export interface IPaymentMethod {
 
 export const paymentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    addPaymentMethod: builder.mutation<IPaymentMethod, IResponseInterface>({
+    addPaymentMethod: builder.mutation<IResponseInterface, IPaymentMethod>({
       query: (args) => ({
         url: `/payment/method`,
         method: 'POST',
         body: { ...args },
       }),
+      invalidatesTags: ['Company'],
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          return res;
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to add payment method!', {
+            id: 'add-payment-method-error',
+          });
+          return err;
+        }
+      },
     }),
   }),
 });

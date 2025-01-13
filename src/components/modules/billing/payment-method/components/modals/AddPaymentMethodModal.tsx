@@ -63,7 +63,10 @@ const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
   });
 
   const handleFormSubmit = async (values) => {
-    addPaymentMethod({ ...values });
+    const res = await addPaymentMethod({ ...values }).unwrap();
+    if (res.success) {
+      setOpened(false);
+    }
   };
 
   return (
@@ -79,75 +82,92 @@ const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
         </Stack>
       </Stack>
       <Stack gap={16}>
-        <TextInput
-          label='Card number'
-          placeholder='XXXX XXXX XXXX XXXX'
-          key={form.key('card_number')}
-          {...form.getInputProps('card_number')}
-        />
-        <div className='grid grid-cols-2 gap-4'>
+        {/* Card Details */}
+        <Stack gap={16}>
+          <p className='text-sm font-medium text-gray-700'>Card Details</p>
           <TextInput
-            label='First name'
-            placeholder='First name'
-            key={form.key('first_name')}
-            {...form.getInputProps('first_name')}
+            label='Card number'
+            placeholder='XXXX XXXX XXXX XXXX'
+            key={form.key('card_number')}
+            {...form.getInputProps('card_number')}
           />
-          <TextInput
-            label='Last name'
-            placeholder='Last name'
-            key={form.key('last_name')}
-            {...form.getInputProps('last_name')}
-          />
-        </div>
-        <div>
-          <p className='text-sm font-medium text-gray-700 mb-1'>Expiry date</p>
           <div className='grid grid-cols-2 gap-4'>
-            <TextInput placeholder='MM' key={form.key('month')} {...form.getInputProps('month')} />
-            <TextInput placeholder='YYYY' key={form.key('year')} {...form.getInputProps('year')} />
+            <TextInput
+              label='First name'
+              placeholder='First name'
+              key={form.key('first_name')}
+              {...form.getInputProps('first_name')}
+            />
+            <TextInput
+              label='Last name'
+              placeholder='Last name'
+              key={form.key('last_name')}
+              {...form.getInputProps('last_name')}
+            />
           </div>
-        </div>
-        <TextInput
-          label='Security code'
-          placeholder='CVV'
-          key={form.key('cvv')}
-          {...form.getInputProps('cvv')}
-        />
-        <TextInput
-          label='Street address'
-          placeholder='Enter street address'
-          key={form.key('street')}
-          {...form.getInputProps('street')}
-        />
-        <div className='grid grid-cols-2 gap-4'>
+          <div>
+            <p className='text-sm font-medium text-gray-700 mb-1'>Expiry date</p>
+            <div className='grid grid-cols-2 gap-4'>
+              <TextInput
+                placeholder='MM'
+                key={form.key('month')}
+                {...form.getInputProps('month')}
+              />
+              <TextInput
+                placeholder='YYYY'
+                key={form.key('year')}
+                {...form.getInputProps('year')}
+              />
+            </div>
+          </div>
           <TextInput
-            label='City'
-            placeholder='Enter city'
-            key={form.key('city')}
-            {...form.getInputProps('city')}
+            label='Security code'
+            placeholder='CVV'
+            key={form.key('cvv')}
+            {...form.getInputProps('cvv')}
           />
+        </Stack>
+
+        {/* Billing Address */}
+        <Stack gap={16}>
+          <p className='text-sm font-medium text-gray-700'>Billing Address</p>
           <TextInput
-            label='State'
-            placeholder='Enter state'
-            key={form.key('state')}
-            {...form.getInputProps('state')}
+            label='Street address'
+            placeholder='Enter street address'
+            key={form.key('street')}
+            {...form.getInputProps('street')}
           />
-        </div>
-        <div className='grid grid-cols-2 gap-4'>
-          <TextInput
-            label='ZIP code'
-            placeholder='Enter ZIP code'
-            key={form.key('zip_code')}
-            {...form.getInputProps('zip_code')}
-          />
-          <TextInput
-            label='Country'
-            placeholder='Enter country'
-            key={form.key('country')}
-            {...form.getInputProps('country')}
-          />
-        </div>
+          <div className='grid grid-cols-2 gap-4'>
+            <TextInput
+              label='City'
+              placeholder='Enter city'
+              key={form.key('city')}
+              {...form.getInputProps('city')}
+            />
+            <TextInput
+              label='State'
+              placeholder='Enter state'
+              key={form.key('state')}
+              {...form.getInputProps('state')}
+            />
+          </div>
+          <div className='grid grid-cols-2 gap-4'>
+            <TextInput
+              label='ZIP code'
+              placeholder='Enter ZIP code'
+              key={form.key('zip_code')}
+              {...form.getInputProps('zip_code')}
+            />
+            <TextInput
+              label='Country'
+              placeholder='Enter country'
+              key={form.key('country')}
+              {...form.getInputProps('country')}
+            />
+          </div>
+        </Stack>
       </Stack>
-      <Stack gap={12}>
+      <Stack gap={12} className='grid grid-cols-2 gap-4'>
         <Button fullWidth type='submit'>
           Confirm
         </Button>
