@@ -1,14 +1,14 @@
 import { Stack } from '@nabiq-ui';
-import { useAppSelector } from 'src/store/hooks';
+import { usePaymentDetails } from 'src/hooks/modules/billing';
 
 import { TrialDetails } from './components';
 
 export const BillingDetailsCard = () => {
-  const { payment } = useAppSelector((state) => state.company);
+  const { paymentPlan } = usePaymentDetails();
 
   return (
     <Stack className='border border-gray-200 shadow-xs p-6 rounded-xl' gap={24}>
-      {payment?.plan === 'trial' && <TrialDetails />}
+      {paymentPlan === 'trial' && <TrialDetails />}
     </Stack>
   );
 };

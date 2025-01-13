@@ -30,6 +30,7 @@ const SettingsPage = delayedLazy(() => import('src/pages/SettingsPage'));
 const ConnectMarktag = delayedLazy(() => import('src/pages/ConnectMarktagPage'));
 const AcquisitionChatbot = delayedLazy(() => import('pages/AcquisitionChatbotPage'));
 const BillingPage = delayedLazy(() => import('pages/BillingPage'));
+const PlansPage = delayedLazy(() => import('pages/PlansPage'));
 
 const Router = () => {
   return (
@@ -44,11 +45,21 @@ const Router = () => {
         <Route element={<PrivateLayout />}>
           {/* Onboarding Route */}
           <Route path='/onboarding' element={<OnboardingPage />} />
+
+          {/* Pages without navigation */}
           <Route
             path='/connect-marktag'
             element={
               <Suspense fallback={<ContentLoader />}>
                 <ConnectMarktag />
+              </Suspense>
+            }
+          />
+          <Route
+            path='/plans'
+            element={
+              <Suspense fallback={<ContentLoader />}>
+                <PlansPage />
               </Suspense>
             }
           />

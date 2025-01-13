@@ -1,9 +1,76 @@
+import { useForm } from '@mantine/form';
 import { FiCreditCardPlus } from '@nabiq-icons';
 import { Button, Modal, Stack, TextInput } from '@nabiq-ui';
+import { IPaymentMethod, useAddPaymentMethodMutation } from 'src/store/billing/payment.api';
+import { useAppSelector } from 'src/store/hooks';
 
 const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
+  const [addPaymentMethod] = useAddPaymentMethodMutation();
+  const { resourceId: companyId } = useAppSelector((state) => state.company);
+  const { resourceId: userId, userEmail: email } = useAppSelector((state) => state.user);
+
+  const form = useForm<IPaymentMethod>({
+    initialValues: {
+      card_number: '',
+      month: '',
+      year: '',
+      cvv: '',
+      first_name: '',
+      last_name: '',
+      companyId,
+      userId,
+      email,
+      street: '',
+      city: '',
+      state: '',
+      zip_code: '',
+      country: '',
+    },
+    validateInputOnChange: true,
+    validate: {
+      card_number: (value) => {
+        if (value?.length === 0) return 'Card number is required';
+        if (!/^\d{13,19}$/.test(value)) return 'Card number must be between 13 and 19 digits';
+        return null;
+      },
+      month: (value) => {
+        if (value?.length === 0) return 'Month is required';
+        if (!/^(0[1-9]|1[0-2])$/.test(value)) return 'Month must be between 01-12';
+        return null;
+      },
+      year: (value) => {
+        if (value?.length === 0) return 'Year is required';
+        if (!/^20\d{2}$/.test(value)) return 'Year must be in 20XX format';
+        return null;
+      },
+      cvv: (value) => {
+        if (value?.length === 0) return 'CVV is required';
+        if (!/^\d{3}$/.test(value)) return 'CVV must be exactly 3 digits';
+        return null;
+      },
+      first_name: (value) => (value?.length === 0 ? 'First name is required' : null),
+      last_name: (value) => (value?.length === 0 ? 'Last name is required' : null),
+      street: (value) => (value?.length === 0 ? 'Street address is required' : null),
+      city: (value) => (value?.length === 0 ? 'City is required' : null),
+      state: (value) => (value?.length === 0 ? 'State is required' : null),
+      zip_code: (value) => {
+        if (value?.length === 0) return 'ZIP code is required';
+        if (!/^\d{5}(-\d{4})?$/.test(value)) return 'Invalid ZIP code format';
+        return null;
+      },
+      country: (value) => (value?.length === 0 ? 'Country is required' : null),
+    },
+  });
+
+  const handleFormSubmit = async (values) => {
+    addPaymentMethod({ ...values });
+  };
+
   return (
-    <Stack gap={32} className='p-6 pt-8'>
+    <form
+      className='p-6 pt-8 space-y-8'
+      onSubmit={form.onSubmit((values) => handleFormSubmit(values))}
+    >
       <Stack gap={16}>
         <FiCreditCardPlus size={32} color='#697586' />
         <Stack gap={4}>
@@ -12,18 +79,83 @@ const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
         </Stack>
       </Stack>
       <Stack gap={16}>
-        <TextInput label='Card number' placeholder='XXXX XXXX XXXX XXXX' />
-        <TextInput label='Name on card' placeholder='Cardholder name' />
-        <TextInput label='Expiry date' placeholder='MM/YY' />
-        <TextInput label='Security code' placeholder='CVV' />
+        <TextInput
+          label='Card number'
+          placeholder='XXXX XXXX XXXX XXXX'
+          key={form.key('card_number')}
+          {...form.getInputProps('card_number')}
+        />
+        <div className='grid grid-cols-2 gap-4'>
+          <TextInput
+            label='First name'
+            placeholder='First name'
+            key={form.key('first_name')}
+            {...form.getInputProps('first_name')}
+          />
+          <TextInput
+            label='Last name'
+            placeholder='Last name'
+            key={form.key('last_name')}
+            {...form.getInputProps('last_name')}
+          />
+        </div>
+        <div>
+          <p className='text-sm font-medium text-gray-700 mb-1'>Expiry date</p>
+          <div className='grid grid-cols-2 gap-4'>
+            <TextInput placeholder='MM' key={form.key('month')} {...form.getInputProps('month')} />
+            <TextInput placeholder='YYYY' key={form.key('year')} {...form.getInputProps('year')} />
+          </div>
+        </div>
+        <TextInput
+          label='Security code'
+          placeholder='CVV'
+          key={form.key('cvv')}
+          {...form.getInputProps('cvv')}
+        />
+        <TextInput
+          label='Street address'
+          placeholder='Enter street address'
+          key={form.key('street')}
+          {...form.getInputProps('street')}
+        />
+        <div className='grid grid-cols-2 gap-4'>
+          <TextInput
+            label='City'
+            placeholder='Enter city'
+            key={form.key('city')}
+            {...form.getInputProps('city')}
+          />
+          <TextInput
+            label='State'
+            placeholder='Enter state'
+            key={form.key('state')}
+            {...form.getInputProps('state')}
+          />
+        </div>
+        <div className='grid grid-cols-2 gap-4'>
+          <TextInput
+            label='ZIP code'
+            placeholder='Enter ZIP code'
+            key={form.key('zip_code')}
+            {...form.getInputProps('zip_code')}
+          />
+          <TextInput
+            label='Country'
+            placeholder='Enter country'
+            key={form.key('country')}
+            {...form.getInputProps('country')}
+          />
+        </div>
       </Stack>
       <Stack gap={12}>
-        <Button fullWidth>Confirm</Button>
+        <Button fullWidth type='submit'>
+          Confirm
+        </Button>
         <Button variant='secondary' fullWidth onClick={() => setOpened(false)}>
           Cancel
         </Button>
       </Stack>
-    </Stack>
+    </form>
   );
 };
 
@@ -35,7 +167,7 @@ export const AddPaymentMethodModal = ({ showModal, setShowModal }) => {
       withNoHeader
       toggleFromOutside={showModal}
       setToggleFromOutside={setShowModal}
-      size='sm'
+      size='md'
     >
       {() => <></>}
     </Modal>

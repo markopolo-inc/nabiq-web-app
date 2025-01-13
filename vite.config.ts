@@ -17,6 +17,11 @@ export default defineConfig({
   ],
   build: {
     outDir: 'build',
+    // manifest: true,
+    // rollupOptions: {
+    //   // overwrite default .html entry
+    //   input: './src/main.tsx',
+    // },
   },
   server: {
     // https: {
