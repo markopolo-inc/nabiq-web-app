@@ -2,11 +2,11 @@ import { Button, Group, Stack } from '@nabiq-ui';
 import { useState } from 'react';
 import { usePaymentDetails } from 'src/hooks/modules/billing';
 
-import { AddPaymentMethodModal, TrialDetails } from './components';
+import { AddPaymentMethodModal, CardDetails, TrialDetails } from './components';
 
 export const PaymentMethodCard = () => {
   const [showModal, setShowModal] = useState(false);
-  const { paymentPlan } = usePaymentDetails();
+  const { paymentPlan, hasPaymentMethod } = usePaymentDetails();
   return (
     <Stack className='border border-gray-200 shadow-xs p-4 rounded-xl'>
       {paymentPlan === 'trial' && (
@@ -17,7 +17,10 @@ export const PaymentMethodCard = () => {
           </Button>
         </Group>
       )}
-      <AddPaymentMethodModal showModal={showModal} setShowModal={setShowModal} />
+      {!hasPaymentMethod && (
+        <AddPaymentMethodModal showModal={showModal} setShowModal={setShowModal} />
+      )}
+      {hasPaymentMethod && <CardDetails setShowModal={setShowModal} />}
     </Stack>
   );
 };

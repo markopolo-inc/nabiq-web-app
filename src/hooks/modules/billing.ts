@@ -10,5 +10,6 @@ export const usePaymentDetails = () => {
   return {
     trialDaysLeft,
     paymentPlan: payment.plan,
+    hasPaymentMethod: !!payment.paymentMethodId,
   };
 };
