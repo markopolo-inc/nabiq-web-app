@@ -32,6 +32,7 @@ export const CampaignTiming = () => {
             value={new Date(campaign?.startDate)}
             onChange={(value) => handleChange('startDate', moment(value).format('YYYY-MM-DD'))}
             placeholder='Select date'
+            minDate={new Date()}
           />
 
           <Select
@@ -103,9 +104,11 @@ export const CampaignTiming = () => {
         dropdownType='modal'
         label={t('create_campaign_form.end_date')}
         allowDeselect
+        defaultValue={new Date(campaign?.startDate)}
         value={new Date(campaign?.endDate)}
         onChange={(value) => handleChange('endDate', moment(value).format('YYYY-MM-DD'))}
         placeholder='Select date'
+        minDate={new Date(campaign?.startDate ? campaign?.startDate : new Date())}
       />
     </Stack>
   );
