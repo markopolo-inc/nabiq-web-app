@@ -1,5 +1,6 @@
 import { Button, GatewayLogo, Modal, TextInput } from '@nabiq-ui';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
 import { useConnectShopifyMutation } from 'src/store/integrations/e-commerce.api';
@@ -13,6 +14,7 @@ const ModalBody = ({
   shopifyShop: string;
   installationId: string;
 }) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [connectShopify, { isLoading }] = useConnectShopifyMutation();
 
@@ -30,11 +32,13 @@ const ModalBody = ({
   return (
     <div className='p-8 space-y-4'>
       <GatewayLogo app='shopify' width={32} />
-      <div className='text-xl font-semibold text-gray-900'>Enter your Shopify store email</div>
+      <div className='text-xl font-semibold text-gray-900'>
+        {t('integrations.enter_shopify_email')}
+      </div>
       <TextInput value={shopifyShop} disabled />
       <TextInput
-        label='Email'
-        placeholder='Enter your Shopify store email'
+        label={t('onboarding.email')}
+        placeholder={t('integrations.enter_shopify_email')}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -46,7 +50,7 @@ const ModalBody = ({
           onClick={handleConnect}
           loading={isLoading}
         >
-          Done
+          {t('create_campaign.done')}
         </Button>
       </div>
     </div>

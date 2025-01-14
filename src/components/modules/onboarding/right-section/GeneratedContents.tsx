@@ -8,11 +8,13 @@ import {
 import { Button, Group, Stack } from '@nabiq-ui';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from 'src/store/hooks';
 import { setIsMarkedContent, setSampleContents } from 'src/store/onboarding/onboardingSlice';
 
 export const GeneratedContents = () => {
+  const { t } = useTranslation();
   const { sampleContents, isMarkedContent } = useAppSelector((state) => state.onboarding);
   const dispatch = useDispatch();
 
@@ -33,9 +35,9 @@ export const GeneratedContents = () => {
     >
       <FiGreenCheckCircle color='#079455' size={32} />
       <Stack gap={8} justify='center' align='center'>
-        <p className='text-2xl font-semibold text-gray-950'>Thank you for your feedback!</p>
+        <p className='text-2xl font-semibold text-gray-950'>{t('onboarding.feedback_thanks')}</p>
         <p className='text-base font-normal text-gray-600'>
-          Help us understand your business better.
+          {t('onboarding.business_understanding')}
         </p>
       </Stack>
     </motion.div>
@@ -94,7 +96,7 @@ export const GeneratedContents = () => {
                       handleMarkContent(index);
                     }}
                   >
-                    I like this
+                    {t('onboarding.like_feedback')}
                   </Button>
                   <Button variant='secondary-black' onClick={() => handleMarkContent(index)}>
                     <FiThumbsDown size={17} />

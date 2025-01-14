@@ -59,7 +59,9 @@ export const LeadsDatabase = () => {
                   );
                 }}
               >
-                {isShopifyConnected ? 'Shopify connected' : 'Connect Shopify'}
+                {isShopifyConnected
+                  ? t('onboarding.shopify_connected')
+                  : t('onboarding.connect_shopify')}
               </Button>
               <Button
                 fullWidth
@@ -73,17 +75,14 @@ export const LeadsDatabase = () => {
                   });
                 }}
               >
-                {isSallaConnected ? 'Salla connected' : 'Connect Salla'}
+                {isSallaConnected ? t('onboarding.salla_connected') : t('onboarding.connect_salla')}
               </Button>
             </div>
           </Stack>
         </Accordion>
         <Accordion title='Sync from CRM' icon={<FiDatabase01 size={20} color='#697586' />}>
           <Stack gap={24}>
-            <p className='text-sm text-gray-600'>
-              Participants and timestamps will be visible to your team. Subject lines and contents
-              won't be visible unless shared.
-            </p>
+            <p className='text-sm text-gray-600'>{t('onboarding.participants_visibility')}</p>
             <div className='grid grid-cols-2 gap-2 p-1'>
               <Button
                 fullWidth
@@ -96,7 +95,9 @@ export const LeadsDatabase = () => {
                   });
                 }}
               >
-                {isHubspotConnected ? 'Hubspot connected' : 'Connect Hubspot'}
+                {isHubspotConnected
+                  ? t('onboarding.hubspot_connected')
+                  : t('onboarding.connect_hubspot')}
               </Button>
               <Button
                 fullWidth
@@ -110,7 +111,9 @@ export const LeadsDatabase = () => {
                   });
                 }}
               >
-                {isSalesforceConnected ? 'Salesforce connected' : 'Connect Salesforce'}
+                {isSalesforceConnected
+                  ? t('onboarding.salesforce_connected')
+                  : t('onboarding.connect_salesforce')}
               </Button>
             </div>
           </Stack>
