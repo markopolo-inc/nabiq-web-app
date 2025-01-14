@@ -1,5 +1,6 @@
 // import { FiCrossX, FiPlatformIcon } from '@nabiq-icons';
 import { Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { ICampaign } from 'src/interfaces/modules/campaign';
@@ -10,6 +11,7 @@ export const CampaignDetailsForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { campaign } = useAppSelector((state) => state);
+  const [linkError, setLinkError] = useState('');
 
   const handleChange = (field: keyof ICampaign, value) => {
     dispatch(
@@ -19,10 +21,30 @@ export const CampaignDetailsForm = () => {
     );
   };
 
+  const isValidUrl = (url: string) => {
+    try {
+      const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+      if (!urlRegex.test(url)) throw new Error('Invalid URL');
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const handleLinkChange = (value: string) => {
+    if (value && !isValidUrl(value)) {
+      setLinkError('Please enter a valid URL');
+    } else {
+      setLinkError('');
+    }
+    handleChange('link', value);
+  };
+
   return (
     <>
       <Stack gap={32} w={960} className='mx-auto'>
         <TextInput
+          required
           label={t('campaigns.name')}
           placeholder='Enter campaign name'
           value={campaign?.name}
@@ -31,6 +53,7 @@ export const CampaignDetailsForm = () => {
 
         <Stack gap={6}>
           <TextArea
+            required
             label={t('create_campaign_form.details_title')}
             placeholder='Enter campaign details'
             rows={4}
@@ -44,18 +67,19 @@ export const CampaignDetailsForm = () => {
 
         <Stack gap={6}>
           <TextInput
+            required
             label={t('create_campaign_form.campaign_link')}
             placeholder='www.mywebsite/offer2'
             value={campaign?.link}
-            onChange={(e) => handleChange('link', e.currentTarget.value)}
+            onChange={(e) => handleLinkChange(e.currentTarget.value)}
+            error={linkError}
+            description={!linkError ? t('create_campaign_form.link_desc') : ''}
           />
-          <Text size='14px' className='text-gray-600'>
-            {t('create_campaign_form.link_desc')}{' '}
-          </Text>
         </Stack>
 
         <Stack gap={6}>
           <Select
+            required
             label={t('create_campaign_form.content_tone')}
             placeholder='Pick value'
             defaultValue={t('create_campaign_form.content_tone')}
