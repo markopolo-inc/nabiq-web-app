@@ -4,13 +4,12 @@ import {
   MonthlyActiveUser,
   PricingPlans,
   Topbar,
-} from 'src/components/modules/billing/plans';
+} from 'src/components/modules/billing';
 
 const PlansPage = () => {
   return (
     <div className='flex flex-col mt-[56px] p-[64px] gap-8 bg-gray-50'>
       <Topbar />
-
       <PricingPlans />
       <Stack gap={32} maw={864}>
         <MonthlyActiveUser />
