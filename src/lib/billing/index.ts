@@ -100,3 +100,39 @@ export const features: Feature[] = [
     enterprise: false,
   },
 ];
+
+export interface PricingPlan {
+  id: string;
+  name: string;
+  description: string;
+  price: string | 'Custom';
+  userLimit: string;
+  features: {
+    whatsapp: string;
+  };
+}
+
+export const pricingPlans: PricingPlan[] = [
+  {
+    id: 'pro',
+    name: 'Pro',
+    description:
+      "Subjects, participants and timestamps will be visible to your team. Content won't be visible unless shared.",
+    price: '$311.67',
+    userLimit: '<10K monthly active users',
+    features: {
+      whatsapp: 'WhatsApp add-on',
+    },
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    description:
+      "Subjects, participants and timestamps will be visible to your team. Content won't be visible unless shared.",
+    price: 'Custom',
+    userLimit: 'up to unlimited active users',
+    features: {
+      whatsapp: 'Unlimited WhatsApp usage',
+    },
+  },
+];
