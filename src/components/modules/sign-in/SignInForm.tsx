@@ -2,6 +2,7 @@ import { useForm } from '@mantine/form';
 import { Button, Image, PasswordInput, Stack, TextInput } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GoogleLogo from 'src/assets/onboarding/google.svg';
 import {
@@ -12,6 +13,7 @@ import {
 import { trimAllValuesOfObject } from 'src/utils/string.utils';
 
 export const SignInForm = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [login] = useLoginMutation();
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +42,7 @@ export const SignInForm = () => {
       password: '',
     },
     validate: {
-      email: (value) => (value.length === 0 ? 'Email is required' : null),
+      email: (value) => (value.length === 0 ? t('settings.email_required') : null),
       password: (value) => (value.length === 0 ? 'Password is required' : null),
     },
   });
@@ -72,11 +74,11 @@ export const SignInForm = () => {
         >
           <Stack gap={32}>
             <Stack gap={8}>
-              <p className='text-gray-950 text-2xl font-semibold'>Sign in</p>
+              <p className='text-gray-950 text-2xl font-semibold'>{t('onboarding.signin')}</p>
               <p className='text-gray-700 text-sm font-normal'>
                 Don't have an account?{' '}
                 <Link className='text-primary-600' to='/signup'>
-                  Sign up
+                  {t('onboarding.signup')}
                 </Link>
               </p>
             </Stack>
@@ -110,12 +112,12 @@ export const SignInForm = () => {
             className='space-y-5'
           >
             <TextInput
-              label='Email'
+              label={t('onboarding.email')}
               placeholder='e.g johndoe@gmail.com'
               {...form.getInputProps('email')}
             />
             <PasswordInput
-              label='Password'
+              label={t('onboarding.password')}
               placeholder='Enter your password'
               {...form.getInputProps('password')}
             />
@@ -135,7 +137,7 @@ export const SignInForm = () => {
             className='flex flex-col gap-8 mt-[64px]'
           >
             <Button type='submit' fullWidth loading={isLoading}>
-              Sign in
+              {t('onboarding.signin')}
             </Button>
           </motion.div>
         </form>
