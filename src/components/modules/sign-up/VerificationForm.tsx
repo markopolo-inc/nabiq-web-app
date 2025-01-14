@@ -57,7 +57,7 @@ export const VerificationForm = () => {
             onChange={handleOTPChange}
             length={6}
             placeholder='0'
-            label='Verification code'
+            label={t('verification.verification_code')}
           />
         </Stack>
       </motion.div>
@@ -87,7 +87,7 @@ export const VerificationForm = () => {
               variant='link'
               className='px-0'
             >
-              Resend
+              {t('verification.resend')}
             </Button>
           </div>
         </Stack>
