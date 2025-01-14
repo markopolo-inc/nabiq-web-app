@@ -5,11 +5,11 @@ import {
   createApi,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
-import toast from 'react-hot-toast';
+//import toast from 'react-hot-toast';
 import { REHYDRATE } from 'redux-persist';
 import { getAuthToken } from 'src/utils/auth';
 
-import { logout } from '../auth/authSlice';
+//  import { logout } from '../auth/authSlice';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_BASE_API_URL,
@@ -27,13 +27,13 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   extraOptions,
 ) => {
   const result = await baseQuery(args, api, extraOptions);
+  // console.log({ result });
   if (result.error && result.error.status === 401) {
-    const id = toast.loading('Logging out...');
-
-    setTimeout(() => {
-      api.dispatch(logout());
-      toast.dismiss(id);
-    }, 1000);
+    // const id = toast.loading('Logging out...');
+    // setTimeout(() => {
+    //   api.dispatch(logout());
+    //   toast.dismiss(id);
+    // }, 1000);
   }
   return result;
 };
