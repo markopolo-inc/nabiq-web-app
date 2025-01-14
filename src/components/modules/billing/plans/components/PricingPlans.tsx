@@ -1,12 +1,18 @@
 import { FiPlus } from '@nabiq-icons';
 import { Button, Checkbox, GatewayLogo, Group, Stack } from '@nabiq-ui';
+import { useState } from 'react';
 import { pricingPlans } from 'src/lib/billing';
 
-import { PriceSummary } from './pricing-plans';
+import { PriceSummary, WhatsAppAddOnModal } from './pricing-plans';
 
 export const PricingPlans = () => {
+  const [showWhatsAppAddOnModal, setShowWhatsAppAddOnModal] = useState(false);
   return (
     <Stack>
+      <WhatsAppAddOnModal
+        showModal={showWhatsAppAddOnModal}
+        setShowModal={setShowWhatsAppAddOnModal}
+      />
       <div className='grid grid-cols-3 gap-6'>
         {pricingPlans.map((plan) => (
           <Stack
@@ -43,6 +49,7 @@ export const PricingPlans = () => {
                 variant='secondary'
                 trailingIcon={<GatewayLogo app='whatsapp' width={20} />}
                 leadingIcon={<FiPlus size={20} />}
+                onClick={() => setShowWhatsAppAddOnModal(true)}
               >
                 WhatsApp add-on
               </Button>
