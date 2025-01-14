@@ -108,8 +108,11 @@ export interface PricingPlan {
   price: string | 'Custom';
   userLimit: string;
   features: {
-    whatsapp: string;
+    whatsapp: {
+      unlimited: boolean;
+    };
   };
+  range: string;
 }
 
 export const pricingPlans: PricingPlan[] = [
@@ -120,8 +123,11 @@ export const pricingPlans: PricingPlan[] = [
       "Subjects, participants and timestamps will be visible to your team. Content won't be visible unless shared.",
     price: '$311.67',
     userLimit: '<10K monthly active users',
+    range: 'per month',
     features: {
-      whatsapp: 'WhatsApp add-on',
+      whatsapp: {
+        unlimited: false,
+      },
     },
   },
   {
@@ -131,8 +137,11 @@ export const pricingPlans: PricingPlan[] = [
       "Subjects, participants and timestamps will be visible to your team. Content won't be visible unless shared.",
     price: 'Custom',
     userLimit: 'up to unlimited active users',
+    range: '',
     features: {
-      whatsapp: 'Unlimited WhatsApp usage',
+      whatsapp: {
+        unlimited: true,
+      },
     },
   },
 ];
