@@ -68,6 +68,8 @@ export interface ICampaignAdsItem {
 export type TProductSource = 'shopify' | 'salla';
 
 export interface IShopifyProduct {
+  value?: string;
+  label?: string;
   url: string;
   title: string;
   images: string[];
@@ -76,6 +78,8 @@ export interface IShopifyProduct {
 }
 
 export interface ISallaProduct {
+  value?: string;
+  label?: string;
   productId: string;
   title: string;
   description: string;
