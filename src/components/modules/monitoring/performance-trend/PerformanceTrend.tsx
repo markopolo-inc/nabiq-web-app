@@ -21,7 +21,8 @@ interface TransformedData {
 
 export const PerformanceTrend: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
-}> = ({ timeRange }) => {
+  campaignIds: string[];
+}> = ({ timeRange, campaignIds }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [valueType, setValueType] = useState<'number' | 'percentage'>('number');
@@ -31,12 +32,15 @@ export const PerformanceTrend: FC<{
     data: performanceData,
     isLoading,
     error,
-  } = useGetMonitoringPerformanceTrendQuery({
-    timeRange,
-    valueType,
-    metrics: [],
-    configId: null,
-  });
+  } = useGetMonitoringPerformanceTrendQuery(
+    {
+      timeRange,
+      valueType,
+      metrics: [],
+      campaignIds,
+    },
+    { skip: campaignIds.length === 0 },
+  );
 
   const transformData = (data: any): TransformedData[] => {
     if (!data?.names || !data?.details) {

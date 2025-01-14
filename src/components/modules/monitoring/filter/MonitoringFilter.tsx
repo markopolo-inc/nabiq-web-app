@@ -4,11 +4,15 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type timeRangeType = 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
+type CampaignOptionType = { label: string; value: string };
 
 export const MonitoringFilter: FC<{
+  campaignId: string;
+  campaignListOptions: CampaignOptionType[];
+  setCampaign: (value: CampaignOptionType['label']) => void;
   timeRange: timeRangeType;
   setTimeRange: (value: timeRangeType) => void;
-}> = ({ timeRange, setTimeRange }) => {
+}> = ({ timeRange, setTimeRange, setCampaign, campaignListOptions, campaignId }) => {
   const { t } = useTranslation();
   const { gray600 } = useGetColors();
 
@@ -34,7 +38,7 @@ export const MonitoringFilter: FC<{
           },
         ]}
       />
-      <Select value={t('monitoring.all_campaigns')} data={[t('monitoring.all_campaigns')]} />
+      <Select value={campaignId} onChange={setCampaign} data={campaignListOptions} />
     </Group>
   );
 };
