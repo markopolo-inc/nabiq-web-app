@@ -3,6 +3,7 @@ import { Group, OptionTabs, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import {
   CartesianGrid,
   Line,
@@ -23,6 +24,7 @@ export const PerformanceTrend: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
   isOnboardingDone: boolean;
 }> = ({ timeRange, isOnboardingDone }) => {
+  const { campaignId } = useParams<{ campaignId: string }>();
   const { t } = useTranslation();
   const [valueType, setValueType] = useState<'number' | 'percentage'>('number');
   const [graphData, setGraphData] = useState<TransformedData[]>([]);
@@ -31,12 +33,17 @@ export const PerformanceTrend: FC<{
     data: performanceData,
     isLoading,
     error,
-  } = useGetMonitoringPerformanceTrendQuery({
-    timeRange,
-    valueType,
-    metrics: [],
-    configId: null,
-  });
+  } = useGetMonitoringPerformanceTrendQuery(
+    {
+      timeRange,
+      valueType,
+      metrics: [],
+      campaignIds: [campaignId],
+    },
+    {
+      skip: !campaignId,
+    },
+  );
 
   const transformData = (data: any): TransformedData[] => {
     if (!data?.names || !data?.details) {

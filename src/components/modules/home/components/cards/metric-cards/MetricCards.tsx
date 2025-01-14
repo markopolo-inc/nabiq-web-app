@@ -3,6 +3,7 @@ import { OptionTabs, Skeleton, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { MetricsCard } from 'src/components/modules/home/';
 import type { TOptionTab } from 'src/interfaces/modules/integrations.ts';
 import { IMetricData, IMetrics } from 'src/interfaces/monitoring.interface.ts';
@@ -29,13 +30,19 @@ export const MetricCards: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
   isOnboardingDone: boolean;
 }> = ({ timeRange, isOnboardingDone }) => {
+  const { campaignId } = useParams<{ campaignId: string }>();
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState<TOptionTab>('email');
 
-  const { data, isLoading } = useGetMetricCardsQuery({
-    timeRange,
-    configIds: [],
-  });
+  const { data, isLoading } = useGetMetricCardsQuery(
+    {
+      timeRange,
+      campaignIds: [campaignId],
+    },
+    {
+      skip: !campaignId,
+    },
+  );
 
   const metricData: IMetricData = data?.data || {};
 
