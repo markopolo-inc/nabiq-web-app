@@ -35,6 +35,7 @@ const MenuItem = ({ item }) => {
 
 export const Sidebar = () => {
   const { payment } = useAppSelector((state) => state.company);
+  const { t } = useTranslation();
   return (
     <div className='h-screen pl-6 pr-8 py-8'>
       <div className='h-full flex flex-col justify-between overflow-y-auto'>
@@ -47,7 +48,7 @@ export const Sidebar = () => {
               key={idx}
             >
               {category?.title && (
-                <p className='text-sm font-medium text-gray-500 px-2 py-2'>{category?.title}</p>
+                <p className='text-sm font-medium text-gray-500 px-2 py-2'>{t(category?.title)}</p>
               )}
               <div className='flex-1'>
                 <ul className='flex flex-col gap-2'>
@@ -60,6 +61,7 @@ export const Sidebar = () => {
         <div className='flex flex-col gap-8'>
           <ul className='flex flex-col gap-2'>
             <p className='text-sm font-medium text-gray-500 px-2'>Others</p>
+            <p className='text-sm font-medium text-gray-500 px-2'>{t('home_page.account')}</p>
             {lowerPartOptions?.map((item, idx) => <MenuItem key={idx} item={item} />)}
           </ul>
           {payment && <PlanCard />}

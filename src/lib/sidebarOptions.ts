@@ -21,7 +21,7 @@ export const sideBarCategories = [
     ],
   },
   {
-    title: 'Engage',
+    title: 'home_page.engage',
     options: [
       {
         title: 'navigation.nav_campaigns',
@@ -44,7 +44,7 @@ export const sideBarCategories = [
     ],
   },
   {
-    title: 'Explore',
+    title: 'home_page.explore',
     options: [
       {
         title: 'navigation.nav_integrations',
