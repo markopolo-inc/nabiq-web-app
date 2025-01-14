@@ -38,7 +38,7 @@ export const GuideNabiq = () => {
 
   const handleSkipStep = async () => {
     const res = await updateOnboardingStatus({ companyId, isOnboardingComplete: true }).unwrap();
-    const id = toast.loading('Taking you to the dashboard...', {
+    const id = toast.loading(`${t('onboarding.taking_to_dashboard')}...`, {
       id: 'skip-step',
     });
     if (res.success) {
@@ -93,7 +93,7 @@ export const GuideNabiq = () => {
         loading={isGeneratingSampleContent || isSampleContentLoading}
         trailingIcon={<FiStar06 size={18} />}
       >
-        Generate sample content
+        {t('onboarding.generate_sample_content')}
       </Button>
       <Group>
         <Button

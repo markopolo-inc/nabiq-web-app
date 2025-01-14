@@ -26,10 +26,12 @@ export const CompanyCreation = () => {
       website: '',
     },
     validate: {
-      businessName: (value) => (value?.length === 0 ? 'Business name is required' : null),
-      industry: (value) => (value?.length === 0 ? 'Industry is required' : null),
-      businessSize: (value) => (value?.length === 0 ? 'Business size is required' : null),
-      website: (value) => (value?.length === 0 ? 'Website is required' : null),
+      businessName: (value) =>
+        value?.length === 0 ? t('onboarding.business_name_required') : null,
+      industry: (value) => (value?.length === 0 ? t('onboarding.industry_required') : null),
+      businessSize: (value) =>
+        value?.length === 0 ? t('onboarding.business_size_required') : null,
+      website: (value) => (value?.length === 0 ? t('onboarding.website_required') : null),
     },
   });
 
@@ -88,31 +90,31 @@ export const CompanyCreation = () => {
               placeholder='Select your industry'
               required
               data={[
-                { value: 'apparel', label: 'Apparel' },
-                { value: 'auto', label: 'Auto' },
-                { value: 'b2b', label: 'B2B' },
-                { value: 'beauty', label: 'Beauty' },
-                { value: 'consumer_service', label: 'Consumer Service' },
-                { value: 'finance_insurance', label: 'Finance Insurance' },
-                { value: 'fitness', label: 'Fitness' },
-                { value: 'home_improvement', label: 'Home Improvement' },
-                { value: 'healthcare', label: 'Healthcare' },
-                { value: 'industrial_services', label: 'Industrial Services' },
-                { value: 'legal', label: 'Legal' },
-                { value: 'retail', label: 'Retail' },
-                { value: 'technology', label: 'Technology' },
-                { value: 'travel_hospitality', label: 'Travel & Hospitality' },
+                { value: 'apparel', label: t('settings.apparel') },
+                { value: 'auto', label: t('settings.auto') },
+                { value: 'b2b', label: t('settings.b2b') },
+                { value: 'beauty', label: t('settings.beauty') },
+                { value: 'consumer_service', label: t('settings.consumer_service') },
+                { value: 'finance_insurance', label: t('settings.finance_insurance') },
+                { value: 'fitness', label: t('settings.fitness') },
+                { value: 'home_improvement', label: t('settings.home_improvement') },
+                { value: 'healthcare', label: t('settings.healthcare') },
+                { value: 'industrial_services', label: t('settings.industrial_services') },
+                { value: 'legal', label: t('settings.legal') },
+                { value: 'retail', label: t('settings.retail') },
+                { value: 'technology', label: t('settings.technology') },
+                { value: 'travel_hospitality', label: t('settings.travel_hospitality') },
               ]}
               disabled={!!companyId}
               {...form.getInputProps('industry')}
             />
             <Select
               data={[
-                { value: '1-10', label: '1-10 employees' },
-                { value: '11-50', label: '11-50 employees' },
-                { value: '51-200', label: '51-200 employees' },
-                { value: '201-500', label: '201-500 employees' },
-                { value: '500+', label: '500+ employees' },
+                { value: '1-10', label: t('employees_count', { size: '1-10' }) },
+                { value: '11-50', label: t('employees_count', { size: '11-50' }) },
+                { value: '51-200', label: t('employees_count', { size: '51-200' }) },
+                { value: '201-500', label: t('employees_count', { size: '201-500' }) },
+                { value: '500+', label: t('employees_count', { size: '500+' }) },
               ]}
               required
               label={t('onboarding_intro.business_size')}
@@ -125,11 +127,7 @@ export const CompanyCreation = () => {
               label={t('onboarding_intro.website')}
               placeholder='Paste your website URL here'
               disabled={!!companyId}
-              description={
-                form.errors.website
-                  ? null
-                  : `We'll use this to understand your business and create campaigns for you.`
-              }
+              description={form.errors.website ? null : t('onboarding_intro.usage_desc')}
               {...form.getInputProps('website')}
             />
           </div>

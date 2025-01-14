@@ -39,10 +39,10 @@ export const SampleContents = () => {
       <Stack gap={32}>
         <StepCount step={4} />
         <Stack gap={8}>
-          <p className='text-2xl font-semibold text-gray-950'>Review sample contents</p>
-          <p className='font-normal text-gray-500'>
-            We’ve a content sequence ready for you to review.
+          <p className='text-2xl font-semibold text-gray-950'>
+            {t('onboarding.review_sample_contents')}
           </p>
+          <p className='font-normal text-gray-500'>{t('onboarding.content_sequence_ready')}</p>
         </Stack>
       </Stack>
       <Stack className='min-w-[520px]'>
@@ -56,7 +56,7 @@ export const SampleContents = () => {
       </Stack>
       {isMarkedContent ? (
         <Button fullWidth onClick={() => handleSkipStep()}>
-          Go to dashboard
+          {t('onboarding.go_to_dashboard')}
         </Button>
       ) : (
         <Group>
