@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 import { apiSlice } from '../api/apiSlice';
 
 interface IPerformanceTrendParams {
@@ -89,21 +91,23 @@ const monitoringApi = apiSlice.injectEndpoints({
         params: { userId, campaignId },
       }),
     }),
-    getMetricCards: builder.query<any, { timeRange: string; configIds: string[] }>({
-      query: ({ timeRange, configIds }) => ({
-        url: `cohort/metrics`,
+    getMetricCards: builder.query<any, { timeRange: string; campaignIds: string[] }>({
+      query: ({ timeRange, campaignIds }) => ({
+        url: 'cohort/metrics?' + queryString.stringify({ campaignIds }, { arrayFormat: 'bracket' }),
         method: 'GET',
-        params: { timeRange, configIds },
+        params: { timeRange },
       }),
     }),
     getMonitoringPerformanceTrend: builder.query<
       any,
-      { configId: string; timeRange: string; metrics: string[]; valueType: string }
+      { timeRange: string; campaignIds: string[]; metrics: string[]; valueType: string }
     >({
-      query: ({ configId, timeRange, metrics, valueType }) => ({
-        url: `cohort/performance/trend`,
+      query: ({ timeRange, campaignIds, metrics, valueType }) => ({
+        url:
+          'cohort/performance/trend?' +
+          queryString.stringify({ campaignIds, metrics }, { arrayFormat: 'bracket' }),
         method: 'GET',
-        params: { configId, timeRange, metrics, valueType },
+        params: { timeRange, valueType },
       }),
     }),
   }),

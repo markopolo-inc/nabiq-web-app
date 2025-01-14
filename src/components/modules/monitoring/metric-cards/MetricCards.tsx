@@ -6,11 +6,15 @@ import { useGetMetricCardsQuery } from 'src/store/monitoring/monitoring.api';
 
 export const MetricCards: FC<{
   timeRange: 'last_year' | 'last_month' | 'last_week' | 'last_3_day';
-}> = ({ timeRange }) => {
-  const { data, isLoading } = useGetMetricCardsQuery({
-    timeRange,
-    configIds: [],
-  });
+  campaignIds: string[];
+}> = ({ timeRange, campaignIds }) => {
+  const { data, isLoading } = useGetMetricCardsQuery(
+    {
+      timeRange,
+      campaignIds,
+    },
+    { skip: campaignIds.length === 0 },
+  );
 
   const metricData: IMetricData = data?.data || {};
 
