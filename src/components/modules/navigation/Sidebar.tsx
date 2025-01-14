@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { lowerPartOptions, sideBarCategories } from 'src/lib/sidebarOptions';
 
+import { PlanCard } from './PlanCard';
+
 const MenuItem = ({ item }) => {
   const { pathname } = useLocation();
   const isSelected = item?.menuRegex?.test(pathname);
@@ -52,11 +54,12 @@ export const Sidebar = () => {
             </motion.div>
           ))}
         </div>
-        <div>
+        <div className='flex flex-col gap-8'>
           <ul className='flex flex-col gap-2'>
-            <p className='text-sm font-medium text-gray-500 px-2'>Account</p>
+            <p className='text-sm font-medium text-gray-500 px-2'>Others</p>
             {lowerPartOptions?.map((item, idx) => <MenuItem key={idx} item={item} />)}
           </ul>
+          <PlanCard />
         </div>
       </div>
     </div>

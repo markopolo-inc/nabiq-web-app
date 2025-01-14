@@ -5,7 +5,7 @@ import { IPaymentMethod, useAddPaymentMethodMutation } from 'src/store/billing/p
 import { useAppSelector } from 'src/store/hooks';
 
 const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
-  const [addPaymentMethod] = useAddPaymentMethodMutation();
+  const [addPaymentMethod, { isLoading }] = useAddPaymentMethodMutation();
   const { resourceId: companyId } = useAppSelector((state) => state.company);
   const { resourceId: userId, userEmail: email } = useAppSelector((state) => state.user);
 
@@ -168,10 +168,10 @@ const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
         </Stack>
       </Stack>
       <Stack gap={12} className='grid grid-cols-2 gap-4'>
-        <Button fullWidth type='submit'>
+        <Button fullWidth type='submit' loading={isLoading}>
           Confirm
         </Button>
-        <Button variant='secondary' fullWidth onClick={() => setOpened(false)}>
+        <Button variant='secondary' fullWidth disabled={isLoading} onClick={() => setOpened(false)}>
           Cancel
         </Button>
       </Stack>
