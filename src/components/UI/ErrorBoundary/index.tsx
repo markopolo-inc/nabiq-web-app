@@ -26,10 +26,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.logErrorToAPI(error, errorInfo);
   }
 
-  async logErrorToAPI(error: Error, errorInfo: ErrorInfo): Promise<void> {
+  async logErrorToAPI(_error: Error, _errorInfo: ErrorInfo): Promise<void> {
     try {
-      console.log({ error });
-      console.log({ errorInfo });
+      // console.log({ error });
+      // console.log({ errorInfo });
       // @TODO: APIs call example
       // await axios.post("/api/log-error", {
       //     message: error.message,
@@ -38,14 +38,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       //     timestamp: new Date().toISOString(),
       // });
     } catch (logError) {
-      console.error('Failed to log error to API:', logError);
+      // console.error('Failed to log error to API:', logError);
     }
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div className='text-center py-10'>
+        <div className='text-center h-screen flex flex-col justify-center items-center'>
           <h1 className='text-2xl font-bold text-red-600'>Something went wrong.</h1>
           <p className='text-gray-600'>Please try again later.</p>
         </div>

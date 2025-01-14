@@ -29,9 +29,10 @@ const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
     if (!waData) return [];
     const numbers = [];
     if (waData?.data?.length > 0) {
-      waData?.data?.forEach((account) => {
+      (waData?.data || [])?.forEach((account) => {
+        const phoneNumbers = account?.phone_numbers?.data || [];
         numbers.push(
-          ...account?.phone_numbers?.data?.map((num) => ({
+          ...phoneNumbers?.map((num) => ({
             ...num,
             whatsAppBusinessAccountId: account?.id,
           })),
