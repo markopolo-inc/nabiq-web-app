@@ -1,9 +1,11 @@
 import { ArrowNarrowLeft } from '@nabiq-icons';
 import { Button, Image, Text } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import logo from 'src/assets/logo/nabiq-dark-logo.png';
 
 export const MarktagSidebar = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -18,11 +20,10 @@ export const MarktagSidebar = () => {
         <Image className='w-36' src={logo} alt='' />
 
         <div className='mt-16 flex flex-col gap-3'>
-          <Text className='display-xl font-medium text-white'>Select Marktag</Text>
-          <Text className='text-xl text-gray-300'>
-            Track first party customer data with cutting-edge precision. Capture and track all your
-            marketing data.
+          <Text className='display-xl font-medium text-white'>
+            {t('connect_marktag.select_marktag')}
           </Text>
+          <Text className='text-xl text-gray-300'>{t('connect_marktag.track_customer_data')}</Text>
         </div>
       </div>
 
@@ -32,7 +33,7 @@ export const MarktagSidebar = () => {
           leadingIcon={<ArrowNarrowLeft size={20} color='#4B5565' />}
           onClick={() => navigate(-1)}
         >
-          Go back
+          {t('connect_marktag.go_back')}
         </Button>
       </div>
     </div>

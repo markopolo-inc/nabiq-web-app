@@ -120,8 +120,8 @@ export const MarktagDetails = () => {
 
         <Select
           className='mb-0'
-          label='Brand'
-          placeholder='Select brand'
+          label={t('connect_marktag.brand')}
+          placeholder={t('connect_marktag.select_brand')}
           value={resourceId}
           onChange={(brandItem) => {
             setMarktagsResourceId('');
@@ -140,9 +140,9 @@ export const MarktagDetails = () => {
 
         <Select
           className='mb-0'
-          label='Marktag'
-          placeholder='Select ‘Marktag’ container'
-          defaultValue='Select ‘Marktag’ container'
+          label={t('connect_marktag.marktag')}
+          placeholder={t('connect_marktag.select_marktag_container')}
+          defaultValue={t('connect_marktag.select_marktag_container')}
           value={marktagsResourceId}
           onChange={setMarktagsResourceId}
           data={marktagsListOptions}
@@ -153,7 +153,7 @@ export const MarktagDetails = () => {
         {!isLoadingBrandList && brandsListOptions?.length === 0 && (
           <Group gap={6}>
             <Text size='14px' weight={500} className='text-red-500 leading-5'>
-              No brands found!
+              {t('connect_marktag.no_brands_found')}
             </Text>
             <Button
               size='sm'
@@ -165,7 +165,7 @@ export const MarktagDetails = () => {
                 );
               }}
             >
-              Create a brand
+              {t('connect_marktag.create_brand')}
             </Button>
           </Group>
         )}
@@ -175,7 +175,7 @@ export const MarktagDetails = () => {
           platforms?.filter((item) => item.isConnected).length > 0 && (
             <Stack gap={12}>
               <Text size='14px' className='text-gray-600 leading-5'>
-                Below ad accounts will get connected automatically.
+                {t('connect_marktag.auto_connect_ad_accounts')}
               </Text>
               <div className='flex gap-4'>
                 {platforms
@@ -204,7 +204,7 @@ export const MarktagDetails = () => {
           disabled={!resourceId || !marktagsResourceId}
           onClick={handleConnect}
         >
-          Connect
+          {t('home_page.common_connect')}
         </Button>
       </div>
     </div>
