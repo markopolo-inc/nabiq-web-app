@@ -104,6 +104,7 @@ export { default as FiPuzzlePiece02 } from './PuzzlePiece02';
 export { default as FiPen } from './Pen';
 export { default as FiPlatformIcon } from './PlatformIcon';
 export { default as FiPhone01 } from './Phone01';
+export { PaymentCardIcons as FiPaymentCardIcons } from './PaymentCardIcons';
 
 // R
 

@@ -12,4 +12,10 @@ export interface IPayment {
   whatsapp: {
     availableMessages: number;
   };
+  card: {
+    email: string;
+    brand: string;
+    last4Digits: string;
+    expiry: string;
+  };
 }

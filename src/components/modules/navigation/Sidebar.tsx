@@ -4,12 +4,14 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { lowerPartOptions, sideBarCategories } from 'src/lib/sidebarOptions';
+import { useAppSelector } from 'src/store/hooks';
 
 import { PlanCard } from './PlanCard';
 
 const MenuItem = ({ item }) => {
   const { pathname } = useLocation();
   const isSelected = item?.menuRegex?.test(pathname);
+
   const { gray950, primary600 } = useGetColors();
   const { t } = useTranslation();
 
@@ -32,6 +34,7 @@ const MenuItem = ({ item }) => {
 };
 
 export const Sidebar = () => {
+  const { payment } = useAppSelector((state) => state.company);
   return (
     <div className='h-screen pl-6 pr-8 py-8'>
       <div className='h-full flex flex-col justify-between overflow-y-auto'>
@@ -59,7 +62,7 @@ export const Sidebar = () => {
             <p className='text-sm font-medium text-gray-500 px-2'>Others</p>
             {lowerPartOptions?.map((item, idx) => <MenuItem key={idx} item={item} />)}
           </ul>
-          <PlanCard />
+          {payment && <PlanCard />}
         </div>
       </div>
     </div>

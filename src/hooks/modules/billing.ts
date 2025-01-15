@@ -9,7 +9,7 @@ export const usePaymentDetails = () => {
 
   return {
     trialDaysLeft,
-    paymentPlan: payment.plan,
-    hasPaymentMethod: !!payment.paymentMethodId,
+    paymentPlan: payment?.plan,
+    hasPaymentMethod: Boolean(!!payment?.paymentMethodId),
   };
 };

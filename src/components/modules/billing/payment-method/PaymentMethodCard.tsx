@@ -12,14 +12,16 @@ export const PaymentMethodCard = () => {
       {paymentPlan === 'trial' && (
         <Group justify='space-between'>
           <TrialDetails />
-          <Button variant='secondary-black' onClick={() => setShowModal(true)}>
-            Add payment method
-          </Button>
+          {!hasPaymentMethod && (
+            <Button variant='secondary-black' onClick={() => setShowModal(true)}>
+              Add payment method
+            </Button>
+          )}
         </Group>
       )}
-      {!hasPaymentMethod && (
-        <AddPaymentMethodModal showModal={showModal} setShowModal={setShowModal} />
-      )}
+
+      <AddPaymentMethodModal showModal={showModal} setShowModal={setShowModal} />
+
       {hasPaymentMethod && <CardDetails setShowModal={setShowModal} />}
     </Stack>
   );

@@ -1,20 +1,27 @@
+import { FiMail01, FiPaymentCardIcons } from '@nabiq-icons';
 import { Button, Group, Stack } from '@nabiq-ui';
-import { FiMail01 } from 'src/components/Icons';
+import { TCardBrand } from 'src/components/Icons/PaymentCardIcons';
 import { useAppSelector } from 'src/store/hooks';
 
 export const CardDetails = ({ setShowModal }: { setShowModal: (showModal: boolean) => void }) => {
-  const { userEmail } = useAppSelector((state) => state.user);
+  const { payment } = useAppSelector((state) => state.company);
   return (
     <Stack gap={24}>
       <div className='grid grid-cols-2 gap-4'>
-        <Stack gap={4}>
-          <p className='text-sm text-gray-500 font-medium'>Visa ending in 1234</p>
-          <p className='text-sm text-gray-600'>Expiry 06/2025</p>
-        </Stack>
+        <Group>
+          <FiPaymentCardIcons brand={payment?.card.brand as TCardBrand} size={58} />
+          <Stack gap={0}>
+            <p className='text-sm text-gray-500 font-medium'>
+              {payment?.card.brand} ending in {payment?.card.last4Digits}
+            </p>
+            <p className='text-sm text-gray-600'>Expiry {payment?.card.expiry}</p>
+          </Stack>
+        </Group>
+
         <Stack>
           <Group gap={4}>
             <FiMail01 color='#98A2b3' size={16} />
-            <p className='text-sm text-gray-600'>{userEmail}</p>
+            <p className='text-sm text-gray-600'>{payment?.card.email}</p>
           </Group>
         </Stack>
       </div>
