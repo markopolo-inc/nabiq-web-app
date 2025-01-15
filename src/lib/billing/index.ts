@@ -115,33 +115,9 @@ export interface PricingPlan {
   range: string;
 }
 
-export const pricingPlans: PricingPlan[] = [
-  {
-    id: 'pro',
-    name: 'Pro',
-    description:
-      "Subjects, participants and timestamps will be visible to your team. Content won't be visible unless shared.",
-    price: '$311.67',
-    userLimit: '<10K monthly active users',
-    range: 'per month',
-    features: {
-      whatsapp: {
-        unlimited: false,
-      },
-    },
-  },
-  {
-    id: 'enterprise',
-    name: 'Enterprise',
-    description:
-      "Subjects, participants and timestamps will be visible to your team. Content won't be visible unless shared.",
-    price: 'Custom',
-    userLimit: 'up to unlimited active users',
-    range: '',
-    features: {
-      whatsapp: {
-        unlimited: true,
-      },
-    },
-  },
+export const monthlyActiveUser = [
+  { value: 10000, label: '<10K', monthly: '62.33', yearly: '673.20', plan: 'pro_1' },
+  { value: 50000, label: '<50K', monthly: '311.67', yearly: '3366.04', plan: 'pro_2' },
+  { value: 100000, label: '<100K', monthly: '623.33', yearly: '6731.96', plan: 'pro_3' },
+  { value: 500000, label: '<500K', monthly: '3116.67', yearly: '33660.04', plan: 'pro_4' },
 ];

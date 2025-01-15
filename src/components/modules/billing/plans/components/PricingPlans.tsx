@@ -1,18 +1,38 @@
 import { FiPlus } from '@nabiq-icons';
-import { Button, Checkbox, GatewayLogo, Group, Stack } from '@nabiq-ui';
+import { Button, Checkbox, GatewayLogo, Group, Stack, Switch } from '@nabiq-ui';
 import { useState } from 'react';
-import { pricingPlans } from 'src/lib/billing';
+import { usePlanDetails } from 'src/hooks/modules/billing';
 
 import { PriceSummary, WhatsAppAddOnModal } from './pricing-plans';
 
-export const PricingPlans = () => {
+export const PricingPlans = ({
+  activeUsers,
+  isMonthly,
+  setIsMonthly,
+}: {
+  activeUsers: number;
+  isMonthly: boolean;
+  setIsMonthly: (value: boolean) => void;
+}) => {
   const [showWhatsAppAddOnModal, setShowWhatsAppAddOnModal] = useState(false);
+  const { pricingPlans, activeUsersInText } = usePlanDetails({ activeUsers, isMonthly });
   return (
     <Stack>
       <WhatsAppAddOnModal
         showModal={showWhatsAppAddOnModal}
         setShowModal={setShowWhatsAppAddOnModal}
       />
+      <Group gap={8}>
+        <Group gap={8}>
+          <p className='text-sm text-gray-600 font-normal'>Monthly</p>
+          <Switch checked={!isMonthly} onChange={() => setIsMonthly(!isMonthly)} size='sm' />
+          <p className='text-sm text-gray-600 font-normal'>Annual</p>
+        </Group>
+        <p className='text-sm text-gray-600 font-normal'>
+          (10% discount for {activeUsersInText} monthly active users)
+        </p>
+      </Group>
+
       <div className='grid grid-cols-3 gap-6'>
         {pricingPlans.map((plan) => (
           <Stack
@@ -56,7 +76,7 @@ export const PricingPlans = () => {
             )}
           </Stack>
         ))}
-        <PriceSummary />
+        <PriceSummary activeUsers={activeUsers} isMonthly={isMonthly} />
       </div>
     </Stack>
   );

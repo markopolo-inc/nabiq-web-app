@@ -1,7 +1,18 @@
 import { Slider } from '@mantine/core';
 import { Group, Stack } from '@nabiq-ui';
+import { usePlanDetails } from 'src/hooks/modules/billing';
+import { monthlyActiveUser } from 'src/lib/billing';
 
-export const MonthlyActiveUser = () => {
+export const MonthlyActiveUser = ({
+  activeUsers,
+  setActiveUsers,
+  isMonthly,
+}: {
+  activeUsers: number;
+  setActiveUsers: (value: number) => void;
+  isMonthly: boolean;
+}) => {
+  const { activeUsersInText } = usePlanDetails({ activeUsers, isMonthly });
   return (
     <Stack className='p-6 shadow-sm bg-white border rounded-xl border-gray-200' gap={48}>
       <Stack gap={12}>
@@ -26,24 +37,22 @@ export const MonthlyActiveUser = () => {
                 display: 'none',
               },
             }}
-            marks={[
-              { value: 10, label: '<10K' },
-              { value: 30, label: '<50K' },
-              { value: 60, label: '<100K' },
-              { value: 100, label: '<500K' },
-            ]}
+            value={activeUsers}
+            onChange={setActiveUsers}
+            max={500000}
+            marks={monthlyActiveUser}
           />
         </Stack>
 
         <Group gap={48} className='grid grid-cols-[1fr_auto]'>
           <div className='w-[150px]'>
-            <p className='text-2xl font-medium text-gray-900'>50K</p>
+            <p className='text-2xl font-semibold text-gray-900'>{activeUsersInText}</p>
             <p className='text-sm text-gray-600 font-normal'>Monthly active users</p>
           </div>
           <Group>
             <p className='text-sm text-gray-600 font-normal'>
-              The Pro plan starts with 10000 MAU specific user plan, which can be used for emails,
-              SMS, push notifications, WhatsApp messages, or other interactions.
+              The Pro plan starts with {activeUsersInText} MAU specific user plan, which can be used
+              for emails, SMS, push notifications, WhatsApp messages, or other interactions.
             </p>
           </Group>
         </Group>
