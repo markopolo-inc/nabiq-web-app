@@ -31,15 +31,13 @@ const CampaignsListPage = () => {
       <Stack gap={64}>
         <div className='flex justify-between'>
           <Stack gap={4}>
-            <p className='text-gray-900 font-semibold text-3xl'>Campaigns</p>
-            <p className='text-gray-600 font-normal'>
-              Create your campaign to effectively target and engage specific cohorts
-            </p>
+            <p className='text-gray-900 font-semibold text-3xl'>{t('campaigns_page.campaigns')}</p>
+            <p className='text-gray-600 font-normal'>{t('campaigns_page.create_campaign')}</p>
           </Stack>
           <Group>
             {/*<Button variant='secondary'>How does it work?</Button>*/}
             <Button leadingIcon={<FiPlus size={20} color='white' />} onClick={handleCreateCampaign}>
-              Create campaign
+              {t('campaigns_page.create_campaign_button')}
             </Button>
           </Group>
         </div>

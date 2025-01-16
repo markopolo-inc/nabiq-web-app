@@ -99,7 +99,7 @@ export const CampaignTable = ({
   const banner = (
     <Stack gap={0}>
       <Group className='flex gap-2 items-center px-8 py-5 border-b border-b-gray-200'>
-        <Text className='text-gray-900 font-semibold text-lg'>Campaign</Text>
+        <Text className='text-gray-900 font-semibold text-lg'>{t('campaigns_page.campaigns')}</Text>
 
         <Badge color='blue' size='sm'>
           {filteredList.length || 0} {t('navigation.nav_campaigns')}
@@ -114,10 +114,10 @@ export const CampaignTable = ({
               setActive(value);
             }}
             options={[
-              { value: 'all', label: 'All' },
-              { value: 'active', label: 'Active' },
-              { value: 'processing', label: 'Processing' },
-              { value: 'finished', label: 'Finished' },
+              { value: 'all', label: t('campaigns_page.all') },
+              { value: 'active', label: t('campaigns_page.active') },
+              { value: 'processing', label: t('campaigns_page.processing') },
+              { value: 'finished', label: t('campaigns_page.finished') },
             ]}
           />
           <TextInput
@@ -128,7 +128,7 @@ export const CampaignTable = ({
             leftSectionWidth={40}
             leftSectionPointerEvents='none'
             className='w-[400px]'
-            placeholder='Search...'
+            placeholder={`${t('campaigns_page.search')}...`}
           />
         </Group>
       </Stack>
@@ -166,10 +166,14 @@ export const CampaignTable = ({
                   )}
                   <Stack align='center' gap={4}>
                     <p className='text-gray-900 font-semibold text-base'>
-                      No campaigns {list.length === 0 ? 'created yet' : 'found!'}
+                      {list.length === 0
+                        ? t('campaigns_page.no_campaigns_created')
+                        : t('campaigns_page.no_campaigns_found')}
                     </p>
                     <p className='text-gray-600 text-sm'>
-                      Your {list.length === 0 ? 'created' : 'filtered'} campaigns will show up here.
+                      {list.length === 0
+                        ? t('campaigns_page.created_campaigns')
+                        : t('campaigns_page.filtered_campaigns')}
                     </p>
                   </Stack>
                 </Stack>
@@ -241,7 +245,7 @@ export const CampaignTable = ({
                       variant='secondary-black'
                       onClick={() => navigate(`/campaigns/details/${item.resourceId}`)}
                     >
-                      Details
+                      {t('campaigns_page.details')}
                     </Button>
                     <Button
                       variant='secondary'
@@ -269,7 +273,7 @@ export const CampaignTable = ({
                           }}
                           disabled={isLoading}
                         >
-                          Delete
+                          {t('campaigns_page.delete')}
                         </Menu.Item>
                       </Menu.Dropdown>
                     </Menu>
@@ -281,7 +285,7 @@ export const CampaignTable = ({
         </TableBody>
       </Table>
       <ConfirmationModal
-        title='Are you sure you want to delete this campaign?'
+        title={t('campaigns_page.confirm_delete_campaign')}
         showModal={showDisconnectModal}
         setShowModal={setShowDisconnectModal}
         onConfirm={handleDelete}
