@@ -19,11 +19,9 @@ const GuidedSupport = () => {
 
           <Stack gap={8} className='pr-3'>
             <p className='text-gray-900 text-[24px] font-semibold'>
-              Guided Implementation for MarkTag
+              {t('home_page.guided_implementation')}
             </p>
-            <p className='text-gray-600 text-base font-normal'>
-              Let us help you setup ‘Marktag’ easily.
-            </p>
+            <p className='text-gray-600 text-base font-normal'>{t('home_page.setup_marktag')}</p>
           </Stack>
         </div>
       </Stack>
@@ -38,7 +36,7 @@ const GuidedSupport = () => {
               setStep('calendly');
             }}
           >
-            Book a call
+            {t('home_page.book_call')}
           </Button>
         </Group>
       </Stack>
