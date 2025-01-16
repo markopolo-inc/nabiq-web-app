@@ -1,12 +1,14 @@
 import { FiCommand, FiPlus } from '@nabiq-icons';
 import { Button, Group, Stack, Text, useGetColors } from '@nabiq-ui';
 import { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 import { useAppSelector } from 'src/store/hooks';
 import { useLazyGetMarkopoloMarkTagsQuery } from 'src/store/marktag/markopoloMarktagApi';
 
 const ConnectMarktag = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { gray600, gray900, primary500, success500 } = useGetColors();
   const { setStep, setDomain, setDomainData } = useContext<MarktagContextType>(MarkTagContext);
@@ -27,18 +29,18 @@ const ConnectMarktag = () => {
   const cardData = [
     {
       icon: <FiCommand size={32} color={primary500} />,
-      title: 'Existing marktag',
-      description: 'Connect an existing marktag already created in Markpolo',
-      buttonLabel: 'Connect',
+      title: 'home_page.existing_marktag',
+      description: 'home_page.connect_existing_marktag',
+      buttonLabel: 'home_page.common_connect',
       buttonAction: () => {
         navigate('/connect-marktag');
       },
     },
     {
       icon: <FiPlus size={32} color={success500} />,
-      title: 'Create new',
-      description: 'New to this? No worries, create a new marktag from scratch',
-      buttonLabel: 'Create',
+      title: 'home_page.create_new',
+      description: 'home_page.new_to_this',
+      buttonLabel: 'create_campaign.create',
       buttonAction: () => {
         if (marktagList?.length === 0) {
           setStep('create');
@@ -62,10 +64,10 @@ const ConnectMarktag = () => {
       <Group justify='center' className='-mt-1'>
         <Stack align='center' gap={8}>
           <Text color={gray900} size='24px' weight={600}>
-            Connect ‘Marktag’
+            {t('home_page.connect_marktag')}
           </Text>
           <Text color={gray600} size='16px'>
-            Select how you want to connect
+            {t('home_page.select_connection_method')}
           </Text>
         </Stack>
       </Group>
@@ -78,11 +80,11 @@ const ConnectMarktag = () => {
             <div className='flex flex-col gap-3 items-center'>
               {card.icon}
               <Text color={gray900} size='18px' weight={600}>
-                {card.title}
+                {t(card.title)}
               </Text>
             </div>
             <Text color={gray600} className='text-sm font-normal text-center'>
-              {card.description}
+              {t(card.description)}
             </Text>
             <Button
               variant='primary'
@@ -90,7 +92,7 @@ const ConnectMarktag = () => {
               fullWidth
               loading={index === 0 ? false : isLoading}
             >
-              {card.buttonLabel}
+              {t(card.buttonLabel)}
             </Button>
           </div>
         ))}
