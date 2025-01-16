@@ -17,7 +17,7 @@ const EmailToDeveloper = ({ setOpened }) => {
 
   const handleSendInstructions = () => {
     if (!recipientEmail) {
-      toast('Please enter a valid email address!', {
+      toast(t('home_page.valid_email_required'), {
         icon: '⚠️',
       });
       return;
@@ -29,7 +29,7 @@ const EmailToDeveloper = ({ setOpened }) => {
         username: userName,
       });
     } else {
-      toast.error('Invalid email address!', { id: 'invalid-email' });
+      toast.error(t('home_page.invalid_email'), { id: 'invalid-email' });
     }
   };
 
@@ -45,7 +45,7 @@ const EmailToDeveloper = ({ setOpened }) => {
         <Group gap={8} style={{ paddingBottom: 20 }}>
           <FiMail01 color={primary500} />
           <Text size='16px' weight={600} color={primary700}>
-            Email to developer
+            {t('home_page.email_to_developer')}
           </Text>
         </Group>
       </div>
@@ -53,49 +53,36 @@ const EmailToDeveloper = ({ setOpened }) => {
       <Stack gap={32}>
         <Stack gap={24}>
           <Text color={gray900} size='18px' weight={600}>
-            Email details
+            {t('home_page.email_details')}
           </Text>
 
           <TextInput
-            label='To:'
-            placeholder='Add recipient email'
+            label={t('home_page.to')}
+            placeholder={t('home_page.add_recipient_email')}
             value={recipientEmail}
             onChange={(e) => setRecipientEmail(e.target.value)}
           />
 
           <TextArea
-            label='Draft message'
-            placeholder='Write the message'
+            label={t('home_page.draft_message')}
+            placeholder={t('home_page.write_message')}
             autosize
-            value={`[User] sent you instructions for installing the Marktag on your website.
-
-Please first setup the Marktag inside the website following the first document and then setup the events for tracking following the second document.
-
-Marktag Setup Guide: https://markopolo-inc.github.io/marktag-docs/web-sdk/installation
-
-Event Setup Guide: https://markopolo-inc.github.io/marktag-docs/web-sdk/usage`}
+            value={t('home_page.marktag_setup_instructions')}
           />
 
           <Stack gap={12} mt={8}>
             <Text color={gray900} size='18px' weight={600}>
-              Email setup instructions
+              {t('home_page.email_setup_instructions')}
             </Text>
             <Stack gap={12}>
               <Text color={gray600} size='14px' className='leading-5'>
-                Marktag offers a robust event collection feature, allowing businesses to track user
-                interactions on their websites accurately. By strategically implementing event
-                tracking, businesses can optimize their marketing campaigns and enhance overall
-                effectiveness.
+                {t('home_page.marktag_event_collection')}
               </Text>
               <Text color={gray600} size='14px' className='leading-5'>
-                To complete the setup of Marktag you have to first install the &quot;MarkTag
-                Script&quot; to your web application and then manual event triggers for each of the
-                event you want to track via Marktag. You can track more than 20 type of events with
-                Marktag along with all the meta data you want to capture.
+                {t('home_page.complete_marktag_setup')}
               </Text>
               <Text color={gray600} size='14px' className='leading-5'>
-                Send the instructions on how to setup the Marktag and events to your developers by
-                clicking the button below.
+                {t('home_page.send_setup_instructions')}
               </Text>
             </Stack>
           </Stack>
@@ -111,7 +98,7 @@ Event Setup Guide: https://markopolo-inc.github.io/marktag-docs/web-sdk/usage`}
               loading={isLoading}
               onClick={handleSendInstructions}
             >
-              Send instructions to developer
+              {t('campaign_details.send_instructions_to_developer')}
             </Button>
           </Group>
         </Stack>
