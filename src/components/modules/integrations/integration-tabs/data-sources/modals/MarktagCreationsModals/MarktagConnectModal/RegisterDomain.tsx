@@ -68,18 +68,18 @@ const RegisterDomain = ({ setOpened }) => {
 
   const handleContinueMarkTag = async () => {
     if (!brandId) {
-      toast.error('Select a brand!', { id: 'select-brand' });
+      toast.error(t('home_page.select_brand'), { id: 'select-brand' });
       return;
     }
 
     if (marktagType !== 'client-side') {
       if (!domain) {
-        toast.error('Enter a domain!', { id: 'enter-domain' });
+        toast.error(t('home_page.enter_domain'), { id: 'enter-domain' });
         return;
       }
 
       if (domain?.toLowerCase()?.includes('https://') || domain?.toLowerCase()?.includes('www.')) {
-        toast.error('Domain cannot contain https:// or www.', { id: 'domain-error' });
+        toast.error(t('home_page.domain_error'), { id: 'domain-error' });
         return;
       }
     }
@@ -130,16 +130,16 @@ const RegisterDomain = ({ setOpened }) => {
     <Stack gap={20}>
       <Stack gap={8} mt={16}>
         <Text color={gray900} size='24px' weight={600}>
-          Domain setup
+          {t('home_page.domain_setup')}
         </Text>
         <Text color={gray600} size='16px'>
-          Enter domain details.
+          {t('home_page.enter_domain_details')}
         </Text>
       </Stack>
       <Select
         className='mb-0'
-        label='Brand'
-        placeholder='Select brand'
+        label={t('home_page.brand')}
+        placeholder={t('home_page.select_brand_option')}
         value={brandId}
         onChange={(brandItem) => setBrandId(brandItem)}
         data={brandsListOptions}
@@ -160,7 +160,7 @@ const RegisterDomain = ({ setOpened }) => {
       {!isLoadingBrandList && brandsListOptions?.length === 0 && (
         <Group gap={6} className='-mt-4'>
           <Text size='14px' weight={500} className='text-red-500 leading-5'>
-            No brands found!
+            {t('home_page.no_brands_found')}
           </Text>
           <Button
             size='sm'
@@ -173,7 +173,7 @@ const RegisterDomain = ({ setOpened }) => {
               setOpened(false);
             }}
           >
-            Create a brand
+            {t('home_page.create_brand')}
           </Button>
         </Group>
       )}
@@ -181,14 +181,14 @@ const RegisterDomain = ({ setOpened }) => {
       {marktagType !== 'client-side' && (
         <Stack gap={4}>
           <TextInput
-            label='Domain name'
-            placeholder='Website URL'
+            label={t('home_page.domain_name')}
+            placeholder={t('home_page.website_url')}
             disabled={['shopify', 'woocommerce']?.includes(marktagType)}
             value={domain}
             onChange={(e) => setDomain(e.currentTarget.value)}
           />
           <Text color={gray500} size='14px'>
-            Enter your domain without https: // or www.
+            {t('home_page.enter_domain_without_protocol')}
           </Text>
         </Stack>
       )}
