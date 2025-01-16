@@ -15,8 +15,8 @@ export const useQuickActions = ({
   return [
     {
       id: 1,
-      header: 'Sync lead databases',
-      subHeader: 'Capture and track your marketing data.',
+      header: t('home_page.sync_lead_databases'),
+      subHeader: t('home_page.capture_marketing_data'),
       icon: RiCodeAiFill,
       onClick: () => {
         navigate({
@@ -28,7 +28,7 @@ export const useQuickActions = ({
     {
       id: 2,
       header: t('home_page.campaign_create_first'),
-      subHeader: 'Launch a campaign to connect with your audience.',
+      subHeader: t('home_page.launch_campaign'),
       icon: RiMegaPhoneFill,
       onClick: () => {
         setShowCampaignGoalModal(true);
@@ -36,8 +36,8 @@ export const useQuickActions = ({
     },
     {
       id: 3,
-      header: 'AI constitution',
-      subHeader: 'Help us make AI smarter and safer by reducing bias.',
+      header: t('home_page.ai_constitution'),
+      subHeader: t('home_page.reduce_ai_bias'),
       icon: RiShieldFill,
       onClick: () => {
         setShowConstitutionalAIModerationModal(true);
@@ -46,7 +46,7 @@ export const useQuickActions = ({
     {
       id: 4,
       header: t('home_page.channels_integration'),
-      subHeader: 'Send marketing campaigns to your audience.',
+      subHeader: t('home_page.send_marketing_campaigns'),
       icon: RiFlashLight,
       onClick: () => {
         navigate({

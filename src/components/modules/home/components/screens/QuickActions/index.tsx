@@ -1,6 +1,7 @@
 import { Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CampaignGoalModal } from 'src/components/modules/campaigns';
 import { ConstitutionalAIModerationModal, QuickActionsCard } from 'src/components/modules/home';
 import { useQuickActions } from 'src/hooks/modules/home';
@@ -20,6 +21,7 @@ const container = {
 };
 
 export const QuickActions: React.FC = () => {
+  const { t } = useTranslation();
   const [showCampaignGoalModal, setShowCampaignGoalModal] = useState(false);
   const [showConstitutionalAIModerationModal, setShowConstitutionalAIModerationModal] =
     useState(false);
@@ -37,7 +39,7 @@ export const QuickActions: React.FC = () => {
 
   return (
     <Stack gap={12}>
-      <p className='text-gray-600 text-base font-medium'>Quick actions</p>
+      <p className='text-gray-600 text-base font-medium'>{t('home_page.quick_actions')}</p>
       <motion.div
         variants={container}
         initial='hidden'
