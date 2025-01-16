@@ -1,8 +1,23 @@
 import { FiCommand } from '@nabiq-icons';
 import { Button, Group, List, Modal, Stack, Text, useGetColors } from '@nabiq-ui';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+const instructions: string[] = [
+  'Copy the Name.',
+  'Go to your domain registrar.',
+  'Go to your DNS management page. For example- Route 53 dashboard has the DNS management tab in its dashboard. Click on “Hosted zones”',
+  'Click on your domain name/link.',
+  'Then click on “Create Record” in the Records page that you will be taken to.',
+  'Paste the copied DNS name in the “Records Name” field. Since Route 53 adds the domain name at the last itself, we can remove that part from our copied name.',
+  'Set the record type according to the Type given here.',
+  'Copy the value from here and enter it in the “Value” field in your domain registrar.',
+  'Then click on Create Record.',
+  'Come back here and click on “Verify Tag”.',
+];
 
 const HowDoesWorkPopup: React.FC = () => {
+  const { t } = useTranslation();
   const { primary500, gray600, gray900 } = useGetColors();
 
   return (
@@ -18,7 +33,7 @@ const HowDoesWorkPopup: React.FC = () => {
         <div className='p-5'>
           <Stack gap={8}>
             <Text color={gray900} size='24px' weight={600}>
-              How it works
+              {t('home_page.how_it_works')}
             </Text>
             <Text color={gray600} size='16px' className='leading-6'>
               The DNS record needs to be set in your domain registrar (Route 53, GoDaddy, NameCheap
@@ -29,7 +44,7 @@ const HowDoesWorkPopup: React.FC = () => {
 
           <Stack gap={12} pt={28}>
             <Text color={gray900} size='24px' weight={600}>
-              Instructions
+              {t('home_page.instructions')}
             </Text>
 
             <List
@@ -43,27 +58,11 @@ const HowDoesWorkPopup: React.FC = () => {
                 itemWrapper: { color: gray600 },
               }}
             >
-              <List.Item>1. Copy the Name.</List.Item>
-              <List.Item>2. Go to your domain registrar.</List.Item>
-              <List.Item>
-                3. Go to your DNS management page. For example- Route 53 dashboard has the DNS
-                management tab in its dashboard. Click on “Hosted zones”
-              </List.Item>
-              <List.Item>4. Click on your domain name/link.</List.Item>
-              <List.Item>
-                5. Then click on “Create Record” in the Records page that you will be taken to.
-              </List.Item>
-              <List.Item>
-                6. Paste the copied DNS name in the “Records Name” field. Since Route 53 adds the
-                domain name at the last itself, we can remove that part from our copied name.
-              </List.Item>
-              <List.Item>7. Set the record type according to the Type given here.</List.Item>
-              <List.Item>
-                8. Copy the value from here and enter it in the “Value” field in your domain
-                registrar.
-              </List.Item>
-              <List.Item>9. Then click on Create Record.</List.Item>
-              <List.Item>10. Come back here and click on “Verify Tag”.</List.Item>
+              {instructions.map((instruction, idx) => (
+                <List.Item key={idx}>
+                  {idx + 1}. {instruction}
+                </List.Item>
+              ))}
             </List>
           </Stack>
 
