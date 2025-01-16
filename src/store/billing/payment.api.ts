@@ -97,9 +97,9 @@ export const paymentApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    buySubscription: builder.mutation<
+    buyWhatsAppAddOn: builder.mutation<
       IResponseInterface,
-      { units: string; companyId: string; countryCode: string }
+      { units: number; companyId: string; countryCode: string }
     >({
       query: (args) => ({
         url: `/payment/buy-wa-msg`,
@@ -131,5 +131,5 @@ export const {
   useAddPaymentMethodMutation,
   useStartSubscriptionMutation,
   useChangeSubscriptionMutation,
-  useBuySubscriptionMutation,
+  useBuyWhatsAppAddOnMutation,
 } = paymentApi;
