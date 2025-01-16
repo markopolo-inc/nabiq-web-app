@@ -102,7 +102,7 @@ const ModalBody: React.FC<{
               fullWidth
               loading={isLoading}
             >
-              Confirm
+              {t('integrations.confirm')}
             </Button>
             <Button
               fullWidth
@@ -110,7 +110,7 @@ const ModalBody: React.FC<{
               onClick={() => setOpened(false)}
               disabled={isLoading}
             >
-              {t('settings.settings')}
+              {t('settings.cancel')}
             </Button>
           </div>
         </form>
