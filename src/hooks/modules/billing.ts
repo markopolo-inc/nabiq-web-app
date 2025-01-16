@@ -59,7 +59,7 @@ export const usePlanDetails = ({
     activeUsersInText: plan?.label,
     monthlyPrice: plan?.monthly,
     yearlyPrice: plan?.yearly,
-    planId: plan?.plan,
+    planId: `${plan?.plan}_${isMonthly ? 'monthly' : 'yearly'}`,
     pricingPlans,
   };
 };

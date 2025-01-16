@@ -46,7 +46,14 @@ export const paymentApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    startSubscription: builder.mutation<IResponseInterface, { planId: string; companyId: string }>({
+      query: (args) => ({
+        url: `/payment/start-sub`,
+        method: 'POST',
+        body: { ...args },
+      }),
+    }),
   }),
 });
 
-export const { useAddPaymentMethodMutation } = paymentApi;
+export const { useAddPaymentMethodMutation, useStartSubscriptionMutation } = paymentApi;

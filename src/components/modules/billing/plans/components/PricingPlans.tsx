@@ -1,5 +1,6 @@
 import { FiPlus } from '@nabiq-icons';
 import { Button, Checkbox, GatewayLogo, Group, Stack, Switch } from '@nabiq-ui';
+import cn from 'classnames';
 import { useState } from 'react';
 import { usePlanDetails } from 'src/hooks/modules/billing';
 
@@ -16,6 +17,7 @@ export const PricingPlans = ({
 }) => {
   const [showWhatsAppAddOnModal, setShowWhatsAppAddOnModal] = useState(false);
   const { pricingPlans, activeUsersInText } = usePlanDetails({ activeUsers, isMonthly });
+  const [planCategory, setPlanCategory] = useState<'pro' | 'enterprise'>('pro');
   return (
     <Stack>
       <WhatsAppAddOnModal
@@ -37,14 +39,20 @@ export const PricingPlans = ({
         {pricingPlans.map((plan) => (
           <Stack
             key={plan.id}
-            className='border border-gray-200 rounded-lg p-6 shadow-sm bg-white'
+            className={cn('border border-gray-200 rounded-lg p-6 shadow-sm bg-white', {
+              'border-blue-500': planCategory === plan.id,
+            })}
             gap={48}
           >
             <Stack gap={24}>
               <Stack gap={16}>
                 <Group justify='space-between'>
                   <p className='text-[36px] font-semibold text-gray-900'>{plan.name}</p>
-                  <Checkbox variant='radio' />
+                  <Checkbox
+                    variant='radio'
+                    checked={planCategory === plan.id}
+                    onChange={() => setPlanCategory(plan.id as 'pro' | 'enterprise')}
+                  />
                 </Group>
                 <p className='text-sm text-gray-600 font-normal !whitespace-pre-wrap'>
                   {plan.description}
@@ -76,7 +84,7 @@ export const PricingPlans = ({
             )}
           </Stack>
         ))}
-        <PriceSummary activeUsers={activeUsers} isMonthly={isMonthly} />
+        <PriceSummary activeUsers={activeUsers} isMonthly={isMonthly} planCategory={planCategory} />
       </div>
     </Stack>
   );
