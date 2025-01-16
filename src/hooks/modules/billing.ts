@@ -3,15 +3,22 @@ import { monthlyActiveUser } from 'src/lib/billing';
 import { useAppSelector } from 'src/store/hooks';
 import { getDateDifference } from 'src/utils/date.uitils';
 
-export const usePaymentDetails = () => {
+export const useBillingDetails = () => {
   const { payment } = useAppSelector((state) => state.company);
 
   const trialDaysLeft = getDateDifference(payment?.subscriptionEndDate, moment().toISOString());
+  const plan = monthlyActiveUser.find((p) => payment.plan?.includes(p.plan));
+  const isMonthly = payment?.plan?.includes('monthly');
+  const subscriptionFee = isMonthly ? plan?.monthly : plan?.yearly;
 
   return {
     trialDaysLeft,
     paymentPlan: payment?.plan,
+    isMonthly,
+    subscriptionFee,
     hasPaymentMethod: Boolean(!!payment?.paymentMethodId),
+    subscriptionStartDate: moment(payment?.subscriptionStartDate).format('DD MMM YYYY'),
+    subscriptionEndDate: moment(payment?.subscriptionEndDate).format('DD MMM YYYY'),
   };
 };
 

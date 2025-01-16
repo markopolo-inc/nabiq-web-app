@@ -70,7 +70,66 @@ export const paymentApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    changeSubscription: builder.mutation<
+      IResponseInterface,
+      { newPlan: string; companyId: string }
+    >({
+      query: (args) => ({
+        url: `/payment/change-subscription`,
+        method: 'POST',
+        body: { ...args },
+      }),
+      invalidatesTags: ['Company'],
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          if (!res.data.success) {
+            toast.error(res.data.message || 'Failed to change subscription!', {
+              id: 'change-subscription-error',
+            });
+          }
+          return res;
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to change subscription!', {
+            id: 'change-subscription-error',
+          });
+          return err;
+        }
+      },
+    }),
+    buySubscription: builder.mutation<
+      IResponseInterface,
+      { units: string; companyId: string; countryCode: string }
+    >({
+      query: (args) => ({
+        url: `/payment/buy-wa-msg`,
+        method: 'POST',
+        body: { ...args },
+      }),
+      invalidatesTags: ['Company'],
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          if (!res.data.success) {
+            toast.error(res.data.message || 'Failed to buy subscription!', {
+              id: 'buy-subscription-error',
+            });
+          }
+          return res;
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to buy subscription!', {
+            id: 'buy-subscription-error',
+          });
+          return err;
+        }
+      },
+    }),
   }),
 });
 
-export const { useAddPaymentMethodMutation, useStartSubscriptionMutation } = paymentApi;
+export const {
+  useAddPaymentMethodMutation,
+  useStartSubscriptionMutation,
+  useChangeSubscriptionMutation,
+  useBuySubscriptionMutation,
+} = paymentApi;

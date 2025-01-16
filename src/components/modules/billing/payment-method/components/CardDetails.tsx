@@ -7,6 +7,7 @@ export const CardDetails = ({ setShowModal }: { setShowModal: (showModal: boolea
   const { payment } = useAppSelector((state) => state.company);
   return (
     <Stack gap={24}>
+      <p className='text-lg font-semibold text-gray-900'>Payment method</p>
       <div className='grid grid-cols-2 gap-4'>
         <Group>
           <FiPaymentCardIcons brand={payment?.card.brand as TCardBrand} size={58} />

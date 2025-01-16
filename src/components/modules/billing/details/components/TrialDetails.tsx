@@ -1,9 +1,9 @@
 import { Badge, Button, Group, Stack } from '@nabiq-ui';
 import { useNavigate } from 'react-router-dom';
-import { usePaymentDetails } from 'src/hooks/modules/billing';
+import { useBillingDetails } from 'src/hooks/modules/billing';
 
 export const TrialDetails = () => {
-  const { trialDaysLeft, paymentPlan } = usePaymentDetails();
+  const { trialDaysLeft, paymentPlan } = useBillingDetails();
   const navigate = useNavigate();
 
   return (

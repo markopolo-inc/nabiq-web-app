@@ -1,9 +1,12 @@
-import { FiPhone01, FiZap } from '@nabiq-icons';
+import { FiZap } from '@nabiq-icons';
 import { Button, Group, Stack } from '@nabiq-ui';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { usePlanDetails } from 'src/hooks/modules/billing';
-import { useStartSubscriptionMutation } from 'src/store/billing/payment.api';
+import { useBillingDetails, usePlanDetails } from 'src/hooks/modules/billing';
+import {
+  useChangeSubscriptionMutation,
+  useStartSubscriptionMutation,
+} from 'src/store/billing/payment.api';
 import { useAppSelector } from 'src/store/hooks';
 
 export const PriceSummary = ({
@@ -19,9 +22,12 @@ export const PriceSummary = ({
     activeUsers,
     isMonthly,
   });
+  const { paymentPlan } = useBillingDetails();
   const { resourceId: companyId } = useAppSelector((state) => state.company);
   const [startSubscription, { isLoading: isStartSubscriptionLoading }] =
     useStartSubscriptionMutation();
+  const [changeSubscription, { isLoading: isChangeSubscriptionLoading }] =
+    useChangeSubscriptionMutation();
   const navigate = useNavigate();
   return (
     <Stack className='bg-primary-50 rounded-xl border border-gray-200 p-6' gap={32}>
@@ -62,28 +68,25 @@ export const PriceSummary = ({
         {planCategory === 'pro' && (
           <Button
             fullWidth
-            leadingIcon={<FiZap size={20} fill='white' />}
+            leadingIcon={<FiZap size={18} fill='white' />}
             onClick={async () => {
-              const res = await startSubscription({ plan: planId, companyId }).unwrap();
+              let res = null;
+              if (paymentPlan?.includes('pro') || paymentPlan?.includes('enterprise')) {
+                res = await changeSubscription({ newPlan: planId, companyId }).unwrap();
+              } else {
+                res = await startSubscription({ plan: planId, companyId }).unwrap();
+              }
               if (res.success) {
                 toast.success('Subscription started successfully!');
-                navigate('/billing/payment');
+                navigate('/billing');
               }
             }}
-            loading={isStartSubscriptionLoading}
+            loading={isStartSubscriptionLoading || isChangeSubscriptionLoading}
           >
             Subscribe to pro plan
           </Button>
         )}
-        {planCategory === 'enterprise' && (
-          <Button
-            fullWidth
-            leadingIcon={<FiZap size={20} fill='white' />}
-            loaderProps={<FiPhone01 />}
-          >
-            Talk to our sales team
-          </Button>
-        )}
+        {planCategory === 'enterprise' && <Button fullWidth>Talk to our sales team</Button>}
       </Stack>
     </Stack>
   );
