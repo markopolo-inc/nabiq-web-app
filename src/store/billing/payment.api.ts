@@ -46,12 +46,29 @@ export const paymentApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    startSubscription: builder.mutation<IResponseInterface, { planId: string; companyId: string }>({
+    startSubscription: builder.mutation<IResponseInterface, { plan: string; companyId: string }>({
       query: (args) => ({
         url: `/payment/start-sub`,
         method: 'POST',
         body: { ...args },
       }),
+      invalidatesTags: ['Company'],
+      async onQueryStarted(args, { queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+          if (!res.data.success) {
+            toast.error(res.data.message || 'Failed to start subscription!', {
+              id: 'start-subscription-error',
+            });
+          }
+          return res;
+        } catch (err) {
+          toast.error(err?.error.message || 'Failed to start subscription!', {
+            id: 'start-subscription-error',
+          });
+          return err;
+        }
+      },
     }),
   }),
 });

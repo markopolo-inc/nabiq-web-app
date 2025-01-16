@@ -4,8 +4,7 @@ import {
   FiChatSmileAiFill,
   FiEquilizer2Fill,
   FiHomeFill,
-  FiMegaphoneFill,
-  FiQuestionFill,
+  FiMegaphoneFill, // FiQuestionFill,
   FiSettings3Fill,
 } from '@nabiq-icons';
 
@@ -72,10 +71,10 @@ export const lowerPartOptions = [
     to: '/settings',
     menuRegex: new RegExp(/^\/settings/, 'i'),
   },
-  {
-    title: 'navigation.nav_support',
-    Icon: FiQuestionFill,
-    to: '#',
-    menuRegex: new RegExp(/^\/help/, 'i'),
-  },
+  // {
+  //   title: 'navigation.nav_support',
+  //   Icon: FiQuestionFill,
+  //   to: '#',
+  //   menuRegex: new RegExp(/^\/help/, 'i'),
+  // },
 ];
