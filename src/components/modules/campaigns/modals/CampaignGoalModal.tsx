@@ -10,8 +10,8 @@ import { goals, mediums } from 'src/lib/campaign.lib';
 import { useAppSelector, useCampaignDispatch } from 'src/store/hooks';
 
 const title = {
-  goal: 'New campaign',
-  medium: 'Select medium of campaign',
+  goal: 'home_page.new_campaign',
+  medium: 'create_campaign.medium_selection',
 };
 
 const subtitle = {
@@ -30,7 +30,7 @@ const ModalBody = ({ setOpened }) => {
   return (
     <Stack className='p-8' gap={64} align='center'>
       <Stack align='center' gap={8}>
-        <p className='text-gray-900 text-[24px] font-semibold'>{title[step]}</p>
+        <p className='text-gray-900 text-[24px] font-semibold'>{t(title[step])}</p>
         <p className='text-gray-600 text-base font-normal'>{t(subtitle[step])}</p>
       </Stack>
       <Stack align='center' justify='center'>
@@ -46,7 +46,7 @@ const ModalBody = ({ setOpened }) => {
                 >
                   <Group justify={goal.badgeLabel ? 'space-between' : 'end'}>
                     {goal.badgeLabel ? <Badge color='warning'>{t(goal.badgeLabel)}</Badge> : <></>}
-                    <Tooltip label={goal.tooltip} multiline maw={300} zIndex={9999}>
+                    <Tooltip label={t(goal.tooltip)} multiline maw={300} zIndex={9999}>
                       <FiHelpCircle color='#9AA4B2' size={20} style={{ cursor: 'pointer' }} />
                     </Tooltip>
                   </Group>
@@ -68,7 +68,7 @@ const ModalBody = ({ setOpened }) => {
                     disabled={goal.isDisabled}
                     fullWidth
                   >
-                    Create
+                    {t('create_campaign.create')}
                   </Button>
                 </Stack>
               );
@@ -88,7 +88,7 @@ const ModalBody = ({ setOpened }) => {
                     justify='end'
                     className={cn(medium.isRecommended ? 'opacity-100' : 'opacity-0')}
                   >
-                    <Badge color='success'>Recommended</Badge>
+                    <Badge color='success'>{t('create_campaign.recommended')}</Badge>
                   </Group>
                   <Stack align='center'>
                     <Icon size={32} color={medium.color} />
@@ -116,7 +116,7 @@ const ModalBody = ({ setOpened }) => {
                       setOpened(false);
                     }}
                   >
-                    Select
+                    {t('create_campaign.select')}
                   </Button>
                 </Stack>
               );

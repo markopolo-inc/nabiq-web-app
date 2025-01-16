@@ -12,8 +12,7 @@ export const goals = [
   {
     title: 'create_campaign.goal_acquisition',
     headline: 'create_campaign.goal_acquisition_desc',
-    tooltip:
-      'Select this goal to attract new customers. Focus on acquiring paying users, trial users, or freemium users, depending on your business model.',
+    tooltip: 'create_campaign.attract_new_customers',
     icon: FiZapFast,
     color: '#EE46BC',
     type: 'acquisition',
@@ -23,8 +22,7 @@ export const goals = [
   {
     title: 'create_campaign.goal_activation',
     headline: 'create_campaign.goal_activation_desc',
-    tooltip:
-      'Choose this goal to convert trial or freemium users into paying customers. It’s all about getting existing users to take the next step.',
+    tooltip: 'create_campaign.convert_users',
     icon: FiCursorClick01,
     color: '#2E90FA',
     type: 'activation',
@@ -34,8 +32,7 @@ export const goals = [
   {
     title: 'create_campaign.goal_retention',
     headline: 'create_campaign.goal_retention_desc',
-    tooltip:
-      'Use this goal to increase customer loyalty. Boost recurring subscriptions, encourage cross-sells, or promote upsells to maintain and grow your customer base.',
+    tooltip: 'create_campaign.increase_loyalty',
     icon: FiInfinity,
     color: '#17B26A',
     type: 'retention',
@@ -46,7 +43,7 @@ export const goals = [
 
 export const mediums = [
   {
-    title: 'WhatsApp',
+    title: 'create_campaign.whatsapp',
     description: 'create_campaign.whatsapp_desc',
     icon: FiWhatsApp,
     isRecommended: true,
