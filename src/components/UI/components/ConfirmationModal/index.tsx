@@ -32,7 +32,7 @@ const ModalBody = ({ setOpened, title = 'Are you sure?', onConfirm }) => {
           fullWidth
           loading={isLoading}
         >
-          Confirm
+          {t('campaigns_page.confirm')}
         </Button>
       </div>
     </div>
