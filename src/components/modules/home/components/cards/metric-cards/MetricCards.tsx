@@ -16,12 +16,12 @@ const appCategories: Array<{
 }> = [
   {
     value: 'email',
-    label: 'Email apps',
+    label: 'integrations.email_apps',
     icon: FiMail01,
   },
   {
     value: 'sms',
-    label: 'SMS apps',
+    label: 'integrations.sms_apps',
     icon: FiMessageSmileCircle,
   },
 ];
@@ -62,9 +62,7 @@ export const MetricCards: FC<{
       <Stack gap={20}>
         <Stack gap={4}>
           <p className='text-gray-900 text-lg font-semibold'>{t('home_page.metrics_title')}</p>
-          <p className='text-gray-600 text-sm font-normal'>
-            Your data will show up here when ready.
-          </p>
+          <p className='text-gray-600 text-sm font-normal'>{t('home_page.data_ready')}</p>
         </Stack>
 
         <OptionTabs
@@ -83,7 +81,7 @@ export const MetricCards: FC<{
                     />
                   </span>
                 )}
-                {item.label}
+                {t(item.label)}
               </div>
             ),
           }))}
