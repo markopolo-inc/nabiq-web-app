@@ -44,10 +44,10 @@ const ChooseOption = () => {
       <Group justify='center' className='-mt-1'>
         <Stack align='center' gap={8}>
           <Text color={gray900} size='24px' weight={600}>
-            Connect ‘Marktag’
+            {t('home_page.connect_marktag')}
           </Text>
           <Text color={gray600} size='16px'>
-            Select how you want to connect
+            {t('home_page.select_connection_method')}
           </Text>
         </Stack>
       </Group>
