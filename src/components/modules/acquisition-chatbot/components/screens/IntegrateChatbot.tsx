@@ -14,13 +14,13 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
   (function () {
     const config = {
       botName: "NabiqBot",
-      apiKey: "${apiKey}", // Replace with actual API key
+      apiKey: "${apiKey}",
       welcomeMessage: "Hi! How can I help?",
       themeColor: "#007BFF",
       position: "bottom-right",
     };
     const script = document.createElement("script");
-    script.src = "https://cdn.example.com/chatbot.js"; // Replace with actual script URL
+    script.src = "https://acquisition-chatbot-bucket.s3.ap-southeast-1.amazonaws.com/main.js";
     script.async = true;
     script.onload = () => window.initializeChatbot?.(config);
     document.head.appendChild(script);
