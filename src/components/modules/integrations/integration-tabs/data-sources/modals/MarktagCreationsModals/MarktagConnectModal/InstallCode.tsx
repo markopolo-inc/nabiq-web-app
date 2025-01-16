@@ -26,7 +26,7 @@ const InstallCode = ({ setOpened }) => {
         window.open('https://markopolo-inc.github.io/marktag-docs/web-sdk/installation', '_blank')
       }
     >
-      View documentation
+      {t('home_page.view_documentation')}
     </Button>
   );
 
@@ -41,8 +41,10 @@ const InstallCode = ({ setOpened }) => {
     <Stack gap={32}>
       <Group justify='space-between'>
         <Stack className='-mt-1' gap={8}>
-          <p className='text-gray-900 text-[24px] font-semibold'>Install code manually</p>
-          <p className='text-gray-600 text-base font-normal'>Setup everything by yourself.</p>
+          <p className='text-gray-900 text-[24px] font-semibold'>
+            {t('home_page.install_code_manually')}
+          </p>
+          <p className='text-gray-600 text-base font-normal'>{t('home_page.setup_self')}</p>
         </Stack>
         <CodeInstructionModal />
       </Group>
@@ -86,7 +88,7 @@ const InstallCode = ({ setOpened }) => {
                   )}
                   <ViewDocumentationButton />
                   <Button variant='tertiary-gray' onClick={() => setOpened(false)}>
-                    Skip for now
+                    {t('home_page.skip_for_now')}
                   </Button>
                 </>
               )}
@@ -97,7 +99,7 @@ const InstallCode = ({ setOpened }) => {
                   </Button>
                   <ViewDocumentationButton />
                   <Button variant='primary' loading={isLoading} onClick={handleFinishSetup}>
-                    Finish setup
+                    {t('home_page.finish_setup')}
                   </Button>
                 </>
               )}
