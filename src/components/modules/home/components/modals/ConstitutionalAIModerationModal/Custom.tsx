@@ -32,7 +32,9 @@ const Custom = ({
   return (
     <Stack gap={24}>
       <Group justify='space-between' className='w-full'>
-        <p className='text-gray-900 text-lg font-semibold'>Custom AI constitutions to train</p>
+        <p className='text-gray-900 text-lg font-semibold'>
+          {t('home_page.custom_ai_constitutions')}
+        </p>
         {step === 'list' ? (
           <Button
             variant='link'
@@ -40,7 +42,7 @@ const Custom = ({
             onClick={() => setSelected([])}
             disabled={customPrompts.length === 0}
           >
-            Deselect all
+            {t('home_page.deselect_all')}
           </Button>
         ) : (
           <Button
@@ -48,7 +50,7 @@ const Custom = ({
             leadingIcon={<FiPlus size={18} />}
             onClick={() => setNewPrompts((state) => [...state, ''])}
           >
-            Add more
+            {t('home_page.add_more')}
           </Button>
         )}
       </Group>
@@ -77,10 +79,10 @@ const Custom = ({
               <Stack gap={48} justify='center' align='center'>
                 <Stack gap={4} justify='center' align='center'>
                   <p className='font-semibold text-base text-gray-900'>
-                    Add your custom constitution
+                    {t('home_page.add_custom_constitution')}
                   </p>
                   <p className='text-gray-600 text-sm font-normal'>
-                    You can add and remove your constitution from here.
+                    {t('home_page.manage_constitution')}
                   </p>
                 </Stack>
                 <Button
@@ -88,7 +90,7 @@ const Custom = ({
                   trailingIcon={<FiPlus size={16} />}
                   onClick={() => setStep('add')}
                 >
-                  Add
+                  {t('home_page.add')}
                 </Button>
               </Stack>
             </Stack>
@@ -102,8 +104,8 @@ const Custom = ({
             <TextArea
               key={index}
               value={prompt}
-              placeholder='Enter your own constituition...'
-              label='Point'
+              placeholder={t('home_page.enter_constitution')}
+              label={t('home_page.point')}
               onChange={(e) => handleChange(e, index)}
             />
           ))}
@@ -118,7 +120,7 @@ const Custom = ({
             disabled={customPrompts.length === 0 || selectedPrompts?.length === 0}
             onClick={handleConfirm}
           >
-            Confirm
+            {t('campaigns_page.confirm')}
           </Button>
           {customPrompts.length > 0 && (
             <Button
@@ -128,7 +130,7 @@ const Custom = ({
               onClick={() => setStep('add')}
               trailingIcon={<FiPlus size={18} />}
             >
-              Add
+              {t('campaigns_page.add')}
             </Button>
           )}
         </div>

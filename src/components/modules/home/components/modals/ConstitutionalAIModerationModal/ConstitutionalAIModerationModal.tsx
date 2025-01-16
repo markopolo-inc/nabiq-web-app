@@ -1,5 +1,6 @@
 import { Modal, OptionTabs, Stack } from '@nabiq-ui';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   useCreateConstitutionalAIConfigMutation,
   useUpdateConstitutionalAIConfigMutation,
@@ -18,6 +19,7 @@ const ModalBody = ({
   savedRules: string[];
   isCompleted: boolean;
 }) => {
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<'preset' | 'custom'>('preset');
   const [createConstitutionalAIConfig] = useCreateConstitutionalAIConfigMutation();
@@ -59,18 +61,19 @@ const ModalBody = ({
     <Stack className='!p-8' gap={24}>
       <Stack gap={32}>
         <Stack align='center' justify='center' gap={8}>
-          <p className='text-gray-900 text-2xl font-semibold'>Constitutional AI Moderation</p>
+          <p className='text-gray-900 text-2xl font-semibold'>
+            {t('home_page.constitutional_ai_moderation')}
+          </p>
           <p className='text-gray-600 text-base font-normal text-center'>
-            Shape our AI, reduce moderation bias, and ensure transparency while prioritizing safety,
-            ethics, and respect for human rights.
+            {t('home_page.shape_ai')}
           </p>
         </Stack>
         <OptionTabs
           active={selectedOption}
           setActive={setSelectedOption}
           options={[
-            { label: 'Preset', value: 'preset' },
-            { label: 'Custom', value: 'custom' },
+            { label: t('home_page.preset'), value: 'preset' },
+            { label: t('home_page.custom'), value: 'custom' },
           ]}
         />
       </Stack>

@@ -1,5 +1,6 @@
 import { Button, Checkbox, Group, Stack } from '@nabiq-ui';
 import { Dispatch, SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
 import { presetPrompts } from 'src/lib/home/constitutional-ai';
 
 export const Presets = ({
@@ -13,12 +14,15 @@ export const Presets = ({
   handleSelect: (line: string) => void;
   handleConfirm: () => void;
 }) => {
+  const { t } = useTranslation();
   return (
     <Stack gap={24}>
       <Group justify='space-between' className='w-full'>
-        <p className='text-gray-900 text-lg font-semibold'>AI constitutions to train</p>
+        <p className='text-gray-900 text-lg font-semibold'>
+          {t('home_page.ai_constitutions_to_train')}
+        </p>
         <Button variant='link' className='!pr-0' onClick={() => setSelected([])}>
-          Deselect all
+          {t('home_page.deselect_all')}
         </Button>
       </Group>
       <Stack gap={24} className='max-h-[400px] overflow-y-scroll'>
@@ -39,7 +43,7 @@ export const Presets = ({
         ))}
       </Stack>
       <Button size='md' disabled={selectedPrompts.length === 0} fullWidth onClick={handleConfirm}>
-        Confirm
+        {t('home_page.confirm')}
       </Button>
     </Stack>
   );
