@@ -2,41 +2,43 @@ import { FiGlobe01, FiPhone01, FiServer01, FiShopify, FiWooCommerce } from '@nab
 import { Button, Group, Stack, Text, useGetColors } from '@nabiq-ui';
 import { toLower } from 'lodash';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
 
 const CreateNew = () => {
+  const { t } = useTranslation();
   const { gray600, gray900 } = useGetColors();
   const { setMarktagType, setStep } = useContext<MarktagContextType>(MarkTagContext);
 
   const cardData = [
     {
       icon: <FiGlobe01 size={32} color='#697586' />,
-      title: 'Website',
-      description: 'Connect to your website',
+      title: 'home_page.website',
+      description: 'home_page.connect_website',
       eligible: true,
     },
     {
       icon: <FiShopify size={32} />,
-      title: 'Shopify',
-      description: 'Add to your Shopify store',
+      title: 'home_page.shopify',
+      description: 'home_page.add_to_shopify',
       eligible: true,
     },
     {
       icon: <FiWooCommerce size={32} />,
-      title: 'WooCommerce',
-      description: 'Add to your Woocommmerce store',
+      title: 'home_page.woocommerce',
+      description: 'home_page.add_to_woocommerce',
       eligible: true,
     },
     {
       icon: <FiPhone01 size={32} color='#EE46BC' />,
-      title: 'Mobile',
-      description: 'Add to your native react mobile app',
+      title: 'home_page.mobile',
+      description: 'home_page.add_to_mobile_app',
       eligible: true,
     },
     {
       icon: <FiServer01 size={32} color='#2E90FA' />,
-      title: 'Client-side',
-      description: 'Add top your client-side',
+      title: 'home_page.client_side',
+      description: 'home_page.add_to_client_side',
       eligible: true,
     },
   ];
@@ -46,10 +48,10 @@ const CreateNew = () => {
       <Group justify='center' className='-mt-1'>
         <Stack align='center' gap={8}>
           <Text color={gray900} size='24px' weight={600}>
-            Create new ‘Marktag’
+            {t('home_page.create_new_marktag')}
           </Text>
           <Text color={gray600} size='16px'>
-            Select what platform you want to connect to
+            {t('home_page.select_platform')}
           </Text>
         </Stack>
       </Group>
@@ -61,20 +63,21 @@ const CreateNew = () => {
           >
             <div className='flex flex-col gap-3 items-center'>
               {card.icon}
-              <Text className='text-lg font-semibold text-gray-900'>{card.title}</Text>
+              <Text className='text-lg font-semibold text-gray-900'>{t(card.title)}</Text>
             </div>
             <Text className='text-sm font-normal text-gray-600 text-center'>
-              {card.description}
+              {t(card.description)}
             </Text>
             <Button
               variant='primary'
               fullWidth
               onClick={() => {
-                setMarktagType(toLower(card.title));
+                // @TODO: will be bug for translation
+                setMarktagType(toLower(t(card.title)));
                 setStep('register');
               }}
             >
-              Create
+              {t('create_campaign.create')}
             </Button>
           </div>
         ))}
