@@ -29,7 +29,7 @@ export const Hubspot = () => {
       {' '}
       <IntegrationCard
         key='hubspot'
-        title='Hubspot'
+        title={t('integrations.hubspot')}
         isConnected={!!datasourceIntegrations?.connectedAccounts?.hubspot}
         description={t('integrations.datasource.crm_desc')}
         icon={<GatewayLogo app='hubspot' width={32} />}
@@ -51,7 +51,7 @@ export const Hubspot = () => {
                 });
               }}
             >
-              Integrate
+              {t('integrations.integrate')}
             </Button>
           </Group>
         ) : (
@@ -62,14 +62,14 @@ export const Hubspot = () => {
               onClick={() => setShowShopifyDisconnectModal(true)}
               loading={isDisconnecting}
             >
-              Disconnect
+              {t('integrations.disconnect')}
             </Button>
           </Group>
         )}
       </IntegrationCard>
       <ConfirmationModal
         onConfirm={handleDisconnectHubspot}
-        title='Are you sure you want to disconnect hubspot?'
+        title={t('integrations.confirm_disconnect_hubspot')}
         showModal={showShopifyDisconnectModal}
         setShowModal={setShowShopifyDisconnectModal}
       />
