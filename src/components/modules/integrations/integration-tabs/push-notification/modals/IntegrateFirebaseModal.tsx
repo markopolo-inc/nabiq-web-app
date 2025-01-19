@@ -1,6 +1,7 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, GatewayLogo, JsonInput, Modal, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import { useIntegrateFirebaseMutation } from 'src/store/integrations/push-notification';
 
@@ -9,22 +10,25 @@ const Instructions = ({
 }: {
   setShowInstructions: (value: boolean) => void;
 }) => {
+  const { t } = useTranslation();
   return (
     <Stack gap={32}>
       <Stack gap={16}>
         <GatewayLogo app='firebase' width={32} />
         <Stack gap={4}>
-          <p className='text-gray-900 font-semibold text-xl'>How do I find service account JSON?</p>
-          <p className='text-gray-600'>Step by step instructions given below.</p>
+          <p className='text-gray-900 font-semibold text-xl'>
+            {t('integrations.find_service_account_json')}
+          </p>
+          <p className='text-gray-600'>{t('integrations.step_by_step_instructions')}</p>
         </Stack>
       </Stack>
       <Stack gap={4} className='text-gray-600'>
-        <p>1. Go to project settings</p>
-        <p>2. Select 'Service account'</p>
-        <p>3. Generate new private key</p>
+        <p>1. {t('integrations.go_to_project_settings')}</p>
+        <p>2. {t('integrations.select_service_account')}</p>
+        <p>3. {t('integrations.generate_private_key')}</p>
       </Stack>
       <Button fullWidth onClick={() => setShowInstructions(false)}>
-        Understood, go back.
+        {t('integrations.understood_go_back')}
       </Button>
     </Stack>
   );
@@ -37,6 +41,7 @@ const ModalBody = ({
   setOpened: (value: boolean) => void;
   setShowFirebaseCodecopyModal: (value: boolean) => void;
 }) => {
+  const { t } = useTranslation();
   const [showInstructions, setShowInstructions] = useState(false);
   const [json, setJson] = useState('');
   const [jsonError, setJsonError] = useState('');
@@ -52,13 +57,13 @@ const ModalBody = ({
       const parsedJson = JSON.parse(value);
 
       if (!parsedJson.project_id || !parsedJson.private_key || !parsedJson.client_email) {
-        setJsonError('Missing required fields: project_id, private_key, or client_email');
+        setJsonError(t('integrations.missing_fields'));
         return;
       }
 
       setJsonError('');
     } catch (e) {
-      setJsonError('Invalid JSON. Please check again.');
+      setJsonError(t('integrations.invalid_json'));
     }
   };
 
@@ -130,6 +135,7 @@ export const IntegrateFirebaseModal = ({
 }: {
   setShowFirebaseCodecopyModal: (value: boolean) => void;
 }) => {
+  const { t } = useTranslation();
   const { markTag, pushIntegrations } = useAppSelector((state) => state.brand);
 
   const isMarkTagConnected = markTag?.resourceId;
@@ -152,7 +158,7 @@ export const IntegrateFirebaseModal = ({
           disabled={!isMarkTagConnected}
           onClick={() => setOpened(true)}
         >
-          {isPushNotificationConnected ? 'Reconnect' : 'Integrate'}
+          {isPushNotificationConnected ? t('integrations.reconnect') : t('integrations.integrate')}
         </Button>
       )}
     </Modal>
