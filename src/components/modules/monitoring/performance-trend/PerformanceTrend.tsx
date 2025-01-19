@@ -115,23 +115,21 @@ export const PerformanceTrend: FC<{
       </Group>
 
       {isLoading ? (
-        <p className='text-gray-600'>Loading performance data...</p>
+        <p className='text-gray-600'>{t('monitoring.loading_performance_data')}</p>
       ) : error ? (
-        <p className='text-red-600'>Error loading performance data</p>
+        <p className='text-red-600'>{t('monitoring.error_loading_data')}</p>
       ) : graphData?.length === 0 ? (
         <Stack align='center' gap={24} p={24}>
           <Stack gap={4} align='center'>
-            <p className='text-gray-900 font-semibold'>No data to show at this moment</p>
-            <p className='text-gray-600 text-sm'>
-              Launch a campaign to see performance trend data.
-            </p>
+            <p className='text-gray-900 font-semibold'>{t('monitoring.no_data_to_show')}</p>
+            <p className='text-gray-600 text-sm'>{t('monitoring.launch_campaign_for_data')}</p>
           </Stack>
 
           <Button
             leadingIcon={<FiPlus size={20} color='white' />}
             onClick={() => navigate(`/campaigns`)}
           >
-            Create campaign
+            {t('monitoring.create_campaign')}
           </Button>
         </Stack>
       ) : (
