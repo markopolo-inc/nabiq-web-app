@@ -2,10 +2,12 @@ import { FiChevronRight } from '@nabiq-icons';
 import { Button, Image, useGetColors } from '@nabiq-ui';
 import ControlRoomAvatar from 'assets/control-room/network-email-marketing-campaign-and-newsletter.svg';
 import React, { SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ModalBody: React.FC<{
   setOpened: React.Dispatch<SetStateAction<boolean>>;
 }> = ({ setOpened }) => {
+  const { t } = useTranslation();
   const { primary600 } = useGetColors();
   return (
     <div className='p-8 flex flex-col gap-6'>
@@ -14,11 +16,11 @@ const ModalBody: React.FC<{
       </div>
 
       <div className='flex flex-col gap-1'>
-        <p className='text-2xl font-semibold text-gray-900'>How does feedback work?</p>
+        <p className='text-2xl font-semibold text-gray-900'>
+          {t('content_samples.how_feedback_works')}
+        </p>
         <p className='text-base font-normal leading-6 text-gray-600'>
-          Give thumbs up to the content samples you find relevant to your campaign or thumbs down to
-          samples that don’t align with your goals. Your feedback helps in creating even more
-          personalized content to send to the users.
+          {t('content_samples.give_feedback')}
         </p>
       </div>
 
@@ -28,11 +30,11 @@ const ModalBody: React.FC<{
           variant='link'
           trailingIcon={<FiChevronRight color={primary600} />}
         >
-          Learn more about control room
+          {t('content_samples.learn_more_control_room')}
         </Button>
       </div>
       <Button onClick={() => setOpened(false)} fullWidth variant='primary' size='md'>
-        Got it
+        {t('content_samples.got_it')}
       </Button>
     </div>
   );

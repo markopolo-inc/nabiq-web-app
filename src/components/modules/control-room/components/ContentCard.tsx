@@ -1,5 +1,6 @@
 import { FiCheck, FiCrossX, FiShield02, SlashCircle01 } from '@nabiq-icons';
 import { Badge, Button, GatewayLogo, Group, Stack } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 import { IContentSampleType } from 'src/interfaces/controlRoom.interface';
 
 export const ContentCard = ({
@@ -16,10 +17,11 @@ export const ContentCard = ({
   ) => void;
   isLoading: boolean;
 }) => {
+  const { t } = useTranslation();
   return (
     <Stack className='rounded-xl border-gray-200 border p-6 max-w-[744px]' gap={24}>
       <Stack className='font-medium text-[12px] text-gray-600'>
-        <p>Subject: {content?.subject}</p>
+        <p>{t('content_samples.subject', { subject: content?.subject })}</p>
         <pre className='whitespace-pre-wrap text-gray-600'>{content?.content}</pre>
       </Stack>
 
@@ -28,7 +30,7 @@ export const ContentCard = ({
           <>
             <Badge color='gray' size='lg'>
               <FiShield02 size={16} strokeWidth={1} />
-              Blocked by AI due to constitution breach
+              {t('content_samples.blocked_by_ai_breach')}
             </Badge>
             <Button
               disabled={isLoading}
@@ -37,7 +39,7 @@ export const ContentCard = ({
               trailingIcon={<FiCheck size={16} color='white' strokeWidth={1} />}
               onClick={() => handleMarkContent(content?.id, 'approved')}
             >
-              Approve
+              {t('content_samples.approve')}
             </Button>
           </>
         )}
@@ -49,11 +51,11 @@ export const ContentCard = ({
               leadingIcon={<SlashCircle01 color='#B42318' size={11} />}
               onClick={() => handleMarkContent(content?.id, 'blocked')}
             >
-              Block
+              {t('content_samples.block')}
             </Button>
             <Badge color='success' size='lg'>
               <FiCheck size={16} strokeWidth={1} />
-              Approved
+              {t('content_samples.approved')}
             </Badge>
           </Group>
         )}
@@ -68,7 +70,7 @@ export const ContentCard = ({
               trailingIcon={<FiCrossX color='#4B5565' size={11} />}
               onClick={() => handleMarkContent(content?.id, 'irrelevant')}
             >
-              Irrelavant
+              {t('content_samples.irrelevant')}
             </Button>
             <Button
               disabled={isLoading}
@@ -77,7 +79,7 @@ export const ContentCard = ({
               trailingIcon={<FiCheck size={16} color='white' strokeWidth={1} />}
               onClick={() => handleMarkContent(content?.id, 'relevant')}
             >
-              I find this relevant
+              {t('content_samples.find_relevant')}
             </Button>
           </Group>
         )}
@@ -85,11 +87,11 @@ export const ContentCard = ({
         {!isBlockedByAI && content.status === 'relevant' && (
           <Group justify='flex-end'>
             <Button variant='link' onClick={() => handleMarkContent(content?.id, 'irrelevant')}>
-              Change feedback
+              {t('content_samples.change_feedback')}
             </Button>
             <Badge color='success' size='lg'>
               <FiCheck size={16} strokeWidth={1} />
-              Relevant
+              {t('content_samples.relevant')}
             </Badge>
           </Group>
         )}
@@ -97,11 +99,11 @@ export const ContentCard = ({
         {!isBlockedByAI && content.status === 'irrelevant' && (
           <Group justify='flex-end'>
             <Button variant='link' onClick={() => handleMarkContent(content?.id, 'relevant')}>
-              Change feedback
+              {t('content_samples.change_feedback')}
             </Button>
             <Badge color='error' size='lg'>
               <FiCheck size={16} strokeWidth={1} color='#B42318' />
-              Irrelevant
+              {t('content_samples.irrelevant')}
             </Badge>
           </Group>
         )}

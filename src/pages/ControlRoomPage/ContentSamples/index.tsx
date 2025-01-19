@@ -1,6 +1,7 @@
 import { FiHelpCircle, Klaviyo, SlashCircle01 } from '@nabiq-icons';
 import { Breadcrumbs, Button, ContentLoader, Group, OptionTabs, Stack } from '@nabiq-ui';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   BlockedByAI,
@@ -31,6 +32,7 @@ export const appCategories = [
 ];
 
 const ContentSamples = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [hasChanged, setHasChanged] = useState<boolean>(false);
   const [category, setCategory] = useState<'content' | 'blocked-content'>('content');
@@ -125,7 +127,7 @@ const ContentSamples = () => {
                   {contentSamplesData?.data?.configDetail}
                 </p>
                 <p className='text-gray-600 text-base font-normal'>
-                  View and give feedback on sample funnel contents.
+                  {t('content_samples.view_feedback_samples')}
                 </p>
               </Stack>
             </Group>
@@ -137,12 +139,12 @@ const ContentSamples = () => {
                 leadingIcon={<FiHelpCircle size={20} />}
                 className='!px-4'
               >
-                How does feedback work?
+                {t('content_samples.how_feedback_works')}
               </Button>
 
               {category === 'content' && (
                 <Button size='md' onClick={saveChanges} variant='primary'>
-                  Done
+                  {t('create_campaign.done')}
                 </Button>
               )}
             </Group>
