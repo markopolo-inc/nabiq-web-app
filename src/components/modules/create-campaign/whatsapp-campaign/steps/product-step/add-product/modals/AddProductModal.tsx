@@ -1,10 +1,12 @@
 import { FiBox } from '@nabiq-icons';
 import { Button, Card, Modal, Stack } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 import { TProductSource } from 'src/interfaces/modules/campaign';
 import { productSources } from 'src/lib/campaign.lib';
 import { useCampaignDispatch, useCampaignSelector } from 'src/store/hooks';
 
 const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
+  const { t } = useTranslation();
   const campaign = useCampaignSelector();
   const dispatchCampaign = useCampaignDispatch();
 
@@ -19,7 +21,7 @@ const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
           <Card key={source.platform} className='!gap-5 items-center justify-center'>
             <source.icon size={48} />
             <Stack gap={16} justify='center' align='center'>
-              <p className='text-lg font-semibold text-gray-900'>{source.title}</p>
+              <p className='text-lg font-semibold text-gray-900'>{t(source.title)}</p>
               <p className='text-gray-600 text-sm text-center'>{source.headline}</p>
             </Stack>
             <Button
