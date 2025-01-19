@@ -1,6 +1,7 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, GatewayLogo, Modal, Select, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import {
   useGetZohoRegionsQuery,
@@ -9,6 +10,7 @@ import {
 import { getOAuthUrl } from 'src/utils/auth';
 
 const ModalBody = () => {
+  const { t } = useTranslation();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const { data, isLoading } = useGetZohoRegionsQuery();
   const [region, setRegion] = useState<string | null>(null);
@@ -38,13 +40,13 @@ const ModalBody = () => {
       <Stack gap={20}>
         <GatewayLogo app='zoho' width={32} />
         <Stack gap={4}>
-          <p className='text-2xl font-semibold text-gray-900'>Integrate Zoho</p>
-          <p className='text-gray-600'>Choose your Zoho account region.</p>
+          <p className='text-2xl font-semibold text-gray-900'>{t('integrations.integrate_zoho')}</p>
+          <p className='text-gray-600'>{t('integrations.choose_zoho_region')}</p>
         </Stack>
       </Stack>
 
       <Select
-        placeholder='Select Region'
+        placeholder={t('integrations.select_region')}
         disabled={isLoading}
         data={regions}
         onChange={(value) => setRegion(value)}
@@ -56,10 +58,10 @@ const ModalBody = () => {
           loading={isSaving}
           onClick={() => handleSaveZohoRegion(region)}
         >
-          Confirm
+          {t('home_page.confirm')}
         </Button>
         <Button variant='secondary' fullWidth disabled={isLoading || isSaving || isRedirecting}>
-          Cancel
+          {t('settings.cancel')}
         </Button>
       </Stack>
     </Stack>
@@ -67,6 +69,7 @@ const ModalBody = () => {
 };
 
 export const ZohoRegionModal = () => {
+  const { t } = useTranslation();
   return (
     <Modal withNoHeader withCustomClose size='sm' body={() => <ModalBody />}>
       {({ setOpened }) => (
@@ -77,7 +80,7 @@ export const ZohoRegionModal = () => {
             setOpened(true);
           }}
         >
-          Integrate
+          {t('integrations.integrate')}
         </Button>
       )}
     </Modal>
