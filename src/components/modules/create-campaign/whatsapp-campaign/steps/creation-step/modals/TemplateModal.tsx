@@ -1,15 +1,17 @@
 import { FiLayoutAlt04 } from '@nabiq-icons';
 import { Button, Card, Modal, Stack } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 import { waCampaignTemplates } from 'src/lib/campaign.lib';
 import { useCampaignDispatch } from 'src/store/hooks';
 
 const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
+  const { t } = useTranslation();
   const campaignDispatch = useCampaignDispatch();
   return (
     <Stack className='p-8' gap={32}>
       <Stack gap={0}>
-        <p className='text-2xl font-semibold text-gray-900'>Templates</p>
-        <p className='text-sm text-gray-600'>Templates made just for you.</p>
+        <p className='text-2xl font-semibold text-gray-900'>{t('create_campaign.templates')}</p>
+        <p className='text-sm text-gray-600'>{t('create_campaign.custom_templates')}</p>
       </Stack>
       <div className='grid grid-cols-3 gap-4'>
         {waCampaignTemplates.map((template, index) => (
@@ -37,6 +39,7 @@ const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
 };
 
 export const TemplateModal = () => {
+  const { t } = useTranslation();
   return (
     <Modal
       size='90%'
@@ -50,7 +53,7 @@ export const TemplateModal = () => {
           onClick={() => setOpened(true)}
           leadingIcon={<FiLayoutAlt04 size={17} />}
         >
-          Use a template
+          {t('create_campaign.use_template')}
         </Button>
       )}
     </Modal>
