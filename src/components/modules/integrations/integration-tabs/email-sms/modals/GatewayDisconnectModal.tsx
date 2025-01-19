@@ -1,6 +1,7 @@
 import { FiLinkBroken01 } from '@nabiq-icons';
 import { Button, Modal, Stack } from '@nabiq-ui';
 import { Dispatch, SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IGateway } from 'src/interfaces/brand.interface';
 import { useAppSelector } from 'src/store/hooks';
 import { useDisconnectGatewayMutation } from 'src/store/integrations/integrations.api';
@@ -12,14 +13,17 @@ const ModalBody = ({
   setOpened: Dispatch<SetStateAction<boolean>>;
   gateway: IGateway;
 }) => {
+  const { t } = useTranslation();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [disconnect, { isLoading }] = useDisconnectGatewayMutation();
   return (
     <Stack className='p-8 pt-0' gap={32}>
       <Stack gap={4}>
-        <p className='text-gray-900 font-semibold text-2xl'>Disconnect {gateway.name}?</p>
+        <p className='text-gray-900 font-semibold text-2xl'>
+          {t('integrations.disconnect_gateway', { name: gateway.name })}
+        </p>
         <p className='text-gray-600 font-normal text-base'>
-          Any active operations related with {gateway.name} account will be paused.
+          {t('integrations.pause_operations', { gateway: gateway.name })}
         </p>
       </Stack>
       <Stack>
@@ -42,7 +46,7 @@ const ModalBody = ({
             }
           }}
         >
-          Yes, disconnect
+          {t('integrations.yes_disconnect')}
         </Button>
         <Button
           variant='secondary'
@@ -51,7 +55,7 @@ const ModalBody = ({
           size='sm'
           disabled={isLoading}
         >
-          No, go back
+          {t('integrations.no_go_back')}
         </Button>
       </Stack>
     </Stack>
@@ -59,6 +63,7 @@ const ModalBody = ({
 };
 
 export const GatewayDisconnectModal = ({ gateway }: { gateway: IGateway }) => {
+  const { t } = useTranslation();
   return (
     <Modal
       size='md'
@@ -74,7 +79,7 @@ export const GatewayDisconnectModal = ({ gateway }: { gateway: IGateway }) => {
     >
       {({ setOpened }) => (
         <Button className='!w-28' onClick={() => setOpened(true)} variant='tertiary-destructive'>
-          Disconnect
+          {t('integrations.disconnect')}
         </Button>
       )}
     </Modal>

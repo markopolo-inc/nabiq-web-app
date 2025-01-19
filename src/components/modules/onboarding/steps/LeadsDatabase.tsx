@@ -61,7 +61,7 @@ export const LeadsDatabase = () => {
               >
                 {isShopifyConnected
                   ? t('onboarding.shopify_connected')
-                  : t('onboarding.connect_shopify')}
+                  : t('onboarding.connect_to_shopify')}
               </Button>
               <Button
                 fullWidth
@@ -75,7 +75,9 @@ export const LeadsDatabase = () => {
                   });
                 }}
               >
-                {isSallaConnected ? t('onboarding.salla_connected') : t('onboarding.connect_salla')}
+                {isSallaConnected
+                  ? t('onboarding.salla_connected')
+                  : t('onboarding.connect_to_salla')}
               </Button>
             </div>
           </Stack>

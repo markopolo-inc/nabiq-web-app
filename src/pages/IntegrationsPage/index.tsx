@@ -45,7 +45,7 @@ const IntegrationsPage = () => {
                           />
                         </span>
                       )}
-                      {item.label}
+                      {t(item.label)}
                     </div>
                   ),
                 }))}

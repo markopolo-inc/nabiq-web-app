@@ -32,7 +32,7 @@ export const IntegrationCard = ({
             <div>{icon}</div>
             <p className='text-gray-900 font-semibold text-lg'>{title}</p>
           </div>
-          {isConnected && <Badge color='success'>Connected</Badge>}
+          {isConnected && <Badge color='success'>{t('create_campaign.connected')}</Badge>}
         </div>
 
         <p className='mt-6 text-gray-600 font-normal text-sm'>{t(description)}</p>
