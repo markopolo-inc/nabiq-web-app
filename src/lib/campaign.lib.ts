@@ -92,13 +92,13 @@ export const whatsappCampaignSteps = [
 
 export const productSources = [
   {
-    title: 'Shopify',
+    title: 'integrations.shopify',
     platform: 'shopify',
     headline: 'Connect your Shopify store to upload products directly',
     icon: FiShopify,
   },
   {
-    title: 'Salla',
+    title: 'integrations.salla',
     platform: 'salla',
     headline: 'Connect your Salla store to import products easily.',
     icon: FiSalla,

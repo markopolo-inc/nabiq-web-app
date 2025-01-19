@@ -1,6 +1,7 @@
 import { FiSalla } from '@nabiq-icons';
 import { Avatar, Group, Loader, MultiSelect, Stack } from '@nabiq-ui';
 import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ISallaProduct } from 'src/interfaces/modules/campaign';
 import { useCampaignDispatch } from 'src/store/hooks';
 import { useGetSallaProductsQuery } from 'src/store/integrations/e-commerce.api';
@@ -12,6 +13,7 @@ type TOption = ISallaProduct & {
 };
 
 export const SallaProducts = () => {
+  const { t } = useTranslation();
   const { data, isLoading } = useGetSallaProductsQuery();
   const [value, setValue] = useState<string[]>([]);
   const dispatchCampaign = useCampaignDispatch();
@@ -34,13 +36,13 @@ export const SallaProducts = () => {
     <Stack className='p-4 bg-[#F5FBEE] rounded-xl' gap={32}>
       <Group gap={12}>
         <FiSalla size={22} />
-        <p className='text-gray-900 font-semibold'>Salla Products</p>
+        <p className='text-gray-900 font-semibold'>{t('create_campaign.salla_products')}</p>
       </Group>
       <MultiSelect
         disabled={isLoading}
         searchable
         autoComplete='on'
-        label='Products'
+        label={t('create_campaign.products')}
         data={products}
         styles={{
           option: {
@@ -51,7 +53,7 @@ export const SallaProducts = () => {
         value={value}
         rightSection={isLoading ? <Loader size={16} /> : null}
         onChange={setValue}
-        placeholder='Select products'
+        placeholder={t('create_campaign.select_products')}
         renderOption={(option: { option: TOption }) => (
           <Group gap={12} wrap='nowrap' className='bg-gray-100 rounded-lg p-2 w-full'>
             <div>
