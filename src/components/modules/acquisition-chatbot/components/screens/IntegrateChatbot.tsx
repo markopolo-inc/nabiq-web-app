@@ -2,12 +2,15 @@ import { FiCopy02 } from '@nabiq-icons';
 import { Button, Stack } from '@nabiq-ui';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 type IntegrateChatbotProps = {
   apiKey: string;
 };
 
 export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) => {
+  const { t } = useTranslation();
+
   const code = `
 <!-- Chatbot Integration Script -->
 <script>
@@ -30,7 +33,7 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
 
   const handleCopy = (value) => {
     navigator.clipboard.writeText(value);
-    toast.success('Copy to clipboard');
+    toast.success(t('home_page.copy_to_clipboard'));
   };
 
   return (
