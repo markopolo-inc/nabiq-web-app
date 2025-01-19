@@ -1,4 +1,5 @@
 import { Stepper } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
 import { FiCheck } from 'src/components/Icons';
 
 import Text from '../Text';
@@ -16,6 +17,7 @@ export const StepperStep = ({
   active: number;
   index: number;
 }) => {
+  const { t } = useTranslation();
   return (
     <Step
       label={
@@ -24,14 +26,14 @@ export const StepperStep = ({
           weight={600}
           className={`${active === index ? 'text-primary-700' : 'text-gray-700'} leading-5`}
         >
-          {label}
+          {t(label)}
         </Text>
       }
       description={
         <div
           className={`${active === index ? 'text-primary-600' : 'text-gray-600'} leading-5 max-w-[240px] text-sm`}
         >
-          {description}
+          {t(description)}
         </div>
       }
       icon={

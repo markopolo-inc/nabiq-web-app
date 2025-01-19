@@ -46,7 +46,7 @@ export const CampaignDetailsForm = () => {
         <TextInput
           required
           label={t('campaigns.name')}
-          placeholder='Enter campaign name'
+          placeholder={t('create_campaign.enter_campaign_name')}
           value={campaign?.name}
           onChange={(e) => handleChange('name', e.currentTarget.value)}
         />
@@ -55,13 +55,13 @@ export const CampaignDetailsForm = () => {
           <TextArea
             required
             label={t('create_campaign_form.details_title')}
-            placeholder='Enter campaign details'
+            placeholder={t('create_campaign.enter_campaign_details')}
             rows={4}
             value={campaign?.details}
             onChange={(e) => handleChange('details', e.currentTarget.value)}
           />
           <Text size='14px' className='text-gray-600'>
-            {t('create_campaign_form.text_prompt')}{' '}
+            {t('create_campaign_form.text_prompt')}
           </Text>
         </Stack>
 
@@ -81,27 +81,26 @@ export const CampaignDetailsForm = () => {
           <Select
             required
             label={t('create_campaign_form.content_tone')}
-            placeholder='Pick value'
+            placeholder={t('create_campaign.pick_value')}
             defaultValue={t('create_campaign_form.content_tone')}
             value={campaign?.tone}
             onChange={(value) => handleChange('tone', value)}
             data={[
-              { label: 'Formal', value: 'formal' },
-              { label: 'Informal', value: 'informal' },
+              { label: t('create_campaign.formal'), value: 'formal' },
+              { label: t('create_campaign.informal'), value: 'informal' },
             ]}
           />
 
           <Text size='14px' className='text-gray-600'>
-            The tone of the content that will be utilized for generating different variations of
-            your campaign
+            {t('create_campaign_form.tone_desc')}
           </Text>
         </Stack>
 
         <Stack gap={6}>
           <Select
             data={[
-              { label: 'English', value: 'en' },
-              { label: 'Arabic', value: 'ar' },
+              { label: t('create_campaign.english'), value: 'en' },
+              { label: t('create_campaign.arabic'), value: 'ar' },
             ]}
             label={t('create_campaign_form.content_language')}
             value={campaign?.language}

@@ -62,16 +62,16 @@ export const mediums = [
 
 export const emailSmsCampaignSteps = [
   {
-    label: 'Campaign details',
-    description: 'Enter the campaign details',
+    label: 'create_campaign_form.details_title',
+    description: 'create_campaign_form.create_campaign_form',
   },
   {
-    label: 'Timing',
-    description: 'Specify the content and approval timing',
+    label: 'create_campaign_form.timing_title',
+    description: 'create_campaign_form.timing_desc',
   },
   {
-    label: 'Channels',
-    description: 'Choose the main and additional channels',
+    label: 'create_campaign.channels',
+    description: 'create_campaign.choose_channels',
   },
 ];
 

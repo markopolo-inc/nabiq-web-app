@@ -123,9 +123,11 @@ export const EmailSmsCampaign = () => {
 
           <div className='flex justify-between'>
             <Stack gap={4}>
-              <p className='text-gray-900 font-semibold text-3xl'>Configure your campaign</p>
+              <p className='text-gray-900 font-semibold text-3xl'>
+                {t('create_campaign.configure_campaign')}
+              </p>
               <p className='text-gray-600 font-normal text-sm'>
-                Provide all the details for configuring your campaign
+                {t('create_campaign.provide_campaign_details')}
               </p>
             </Stack>
             <Group>
@@ -158,8 +160,8 @@ export const EmailSmsCampaign = () => {
               >
                 {isReadyToConfirm
                   ? campaignConfig?.resourceId?.length
-                    ? 'Update'
-                    : 'Create'
+                    ? t('create_campaign.update')
+                    : t('create_campaign.common_create')
                   : t('onboarding.continue')}
               </Button>
             </Group>
