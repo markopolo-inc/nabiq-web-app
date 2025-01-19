@@ -16,7 +16,7 @@ export const Marktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
     <IntegrationCard
       description={t('integrations.datasource.tracking_desc')}
       icon={<FiCommand size={32} color={primary500} fill={primary500} />}
-      title='Marktag'
+      title={t('connect_marktag.marktag')}
       isConnected={!!markTag}
       badge={
         markTag && (
@@ -30,7 +30,7 @@ export const Marktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
       <div className='flex gap-8'>
         {markTag ? (
           <Button variant='secondary' onClick={onShowMarktag} className='!w-36'>
-            Reconfigure
+            {t('integrations.reconfigure')}
           </Button>
         ) : (
           <>
@@ -43,7 +43,7 @@ export const Marktag = ({ onShowMarktag }: ConnectMarktagPropsTypes) => {
               }
               variant='link'
             >
-              Learn more
+              {t('integrations.learn_more')}
             </Button>
           </>
         )}
