@@ -1,8 +1,10 @@
 import { FiCopy02 } from '@nabiq-icons';
 import { Button, GatewayLogo, Group, Modal, Stack } from '@nabiq-ui';
 import { toast } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const ModalBody = () => {
+  const { t } = useTranslation();
   const codeText = `mtag('event', {
     type: 'fcm',
     fcmToken: '`;
@@ -15,8 +17,10 @@ const ModalBody = () => {
       <Stack gap={16}>
         <GatewayLogo app='firebase' width={32} />
         <Stack gap={4}>
-          <p className='text-gray-900 font-semibold text-xl'>Integrate Firebase</p>
-          <p className='text-gray-600'>{`Copy the following code and paste in your <head> tag.`}</p>
+          <p className='text-gray-900 font-semibold text-xl'>
+            {t('integrations.integrate_firebase')}
+          </p>
+          <p className='text-gray-600'>{t('integrations.copy_code')}</p>
         </Stack>
       </Stack>
       <Stack className='border rounded-xl border-gray-200 p-6' gap={12}>
@@ -25,7 +29,7 @@ const ModalBody = () => {
             leadingIcon={<FiCopy02 />}
             onClick={() => {
               navigator.clipboard.writeText(codeText + 'USER_FCM_TOKEN' + codeEnd);
-              toast.success('Code copied to clipboard!', { id: 'code-copied' });
+              toast.success(t('integrations.code_copied'), { id: 'code-copied' });
             }}
           >
             Copy
@@ -38,11 +42,11 @@ const ModalBody = () => {
         </pre>
       </Stack>
       <p className='text-gray-600'>
-        Please input the user token in the{' '}
+        {t('integrations.input_user_token')}{' '}
         <span className='font-semibold' style={{ color: '#000', fontFamily: 'monospace' }}>
-          fcmToken
+          {t('integrations.fcm_token')}
         </span>{' '}
-        field after integrating firebase to your website.
+        {t('integrations.field_after_firebase')}
       </p>
     </Stack>
   );

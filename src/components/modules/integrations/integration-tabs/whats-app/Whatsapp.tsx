@@ -25,7 +25,7 @@ export const Whatsapp = () => {
   return (
     <div className='gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
       <IntegrationCard
-        title='Whatsapp'
+        title={t('integrations.whatsapp')}
         description={t('integrations.whatsapp_desc')}
         icon={<GatewayLogo app='whatsapp' width={28} />}
         isConnected={!!socialIntegrations?.socialTokens?.facebook}
@@ -43,7 +43,7 @@ export const Whatsapp = () => {
               onClick={() => setShowDisconnectModal(true)}
               loading={isDisconnecting}
             >
-              Disconnect
+              {t('integrations.disconnect')}
             </Button>
           </div>
         ) : (
@@ -56,13 +56,13 @@ export const Whatsapp = () => {
               });
             }}
           >
-            Integrate
+            {t('integrations.integrate')}
           </Button>
         )}
       </IntegrationCard>
       <ConfirmationModal
         onConfirm={handleDisconnect}
-        title='Are you sure you want to disconnect?'
+        title={t('integrations.confirm_disconnect')}
         showModal={showDisconnectModal}
         setShowModal={setShowDisconnectModal}
       />
