@@ -1,10 +1,12 @@
 import { FiCheckCircle } from '@nabiq-icons';
 import { Button, Modal, Stack, Text } from '@nabiq-ui';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 const ModalBody = ({ setOpened }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Stack gap={32} className='p-8'>
@@ -24,8 +26,8 @@ const ModalBody = ({ setOpened }) => {
 
           <Text size='16px' className='text-center text-gray-600'>
             You&rsquo;ll be able to view and approve them in our{' '}
-            <span className='font-bold'>control room</span>. Don&rsquo;t worry, we will notify you
-            when it&rsquo;s ready.
+            <span className='font-bold'>{t('navigation.nav_control_room')}</span>. Don&rsquo;t
+            worry, we will notify you when it&rsquo;s ready.
           </Text>
         </Stack>
       </Stack>
