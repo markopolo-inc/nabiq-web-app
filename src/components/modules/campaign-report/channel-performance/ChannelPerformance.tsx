@@ -9,7 +9,9 @@ export const ChannelPerformance: FC = () => {
     <Stack gap={20} className='border border-gray-200 shadow-sm rounded-xl p-6'>
       <div className='flex justify-between items-center'>
         <Stack className='flex-row' gap={8}>
-          <p className='text-gray-900 text-lg font-semibold'>Channel performance</p>
+          <p className='text-gray-900 text-lg font-semibold'>
+            {t('campaign_report.channel_performance')}
+          </p>
           <Badge color='gray'>{t('create_campaign.goal_retention')}</Badge>
         </Stack>
       </div>
