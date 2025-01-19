@@ -96,13 +96,15 @@ const ModalBody = ({
           <Stack gap={16}>
             <GatewayLogo app='firebase' width={32} />
             <Stack gap={4}>
-              <p className='text-gray-900 font-semibold text-xl'>Integrate Firebase</p>
-              <p className='text-gray-600'>Enter your service account JSON.</p>
+              <p className='text-gray-900 font-semibold text-xl'>
+                {t('integrations.integrate_firebase')}
+              </p>
+              <p className='text-gray-600'>{t('integrations.enter_service_account_json')}</p>
             </Stack>
           </Stack>
           <JsonInput
-            placeholder='Enter JSON'
-            label='JSON'
+            placeholder={t('integrations.enter_json')}
+            label={t('integrations.json')}
             value={json}
             onChange={(value) => {
               setJson(value);
@@ -118,10 +120,10 @@ const ModalBody = ({
               onClick={handleVerify}
               disabled={!json || !!jsonError}
             >
-              Verify
+              {t('integrations.verify')}
             </Button>
             <Button onClick={() => setShowInstructions(true)} variant='link'>
-              How do I find service account JSON?
+              {t('integrations.find_service_account_json')}
             </Button>
           </Stack>
         </Stack>
