@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import type { GatewayType, IGateway } from 'interfaces/brand.interface';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ApiKeyModal,
   GatewayDisconnectModal,
@@ -16,6 +17,7 @@ import { useAppSelector } from 'store/hooks';
 import { getOAuthUrl } from 'utils/auth';
 
 export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
+  const { t } = useTranslation();
   const [selectedGateway, setSelectedGateway] = useState<IGateway | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
@@ -62,7 +64,9 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
                           handleIntegrate(gateway.oauthUrl);
                         }}
                       >
-                        {isGatewayConnected ? 'Reconnect' : 'Integrate'}
+                        {isGatewayConnected
+                          ? t('integrations.reconnect')
+                          : t('integrations.integrate')}
                       </Button>
                     )}
 
@@ -77,7 +81,7 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
                               setSelectedGateway(gateway);
                             }}
                           >
-                            Configure
+                            {t('create_campaign.configure')}
                           </Button>
                         ) : (
                           <Button
@@ -88,7 +92,7 @@ export const EmailSmsApp = ({ selectedTab }: { selectedTab: TOptionTab }) => {
                               setSelectedGateway(gateway);
                             }}
                           >
-                            Integrate
+                            {t('integrations.integrate')}
                           </Button>
                         )}
                       </>

@@ -15,27 +15,27 @@ export const appCategories: Array<{
 }> = [
   {
     value: 'data-sources',
-    label: 'Data sources',
+    label: 'integrations.data_sources',
     icon: FiData,
   },
   {
     value: 'email',
-    label: 'Email apps',
+    label: 'integrations.email_apps',
     icon: FiMail01,
   },
   {
     value: 'sms',
-    label: 'SMS apps',
+    label: 'integrations.sms_apps',
     icon: FiMessageSmileCircle,
   },
   {
     value: 'whatsapp',
-    label: 'WhatsApp',
+    label: 'integrations.whatsapp',
     icon: FiWhatsApp,
   },
   {
     value: 'push-notification',
-    label: 'Push notification apps',
+    label: 'integrations.push_notification_apps',
     icon: FiNotificationMessage,
   },
 ];
