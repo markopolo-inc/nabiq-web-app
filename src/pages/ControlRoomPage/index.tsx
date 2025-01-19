@@ -60,15 +60,15 @@ const ControlRoom = () => {
               </div>
               <Stack gap={4} align='center'>
                 <p className='text-gray-900 text-3xl font-semibold'>
-                  No campaigns to show at the moment.
+                  {t('control_room.no_campaigns_to_show')}
                 </p>
                 <p className='text-gray-600 text-base font-normal'>
-                  Create a campaign to see updates here.
+                  {t('control_room.create_campaign_for_updates')}
                 </p>
               </Stack>
             </Stack>
             <Button leadingIcon={<FiPlus size={20} color='white' />} onClick={handleCreateCampaign}>
-              Create campaign
+              {t('campaigns_page.create_campaign_button')}
             </Button>
           </Stack>
         )}

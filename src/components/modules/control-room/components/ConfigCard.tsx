@@ -31,7 +31,7 @@ export const ConfigCard = ({
             {config?.hasFeedBack && (
               <Badge color='success'>
                 <FiDot size={8} color='#17B26A' />
-                Feedback given
+                {t('control_room.feedback_given')}
               </Badge>
             )}
           </Group>
@@ -54,11 +54,12 @@ export const ConfigCard = ({
           {isPublished && (
             <Stack gap={4}>
               <p className='text-gray-900 font-semibold text-lg'>
-                '{config?.name}' <span className='font-normal'>email has been published</span>
+                '{config?.name}'{' '}
+                <span className='font-normal'>{t('control_room.email_published')}</span>
               </p>
 
               <p className='text-gray-600 font-normal text-sm'>
-                Content has been delivered to your cohorts.
+                {t('control_room.content_delivered')}
               </p>
             </Stack>
           )}
@@ -71,11 +72,15 @@ export const ConfigCard = ({
                     <Progress value={config?.progress} color='#2972F5' />
                   </div>
 
-                  <span className='text-gray-700 font-sm font-medium'>{config?.timeLeft} left</span>
+                  <span className='text-gray-700 font-sm font-medium'>
+                    {config?.timeLeft} {t('control_room.left')}
+                  </span>
                 </div>
               ) : (
                 <Badge color='gray'>
-                  Scheduled for {moment(config?.scheduledFor).format('MMM D, YYYY')}
+                  {t('control_room', {
+                    scheduled_for: moment(config?.scheduledFor).format('MMM D, YYYY'),
+                  })}
                 </Badge>
               )}{' '}
             </>
@@ -91,7 +96,7 @@ export const ConfigCard = ({
                   trailingIcon={<FiChevronRight />}
                   onClick={() => navigate(`/control-room/content-samples/${config?.id}`)}
                 >
-                  View content sample
+                  {t('control_room.view_content_sample')}
                 </Button>
                 {/*<Badge size='lg' color='primary'>*/}
                 {/*  125 identified individuals*/}

@@ -28,12 +28,12 @@ const ModalBody: React.FC<{
           variant='link'
           trailingIcon={<FiChevronRight color={primary600} />}
         >
-          Learn more about control room
+          {t('content_samples.learn_more_control_room')}
         </Button>
       </div>
 
       <Button onClick={() => setOpened(false)} fullWidth variant='primary' size='md'>
-        Got it
+        {t('content_samples.got_it')}
       </Button>
     </div>
   );
