@@ -2,6 +2,7 @@ import { ComboboxItem } from '@mantine/core';
 import { Button, GatewayLogo, Loader, Modal, Select } from '@nabiq-ui';
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAppSelector } from 'src/store/hooks';
 import {
@@ -16,6 +17,7 @@ interface NumberOption extends ComboboxItem {
 }
 
 const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
+  const { t } = useTranslation();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const { data } = useGetFbBusinessAccountsQuery(brandId);
   const [getWABusinessAccounts, { isLoading, data: waData }] = useLazyGetWABusinessAccountsQuery();
@@ -71,20 +73,22 @@ const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
   return (
     <div className='p-8 space-y-4'>
       <GatewayLogo app='whatsapp' width={32} />
-      <div className='text-xl font-semibold text-gray-900'>Select business account</div>
+      <div className='text-xl font-semibold text-gray-900'>
+        {t('create_campaign.select_business_account')}
+      </div>
       <Select
         data={businessAccounts}
-        label='Select facebook business account'
-        placeholder='Select account'
+        label={t('create_campaign.select_facebook_account')}
+        placeholder={t('create_campaign.select_account')}
         onChange={setAccountId}
       />
       <Select
         leftSection={isLoading ? <Loader size='xs' /> : null}
         disabled={isLoading || !accountId}
         data={waNumbers}
-        label='Select whatsapp number'
-        placeholder='Whatsapp number'
-        nothingFoundMessage={isLoading ? 'Loading...' : 'No whatsapp numbers found.'}
+        label={t('create_campaign.select_whatsapp_number')}
+        placeholder={t('create_campaign.whatsapp_number')}
+        nothingFoundMessage={isLoading ? 'Loading...' : t('integrations.no_whatsapp_numbers')}
         onChange={(value, option: NumberOption) => {
           setNumber(value);
           setName(option?.name);
@@ -99,7 +103,7 @@ const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
           loading={isSaving}
           onClick={handleSave}
         >
-          Done
+          {t('create_campaign.done')}
         </Button>
       </div>
     </div>
@@ -115,6 +119,7 @@ export const WhatsAppConnectModal = ({
   setIsShowModal: (value: boolean) => void;
   showTrigger?: boolean;
 }) => {
+  const { t } = useTranslation();
   const { socialIntegrations } = useAppSelector((state) => state.brand);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -124,13 +129,13 @@ export const WhatsAppConnectModal = ({
       setIsShowModal(true);
       url.searchParams.delete('success');
       navigate({ search: url.search }, { replace: true });
-      toast.success('Facebook connected successfully', {
+      toast.success(t('create_campaign.facebook_connected'), {
         id: 'whatsapp-connected',
       });
     }
 
     if (searchParams.has('error')) {
-      toast.error('Facebook authentication failed!', {
+      toast.error(t('create_campaign.facebook_auth_failed'), {
         id: 'whatsapp-error',
       });
       url.searchParams.delete('error');
@@ -151,7 +156,7 @@ export const WhatsAppConnectModal = ({
       {({ setOpened }) =>
         showTrigger ? (
           <Button variant='secondary' onClick={() => setOpened(true)}>
-            Configure
+            {t('create_campaign.configure')}
           </Button>
         ) : null
       }
