@@ -30,11 +30,11 @@ const Settings = () => {
       businessSize: company?.meta?.businessSize ?? '',
     },
     validate: {
-      userName: (value) => (value.length === 0 ? 'Name is required' : null),
-      userEmail: (value) => (value.length === 0 ? 'Email is required' : null),
-      businessName: (value) => (value?.length === 0 ? 'Business name is required' : null),
-      industry: (value) => (value?.length === 0 ? 'Industry is required' : null),
-      businessSize: (value) => (value?.length === 0 ? 'Business Size is required' : null),
+      userName: (value) => (value.length === 0 ? t('settings.name_required') : null),
+      userEmail: (value) => (value.length === 0 ? t('settings.email_required') : null),
+      businessName: (value) => (value?.length === 0 ? t('settings.business_name_required') : null),
+      industry: (value) => (value?.length === 0 ? t('settings.industry_required') : null),
+      businessSize: (value) => (value?.length === 0 ? t('settings.business_size_required') : null),
     },
   });
 
@@ -87,13 +87,13 @@ const Settings = () => {
                 <div className='space-y-5'>
                   <TextInput
                     label={t('settings.name')}
-                    placeholder='Enter your name'
+                    placeholder={t('settings.enter_name')}
                     {...form.getInputProps('userName')}
                   />
 
                   <TextInput
                     label={t('settings.email')}
-                    placeholder='Enter your email'
+                    placeholder={t('settings.enter_email')}
                     {...form.getInputProps('userEmail')}
                   />
 
@@ -131,42 +131,57 @@ const Settings = () => {
                   <TextInput
                     required
                     label={t('settings.business_name')}
-                    placeholder='Enter business name'
+                    placeholder={t('settings.enter_business_name')}
                     {...form.getInputProps('businessName')}
                   />
                   <Select
                     required
                     data={[
-                      { value: 'apparel', label: 'Apparel' },
-                      { value: 'auto', label: 'Auto' },
-                      { value: 'b2b', label: 'B2B' },
-                      { value: 'beauty', label: 'Beauty' },
-                      { value: 'consumer_service', label: 'Consumer Service' },
-                      { value: 'finance_insurance', label: 'Finance Insurance' },
-                      { value: 'fitness', label: 'Fitness' },
-                      { value: 'home_improvement', label: 'Home Improvement' },
-                      { value: 'healthcare', label: 'Healthcare' },
-                      { value: 'industrial_services', label: 'Industrial Services' },
-                      { value: 'legal', label: 'Legal' },
-                      { value: 'retail', label: 'Retail' },
-                      { value: 'technology', label: 'Technology' },
-                      { value: 'travel_hospitality', label: 'Travel & Hospitality' },
+                      { value: t('settings.apparel'), label: 'Apparel' },
+                      { value: t('settings.auto'), label: 'Auto' },
+                      { value: t('settings.b2b'), label: 'B2B' },
+                      { value: t('settings.beauty'), label: 'Beauty' },
+                      { value: t('settings.consumer_service'), label: 'Consumer Service' },
+                      { value: t('settings.finance_insurance'), label: 'Finance Insurance' },
+                      { value: t('settings.fitness'), label: 'Fitness' },
+                      { value: t('settings.home_improvement'), label: 'Home Improvement' },
+                      { value: t('settings.healthcare'), label: 'Healthcare' },
+                      { value: t('settings.industrial_services'), label: 'Industrial Services' },
+                      { value: t('settings.legal'), label: 'Legal' },
+                      { value: t('settings.retail'), label: 'Retail' },
+                      { value: t('settings.technology'), label: 'Technology' },
+                      { value: t('settings.travel_hospitality'), label: 'Travel & Hospitality' },
                     ]}
                     label={t('settings.industry')}
-                    placeholder='Select industry'
+                    placeholder={t('settings.select_industry')}
                     {...form.getInputProps('industry')}
                   />
                   <Select
                     required
                     data={[
-                      { value: '1-10', label: '1-10 employees' },
-                      { value: '11-50', label: '11-50 employees' },
-                      { value: '51-200', label: '51-200 employees' },
-                      { value: '201-500', label: '201-500 employees' },
-                      { value: '500+', label: '500+ employees' },
+                      {
+                        value: t('settings.employees_count', { size: '1-10' }),
+                        label: '1-10 employees',
+                      },
+                      {
+                        value: t('settings.employees_count', { size: '11-50' }),
+                        label: '11-50 employees',
+                      },
+                      {
+                        value: t('settings.employees_count', { size: '51-200' }),
+                        label: '51-200 employees',
+                      },
+                      {
+                        value: t('settings.employees_count', { size: '201-500' }),
+                        label: '201-500 employees',
+                      },
+                      {
+                        value: t('settings.employees_count', { size: '500+' }),
+                        label: '500+ employees',
+                      },
                     ]}
                     label={t('settings.business_size')}
-                    placeholder='Select business size'
+                    placeholder={t('settings.select_business_size')}
                     {...form.getInputProps('businessSize')}
                   />
                 </div>
