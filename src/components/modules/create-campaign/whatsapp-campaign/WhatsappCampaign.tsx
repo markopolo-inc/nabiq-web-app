@@ -51,11 +51,13 @@ export const WhatsappCampaign = () => {
         <Stack gap={20}>
           <Breadcrumbs />
           <Group justify='space-between' align='center'>
-            <p className='text-gray-900 font-semibold text-xl'>Configure your campaign</p>
+            <p className='text-gray-900 font-semibold text-xl'>
+              {t('create_campaign.configure_campaign')}
+            </p>
             {active === 3 ? (
               <Group>
                 <Button variant='link' size='md' onClick={() => navigate('/campaigns')}>
-                  Go to campaigns
+                  {t('create_campaign.go_to_campaigns')}
                 </Button>
               </Group>
             ) : (

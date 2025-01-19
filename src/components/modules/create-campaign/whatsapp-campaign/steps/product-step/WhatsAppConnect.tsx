@@ -20,13 +20,12 @@ export const WhatsAppConnect = () => {
           <p className='text-gray-900 text-lg font-semibold'>
             1. {t('create_campaign_whatsapp.connect_prompt')}
           </p>
-          {socialIntegrations?.socialTokens?.facebook && <Badge color='success'>Connected</Badge>}
+          {socialIntegrations?.socialTokens?.facebook && (
+            <Badge color='success'>{t('create_campaign.connected')}</Badge>
+          )}
         </Group>
 
-        <p className='text-gray-600 text-sm'>
-          Link your WhatsApp Business account to launch a conversational SMS campaign. Don't have an
-          account?
-        </p>
+        <p className='text-gray-600 text-sm'>{t('create_campaign.link_whatsapp')}</p>
         <Group justify='space-between'>
           {!socialIntegrations?.socialTokens?.facebook ? (
             <Button
@@ -39,7 +38,7 @@ export const WhatsAppConnect = () => {
                 });
               }}
             >
-              Connect
+              {t('home_page.common_connect')}
             </Button>
           ) : (
             <Group justify='space-between'>
@@ -48,7 +47,7 @@ export const WhatsAppConnect = () => {
                 leadingIcon={<FiEdit01 size={14} />}
                 onClick={() => setShowWAConnectModal(true)}
               >
-                Configure
+                {t('create_campaign.configure')}
               </Button>
             </Group>
           )}
@@ -56,7 +55,7 @@ export const WhatsAppConnect = () => {
             {isConnected && <Badge color='gray'>{socialIntegrations?.whatsApp?.number}</Badge>}
             {socialIntegrations?.socialTokens?.facebook &&
               !socialIntegrations?.whatsApp?.number && (
-                <Badge color='error'>Number is not available</Badge>
+                <Badge color='error'>{t('create_campaign.number_not_available')}</Badge>
               )}
           </Group>
         </Group>

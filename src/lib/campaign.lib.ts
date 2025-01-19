@@ -77,16 +77,16 @@ export const emailSmsCampaignSteps = [
 
 export const whatsappCampaignSteps = [
   {
-    label: 'Connection',
-    description: 'Connect WhatsApp & sync products',
+    label: 'create_campaign.connection',
+    description: 'create_campaign_whatsapp.sync_products',
   },
   {
     label: 'Creation',
-    description: 'Set priorities for Captain Nabiq.',
+    description: 'create_campaign_whatsapp.set_priorities',
   },
   {
     label: 'Completion',
-    description: 'Captain Nabiq is on it—upload more leads if needed.',
+    description: 'create_campaign_whatsapp.captain_working',
   },
 ];
 
