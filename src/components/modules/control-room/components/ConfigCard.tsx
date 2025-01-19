@@ -78,8 +78,8 @@ export const ConfigCard = ({
                 </div>
               ) : (
                 <Badge color='gray'>
-                  {t('control_room', {
-                    scheduled_for: moment(config?.scheduledFor).format('MMM D, YYYY'),
+                  {t('control_room.scheduled_for', {
+                    scheduled: moment(config?.scheduledFor).format('MMM D, YYYY'),
                   })}
                 </Badge>
               )}{' '}
