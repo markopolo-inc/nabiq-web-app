@@ -1,12 +1,14 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, ConfirmationModal, GatewayLogo, Group } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IntegrationCard } from 'src/components/modules/integrations/components';
 import { useAppSelector } from 'src/store/hooks';
 import { useDisconnectDataSourceMutation } from 'src/store/integrations/data-sources.api';
 import { getOAuthUrl } from 'src/utils/auth';
 
 export const Salesforce = () => {
+  const { t } = useTranslation();
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
 
   const [showSalesforceDisconnectModal, setShowSalesforceDisconnectModal] =
@@ -21,12 +23,11 @@ export const Salesforce = () => {
   };
   return (
     <>
-      {' '}
       <IntegrationCard
         key='salesforce'
-        title='Salesforce'
+        title={t('integrations.salesforce')}
         isConnected={!!datasourceIntegrations?.connectedAccounts?.salesforce}
-        description='Leverage Salesforce as a data source for seamless, data-driven customer engagement.'
+        description={t('integrations.leverage_salesforce')}
         icon={<GatewayLogo app='salesforce' width={32} />}
       >
         {!datasourceIntegrations?.connectedAccounts?.salesforce ? (
@@ -40,7 +41,7 @@ export const Salesforce = () => {
               });
             }}
           >
-            Integrate
+            {t('integrations.integrate')}
           </Button>
         ) : (
           <Group>
@@ -49,14 +50,14 @@ export const Salesforce = () => {
               onClick={() => setShowSalesforceDisconnectModal(true)}
               loading={isDisconnecting}
             >
-              Disconnect
+              {t('integrations.disconnect')}
             </Button>
           </Group>
         )}
       </IntegrationCard>
       <ConfirmationModal
         onConfirm={handleDisconnectSalesforce}
-        title='Are you sure you want to disconnect salesforce?'
+        title={t('integrations.confirm_disconnect_salesforce')}
         showModal={showSalesforceDisconnectModal}
         setShowModal={setShowSalesforceDisconnectModal}
       />

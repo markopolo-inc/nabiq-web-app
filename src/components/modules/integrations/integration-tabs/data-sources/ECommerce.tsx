@@ -30,7 +30,7 @@ export const ECommerce = () => {
 
   useEffect(() => {
     if (searchParams.get(QUERY_PARAMS.SUCCESS) === QUERY_PARAMS_VALUES.SALLA_CONNECT) {
-      toast.success('Salla connected successfully!', {
+      toast.success(t('integrations.salla_connected'), {
         id: 'salla-connect',
       });
       searchParams.delete(QUERY_PARAMS.SUCCESS);
@@ -77,7 +77,9 @@ export const ECommerce = () => {
               );
             }}
           >
-            {isShopifyConnected ? 'Reconnect store' : 'Connect store'}
+            {isShopifyConnected
+              ? t('integrations.reconnect_store')
+              : t('integrations.connect_store')}
           </Button>
           {isShopifyConnected && (
             <Button
@@ -87,14 +89,14 @@ export const ECommerce = () => {
                 setShowDisconnectModal(true);
               }}
             >
-              Disconnect
+              {t('integrations.disconnect')}
             </Button>
           )}
         </Group>
       </IntegrationCard>
 
       <IntegrationCard
-        title='Salla'
+        title={t('integrations.salla')}
         description={t('integrations.datasource.salla_desc')}
         icon={<GatewayLogo app='salla' width={32} />}
         isConnected={isSallaConnected}
@@ -103,10 +105,14 @@ export const ECommerce = () => {
           datasourceIntegrations?.connectedAccounts?.salla?.store && (
             <div className='flex items-center gap-2'>
               <Badge color='gray'>
-                ID: {datasourceIntegrations?.connectedAccounts?.salla?.store?.id}
+                {t('salla_id', {
+                  salla_id: datasourceIntegrations?.connectedAccounts?.salla?.store?.id,
+                })}
               </Badge>
               <Badge color='gray'>
-                Name: {datasourceIntegrations?.connectedAccounts?.salla?.store?.name}
+                {t('salla_name', {
+                  salla_name: datasourceIntegrations?.connectedAccounts?.salla?.store?.name,
+                })}
               </Badge>
             </div>
           )
@@ -124,7 +130,7 @@ export const ECommerce = () => {
             }}
             disabled={isDisconnecting}
           >
-            {isSallaConnected ? 'Reconnect store' : 'Connect store'}
+            {isSallaConnected ? t('integrations.reconnect_store') : t('integrations.connect_store')}
           </Button>
           {isSallaConnected && (
             <Button
@@ -134,7 +140,7 @@ export const ECommerce = () => {
                 setShowDisconnectModal(true);
               }}
             >
-              Disconnect
+              {t('integrations.disconnect')}
             </Button>
           )}
         </Group>
@@ -142,7 +148,7 @@ export const ECommerce = () => {
 
       <ShopifyConnectModal />
       <ConfirmationModal
-        title='Are you sure you want to disconnect this platform?'
+        title={t('integrations.confirm_disconnect_platform')}
         showModal={showDisconnectModal}
         setShowModal={setShowDisconnectModal}
         onConfirm={() => handleDisconnect(selectedPlatform)}
