@@ -130,7 +130,7 @@ export const CampaignDetails = () => {
       <Group justify='space-between'>
         <Stack gap={4}>
           <p className='text-gray-900 text-[20px] font-semibold'>
-            {capitalize(name?.split('-').join(' '))} Discover Bali
+            {capitalize(name?.split('-').join(' '))} {t('campaign_details.discover_bali')}
           </p>
           <p className='text-gray-600 text-base font-normal'>
             {t('campaign_details.list_description')}
@@ -171,7 +171,7 @@ export const CampaignDetails = () => {
       <Xwrapper>
         <div className='grid grid-cols-12 gap-20 relative mt-8'>
           <Stack className='col-span-6'>
-            <p className='text-sm font-normal text-gray-600'>Audience</p>
+            <p className='text-sm font-normal text-gray-600'>{t('campaign_details.audience')}</p>
             {isLoadingAudienceData && (
               <Image src={LoaderGif} alt='Loading...' className='w-56 mx-auto' />
             )}
@@ -199,7 +199,7 @@ export const CampaignDetails = () => {
                         <p className='text-gray-900 font-semibold'>ID: {user.id}</p>
                         {user.isEnhanced && (
                           <Badge color='success'>
-                            Nabiq enhanced <FiStar04 />
+                            {t('campaign_details.nabiq_enhanced')} <FiStar04 />
                           </Badge>
                         )}
                       </Group>
@@ -227,12 +227,14 @@ export const CampaignDetails = () => {
               </Stack>
             )}
             {!isLoadingAudienceData && audience?.length === 0 && (
-              <p className='text-gray-600 font-normal text-sm'>No audience found!</p>
+              <p className='text-gray-600 font-normal text-sm'>
+                {t('campaign_details.no_audience_found')}
+              </p>
             )}
           </Stack>
 
           <Stack className='col-span-6'>
-            <p className='text-sm font-normal text-gray-600'>Breakdown</p>
+            <p className='text-sm font-normal text-gray-600'>{t('campaign_details.breakdown')}</p>
             {!isNoData ? (
               <Stack gap={36}>
                 {breakdown?.map((item, idx) => (
@@ -251,12 +253,16 @@ export const CampaignDetails = () => {
                       <Fragment>
                         <Group justify='space-between'>
                           <GatewayLogo app={item?.platform} width={24} />
-                          <Badge color='gray'>Step {item?.step}</Badge>
+                          <Badge color='gray'>
+                            {t('campaign_details.step')} {item?.step}
+                          </Badge>
                         </Group>
                         <Stack gap={0} className='mt-4'>
                           <p className='text-gray-900 font-semibold'>{capitalize(item?.channel)}</p>
                           <p className='text-gray-600 font-normal text-sm'>
-                            Sent on {moment(item?.sentOn).format('MMM D, YYYY')} at{' '}
+                            {t('campaign_details.sent_on', {
+                              time: moment(item?.sentOn).format('MMM D, YYYY'),
+                            })}
                             {moment(item?.sentOn).format('h:mm a')}
                           </p>
                         </Stack>
@@ -314,7 +320,9 @@ export const CampaignDetails = () => {
                 ))}
               </Stack>
             ) : (
-              <p className='text-gray-600 font-normal text-sm'>No data available!</p>
+              <p className='text-gray-600 font-normal text-sm'>
+                {t('campaign_details.no_data_available')}
+              </p>
             )}
           </Stack>
         </div>
