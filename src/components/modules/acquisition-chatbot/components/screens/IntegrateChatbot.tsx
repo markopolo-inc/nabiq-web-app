@@ -20,7 +20,7 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
       position: "bottom-right",
     };
     const script = document.createElement("script");
-    script.src = "https://acquisition-chatbot-bucket.s3.ap-southeast-1.amazonaws.com/main.js";
+    script.src = "${import.meta.env.VITE_ACQUISITION_CHATBOT_SCRIPT_URL || 'N/A'}";
     script.async = true;
     script.onload = () => window.initializeChatbot?.(config);
     document.head.appendChild(script);
