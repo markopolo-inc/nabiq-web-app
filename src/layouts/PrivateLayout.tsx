@@ -1,3 +1,4 @@
+import Intercom from '@intercom/messenger-js-sdk';
 import { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useLogoutMutation } from 'src/store/auth/authApi';
@@ -8,6 +9,17 @@ export const PrivateLayout = () => {
   const [logout] = useLogoutMutation();
 
   const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const { resourceId, userEmail, userName, createdAt } = useAppSelector((state) => state.user);
+
+  // integrate intercom with user info
+  Intercom({
+    app_id: import.meta.env.VITE_INTERCOM_APP_ID,
+    user_id: resourceId,
+    name: userName,
+    email: userEmail,
+    created_at: new Date(createdAt)?.getTime(),
+  });
+
   useEffect(() => {
     const handleWindowFocus = async () => {
       const res = await getAuthToken();

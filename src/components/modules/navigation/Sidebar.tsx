@@ -1,3 +1,4 @@
+import { show } from '@intercom/messenger-js-sdk';
 import { useGetColors } from '@nabiq-ui';
 import cn from 'classnames';
 import { motion } from 'framer-motion';
@@ -20,6 +21,12 @@ const MenuItem = ({ item }) => {
     <Link
       to={item.to}
       className={cn('px-2 py-1.5', isSelected ? 'bg-white rounded-lg shadow-sm' : '')}
+      onClick={(event) => {
+        if (item.to === '#') {
+          event.preventDefault();
+          show();
+        }
+      }}
     >
       <div className='flex gap-3 items-center'>
         <Icon size={18} fill={isSelected ? primary600 : gray950} />
@@ -36,8 +43,8 @@ const MenuItem = ({ item }) => {
 export const Sidebar = () => {
   const { payment } = useAppSelector((state) => state.company);
   return (
-    <div className='h-screen pl-6 pr-8 py-8'>
-      <div className='h-full flex flex-col justify-between overflow-y-auto'>
+    <div className='h-screen pl-6 pr-8 py-8 overflow-y-auto'>
+      <div className='h-full flex flex-col justify-between'>
         <div className='flex flex-col gap-3.5'>
           {sideBarCategories?.map((category, idx) => (
             <motion.div
@@ -57,7 +64,7 @@ export const Sidebar = () => {
             </motion.div>
           ))}
         </div>
-        <div className='flex flex-col gap-8'>
+        <div className='flex flex-col gap-8 mt-4'>
           <ul className='flex flex-col gap-2'>
             <p className='text-sm font-medium text-gray-500 px-2'>Others</p>
             {lowerPartOptions?.map((item, idx) => <MenuItem key={idx} item={item} />)}
