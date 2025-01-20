@@ -5,4 +5,5 @@ export interface UserInterface {
   cognitoId?: string;
   userEmail?: string;
   userName?: string;
+  createdAt?: string;
 }

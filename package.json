@@ -24,6 +24,7 @@
     ]
   },
   "dependencies": {
+    "@intercom/messenger-js-sdk": "^0.0.14",
     "@kainstar/vite-plugin-i18next-loader": "^1.0.3",
     "@mantine/code-highlight": "^7.12.2",
     "@mantine/core": "^7.10.1",
