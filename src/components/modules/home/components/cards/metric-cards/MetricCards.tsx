@@ -9,6 +9,8 @@ import type { TOptionTab } from 'src/interfaces/modules/integrations.ts';
 import { IMetricData, IMetrics } from 'src/interfaces/monitoring.interface.ts';
 import { useGetMetricCardsQuery } from 'src/store/monitoring/monitoring.api.ts';
 
+import { EmptyMetricsCard } from '../MetricsCard/EmptyMetricsCard';
+
 const appCategories: Array<{
   value: TOptionTab;
   label: string;
@@ -101,16 +103,25 @@ export const MetricCards: FC<{
                 className='w-[264px] border border-gray-200 rounded-xl p-6 gap-4'
               />
             ))
-          : metrics?.map((item, index) => (
-              <MetricsCard
-                key={item?.name}
-                index={index}
-                name={item?.name}
-                change={item?.change}
-                type={item?.type}
-                value={item?.value}
-              />
-            ))}
+          : metrics?.length > 0
+            ? metrics?.map((item, index) => (
+                <MetricsCard
+                  key={item?.name}
+                  index={index}
+                  name={item?.name}
+                  change={item?.change}
+                  type={item?.type}
+                  value={item?.value}
+                />
+              ))
+            : [
+                'Sent',
+                'Delivered',
+                'Opened rate',
+                'Total link clicks',
+                'Click through rate',
+                'Conversion rate',
+              ]?.map((item, index) => <EmptyMetricsCard key={item} index={index} name={item} />)}
       </motion.div>
     </motion.div>
   );

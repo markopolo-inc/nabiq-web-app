@@ -239,14 +239,18 @@ export const CampaignTable = ({
                   <Stack align='center' className='flex-row' gap={12}>
                     <Button
                       variant='secondary-black'
-                      onClick={() => navigate(`/campaigns/details/${item.resourceId}`)}
+                      onClick={() =>
+                        navigate(`/campaigns/details/${item.resourceId}?name=${item.name}`)
+                      }
                     >
                       Details
                     </Button>
                     <Button
                       variant='secondary'
                       onClick={() =>
-                        navigate(`/campaigns/report/${item.resourceId}?name=${item.name}`)
+                        navigate(
+                          `/campaigns/report/${item.resourceId}?name=${item.name}&createdAt=${item.createdAt}`,
+                        )
                       }
                     >
                       <FiBarChart04 color='#364152' size={20} />
