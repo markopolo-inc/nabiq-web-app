@@ -42,9 +42,11 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
       className='max-w-[768px] w-full bg-white border border-gray-200 rounded-xl p-6 shadow-sm'
     >
       <Stack gap={4}>
-        <p className='text-gray-900 text-lg font-semibold'>Integrate chatbot</p>
+        <p className='text-gray-900 text-lg font-semibold'>
+          {t('acquisition_chatbot_page.integrate_chatbot')}
+        </p>
         <p className='text-gray-600 text-sm font-normal'>
-          Copy and paste the following code into your website's <code>&lt;head&gt;</code> tag.
+          {t('acquisition_chatbot_page.copy_paste_code')}
         </p>
       </Stack>
 
@@ -56,7 +58,7 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
             leadingIcon={<FiCopy02 />}
             onClick={() => handleCopy(code)}
           >
-            Copy
+            {t('acquisition_chatbot_page.copy')}
           </Button>
           <code className='font-medium text-base text-gray-600 block whitespace-pre-wrap'>
             {code}
