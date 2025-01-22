@@ -137,9 +137,9 @@ export const PerformanceTrend: FC<{
 
             <Stack gap={4} align='center'>
               <p className='text-gray-900 font-semibold text-base'>
-                {t('monitoring.data_coming_soon')}
+                {t('home_page.data_coming_soon')}
               </p>
-              <p className='text-gray-600 font-normal text-sm'>{t('monitoring.data_ready')}</p>
+              <p className='text-gray-600 font-normal text-sm'>{t('home_page.data_ready')}</p>
             </Stack>
           </Stack>
         ) : (
