@@ -7,19 +7,32 @@ type MetricsCardProps = {
   value: number;
   type: 'number' | 'percentage' | 'currency' | 'count' | 'amount';
   change: number;
-  medium?: 'email' | 'sms' | 'whatsapp' | undefined;
+  mediums?: ('email' | 'sms' | 'whatsapp')[];
 };
 
-function MetricsCard({ name, type, value, change, medium = undefined }: MetricsCardProps) {
+const MediumIcon = ({ medium, color }: { medium: string; color: string }) => {
+  switch (medium) {
+    case 'email':
+      return <FiMail01 size={20} color={color} />;
+    case 'sms':
+      return <FiMessageDotCircle size={20} color={color} />;
+    case 'whatsapp':
+      return <FiWhatsApp size={20} color={color} />;
+    default:
+      return null;
+  }
+};
+
+function MetricsCard({ name, type, value, change, mediums = [] }: MetricsCardProps) {
   const { gray600 } = useGetColors();
   const isPositive = change > 0;
 
   return (
     <Stack className='w-[264px] border border-gray-200 rounded-xl p-6 gap-4'>
       <Group gap={8}>
-        {medium === 'email' && <FiMail01 size={20} color={gray600} />}
-        {medium === 'sms' && <FiMessageDotCircle size={20} color={gray600} />}
-        {medium === 'whatsapp' && <FiWhatsApp size={20} />}
+        {mediums?.map((medium, index) => (
+          <MediumIcon key={`${medium}-${index}`} medium={medium} color={gray600} />
+        ))}
         <p className='text-gray-600 font-medium text-sm'>{name}</p>
       </Group>
       <Group justify='space-between'>
@@ -32,4 +45,5 @@ function MetricsCard({ name, type, value, change, medium = undefined }: MetricsC
     </Stack>
   );
 }
+
 export default MetricsCard;
