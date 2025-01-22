@@ -1,6 +1,7 @@
 import { Alert } from '@mantine/core';
 import { Button, Select, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IGateway } from 'src/interfaces/brand.interface';
 import { useAppSelector } from 'src/store/hooks';
 import { useAddAccountsMutation } from 'src/store/integrations/integrations.api';
@@ -45,6 +46,7 @@ const AccountForm: React.FC<{
   gateway: IGateway;
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ selectableObjects, message, gateway, setOpened }) => {
+  const { t } = useTranslation();
   const { resourceId: brandId } = useAppSelector((state) => state.brand);
   const [addAccount, { isLoading }] = useAddAccountsMutation();
   const fields = Object.keys(selectableObjects || {});
@@ -53,7 +55,7 @@ const AccountForm: React.FC<{
   // console.log(payload);
   return (
     <Stack>
-      <Alert color='green' title={message || 'Account verified!'} />
+      <Alert color='green' title={message || t('integrations.account_verified')} />
 
       <form
         onSubmit={async (e) => {
@@ -88,7 +90,7 @@ const AccountForm: React.FC<{
             return (
               <Select
                 value={payload?.[field]?.value}
-                placeholder='Select...'
+                placeholder={`${t('create_campaign.select')}...`}
                 onChange={(value) =>
                   setPayload((state) => ({
                     ...state,
@@ -111,7 +113,7 @@ const AccountForm: React.FC<{
             //   fullWidth
             //   loading={isLoading}
           >
-            Confirm
+            {t('integrations.confirm')}
           </Button>
         </Stack>
       </form>

@@ -30,7 +30,7 @@ export const IntegrationCard = ({
         <div className='flex gap-6 justify-between items-center'>
           <div className='flex items-center gap-3'>
             <div>{icon}</div>
-            <p className='text-gray-900 font-semibold text-lg'>{title}</p>
+            <p className='text-gray-900 font-semibold text-lg'>{t(title)}</p>
           </div>
           {isConnected && <Badge color='success'>{t('create_campaign.connected')}</Badge>}
         </div>
