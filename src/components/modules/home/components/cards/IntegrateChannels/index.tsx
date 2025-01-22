@@ -39,7 +39,7 @@ export const IntegrateChannels: React.FC = () => {
       <Group gap={24}>
         {integrations.map((integration) => (
           <IntegrationCard
-            name={integration.name}
+            name={t(integration.name)}
             gateway={integration.gateway}
             id={integration.id}
             key={integration.id}

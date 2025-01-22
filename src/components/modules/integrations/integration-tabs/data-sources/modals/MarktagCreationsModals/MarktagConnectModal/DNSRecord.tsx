@@ -39,7 +39,11 @@ const DNSRecord = () => {
       </Stack>
 
       <Stack gap={16} py={12}>
-        <TextInput label='Type' readOnly value={domainData?.records?.[0]?.type} />
+        <TextInput
+          label={t('home_page.type_label')}
+          readOnly
+          value={domainData?.records?.[0]?.type}
+        />
 
         <TextInput
           label={t('home_page.name')}
@@ -69,7 +73,11 @@ const DNSRecord = () => {
           }
         />
 
-        <TextInput label='TTL' readOnly value={domainData?.records?.[0]?.ttl} />
+        <TextInput
+          label={t('home_page.ttl_label')}
+          readOnly
+          value={domainData?.records?.[0]?.ttl}
+        />
       </Stack>
 
       <Stack gap={12} pt={20}>
