@@ -24,7 +24,7 @@ const CampaignsListPage = () => {
 
   return (
     <>
-      <HeaderTitle>Nabiq | Campaigns</HeaderTitle>
+      <HeaderTitle>{t('page_title.campaigns_title')}</HeaderTitle>
 
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
 
