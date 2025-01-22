@@ -1,45 +1,36 @@
-import { FiPlus } from '@nabiq-icons';
-import { Button, Checkbox, GatewayLogo, Group, Stack, Switch } from '@nabiq-ui';
+import { Checkbox, Group, Stack } from '@nabiq-ui';
 import cn from 'classnames';
 import { useState } from 'react';
 import { usePlanDetails } from 'src/hooks/modules/billing';
 
-import { PriceSummary, WhatsAppAddOnModal } from './pricing-plans';
+import { WhatsAppAddOnModal } from './pricing-plans';
 
 export const PricingPlans = ({
   activeUsers,
   isMonthly,
-  setIsMonthly,
+  planCategory,
+  setPlanCategory,
 }: {
   activeUsers: number;
   isMonthly: boolean;
   setIsMonthly: (value: boolean) => void;
+  planCategory: 'pro' | 'enterprise';
+  setPlanCategory: (value: 'pro' | 'enterprise') => void;
 }) => {
   const [showWhatsAppAddOnModal, setShowWhatsAppAddOnModal] = useState(false);
-  const { pricingPlans, activeUsersInText } = usePlanDetails({ activeUsers, isMonthly });
-  const [planCategory, setPlanCategory] = useState<'pro' | 'enterprise'>('pro');
+  const { pricingPlans } = usePlanDetails({ activeUsers, isMonthly });
   return (
     <Stack>
       <WhatsAppAddOnModal
         showModal={showWhatsAppAddOnModal}
         setShowModal={setShowWhatsAppAddOnModal}
       />
-      <Group gap={8}>
-        <Group gap={8}>
-          <p className='text-sm text-gray-600 font-normal'>Monthly</p>
-          <Switch checked={!isMonthly} onChange={() => setIsMonthly(!isMonthly)} size='sm' />
-          <p className='text-sm text-gray-600 font-normal'>Annual</p>
-        </Group>
-        <p className='text-sm text-gray-600 font-normal'>
-          (10% discount for {activeUsersInText} monthly active users)
-        </p>
-      </Group>
 
-      <div className='grid grid-cols-3 gap-6'>
+      <div className='grid grid-cols-2 gap-6'>
         {pricingPlans.map((plan) => (
           <Stack
             key={plan.id}
-            className={cn('border border-gray-200 rounded-lg p-6 shadow-sm bg-white', {
+            className={cn('border border-gray-200 rounded-xl p-6 shadow-sm bg-white', {
               'border-blue-500': planCategory === plan.id,
             })}
             gap={48}
@@ -67,24 +58,8 @@ export const PricingPlans = ({
               </Stack>
               <p className='text-sm text-gray-600 font-semibold'>{plan.userLimit}</p>
             </Stack>
-            {plan.features.whatsapp.unlimited ? (
-              <Group>
-                <p className='text-sm text-gray-600'>Unlimited WhatsApp usage</p>
-                <GatewayLogo app='whatsapp' width={20} />
-              </Group>
-            ) : (
-              <Button
-                variant='secondary'
-                trailingIcon={<GatewayLogo app='whatsapp' width={20} />}
-                leadingIcon={<FiPlus size={20} />}
-                onClick={() => setShowWhatsAppAddOnModal(true)}
-              >
-                WhatsApp add-on
-              </Button>
-            )}
           </Stack>
         ))}
-        <PriceSummary activeUsers={activeUsers} isMonthly={isMonthly} planCategory={planCategory} />
       </div>
     </Stack>
   );

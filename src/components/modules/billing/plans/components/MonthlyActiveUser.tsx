@@ -7,10 +7,12 @@ export const MonthlyActiveUser = ({
   activeUsers,
   setActiveUsers,
   isMonthly,
+  planCategory,
 }: {
   activeUsers: number;
   setActiveUsers: (value: number) => void;
   isMonthly: boolean;
+  planCategory: 'pro' | 'enterprise';
 }) => {
   const { activeUsersInText } = usePlanDetails({ activeUsers, isMonthly });
   return (
@@ -41,6 +43,7 @@ export const MonthlyActiveUser = ({
             onChange={setActiveUsers}
             max={500000}
             marks={monthlyActiveUser}
+            disabled={planCategory === 'enterprise'}
           />
         </Stack>
 

@@ -16,6 +16,7 @@ export const useBillingDetails = () => {
     paymentPlan: payment?.plan,
     isMonthly,
     subscriptionFee,
+    availableWhatsAppMessages: payment?.whatsapp?.availableMessages || 0,
     hasPaymentMethod: Boolean(!!payment?.paymentMethodId),
     subscriptionStartDate: moment(payment?.subscriptionStartDate).format('DD MMM YYYY'),
     subscriptionEndDate: moment(payment?.subscriptionEndDate).format('DD MMM YYYY'),

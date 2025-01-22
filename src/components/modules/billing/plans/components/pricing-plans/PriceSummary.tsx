@@ -30,7 +30,7 @@ export const PriceSummary = ({
     useChangeSubscriptionMutation();
   const navigate = useNavigate();
   return (
-    <Stack className='bg-primary-50 rounded-xl border border-gray-200 p-6' gap={32}>
+    <Stack className='bg-primary-50 rounded-xl border border-gray-200 p-6 h-fit' gap={32}>
       <Stack gap={8}>
         <p className='text-2xl text-gray-900 font-semibold'>Price Summary</p>
         <p className='text-sm text-gray-600 font-normal'>Billed in $US Dollars</p>

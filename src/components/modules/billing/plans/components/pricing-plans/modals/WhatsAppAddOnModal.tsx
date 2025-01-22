@@ -89,7 +89,7 @@ const ModalBody = ({ setOpened }) => {
               const res = await buyWhatsAppAddOn({
                 companyId: brandId,
                 countryCode: country,
-                units: Number(unit) * 1000,
+                units: Number(unit),
               }).unwrap();
               if (res.success) {
                 setOpened(false);
