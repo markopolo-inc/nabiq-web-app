@@ -1,5 +1,5 @@
 import { Breadcrumbs, Button, Group, Stack } from '@nabiq-ui';
-import { capitalize } from 'lodash';
+import moment from 'moment-timezone';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -7,18 +7,17 @@ export const CampaignReportHeader = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
   const name = searchParams.get('name');
+  const createdAt = searchParams.get('createdAt');
+
   return (
     <>
       <Breadcrumbs />
       <Group justify='space-between'>
         <Stack gap={4}>
-          <p className='text-gray-900 text-[20px] font-semibold'>
-            {t('campaign_report.tropical_treasures')}: {capitalize(name?.split('-').join(' '))}
-          </p>
+          <p className='text-gray-900 text-[20px] font-semibold'>{name}</p>
           <p className='text-gray-600 text-base font-normal'>
-            {t('campaign_details.list_description')}
+            Created on {moment(createdAt).format('MMM DD, YYYY [at] hh:mm a')}
           </p>
         </Stack>
         <Button size='md' variant='secondary' onClick={() => navigate(-1)}>

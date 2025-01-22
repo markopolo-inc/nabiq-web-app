@@ -45,7 +45,7 @@ export const MetricCards: FC<{
               change={item?.change}
               type={item?.type}
               value={item?.value}
-              medium='email'
+              mediums={item?.mediums}
             />
           ))}
     </Group>

@@ -1,8 +1,10 @@
+type mediums = 'email' | 'sms' | 'whatsapp';
 export interface IMetrics {
   name: string;
   value: number;
   type: 'number' | 'percentage' | 'currency' | 'count' | 'amount';
   change: number;
+  mediums?: mediums[];
 }
 
 export interface IMetricDetail {

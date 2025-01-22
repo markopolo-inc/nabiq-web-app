@@ -18,7 +18,7 @@ import { capitalize } from 'lodash';
 import moment from 'moment-timezone';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Xarrow, { Xwrapper, useXarrow } from 'react-xarrows';
 import LoaderGif from 'src/assets/loader/loading.gif';
 import {
@@ -45,7 +45,9 @@ export const CampaignDetails = () => {
 
   const div1Ref = useRef(null);
   const div2Ref = useRef(null);
-  const { name, campaignId } = useParams();
+  const { campaignId } = useParams();
+  const [searchParams] = useSearchParams();
+  const name = searchParams.get('name');
   const [showDrawer, setShowDrawer] = useState(false);
   // const [timeRange, setTimeRange] = useState<'today' | 'last_week' | 'last_month'>('last_week');
   const [userId, setUserId] = useState<string>(null);
@@ -129,9 +131,7 @@ export const CampaignDetails = () => {
 
       <Group justify='space-between'>
         <Stack gap={4}>
-          <p className='text-gray-900 text-[20px] font-semibold'>
-            {capitalize(name?.split('-').join(' '))} {t('campaign_details.discover_bali')}
-          </p>
+          <p className='text-gray-900 text-[20px] font-semibold'>{name}</p>
           <p className='text-gray-600 text-base font-normal'>
             {t('campaign_details.list_description')}
           </p>
