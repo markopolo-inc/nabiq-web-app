@@ -16,7 +16,8 @@
     "no_account": "ليس لديك حساب؟",
     "signin_google": "سجل الدخول باستخدام قوقل",
     "signin_email": "او، سجل الدخول باستخدام البريد الإلكتروني",
-    "forgot_password": "نسيت الرقم السري؟"
+    "forgot_password": "نسيت الرقم السري؟",
+    "enter_password": "أدخل كلمة المرور الخاصة بك"
   },
   "verification": {
     "verification_code": "رمز التحقق",

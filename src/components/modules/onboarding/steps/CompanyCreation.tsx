@@ -48,7 +48,7 @@ export const CompanyCreation = () => {
       });
       setOnboardingStep('lead_database');
     } catch (err) {
-      toast.error('Failed to get user data!', { id: 'user-data-error' });
+      toast.error(t('onboarding.user_data_error'), { id: 'user-data-error' });
     } finally {
       setIsLoading(false);
     }
@@ -80,14 +80,14 @@ export const CompanyCreation = () => {
           <div className='space-y-5'>
             <TextInput
               label={t('onboarding_intro.business_name')}
-              placeholder='e.g John’s company'
+              placeholder={t('onboarding.example_company')}
               disabled={!!companyId}
               required
               {...form.getInputProps('businessName')}
             />
             <Select
               label={t('onboarding_intro.industry')}
-              placeholder='Select your industry'
+              placeholder={t('onboarding.select_industry')}
               required
               data={[
                 { value: 'apparel', label: t('settings.apparel') },
@@ -118,14 +118,14 @@ export const CompanyCreation = () => {
               ]}
               required
               label={t('onboarding_intro.business_size')}
-              placeholder='Select your business size'
+              placeholder={t('onboarding.select_business_size')}
               disabled={!!companyId}
               {...form.getInputProps('businessSize')}
             />
             <TextInput
               required
               label={t('onboarding_intro.website')}
-              placeholder='Paste your website URL here'
+              placeholder={t('onboarding.website_url_placeholder')}
               disabled={!!companyId}
               description={form.errors.website ? null : t('onboarding_intro.usage_desc')}
               {...form.getInputProps('website')}

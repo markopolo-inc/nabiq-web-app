@@ -16,7 +16,8 @@
     "no_account": "Don't have an account?",
     "signin_google": "Sign in with Google",
     "signin_email": "Or, sign in with email",
-    "forgot_password": "Forgot password?"
+    "forgot_password": "Forgot password?",
+    "enter_password": "Enter your password"
   },
   "verification": {
     "verification_code": "Verification code",
