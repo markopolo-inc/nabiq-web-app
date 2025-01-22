@@ -23,7 +23,7 @@ export const SampleContents = () => {
 
   const handleSkipStep = async () => {
     const res = await updateOnboardingStatus({ companyId, isOnboardingComplete: true }).unwrap();
-    const id = toast.loading('Taking you to the dashboard...', {
+    const id = toast.loading(`${t('onboarding.taking_to_dashboard')}...`, {
       id: 'skip-step',
     });
     if (res.success) {

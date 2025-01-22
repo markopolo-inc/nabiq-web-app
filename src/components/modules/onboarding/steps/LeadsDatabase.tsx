@@ -82,7 +82,10 @@ export const LeadsDatabase = () => {
             </div>
           </Stack>
         </Accordion>
-        <Accordion title='Sync from CRM' icon={<FiDatabase01 size={20} color='#697586' />}>
+        <Accordion
+          title={t('onboarding.sync_crm_prompt')}
+          icon={<FiDatabase01 size={20} color='#697586' />}
+        >
           <Stack gap={24}>
             <p className='text-sm text-gray-600'>{t('onboarding.participants_visibility')}</p>
             <div className='grid grid-cols-2 gap-2 p-1'>
