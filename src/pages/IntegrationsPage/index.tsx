@@ -18,7 +18,7 @@ const IntegrationsPage = () => {
 
   return (
     <>
-      <HeaderTitle>Nabiq - Integrations</HeaderTitle>
+      <HeaderTitle>{t('page_title.integrations_title')}</HeaderTitle>
       <AnimatePresence>
         <div className='flex flex-col gap-16'>
           <div className='flex flex-col'>

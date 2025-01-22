@@ -72,9 +72,11 @@ const ModalBody: React.FC<{
       <div className='flex flex-col gap-4'>
         <GatewayLogo app={gateway.gateway} width={32} />
         <div className='flex flex-col gap-2'>
-          <p className='text-gray-900 font-semibold text-[24px]'>Integrate {gateway.name}</p>
+          <p className='text-gray-900 font-semibold text-[24px]'>
+            {t('integrations.integrate_name', { name: gateway.name })}
+          </p>
           <p className='text-gray-600 font-normal text-base'>
-            Please enter your {gateway.name} account details.
+            {t('integrations.enter_account_details', { gatewayName: gateway.name })}
           </p>
         </div>
       </div>
@@ -90,7 +92,7 @@ const ModalBody: React.FC<{
               <TextInput
                 key={field}
                 label={camelCaseToCapitalized(field)}
-                placeholder={`Enter ${camelCaseToCapitalized(field)}`}
+                placeholder={t('integrations.enter', { fieldName: camelCaseToCapitalized(field) })}
                 {...form.getInputProps(field)}
               />
             ))}

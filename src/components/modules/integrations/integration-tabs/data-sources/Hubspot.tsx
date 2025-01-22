@@ -26,7 +26,6 @@ export const Hubspot = () => {
 
   return (
     <>
-      {' '}
       <IntegrationCard
         key='hubspot'
         title={t('integrations.hubspot')}

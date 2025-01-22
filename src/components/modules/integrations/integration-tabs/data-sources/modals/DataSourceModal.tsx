@@ -17,6 +17,7 @@ import {
 import { IconArrowNarrowRight } from '@tabler/icons-react';
 import _, { capitalize } from 'lodash';
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IMappedField, TDataSourcePlatform } from 'src/interfaces/brand.interface';
 import { useAppSelector } from 'src/store/hooks';
 import {
@@ -31,6 +32,7 @@ const ModalBody = ({
   setOpened: Dispatch<SetStateAction<boolean>>;
   platform: TDataSourcePlatform;
 }) => {
+  const { t } = useTranslation();
   const { resourceId: brandId, datasourceIntegrations } = useAppSelector((state) => state.brand);
   const { data, isLoading } = useGetDataSourcePropertiesQuery({
     brandId,
@@ -45,10 +47,10 @@ const ModalBody = ({
   const [selectedOptionalFields, setSelectedOptionalFields] = useState<IMappedField[]>([]);
 
   const requiredFields = [
-    { label: 'company', value: 'company' },
-    { label: 'email', value: 'email' },
-    { label: 'phone', value: 'phone' },
-    { label: 'name', value: 'name' },
+    { label: t('integrations.company'), value: 'company' },
+    { label: t('onboarding.email'), value: 'email' },
+    { label: t('integrations.phone'), value: 'phone' },
+    { label: t('settings.name'), value: 'name' },
   ];
 
   useEffect(() => {
@@ -131,9 +133,11 @@ const ModalBody = ({
       <Stack className='p-8 pb-5 border-b border-gray-200 sticky top-0 bg-white z-10 shadow-sm'>
         <GatewayLogo app={platform} width={32} />
         <Stack gap={0}>
-          <p className='text-2xl font-semibold text-gray-900'>Integrate {capitalize(platform)}</p>
+          <p className='text-2xl font-semibold text-gray-900'>
+            {t('integrations.integrate')} {capitalize(platform)}
+          </p>
           <p className='text-base text-gray-600'>
-            Choose the data fields you want to bring over from {capitalize(platform)}.
+            {t('integrations.choose_data_fields')} {capitalize(platform)}.
           </p>
         </Stack>
         <div className='absolute top-8 right-8'>
@@ -141,9 +145,12 @@ const ModalBody = ({
         </div>
       </Stack>
       <Stack className='px-8 py-5' gap={0}>
-        <p className='text-lg font-semibold text-gray-900'>Mandatory field</p>
+        <p className='text-lg font-semibold text-gray-900'>{t('integrations.mandatory_field')}</p>
         <p className='text-sm text-gray-600'>
-          {mappedRequiredFieldsLength} out of {requiredFields.length || 0} mapped
+          {t('mapped_fields', {
+            mappedRequiredFieldsLength,
+            requiredFieldsLength: requiredFields.length || 0,
+          })}
         </p>
       </Stack>
       <Table
@@ -155,9 +162,9 @@ const ModalBody = ({
       >
         <TableHead>
           <TableRow>
-            <Th>Template property</Th>
-            <Th>Mapping</Th>
-            <Th>Nabiq property</Th>
+            <Th>{t('integrations.template_property')}</Th>
+            <Th>{t('integrations.mapping')}</Th>
+            <Th>{t('integrations.nabiq_property')}</Th>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -199,9 +206,12 @@ const ModalBody = ({
         </TableBody>
       </Table>
       <Stack className='px-8 py-5' gap={0}>
-        <p className='text-lg font-semibold text-gray-900'>Optional fields</p>
+        <p className='text-lg font-semibold text-gray-900'>{t('integrations.optional_fields')}</p>
         <p className='text-sm text-gray-600'>
-          {mappedOptionalFieldsLength} out of {selectedOptionalFields.length} mapped
+          {t('mapped_fields', {
+            mappedOptionalFieldsLength,
+            requiredFieldsLength: selectedOptionalFields.length || 0,
+          })}
         </p>
       </Stack>
       <Table
@@ -213,9 +223,9 @@ const ModalBody = ({
       >
         <TableHead>
           <TableRow>
-            <Th>Template property</Th>
-            <Th>Mapping</Th>
-            <Th>Nabiq property</Th>
+            <Th>{t('integrations.template_property')}</Th>
+            <Th>{t('integrations.mapping')}</Th>
+            <Th>{t('integrations.nabiq_property')}</Th>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -276,7 +286,7 @@ const ModalBody = ({
         }
         leadingIcon={<FiPlus size={18} />}
       >
-        Add field
+        {t('integrations.add_field')}
       </Button>
       <Stack className='p-8 sticky bottom-0 bg-white border-t border-gray-200'>
         <Button
@@ -288,10 +298,10 @@ const ModalBody = ({
             mappedOptionalFieldsLength !== selectedOptionalFields.length
           }
         >
-          Confirm
+          {t('integrations.confirm')}
         </Button>
         <Button disabled={isSaving} variant='secondary' onClick={() => setOpened(false)} fullWidth>
-          Cancel
+          {t('settings.cancel')}
         </Button>
       </Stack>
     </div>
@@ -299,6 +309,7 @@ const ModalBody = ({
 };
 
 export const DataSourceModal = ({ platform }: { platform: TDataSourcePlatform }) => {
+  const { t } = useTranslation();
   return (
     <Modal
       withNoHeader
@@ -306,7 +317,7 @@ export const DataSourceModal = ({ platform }: { platform: TDataSourcePlatform })
     >
       {({ setOpened }) => (
         <Button className='!w-40' variant='secondary' onClick={() => setOpened(true)}>
-          Configure
+          {t('create_campaign.configure')}
         </Button>
       )}
     </Modal>

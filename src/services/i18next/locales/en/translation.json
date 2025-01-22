@@ -467,7 +467,7 @@
     "whatsapp": "WhatsApp",
     "push_notification_apps": "Push notification apps",
     "integrate_name": "Integrate {name}",
-    "enter_account_details": "Please enter your {gateway.name} account details.",
+    "enter_account_details": "Please enter your {gatewayName} account details.",
     "confirm": "Confirm",
     "reconnect": "Reconnect",
     "integrate": "Integrate",
@@ -482,7 +482,7 @@
     "hubspot": "Hubspot",
     "choose_data_fields": "Choose the data fields you want to bring over from {capitalize(platform)}.",
     "mandatory_field": "Mandatory field",
-    "mapped_fields": "{mappedRequiredFieldsLength} out of {requiredFields.length || 0} mapped",
+    "mapped_fields": "{mappedRequiredFieldsLength} out of {requiredFieldsLength} mapped",
     "template_property": "Template property",
     "mapping": "Mapping",
     "nabiq_property": "Nabiq property",
@@ -549,7 +549,12 @@
     "flow_route": "Flow Route",
     "are_you_sure": "Are you sure?",
     "copy": "Copy",
-    "user_fcm_token": "USER_FCM_TOKEN"
+    "user_fcm_token": "USER_FCM_TOKEN",
+    "enter": "Enter {fieldName}",
+    "account_verified": "Account verified!",
+    "company": "company",
+    "phone": "phone",
+    "add_field": "Add field"
   },
   "onboarding": {
     "create_account": "Create your Nabiq account",

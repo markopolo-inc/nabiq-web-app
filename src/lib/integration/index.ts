@@ -43,7 +43,7 @@ export const appCategories: Array<{
 export const appOptions: IGateway[] = [
   {
     category: 'email',
-    name: 'Klaviyo',
+    name: 'integrations.klaviyo',
     headline: 'integrations.klaviyo_desc',
     gateway: 'klaviyo',
     learnMoreLink: '',
@@ -53,7 +53,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'email',
-    name: 'Hubspot',
+    name: 'integrations.hubspot',
     headline: 'integrations.hubspot_desc',
     gateway: 'hubspot',
     learnMoreLink: '',
@@ -63,7 +63,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'email',
-    name: 'Postmark',
+    name: 'integrations.postmark',
     headline: 'integrations.postmark_desc',
     gateway: 'postmark',
     learnMoreLink: '',
@@ -72,7 +72,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'email',
-    name: 'OneSignal',
+    name: 'integrations.onesignal',
     headline: 'integrations.onesignal_desc',
     gateway: 'onesignal',
     learnMoreLink: '',
@@ -81,7 +81,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'email',
-    name: 'SendGrid',
+    name: 'integrations.sendgrid',
     headline: 'integrations.sendgrid_desc',
     gateway: 'sendgrid',
     learnMoreLink: '',
@@ -90,7 +90,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'email',
-    name: 'Resend',
+    name: 'integrations.resend',
     headline: 'integrations.resend_desc',
     gateway: 'resend',
     learnMoreLink: '',
@@ -99,7 +99,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'email',
-    name: 'MailGun',
+    name: 'integrations.mailgun',
     headline: 'integrations.mailgun_desc',
     gateway: 'mailgun',
     learnMoreLink: '',
@@ -108,7 +108,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'email',
-    name: 'Click Send',
+    name: 'integrations.click_send',
     headline: 'integrations.clicksend_desc',
     gateway: 'clicksend',
     learnMoreLink: '',
@@ -117,7 +117,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'sms',
-    name: 'Twilio',
+    name: 'integrations.twilio',
     headline: 'integrations.twilio_desc',
     gateway: 'twilio',
     learnMoreLink: '',
@@ -126,7 +126,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'sms',
-    name: 'Sinch',
+    name: 'integrations.sinch',
     headline: 'integrations.sinch_desc',
     gateway: 'sinch',
     learnMoreLink: '',
@@ -135,7 +135,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'sms',
-    name: 'Flow Route',
+    name: 'integrations.flow_route',
     headline: 'integrations.flowroute_desc',
     gateway: 'flowroute',
     learnMoreLink: '',
@@ -144,7 +144,7 @@ export const appOptions: IGateway[] = [
   },
   {
     category: 'sms',
-    name: 'Click Send',
+    name: 'integrations.click_send',
     headline: 'integrations.clicksend_desc',
     gateway: 'clicksend',
     learnMoreLink: '',

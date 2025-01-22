@@ -551,7 +551,7 @@
     "whatsapp": "واتساب",
     "push_notification_apps": "برامج التنبيهات المباشرة",
     "integrate_name": "دمج {name}",
-    "enter_account_details": "يرجى إدخال تفاصيل حسابك في {gateway.name}.",
+    "enter_account_details": "يرجى إدخال تفاصيل حسابك في {gatewayName}.",
     "confirm": "تأكيد",
     "reconnect": "اعادة الاتصال",
     "integrate": "دمج",
@@ -566,7 +566,7 @@
     "hubspot": "هاب سبوت",
     "choose_data_fields": "اختَر البيانات التي ترغب في استيرادها من {capitalize(platform)}.",
     "mandatory_field": "الحقل إلزامي",
-    "mapped_fields": "تم ربط {mappedRequiredFieldsLength} من أصل {requiredFields.length || 0}.",
+    "mapped_fields": "تم ربط {mappedRequiredFieldsLength} من أصل {requiredFieldsLength || 0}.",
     "template_property": "خصائص القالب",
     "mapping": "التخطيط",
     "nabiq_property": "خصائص نبيق",
@@ -633,7 +633,12 @@
     "flow_route": "فلو رووت( Flow Route)",
     "are_you_sure": "هل انت متأكد",
     "copy": "نسخ",
-    "user_fcm_token": "رمز FCM للمستخدم"
+    "user_fcm_token": "رمز FCM للمستخدم",
+    "enter": "يدخل {fieldName}",
+    "account_verified": "تم التحقق من الحساب!",
+    "company": "شركة",
+    "phone": "هاتف",
+    "add_field": "إضافة حقل"
   },
   "onboarding": {
     "create_account": "أنشئ حساب جديد",
