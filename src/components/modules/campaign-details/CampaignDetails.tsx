@@ -196,7 +196,9 @@ export const CampaignDetails = () => {
                       id={`listElem${idx}`}
                     >
                       <Group justify='space-between'>
-                        <p className='text-gray-900 font-semibold'>ID: {user.id}</p>
+                        <p className='text-gray-900 font-semibold'>
+                          {t('integrations.salla_id', { salla_id: user.id })}
+                        </p>
                         {user.isEnhanced && (
                           <Badge color='success'>
                             {t('campaign_details.nabiq_enhanced')} <FiStar04 />
@@ -295,7 +297,7 @@ export const CampaignDetails = () => {
                             setSelectedContent({ ...item, email: selectedEmail });
                           }}
                         >
-                          View
+                          {t('campaign_details.view')}
                         </Button>
                       </Fragment>
                     )}
