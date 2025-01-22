@@ -31,13 +31,13 @@ export const CampaignTiming = () => {
             allowDeselect
             value={new Date(campaign?.startDate)}
             onChange={(value) => handleChange('startDate', moment(value).format('YYYY-MM-DD'))}
-            placeholder='Select date'
+            placeholder={t('create_campaign.select_date')}
             minDate={new Date()}
           />
 
           <Select
-            label='Time'
-            placeholder='Select time'
+            label={t('create_campaign_form.time')}
+            placeholder={t('create_campaign_form.select_time')}
             data={[
               '00:00',
               '01:00',
@@ -78,7 +78,7 @@ export const CampaignTiming = () => {
           value={String(campaign?.stepCount)}
           onChange={(value) => handleChange('stepCount', Number(value))}
           data={['1', '2', '3', '4', '5', '6']}
-          placeholder='Select steps'
+          placeholder={t('create_campaign_form.select_steps')}
         />
 
         <Text size='14px' className='text-gray-600'>
@@ -91,7 +91,7 @@ export const CampaignTiming = () => {
           label={t('create_campaign_form.min_delay')}
           value={String(campaign?.stepDelay)}
           data={['1', '2', '3', '4', '5', '6']}
-          placeholder='Select steps'
+          placeholder={t('create_campaign_form.select_steps')}
           onChange={(value) => handleChange('stepDelay', Number(value))}
         />
 
@@ -107,7 +107,7 @@ export const CampaignTiming = () => {
         defaultValue={new Date(campaign?.startDate)}
         value={new Date(campaign?.endDate)}
         onChange={(value) => handleChange('endDate', moment(value).format('YYYY-MM-DD'))}
-        placeholder='Select date'
+        placeholder={t('create_campaign_form.select_date')}
         minDate={new Date(campaign?.startDate ? campaign?.startDate : new Date())}
       />
     </Stack>

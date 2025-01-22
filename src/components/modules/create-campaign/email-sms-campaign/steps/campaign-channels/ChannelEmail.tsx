@@ -23,7 +23,7 @@ export const ChannelEmail = () => {
       </div>
       <Select
         value={(campaign?.channels || []).find((item) => item.channel === 'email')?.platform}
-        placeholder='No platform selected'
+        placeholder={t('create_campaign.no_platform_selected')}
         data={Object.keys(emailIntegrations || {})?.map((item) => ({
           label: capitalize(item),
           value: item,

@@ -17,8 +17,8 @@ const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
         {waCampaignTemplates.map((template, index) => (
           <Card key={index} className='g'>
             <Stack gap={24}>
-              <p className='text-lg font-semibold text-gray-900'>{template.title}</p>
-              <p className='text-sm text-gray-600'>{template.template}</p>
+              <p className='text-lg font-semibold text-gray-900'>{t(template.title)}</p>
+              <p className='text-sm text-gray-600'>{t(template.template)}</p>
             </Stack>
             <Button
               variant='secondary-black'
@@ -29,7 +29,7 @@ const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
                 });
               }}
             >
-              Use
+              {t('create_campaign.use')}
             </Button>
           </Card>
         ))}

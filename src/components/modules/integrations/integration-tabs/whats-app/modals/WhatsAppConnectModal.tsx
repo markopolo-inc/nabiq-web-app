@@ -88,7 +88,9 @@ const ModalBody = ({ setOpened }: { setOpened: (value: boolean) => void }) => {
         data={waNumbers}
         label={t('create_campaign.select_whatsapp_number')}
         placeholder={t('create_campaign.whatsapp_number')}
-        nothingFoundMessage={isLoading ? 'Loading...' : t('integrations.no_whatsapp_numbers')}
+        nothingFoundMessage={
+          isLoading ? t('create_campaign.loading') : t('integrations.no_whatsapp_numbers')
+        }
         onChange={(value, option: NumberOption) => {
           setNumber(value);
           setName(option?.name);

@@ -23,7 +23,7 @@ export const ChannelSMS = () => {
       </div>
       <Select
         value={(campaign?.channels || []).find((item) => item.channel === 'sms')?.platform}
-        placeholder='No platform selected'
+        placeholder={t('create_campaign.no_platform_selected')}
         data={Object.keys(smsIntegrations || {})?.map((item) => ({
           label: capitalize(item),
           value: item,
