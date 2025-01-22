@@ -16,18 +16,17 @@ const ModalBody = ({ setOpened }) => {
         </div>
 
         <Text size='24px' weight={600} className='text-center text-gray-900'>
-          Congratulations on your first campaign!
+          {t('campaign_report.congratulations_first_campaign')}
         </Text>
         <Stack gap={32}>
           <Text size='16px' className='text-center text-gray-600'>
-            We will pick the perfect cohorts that match this campaign and also write the
-            personalized contents for you.
+            {t('campaign_report.cohort_selection')}
           </Text>
 
           <Text size='16px' className='text-center text-gray-600'>
-            You&rsquo;ll be able to view and approve them in our{' '}
-            <span className='font-bold'>{t('navigation.nav_control_room')}</span>. Don&rsquo;t
-            worry, we will notify you when it&rsquo;s ready.
+            {t('campaign_report.view_approval')}{' '}
+            <span className='font-bold'>{t('navigation.nav_control_room')}</span>.
+            {t('campaign_report.notification_ready')}
           </Text>
         </Stack>
       </Stack>
@@ -39,7 +38,7 @@ const ModalBody = ({ setOpened }) => {
           navigate('/control-room');
         }}
       >
-        View control room
+        {t('campaign_report.view_control_room')}
       </Button>
     </Stack>
   );

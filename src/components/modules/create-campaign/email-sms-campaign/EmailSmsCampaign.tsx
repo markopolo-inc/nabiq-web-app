@@ -70,7 +70,7 @@ export const EmailSmsCampaign = () => {
       }
 
       if (res.success) {
-        const toastId = toast.success(res.message || 'Campaign created successfully', {
+        const toastId = toast.success(res.message || t('campaign_report.campaign_created'), {
           id: 'campaign-created',
         });
 
@@ -113,7 +113,7 @@ export const EmailSmsCampaign = () => {
 
   return (
     <>
-      <HeaderTitle>Nabiq | Campaign Configuration</HeaderTitle>
+      <HeaderTitle>{t('page_title.campaign_configuration_title')}</HeaderTitle>
       <CampaignFirstCreationModal showModal={showModal} setShowModal={setShowModal} />
       <Stack gap={64}>
         <Stack gap={20}>

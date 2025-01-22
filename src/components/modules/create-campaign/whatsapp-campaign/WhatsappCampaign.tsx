@@ -45,7 +45,7 @@ export const WhatsappCampaign = () => {
 
   return (
     <>
-      <HeaderTitle>Nabiq | Campaign Configuration</HeaderTitle>
+      <HeaderTitle>{t('page_title.campaign_configuration_title')}</HeaderTitle>
 
       <Stack gap={64}>
         <Stack gap={20}>

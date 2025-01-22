@@ -13,8 +13,8 @@ const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
   return (
     <Stack gap={64} className='p-8'>
       <Stack gap={0}>
-        <p className='text-2xl text-gray-900 font-semibold'>Add product</p>
-        <p className='text-gray-600'>Choose how you want to add your product</p>
+        <p className='text-2xl text-gray-900 font-semibold'>{t('create_campaign.add_product_2')}</p>
+        <p className='text-gray-600'>{t('create_campaign.choose_product_addition')}</p>
       </Stack>
       <div className='grid grid-cols-2 gap-4'>
         {productSources.map((source) => (
@@ -22,7 +22,7 @@ const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
             <source.icon size={48} />
             <Stack gap={16} justify='center' align='center'>
               <p className='text-lg font-semibold text-gray-900'>{t(source.title)}</p>
-              <p className='text-gray-600 text-sm text-center'>{source.headline}</p>
+              <p className='text-gray-600 text-sm text-center'>{t(source.headline)}</p>
             </Stack>
             <Button
               fullWidth
@@ -34,7 +34,9 @@ const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
               }}
               disabled={campaign.productSource === source.platform}
             >
-              {campaign.productSource === source.platform ? 'Selected' : 'Select'}
+              {campaign.productSource === source.platform
+                ? t('create_campaign.selected')
+                : t('create_campaign.select')}
             </Button>
           </Card>
         ))}
@@ -44,12 +46,13 @@ const ModalBody = ({ setOpened }: { setOpened: (state: boolean) => void }) => {
 };
 
 export const AddProductModal = () => {
+  const { t } = useTranslation();
   const campaign = useCampaignSelector();
 
   return (
     <Modal
       withCustomClose
-      title={() => 'Add Product'}
+      title={() => t('create_campaign.add_product_2')}
       body={({ setOpened }) => <ModalBody setOpened={setOpened} />}
       withNoHeader
     >
@@ -61,7 +64,7 @@ export const AddProductModal = () => {
             className='!p-0 mt-[-12px]'
             onClick={() => setOpened(true)}
           >
-            Change how I want to add product
+            {t('create_campaign.change_product_addition')}
           </Button>
         ) : (
           <Button
@@ -69,7 +72,7 @@ export const AddProductModal = () => {
             onClick={() => setOpened(true)}
             leadingIcon={<FiBox size={18} />}
           >
-            Add product
+            {t('create_campaign.add_product_2')}
           </Button>
         )
       }

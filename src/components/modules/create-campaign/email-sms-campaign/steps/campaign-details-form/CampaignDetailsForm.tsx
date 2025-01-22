@@ -24,7 +24,7 @@ export const CampaignDetailsForm = () => {
   const isValidUrl = (url: string) => {
     try {
       const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
-      if (!urlRegex.test(url)) throw new Error('Invalid URL');
+      if (!urlRegex.test(url)) throw new Error(t('create_campaign.invalid_url'));
       return true;
     } catch {
       return false;
@@ -33,7 +33,7 @@ export const CampaignDetailsForm = () => {
 
   const handleLinkChange = (value: string) => {
     if (value && !isValidUrl(value)) {
-      setLinkError('Please enter a valid URL');
+      setLinkError(t('create_campaign.enter_valid_url'));
     } else {
       setLinkError('');
     }
