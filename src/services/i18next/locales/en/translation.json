@@ -762,7 +762,7 @@
     "country": "Country",
     "country_placeholder": "Enter country",
     "payment_method": "Payment method",
-    "card_brand": "{brand} ending in {lastDIgit}",
+    "card_brand": "{brand} ending in {lastDigit}",
     "expiry_date_display": "Expiry {date}",
     "edit": "Edit",
     "free_trial": "Free trial",
@@ -783,7 +783,11 @@
     "usage": "Usage",
     "target_used": "{target}% used",
     "users_targeted": "{30}/100 users targeted",
-    "credits_not_reset": "Credits will not reset on free trial period."
+    "credits_not_reset": "Credits will not reset on free trial period.",
+    "your_country": "Your country",
+    "select_country": "Select country",
+    "quantity_of_messages_monthly": "Quantity of messages (monthly)",
+    "quantity_of_messages": "Quantity of messages"
   },
   "campaign_report": {
     "tropical_treasures": "Tropical Treasures",
