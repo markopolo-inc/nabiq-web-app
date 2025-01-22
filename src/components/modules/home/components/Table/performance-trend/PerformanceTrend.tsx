@@ -126,9 +126,9 @@ export const PerformanceTrend: FC<{
         )}
 
         {isLoading ? (
-          <p className='text-gray-600'>Loading performance data...</p>
+          <p className='text-gray-600'>{t('home_page.loading_performance_data')}...</p>
         ) : error ? (
-          <p className='text-red-600'>Error loading performance data</p>
+          <p className='text-red-600'>{t('monitoring.error_loading_data')}</p>
         ) : graphData?.length === 0 ? (
           <Stack align='center' gap={24} p={24}>
             <div className='p-3 bg-white border border-gray-200 shadow-xs rounded-[10px]'>
@@ -137,11 +137,9 @@ export const PerformanceTrend: FC<{
 
             <Stack gap={4} align='center'>
               <p className='text-gray-900 font-semibold text-base'>
-                Data will be rolling in shortly!
+                {t('monitoring.data_coming_soon')}
               </p>
-              <p className='text-gray-600 font-normal text-sm'>
-                Your data will show up here when ready.
-              </p>
+              <p className='text-gray-600 font-normal text-sm'>{t('monitoring.data_ready')}</p>
             </Stack>
           </Stack>
         ) : (

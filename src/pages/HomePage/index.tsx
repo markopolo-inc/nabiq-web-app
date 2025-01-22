@@ -1,6 +1,7 @@
 import { Stack } from '@nabiq-ui';
 import { HeaderTitle, PageLayout } from 'layouts';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import BackgroundImage from 'src/assets/bg.png';
 import { CampaignGoalModal } from 'src/components/modules/campaigns';
@@ -26,6 +27,7 @@ function isObjectNotEmpty(obj) {
 }
 
 const Home = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -67,7 +69,7 @@ const Home = () => {
 
   return (
     <>
-      <HeaderTitle>Nabiq - Your marketing co-pilot captain</HeaderTitle>
+      <HeaderTitle>{t('page_title.marketing_copilot_title')}</HeaderTitle>
       <CampaignGoalModal showModal={showGoalModal} setShowModal={setShowGoalModal} />
       <MarktagCreationsModals openedModal={showMarktagModal} setOpenedModal={setShowMarktagModal} />
 

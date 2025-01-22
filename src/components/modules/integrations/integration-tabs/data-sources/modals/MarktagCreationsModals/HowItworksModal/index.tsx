@@ -4,16 +4,16 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const instructions: string[] = [
-  'Copy the Name.',
-  'Go to your domain registrar.',
-  'Go to your DNS management page. For example- Route 53 dashboard has the DNS management tab in its dashboard. Click on “Hosted zones”',
-  'Click on your domain name/link.',
-  'Then click on “Create Record” in the Records page that you will be taken to.',
-  'Paste the copied DNS name in the “Records Name” field. Since Route 53 adds the domain name at the last itself, we can remove that part from our copied name.',
-  'Set the record type according to the Type given here.',
-  'Copy the value from here and enter it in the “Value” field in your domain registrar.',
-  'Then click on Create Record.',
-  'Come back here and click on “Verify Tag”.',
+  'home_page.copy_name',
+  'home_page.go_to_registrar',
+  'home_page.dns_management_instructions',
+  'home_page.click_domain',
+  'home_page.create_record_instructions',
+  'home_page.paste_dns_name',
+  'home_page.set_record_type',
+  'home_page.copy_value',
+  'home_page.create_record',
+  'home_page.verify_tag',
 ];
 
 const HowDoesWorkPopup: React.FC = () => {
@@ -36,9 +36,7 @@ const HowDoesWorkPopup: React.FC = () => {
               {t('home_page.how_it_works')}
             </Text>
             <Text color={gray600} size='16px' className='leading-6'>
-              The DNS record needs to be set in your domain registrar (Route 53, GoDaddy, NameCheap
-              etc.) for us to verify the tag and proceed further. You can watch the tutorial if you
-              need help.
+              {t('home_page.dns_instructions')}
             </Text>
           </Stack>
 
@@ -60,21 +58,21 @@ const HowDoesWorkPopup: React.FC = () => {
             >
               {instructions.map((instruction, idx) => (
                 <List.Item key={idx}>
-                  {idx + 1}. {instruction}
+                  {idx + 1}. {t(instruction)}
                 </List.Item>
               ))}
             </List>
           </Stack>
 
           <Button fullWidth variant='primary' onClick={() => setOpened(false)}>
-            Understood
+            {t('home_page.understood')}
           </Button>
         </div>
       )}
     >
       {({ setOpened }) => (
         <Button fullWidth variant='secondary' onClick={() => setOpened(true)}>
-          How does it work?
+          {t('home_page.how_does_it')}
         </Button>
       )}
     </Modal>

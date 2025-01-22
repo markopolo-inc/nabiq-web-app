@@ -12,8 +12,8 @@ const ChooseOption = () => {
   const cardData = [
     {
       icon: <FiCode size={32} color='#0BA5EC' />,
-      title: 'Install code manually',
-      description: 'Setup everything by yourself',
+      title: 'home_page.install_code_manually',
+      description: 'home_page.setup_self',
       buttonLabel: 'onboarding.continue',
       buttonAction: () => {
         setStep('code');
@@ -21,8 +21,8 @@ const ChooseOption = () => {
     },
     {
       icon: <Envelope size={32} color='#EE46BC' />,
-      title: 'Email to developer',
-      description: "Setup with developer's help",
+      title: 'home_page.email_to_developer',
+      description: 'home_page.setup_help',
       buttonLabel: 'onboarding.continue',
       buttonAction: () => {
         setStep('email');
@@ -30,8 +30,8 @@ const ChooseOption = () => {
     },
     {
       icon: <FiLifeBuoy01 size={32} color='#669F2A' />,
-      title: 'Get support',
-      description: 'Get us to help you setup!',
+      title: 'home_page.get_support',
+      description: 'home_page.help_setup',
       buttonLabel: 'onboarding.continue',
       buttonAction: () => {
         setStep('support');
@@ -60,10 +60,10 @@ const ChooseOption = () => {
           >
             <div className='flex flex-col gap-3 items-center'>
               {card.icon}
-              <Text className='text-lg font-semibold text-gray-900'>{card.title}</Text>
+              <Text className='text-lg font-semibold text-gray-900'>{t(card.title)}</Text>
             </div>
             <Text className='text-sm font-normal text-gray-600 text-center'>
-              {card.description}
+              {t(card.description)}
             </Text>
             <Button variant='primary' fullWidth onClick={card.buttonAction}>
               {t(card.buttonLabel)}

@@ -107,7 +107,7 @@ const ModalBody = ({ setOpened }) => {
                         brandId,
                         tagId: markTag?.resourceId,
                         goal: selectedGoal,
-                        name: `Untitled Campaign-${moment().format('DD-MM-YYYY')}`,
+                        name: `${t('home_page.untitled_campaign')}${moment().format('DD-MM-YYYY')}`,
                       });
 
                       navigate(

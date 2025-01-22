@@ -51,7 +51,7 @@ export const mediums = [
     type: 'whatsapp',
   },
   {
-    title: 'Email and SMS',
+    title: 'home_page.email_sms',
     description: 'create_campaign.one_way_desc',
     icon: FiAnnouncement01,
     isRecommended: false,
