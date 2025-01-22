@@ -1,11 +1,13 @@
 import { FiPlus } from '@nabiq-icons';
 import { Button, GatewayLogo, Group, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useBillingDetails } from 'src/hooks/modules/billing';
 
 import { WhatsAppAddOnModal } from '../plans/components/pricing-plans';
 
 export const WhatsAppAddOnCard = () => {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const { paymentPlan, availableWhatsAppMessages } = useBillingDetails();
   return (
@@ -28,7 +30,7 @@ export const WhatsAppAddOnCard = () => {
 
       {availableWhatsAppMessages > 0 ? (
         <Button variant='secondary' onClick={() => setShowModal(true)} leadingIcon={<FiPlus />}>
-          Add more
+          {t('home_page.add_more')}
         </Button>
       ) : (
         <Button

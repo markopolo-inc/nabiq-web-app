@@ -1,10 +1,12 @@
 import { Button, Group, Stack } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useBillingDetails } from 'src/hooks/modules/billing';
 
 import { AddPaymentMethodModal, CardDetails, TrialDetails } from './components';
 
 export const PaymentMethodCard = () => {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const { paymentPlan, hasPaymentMethod } = useBillingDetails();
   return (
@@ -14,7 +16,7 @@ export const PaymentMethodCard = () => {
           <TrialDetails />
           {!hasPaymentMethod && (
             <Button variant='secondary-black' onClick={() => setShowModal(true)}>
-              Add payment method
+              {t('billing_page.add_payment_method')}
             </Button>
           )}
         </Group>

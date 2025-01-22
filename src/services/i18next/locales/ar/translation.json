@@ -273,7 +273,7 @@
     "country": "الدولة",
     "country_placeholder": "ادخل الدولة",
     "payment_method": "وسيلة الدفع",
-    "card_brand": "{brand} ينتهي بـ {lastDIgit}",
+    "card_brand": "{brand} ينتهي بـ {lastDigit}",
     "expiry_date_display": "تاريخ الانتهاء {date}",
     "edit": "تعديل",
     "free_trial": "تجربة مجانية",
@@ -294,7 +294,11 @@
     "usage": "الاستخدام",
     "target_used": "تم استهلاك {target}%",
     "users_targeted": "تم استهداف 30 مستخدمًا من أصل 100 مستخدم.",
-    "credits_not_reset": "رصيدك لن يُعاد ضبطه خلال فترة التجربة المجانية."
+    "credits_not_reset": "رصيدك لن يُعاد ضبطه خلال فترة التجربة المجانية.",
+    "your_country": "بلدك",
+    "select_country": "اختر البلد",
+    "quantity_of_messages_monthly": "كمية الرسائل (شهريا)",
+    "quantity_of_messages": "كمية الرسائل"
   },
   "create_campaign": {
     "goal_acquisition": "استحواذ",

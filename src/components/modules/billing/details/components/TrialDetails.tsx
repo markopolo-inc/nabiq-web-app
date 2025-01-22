@@ -1,8 +1,10 @@
 import { Badge, Button, Group, Stack } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useBillingDetails } from 'src/hooks/modules/billing';
 
 export const TrialDetails = () => {
+  const { t } = useTranslation();
   const { trialDaysLeft, paymentPlan } = useBillingDetails();
   const navigate = useNavigate();
 
@@ -12,23 +14,33 @@ export const TrialDetails = () => {
         <Stack gap={8}>
           {paymentPlan === 'trial' && (
             <Group>
-              <p className='text-lg font-semibold text-gray-900'>Free trial</p>
-              <Badge color='blue'>{trialDaysLeft} days period</Badge>
+              <p className='text-lg font-semibold text-gray-900'>{t('billing_page.free_trial')}</p>
+              <Badge color='blue'>
+                {t('billing_page.trial_period', {
+                  trialLeft: trialDaysLeft,
+                })}
+              </Badge>
             </Group>
           )}
           <p className='text-sm text-gray-600'>
-            You are currently on our free {trialDaysLeft} day trial period.
+            {t('billing_page.current_free_trial', {
+              trialDaysLeft,
+            })}
           </p>
         </Stack>
         <Stack gap={8}>
-          <p className='text-lg font-semibold text-gray-900'>Billing period</p>
-          <p className='text-sm text-gray-600'>Not billed yet</p>
+          <p className='text-lg font-semibold text-gray-900'>
+            {t('billing_page.billing_period', {
+              trialDaysLeft,
+            })}
+          </p>
+          <p className='text-sm text-gray-600'>{t('billing_page.not_billed_yet')}</p>
         </Stack>
       </Group>
       <p className='text-lg font-semibold text-gray-900'>
-        $0 <span className='text-gray-600 text-sm font-normal'>per month</span>
+        $0 <span className='text-gray-600 text-sm font-normal'>{t('billing_page.per_month')}</span>
       </p>
-      <Button onClick={() => navigate('/billing/plans')}>Explore plans</Button>
+      <Button onClick={() => navigate('/billing/plans')}>{t('billing_page.explore_plans')}</Button>
     </Stack>
   );
 };

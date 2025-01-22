@@ -1,6 +1,7 @@
 import { ComboboxItem } from '@mantine/core';
 import { Button, GatewayLogo, Group, Modal, Select, Stack } from '@nabiq-ui';
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { countryData, whatsAppUnitList } from 'src/lib/billing';
 import { useBuyWhatsAppAddOnMutation } from 'src/store/billing/payment.api';
@@ -11,6 +12,7 @@ interface TOption extends ComboboxItem {
 }
 
 const ModalBody = ({ setOpened }) => {
+  const { t } = useTranslation();
   const { resourceId: brandId } = useAppSelector((state) => state.company);
   const [unit, setUnit] = useState('1');
   const [country, setCountry] = useState('AR');
@@ -31,17 +33,19 @@ const ModalBody = ({ setOpened }) => {
     <Stack gap={48} className='p-8'>
       <Stack gap={8}>
         <GatewayLogo app='whatsapp' width={28} />
-        <p className='text-2xl text-gray-900 font-semibold'>Add payment method</p>
+        <p className='text-2xl text-gray-900 font-semibold'>
+          {t('billing_page.add_payment_method')}
+        </p>
         <p className='text-sm text-gray-600 font-normal'>
-          You won't be charged until you select a plan.
+          {t('billing_page.no_charge_until_plan')}
         </p>
       </Stack>
       <div className='grid grid-cols-2 gap-16'>
         <Stack>
           <Select
-            label='Your country'
+            label={t('billing_page.your_country')}
+            placeholder={t('billing_page.select_country')}
             data={countryData}
-            placeholder='Select country'
             value={country}
             onChange={(value, options: TOption) => {
               setCountry(value);
@@ -49,9 +53,9 @@ const ModalBody = ({ setOpened }) => {
             }}
           />
           <Select
-            label='Quantity of messages (monthly)'
             data={whatsAppUnitList}
-            placeholder='Quantity of messages'
+            label={t('billing_page.quantity_of_messages_monthly')}
+            placeholder={t('billing_page.quantity_of_messages')}
             value={unit}
             onChange={(value) => setUnit(value)}
           />
