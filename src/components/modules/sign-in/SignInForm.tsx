@@ -43,7 +43,7 @@ export const SignInForm = () => {
     },
     validate: {
       email: (value) => (value.length === 0 ? t('settings.email_required') : null),
-      password: (value) => (value.length === 0 ? 'Password is required' : null),
+      password: (value) => (value.length === 0 ? t('settings.password_required') : null),
     },
   });
 
@@ -76,7 +76,7 @@ export const SignInForm = () => {
             <Stack gap={8}>
               <p className='text-gray-950 text-2xl font-semibold'>{t('onboarding.signin')}</p>
               <p className='text-gray-700 text-sm font-normal'>
-                Don't have an account?{' '}
+                {t('signin.no_account')}{' '}
                 <Link className='text-primary-600' to='/signup'>
                   {t('onboarding.signup')}
                 </Link>
@@ -89,13 +89,13 @@ export const SignInForm = () => {
               loading={isGoogleLoading}
               onClick={handleGoogleSignIn}
             >
-              Sign in with Google
+              {t('onboarding.signin_google')}
             </Button>
           </Stack>
         </motion.div>
         <div className='flex items-center gap-4'>
           <div className='h-[1px] flex-1 bg-gray-300' />
-          <p className='text-gray-700 text-sm font-normal'>Or, sign in with email</p>
+          <p className='text-gray-700 text-sm font-normal'>{t('onboarding.signin_email')}</p>
           <div className='h-[1px] flex-1 bg-gray-300' />
         </div>
       </Stack>
@@ -113,12 +113,12 @@ export const SignInForm = () => {
           >
             <TextInput
               label={t('onboarding.email')}
-              placeholder='e.g johndoe@gmail.com'
+              placeholder={t('signup.example_email')}
               {...form.getInputProps('email')}
             />
             <PasswordInput
               label={t('onboarding.password')}
-              placeholder='Enter your password'
+              placeholder={t('signup.enter_password')}
               {...form.getInputProps('password')}
             />
             <Button
@@ -127,7 +127,7 @@ export const SignInForm = () => {
               className='px-0'
               onClick={() => window.open('https://app.markopolo.ai/reset-pass', '_blank')}
             >
-              Forgot password?
+              {t('signin.forgot_password')}
             </Button>
           </motion.div>
           <motion.div

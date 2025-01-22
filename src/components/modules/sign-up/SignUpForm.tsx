@@ -24,9 +24,9 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
       name: (value) => (value.length === 0 ? t('settings.name_required') : null),
       email: (value) => (value.length === 0 ? t('settings.email_required') : null),
       password: (value) => {
-        if (value.length === 0) return 'Password is required';
-        if (value.length < 8) return 'Password must be at least 8 characters';
-        if (!/[A-Z]/.test(value)) return 'Password must contain at least 1 capital letter';
+        if (value.length === 0) return t('signup.password_required');
+        if (value.length < 8) return t('signup.password_min_length');
+        if (!/[A-Z]/.test(value)) return t('signup.password_capital_letter');
         return null;
       },
     },
@@ -105,12 +105,12 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
           >
             <TextInput
               label={t('onboarding.full_name')}
-              placeholder='e.g John Doe'
+              placeholder={t('signup.example_name')}
               {...form.getInputProps('name')}
             />
             <TextInput
               label={t('onboarding.email')}
-              placeholder='e.g johndoe@gmail.com'
+              placeholder={t('signup.example_email')}
               {...form.getInputProps('email')}
             />
             <PasswordInput

@@ -9,10 +9,12 @@ import {
 import { motion } from 'framer-motion';
 import { HeaderTitle, OnboardingLayout } from 'layouts';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { setOnboardingStep } from 'src/store/onboarding/onboardingSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 const Onboarding = () => {
+  const { t } = useTranslation();
   const { resourceId: companyId } = useAppSelector((state) => state.company);
   const { step } = useAppSelector((state) => state.onboarding);
   const dispatch = useAppDispatch();
@@ -34,7 +36,7 @@ const Onboarding = () => {
 
   return (
     <>
-      <HeaderTitle>Nabiq | Create your company</HeaderTitle>
+      <HeaderTitle>{t('page_title.create_company_title')}</HeaderTitle>
       <Topbar />
       <OnboardingLayout
         rightSection={<RightSection />}
