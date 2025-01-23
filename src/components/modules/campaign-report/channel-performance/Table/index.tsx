@@ -1,16 +1,18 @@
 import { Table, TableBody, TableHead, TableRow, Th } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 
 const CHANNEL_PERFORMANCE_TABLE_HEADER: string[] = [
-  'Channels',
-  'Open rate',
-  'Link clicks',
-  'Conversion rate',
-  'Engagement',
-  'Revenue',
+  'create_campaign.channels',
+  'campaign_report.open_rate',
+  'campaign_report.link_clicks',
+  'campaign_report.conversion_rate',
+  'campaign_report.engagement',
+  'campaign_report.revenue',
   'CTR',
 ];
 
 export const ChannelPerformanceTable = () => {
+  const { t } = useTranslation();
   return (
     <Table>
       <TableHead>
@@ -18,7 +20,7 @@ export const ChannelPerformanceTable = () => {
           {CHANNEL_PERFORMANCE_TABLE_HEADER.map((item, idx) => (
             <Th key={idx}>
               <div className='flex items-center gap-1'>
-                <div className='text-xs font-medium text-gray-600'>{item}</div>
+                <div className='text-xs font-medium text-gray-600'>{t(item)}</div>
               </div>
             </Th>
           ))}

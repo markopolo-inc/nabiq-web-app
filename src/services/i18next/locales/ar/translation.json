@@ -534,7 +534,14 @@
     "cohort_selection": "سنحدد الفئات المثالية المتوافقة مع هذه الحملة، وسنقوم بكتابة محتويات خصيصًا لك.",
     "view_approval": "يمكنك الاطلاع عليها والموافقة عبر منصتنا.",
     "notification_ready": "اطمئن، سنقوم بإشعارك عندما تكون جاهزة.",
-    "view_control_room": "اطلع على غرفة التحكم"
+    "view_control_room": "اطلع على غرفة التحكم",
+    "created_on": "{{date}} تم إنشاؤه في",
+    "open_rate": "معدل الفتح",
+    "link_clicks": "نقرات الرابط",
+    "conversion_rate": "معدل التحويل",
+    "engagement": "ارتباط",
+    "revenue": "ربح",
+    "CTR": "CTR"
   },
   "integrations": {
     "datasource": {

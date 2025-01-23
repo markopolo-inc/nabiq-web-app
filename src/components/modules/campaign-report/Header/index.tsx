@@ -17,7 +17,9 @@ export const CampaignReportHeader = () => {
         <Stack gap={4}>
           <p className='text-gray-900 text-[20px] font-semibold'>{name}</p>
           <p className='text-gray-600 text-base font-normal'>
-            Created on {moment(createdAt).format('MMM DD, YYYY [at] hh:mm a')}
+            {t('campaign_report.created_on', {
+              date: moment(createdAt).format('MMM DD, YYYY [at] hh:mm a'),
+            })}
           </p>
         </Stack>
         <Button size='md' variant='secondary' onClick={() => navigate(-1)}>
