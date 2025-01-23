@@ -62,29 +62,31 @@ const ModalBody = ({ setOpened }) => {
         </Stack>
         <Stack gap={24} className='border border-gray-200 bg-gray-50 rounded-xl p-6'>
           <Group justify='space-between' className='border-b border-gray-300 pb-6'>
-            <p className='text-sm text-gray-900 font-semibold'>Total conversion cost</p>
+            <p className='text-sm text-gray-900 font-semibold'>{t('pricing_plan.pricing_plan')}</p>
             <p className='text-sm text-gray-900 font-semibold'>
-              ${totalConversionCost.toFixed(2)}/month
+              $
+              {t('pricing_plan.conversion_cost_per_month', {
+                totalConversionCost: totalConversionCost.toFixed(2),
+              })}
             </p>
           </Group>
           <Stack className='border-b border-gray-300 pb-6' gap={24}>
             <Group justify='space-between'>
-              <p className='text-sm text-gray-600'>Price per 1,000 messages</p>
+              <p className='text-sm text-gray-600'>
+                {t('pricing_plan.price_per_thousand_messages')}
+              </p>
               <p className='text-sm text-gray-600'>${perUnitPrice.toFixed(2)}</p>
             </Group>
             <Group justify='space-between'>
-              <p className='text-sm text-gray-600'>Processing Fee (10% of total cost)</p>
+              <p className='text-sm text-gray-600'>{t('pricing_plan.processing_fee')}</p>
               <p className='text-sm text-gray-600'>${processingFee.toFixed(2)}</p>
             </Group>
             <Group justify='space-between'>
-              <p className='text-sm text-gray-600'>Total conversion cost</p>
+              <p className='text-sm text-gray-600'>{t('pricing_plan.total_conversion_cost')}</p>
               <p className='text-sm text-gray-600'>${totalConversionCost.toFixed(2)}</p>
             </Group>
           </Stack>
-          <p className='text-sm text-gray-600'>
-            *Subjects, participants and timestamps will be visible to your team, Content won’t be
-            visible unless shared.
-          </p>
+          <p className='text-sm text-gray-600'>{t('pricing_plan.visibility_notice')}</p>
           <Button
             fullWidth
             variant='secondary-black'
@@ -101,7 +103,7 @@ const ModalBody = ({ setOpened }) => {
               }
             }}
           >
-            Confirm WhatsApp add-on
+            {t('billing_page.confirm_whatsapp_addon')}
           </Button>
         </Stack>
       </div>
