@@ -72,12 +72,8 @@ const ModalBody: React.FC<{
       <div className='flex flex-col gap-4'>
         <GatewayLogo app={gateway.gateway} width={32} />
         <div className='flex flex-col gap-2'>
-          <p className='text-gray-900 font-semibold text-[24px]'>
-            {t('integrations.integrate_name', { name: gateway.name })}
-          </p>
-          <p className='text-gray-600 font-normal text-base'>
-            {t('integrations.enter_account_details', { gatewayName: gateway.name })}
-          </p>
+          <p className='text-gray-900 font-semibold text-[24px]'>{t(gateway.name)}</p>
+          <p className='text-gray-600 font-normal text-base'>{t(gateway.headline)}</p>
         </div>
       </div>
       {formStep === 'credential' && (
