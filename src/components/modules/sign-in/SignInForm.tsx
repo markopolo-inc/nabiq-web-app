@@ -43,7 +43,7 @@ export const SignInForm = () => {
     },
     validate: {
       email: (value) => (value.length === 0 ? t('settings.email_required') : null),
-      password: (value) => (value.length === 0 ? t('settings.password_required') : null),
+      password: (value) => (value.length === 0 ? t('signup.password_required') : null),
     },
   });
 
