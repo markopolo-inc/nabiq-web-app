@@ -1,5 +1,6 @@
 import { Group, Stack, Switch } from '@nabiq-ui';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ComparePlanFeatures,
   MonthlyActiveUser,
@@ -10,6 +11,7 @@ import { PriceSummary } from 'src/components/modules/billing/plans/components/pr
 import { usePlanDetails } from 'src/hooks/modules/billing';
 
 const PlansPage = () => {
+  const { t } = useTranslation();
   const [activeUsers, setActiveUsers] = useState(10000);
   const [isMonthly, setIsMonthly] = useState(true);
   const [planCategory, setPlanCategory] = useState<'pro' | 'enterprise'>('pro');
@@ -22,17 +24,17 @@ const PlansPage = () => {
       <Stack>
         <Group gap={8}>
           <Group gap={8}>
-            <p className='text-sm text-gray-600 font-normal'>Monthly</p>
+            <p className='text-sm text-gray-600 font-normal'>{t('billing_page.monthly')}</p>
             <Switch
               checked={!isMonthly}
               disabled={planCategory === 'enterprise'}
               onChange={() => setIsMonthly(!isMonthly)}
               size='sm'
             />
-            <p className='text-sm text-gray-600 font-normal'>Annual</p>
+            <p className='text-sm text-gray-600 font-normal'>{t('billing_page.annual')}</p>
           </Group>
           <p className='text-sm text-gray-600 font-normal'>
-            (10% discount for {activeUsersInText} monthly active users)
+            {t('pricing_plan.discount_notice', { activeUsersInText })}
           </p>
         </Group>
 

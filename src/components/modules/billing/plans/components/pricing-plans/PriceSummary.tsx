@@ -1,6 +1,7 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, Group, Stack } from '@nabiq-ui';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useBillingDetails, usePlanDetails } from 'src/hooks/modules/billing';
 import {
@@ -18,6 +19,7 @@ export const PriceSummary = ({
   isMonthly: boolean;
   planCategory: 'pro' | 'enterprise';
 }) => {
+  const { t } = useTranslation();
   const { activeUsersInText, monthlyPrice, yearlyPrice, planId } = usePlanDetails({
     activeUsers,
     isMonthly,
@@ -32,38 +34,39 @@ export const PriceSummary = ({
   return (
     <Stack className='bg-primary-50 rounded-xl border border-gray-200 p-6 h-fit' gap={32}>
       <Stack gap={8}>
-        <p className='text-2xl text-gray-900 font-semibold'>Price Summary</p>
-        <p className='text-sm text-gray-600 font-normal'>Billed in $US Dollars</p>
+        <p className='text-2xl text-gray-900 font-semibold'>{t('pricing_plan.price_summary')}</p>
+        <p className='text-sm text-gray-600 font-normal'>{t('pricing_plan.billed_in_usd')}</p>
       </Stack>
       <Stack gap={8} className='border-b border-gray-300 pb-8'>
         <Group justify='space-between'>
           <p className='text-sm text-gray-900 font-semibold'>
-            {planCategory === 'pro' ? 'Pro plan' : 'Enterprise plan'}
+            {planCategory === 'pro'
+              ? t('pricing_plan.pro_plan')
+              : t('pricing_plan.enterprise_plan')}
           </p>
           <p className='text-sm text-gray-900 font-semibold'>
             {planCategory === 'pro'
-              ? `${isMonthly ? monthlyPrice : yearlyPrice}/${isMonthly ? 'month' : 'year'}`
-              : 'Custom'}
+              ? `${isMonthly ? monthlyPrice : yearlyPrice}/${isMonthly ? t('billing_page.month') : t('billing_page.year')}`
+              : t('home_page.custom')}
           </p>
         </Group>
         <p className='text-sm text-gray-600 font-normal'>
           {planCategory === 'pro'
-            ? `${activeUsersInText} monthly active users`
-            : 'Up to unlimited active users'}
+            ? t('pricing_plan.active_users_text', { activeUsersInText })
+            : t('pricing_plan.unlimited_active_users')}
         </p>
       </Stack>
       <Stack gap={24}>
         <Group justify='space-between'>
-          <p className='text-lg text-gray-900 font-semibold'>Total</p>
+          <p className='text-lg text-gray-900 font-semibold'>{t('pricing_plan.total')}</p>
           <p className='text-lg text-gray-900 font-semibold'>
             {planCategory === 'pro'
-              ? `${isMonthly ? monthlyPrice : yearlyPrice}/${isMonthly ? 'month' : 'year'}`
-              : 'Custom'}
+              ? `${isMonthly ? monthlyPrice : yearlyPrice}/${isMonthly ? t('billing_page.month') : t('billing_page.year')}`
+              : t('home_page.custom')}
           </p>
         </Group>
         <p className='text-sm text-gray-600 font-normal'>
-          *Subjects, participants and timestamps will be visible to your team, Content won’t be
-          visible unless shared.
+          {t('pricing_plan.visibility_notice_repeated')}
         </p>
         {planCategory === 'pro' && (
           <Button
@@ -77,16 +80,18 @@ export const PriceSummary = ({
                 res = await startSubscription({ plan: planId, companyId }).unwrap();
               }
               if (res.success) {
-                toast.success('Subscription started successfully!');
+                toast.success(t('pricing_plan.subscription_success'));
                 navigate('/billing');
               }
             }}
             loading={isStartSubscriptionLoading || isChangeSubscriptionLoading}
           >
-            Subscribe to pro plan
+            {t('pricing_plan.subscribe_pro_plan')}
           </Button>
         )}
-        {planCategory === 'enterprise' && <Button fullWidth>Talk to our sales team</Button>}
+        {planCategory === 'enterprise' && (
+          <Button fullWidth>{t('pricing_plan.contact_sales_team')}</Button>
+        )}
       </Stack>
     </Stack>
   );
