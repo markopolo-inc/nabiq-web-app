@@ -113,13 +113,13 @@ export const MetricCards: FC<{
                 />
               ))
             : [
-                'Sent',
-                'Delivered',
-                'Opened rate',
-                'Total link clicks',
-                'Click through rate',
-                'Conversion rate',
-              ]?.map((item, index) => <EmptyMetricsCard key={item} index={index} name={item} />)}
+                'home_page.metrics_sent',
+                'home_page.metrics_delivered',
+                'home_page.metrics_open_rate',
+                'home_page.metrics_total_clicks',
+                'home_page.metrics_ctr',
+                'home_page.metrics_conversion',
+              ].map((item, index) => <EmptyMetricsCard key={item} index={index} name={t(item)} />)}
       </motion.div>
     </motion.div>
   );

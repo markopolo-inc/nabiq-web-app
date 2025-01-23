@@ -8,7 +8,7 @@ const CHANNEL_PERFORMANCE_TABLE_HEADER: string[] = [
   'campaign_report.conversion_rate',
   'campaign_report.engagement',
   'campaign_report.revenue',
-  'CTR',
+  'campaign_report.CTR',
 ];
 
 export const ChannelPerformanceTable = () => {
