@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import { useTranslation } from 'react-i18next';
 import { monthlyActiveUser } from 'src/lib/billing';
 import { useAppSelector } from 'src/store/hooks';
 import { getDateDifference } from 'src/utils/date.uitils';
@@ -30,17 +31,17 @@ export const usePlanDetails = ({
   activeUsers: number;
   isMonthly: boolean;
 }) => {
+  const { t } = useTranslation();
   const plan = monthlyActiveUser.find((activeUser) => activeUser.value === activeUsers);
 
   const pricingPlans = [
     {
       id: 'pro',
-      name: 'Pro',
-      description:
-        "Subjects, participants and timestamps will be visible to your team. Content won't be visible unless shared.",
+      name: t('pricing_plan.pro'),
+      description: t('pricing_plan.subject_participants_and_timestamps'),
       price: `$${isMonthly ? plan?.monthly : plan?.yearly}`,
-      userLimit: `${plan?.label} monthly active users`,
-      range: isMonthly ? 'per month' : 'per year',
+      userLimit: t('pricing_plan.active_users_text', { activeUsersInText: plan?.label }),
+      range: isMonthly ? t('billing_page.per_month') : t('billing_page.per_year'),
       features: {
         whatsapp: {
           unlimited: false,
@@ -49,11 +50,10 @@ export const usePlanDetails = ({
     },
     {
       id: 'enterprise',
-      name: 'Enterprise',
-      description:
-        "Subjects, participants and timestamps will be visible to your team. Content won't be visible unless shared.",
-      price: 'Custom',
-      userLimit: 'up to unlimited active users',
+      name: t('pricing_plan.enterprise'),
+      description: t('pricing_plan.subject_participants_and_timestamps'),
+      price: t('home_page.custom'),
+      userLimit: t('pricing_plan.unlimited_active_users'),
       range: '',
       features: {
         whatsapp: {

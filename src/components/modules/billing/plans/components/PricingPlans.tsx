@@ -1,6 +1,7 @@
 import { Checkbox, Group, Stack } from '@nabiq-ui';
 import cn from 'classnames';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { usePlanDetails } from 'src/hooks/modules/billing';
 
 import { WhatsAppAddOnModal } from './pricing-plans';
@@ -17,6 +18,7 @@ export const PricingPlans = ({
   planCategory: 'pro' | 'enterprise';
   setPlanCategory: (value: 'pro' | 'enterprise') => void;
 }) => {
+  const { t } = useTranslation();
   const [showWhatsAppAddOnModal, setShowWhatsAppAddOnModal] = useState(false);
   const { pricingPlans } = usePlanDetails({ activeUsers, isMonthly });
   return (
@@ -50,7 +52,7 @@ export const PricingPlans = ({
                 </p>
               </Stack>
               <Stack gap={12}>
-                <p className='text-sm text-gray-600'>You will pay</p>
+                <p className='text-sm text-gray-600'>{t('pricing_plan.you_will_pay')}</p>
                 <Group gap={8}>
                   <p className='text-[24px] font-semibold text-gray-900'>{plan.price}</p>
                   <p className='text-sm text-gray-600'>{plan.range}</p>
