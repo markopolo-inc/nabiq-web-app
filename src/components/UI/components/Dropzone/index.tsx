@@ -3,10 +3,12 @@ import { Dropzone as DropzoneField, DropzoneProps, IMAGE_MIME_TYPE } from '@mant
 import '@mantine/dropzone/styles.css';
 import { FiFileUpload } from '@nabiq-icons';
 import { IconUpload, IconX } from '@tabler/icons-react';
+import { useTranslation } from 'react-i18next';
 
 import classes from './Index.module.scss';
 
 function Dropzone(props: DropzoneProps) {
+  const { t } = useTranslation();
   return (
     <DropzoneField
       maxSize={5 * 1024 ** 2}
@@ -36,12 +38,12 @@ function Dropzone(props: DropzoneProps) {
 
         <div className='flex flex-col gap-1'>
           <div className='font-open text-sm leading-5 text-left'>
-            <span className='font-semibold text-primary-600'>Click to upload</span>
-            <span className='font-normal text-gray-600'> or drag and drop</span>
+            <span className='font-semibold text-primary-600'>{t('settings.click_to_upload')}</span>
+            <span className='font-normal text-gray-600'> {t('settings.drag_and_drop')}</span>
           </div>
 
           <div className='font-open text-xs font-normal leading-4 text-center text-gray-600'>
-            SVG, PNG, JPG, or GIF (max. 800x400px)
+            {t('settings.upload_instructions')}
           </div>
         </div>
       </Group>
