@@ -159,26 +159,14 @@ const Settings = () => {
                   <Select
                     required
                     data={[
+                      { value: '1-10', label: t('settings.employees_count', { size: '1-10' }) },
+                      { value: '11-50', label: t('settings.employees_count', { size: '11-50' }) },
+                      { value: '51-200', label: t('settings.employees_count', { size: '51-200' }) },
                       {
-                        value: t('settings.employees_count', { size: '1-10' }),
-                        label: '1-10 employees',
+                        value: '201-500',
+                        label: t('settings.employees_count', { size: '201-500' }),
                       },
-                      {
-                        value: t('settings.employees_count', { size: '11-50' }),
-                        label: '11-50 employees',
-                      },
-                      {
-                        value: t('settings.employees_count', { size: '51-200' }),
-                        label: '51-200 employees',
-                      },
-                      {
-                        value: t('settings.employees_count', { size: '201-500' }),
-                        label: '201-500 employees',
-                      },
-                      {
-                        value: t('settings.employees_count', { size: '500+' }),
-                        label: '500+ employees',
-                      },
+                      { value: '500+', label: t('settings.employees_count', { size: '500+' }) },
                     ]}
                     label={t('settings.business_size')}
                     placeholder={t('settings.select_business_size')}

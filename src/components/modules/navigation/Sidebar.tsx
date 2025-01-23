@@ -67,8 +67,8 @@ export const Sidebar = () => {
         </div>
         <div className='flex flex-col gap-8 mt-4'>
           <ul className='flex flex-col gap-2'>
-            <p className='text-sm font-medium text-gray-500 px-2'>Others</p>
-            <p className='text-sm font-medium text-gray-500 px-2'>{t('home_page.account')}</p>
+            <p className='text-sm font-medium text-gray-500 px-2'>{t('navigation.nav_others')}</p>
+            {/* <p className='text-sm font-medium text-gray-500 px-2'>{t('home_page.account')}</p> */}
             {lowerPartOptions?.map((item, idx) => <MenuItem key={idx} item={item} />)}
           </ul>
           {payment && <PlanCard />}

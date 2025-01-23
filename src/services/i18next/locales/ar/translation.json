@@ -31,7 +31,8 @@
     "nav_chatbot": "الروبوت",
     "nav_settings": "الاعدادات",
     "nav_support": "الدعم",
-    "nav_logout": "تسجيل الخروج"
+    "nav_logout": "تسجيل الخروج",
+    "nav_others": "الأخرى"
   },
   "home_page": {
     "notifications_title": "الإشعارات",
@@ -762,7 +763,7 @@
     "technology": "التقنية",
     "travel_hospitality": "السفر والضيافة",
     "select_industry": "اختر القطاع",
-    "employees_count": "{size} موظفين",
+    "employees_count": "{{size}} موظفين",
     "select_business_size": "أدخل حجم الشركة",
     "click_to_upload": "اضغط للتحميل",
     "drag_and_drop": "أو قم بالسحب والإفلات",
