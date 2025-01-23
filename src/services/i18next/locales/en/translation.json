@@ -436,7 +436,7 @@
     "email_published": "email has been published",
     "content_delivered": "Content has been delivered to your cohorts.",
     "left": "left",
-    "scheduled_for": "Scheduled for {scheduled}",
+    "scheduled_for": "Scheduled for {{scheduled}}",
     "view_content_sample": "View content sample",
     "email_sms": "Email and SMS",
     "untitled_campaign": "Untitled Campaign-"

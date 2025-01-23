@@ -520,7 +520,7 @@
     "email_published": "تم نشر البريد الإلكتروني.",
     "content_delivered": "تم إرسال المحتوى إلى أفراد مجموعتك.",
     "left": "غادر",
-    "scheduled_for": "مجدول لـ {scheduled}.",
+    "scheduled_for": "مجدول لـ {{scheduled}}.",
     "view_content_sample": "عرض عينة.",
     "email_sms": "البريد الإلكتروني والرسائل النصية",
     "untitled_campaign": "حملة بدون عنوان"
