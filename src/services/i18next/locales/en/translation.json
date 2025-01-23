@@ -805,7 +805,14 @@
     "cohort_selection": "We will pick the perfect cohorts that match this campaign and also write the personalized contents for you.",
     "view_approval": "You'll be able to view and approve them in our",
     "notification_ready": "Don't worry, we will notify you when it's ready.",
-    "view_control_room": "View control room"
+    "view_control_room": "View control room",
+    "created_on": "Created on {{date}}",
+    "open_rate": "Open rate",
+    "link_clicks": "Link clicks",
+    "conversion_rate": "Conversion rate",
+    "engagement": "Engagement",
+    "revenue": "Revenue",
+    "CTR": "CTR"
   },
   "campaign_details": {
     "list_description": "List of audience and individual campaign funnel details.",
