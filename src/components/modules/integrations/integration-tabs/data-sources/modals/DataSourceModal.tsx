@@ -137,7 +137,7 @@ const ModalBody = ({
             {t('integrations.integrate')} {capitalize(platform)}
           </p>
           <p className='text-base text-gray-600'>
-            {t('integrations.choose_data_fields')} {capitalize(platform)}.
+            {t('integrations.choose_data_fields', { platform: capitalize(platform) })}
           </p>
         </Stack>
         <div className='absolute top-8 right-8'>
@@ -147,8 +147,8 @@ const ModalBody = ({
       <Stack className='px-8 py-5' gap={0}>
         <p className='text-lg font-semibold text-gray-900'>{t('integrations.mandatory_field')}</p>
         <p className='text-sm text-gray-600'>
-          {t('mapped_fields', {
-            mappedRequiredFieldsLength,
+          {t('integrations.mapped_fields', {
+            dynamicKeyName: mappedRequiredFieldsLength,
             requiredFieldsLength: requiredFields.length || 0,
           })}
         </p>
@@ -208,8 +208,8 @@ const ModalBody = ({
       <Stack className='px-8 py-5' gap={0}>
         <p className='text-lg font-semibold text-gray-900'>{t('integrations.optional_fields')}</p>
         <p className='text-sm text-gray-600'>
-          {t('mapped_fields', {
-            mappedOptionalFieldsLength,
+          {t('integrations.mapped_fields', {
+            dynamicKeyName: mappedOptionalFieldsLength,
             requiredFieldsLength: selectedOptionalFields.length || 0,
           })}
         </p>
