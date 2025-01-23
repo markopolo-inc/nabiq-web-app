@@ -52,7 +52,7 @@ const Settings = () => {
 
   return (
     <Stack gap={64}>
-      <HeaderTitle>Nabiq | Settings</HeaderTitle>
+      <HeaderTitle>{t('page_title.settings_title')}</HeaderTitle>
 
       <form
         onSubmit={form.onSubmit((values) => {
