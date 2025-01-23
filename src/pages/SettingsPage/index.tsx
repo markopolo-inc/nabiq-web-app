@@ -137,20 +137,20 @@ const Settings = () => {
                   <Select
                     required
                     data={[
-                      { value: t('settings.apparel'), label: 'Apparel' },
-                      { value: t('settings.auto'), label: 'Auto' },
-                      { value: t('settings.b2b'), label: 'B2B' },
-                      { value: t('settings.beauty'), label: 'Beauty' },
-                      { value: t('settings.consumer_service'), label: 'Consumer Service' },
-                      { value: t('settings.finance_insurance'), label: 'Finance Insurance' },
-                      { value: t('settings.fitness'), label: 'Fitness' },
-                      { value: t('settings.home_improvement'), label: 'Home Improvement' },
-                      { value: t('settings.healthcare'), label: 'Healthcare' },
-                      { value: t('settings.industrial_services'), label: 'Industrial Services' },
-                      { value: t('settings.legal'), label: 'Legal' },
-                      { value: t('settings.retail'), label: 'Retail' },
-                      { value: t('settings.technology'), label: 'Technology' },
-                      { value: t('settings.travel_hospitality'), label: 'Travel & Hospitality' },
+                      { label: t('settings.apparel'), value: 'apparel' },
+                      { label: t('settings.auto'), value: 'auto' },
+                      { label: t('settings.b2b'), value: 'b2b' },
+                      { label: t('settings.beauty'), value: 'beauty' },
+                      { label: t('settings.consumer_service'), value: 'consumer_service' },
+                      { label: t('settings.finance_insurance'), value: 'finance_insurance' },
+                      { label: t('settings.fitness'), value: 'fitness' },
+                      { label: t('settings.home_improvement'), value: 'home_improvement' },
+                      { label: t('settings.healthcare'), value: 'healthcare' },
+                      { label: t('settings.industrial_services'), value: 'industrial_services' },
+                      { label: t('settings.legal'), value: 'legal' },
+                      { label: t('settings.retail'), value: 'retail' },
+                      { label: t('settings.technology'), value: 'technology' },
+                      { label: t('settings.travel_hospitality'), value: 'travel_hospitality' },
                     ]}
                     label={t('settings.industry')}
                     placeholder={t('settings.select_industry')}
