@@ -161,7 +161,7 @@ export const EmailSmsCampaign = () => {
                 {isReadyToConfirm
                   ? campaignConfig?.resourceId?.length
                     ? t('create_campaign.update')
-                    : t('create_campaign.common_create')
+                    : t('home_page.common_create')
                   : t('onboarding.continue')}
               </Button>
             </Group>
