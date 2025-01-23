@@ -17,15 +17,19 @@ export const WhatsAppAddOnCard = () => {
       <Stack gap={0}>
         <Group gap={8}>
           <p className='text-lg font-semibold text-gray-900'>
-            WhatsApp business conversation add-on
+            {t('billing_page.whatsapp_business_addon')}
           </p>
         </Group>
-        <p className='text-sm text-gray-600'>Subscribe to a plan then you can add-on WhatsApp.</p>
+        <p className='text-sm text-gray-600'>{t('billing_page.subscribe_then_add_whatsapp')}</p>
       </Stack>
 
       <Group gap={4}>
         <GatewayLogo app='whatsapp' />
-        <p className='text-sm text-gray-600'>{availableWhatsAppMessages} monthly messages</p>
+        <p className='text-sm text-gray-600'>
+          {t('billing_page.monthly_whatsapp_messages', {
+            availableWhatsAppMessages,
+          })}
+        </p>
       </Group>
 
       {availableWhatsAppMessages > 0 ? (
@@ -39,7 +43,7 @@ export const WhatsAppAddOnCard = () => {
           leadingIcon={<GatewayLogo app='whatsapp' />}
           disabled={paymentPlan === 'trial'}
         >
-          Add-on WhatsApp
+          {t('billing_page.add_whatsapp')}
         </Button>
       )}
     </Stack>

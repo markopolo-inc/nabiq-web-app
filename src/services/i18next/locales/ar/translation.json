@@ -232,7 +232,7 @@
     "copy": "نسخ"
   },
   "billing_page": {
-    "free_trial_days_left": "بقي {days} يومًا على تجربتك المجانية.",
+    "free_trial_days_left": "بقي {{days}} يومًا على تجربتك المجانية.",
     "add_payment_method": "أضف وسيلة  دفع.",
     "card_number_required": "رقم البطاقة مطلوب.",
     "card_number_length": "يجب أن يتراوح عدد أرقام البطاقة بين 13 و 19 رقمًا.",
@@ -273,12 +273,12 @@
     "country": "الدولة",
     "country_placeholder": "ادخل الدولة",
     "payment_method": "وسيلة الدفع",
-    "card_brand": "{brand} ينتهي بـ {lastDigit}",
-    "expiry_date_display": "تاريخ الانتهاء {date}",
+    "card_brand": "{{brand}} ينتهي بـ {{lastDigit}}",
+    "expiry_date_display": "تاريخ الانتهاء {{date}}",
     "edit": "تعديل",
     "free_trial": "تجربة مجانية",
-    "trial_period": "{trialLeft} أيام تجربة مجانية",
-    "current_free_trial": "أنت حاليًا في فترة تجربتك المجانية التي تستمر لـ {trialDaysLeft} يومًا.",
+    "trial_period": "{{trialLeft}} أيام تجربة مجانية",
+    "current_free_trial": "أنت حاليًا في فترة تجربتك المجانية التي تستمر لـ {{trialDaysLeft}} يومًا.",
     "billing_period": "فترة الدفع",
     "not_billed_yet": "لم يتم فرض الرسوم بعد",
     "per_month": "شهريًا",
@@ -300,10 +300,10 @@
     "quantity_of_messages_monthly": "كمية الرسائل (شهريا)",
     "quantity_of_messages": "كمية الرسائل",
     "confirm_whatsapp_addon": "تأكيد إضافة واتساب",
-    "conversion_cost_per_month": "${totalConversionCost} شهريًا",
+    "conversion_cost_per_month": "${{totalConversionCost}} شهريًا",
     "whatsapp_business_addon": "إضافة محادثات واتساب للأعمال",
     "subscribe_then_add_whatsapp": "قم بالاشتراك في باقة، وبعد ذلك يمكنك إضافة ميزة واتساب.",
-    "monthly_whatsapp_messages": "{availableWhatsAppMessages} رسالة شهريًا",
+    "monthly_whatsapp_messages": "{{availableWhatsAppMessages}} رسالة شهريًا",
     "add_whatsapp": "إضافة واتساب"
   },
   "create_campaign": {
