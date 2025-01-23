@@ -89,13 +89,13 @@ export const SignInForm = () => {
               loading={isGoogleLoading}
               onClick={handleGoogleSignIn}
             >
-              {t('onboarding.signin_google')}
+              {t('signin.signin_google')}
             </Button>
           </Stack>
         </motion.div>
         <div className='flex items-center gap-4'>
           <div className='h-[1px] flex-1 bg-gray-300' />
-          <p className='text-gray-700 text-sm font-normal'>{t('onboarding.signin_email')}</p>
+          <p className='text-gray-700 text-sm font-normal'>{t('signin.signin_email')}</p>
           <div className='h-[1px] flex-1 bg-gray-300' />
         </div>
       </Stack>
@@ -118,7 +118,7 @@ export const SignInForm = () => {
             />
             <PasswordInput
               label={t('onboarding.password')}
-              placeholder={t('signup.enter_password')}
+              placeholder={t('signin.enter_password')}
               {...form.getInputProps('password')}
             />
             <Button
