@@ -36,8 +36,8 @@ export const CampaignTiming = () => {
           />
 
           <Select
-            label={t('create_campaign_form.time')}
-            placeholder={t('create_campaign_form.select_time')}
+            label={t('create_campaign.time')}
+            placeholder={t('create_campaign.select_time')}
             data={[
               '00:00',
               '01:00',
@@ -78,7 +78,7 @@ export const CampaignTiming = () => {
           value={String(campaign?.stepCount)}
           onChange={(value) => handleChange('stepCount', Number(value))}
           data={['1', '2', '3', '4', '5', '6']}
-          placeholder={t('create_campaign_form.select_steps')}
+          placeholder={t('create_campaign.select_steps')}
         />
 
         <Text size='14px' className='text-gray-600'>
@@ -91,7 +91,7 @@ export const CampaignTiming = () => {
           label={t('create_campaign_form.min_delay')}
           value={String(campaign?.stepDelay)}
           data={['1', '2', '3', '4', '5', '6']}
-          placeholder={t('create_campaign_form.select_steps')}
+          placeholder={t('create_campaign.select_steps')}
           onChange={(value) => handleChange('stepDelay', Number(value))}
         />
 

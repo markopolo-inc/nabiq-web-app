@@ -63,7 +63,7 @@ export const mediums = [
 export const emailSmsCampaignSteps = [
   {
     label: 'create_campaign_form.details_title',
-    description: 'create_campaign_form.create_campaign_form',
+    description: 'create_campaign_form.details_prompt',
   },
   {
     label: 'create_campaign_form.timing_title',
