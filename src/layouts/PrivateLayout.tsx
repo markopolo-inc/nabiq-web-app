@@ -7,7 +7,7 @@ import { getAuthToken } from 'src/utils/auth';
 
 export const PrivateLayout = () => {
   const [logout] = useLogoutMutation();
-
+  const { language } = useAppSelector((state) => state.app);
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   const { resourceId, userEmail, userName, createdAt } = useAppSelector((state) => state.user);
 
@@ -18,6 +18,8 @@ export const PrivateLayout = () => {
     name: userName,
     email: userEmail,
     created_at: new Date(createdAt)?.getTime(),
+    language_override: language,
+    alignment: language === 'ar' ? 'left' : 'right',
   });
 
   useEffect(() => {
