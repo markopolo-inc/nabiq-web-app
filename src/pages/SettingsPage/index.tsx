@@ -18,7 +18,7 @@ const Settings = () => {
   const company = useAppSelector((state) => state.company);
   const user = useAppSelector((state) => state.user);
 
-  const [updateSetting] = useUpdateSettingMutation();
+  const [updateSetting, { isSuccess }] = useUpdateSettingMutation();
 
   const form = useForm({
     initialValues: {
@@ -70,7 +70,9 @@ const Settings = () => {
                 <Button onClick={() => navigate('/')} variant='secondary'>
                   {t('settings.cancel')}
                 </Button>
-                <Button type='submit'>{t('settings.save_changes')}</Button>
+                <Button type='submit' disabled={isSuccess}>
+                  {t('settings.save_changes')}
+                </Button>
               </Group>
             </div>
           </Stack>
