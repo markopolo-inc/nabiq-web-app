@@ -919,7 +919,7 @@
   },
   "plan_card": {
     "used_mau": "مستخدم شهريًا",
-    "target_notification": "لقد استهدفت {target}% من عدد المستخدمين النشطين شهريًا.",
+    "target_notification": "لقد استهدفت {{target}}% من عدد المستخدمين النشطين شهريًا.",
     "plan_upgrade": "ترقية الباقة"
   }
 }
