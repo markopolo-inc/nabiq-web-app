@@ -110,11 +110,11 @@ export const CompanyCreation = () => {
             />
             <Select
               data={[
-                { value: '1-10', label: t('employees_count', { size: '1-10' }) },
-                { value: '11-50', label: t('employees_count', { size: '11-50' }) },
-                { value: '51-200', label: t('employees_count', { size: '51-200' }) },
-                { value: '201-500', label: t('employees_count', { size: '201-500' }) },
-                { value: '500+', label: t('employees_count', { size: '500+' }) },
+                { value: '1-10', label: t('settings.employees_count', { size: '1-10' }) },
+                { value: '11-50', label: t('settings.employees_count', { size: '11-50' }) },
+                { value: '51-200', label: t('settings.employees_count', { size: '51-200' }) },
+                { value: '201-500', label: t('settings.employees_count', { size: '201-500' }) },
+                { value: '500+', label: t('settings.employees_count', { size: '500+' }) },
               ]}
               required
               label={t('onboarding_intro.business_size')}

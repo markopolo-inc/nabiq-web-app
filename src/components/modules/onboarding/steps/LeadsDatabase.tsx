@@ -35,7 +35,7 @@ export const LeadsDatabase = () => {
           <p className='font-normal text-gray-500'>{t('onboarding.connect_crm')}</p>
         </Stack>
       </Stack>
-      <Stack gap={16} className='min-w-[520px]'>
+      <Stack gap={16} className=''>
         <Accordion
           title={t('onboarding.sync_marketplace')}
           icon={<FiShoppingBag02 size={20} color='#697586' />}
