@@ -917,5 +917,10 @@
     "settings_title": "Nabiq | Settings",
     "signin_title": "Nabiq | Sign in",
     "signup_title": "Nabiq | Signup"
+  },
+  "plan_card": {
+    "used_mau": "Used MAU",
+    "target_notification": "You have targeted {target}% of your available monthly active users.",
+    "plan_upgrade": "Upgrade Plan"
   }
 }

@@ -916,5 +916,10 @@
     "settings_title": "نبيق | الاعدادات",
     "signin_title": "نبيق | تسجيل الدخول",
     "signup_title": "نبيق | التسجيل"
+  },
+  "plan_card": {
+    "used_mau": "مستخدم شهريًا",
+    "target_notification": "لقد استهدفت {target}% من عدد المستخدمين النشطين شهريًا.",
+    "plan_upgrade": "ترقية الباقة"
   }
 }
