@@ -783,7 +783,7 @@
     "upgrade": "Upgrade",
     "usage": "Usage",
     "target_used": "{{target}}% used",
-    "users_targeted": "{30}/100 users targeted",
+    "users_targeted": "{{target}}/100 users targeted",
     "credits_not_reset": "Credits will not reset on free trial period.",
     "your_country": "Your country",
     "select_country": "Select country",

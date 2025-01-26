@@ -294,7 +294,7 @@
     "upgrade": "ترقية",
     "usage": "الاستخدام",
     "target_used": "تم استهلاك {{target}}%",
-    "users_targeted": "تم استهداف 30 مستخدمًا من أصل 100 مستخدم.",
+    "users_targeted": "تم استهداف {{target}} مستخدمًا من أصل 100 مستخدم.",
     "credits_not_reset": "رصيدك لن يُعاد ضبطه خلال فترة التجربة المجانية.",
     "your_country": "بلدك",
     "select_country": "اختر البلد",
