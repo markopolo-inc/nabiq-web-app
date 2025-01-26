@@ -9,7 +9,10 @@ import { useAppSelector } from 'src/store/hooks.ts';
 
 export const TopMenu = () => {
   const { t } = useTranslation();
+
+  const user = useAppSelector((state) => state.user);
   const company = useAppSelector((state) => state.company);
+
   const navigate = useNavigate();
   const { gray500 } = useGetColors();
   const [logout] = useLogoutMutation();
@@ -28,7 +31,7 @@ export const TopMenu = () => {
           <Image
             src={company?.meta?.profilePhoto || AvatarImage}
             className='w-[32px] h-[32px] rounded-full'
-            alt={company?.meta?.userName}
+            alt={user?.userName}
           />
         </UnstyledButton>
       </Menu.Target>
@@ -38,13 +41,13 @@ export const TopMenu = () => {
           <Avatar
             className='w-10 h-10 flex-none rounded-full focus:ring-4 ring-[#E0E0E0] !border-[0.75px] !border-gray-100 !shadow-sm'
             src={company?.meta?.profilePhoto || AvatarImage}
-            alt={company?.meta?.userName}
+            alt={user?.userName}
             active
             size='md'
           />
           <div className='grid font-sans text-sm font-semibold leading-5 text-gray-700'>
-            <p className='truncate'>{company?.meta?.userName}</p>
-            <p className='font-normal text-gray-600 truncate'>{company?.meta?.userEmail}</p>
+            <p className='truncate'>{user?.userName}</p>
+            <p className='font-normal text-gray-600 truncate'>{user?.userEmail}</p>
           </div>
         </Menu.Label>
 
