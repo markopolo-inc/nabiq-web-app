@@ -22,8 +22,8 @@ const Settings = () => {
 
   const form = useForm({
     initialValues: {
-      userName: company?.meta?.userName ?? '',
-      userEmail: company?.meta?.userEmail ?? '',
+      userName: user?.userName ?? '',
+      userEmail: user?.userEmail ?? '',
       profilePhoto: company?.meta?.profilePhoto ?? '',
       businessName: company?.meta?.businessName ?? '',
       industry: company?.meta?.industry ?? '',
