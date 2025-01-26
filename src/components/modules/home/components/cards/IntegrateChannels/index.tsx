@@ -36,7 +36,7 @@ export const IntegrateChannels: React.FC = () => {
         </Button>
       </Stack>
 
-      <Group gap={24}>
+      <Group gap={24} align='normal'>
         {integrations.map((integration) => (
           <IntegrationCard
             name={t(integration.name)}
