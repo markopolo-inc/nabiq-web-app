@@ -39,7 +39,11 @@ const Settings = () => {
   });
 
   const handleFormSubmit = (values) => {
-    updateSetting(values).unwrap();
+    updateSetting(values)
+      .unwrap()
+      .then(() => {
+        navigate('/');
+      });
   };
 
   useEffect(() => {
