@@ -63,7 +63,7 @@ export const RightSection = () => {
                       Generated content will show up here
                     </p>
                     <p className='text-sm text-gray-600 text-center'>
-                      Tell us what you’re looking for in your contents—who it’s for, what to say,
+                      Tell us what you're looking for in your contents—who it's for, what to say,
                       and how to say it. The clearer you are, the better Nabiq can deliver.
                     </p>
                   </motion.div>
@@ -73,7 +73,7 @@ export const RightSection = () => {
           case 'sample_content':
             return <GeneratedContents />;
           default:
-            return <Image src={MonitoringImage} alt='Monitoring' />;
+            return null;
         }
       })()}
     </AnimatePresence>

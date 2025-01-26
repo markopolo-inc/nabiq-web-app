@@ -1,10 +1,9 @@
-import { show } from '@intercom/messenger-js-sdk';
 import { useGetColors } from '@nabiq-ui';
 import cn from 'classnames';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-import { lowerPartOptions, sideBarCategories } from 'src/lib/sidebarOptions';
+import { useNavigationItems } from 'src/hooks/modules/navigation';
 import { useAppSelector } from 'src/store/hooks';
 
 import { PlanCard } from './PlanCard';
@@ -22,9 +21,8 @@ const MenuItem = ({ item }) => {
       to={item.to}
       className={cn('px-2 py-1.5', isSelected ? 'bg-white rounded-lg shadow-sm' : '')}
       onClick={(event) => {
-        if (item.to === '#') {
-          event.preventDefault();
-          show();
+        if (item?.onClick) {
+          item?.onClick(event);
         }
       }}
     >
@@ -43,6 +41,8 @@ const MenuItem = ({ item }) => {
 export const Sidebar = () => {
   const { payment } = useAppSelector((state) => state.company);
   const { t } = useTranslation();
+  const { sideBarCategories, lowerPartOptions } = useNavigationItems();
+
   return (
     <div className='h-screen pl-6 pr-8 py-8 overflow-y-auto'>
       <div className='h-full flex flex-col justify-between'>
