@@ -716,7 +716,7 @@
     "convert_visitors": "Convert visitors into leads with the acquisition chatbot.",
     "need_help_chatbot": "Need help integrating chatbot?",
     "integrate_chatbot": "Integrate chatbot",
-    "copy_paste_code": "Copy and paste the following code into your website's <code>&lt;head&gt;</code> tag.",
+    "copy_paste_code": "Copy and paste the following code into your website's <1>head</1> tag.",
     "copy": "Copy"
   },
   "billing_page": {

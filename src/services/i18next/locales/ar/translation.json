@@ -228,7 +228,7 @@
     "convert_visitors": "استخدم روبوت المحادثة لجذب العملاء لتحويل الزوار إلى عملاء.",
     "need_help_chatbot": "هل تحتاج إلى مساعدة في دمج روبوت المحادثة؟",
     "integrate_chatbot": "ربط نظام الدردشة الآلي",
-    "copy_paste_code": "انسخ والصق الكود التالي في وسم <code><head></code> في موقعك الإلكتروني.",
+    "copy_paste_code": "انسخ والصق الكود التالي في وسم <1>head</1> في موقعك الإلكتروني.",
     "copy": "نسخ"
   },
   "billing_page": {
@@ -253,7 +253,7 @@
     "no_charge_until_plan": "لن يتم خصم أي رسوم حتى تختار خطة.",
     "card_details": "تفاصيل البطاقة",
     "card_number": "رقم البطاقة",
-    "card_number_placeholder": "1111 1111 1111 1111",
+    "card_number_placeholder": "XXXX XXXX XXXX XXXX",
     "first_name": "الاسم الأول",
     "last_name": "الاسم الأخير",
     "expiry_date": "تاريخ الانتهاء",

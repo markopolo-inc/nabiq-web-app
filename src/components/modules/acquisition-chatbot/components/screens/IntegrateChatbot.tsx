@@ -2,7 +2,7 @@ import { FiCopy02 } from '@nabiq-icons';
 import { Button, Stack } from '@nabiq-ui';
 import React from 'react';
 import toast from 'react-hot-toast';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 type IntegrateChatbotProps = {
   apiKey: string;
@@ -46,7 +46,9 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
           {t('acquisition_chatbot_page.integrate_chatbot')}
         </p>
         <p className='text-gray-600 text-sm font-normal'>
-          {t('acquisition_chatbot_page.copy_paste_code')}
+          <Trans i18nKey='acquisition_chatbot_page.copy_paste_code'>
+            Copy and paste the following code into your website's <code>head</code> tag.
+          </Trans>
         </p>
       </Stack>
 
@@ -60,7 +62,12 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
           >
             {t('acquisition_chatbot_page.copy')}
           </Button>
-          <code className='font-medium text-base text-gray-600 block whitespace-pre-wrap'>
+          <code
+            className='font-medium text-base text-gray-600 block whitespace-pre-wrap'
+            style={{
+              direction: 'ltr',
+            }}
+          >
             {code}
           </code>
         </Stack>
