@@ -5,7 +5,7 @@ import { useBillingDetails } from 'src/hooks/modules/billing';
 
 export const TrialDetails = () => {
   const { t } = useTranslation();
-  const { trialDaysLeft, paymentPlan } = useBillingDetails();
+  const { trialDaysLeft, paymentPlan, hasPaymentMethod } = useBillingDetails();
   const navigate = useNavigate();
 
   return (
@@ -40,7 +40,9 @@ export const TrialDetails = () => {
       <p className='text-lg font-semibold text-gray-900'>
         $0 <span className='text-gray-600 text-sm font-normal'>{t('billing_page.per_month')}</span>
       </p>
-      <Button onClick={() => navigate('/billing/plans')}>{t('billing_page.explore_plans')}</Button>
+      <Button onClick={() => navigate('/billing/plans')} disabled={!hasPaymentMethod}>
+        {t('billing_page.explore_plans')}
+      </Button>
     </Stack>
   );
 };

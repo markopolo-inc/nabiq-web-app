@@ -10,7 +10,9 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings=100",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" --config ./.prettierrc",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "extract-translations": "npx i18next-parser",
+    "check-missing-translations": "npx i18next-parser && node scripts/checkMissingTranslations.js"
   },
   "husky": {
     "hooks": {
@@ -59,6 +61,7 @@
     "react-xarrows": "^2.0.2",
     "recharts": "^2.12.7",
     "redux-persist": "^6.0.0",
+    "translation-check": "^1.1.0",
     "unplugin-fonts": "^1.1.1",
     "vite-tsconfig-paths": "^4.3.2"
   },
