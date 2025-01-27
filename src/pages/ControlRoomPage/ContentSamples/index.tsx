@@ -15,21 +15,25 @@ import {
   useMarkConfigContentMutation,
 } from 'src/store/controlRoom/controlRoom.api.ts';
 
-export const appCategories = [
-  {
-    value: 'content',
-    label: 'Samples',
-  },
-  {
-    value: 'blocked-content',
-    label: () => (
-      <div className='flex gap-2 items-center'>
-        <SlashCircle01 size={20} />
-        Blocked by AI
-      </div>
-    ),
-  },
-];
+export const APPCategories = () => {
+  const { t } = useTranslation();
+
+  return [
+    {
+      value: 'content',
+      label: t('content_samples.samples'), // Translated string
+    },
+    {
+      value: 'blocked-content',
+      label: () => (
+        <div className='flex gap-2 items-center'>
+          <SlashCircle01 size={20} />
+          {t('content_samples.blocked_by_ai')} {/* Translated string */}
+        </div>
+      ),
+    },
+  ];
+};
 
 const ContentSamples = () => {
   const { t } = useTranslation();
@@ -150,7 +154,7 @@ const ContentSamples = () => {
             </Group>
           </Group>
 
-          <OptionTabs setActive={setCategory} active={category} options={appCategories} />
+          <OptionTabs setActive={setCategory} active={category} options={APPCategories()} />
 
           {isContentLoading ? (
             <ContentLoader />
