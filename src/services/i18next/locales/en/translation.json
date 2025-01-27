@@ -567,7 +567,6 @@
     "password_requirement": "Password must contain at least 8 characters.",
     "signup": "Sign up",
     "signin_prompt": "Already have an account?",
-    "signin": "Sign in",
     "email_check": "Check your email to continue",
     "verification_sent": "We have sent a verification code to",
     "verify": "Verify",

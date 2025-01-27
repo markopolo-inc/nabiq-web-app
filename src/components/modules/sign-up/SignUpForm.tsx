@@ -132,7 +132,7 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
             <p className='text-gray-700 text-sm font-normal text-center'>
               {t('onboarding.signin_prompt')}{' '}
               <Link className='text-primary-600' to='/login'>
-                {t('onboarding.signin')}
+                {t('signup.signin')}
               </Link>
             </p>
           </motion.div>
