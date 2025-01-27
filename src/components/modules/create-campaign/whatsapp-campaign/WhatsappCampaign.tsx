@@ -35,7 +35,7 @@ export const WhatsappCampaign = () => {
   const errors = (
     <ul>
       {validationErrors.map((error) => (
-        <li key={error} className='text-orange-600 flex items-center gap-2'>
+        <li key={error} className='text-gray-600 flex items-center gap-2'>
           <FiDot size={8} />
           {error}
         </li>
