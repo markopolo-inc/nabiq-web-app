@@ -137,7 +137,7 @@ export const SignInForm = () => {
             className='flex flex-col gap-8 mt-[64px]'
           >
             <Button type='submit' fullWidth loading={isLoading}>
-              {t('onboarding.signin')}
+              {t('signup.signin')}
             </Button>
           </motion.div>
         </form>
