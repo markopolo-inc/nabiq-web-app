@@ -81,11 +81,11 @@ export const whatsappCampaignSteps = [
     description: 'create_campaign_whatsapp.sync_products',
   },
   {
-    label: 'Creation',
+    label: 'create_campaign.creation',
     description: 'create_campaign_whatsapp.set_priorities',
   },
   {
-    label: 'Completion',
+    label: 'create_campaign.completion',
     description: 'create_campaign_whatsapp.captain_working',
   },
 ];

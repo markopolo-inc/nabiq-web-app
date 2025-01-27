@@ -1,5 +1,6 @@
 import { Modal as MantineModal } from '@mantine/core';
 import { CSSProperties, ReactNode, useEffect, useState } from 'react';
+import { useAppSelector } from 'src/store/hooks';
 
 import CloseButton from '../CloseButton';
 import classes from './Modal.module.scss';
@@ -22,6 +23,7 @@ const Modal = ({
   setToggleFromOutside = undefined,
 }: PropTypes) => {
   const [modalOpened, setModalOpened] = useState(toggleFromOutside);
+  const { language } = useAppSelector((state) => state.app);
 
   const setOpened = (openedState: boolean) => {
     setModalOpened((prevState) => {
@@ -69,7 +71,15 @@ const Modal = ({
       >
         <>
           {withCustomClose && (
-            <div style={{ position: 'absolute', right: 20, top: 30, zIndex: 100 }}>
+            <div
+              style={{
+                position: 'absolute',
+                right: language === 'ar' ? undefined : 20,
+                left: language === 'ar' ? 20 : undefined,
+                top: 30,
+                zIndex: 100,
+              }}
+            >
               <CloseButton
                 size='md'
                 onClick={() => {
