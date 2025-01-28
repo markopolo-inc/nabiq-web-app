@@ -140,7 +140,7 @@ export const SignInForm = () => {
               variant='link'
               size='sm'
               className='px-0'
-              onClick={() => window.open('https://app.markopolo.ai/reset-pass', '_blank')}
+              onClick={() => navigate('/reset-pass')}
             >
               {t('signin.forgot_password')}
             </Button>
