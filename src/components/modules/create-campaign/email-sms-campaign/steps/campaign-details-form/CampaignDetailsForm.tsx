@@ -1,5 +1,6 @@
 // import { FiCrossX, FiPlatformIcon } from '@nabiq-icons';
 import { Select, Stack, Text, TextArea, TextInput } from '@nabiq-ui';
+import Joi from 'joi';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -23,9 +24,9 @@ export const CampaignDetailsForm = () => {
 
   const isValidUrl = (url: string) => {
     try {
-      const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
-      if (!urlRegex.test(url)) throw new Error(t('create_campaign.invalid_url'));
-      return true;
+      const res = Joi.string().uri().validate(url);
+      if (!res?.error) return true;
+      else throw new Error(t('create_campaign.invalid_url'));
     } catch {
       return false;
     }
@@ -69,7 +70,7 @@ export const CampaignDetailsForm = () => {
           <TextInput
             required
             label={t('create_campaign_form.campaign_link')}
-            placeholder='www.mywebsite/offer2'
+            placeholder='https://www.mywebsite/offer2'
             value={campaign?.link}
             onChange={(e) => handleLinkChange(e.currentTarget.value)}
             error={linkError}
