@@ -1,6 +1,7 @@
 import { ContentLoader } from '@nabiq-ui';
 import NotFoundPage from 'pages/NotFoundPage';
 import OnboardingPage from 'pages/OnboardingPage';
+import ResetPassPage from 'pages/ResetPass';
 import SignInPage from 'pages/SignInPage';
 import SignUpPage from 'pages/SignUpPage';
 import { Suspense, lazy } from 'react';
@@ -40,6 +41,7 @@ const Router = () => {
         <Route element={<PublicLayout />}>
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/login' element={<SignInPage />} />
+          <Route path='/reset-pass' element={<ResetPassPage />} />
         </Route>
 
         <Route element={<PrivateLayout />}>
