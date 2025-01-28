@@ -74,7 +74,7 @@ export const SignInForm = () => {
         >
           <Stack gap={32}>
             <Stack gap={8}>
-              <p className='text-gray-950 text-2xl font-semibold'>{t('onboarding.signin')}</p>
+              <p className='text-gray-950 text-2xl font-semibold'>{t('signup.signin')}</p>
               <p className='text-gray-700 text-sm font-normal'>
                 {t('signin.no_account')}{' '}
                 <Link className='text-primary-600' to='/signup'>
