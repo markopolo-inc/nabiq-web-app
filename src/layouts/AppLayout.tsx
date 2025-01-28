@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
 import { useGetCompanyQuery } from 'src/store/company/companyApi';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -8,6 +9,7 @@ export const AppLayout = () => {
   const { pathname } = useLocation();
   const { resourceId: companyId, isOnboardingComplete } = useAppSelector((state) => state.company);
   const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const [searchParams] = useSearchParams();
   const {
     refetch: refetchCompany,
     isFetching: isFetchingCompany,
@@ -23,7 +25,15 @@ export const AppLayout = () => {
         navigate('/');
       }
       if ((!companyId || !isOnboardingComplete) && pathname !== '/onboarding') {
-        navigate('/onboarding');
+        const installationId = searchParams.get(QUERY_PARAMS.INSTALLATION_ID);
+        const shopifyShop = searchParams.get(QUERY_PARAMS.SHOPIFY_SHOP);
+        if (installationId && shopifyShop) {
+          navigate(
+            `/onboarding?${QUERY_PARAMS.INSTALLATION_ID}=${installationId}&${QUERY_PARAMS.SHOPIFY_SHOP}=${shopifyShop}`,
+          );
+        } else {
+          navigate('/onboarding');
+        }
       }
     }
   }, [
@@ -33,6 +43,7 @@ export const AppLayout = () => {
     isAuthenticated,
     isFetchingCompany,
     isLoadingCompany,
+    searchParams,
   ]);
 
   useEffect(() => {
