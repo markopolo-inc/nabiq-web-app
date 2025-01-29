@@ -62,7 +62,9 @@ const ModalBody = ({ setOpened }) => {
         </Stack>
         <Stack gap={24} className='border border-gray-200 bg-gray-50 rounded-xl p-6'>
           <Group justify='space-between' className='border-b border-gray-300 pb-6'>
-            <p className='text-sm text-gray-900 font-semibold'>{t('pricing_plan.pricing_plan')}</p>
+            <p className='text-sm text-gray-900 font-semibold'>
+              {t('pricing_plan.total_conversion_cost')}
+            </p>
             <p className='text-sm text-gray-900 font-semibold'>
               $
               {t('pricing_plan.conversion_cost_per_month', {
