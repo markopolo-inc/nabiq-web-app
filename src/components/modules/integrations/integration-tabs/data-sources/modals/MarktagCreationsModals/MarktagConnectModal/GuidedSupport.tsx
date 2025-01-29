@@ -28,7 +28,7 @@ const GuidedSupport = () => {
       <Stack align='end'>
         <Group gap={12}>
           <Button variant='secondary' onClick={() => setStep('choose')}>
-            {t('campaign_details.back')}
+            {t('campaign_details.go_back')}
           </Button>
           <Button
             variant='primary'

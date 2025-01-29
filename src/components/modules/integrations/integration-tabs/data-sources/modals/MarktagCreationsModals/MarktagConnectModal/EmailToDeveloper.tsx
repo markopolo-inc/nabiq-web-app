@@ -91,14 +91,14 @@ const EmailToDeveloper = ({ setOpened }) => {
         <Stack align='end'>
           <Group gap={12}>
             <Button variant='secondary' onClick={() => setStep('choose')}>
-              {t('campaign_details.back')}
+              {t('campaign_details.go_back')}
             </Button>
             <Button
               style={{ marginTop: '16px' }}
               loading={isLoading}
               onClick={handleSendInstructions}
             >
-              {t('campaign_details.send_instructions_to_developer')}
+              {t('home_page.send_instructions_to_developer')}
             </Button>
           </Group>
         </Stack>
