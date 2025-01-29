@@ -924,11 +924,24 @@
     "create_company_title": "نبيق | أطلق شركتك",
     "settings_title": "نبيق | الاعدادات",
     "signin_title": "نبيق | تسجيل الدخول",
-    "signup_title": "نبيق | التسجيل"
+    "signup_title": "نبيق | التسجيل",
+    "reset_pass": "إعادة تعيين كلمة المرور"
   },
   "plan_card": {
     "used_mau": "مستخدم شهريًا",
     "target_notification": "لقد استهدفت %{{target}} من عدد المستخدمين النشطين شهريًا.",
     "plan_upgrade": "ترقية الباقة"
+  },
+  "reset_pass": {
+    "enter_email_reset_pass": "أدخل عنوان بريدك الإلكتروني وسنرسل لك تعليمات لإعادة تعيين كلمة المرور الخاصة بك.",
+    "back_to_sign_in": "العودة إلى تسجيل الدخول.",
+    "please_check_your_email": "يرجى التحقق من بريدك الإلكتروني.",
+    "reset_password_instructions": "لقد أرسلنا لك تعليمات لإعادة تعيين كلمة المرور على {{email}}.",
+    "resend_email": "إعادة إرسال البريد الإلكتروني.",
+    "enter_new_password": "أدخل كلمة مرور جديدة لـ Nabiq.",
+    "new_password": "كلمة المرور الجديدة.",
+    "enter_new_password_placeholder_text": "أدخل كلمة مرورك الجديدة.",
+    "password_changed": "تم تغيير كلمة المرور!",
+    "password_changed_successfully": "تم تغيير كلمة المرور بنجاح."
   }
 }
