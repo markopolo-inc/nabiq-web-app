@@ -13,6 +13,7 @@ dist-ssr
 build
 *.local
 creds.md
+dump
 
 # Editor directories and files
 .vscode/*

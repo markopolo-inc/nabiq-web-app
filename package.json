@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "prepare": "husky install",
     "extract-translations": "npx i18next-parser",
-    "check-missing-translations": "npx i18next-parser && node scripts/checkMissingTranslations.js"
+    "check-missing-translations": "npx i18next-parser && node scripts/checkMissingTranslations.js",
+    "i18n:scan": "i18next-scanner --config i18next-scanner.config.js 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "husky": {
     "hooks": {
@@ -84,6 +85,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "husky": "^8.0.0",
+    "i18next-scanner": "^4.6.0",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "^1.15.0",

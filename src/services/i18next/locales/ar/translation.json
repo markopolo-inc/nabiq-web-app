@@ -274,7 +274,7 @@
     "country_placeholder": "ادخل الدولة",
     "payment_method": "وسيلة الدفع",
     "card_brand": "{{brand}} ينتهي بـ {{lastDigit}}",
-    "expiry_date_display": "تاريخ الانتهاء {{date}}",
+    "expiry_date_display": "تاريخ الانتهاء {{-date}}",
     "edit": "تعديل",
     "free_trial": "تجربة مجانية",
     "trial_period": "{{trialLeft}} أيام تجربة مجانية",
