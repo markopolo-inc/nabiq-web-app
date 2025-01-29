@@ -5,7 +5,11 @@ import { useTranslation } from 'react-i18next';
 import NabiqLogo from 'src/assets/logo/logo-landmark.png';
 import { trimAllValuesOfObject } from 'src/utils/string.utils.ts';
 
-export const NewPass = () => {
+type NewPassProps = {
+  onSetup: () => void;
+};
+
+export const NewPass = ({ onSetup }: NewPassProps) => {
   const { t } = useTranslation();
 
   const form = useForm({
@@ -19,15 +23,16 @@ export const NewPass = () => {
 
   const handleFormSubmit = async (values) => {
     console.log({ values });
+    onSetup();
   };
 
   return (
     <>
       <Image src={NabiqLogo} alt='Nabiq' className='w-8 h-8' />
       <Stack align='center' gap={4}>
-        <p className='text-gray-900 text-2xl font-semibold'>Reset password</p>
+        <p className='text-gray-900 text-2xl font-semibold'>{t('page_title.reset_pass')}</p>
         <p className='text-gray-500 text-xl leading-[30px] font-normal text-center'>
-          Enter a new password for Nabiq.
+          {t('reset_pass.enter_new_password')}
         </p>
       </Stack>
       <form
@@ -37,14 +42,14 @@ export const NewPass = () => {
         className='flex flex-col gap-6 w-full'
       >
         <PasswordInput
-          label='New password'
-          placeholder='Enter your new password'
+          label={t('reset_pass.new_password')}
+          placeholder={t('reset_pass.enter_new_password_placeholder_text')}
           {...form.getInputProps('password')}
         />
 
         <Stack gap={16}>
           <Button type='submit' fullWidth>
-            Reset password
+            {t('page_title.reset_pass')}
           </Button>
         </Stack>
       </form>

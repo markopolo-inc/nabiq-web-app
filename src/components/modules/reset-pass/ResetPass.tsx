@@ -6,7 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import NabiqLogo from 'src/assets/logo/logo-landmark.png';
 import { trimAllValuesOfObject } from 'src/utils/string.utils.ts';
 
-export const ResetPass = () => {
+type ResetPasswordProps = {
+  onSetup: () => void;
+};
+
+export const ResetPass = ({ onSetup }: ResetPasswordProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -20,16 +24,29 @@ export const ResetPass = () => {
   });
 
   const handleFormSubmit = async (values) => {
-    console.log({ values });
+    // @TODO: Need to confirm with @simanto bhai: (if user put space then not showing require text)
+    // if (values.email.length === 0) {
+    //   form.setErrors({ email: 'Email is required' });
+    //   return;
+    // }
+
+    try {
+      console.log({ values });
+      onSetup();
+      // await Auth.forgotPassword(values.email);
+      // toast.success('Code has been sent!');
+    } catch {
+      // @TODO: Handle error
+    }
   };
 
   return (
     <>
       <Image src={NabiqLogo} alt='Nabiq' className='w-8 h-8' />
       <Stack align='center' gap={4}>
-        <p className='text-gray-900 text-2xl font-semibold'>Reset password</p>
+        <p className='text-gray-900 text-2xl font-semibold'>{t('page_title.reset_pass')}</p>
         <p className='text-gray-500 text-xl leading-[30px] font-normal text-center'>
-          Enter your email address and we will send you instructions to reset your password.
+          {t('reset_pass.enter_email_reset_pass')}
         </p>
       </Stack>
       <form
@@ -49,7 +66,7 @@ export const ResetPass = () => {
             {t('onboarding.continue')}
           </Button>
           <Button type='submit' variant='link' fullWidth onClick={() => navigate('/login')}>
-            Back to sign in
+            {t('reset_pass.back_to_sign_in')}
           </Button>
         </Stack>
       </form>
