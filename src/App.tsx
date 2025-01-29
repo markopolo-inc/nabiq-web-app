@@ -46,7 +46,12 @@ const App = () => {
             }}
           >
             <Toaster position='top-center' reverseOrder={false} />
-            <BrowserRouter>
+            <BrowserRouter
+              future={{
+                v7_startTransition: true,
+                v7_relativeSplatPath: true,
+              }}
+            >
               <Router />
             </BrowserRouter>
           </MantineProvider>
