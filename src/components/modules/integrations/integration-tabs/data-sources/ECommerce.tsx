@@ -105,12 +105,12 @@ export const ECommerce = () => {
           datasourceIntegrations?.connectedAccounts?.salla?.store && (
             <div className='flex items-center gap-2'>
               <Badge color='gray'>
-                {t('salla_id', {
+                {t('integrations.salla_id', {
                   salla_id: datasourceIntegrations?.connectedAccounts?.salla?.store?.id,
                 })}
               </Badge>
               <Badge color='gray'>
-                {t('salla_name', {
+                {t('integrations.salla_name', {
                   salla_name: datasourceIntegrations?.connectedAccounts?.salla?.store?.name,
                 })}
               </Badge>
