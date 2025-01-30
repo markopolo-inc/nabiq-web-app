@@ -10,7 +10,7 @@ export interface IControlRoomConfig {
   status: 'ACTIVE' | 'IN_REVIEW' | 'processing';
   startDate: string;
   hasFeedBack: boolean;
-  queuedAt: string;
+  queuedAt?: string;
   scheduledFor: string;
   identifiedIndividuals?: number; // @TODO: just for UI matching
 }

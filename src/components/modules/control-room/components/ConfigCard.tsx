@@ -23,7 +23,9 @@ export const ConfigCard = ({
   const navigate = useNavigate();
   return (
     <Stack gap={8}>
-      <p className='text-gray-600 font-normal text-sm'>{formatTimeAgo(config.queuedAt)}</p>
+      <p className='text-gray-600 font-normal text-sm'>
+        {config?.queuedAt && formatTimeAgo(config?.queuedAt)}
+      </p>
       <Stack className='rounded-xl border-gray-200 border p-6 w-[552px]' gap={32}>
         <Stack gap={20}>
           <Group justify='space-between'>
