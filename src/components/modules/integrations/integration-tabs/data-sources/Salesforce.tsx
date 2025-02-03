@@ -46,6 +46,18 @@ export const Salesforce = () => {
         ) : (
           <Group>
             <Button
+              variant='secondary'
+              className='!w-36'
+              onClick={async () => {
+                window.location.href = await getOAuthUrl('/salesforce/auth/connect', {
+                  brandId,
+                  redirectUri: window.location.href,
+                });
+              }}
+            >
+              {t('integrations.reconfigure')}
+            </Button>
+            <Button
               variant='tertiary-destructive'
               onClick={() => setShowSalesforceDisconnectModal(true)}
               loading={isDisconnecting}
