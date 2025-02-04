@@ -21,12 +21,31 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
       password: '',
     },
     validate: {
-      name: (value) => (value.length === 0 ? t('settings.name_required') : null),
-      email: (value) => (value.length === 0 ? t('settings.email_required') : null),
+      name: (value) => {
+        const trimmedValue = value.trim(); //leading and trailing spaces removed
+        if (trimmedValue.length === 0) return t('settings.name_required');
+        if (trimmedValue.length < 8 || trimmedValue.length > 2048) return t('settings.name_length');
+        if (!/^[A-Za-z\s'-]+$/.test(trimmedValue)) return t('settings.name_invalid_chars'); //allows uppercase ,lowercase ,hyphens and apostrophes
+        return null;
+      },
+      email: (value) => {
+        const trimmedValue = value.trim();
+        if (trimmedValue.length === 0) return t('settings.email_required');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(trimmedValue)) return t('settings.email_invalid');
+
+        return null;
+      },
       password: (value) => {
-        if (value.length === 0) return t('signup.password_required');
-        if (value.length < 8) return t('signup.password_min_length');
-        if (!/[A-Z]/.test(value)) return t('signup.password_capital_letter');
+        const trimmedValue = value.trim(); // Remove leading and trailing spaces
+
+        if (trimmedValue.length === 0) return t('signup.password_required');
+        if (trimmedValue.length < 8 || trimmedValue.length > 64) return t('signup.password_length');
+        if (!/[A-Z]/.test(trimmedValue)) return t('signup.password_capital_letter'); // At least one capital letter
+        if (!/[a-z]/.test(trimmedValue)) return t('signup.password_lowercase_letter'); // At least one lowercase letter
+        if (!/\d/.test(trimmedValue)) return t('signup.password_number'); // At least one number
+        if (!/[@$!%*?&]/.test(trimmedValue)) return t('signup.password_special_character'); // At least one special character
+
         return null;
       },
     },
