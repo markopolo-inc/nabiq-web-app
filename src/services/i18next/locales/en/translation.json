@@ -7,7 +7,10 @@
   "signup": {
     "signin": "Sign in",
     "password_required": "Password is required",
-    "password_min_length": "Password must be at least 8 characters",
+    "password_length": "Password must be from 8 to 64 characters",
+    "password_lowercase_letter": "Password must contain at least one lowercase letter",
+    "password_number": "Password must contain at least one number",
+    "password_special_character": "Password must contain at least one special character (e.g., @$!%*?&)",
     "password_capital_letter": "Password must contain at least 1 capital letter",
     "example_name": "e.g John Doe",
     "example_email": "e.g johndoe@gmail.com"
@@ -665,6 +668,9 @@
     "cancel": "Cancel",
     "save_changes": "Save changes",
     "name_required": "Name is required",
+    "name_length": "Length should be between 8 to 50 characters",
+    "name_invalid_chars": "Name should contain only alphabets, hyphen, and apostrophes",
+    "email_invalid": "Invalid email address",
     "email_required": "Email is required",
     "business_name_required": "Business name is required",
     "industry_required": "Industry is required",
