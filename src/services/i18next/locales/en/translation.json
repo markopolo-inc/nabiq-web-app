@@ -475,6 +475,8 @@
     "reconnect": "Reconnect",
     "integrate": "Integrate",
     "disconnect": "Disconnect",
+    "facebook": "Facebook",
+    "facebook_desc": "Simplify your online presence with Facebook's user-friendly platform designed to connect you with a global audience.",
     "disconnect_gateway": "Disconnect {{name}}",
     "pause_operations": "Any active operations related with {{gateway}} account will be paused.",
     "yes_disconnect": "Yes, disconnect",

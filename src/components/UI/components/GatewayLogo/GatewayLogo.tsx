@@ -1,5 +1,6 @@
 import { Image } from '@nabiq-ui';
 import ClickSend from 'assets/integraions/ClickSend.svg';
+import Facebook from 'assets/integraions/Facebook.svg';
 import Firebase from 'assets/integraions/FirebaseLogo.svg';
 import FlowRoute from 'assets/integraions/FlowRoute.svg';
 import Hubspot from 'assets/integraions/HubspotLogo.svg';
@@ -43,6 +44,7 @@ const GatewayLogo: React.FC<{
     salesforce: SalesForce,
     firebase: Firebase,
     zoho: Zoho,
+    facebook: Facebook,
   };
 
   return <Image src={logo?.[app]} style={{ width }} />;

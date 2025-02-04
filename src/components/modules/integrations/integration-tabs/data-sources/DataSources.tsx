@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   ECommerce,
+  Facebook,
   Hubspot,
   Marktag,
   MarktagCreationsModals,
@@ -18,6 +19,7 @@ export const DataSources = () => {
         <Marktag onShowMarktag={() => setShowMarktagModal(true)} />
         <Hubspot />
         <Salesforce />
+        <Facebook />
         <ECommerce />
         <Zoho />
       </div>
