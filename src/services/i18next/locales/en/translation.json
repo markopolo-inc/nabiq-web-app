@@ -792,7 +792,8 @@
     "conversion_cost_per_month": "${{totalConversionCost}}/month",
     "whatsapp_business_addon": "WhatsApp business conversation add-on",
     "subscribe_then_add_whatsapp": "Subscribe to a plan then you can add-on WhatsApp.",
-    "monthly_whatsapp_messages": "{{availableWhatsAppMessages}} monthly messages",
+    "monthly_whatsapp_messages": "{{total}} monthly messages",
+    "conversation_used": "{{used}}/{{total}} conversations used",
     "add_whatsapp": "Add-on WhatsApp"
   },
   "campaign_report": {

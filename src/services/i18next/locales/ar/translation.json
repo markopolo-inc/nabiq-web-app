@@ -304,7 +304,8 @@
     "conversion_cost_per_month": "${{totalConversionCost}} شهريًا",
     "whatsapp_business_addon": "إضافة محادثات واتساب للأعمال",
     "subscribe_then_add_whatsapp": "قم بالاشتراك في باقة، وبعد ذلك يمكنك إضافة ميزة واتساب.",
-    "monthly_whatsapp_messages": "{{availableWhatsAppMessages}} رسالة شهريًا",
+    "monthly_whatsapp_messages": "{{total}} رسالة شهريًا",
+    "conversation_used": "تم استخدام {{used}}/{{total}} من المحادثات",
     "add_whatsapp": "إضافة واتساب"
   },
   "create_campaign": {

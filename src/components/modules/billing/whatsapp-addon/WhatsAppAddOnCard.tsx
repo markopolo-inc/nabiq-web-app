@@ -1,5 +1,5 @@
 import { FiPlus } from '@nabiq-icons';
-import { Button, GatewayLogo, Group, Stack } from '@nabiq-ui';
+import { Button, GatewayLogo, Group, Progress, Stack } from '@nabiq-ui';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useBillingDetails } from 'src/hooks/modules/billing';
@@ -9,7 +9,10 @@ import { WhatsAppAddOnModal } from '../plans/components/pricing-plans';
 export const WhatsAppAddOnCard = () => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
-  const { paymentPlan, availableWhatsAppMessages } = useBillingDetails();
+  const { paymentPlan, totalWhatsAppMessages, usedWhatsAppMessages } = useBillingDetails();
+
+  const usedPercentage = (usedWhatsAppMessages / totalWhatsAppMessages) * 100;
+
   return (
     <Stack className='border border-gray-200 shadow-xs p-6 rounded-xl' gap={24}>
       <WhatsAppAddOnModal showModal={showModal} setShowModal={setShowModal} />
@@ -27,12 +30,24 @@ export const WhatsAppAddOnCard = () => {
         <GatewayLogo app='whatsapp' />
         <p className='text-sm text-gray-600'>
           {t('billing_page.monthly_whatsapp_messages', {
-            availableWhatsAppMessages,
+            total: totalWhatsAppMessages,
           })}
         </p>
       </Group>
 
-      {availableWhatsAppMessages > 0 ? (
+      {totalWhatsAppMessages > 0 && (
+        <Stack gap={0} className='text-gray-700 text-sm font-medium'>
+          <Progress value={usedPercentage} />
+          <Group justify='flex-end'>
+            {t('billing_page.conversation_used', {
+              used: usedWhatsAppMessages,
+              total: totalWhatsAppMessages,
+            })}
+          </Group>
+        </Stack>
+      )}
+
+      {totalWhatsAppMessages > 0 ? (
         <Button variant='secondary' onClick={() => setShowModal(true)} leadingIcon={<FiPlus />}>
           {t('home_page.add_more')}
         </Button>

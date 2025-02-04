@@ -11,6 +11,8 @@ export interface IPayment {
   awaitingCancellation: boolean;
   whatsapp: {
     availableMessages: number;
+    totalMessages: number;
+    usedMessages: number;
   };
   card: {
     email: string;
