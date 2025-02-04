@@ -42,26 +42,23 @@ export const SignInForm = () => {
       password: '',
     },
     validate: {
-      email: (value) => {
-        const trimmedValue = value.trim();
-        if (trimmedValue.length === 0) return t('settings.email_required');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(trimmedValue)) return t('settings.email_invalid');
-
-        return null;
-      },
-      password: (value) => {
-        const trimmedValue = value.trim(); // Remove leading and trailing spaces
-
-        if (trimmedValue.length === 0) return t('signup.password_required');
-        if (trimmedValue.length < 8 || trimmedValue.length > 64) return t('signup.password_length');
-        if (!/[A-Z]/.test(trimmedValue)) return t('signup.password_capital_letter'); // At least one capital letter
-        if (!/[a-z]/.test(trimmedValue)) return t('signup.password_lowercase_letter'); // At least one lowercase letter
-        if (!/\d/.test(trimmedValue)) return t('signup.password_number'); // At least one number
-        if (!/[@$!%*?&]/.test(trimmedValue)) return t('signup.password_special_character'); // At least one special character
-
-        return null;
-      },
+      // email: (value) => {
+      //   const trimmedValue = value.trim();
+      //   if (trimmedValue.length === 0) return t('settings.email_required');
+      //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      //   if (!emailRegex.test(trimmedValue)) return t('settings.email_invalid');
+      //   return null;
+      // },
+      // password: (value) => {
+      //   const trimmedValue = value.trim(); // Remove leading and trailing spaces
+      //   if (trimmedValue.length === 0) return t('signup.password_required');
+      //   if (trimmedValue.length < 8 || trimmedValue.length > 64) return t('signup.password_length');
+      //   if (!/[A-Z]/.test(trimmedValue)) return t('signup.password_capital_letter'); // At least one capital letter
+      //   if (!/[a-z]/.test(trimmedValue)) return t('signup.password_lowercase_letter'); // At least one lowercase letter
+      //   if (!/\d/.test(trimmedValue)) return t('signup.password_number'); // At least one number
+      //   if (!/[@$!%*?&]/.test(trimmedValue)) return t('signup.password_special_character'); // At least one special character
+      //   return null;
+      // },
     },
   });
 

@@ -17,7 +17,7 @@ export const MarktagSidebar = () => {
       }}
     >
       <div className='py-20 lg:py-16 pl-12 pr-8'>
-        <Image className='w-36' src={logo} alt='' />
+        <Image className='w-36 cursor-pointer' src={logo} alt='' onClick={() => navigate('/')} />
 
         <div className='mt-16 flex flex-col gap-3'>
           <Text className='display-xl font-medium text-white'>

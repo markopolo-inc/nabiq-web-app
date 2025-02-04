@@ -13,7 +13,12 @@ export const Topbar = () => {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 w-screen bg-gray-950 h-[56px] flex justify-between items-center z-10 px-[64px]`}
     >
-      <Image src={NabiqLogo} alt='Nabiq' className='w-[70px]' />
+      <Image
+        src={NabiqLogo}
+        alt='Nabiq'
+        className='w-[70px] cursor-pointer'
+        onClick={() => navigate('/')}
+      />
       <Button variant='secondary-black' className='w-[40px]' onClick={() => navigate('/billing')}>
         <FiCrossX color='white' size={12} />
       </Button>

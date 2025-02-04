@@ -24,7 +24,7 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
       name: (value) => {
         const trimmedValue = value.trim(); //leading and trailing spaces removed
         if (trimmedValue.length === 0) return t('settings.name_required');
-        if (trimmedValue.length < 8 || trimmedValue.length > 50) return t('settings.name_length');
+        if (trimmedValue.length < 2 || trimmedValue.length > 50) return t('settings.name_length');
         if (!/^[A-Za-z\s'-]+$/.test(trimmedValue)) return t('settings.name_invalid_chars'); //allows uppercase ,lowercase ,hyphens and apostrophes
         return null;
       },

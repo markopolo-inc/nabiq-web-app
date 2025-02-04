@@ -27,7 +27,12 @@ export const NavigationLayout = () => {
           <Group h='100%' px='md' className='justify-between'>
             <Group>
               <Burger opened={opened} onClick={toggle} hiddenFrom='md' color='white' size='sm' />
-              <Image src={NabiqLogo} alt='Nabiq' className='w-[74px]' />
+              <Image
+                src={NabiqLogo}
+                alt='Nabiq'
+                className='w-[74px] cursor-pointer'
+                onClick={() => (window.location.href = '/')}
+              />
             </Group>
 
             <Group>

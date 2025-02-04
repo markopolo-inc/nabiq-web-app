@@ -12,7 +12,12 @@ export const Topbar = () => {
       className={`fixed top-0 left-0 w-screen bg-gray-950 h-[56px] flex justify-between items-center px-[48px] z-10`}
     >
       <div>
-        <Image src={NabiqLogo} alt='Nabiq' className='w-[70px]' />
+        <Image
+          src={NabiqLogo}
+          alt='Nabiq'
+          className='w-[70px] cursor-pointer'
+          onClick={() => (window.location.href = '/')}
+        />
       </div>
 
       <SwitchLanguage />
