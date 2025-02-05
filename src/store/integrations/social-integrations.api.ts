@@ -62,6 +62,21 @@ const socialIntegrationsApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getFBPages: builder.query<IResponseInterface<IWhatsappBusinessAccount[]>, { brandId: string }>({
+      query: (args) => ({
+        url: '/auth/fb/pages',
+        method: 'GET',
+        params: { ...args },
+      }),
+      async onQueryStarted(args, { queryFulfilled }) {
+        const res = await queryFulfilled;
+        if (!res?.data?.success) {
+          toast.error('No pages found!', {
+            id: 'get-fb-pages-error',
+          });
+        }
+      },
+    }),
     saveWANumber: builder.mutation<
       IResponseInterface,
       {
