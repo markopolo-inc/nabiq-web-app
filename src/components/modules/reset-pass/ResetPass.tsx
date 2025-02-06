@@ -1,16 +1,19 @@
 import { Image } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Button, Stack, TextInput } from '@nabiq-ui';
+import { Auth } from 'aws-amplify';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import NabiqLogo from 'src/assets/logo/logo-landmark.png';
 import { trimAllValuesOfObject } from 'src/utils/string.utils.ts';
 
 type ResetPasswordProps = {
   onSetup: () => void;
+  setEmail: (email: string) => void;
 };
 
-export const ResetPass = ({ onSetup }: ResetPasswordProps) => {
+export const ResetPass = ({ setEmail, onSetup }: ResetPasswordProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -19,24 +22,18 @@ export const ResetPass = ({ onSetup }: ResetPasswordProps) => {
       email: '',
     },
     validate: {
-      email: (value) => (value.length === 0 ? t('settings.email_required') : null),
+      email: (value) => (!value.trim() ? t('settings.email_required') : null),
     },
   });
 
   const handleFormSubmit = async (values) => {
-    // @TODO: Need to confirm with @simanto bhai: (if user put space then not showing require text)
-    // if (values.email.length === 0) {
-    //   form.setErrors({ email: 'Email is required' });
-    //   return;
-    // }
-
     try {
-      console.log({ values });
-      onSetup();
-      // await Auth.forgotPassword(values.email);
-      // toast.success('Code has been sent!');
-    } catch {
-      // @TODO: Handle error
+      await Auth.forgotPassword(values.email);
+      setEmail(values.email);
+      toast.success(t('reset_pass.code_sent'));
+      onSetup(); // Proceed to verification step
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -50,9 +47,7 @@ export const ResetPass = ({ onSetup }: ResetPasswordProps) => {
         </p>
       </Stack>
       <form
-        onSubmit={form.onSubmit((values) => {
-          handleFormSubmit(trimAllValuesOfObject(values));
-        })}
+        onSubmit={form.onSubmit((values) => handleFormSubmit(trimAllValuesOfObject(values)))}
         className='flex flex-col gap-6 w-full'
       >
         <TextInput
@@ -65,7 +60,7 @@ export const ResetPass = ({ onSetup }: ResetPasswordProps) => {
           <Button type='submit' fullWidth>
             {t('onboarding.continue')}
           </Button>
-          <Button type='submit' variant='link' fullWidth onClick={() => navigate('/login')}>
+          <Button type='button' variant='link' fullWidth onClick={() => navigate('/login')}>
             {t('reset_pass.back_to_sign_in')}
           </Button>
         </Stack>

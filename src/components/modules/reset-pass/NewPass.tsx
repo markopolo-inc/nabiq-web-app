@@ -21,8 +21,7 @@ export const NewPass = ({ onSetup }: NewPassProps) => {
     },
   });
 
-  const handleFormSubmit = async (values) => {
-    console.log({ values });
+  const handleFormSubmit = async (_values) => {
     onSetup();
   };
 

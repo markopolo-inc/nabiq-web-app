@@ -24,7 +24,9 @@
   },
   "verification": {
     "verification_code": "رمز التحقق",
-    "resend": "إعادة ارسال"
+    "resend": "إعادة ارسال",
+    "enter_code": "أدخل رمز التحقق",
+    "code_instruction": "لقد أرسلنا رمز تحقق مكونًا من 6 أرقام إلى بريدك الإلكتروني"
   },
   "navigation": {
     "nav_home": "الصفحة الرئيسية",
@@ -942,6 +944,7 @@
     "new_password": "كلمة المرور الجديدة.",
     "enter_new_password_placeholder_text": "أدخل كلمة مرورك الجديدة.",
     "password_changed": "تم تغيير كلمة المرور!",
-    "password_changed_successfully": "تم تغيير كلمة المرور بنجاح."
+    "password_changed_successfully": "تم تغيير كلمة المرور بنجاح.",
+    "reset_password": "إعادة تعيين كلمة المرور"
   }
 }
