@@ -24,7 +24,9 @@
   },
   "verification": {
     "verification_code": "Verification code",
-    "resend": "Resend"
+    "resend": "Resend",
+    "enter_code": "Enter Verification Code",
+    "code_instruction": "We have sent a 6-digit verification code to your email"
   },
   "navigation": {
     "nav_home": "Home",
@@ -942,6 +944,7 @@
     "new_password": "New password.",
     "enter_new_password_placeholder_text": "Enter your new password.",
     "password_changed": "Password changed!",
-    "password_changed_successfully": "Your password has been changed successfully."
+    "password_changed_successfully": "Your password has been changed successfully.",
+    "reset_password": "Reset password"
   }
 }
