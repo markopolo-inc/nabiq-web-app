@@ -1,5 +1,6 @@
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Auth } from 'aws-amplify';
+import posthog from 'posthog-js';
 import toast from 'react-hot-toast';
 import { persistor } from 'src/store';
 
@@ -21,6 +22,12 @@ export const authApi = apiSlice.injectEndpoints({
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
+          posthog?.capture('User_Signed_In', {
+            user_id: email,
+            email,
+            signup_method: 'email',
+            timestamp: new Date().toISOString(),
+          });
           // toast.success('Successfully logged in.', { id: 'login-success' });
           onSuccess && onSuccess();
         } catch (error) {
