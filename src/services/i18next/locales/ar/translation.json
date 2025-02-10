@@ -216,7 +216,7 @@
     "got_it": "فهمت",
     "view_feedback_samples": "شاهد عينات المحتوى وقدم ملاحظاتك.",
     "samples": "عينات",
-    "subject": "موضوع: {{subject}}",
+    "subject": "موضوع: {{-subject}}",
     "blocked_by_ai_breach": "تم حظره بواسطة الذكاء الاصطناعي بسبب مخالفة الدستور.",
     "approve": "اعتماد",
     "block": "حظر",

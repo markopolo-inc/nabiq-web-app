@@ -709,7 +709,7 @@
     "got_it": "Got it",
     "view_feedback_samples": "View and give feedback on sample funnel contents.",
     "samples": "Samples",
-    "subject": "Subject: {{subject}}",
+    "subject": "Subject: {{-subject}}",
     "blocked_by_ai_breach": "Blocked by AI due to constitution breach",
     "approve": "Approve",
     "block": "Block",
