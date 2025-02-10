@@ -27,4 +27,31 @@ const getOAuthUrl = async (
   })}`;
 };
 
+export const requestPasswordReset = async (email: string) => {
+  try {
+    await Auth.forgotPassword(email);
+    return { success: true, message: 'reset_pass.code_sent' };
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
+};
+
+export const submitNewPassword = async (email: string, code: string, newPassword: string) => {
+  try {
+    await Auth.forgotPasswordSubmit(email, code, newPassword);
+    return { success: true, message: 'reset_pass.password_reset_success' };
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
+};
+
+export const resendVerificationCode = async (email: string) => {
+  try {
+    await Auth.forgotPassword(email);
+    return { success: true, message: 'reset_pass.code_resent' };
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
+};
+
 export { getAuthToken, getOAuthUrl };

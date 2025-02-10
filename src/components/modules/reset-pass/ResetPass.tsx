@@ -1,12 +1,12 @@
 import { Image } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Button, Stack, TextInput } from '@nabiq-ui';
-import { Auth } from 'aws-amplify';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import NabiqLogo from 'src/assets/logo/logo-landmark.png';
-import { trimAllValuesOfObject } from 'src/utils/string.utils.ts';
+import { requestPasswordReset } from 'src/utils/auth';
+import { trimAllValuesOfObject } from 'src/utils/string.utils';
 
 type ResetPasswordProps = {
   onSetup: () => void;
@@ -17,20 +17,18 @@ export const ResetPass = ({ setEmail, onSetup }: ResetPasswordProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const form = useForm({
-    initialValues: {
-      email: '',
-    },
+  const form = useForm<{ email: string }>({
+    initialValues: { email: '' },
     validate: {
       email: (value) => (!value.trim() ? t('settings.email_required') : null),
     },
   });
 
-  const handleFormSubmit = async (values) => {
+  const handleFormSubmit = async (values: { email: string }) => {
     try {
-      await Auth.forgotPassword(values.email);
+      await requestPasswordReset(values.email);
       setEmail(values.email);
-      toast.success(t('reset_pass.code_sent'));
+      toast.success(t('verification.code_instruction'));
       onSetup(); // Proceed to verification step
     } catch (error) {
       toast.error(error.message);
@@ -47,7 +45,9 @@ export const ResetPass = ({ setEmail, onSetup }: ResetPasswordProps) => {
         </p>
       </Stack>
       <form
-        onSubmit={form.onSubmit((values) => handleFormSubmit(trimAllValuesOfObject(values)))}
+        onSubmit={form.onSubmit((values) =>
+          handleFormSubmit(trimAllValuesOfObject(values) as { email: string }),
+        )}
         className='flex flex-col gap-6 w-full'
       >
         <TextInput
