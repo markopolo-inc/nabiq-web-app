@@ -1,0 +1,25 @@
+# Build and run the application
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy local code to the container
+COPY . .
+
+# Set the build environment to production by default
+ARG NODE_ENV=production
+
+# Build the application
+RUN npm run build
+
+# Expose port for the Node.js application
+EXPOSE 3000
+
+# Start the application
+CMD ["npm", "start"]
