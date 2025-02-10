@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { resendVerificationCode, submitNewPassword } from 'src/utils/auth';
+import { useResendCodeMutation, useSubmitNewPasswordMutation } from 'src/store/auth/authApi';
 
 type CheckEmailProps = {
   email: string;
@@ -14,15 +14,16 @@ type CheckEmailProps = {
 
 export const CheckEmail = ({ email, onSetup }: CheckEmailProps) => {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(120); // 2 minutes (120 seconds)
+  const [submitNewPassword, { isLoading }] = useSubmitNewPasswordMutation();
+  const [resendCode] = useResendCodeMutation();
+  const [timeLeft, setTimeLeft] = useState(120);
   const [canResend, setCanResend] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false); // Controls Reset Password button
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
     if (timeLeft === 0) {
       setCanResend(true);
-      setIsButtonDisabled(true); // Disable Reset Password button when timer ends
+      setIsButtonDisabled(true);
       return;
     }
 
@@ -34,15 +35,14 @@ export const CheckEmail = ({ email, onSetup }: CheckEmailProps) => {
   }, [timeLeft]);
 
   const handleResendCode = async () => {
-    setCanResend(false);
-    setTimeLeft(120);
-    setIsButtonDisabled(false);
-
     try {
-      await resendVerificationCode(email);
+      await resendCode({ email }).unwrap();
+      setCanResend(false);
+      setTimeLeft(120);
+      setIsButtonDisabled(false);
       toast.success(t('verification.code_resent'));
-    } catch (error) {
-      toast.error(error.message);
+    } catch (error: any) {
+      toast.error(t(error.message) || t('error.something_went_wrong'));
     }
   };
 
@@ -64,28 +64,25 @@ export const CheckEmail = ({ email, onSetup }: CheckEmailProps) => {
 
   const handlePasswordReset = async () => {
     const validation = form.validate();
-
-    if (validation.hasErrors) {
-      Object.values(validation.errors).forEach((error) => {
-        if (typeof error === 'string') {
-          toast.error(error);
-        } else {
-          toast.error(t('error.unknown'));
-        }
-      });
-      return;
-    }
+    if (validation.hasErrors) return;
 
     try {
-      setLoading(true);
+      const result = await submitNewPassword({
+        email,
+        code: form.values.code,
+        newPassword: form.values.newPassword,
+      }).unwrap();
 
-      await submitNewPassword(email, form.values.code, form.values.newPassword);
-      toast.success(t('reset_pass.password_changed_successfully'));
-      onSetup();
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
+      if (result.success) {
+        toast.success(t('reset_pass.password_changed_successfully'));
+        onSetup(); // Only called when successful
+      }
+    } catch (error: any) {
+      if (error.data?.message?.includes('Invalid verification code provided')) {
+        toast.error(t('reset_pass.invalid_code'));
+      } else {
+        toast.error(error.data?.message || t('error.something_went_wrong'));
+      }
     }
   };
 
@@ -123,12 +120,12 @@ export const CheckEmail = ({ email, onSetup }: CheckEmailProps) => {
           type='submit'
           fullWidth
           onClick={handlePasswordReset}
-          disabled={loading || isButtonDisabled}
+          disabled={isLoading || isButtonDisabled}
+          loading={isLoading}
         >
-          {loading ? t('reset_pass.processing') : t('reset_pass.reset_password')}
+          {t('reset_pass.reset_password')}
         </Button>
 
-        {/* Timer & Resend Code */}
         <p className='text-gray-700 text-sm font-normal text-center mt-3'>
           {canResend ? (
             <button className='text-primary-600 font-medium' onClick={handleResendCode}>

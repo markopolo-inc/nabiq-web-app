@@ -50,7 +50,6 @@ export const authApi = apiSlice.injectEndpoints({
         const { name, email, password, onLoading, onSuccess } = arg;
         try {
           onLoading && onLoading(true);
-          // Add user to cognito
           await Auth.signUp({
             username: email,
             password,
@@ -63,8 +62,7 @@ export const authApi = apiSlice.injectEndpoints({
           });
           dispatch(setUserEmail(email));
           onSuccess && onSuccess();
-          toast.success('Successfully sign up.', { id: 'signup-success' });
-          // window.location.href = `/verify`;
+          toast.success('Successfully signed up.', { id: 'signup-success' });
         } catch (error) {
           toast.error(error?.message || 'Something went wrong', { id: 'signup-error' });
         } finally {
@@ -80,7 +78,6 @@ export const authApi = apiSlice.injectEndpoints({
         const loading = toast.loading('Signing in with Google...', {
           id: 'google-signin-loading',
         });
-
         try {
           let user: any = null;
           try {
@@ -90,21 +87,17 @@ export const authApi = apiSlice.injectEndpoints({
               throw error;
             }
           }
-
           if (!user) {
             await Auth.federatedSignIn({
               provider: CognitoHostedUIIdentityProvider.Google,
             });
             user = await Auth.currentAuthenticatedUser();
           }
-
           const email = user.attributes.email;
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
-
           toast.dismiss(loading);
           toast.success('Successfully signed in with Google.', { id: 'google-signin-success' });
-
           setTimeout(() => {
             window.location.href = '/';
           }, 100);
@@ -116,7 +109,6 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
-
     verify: builder.mutation({
       queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
@@ -153,13 +145,78 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    requestPasswordReset: builder.mutation({
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
+        return { data: null }; // No-op response
+      },
+      async onQueryStarted(arg) {
+        const { email, onLoading, onSuccess } = arg;
+        try {
+          onLoading && onLoading(true);
+          await Auth.forgotPassword(email);
+
+          onSuccess && onSuccess();
+        } catch (error) {
+          void error;
+        } finally {
+          onLoading && onLoading(false);
+        }
+      },
+    }),
+    submitNewPassword: builder.mutation({
+      queryFn: async (arg, _api, _extraOptions, _baseQuery) => {
+        const { email, code, newPassword } = arg;
+        try {
+          await Auth.forgotPasswordSubmit(email, code, newPassword);
+          return { data: { success: true } };
+        } catch (error: any) {
+          return {
+            error: {
+              status: 400,
+              data: {
+                success: false,
+                message: error.message || 'Failed to reset password',
+              },
+            },
+          };
+        }
+      },
+      async onQueryStarted(arg, { queryFulfilled }) {
+        const { onLoading } = arg;
+        try {
+          onLoading?.(true);
+          await queryFulfilled;
+        } catch (error) {
+          void error;
+        } finally {
+          onLoading?.(false);
+        }
+      },
+    }),
+    resendCode: builder.mutation({
+      queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
+        return { data: null }; // No-op response
+      },
+      async onQueryStarted(arg) {
+        const { email, onLoading, onSuccess } = arg;
+        try {
+          onLoading && onLoading(true);
+          await Auth.forgotPassword(email);
+
+          onSuccess && onSuccess();
+        } catch (error) {
+          void error;
+        } finally {
+          onLoading && onLoading(false);
+        }
+      },
+    }),
     logout: builder.mutation({
       queryFn: async (_arg, _queryApi, _extraOptions, _fetchWithBQ) => {
         return { data: null }; // Return a no-op response
       },
       async onQueryStarted(_arg, { dispatch }) {
         Auth.signOut();
-
         const loading = toast.loading('Logging out...', {
           id: 'logout-loading',
         });
@@ -167,9 +224,7 @@ export const authApi = apiSlice.injectEndpoints({
           dispatch(logout());
           dispatch({ type: 'store/reset' });
           dispatch(apiSlice.util.resetApiState());
-          persistor.purge().then((_) => {
-            // resolved
-          });
+          persistor.purge().then((_result) => void _result);
           toast.dismiss(loading);
           window.localStorage.clear();
         }, 2000);
@@ -185,4 +240,7 @@ export const {
   useLogoutMutation,
   useVerifyMutation,
   useResendVerificationCodeMutation,
+  useRequestPasswordResetMutation,
+  useSubmitNewPasswordMutation,
+  useResendCodeMutation,
 } = authApi;
