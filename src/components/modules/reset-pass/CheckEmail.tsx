@@ -1,11 +1,11 @@
 import { useForm } from '@mantine/form';
 import { FiMail01 } from '@nabiq-icons';
 import { Button, OtpInput, PasswordInput, Stack } from '@nabiq-ui';
-import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { resendVerificationCode, submitNewPassword } from 'src/utils/auth';
 
 type CheckEmailProps = {
   email: string;
@@ -34,11 +34,12 @@ export const CheckEmail = ({ email, onSetup }: CheckEmailProps) => {
   }, [timeLeft]);
 
   const handleResendCode = async () => {
+    setCanResend(false);
+    setTimeLeft(120);
+    setIsButtonDisabled(false);
+
     try {
-      setCanResend(false);
-      setTimeLeft(120); // Reset timer to 2 minutes
-      setIsButtonDisabled(false); // Enable Reset Password button when timer restarts
-      await Auth.forgotPassword(email);
+      await resendVerificationCode(email);
       toast.success(t('verification.code_resent'));
     } catch (error) {
       toast.error(error.message);
@@ -63,15 +64,23 @@ export const CheckEmail = ({ email, onSetup }: CheckEmailProps) => {
 
   const handlePasswordReset = async () => {
     const validation = form.validate();
+
     if (validation.hasErrors) {
-      Object.values(validation.errors).forEach((error) => toast.error(error));
+      Object.values(validation.errors).forEach((error) => {
+        if (typeof error === 'string') {
+          toast.error(error);
+        } else {
+          toast.error(t('error.unknown'));
+        }
+      });
       return;
     }
 
     try {
       setLoading(true);
-      await Auth.forgotPasswordSubmit(email, form.values.code, form.values.newPassword);
-      toast.success(t('reset_pass.password_reset_success'));
+
+      await submitNewPassword(email, form.values.code, form.values.newPassword);
+      toast.success(t('reset_pass.password_changed_successfully'));
       onSetup();
     } catch (error) {
       toast.error(error.message);

@@ -26,7 +26,8 @@
     "verification_code": "Verification code",
     "resend": "Resend",
     "enter_code": "Enter Verification Code",
-    "code_instruction": "We have sent a 6-digit verification code to your email"
+    "code_instruction": "We have sent a 6-digit verification code to your email",
+    "code_resent": "Verification code has been resent successfully."
   },
   "navigation": {
     "nav_home": "Home",
