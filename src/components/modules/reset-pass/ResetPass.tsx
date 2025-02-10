@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import NabiqLogo from 'src/assets/logo/logo-landmark.png';
-import { requestPasswordReset } from 'src/utils/auth';
+import { useRequestPasswordResetMutation } from 'src/store/auth/authApi';
 import { trimAllValuesOfObject } from 'src/utils/string.utils';
 
 type ResetPasswordProps = {
@@ -16,6 +16,7 @@ type ResetPasswordProps = {
 export const ResetPass = ({ setEmail, onSetup }: ResetPasswordProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [requestPasswordReset, { isLoading }] = useRequestPasswordResetMutation();
 
   const form = useForm<{ email: string }>({
     initialValues: { email: '' },
@@ -26,12 +27,12 @@ export const ResetPass = ({ setEmail, onSetup }: ResetPasswordProps) => {
 
   const handleFormSubmit = async (values: { email: string }) => {
     try {
-      await requestPasswordReset(values.email);
+      await requestPasswordReset({ email: values.email }).unwrap();
       setEmail(values.email);
       toast.success(t('verification.code_instruction'));
-      onSetup(); // Proceed to verification step
-    } catch (error) {
-      toast.error(error.message);
+      onSetup();
+    } catch (error: any) {
+      toast.error(t(error.message) || t('error.something_went_wrong'));
     }
   };
 
@@ -57,7 +58,7 @@ export const ResetPass = ({ setEmail, onSetup }: ResetPasswordProps) => {
         />
 
         <Stack gap={16}>
-          <Button type='submit' fullWidth>
+          <Button type='submit' fullWidth loading={isLoading}>
             {t('onboarding.continue')}
           </Button>
           <Button type='button' variant='link' fullWidth onClick={() => navigate('/login')}>

@@ -946,6 +946,7 @@
     "enter_new_password_placeholder_text": "Enter your new password.",
     "password_changed": "Password changed!",
     "password_changed_successfully": "Your password has been changed successfully.",
-    "reset_password": "Reset password"
+    "reset_password": "Reset password",
+    "invalid_code": "The verification code is invalid or has expired."
   }
 }

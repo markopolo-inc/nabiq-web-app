@@ -946,6 +946,7 @@
     "enter_new_password_placeholder_text": "أدخل كلمة مرورك الجديدة.",
     "password_changed": "تم تغيير كلمة المرور!",
     "password_changed_successfully": "تم تغيير كلمة المرور بنجاح.",
-    "reset_password": "إعادة تعيين كلمة المرور"
+    "reset_password": "إعادة تعيين كلمة المرور",
+    "invalid_code_ar": "رمز التحقق غير صالح أو منتهي الصلاحية."
   }
 }
