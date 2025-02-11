@@ -9,7 +9,7 @@ import { AppLayout, NavigationLayout, PageLayout, PrivateLayout, PublicLayout } 
 
 import { TestRoutes } from './TestRoutes';
 
-const delayedLazy = (importFn: () => Promise<any>, delay = 1000) => {
+const delayedLazy = (importFn: () => Promise<any>, delay = 0) => {
   return lazy(() =>
     Promise.all([importFn(), new Promise((resolve) => setTimeout(resolve, delay))]).then(
       ([module]) => module,
