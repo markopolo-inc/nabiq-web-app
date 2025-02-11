@@ -187,9 +187,13 @@ export const CampaignTable = ({
                     <Switch checked={idx % 2 === 0} />
                   </Stack>
                 </Td> */}
-                <Td className='py-4 px-6'>
+                <Td className='py-4 px-6 max-w-[234px] overflow-hidden text-ellipsis'>
                   <Stack align='left' gap={4}>
-                    <div className='text-sm font-medium text-gray-900'>{item.name}</div>
+                    <Tooltip label={item.name}>
+                      <div className='text-sm font-medium text-gray-900'>
+                        <bdi>{item.name}</bdi>
+                      </div>
+                    </Tooltip>
                     <Tooltip label={item.details}>
                       <div className='text-xs font-medium text-gray-600 truncate w-[234px]'>
                         {item.details}

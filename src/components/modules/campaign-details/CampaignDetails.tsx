@@ -34,9 +34,9 @@ const PAGE_SIZE = 10;
 export const CampaignDetails = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { primary600, gray400 } = useGetColors();
+  const { gray400 } = useGetColors();
   const updateXarrow = useXarrow();
-  const [arrows, setArrows] = useState([]);
+  const [_arrows, setArrows] = useState([]);
   const [subArrows, setSubArrows] = useState([{ start: 'breakdownElem0', end: 'breakdownElem1' }]);
 
   const addArrow = (start, end) => {
@@ -210,8 +210,8 @@ export const CampaignDetails = () => {
                         <p className='text-gray-600 font-normal text-xs'>{user.description}</p>
                       )}
                       <Group>
-                        <Badge color='gray'>{user.email}</Badge>
-                        <Badge color='gray'>{user.phone}</Badge>
+                        {user.email && <Badge color='gray'>{user.email}</Badge>}
+                        {user.phone && <Badge color='gray'>{user.phone}</Badge>}
                       </Group>
                     </Stack>
                   ))}
@@ -328,7 +328,7 @@ export const CampaignDetails = () => {
             )}
           </Stack>
         </div>
-
+        {/* 
         {arrows.map((arrow, index) => (
           <Xarrow
             key={index}
@@ -345,7 +345,7 @@ export const CampaignDetails = () => {
             showHead={false}
             lineColor={primary600}
           />
-        ))}
+        ))} */}
       </Xwrapper>
       {/* <svg className='absolute top-0 left-0 w-full h-full pointer-events-none'>
         <path d={pathData} fill='none' stroke='#3B82F6' strokeWidth='2' />
