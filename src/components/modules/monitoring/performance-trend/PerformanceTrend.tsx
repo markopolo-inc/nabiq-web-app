@@ -71,6 +71,8 @@ export const PerformanceTrend: FC<{
     }
   }, [performanceData]);
 
+  const names = performanceData?.data?.names;
+
   return (
     <Stack gap={20} className='border border-gray-200 shadow-sm rounded-xl p-6'>
       <div className='flex justify-between items-center'>
@@ -95,7 +97,7 @@ export const PerformanceTrend: FC<{
         />
         <Group gap={12} className='px-2 py-2' style={{ marginBottom: -50 }}>
           {graphData?.length > 0 &&
-            performanceData?.data?.names?.map((metric: string, index: number) => (
+            names?.map((metric: string, index: number) => (
               <div key={metric} className='flex items-center'>
                 <div
                   className={`w-2.5 h-2.5 rounded-full mr-2 ${
@@ -146,7 +148,7 @@ export const PerformanceTrend: FC<{
               opacity={0.4}
               stroke='#181819'
               interval='equidistantPreserveStart'
-            ></XAxis>
+            />
             <YAxis
               tickFormatter={(value) => value}
               tickCount={7}
@@ -155,7 +157,7 @@ export const PerformanceTrend: FC<{
               stroke='#181819'
             />
             <Tooltip />
-            {performanceData?.data?.names?.map((metric: string, index: number) => (
+            {names?.filter(Boolean).map((metric: string, index: number) => (
               <Line
                 key={metric}
                 type='monotone'
@@ -171,8 +173,8 @@ export const PerformanceTrend: FC<{
                   ][index]
                 }
                 strokeWidth={2}
-                dot={null}
-              />
+                // dot={null}
+              ></Line>
             ))}
           </LineChart>
         </ResponsiveContainer>
