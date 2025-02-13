@@ -8,6 +8,7 @@ import { CampaignGoalModal } from 'src/components/modules/campaigns';
 import {
   Header,
   MetricCards,
+  OfferBanner,
   OnBoardingItems,
   PerformanceTrend,
   QuickActions,
@@ -67,6 +68,11 @@ const Home = () => {
     }
   }, [searchParams]);
 
+  const currentDate = new Date();
+  const offerStartDate = new Date('2025-02-13');
+  const offerEndDate = new Date('2025-02-20');
+  const shouldRenderOfferBanner = currentDate >= offerStartDate && currentDate <= offerEndDate; // offer banner will be visible from February 13th to next 1 week
+
   return (
     <>
       <HeaderTitle>{t('page_title.marketing_copilot_title')}</HeaderTitle>
@@ -78,6 +84,8 @@ const Home = () => {
         style={{ backgroundImage: `url(${BackgroundImage})` }}
       >
         <PageLayout>
+          {shouldRenderOfferBanner && <OfferBanner />}
+
           <Header />
 
           {isOnboardingDone && !isLoadingCampaignList && <QuickActions />}
