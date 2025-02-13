@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 import {
   ConnectFirstMarkTagCard,
   CreateFirstCampaignCard,
-  IntegrateChannels,
+  IntegrateChannelsCard,
+  IntegrateDataSourceCard,
 } from 'src/components/modules/home';
 
 type OnBoardingItemsProps = {
@@ -48,24 +49,39 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
       step: 1,
       isDone: isDataSourceConnected,
       label: t('home_page.integrate_datasource'),
+      card: <IntegrateDataSourceCard />,
     },
     {
       id: 'integration_channel',
       step: 2,
       isDone: isIntegrationChannelDone,
       label: t('home_page.channels_integration'),
+      card: <IntegrateChannelsCard />,
     },
     {
       id: 'first_campaign',
       step: 3,
       isDone: isFirstCampaignDone,
       label: t('home_page.campaign_create_first'),
+      card: (
+        <CreateFirstCampaignCard
+          isActive={Boolean(activeCard === 'first_campaign')}
+          onClick={onClickShowGoalModal}
+        />
+      ),
     },
     {
       id: 'mark_tag',
       step: 4,
       isDone: isMarkTagDone,
       label: t('home_page.marktag_connect'),
+      card: (
+        <ConnectFirstMarkTagCard
+          isIntegratedChannel={isIntegrationChannelDone}
+          isActive={Boolean(activeCard === 'mark_tag')}
+          onClick={onClickShowMarkTagModal}
+        />
+      ),
     },
   ];
 
@@ -91,7 +107,9 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
       </Stack>
 
       <Stack className='relative w-full min-h-[248px]'>
-        {!isIntegrationChannelDone && <IntegrateChannels />}
+        {items?.filter((item) => !Boolean(item.isDone)).map((item) => item.card)}
+        {/* {!isDataSourceConnected && <IntegrateDataSourceCard />}
+        {!isIntegrationChannelDone && <IntegrateChannelsCard />}
         {!isFirstCampaignDone && (
           <CreateFirstCampaignCard
             isActive={Boolean(activeCard === 'first_campaign')}
@@ -104,7 +122,7 @@ export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
             isActive={Boolean(activeCard === 'mark_tag')}
             onClick={onClickShowMarkTagModal}
           />
-        )}
+        )} */}
       </Stack>
     </Stack>
   );

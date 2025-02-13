@@ -12,10 +12,7 @@ export { ConstitutionalAIModerationModal } from 'components/modules/home/compone
 
 // Cards
 export { IntegrateApps } from 'components/modules/home/components/cards/IntegrateApps';
-export { IntegrateChannels } from 'src/components/modules/home/components/cards/IntegrateCard';
 export { IntegrationCard } from 'components/modules/home/components/cards/IntegrationCard';
-export { ConnectFirstMarkTagCard } from 'components/modules/home/components/cards/ConnectFirstMarkTagCard';
-export { CreateFirstCampaignCard } from 'components/modules/home/components/cards/CreateFirstCampaignCard';
 export { MetricCards } from 'components/modules/home/components/cards/metric-cards/MetricCards';
 export { MetricsCard } from 'components/modules/home/components/cards/MetricsCard/MetricsCard';
 export { QuickActionsCard } from 'components/modules/home/components/cards/QuickActionsCard';
@@ -28,3 +25,9 @@ export { OnBoardingItems } from 'components/modules/home/components/screens/OnBo
 
 // Tables
 export { PerformanceTrend } from 'components/modules/home/components/Table/performance-trend/PerformanceTrend.tsx';
+
+// Stacked cards
+export { IntegrateChannelsCard } from 'src/components/modules/home/components/cards/onboarding-stacked-cards/IntegrateChannelsCard';
+export { ConnectFirstMarkTagCard } from 'components/modules/home/components/cards/onboarding-stacked-cards/ConnectFirstMarkTagCard';
+export { CreateFirstCampaignCard } from 'components/modules/home/components/cards/onboarding-stacked-cards/CreateFirstCampaignCard';
+export { IntegrateDataSourceCard } from 'components/modules/home/components/cards/onboarding-stacked-cards/IntegrateDataSourceCard';

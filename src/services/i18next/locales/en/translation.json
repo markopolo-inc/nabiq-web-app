@@ -42,6 +42,11 @@
     "nav_others": "Others"
   },
   "home_page": {
+    "salla": "Salla",
+    "hubspot": "Hubspot",
+    "salesforce": "Salesforce",
+    "integrate_data_source": "Integrate datasource",
+    "data_source_suggestion": "Connect at least one data source to continue.",
     "notifications_title": "Notifications",
     "notifications_empty": "No notifications",
     "welcome_message": "Welcome aboard, {{-name}}!",

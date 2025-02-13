@@ -42,6 +42,11 @@
     "nav_others": "الأخرى"
   },
   "home_page": {
+    "salla": "سلة",
+    "hubspot": "هبتسبوت",
+    "salesforce": "سالسفورت",
+    "integrate_data_source": "ربط البيانات المصدر",
+    "data_source_suggestion": "ربط بيانات مصدر واحد على الأقل للمتابعة.",
     "notifications_title": "الإشعارات",
     "notifications_empty": "لا توجد إشعارات",
     "welcome_message": "مرحبًا بك، {{name}}",
