@@ -1,5 +1,5 @@
 import { FiDatabase01, FiShoppingBag02 } from '@nabiq-icons';
-import { Accordion, Button, GatewayLogo, Stack } from '@nabiq-ui';
+import { Accordion, Badge, Button, GatewayLogo, Group, Stack, Tooltip } from '@nabiq-ui';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { ShopifyConnectModal } from 'src/components/modules/integrations/integration-tabs/data-sources/modals/ShopifyConnectModal';
@@ -21,8 +21,8 @@ export const LeadsDatabase = () => {
     return datasourceIntegrations?.tokens?.[integration] || false;
   };
 
-  const isShopifyConnected = isIntegrationConnected('shopify');
-  const isSallaConnected = isIntegrationConnected('salla');
+  // const isShopifyConnected = isIntegrationConnected('shopify');
+  // const isSallaConnected = isIntegrationConnected('salla');
   const isHubspotConnected = isIntegrationConnected('hubspot');
   const isSalesforceConnected = isIntegrationConnected('salesforce');
 
@@ -36,52 +36,6 @@ export const LeadsDatabase = () => {
         </Stack>
       </Stack>
       <Stack gap={16} className=''>
-        <Accordion
-          title={t('onboarding.sync_marketplace')}
-          icon={<FiShoppingBag02 size={20} color='#697586' />}
-        >
-          <Stack gap={24}>
-            <p className='text-sm text-gray-600'>{t('onboarding.team_visibility')}</p>
-            <div className='grid grid-cols-2 gap-2 p-1'>
-              <Button
-                fullWidth
-                disabled={isShopifyConnected}
-                leadingIcon={<GatewayLogo app='shopify' width={20} />}
-                onClick={async () => {
-                  window.location.href = await getOAuthUrl(
-                    '/shopify/install/direct',
-                    {
-                      shop: import.meta.env.VITE_SHOPIFY_APP_NAME,
-                    },
-                    {
-                      sendToken: false,
-                    },
-                  );
-                }}
-              >
-                {isShopifyConnected
-                  ? t('onboarding.shopify_connected')
-                  : t('onboarding.connect_to_shopify')}
-              </Button>
-              <Button
-                fullWidth
-                variant='secondary-black'
-                leadingIcon={<GatewayLogo app='salla' width={20} variant='light' />}
-                disabled={isSallaConnected}
-                onClick={async () => {
-                  window.location.href = await getOAuthUrl('/salla/oauth', {
-                    brandId,
-                    redirectUri: window.location.href,
-                  });
-                }}
-              >
-                {isSallaConnected
-                  ? t('onboarding.salla_connected')
-                  : t('onboarding.connect_to_salla')}
-              </Button>
-            </div>
-          </Stack>
-        </Accordion>
         <Accordion
           title={t('onboarding.sync_crm_prompt')}
           icon={<FiDatabase01 size={20} color='#697586' />}
@@ -123,6 +77,61 @@ export const LeadsDatabase = () => {
             </div>
           </Stack>
         </Accordion>
+        <Accordion
+          title={t('onboarding.sync_marketplace')}
+          icon={<FiShoppingBag02 size={20} color='#697586' />}
+          badge={<Badge color='pink'>{t('create_campaign.coming_soon')}</Badge>}
+        >
+          <Stack gap={24}>
+            <p className='text-sm text-gray-600'>{t('onboarding.team_visibility')}</p>
+            <div className='grid grid-cols-2 gap-2 p-1'>
+              {/* <Button
+                fullWidth
+                disabled={isShopifyConnected}
+                leadingIcon={}
+                onClick={async () => {
+                  window.location.href = await getOAuthUrl(
+                    '/shopify/install/direct',
+                    {
+                      shop: import.meta.env.VITE_SHOPIFY_APP_NAME,
+                    },
+                    {
+                      sendToken: false,
+                    },
+                  );
+                }}
+              >
+                {isShopifyConnected
+                  ? t('onboarding.shopify_connected')
+                  : t('onboarding.connect_to_shopify')}
+              </Button> */}
+              {/* <Button
+                fullWidth
+                variant='secondary-black'
+                leadingIcon={<GatewayLogo app='salla' width={20} variant='light' />}
+                disabled={isSallaConnected}
+                onClick={async () => {
+                  window.location.href = await getOAuthUrl('/salla/oauth', {
+                    brandId,
+                    redirectUri: window.location.href,
+                  });
+                }}
+              >
+                {isSallaConnected
+                  ? t('onboarding.salla_connected')
+                  : t('onboarding.connect_to_salla')}
+              </Button> */}
+              <Group gap={24}>
+                <Tooltip label={t('integrations.shopify')}>
+                  <GatewayLogo app='shopify' width={20} />
+                </Tooltip>
+                <Tooltip label={t('integrations.salla')}>
+                  <GatewayLogo app='salla' width={20} />
+                </Tooltip>
+              </Group>
+            </div>
+          </Stack>
+        </Accordion>
       </Stack>
       <Button
         fullWidth
@@ -132,6 +141,9 @@ export const LeadsDatabase = () => {
         }}
       >
         {t('onboarding.continue')}
+      </Button>
+      <Button variant='secondary' onClick={() => dispatch(setOnboardingStep('guide_nabiq'))}>
+        {t('onboarding.skip_step')}
       </Button>
       <ShopifyConnectModal />
     </Stack>

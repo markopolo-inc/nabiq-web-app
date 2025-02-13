@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
 interface AccordionProps {
-  title: string;
+  title: React.ReactNode;
   icon?: React.ReactNode;
   children: React.ReactNode;
+  badge?: React.ReactNode;
 }
 
-export const Accordion = ({ title, icon, children }: AccordionProps) => {
+export const Accordion = ({ title, icon, children, badge }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -18,6 +19,7 @@ export const Accordion = ({ title, icon, children }: AccordionProps) => {
         <div className='flex items-center gap-3'>
           {icon && <span>{icon}</span>}
           <span className='font-semibold text-gray-900'>{title}</span>
+          {badge && badge}
         </div>
         <svg
           className={`w-5 h-5 transition-transform ${isOpen ? 'rotate-180' : ''}`}
