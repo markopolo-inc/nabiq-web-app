@@ -20,7 +20,7 @@ export type APIGetAdsResponseType = {
 
 export type IResponseInterface<T = null> = {
   success: boolean;
-  message: string;
+  message: string | any;
   data?: T;
   products?: IShopifyProduct[];
 };
