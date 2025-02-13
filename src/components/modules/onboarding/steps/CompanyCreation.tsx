@@ -1,9 +1,11 @@
 import { useForm } from '@mantine/form';
 import { Button, Select, Stack, TextInput } from '@nabiq-ui';
 import { Auth } from 'aws-amplify';
+import posthog from 'posthog-js';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
 import { CompanyCreationInterface } from 'src/interfaces/company.interface';
 import { useAppSelector } from 'src/store/hooks';
 import { useOnboardUserMutation } from 'src/store/onboarding/onboardingApi';
@@ -17,6 +19,7 @@ export const CompanyCreation = () => {
   const [isLoadingUser, setIsLoading] = useState(false);
   const [onboardUser, { isLoading }] = useOnboardUserMutation();
   const { resourceId: companyId, companyName } = useAppSelector((state) => state.company);
+  const posthogParams = usePosthogParams();
 
   const form = useForm<CompanyCreationInterface>({
     initialValues: {
@@ -45,6 +48,14 @@ export const CompanyCreation = () => {
         userName: user?.attributes?.['custom:fullName'] || 'Test',
         userEmail: user?.attributes?.email,
         ...values,
+      });
+      posthog?.capture('Business_Info_Provided', {
+        company_name: values.businessName,
+        industry: values.industry,
+        team_size: values.businessSize,
+        website: values.website,
+        user_id: user?.attributes?.email,
+        ...posthogParams,
       });
       setOnboardingStep('lead_database');
     } catch (err) {

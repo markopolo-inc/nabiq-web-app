@@ -1,11 +1,12 @@
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import posthog from 'posthog-js';
 import { useEffect, useState } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useSearchParams } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import LoaderGif from 'src/assets/logo/logo.svg';
 import Router from 'src/router';
@@ -14,9 +15,16 @@ import { persistor, store } from 'src/store';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const handleComplete = () => {
+      posthog?.capture('Website_Visit', {
+        timestamp: new Date().toISOString(),
+        referrer: searchParams.get('referrer') || document.referrer || 'direct',
+        utm_source: searchParams.get('utm_source') || undefined,
+        utm_medium: searchParams.get('utm_medium') || undefined,
+      });
       setLoading(false);
     };
 

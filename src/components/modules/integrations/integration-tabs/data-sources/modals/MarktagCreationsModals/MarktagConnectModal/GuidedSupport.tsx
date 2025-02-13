@@ -1,13 +1,16 @@
 import { Command } from '@nabiq-icons';
 import { Button, Group, Stack, useGetColors } from '@nabiq-ui';
+import posthog from 'posthog-js';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarkTagContext, MarktagContextType } from 'src/context/MarkTagContext';
+import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
 
 const GuidedSupport = () => {
   const { t } = useTranslation();
   const { primary500 } = useGetColors();
   const { setStep } = useContext<MarktagContextType>(MarkTagContext);
+  const posthogParams = usePosthogParams();
 
   return (
     <Stack gap={64} align=''>
@@ -33,6 +36,10 @@ const GuidedSupport = () => {
           <Button
             variant='primary'
             onClick={() => {
+              posthog?.capture('CTA_Clicked', {
+                button_text: t('home_page.book_call'),
+                ...posthogParams,
+              });
               setStep('calendly');
             }}
           >
