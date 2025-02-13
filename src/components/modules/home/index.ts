@@ -1,6 +1,9 @@
 // Header
 export { Header } from 'components/modules/home/components/Header.tsx';
 
+// Banner
+export { OfferBanner } from 'components/modules/home/components/banner/OfferBanner';
+
 // Common
 export { HomePageCardWrapper } from 'components/modules/home/components/common/HomePageCardWrapper';
 
