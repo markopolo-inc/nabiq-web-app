@@ -1,5 +1,6 @@
 import { FiZap } from '@nabiq-icons';
-import { Button, Group, Stack } from '@nabiq-ui';
+import { Button, CloseButton, Group, Stack, TextInput } from '@nabiq-ui';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -30,6 +31,7 @@ export const PriceSummary = ({
     useStartSubscriptionMutation();
   const [changeSubscription, { isLoading: isChangeSubscriptionLoading }] =
     useChangeSubscriptionMutation();
+  const [couponCode, setCouponCode] = useState('');
   const navigate = useNavigate();
   return (
     <Stack className='bg-primary-50 rounded-xl border border-gray-200 p-6 h-fit' gap={32}>
@@ -69,28 +71,42 @@ export const PriceSummary = ({
           {t('pricing_plan.visibility_notice_repeated')}
         </p>
         {planCategory === 'pro' && (
-          <Button
-            fullWidth
-            leadingIcon={<FiZap size={18} fill='white' />}
-            onClick={async () => {
-              let res = null;
-              if (paymentPlan?.includes('pro') || paymentPlan?.includes('enterprise')) {
-                res = await changeSubscription({ newPlan: planId, companyId }).unwrap();
-              } else {
-                res = await startSubscription({ plan: planId, companyId }).unwrap();
-              }
-              if (res.success) {
-                toast.success(t('pricing_plan.subscription_success'));
-                navigate('/billing');
-              }
-            }}
-            loading={isStartSubscriptionLoading || isChangeSubscriptionLoading}
-          >
-            {t('pricing_plan.subscribe_pro_plan')}
-          </Button>
+          <Stack gap={20}>
+            <Button
+              fullWidth
+              leadingIcon={<FiZap size={18} fill='white' />}
+              onClick={async () => {
+                let res = null;
+                if (paymentPlan?.includes('pro') || paymentPlan?.includes('enterprise')) {
+                  res = await changeSubscription({ newPlan: planId, companyId }).unwrap();
+                } else {
+                  res = await startSubscription({ plan: planId, companyId, couponCode }).unwrap();
+                }
+                if (res.success) {
+                  toast.success(t('pricing_plan.subscription_success'));
+                  navigate('/billing');
+                }
+              }}
+              loading={isStartSubscriptionLoading || isChangeSubscriptionLoading}
+            >
+              {t('pricing_plan.subscribe_pro_plan')}
+            </Button>
+            {!paymentPlan?.includes('pro') && !paymentPlan?.includes('enterprise') && (
+              <TextInput
+                disabled={isStartSubscriptionLoading || isChangeSubscriptionLoading}
+                value={couponCode}
+                label={t('pricing_plan.coupon_code')}
+                placeholder={t('pricing_plan.coupon_code')}
+                onChange={(e) => setCouponCode(e.target.value)}
+                rightSection={<CloseButton onClick={() => setCouponCode('')} />}
+              />
+            )}
+          </Stack>
         )}
         {planCategory === 'enterprise' && (
-          <Button fullWidth>{t('pricing_plan.contact_sales_team')}</Button>
+          <Button fullWidth onClick={() => window.open('https://cal.com/nabiq.ai/30min', '_blank')}>
+            {t('pricing_plan.contact_sales_team')}
+          </Button>
         )}
       </Stack>
     </Stack>

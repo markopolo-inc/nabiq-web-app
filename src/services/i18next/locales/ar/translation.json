@@ -855,6 +855,7 @@
     "auto_connect_ad_accounts": "سيتم ربط حسابات الإعلانات التالية تلقائيًا."
   },
   "pricing_plan": {
+    "coupon_code": "كود الخصم",
     "add_payment_method": "أضف وسيلة دفع",
     "no_charge_until_plan": "لن يتم فرض أي رسوم عليك حتى تقوم باختيار خطة.",
     "your_country": "بلد الإقامة",
@@ -862,7 +863,7 @@
     "monthly_message_quantity": "عدد الرسائل (شهريًا)",
     "message_quantity": "عدد الرسائل",
     "total_conversion_cost": "تكلفة التحويل الإجمالية",
-    "conversion_cost_per_month": "{{totalConversionCost}}/شهر",
+    "conversion_cost_per_month": "{{-totalConversionCost}}/شهر",
     "price_per_thousand_messages": "السعر لكل الف رسالة",
     "processing_fee": "رسوم المعالجة (10% من التكلفة الإجمالية)",
     "visibility_notice": "ستكون المواضيع والمشاركين والأوقات الزمنية مرئية لفريقك، بينما لن يكون المحتوى مرئيًا إلا إذا تمت مشاركته.",
@@ -871,7 +872,7 @@
     "monthly_active_users_question": "كم عدد المستخدمين النشطين شهريًا لديك؟",
     "pro_plan_limit": "مع الباقة الاحترافية، يمكنك الوصول إلى ما يصل إلى <500 ألف> مستخدم نشط شهريًا.",
     "monthly_active_users": "المستخدمون النشطون شهريًا",
-    "pro_plan_description": "تبدأ الباقة الاحترافية بخطة مستخدمين محددة بـ {{activeUsersInText}} مستخدم نشط شهريًا (MAU)، والتي يمكن استخدامها للبريد الإلكتروني والرسائل النصية القصيرة والإشعارات ورسائل WhatsApp أو تفاعلات أخرى.",
+    "pro_plan_description": "تبدأ الباقة الاحترافية بخطة مستخدمين محددة بـ {{-activeUsersInText}} مستخدم نشط شهريًا (MAU)، والتي يمكن استخدامها للبريد الإلكتروني والرسائل النصية القصيرة والإشعارات ورسائل WhatsApp أو تفاعلات أخرى.",
     "compare_plan_features": "مقارنة ميزات الباقات",
     "feature": "ميزة",
     "pro": "احترافي",
@@ -908,14 +909,14 @@
     "billed_in_usd": "الفاتورة بالدولار الأمريكي",
     "pro_plan": "الباقة الاحترافية",
     "enterprise_plan": "باقة الشركات",
-    "active_users_text": "{{activeUsersInText}} مستخدم نشط شهريًا",
+    "active_users_text": "{{-activeUsersInText}} مستخدم نشط شهريًا",
     "unlimited_active_users": "حتى عدد غير محدود من المستخدمين النشطين",
     "total": "المجموع",
     "visibility_notice_repeated": "ستكون المواضيع والمشاركين ولاوقات الزمنية مرئية لفريقك، بينما لن يكون المحتوى مرئيًا إلا إذا تمت مشاركته.",
     "subscription_success": "تم تفعيل الاشتراك بنجاح!",
     "subscribe_pro_plan": "اشترك في الباقة الاحترافية",
     "contact_sales_team": "تواصل مع فريق المبيعات الخاص بنا",
-    "discount_notice": "(خصم 10% للمستخدمين النشطين شهريًا {{activeUsersInText}})",
+    "discount_notice": "(خصم 10% للمستخدمين النشطين شهريًا {{-activeUsersInText}})",
     "others": "غيرها"
   },
   "page_title": {
@@ -932,14 +933,14 @@
   },
   "plan_card": {
     "used_mau": "مستخدم شهريًا",
-    "target_notification": "لقد استهدفت %{{target}} من عدد المستخدمين النشطين شهريًا.",
+    "target_notification": "لقد استهدفت %{{-target}} من عدد المستخدمين النشطين شهريًا.",
     "plan_upgrade": "ترقية الباقة"
   },
   "reset_pass": {
     "enter_email_reset_pass": "أدخل عنوان بريدك الإلكتروني وسنرسل لك تعليمات لإعادة تعيين كلمة المرور الخاصة بك.",
     "back_to_sign_in": "العودة إلى تسجيل الدخول.",
     "please_check_your_email": "يرجى التحقق من بريدك الإلكتروني.",
-    "reset_password_instructions": "لقد أرسلنا لك تعليمات لإعادة تعيين كلمة المرور على {{email}}.",
+    "reset_password_instructions": "لقد أرسلنا لك تعليمات لإعادة تعيين كلمة المرور على {{-email}}.",
     "resend_email": "إعادة إرسال البريد الإلكتروني.",
     "enter_new_password": "أدخل كلمة مرور جديدة لـ Nabiq.",
     "new_password": "كلمة المرور الجديدة.",

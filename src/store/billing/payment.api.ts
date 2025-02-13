@@ -46,7 +46,10 @@ export const paymentApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    startSubscription: builder.mutation<IResponseInterface, { plan: string; companyId: string }>({
+    startSubscription: builder.mutation<
+      IResponseInterface,
+      { plan: string; companyId: string; couponCode: string }
+    >({
       query: (args) => ({
         url: `/payment/start-sub`,
         method: 'POST',
