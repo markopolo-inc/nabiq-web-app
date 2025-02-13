@@ -27,7 +27,7 @@ export { OnBoardingItems } from 'components/modules/home/components/screens/OnBo
 export { PerformanceTrend } from 'components/modules/home/components/Table/performance-trend/PerformanceTrend.tsx';
 
 // Stacked cards
-export { IntegrateChannelsCard } from 'src/components/modules/home/components/cards/onboarding-stacked-cards/IntegrateChannelsCard';
+export { IntegrateChannelsCard } from 'components/modules/home/components/cards/onboarding-stacked-cards/IntegrateChannelsCard';
 export { ConnectFirstMarkTagCard } from 'components/modules/home/components/cards/onboarding-stacked-cards/ConnectFirstMarkTagCard';
 export { CreateFirstCampaignCard } from 'components/modules/home/components/cards/onboarding-stacked-cards/CreateFirstCampaignCard';
 export { IntegrateDataSourceCard } from 'components/modules/home/components/cards/onboarding-stacked-cards/IntegrateDataSourceCard';

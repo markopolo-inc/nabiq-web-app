@@ -33,9 +33,14 @@ export const paymentApi = apiSlice.injectEndpoints({
         try {
           const res = await queryFulfilled;
           if (!res.data.success) {
-            toast.error(res?.data?.message?.[0]?.[0]?.message || 'Failed to add payment method!', {
-              id: 'add-payment-method-error',
-            });
+            toast.error(
+              Array.isArray(res?.data?.message)
+                ? res?.data?.message?.[0]?.[0]?.message
+                : res?.data?.message || 'Failed to add payment method!',
+              {
+                id: 'add-payment-method-error',
+              },
+            );
           }
           return res;
         } catch (err) {
