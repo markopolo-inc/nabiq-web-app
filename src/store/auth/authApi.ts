@@ -25,7 +25,7 @@ export const authApi = apiSlice.injectEndpoints({
           posthog?.capture('User_Signed_In', {
             user_id: email,
             email,
-            signup_method: 'email',
+            signin_method: 'email',
             timestamp: new Date().toISOString(),
           });
           // toast.success('Successfully logged in.', { id: 'login-success' });
@@ -62,6 +62,12 @@ export const authApi = apiSlice.injectEndpoints({
           });
           dispatch(setUserEmail(email));
           onSuccess && onSuccess();
+          posthog?.capture('User_Signed_Up', {
+            user_id: email,
+            email,
+            signup_method: 'email',
+            timestamp: new Date().toISOString(),
+          });
           toast.success('Successfully signed up.', { id: 'signup-success' });
         } catch (error) {
           toast.error(error?.message || 'Something went wrong', { id: 'signup-error' });
@@ -97,6 +103,12 @@ export const authApi = apiSlice.injectEndpoints({
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
           toast.dismiss(loading);
+          posthog?.capture('User_Signed_In', {
+            user_id: email,
+            email,
+            signin_method: 'google',
+            timestamp: new Date().toISOString(),
+          });
           toast.success('Successfully signed in with Google.', { id: 'google-signin-success' });
           setTimeout(() => {
             window.location.href = '/';
@@ -120,6 +132,12 @@ export const authApi = apiSlice.injectEndpoints({
           await Auth.confirmSignUp(email, confirmationPin);
           toast.success('Verification successful!', { id: 'verify-success' });
           onSuccess && onSuccess();
+          posthog?.capture('User_Verified', {
+            user_id: email,
+            email,
+            verification_method: 'email',
+            timestamp: new Date().toISOString(),
+          });
         } catch (error) {
           toast.error(error?.message || 'Something went wrong!', { id: 'verify-error' });
           onLoading && onLoading(false);
