@@ -1,7 +1,8 @@
 import { useForm } from '@mantine/form';
 import { FiCreditCardPlus } from '@nabiq-icons';
-import { Button, Modal, Stack, TextInput } from '@nabiq-ui';
+import { Button, Modal, Select, Stack, TextInput } from '@nabiq-ui';
 import { useTranslation } from 'react-i18next';
+import { COUNTRY_CODES } from 'src/lib/billing';
 import { IPaymentMethod, useAddPaymentMethodMutation } from 'src/store/billing/payment.api';
 import { useAppSelector } from 'src/store/hooks';
 
@@ -57,10 +58,14 @@ const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
       state: (value) => (value?.length === 0 ? t('billing_page.state_required') : null),
       zip_code: (value) => {
         if (value?.length === 0) return t('billing_page.zip_code_required');
-        if (!/^\d{5}(-\d{4})?$/.test(value)) return t('billing_page.invalid_zip_code');
+        // if (!/^\d{5}(-\d{4})?$/.test(value)) return t('billing_page.invalid_zip_code');
         return null;
       },
-      country: (value) => (value?.length === 0 ? t('billing_page.country_required') : null),
+      country: (value) => {
+        if (value?.length === 0) return t('billing_page.country_required');
+        if (!/^[A-Z]{2}$/.test(value)) return t('billing_page.invalid_country_code');
+        return null;
+      },
     },
   });
 
@@ -88,7 +93,7 @@ const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
       <Stack gap={16}>
         {/* Card Details */}
         <Stack gap={16}>
-          <p className='text-sm font-medium text-gray-700'>{t('billing_page.card_details')}</p>
+          {/* <p className='text-sm font-medium text-gray-700'>{t('billing_page.card_details')}</p> */}
           <TextInput
             label={t('billing_page.card_number')}
             placeholder={t('billing_page.card_number_placeholder')}
@@ -136,7 +141,7 @@ const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
 
         {/* Billing Address */}
         <Stack gap={16}>
-          <p className='text-sm font-medium text-gray-700'>{t('billing_page.billing_address')}</p>
+          {/* <p className='text-sm font-medium text-gray-700'>{t('billing_page.billing_address')}</p> */}
           <TextInput
             label={t('billing_page.street_address')}
             placeholder={t('billing_page.street_address_placeholder')}
@@ -164,12 +169,20 @@ const ModalBody = ({ setOpened }: { setOpened: (opened: boolean) => void }) => {
               key={form.key('zip_code')}
               {...form.getInputProps('zip_code')}
             />
-            <TextInput
+            <Select
+              data={COUNTRY_CODES}
+              label={t('billing_page.country')}
+              placeholder={t('billing_page.country_placeholder')}
+              key={form.key('country')}
+              searchable
+              {...form.getInputProps('country')}
+            />
+            {/* <TextInput
               label={t('billing_page.country')}
               placeholder={t('billing_page.country_placeholder')}
               key={form.key('country')}
               {...form.getInputProps('country')}
-            />
+            /> */}
           </div>
         </Stack>
       </Stack>
