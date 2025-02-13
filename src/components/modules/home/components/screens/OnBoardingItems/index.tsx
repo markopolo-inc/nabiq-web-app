@@ -14,77 +14,80 @@ type OnBoardingItemsProps = {
   isIntegrationChannelDone: boolean;
   isFirstCampaignDone: boolean;
   isMarkTagDone: boolean;
+  isDataSourceConnected: boolean;
 };
 
 export const OnBoardingItems: React.FC<OnBoardingItemsProps> = ({
   onClickShowGoalModal,
   onClickShowMarkTagModal,
   isIntegrationChannelDone,
+  isDataSourceConnected,
   isFirstCampaignDone,
   isMarkTagDone,
 }) => {
   const { t } = useTranslation();
   const [activeCard, setActiveCard] = useState<
-    'integration_channel' | 'first_campaign' | 'mark_tag'
-  >('integration_channel');
+    'integrate_datasource' | 'integration_channel' | 'first_campaign' | 'mark_tag'
+  >('integrate_datasource');
 
   useEffect(() => {
-    if (!isIntegrationChannelDone) {
+    if (!isDataSourceConnected) {
+      setActiveCard('integrate_datasource');
+    } else if (!isIntegrationChannelDone) {
       setActiveCard('integration_channel');
-      return;
-    }
-    if (!isFirstCampaignDone) {
+    } else if (!isFirstCampaignDone) {
       setActiveCard('first_campaign');
-      return;
-    }
-    if (!isMarkTagDone) {
+    } else if (!isMarkTagDone) {
       setActiveCard('mark_tag');
     }
-  }, [isIntegrationChannelDone, isFirstCampaignDone, isMarkTagDone]);
+  }, [isDataSourceConnected, isIntegrationChannelDone, isFirstCampaignDone, isMarkTagDone]);
+
+  const items = [
+    {
+      id: 'integrate_datasource',
+      step: 1,
+      isDone: isDataSourceConnected,
+      label: t('home_page.integrate_datasource'),
+    },
+    {
+      id: 'integration_channel',
+      step: 2,
+      isDone: isIntegrationChannelDone,
+      label: t('home_page.channels_integration'),
+    },
+    {
+      id: 'first_campaign',
+      step: 3,
+      isDone: isFirstCampaignDone,
+      label: t('home_page.campaign_create_first'),
+    },
+    {
+      id: 'mark_tag',
+      step: 4,
+      isDone: isMarkTagDone,
+      label: t('home_page.marktag_connect'),
+    },
+  ];
 
   return (
     <Stack gap={24} className='flex-col lg:flex-row w-full mt-8'>
       <Stack gap={16} className='lg:max-w-[372px] w-full'>
-        <Group
-          gap={16}
-          className={`p-[15px] rounded-xl bg-white border ${activeCard === 'integration_channel' ? 'border-primary-600' : 'border-gray-200'}`}
-        >
-          {isIntegrationChannelDone ? (
-            <FiGreenCheckCircle color='#079455' />
-          ) : (
-            <div className='text-base font-normal text-gray-950'>1</div>
-          )}
-          <p className='text-base font-semibold text-gray-950'>
-            {t('home_page.channels_integration')}
-          </p>
-        </Group>
-
-        <Group
-          gap={16}
-          className={`p-[15px] rounded-xl bg-white border  ${activeCard === 'first_campaign' ? 'border-primary-600' : 'border-gray-200'}`}
-        >
-          {isFirstCampaignDone ? (
-            <FiGreenCheckCircle color='#079455' />
-          ) : (
-            <div className='text-base font-normal text-gray-950'>2</div>
-          )}
-
-          <p className='text-base font-semibold text-gray-950'>
-            {t('home_page.campaign_create_first')}
-          </p>
-        </Group>
-
-        <Group
-          gap={16}
-          className={`p-[15px] rounded-xl bg-white border ${activeCard === 'mark_tag' ? 'border-primary-600' : 'border-gray-200'}`}
-        >
-          {isMarkTagDone ? (
-            <FiGreenCheckCircle color='#079455' />
-          ) : (
-            <div className='text-base font-normal text-gray-950'>3</div>
-          )}
-          <p className='text-base font-semibold text-gray-950'>{t('home_page.marktag_connect')}</p>
-        </Group>
+        {items.map(({ id, step, isDone, label }) => (
+          <Group
+            key={id}
+            gap={16}
+            className={`p-[15px] rounded-xl bg-white border ${
+              activeCard === id ? 'border-primary-600' : 'border-gray-200'
+            }`}
+          >
+            {isDone ? (
+              <FiGreenCheckCircle color='#079455' />
+            ) : (
+              <div className='text-base font-normal text-gray-950'>{step}</div>
+            )}
+            <p className='text-base font-semibold text-gray-950'>{label}</p>
+          </Group>
+        ))}
       </Stack>
 
       <Stack className='relative w-full min-h-[248px]'>

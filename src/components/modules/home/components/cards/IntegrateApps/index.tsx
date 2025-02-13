@@ -1,10 +1,12 @@
 import { FiZap } from '@nabiq-icons';
 import { Button, GatewayLogo } from '@nabiq-ui';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import type { GatewayType } from 'src/interfaces/brand.interface';
 
 export const IntegrateApps = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className='bg-white rounded-xl p-8 shadow-lg flex flex-row gap-4 items-start min-h-[250px]'>
@@ -14,9 +16,9 @@ export const IntegrateApps = () => {
       <div className='flex gap-3 flex-col justify-between h-full'>
         <div className='flex flex-col gap-16'>
           <div className='flex flex-col gap-1'>
-            <p className='text-gray-900 text-lg font-semibold'>Integrate apps</p>
+            <p className='text-gray-900 text-lg font-semibold'>{t('home_page.integrate_apps')}</p>
             <p className='text-gray-600 text-sm font-normal'>
-              Integrate email, sms and push notification apps to build custom marketing funnels.
+              {t('home_page.integrate_apps_description')}
             </p>
           </div>
         </div>

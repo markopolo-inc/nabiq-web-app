@@ -12,7 +12,7 @@ export { ConstitutionalAIModerationModal } from 'components/modules/home/compone
 
 // Cards
 export { IntegrateApps } from 'components/modules/home/components/cards/IntegrateApps';
-export { IntegrateChannels } from 'components/modules/home/components/cards/IntegrateChannels';
+export { IntegrateChannels } from 'src/components/modules/home/components/cards/IntegrateCard';
 export { IntegrationCard } from 'components/modules/home/components/cards/IntegrationCard';
 export { ConnectFirstMarkTagCard } from 'components/modules/home/components/cards/ConnectFirstMarkTagCard';
 export { CreateFirstCampaignCard } from 'components/modules/home/components/cards/CreateFirstCampaignCard';

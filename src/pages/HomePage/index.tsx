@@ -1,5 +1,6 @@
 import { Stack } from '@nabiq-ui';
 import { HeaderTitle, PageLayout } from 'layouts';
+import { isEmpty } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -18,15 +19,6 @@ import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
 import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
 import { useAppSelector } from 'src/store/hooks.ts';
 
-function isObjectNotEmpty(obj) {
-  // Check if the object exists and is not null
-  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
-    // Check if the object has any own properties
-    return Object.keys(obj).length > 0;
-  }
-  return false;
-}
-
 const Home = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -37,6 +29,7 @@ const Home = () => {
     emailIntegrations,
     smsIntegrations,
     markTag,
+    datasourceIntegrations,
   } = useAppSelector((state) => state.brand);
 
   const [showGoalModal, setShowGoalModal] = useState<boolean>(false);
@@ -49,11 +42,10 @@ const Home = () => {
   const { data: campaignList, isLoading: isLoadingCampaignList } =
     useGetCampaignConfigsQuery(brandId);
 
-  const isIntegrationChannelDone = !(
-    !isObjectNotEmpty(emailIntegrations) && !isObjectNotEmpty(smsIntegrations)
-  );
+  const isIntegrationChannelDone = !(isEmpty(emailIntegrations) && isEmpty(smsIntegrations));
   const isFirstCampaignDone = !!campaignList?.data?.length;
   const isMarkTagDone = Boolean(markTag?.resourceId);
+  const isDataSourceConnected = !isEmpty(datasourceIntegrations);
 
   const isOnboardingDone = isIntegrationChannelDone && isFirstCampaignDone && isMarkTagDone;
   const isOnBoardingMetricsShow = isIntegrationChannelDone && isFirstCampaignDone;
@@ -95,6 +87,7 @@ const Home = () => {
               isIntegrationChannelDone={isIntegrationChannelDone}
               isFirstCampaignDone={isFirstCampaignDone}
               isMarkTagDone={isMarkTagDone}
+              isDataSourceConnected={isDataSourceConnected}
               onClickShowGoalModal={() => setShowGoalModal((prevState) => !prevState)}
               onClickShowMarkTagModal={() => setShowMarktagModal((prevState) => !prevState)}
             />
