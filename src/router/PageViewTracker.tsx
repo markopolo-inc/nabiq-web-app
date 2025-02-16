@@ -2,14 +2,21 @@ import posthog from 'posthog-js';
 import { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
+import { useAppSelector } from 'src/store/hooks';
 
 export const PageViewTracker = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const posthogParams = usePosthogParams();
-
+  const { userName, userEmail } = useAppSelector((state) => state.user);
   useEffect(() => {
     const pathname = location.pathname;
+
+    posthog.identify(
+      userEmail,
+      { email: userEmail, name: userName },
+      { first_visited_url: pathname },
+    );
 
     posthog?.capture('Website_Visit', {
       timestamp: new Date().toISOString(),

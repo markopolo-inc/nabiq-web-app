@@ -238,6 +238,7 @@ export const authApi = apiSlice.injectEndpoints({
         const loading = toast.loading('Logging out...', {
           id: 'logout-loading',
         });
+        posthog?.reset();
         setTimeout(() => {
           dispatch(logout());
           dispatch({ type: 'store/reset' });
