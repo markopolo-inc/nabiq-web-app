@@ -109,7 +109,7 @@
     "domain_name": "Domain name",
     "website_url": "Website URL",
     "enter_domain_without_protocol": "Enter your domain without https: // or www.",
-    "copy_to_clipboard": "Copy to clipboard",
+    "copy_to_clipboard": "Copied to clipboard",
     "dns_records": "DNS Records",
     "add_dns_record": "Please add record to your domain to complete setup. It may take up to 72 hours for DNS record to propagate.",
     "name": "Name",

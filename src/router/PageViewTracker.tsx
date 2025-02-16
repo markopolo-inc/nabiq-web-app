@@ -32,7 +32,38 @@ export const PageViewTracker = () => {
           utm_medium: searchParams.get('utm_medium') || undefined,
         });
         break;
+      case '/monitoring':
+        posthog?.capture('Monitoring_Page_Viewed', {
+          user_id: posthogParams?.email,
+          ...posthogParams,
+        });
+        break;
+      case '/integrations':
+        posthog?.capture('Integrations_Page_Viewed', {
+          user_id: posthogParams?.email,
+          ...posthogParams,
+        });
+        break;
+      case '/campaigns':
+        posthog?.capture('Campaigns_Page_Viewed', {
+          user_id: posthogParams?.email,
+          ...posthogParams,
+        });
+        break;
+      case '/control-room':
+        posthog?.capture('Control_Room_Page_Viewed', {
+          user_id: posthogParams?.email,
+          ...posthogParams,
+        });
+        break;
+
       default:
+        if (pathname.includes('/control-room/content-samples/')) {
+          posthog?.capture('Control_Room_Content_Samples_Page_Viewed', {
+            user_id: posthogParams?.email,
+            ...posthogParams,
+          });
+        }
         break;
     }
   }, [location.pathname, searchParams]); // Depend only on pathname to fire only when route changes

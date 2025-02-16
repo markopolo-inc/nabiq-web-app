@@ -1,8 +1,10 @@
 import { FiCopy02 } from '@nabiq-icons';
 import { Button, Stack } from '@nabiq-ui';
+import posthog from 'posthog-js';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { Trans, useTranslation } from 'react-i18next';
+import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
 
 type IntegrateChatbotProps = {
   apiKey: string;
@@ -10,6 +12,7 @@ type IntegrateChatbotProps = {
 
 export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) => {
   const { t } = useTranslation();
+  const posthogParams = usePosthogParams();
 
   const code = `
 <!-- Chatbot Integration Script -->
@@ -34,6 +37,10 @@ export const IntegrateChatbot: React.FC<IntegrateChatbotProps> = ({ apiKey }) =>
   const handleCopy = (value) => {
     navigator.clipboard.writeText(value);
     toast.success(t('home_page.copy_to_clipboard'));
+    posthog?.capture('Copy_Chatbot_Code_Snippet', {
+      user_id: posthogParams?.email,
+      ...posthogParams,
+    });
   };
 
   return (
