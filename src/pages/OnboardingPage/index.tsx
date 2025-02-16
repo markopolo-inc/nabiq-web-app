@@ -21,7 +21,7 @@ const Onboarding = () => {
 
   useEffect(() => {
     if (companyId) {
-      dispatch(setOnboardingStep('lead_database'));
+      dispatch(setOnboardingStep('guide_nabiq'));
     } else {
       dispatch(setOnboardingStep('company_creation'));
     }
