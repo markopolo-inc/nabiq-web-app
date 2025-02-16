@@ -1,5 +1,6 @@
 import { FiHelpCircle, Klaviyo, SlashCircle01 } from '@nabiq-icons';
 import { Breadcrumbs, Button, ContentLoader, Group, OptionTabs, Stack } from '@nabiq-ui';
+import posthog from 'posthog-js';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,6 +9,7 @@ import {
   HowDoesFeedbackWorkModal,
   Samples,
 } from 'src/components/modules/control-room';
+import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
 import { IContentSampleType, IMarkContentOperation } from 'src/interfaces/controlRoom.interface.ts';
 import {
   useGetContentSamplesQuery,
@@ -44,6 +46,7 @@ const ContentSamples = () => {
   const [addMarks, { isLoading }] = useMarkConfigContentMutation();
   const [addBlockedMark, { isLoading: isMarkApprovedLoading }] =
     useMarkApprovedConfigContentMutation();
+  const posthogParams = usePosthogParams();
 
   const { configId } = useParams();
 
@@ -97,7 +100,11 @@ const ContentSamples = () => {
     };
   }, [hasChanged]);
 
-  const handleApprovedMarkConfig = async (contentId: string, status: 'approved' | 'blocked') => {
+  const handleApprovedMarkConfig = async (
+    contentId: string,
+    status: 'approved' | 'blocked',
+    content?: string,
+  ) => {
     await addBlockedMark({
       configId,
       payload: {
@@ -105,6 +112,13 @@ const ContentSamples = () => {
         action: status,
       },
     }).unwrap();
+    posthog?.capture('Content_Feedback_Provided', {
+      user_id: posthogParams?.email,
+      content_id: contentId,
+      content: content,
+      action: status,
+      ...posthogParams,
+    });
   };
 
   useEffect(() => {

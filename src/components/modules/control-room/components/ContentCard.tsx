@@ -14,6 +14,7 @@ export const ContentCard = ({
   handleMarkContent: (
     contentId: string,
     status: 'relevant' | 'irrelevant' | 'approved' | 'blocked',
+    _content?: string,
   ) => void;
   isLoading: boolean;
 }) => {
@@ -68,7 +69,7 @@ export const ContentCard = ({
               variant='secondary'
               size='sm'
               trailingIcon={<FiCrossX color='#4B5565' size={11} />}
-              onClick={() => handleMarkContent(content?.id, 'irrelevant')}
+              onClick={() => handleMarkContent(content?.id, 'irrelevant', content?.content)}
             >
               {t('content_samples.irrelevant')}
             </Button>
@@ -77,7 +78,7 @@ export const ContentCard = ({
               variant='secondary-black'
               size='sm'
               trailingIcon={<FiCheck size={16} color='white' strokeWidth={1} />}
-              onClick={() => handleMarkContent(content?.id, 'relevant')}
+              onClick={() => handleMarkContent(content?.id, 'relevant', content?.content)}
             >
               {t('content_samples.find_relevant')}
             </Button>
@@ -86,7 +87,10 @@ export const ContentCard = ({
 
         {!isBlockedByAI && content.status === 'relevant' && (
           <Group justify='flex-end'>
-            <Button variant='link' onClick={() => handleMarkContent(content?.id, 'irrelevant')}>
+            <Button
+              variant='link'
+              onClick={() => handleMarkContent(content?.id, 'irrelevant', content?.content)}
+            >
               {t('content_samples.change_feedback')}
             </Button>
             <Badge color='success' size='lg'>
@@ -98,7 +102,10 @@ export const ContentCard = ({
 
         {!isBlockedByAI && content.status === 'irrelevant' && (
           <Group justify='flex-end'>
-            <Button variant='link' onClick={() => handleMarkContent(content?.id, 'relevant')}>
+            <Button
+              variant='link'
+              onClick={() => handleMarkContent(content?.id, 'relevant', content?.content)}
+            >
               {t('content_samples.change_feedback')}
             </Button>
             <Badge color='error' size='lg'>
