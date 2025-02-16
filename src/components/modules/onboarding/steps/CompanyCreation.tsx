@@ -57,7 +57,12 @@ export const CompanyCreation = () => {
         user_id: user?.attributes?.email,
         ...posthogParams,
       });
-      setOnboardingStep('lead_database');
+
+      posthog?.capture('Content_Generation_Page_View', {
+        user_id: user?.attributes?.email,
+        ...posthogParams,
+      });
+      setOnboardingStep('guide_nabiq');
     } catch (err) {
       toast.error(t('onboarding.user_data_error'), { id: 'user-data-error' });
     } finally {

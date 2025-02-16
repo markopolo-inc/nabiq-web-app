@@ -1,10 +1,15 @@
-import { FiChevronLeft, FiStar06 } from '@nabiq-icons';
+import {
+  // FiChevronLeft,
+  FiStar06,
+} from '@nabiq-icons';
 import { Button, Group, Stack, TextArea } from '@nabiq-ui';
+import posthog from 'posthog-js';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
 import { RootState } from 'src/store';
 import { useAppSelector } from 'src/store/hooks';
 import {
@@ -33,6 +38,7 @@ export const GuideNabiq = () => {
   const [updateOnboardingStatus, { isLoading: isUpdatingOnboardingStatus }] =
     useUpdateOnboardingStatusMutation();
   const navigate = useNavigate();
+  const posthogParams = usePosthogParams();
 
   const [prompt, setPrompt] = useState('');
 
@@ -53,6 +59,10 @@ export const GuideNabiq = () => {
     dispatch(setIsSampleContentLoading(true));
     const res = await generateSampleContent({ brandId, prompt }).unwrap();
     if (res.success) {
+      posthog?.capture('Sample_Content_Generated', {
+        user_id: posthogParams?.email,
+        ...posthogParams,
+      });
       setTimeout(() => {
         dispatch(setGeneratePrompt(prompt));
         dispatch(setSampleContents(res.data));
@@ -96,14 +106,14 @@ export const GuideNabiq = () => {
         {t('onboarding.generate_sample_content')}
       </Button>
       <Group>
-        <Button
+        {/* <Button
           variant='link'
           onClick={() => dispatch(setOnboardingStep('lead_database'))}
           leadingIcon={<FiChevronLeft />}
           disabled={isGeneratingSampleContent || isSampleContentLoading}
         >
           {t('onboarding.go_back')}
-        </Button>
+        </Button> */}
         <Button
           variant='secondary'
           onClick={() => handleSkipStep()}

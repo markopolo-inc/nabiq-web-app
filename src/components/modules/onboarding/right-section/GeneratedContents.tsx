@@ -8,8 +8,10 @@ import {
 import { Button, Group, Stack } from '@nabiq-ui';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
+import posthog from 'posthog-js';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
 import { useAppSelector } from 'src/store/hooks';
 import { setIsMarkedContent, setSampleContents } from 'src/store/onboarding/onboardingSlice';
 
@@ -17,10 +19,21 @@ export const GeneratedContents = () => {
   const { t } = useTranslation();
   const { sampleContents, isMarkedContent } = useAppSelector((state) => state.onboarding);
   const dispatch = useDispatch();
+  const posthogParams = usePosthogParams();
 
   const contents = sampleContents?.slice(0, 3);
-  const handleMarkContent = (index: number) => {
+  const handleMarkContent = (index: number, type: 'like' | 'dislike') => {
+    posthog?.capture('Sample_Content_Feedback', {
+      user_id: posthogParams?.email,
+      content: contents[index],
+      feedback: type,
+      ...posthogParams,
+    });
     if (contents?.length === 1) {
+      posthog?.capture('Thank_You_Page_Viewed', {
+        user_id: posthogParams?.email,
+        ...posthogParams,
+      });
       dispatch(setIsMarkedContent(true));
     }
     dispatch(setSampleContents(sampleContents.slice(0, index)));
@@ -93,12 +106,15 @@ export const GeneratedContents = () => {
                   <Button
                     trailingIcon={<FiThumbsUp size={17} />}
                     onClick={() => {
-                      handleMarkContent(index);
+                      handleMarkContent(index, 'like');
                     }}
                   >
                     {t('onboarding.like_feedback')}
                   </Button>
-                  <Button variant='secondary-black' onClick={() => handleMarkContent(index)}>
+                  <Button
+                    variant='secondary-black'
+                    onClick={() => handleMarkContent(index, 'dislike')}
+                  >
                     <FiThumbsDown size={17} />
                   </Button>
                 </Group>
