@@ -8,15 +8,12 @@ export const PageViewTracker = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const posthogParams = usePosthogParams();
-  const { userName, userEmail } = useAppSelector((state) => state.user);
+  const { userEmail } = useAppSelector((state) => state.user);
+  const { resourceId: companyId } = useAppSelector((state) => state.company);
   useEffect(() => {
     const pathname = location.pathname;
 
-    posthog.identify(
-      userEmail,
-      { email: userEmail, name: userName },
-      { first_visited_url: pathname },
-    );
+    posthog.identify(userEmail, { company_id: companyId });
 
     posthog?.capture('Website_Visit', {
       timestamp: new Date().toISOString(),
