@@ -1,7 +1,6 @@
 import { Stack } from '@nabiq-ui';
 import { HeaderTitle, PageLayout } from 'layouts';
 import { isEmpty } from 'lodash';
-import posthog from 'posthog-js';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -16,7 +15,6 @@ import {
   QuickActions,
 } from 'src/components/modules/home';
 import { MarktagCreationsModals } from 'src/components/modules/integrations/integration-tabs/data-sources';
-import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
 import { QUERY_PARAMS } from 'src/lib/integration/ecommerce';
 import { useGetCampaignConfigsQuery } from 'src/store/campaign/campaignApi.ts';
 import { useAppSelector } from 'src/store/hooks.ts';
@@ -25,15 +23,6 @@ const Home = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
-  const posthogParams = usePosthogParams();
-
-  useEffect(() => {
-    posthog?.capture('Homepage_View', {
-      user_id: posthogParams?.email,
-      ...posthogParams,
-    });
-  }, []);
 
   const {
     resourceId: brandId,

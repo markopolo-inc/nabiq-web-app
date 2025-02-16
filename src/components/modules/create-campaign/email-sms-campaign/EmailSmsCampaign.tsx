@@ -9,6 +9,7 @@ import {
   StepperStep,
 } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
+import posthog from 'posthog-js';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +21,7 @@ import {
   CampaignFirstCreationModal,
   CampaignTiming,
 } from 'src/components/modules/create-campaign/email-sms-campaign';
+import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
 import { APIResponseType } from 'src/interfaces/response.interface';
 import { emailSmsCampaignSteps } from 'src/lib/campaign.lib';
 import {
@@ -43,6 +45,7 @@ export const EmailSmsCampaign = () => {
   const { isFirstCreationModal } = useAppSelector((state) => state.onboarding);
   const [active, setActive] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const posthogParams = usePosthogParams();
 
   const isReadyToConfirm = active === 2;
   const isStepOneValid = !!(
@@ -67,6 +70,15 @@ export const EmailSmsCampaign = () => {
         res = await editConfig(campaignConfig).unwrap();
       } else {
         res = await createConfig(campaignConfig).unwrap();
+        posthog?.capture('Campaign_Creation_Completed', {
+          user_id: posthogParams?.email,
+          campaign_name: campaignConfig.name,
+          campaign_medium: 'email-sms',
+          campaign_goal: campaignConfig.goal,
+          channels: campaignConfig.channels.map((channel) => channel.channel),
+          platforms: campaignConfig.channels.map((channel) => channel.platform),
+          ...posthogParams,
+        });
       }
 
       if (res.success) {

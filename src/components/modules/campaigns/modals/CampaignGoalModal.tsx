@@ -2,9 +2,11 @@ import { FiHelpCircle } from '@nabiq-icons';
 import { Badge, Button, Group, Modal, Stack, Tooltip } from '@nabiq-ui';
 import cn from 'classnames';
 import moment from 'moment-timezone';
+import posthog from 'posthog-js';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { usePosthogParams } from 'src/hooks/modules/usePosthogParams';
 import { TCampaignGoal } from 'src/interfaces/modules/campaign';
 import { goals, mediums } from 'src/lib/campaign.lib';
 import { useAppSelector, useCampaignDispatch } from 'src/store/hooks';
@@ -26,6 +28,7 @@ const ModalBody = ({ setOpened }) => {
   const dispatchCampaign = useCampaignDispatch();
   const [step, setStep] = useState<'goal' | 'medium'>('goal');
   const [selectedGoal, setSelectedGoal] = useState<TCampaignGoal | null>(null);
+  const posthogParams = usePosthogParams();
 
   return (
     <Stack className='p-8' gap={64} align='center'>
@@ -108,6 +111,13 @@ const ModalBody = ({ setOpened }) => {
                         tagId: markTag?.resourceId,
                         goal: selectedGoal,
                         name: `${t('home_page.untitled_campaign')}${moment().format('DD-MM-YYYY')}`,
+                      });
+
+                      posthog?.capture('Campaign_Creation_Started', {
+                        user_id: posthogParams?.email,
+                        campaign_type: medium.type,
+                        campaign_goal: selectedGoal,
+                        ...posthogParams,
                       });
 
                       navigate(

@@ -1,7 +1,6 @@
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
-import posthog from 'posthog-js';
 import { useEffect, useState } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
@@ -13,18 +12,13 @@ import Router from 'src/router';
 import 'src/services/i18next';
 import { persistor, store } from 'src/store';
 
+import { PageViewTracker } from './router/PageViewTracker';
+
 const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const handleComplete = () => {
-      const searchParams = new URLSearchParams(location.search);
-      posthog?.capture('Website_Visit', {
-        timestamp: new Date().toISOString(),
-        referrer: searchParams.get('referrer') || document.referrer || 'direct',
-        utm_source: searchParams.get('utm_source'),
-        utm_medium: searchParams.get('utm_medium'),
-      });
       setLoading(false);
     };
 
@@ -54,12 +48,14 @@ const App = () => {
             }}
           >
             <Toaster position='top-center' reverseOrder={false} />
+
             <BrowserRouter
               future={{
                 v7_startTransition: true,
                 v7_relativeSplatPath: true,
               }}
             >
+              <PageViewTracker />
               <Router />
             </BrowserRouter>
           </MantineProvider>
