@@ -3,6 +3,7 @@ import { useForm } from '@mantine/form';
 import { Avatar, Button, Dropzone, Grid, Group, Select, Stack, TextInput } from '@nabiq-ui';
 import { HeaderTitle } from 'layouts';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useUpdateSettingMutation } from 'store/company/companyApi';
@@ -14,6 +15,7 @@ const Settings = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [files, setFiles] = useState<FileWithPath[]>([]);
+  const [initialValues, setInitialValues] = useState({});
 
   const company = useAppSelector((state) => state.company);
   const user = useAppSelector((state) => state.user);
@@ -38,12 +40,27 @@ const Settings = () => {
     },
   });
 
+  useEffect(() => {
+    setInitialValues(form.values);
+  }, []);
+
   const handleFormSubmit = (values) => {
-    updateSetting(values)
-      .unwrap()
-      .then(() => {
-        navigate('/');
-      });
+    const hasChanges = Object.keys(values).some((key) => values[key] !== initialValues[key]);
+
+    if (hasChanges) {
+      updateSetting(values)
+        .unwrap()
+        .then(() => {
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
+        })
+        .catch(() => {
+          toast.error('Failed to update settings');
+        });
+    } else {
+      toast.error('No changes are made');
+    }
   };
 
   useEffect(() => {
