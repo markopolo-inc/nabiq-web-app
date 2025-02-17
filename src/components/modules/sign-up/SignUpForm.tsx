@@ -60,6 +60,8 @@ export const SignUpForm = ({ setIsSignedUp }: { setIsSignedUp: (value: boolean) 
   };
 
   const handleFormSubmit = async (values) => {
+    console.log('email - ', values.email);
+
     await signup({ ...values, onLoading, onSuccess }).unwrap();
   };
 
