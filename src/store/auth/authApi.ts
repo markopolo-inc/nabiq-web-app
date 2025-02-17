@@ -22,6 +22,9 @@ export const authApi = apiSlice.injectEndpoints({
           await Auth.signIn(email, password);
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
+
+          posthog.identify(email);
+
           posthog?.capture('User_Signed_In', {
             user_id: email,
             email,
@@ -103,6 +106,7 @@ export const authApi = apiSlice.injectEndpoints({
           dispatch(setIsAuthenticated(true));
           dispatch(setUserEmail(email));
           toast.dismiss(loading);
+          posthog.identify(email);
           posthog?.capture('User_Signed_In', {
             user_id: email,
             email,
@@ -132,6 +136,7 @@ export const authApi = apiSlice.injectEndpoints({
           await Auth.confirmSignUp(email, confirmationPin);
           toast.success('Verification successful!', { id: 'verify-success' });
           onSuccess && onSuccess();
+          posthog.identify(email);
           posthog?.capture('User_Verified', {
             user_id: email,
             email,
