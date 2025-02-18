@@ -43,7 +43,6 @@
     "@types/joi": "^17.2.3",
     "@xyflow/react": "^12.1.1",
     "aws-amplify": "^5",
-    "aws-sdk": "^2.1692.0",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.11",
     "express": "^4.21.2",
