@@ -24,7 +24,7 @@ export const NavigationLayout = () => {
     >
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
         <AppShell.Header px='sm' className='bg-gray-950'>
-          <Group h='100%' px='md' className='justify-between'>
+          <Group h='100%' px='md' className='justify-between' style={{ direction: 'ltr' }}>
             <Group>
               <Burger opened={opened} onClick={toggle} hiddenFrom='md' color='white' size='sm' />
               <Image
