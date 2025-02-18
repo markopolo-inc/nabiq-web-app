@@ -52,8 +52,6 @@ export const authApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { dispatch }) {
         const { name, email, password, onLoading, onSuccess } = arg;
 
-        console.log('Mail recieved at authApi is - ', email);
-
         try {
           onLoading && onLoading(true);
 
