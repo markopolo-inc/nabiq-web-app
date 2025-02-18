@@ -51,8 +51,11 @@ export const authApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(arg, { dispatch }) {
         const { name, email, password, onLoading, onSuccess } = arg;
+
         try {
           onLoading && onLoading(true);
+
+          // Attempt to sign up the user
           await Auth.signUp({
             username: email,
             password,
@@ -63,6 +66,7 @@ export const authApi = apiSlice.injectEndpoints({
               enabled: true,
             },
           });
+
           dispatch(setUserEmail(email));
           onSuccess && onSuccess();
           posthog?.capture('User_Signed_Up', {
@@ -71,9 +75,38 @@ export const authApi = apiSlice.injectEndpoints({
             signup_method: 'email',
             timestamp: new Date().toISOString(),
           });
-          toast.success('Successfully signed up.', { id: 'signup-success' });
+          toast.success(
+            'Successfully signed up. Please check your email for the verification code.',
+            { id: 'signup-success' },
+          );
         } catch (error) {
-          toast.error(error?.message || 'Something went wrong', { id: 'signup-error' });
+          if (error.code === 'UsernameExistsException') {
+            // Check if the user is already confirmed
+            try {
+              dispatch(setUserEmail(email));
+              await Auth.resendSignUp(email);
+              onSuccess();
+              toast.success('Verification code has been resent to your email.', {
+                id: 'resend-verification-success',
+              });
+            } catch (resendError) {
+              if (resendError.code === 'UserNotConfirmedException') {
+                toast.error('This email is already registered and confirmed. Please log in.', {
+                  id: 'email-already-confirmed-error',
+                });
+              } else {
+                toast.error(
+                  resendError.message ||
+                    'Something went wrong while resending the verification code.',
+                  { id: 'resend-verification-error' },
+                );
+              }
+            }
+          } else {
+            toast.error(error.message || 'Something went wrong during sign-up.', {
+              id: 'signup-error',
+            });
+          }
         } finally {
           onLoading && onLoading(false);
         }
