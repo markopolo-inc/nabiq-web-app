@@ -15,12 +15,20 @@ const Settings = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [files, setFiles] = useState<FileWithPath[]>([]);
-  const [initialValues, setInitialValues] = useState({});
 
   const company = useAppSelector((state) => state.company);
   const user = useAppSelector((state) => state.user);
 
-  const [updateSetting, { isSuccess }] = useUpdateSettingMutation();
+  const [updateSetting, { isLoading }] = useUpdateSettingMutation();
+  const [hasChanges, setHasChanges] = useState(false);
+  const [storedValues, setStoredValues] = useState({
+    userName: user?.userName ?? '',
+    userEmail: user?.userEmail ?? '',
+    profilePhoto: company?.meta?.profilePhoto ?? '',
+    businessName: company?.meta?.businessName ?? '',
+    industry: company?.meta?.industry ?? '',
+    businessSize: company?.meta?.businessSize ?? '',
+  });
 
   const form = useForm({
     initialValues: {
@@ -41,25 +49,26 @@ const Settings = () => {
   });
 
   useEffect(() => {
-    setInitialValues(form.values);
-  }, []);
+    setStoredValues({
+      userName: user?.userName ?? '',
+      userEmail: user?.userEmail ?? '',
+      profilePhoto: company?.meta?.profilePhoto ?? '',
+      businessName: company?.meta?.businessName ?? '',
+      industry: company?.meta?.industry ?? '',
+      businessSize: company?.meta?.businessSize ?? '',
+    });
+  }, [user, company]);
 
-  const handleFormSubmit = (values) => {
-    const hasChanges = Object.keys(values).some((key) => values[key] !== initialValues[key]);
+  useEffect(() => {
+    setHasChanges(JSON.stringify(form.values) !== JSON.stringify(storedValues));
+  }, [form.values, storedValues]);
 
-    if (hasChanges) {
-      updateSetting(values)
-        .unwrap()
-        .then(() => {
-          setTimeout(() => {
-            navigate('/');
-          }, 2000);
-        })
-        .catch(() => {
-          toast.error('Failed to update settings');
-        });
-    } else {
-      toast.error('No changes are made');
+  const handleFormSubmit = async (values) => {
+    try {
+      await updateSetting(values).unwrap();
+      setHasChanges(false);
+    } catch (error) {
+      toast.error('Failed to update settings');
     }
   };
 
@@ -88,10 +97,10 @@ const Settings = () => {
                 <p className='text-gray-600 font-normal'>{t('settings.description')}</p>
               </Stack>
               <Group>
-                <Button onClick={() => navigate('/')} variant='secondary'>
+                <Button onClick={() => navigate('/')} variant='secondary' disabled={isLoading}>
                   {t('settings.cancel')}
                 </Button>
-                <Button type='submit' disabled={isSuccess}>
+                <Button type='submit' disabled={!hasChanges} loading={isLoading}>
                   {t('settings.save_changes')}
                 </Button>
               </Group>
@@ -118,6 +127,7 @@ const Settings = () => {
                     label={t('settings.email')}
                     placeholder={t('settings.enter_email')}
                     {...form.getInputProps('userEmail')}
+                    disabled
                   />
 
                   <div className='flex flex-col gap-1.5'>
