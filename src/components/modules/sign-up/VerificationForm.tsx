@@ -37,8 +37,6 @@ export const VerificationForm = () => {
   };
 
   const handleOTPChange = (_value: string) => {
-    console.log('Email and otp is - ', email, _value);
-
     setConfirmationPin(_value);
   };
   return (
