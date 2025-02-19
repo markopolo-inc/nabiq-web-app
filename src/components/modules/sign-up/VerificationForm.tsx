@@ -1,7 +1,8 @@
 import { Button, OtpInput, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+// Add useRef
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +15,7 @@ export const VerificationForm = () => {
   const [confirmationPin, setConfirmationPin] = useState<string>('');
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isExpired, setIsExpired] = useState<boolean>(false);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null); // Store the interval ID
+  const intervalRef = useRef<NodeJS.Timeout | null>(null); // Use a ref to store the interval ID
 
   const [verify] = useVerifyMutation();
   const [resend] = useResendVerificationCodeMutation();
@@ -23,7 +24,7 @@ export const VerificationForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const OTP_EXPIRY_TIME = 30; // 30 seconds (in seconds)
+  const OTP_EXPIRY_TIME = 120;
 
   const startTimer = () => {
     setTimeLeft(OTP_EXPIRY_TIME);
@@ -39,7 +40,7 @@ export const VerificationForm = () => {
         }
       });
     }, 1000);
-    setIntervalId(timer); // Store the interval ID
+    intervalRef.current = timer;
   };
 
   useEffect(() => {
@@ -57,10 +58,10 @@ export const VerificationForm = () => {
       setIsExpired(true);
     }
 
-    startTimer(); // Start the timer on component mount
+    startTimer();
 
     return () => {
-      if (intervalId) clearInterval(intervalId); // Clear the interval on component unmount
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, []);
 
@@ -102,8 +103,8 @@ export const VerificationForm = () => {
     try {
       await resend({ email });
       localStorage.setItem('otpTimestamp', Date.now().toString());
-      if (intervalId) clearInterval(intervalId); // Clear the existing interval
-      startTimer(); // Restart the timer on resend
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      startTimer();
       setIsExpired(false);
     } catch (error) {
       console.error('Error resending OTP:', error);

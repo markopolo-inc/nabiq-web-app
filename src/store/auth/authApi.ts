@@ -163,7 +163,7 @@ export const authApi = apiSlice.injectEndpoints({
             timestamp: new Date().toISOString(),
           });
 
-          localStorage.removeItem('otpTimestamp'); // Remove timestamp after successful verification
+          localStorage.removeItem('otpTimestamp');
         } catch (error) {
           toast.error(error?.message || 'Something went wrong!', { id: 'verify-error' });
           onLoading && onLoading(false);
