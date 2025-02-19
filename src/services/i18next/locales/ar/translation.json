@@ -739,7 +739,9 @@
     "example_company": "مثال: شركة جون",
     "select_industry": "حدد قطاع نشاطك التجاري",
     "select_business_size": "حدد حجم نشاطك التجاري",
-    "website_url_placeholder": "الصق رابط موقعك الإلكتروني هنا"
+    "website_url_placeholder": "الصق رابط موقعك الإلكتروني هنا",
+    "invalid_website": "يرجى تقديم عنوان موقع ويب صالح.",
+    "business_name_min_length": "يجب أن يكون الحد الأدنى لطول اسم النشاط التجاري 3 أحرف."
   },
   "onboarding_intro": {
     "title": "دعنا نتعرف عليك",
