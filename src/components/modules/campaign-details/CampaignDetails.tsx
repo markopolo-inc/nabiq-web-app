@@ -264,10 +264,11 @@ export const CampaignDetails = () => {
                           <p className='text-gray-600 font-normal text-sm'>
                             {t('campaign_details.sent_on', {
                               time: moment(item?.sentOn).format('MMM D, YYYY'),
-                            })}
+                            })}{' '}
                             {moment(item?.sentOn).format('h:mm a')}
                           </p>
                         </Stack>
+
                         {/* <Group className='mt-9 tex-sm text-gray-600' justify='space-between'>
                   <p>Link click?</p>
                   <p>Yes</p>

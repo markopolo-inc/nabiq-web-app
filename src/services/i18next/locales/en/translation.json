@@ -636,7 +636,9 @@
     "example_company": "e.g John's company",
     "select_industry": "Select your industry",
     "select_business_size": "Select your business size",
-    "website_url_placeholder": "Paste your website URL here"
+    "website_url_placeholder": "Paste your website URL here",
+    "invalid_website": "Please provide a valid website url.",
+    "business_name_min_length": "Minimum length for bussiness name should be 3."
   },
   "onboarding_intro": {
     "title": "Let's get to know you",

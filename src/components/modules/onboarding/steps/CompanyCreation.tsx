@@ -29,12 +29,31 @@ export const CompanyCreation = () => {
       website: '',
     },
     validate: {
-      businessName: (value) =>
-        value?.length === 0 ? t('onboarding.business_name_required') : null,
+      businessName: (value) => {
+        if (!value || value.trim().length === 0) {
+          return t('onboarding.business_name_required');
+        }
+        if (value.trim().length < 3) {
+          return t('onboarding.business_name_min_length');
+        }
+        return null;
+      },
       industry: (value) => (value?.length === 0 ? t('onboarding.industry_required') : null),
+
       businessSize: (value) =>
         value?.length === 0 ? t('onboarding.business_size_required') : null,
-      website: (value) => (value?.length === 0 ? t('onboarding.website_required') : null),
+
+      website: (value) => {
+        const urlRegex =
+          /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,63}\.(com|in|org|net|gov|edu|io|co)(\/[\w-./?%&=]*)?$/;
+        if (!value || value.trim().length === 0) {
+          return t('onboarding.website_required');
+        }
+        if (!urlRegex.test(value.trim())) {
+          return t('onboarding.invalid_website');
+        }
+        return null;
+      },
     },
   });
 
