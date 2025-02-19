@@ -1,6 +1,7 @@
 import { Button, OtpInput, Stack } from '@nabiq-ui';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +12,9 @@ import { useAppSelector } from 'src/store/hooks';
 export const VerificationForm = () => {
   const { t } = useTranslation();
   const [confirmationPin, setConfirmationPin] = useState<string>('');
+  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [isExpired, setIsExpired] = useState<boolean>(false);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null); // Store the interval ID
 
   const [verify] = useVerifyMutation();
   const [resend] = useResendVerificationCodeMutation();
@@ -19,11 +23,46 @@ export const VerificationForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (email) {
-  //     setConfirmationPin('');
-  //   }
-  // }, [email]);
+  const OTP_EXPIRY_TIME = 30; // 30 seconds (in seconds)
+
+  const startTimer = () => {
+    setTimeLeft(OTP_EXPIRY_TIME);
+    setIsExpired(false);
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev > 0) {
+          return prev - 1;
+        } else {
+          setIsExpired(true);
+          clearInterval(timer);
+          return 0;
+        }
+      });
+    }, 1000);
+    setIntervalId(timer); // Store the interval ID
+  };
+
+  useEffect(() => {
+    let storedTimestamp = localStorage.getItem('otpTimestamp');
+    if (!storedTimestamp) {
+      storedTimestamp = Date.now().toString();
+      localStorage.setItem('otpTimestamp', storedTimestamp);
+    }
+
+    const elapsedTime = Math.floor((Date.now() - parseInt(storedTimestamp, 10)) / 1000);
+    if (elapsedTime < OTP_EXPIRY_TIME) {
+      setTimeLeft(OTP_EXPIRY_TIME - elapsedTime);
+      setIsExpired(false);
+    } else {
+      setIsExpired(true);
+    }
+
+    startTimer(); // Start the timer on component mount
+
+    return () => {
+      if (intervalId) clearInterval(intervalId); // Clear the interval on component unmount
+    };
+  }, []);
 
   const onLoading = (loading: boolean) => {
     setIsLoading(loading);
@@ -39,6 +78,38 @@ export const VerificationForm = () => {
   const handleOTPChange = (_value: string) => {
     setConfirmationPin(_value);
   };
+
+  const handleVerify = () => {
+    if (!email || confirmationPin.length !== 6) return;
+
+    const storedTimestamp = localStorage.getItem('otpTimestamp');
+    if (!storedTimestamp) {
+      toast.error('OTP timestamp not found. Please resend the code.');
+      return;
+    }
+
+    const elapsedTime = Math.floor((Date.now() - parseInt(storedTimestamp, 10)) / 1000);
+    if (elapsedTime > OTP_EXPIRY_TIME) {
+      toast.error('OTP has expired. Please request a new one.');
+      setIsExpired(true);
+      return;
+    }
+
+    verify({ email, confirmationPin, onLoading, onSuccess });
+  };
+
+  const handleResend = async () => {
+    try {
+      await resend({ email });
+      localStorage.setItem('otpTimestamp', Date.now().toString());
+      if (intervalId) clearInterval(intervalId); // Clear the existing interval
+      startTimer(); // Restart the timer on resend
+      setIsExpired(false);
+    } catch (error) {
+      console.error('Error resending OTP:', error);
+    }
+  };
+
   return (
     <Stack gap={200}>
       <motion.div
@@ -59,6 +130,9 @@ export const VerificationForm = () => {
             placeholder='0'
             label={t('verification.verification_code')}
           />
+          <p className='text-sm text-gray-600'>
+            {isExpired ? 'OTP expired. Please resend.' : `OTP expires in ${timeLeft}s`}
+          </p>
         </Stack>
       </motion.div>
       <motion.div
@@ -72,8 +146,8 @@ export const VerificationForm = () => {
             fullWidth
             variant='primary'
             loading={isLoading}
-            disabled={confirmationPin?.length !== 6 || !email}
-            onClick={() => verify({ email, confirmationPin, onLoading, onSuccess })}
+            disabled={confirmationPin.length !== 6 || !email}
+            onClick={handleVerify}
           >
             {t('onboarding.verify')}
           </Button>
@@ -82,8 +156,8 @@ export const VerificationForm = () => {
               {t('onboarding.resend_code')}
             </p>
             <Button
-              disabled={!email}
-              onClick={() => resend({ email })}
+              disabled={!email || !isExpired}
+              onClick={handleResend}
               variant='link'
               className='px-0'
             >

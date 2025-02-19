@@ -133,8 +133,27 @@ export const authApi = apiSlice.injectEndpoints({
         const { email, confirmationPin, onLoading, onSuccess } = _arg;
         try {
           onLoading && onLoading(true);
+
+          const storedTimestamp = localStorage.getItem('otpTimestamp');
+          if (!storedTimestamp) {
+            toast.error('OTP timestamp not found. Please request a new OTP.', {
+              id: 'verify-error',
+            });
+            onLoading(false);
+            return;
+          }
+
+          const elapsedTime = Date.now() - parseInt(storedTimestamp, 10);
+
+          if (elapsedTime > 120000) {
+            toast.error('OTP has expired. Please request a new one.', { id: 'verify-error' });
+            onLoading(false);
+            return;
+          }
+
           await Auth.confirmSignUp(email, confirmationPin);
           toast.success('Verification successful!', { id: 'verify-success' });
+
           onSuccess && onSuccess();
           posthog.identify(email);
           posthog?.capture('User_Verified', {
@@ -143,6 +162,8 @@ export const authApi = apiSlice.injectEndpoints({
             verification_method: 'email',
             timestamp: new Date().toISOString(),
           });
+
+          localStorage.removeItem('otpTimestamp'); // Remove timestamp after successful verification
         } catch (error) {
           toast.error(error?.message || 'Something went wrong!', { id: 'verify-error' });
           onLoading && onLoading(false);
